@@ -4,9 +4,9 @@
 export default function Footer() {
   return (
     <footer className="bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-6">
         {/* rounded pale box with columns */}
-        <div className="bg-slate-100/80 rounded-xl p-6 md:p-10">
+        <div className="bg-slate-100/80 rounded-xl p-6 md:p-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {/* Column 1 */}
             <div>
