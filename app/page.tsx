@@ -1,13 +1,14 @@
-
-
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Updates from "./components/Updates";
 import Footer from "./components/Footer";
-import Popularsearches from './components/PopularSearches';
-import Partnership from './components/Partnership';
-import Ourstory from './components/Ourstory';
+import Popularsearches from "./components/PopularSearches";
+import Partnership from "./components/Partnership";
+import Ourstory from "./components/Ourstory";
+import MCA from "./MCA/page";
+import CompliancePage from "./compliance/page";
+import IncomeTaxPage from "./incometax/page";
 
 export default function Home() {
   return (
@@ -19,6 +20,9 @@ export default function Home() {
       <Ourstory />
       <Partnership />
       <Popularsearches />
+      <MCA />
+      <CompliancePage />
+      <IncomeTaxPage />
       <Footer />
       {/* More sections will go here */}
     </>
