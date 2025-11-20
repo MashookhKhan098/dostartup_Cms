@@ -17,6 +17,9 @@ export default function Home() {
       <Ourstory />
       <Partnership />
       <Popularsearches />
+      <MCA />
+      <CompliancePage />
+      <IncomeTaxPage />
       <Footer />
       {/* More sections will go here */}
     </>
