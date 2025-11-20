@@ -6,9 +6,6 @@ import Footer from "./components/Footer";
 import Popularsearches from "./components/PopularSearches";
 import Partnership from "./components/Partnership";
 import Ourstory from "./components/Ourstory";
-import MCA from "./MCA/page";
-import CompliancePage from "./compliance/page";
-import IncomeTaxPage from "./incometax/page";
 
 export default function Home() {
   return (
