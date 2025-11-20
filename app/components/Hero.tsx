@@ -21,9 +21,6 @@
 //   );
 // }
 
-
-
-
 // app/components/HeroSection.tsx
 "use client";
 
@@ -74,18 +71,26 @@ export default function HeroSection() {
             className="w-full h-[380px] md:h-[460px] object-cover"
           />
           {/* Overlay */}
-          <div className="absolute inset-0 bg-green-900/50 flex items-center">
+          {/* <div className="absolute inset-0 bg-green-900/50 flex items-center">
             <div className="px-8 md:px-16 text-white max-w-lg">
               <h2 className="text-xl md:text-2xl font-semibold mb-3">
                 {slides[current].title}
               </h2>
               <p className="text-sm md:text-base">{slides[current].subtitle}</p>
               <div className="mt-4 flex gap-3">
-                <img src="/images/playstore.png" alt="Google Play" className="h-10" />
-                <img src="/images/appstore.png" alt="App Store" className="h-10" />
+                <img
+                  src="/images/playstore.png"
+                  alt="Google Play"
+                  className="h-10"
+                />
+                <img
+                  src="/images/appstore.png"
+                  alt="App Store"
+                  className="h-10"
+                />
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Navigation */}
           <button
@@ -105,4 +110,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
