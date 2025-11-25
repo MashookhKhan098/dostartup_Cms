@@ -6,7 +6,7 @@ import Services from "./components/Services";
 import Updates from "./components/Updates";
 import Footer from "./components/Footer";
 import Popularsearches from './components/PopularSearches';
-import Partnership from './components/Partnership';
+import Partnerships from './components/Partnerships';
 import Ourstory from './components/Ourstory';
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
       <Services />
       <Updates />
       <Ourstory />
-      <Partnership />
+      <Partnerships />
       <Popularsearches />
       <Footer />
       {/* More sections will go here */}
