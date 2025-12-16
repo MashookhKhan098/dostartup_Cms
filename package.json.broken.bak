@@ -1,8 +1,8 @@
-{
-  "name": "my-next-project",
+﻿{
+  "type": "module",
+"name": "my-next-project",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -20,11 +20,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types,node": "^24.6.2",
-    "@types,react": "^19.2.0",
+    "@types/node": "^24.6.2",
+    "@types/react": "^19.2.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
     "tailwindcss": "^4",
     "typescript": "^5.9.3"
   }
 }
+

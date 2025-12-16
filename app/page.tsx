@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Popularsearches from "./components/PopularSearches";
 import Partnership from "./components/Partnership";
 import Ourstory from "./components/Ourstory";
+import MCA from "./MCA/page";
 
 export default function Home() {
   return (
@@ -17,9 +18,8 @@ export default function Home() {
       <Ourstory />
       <Partnership />
       <Popularsearches />
-      <MCA />
-      <CompliancePage />
-      <IncomeTaxPage />
+      {/* Uncomment if you want to render the MCA page component here */}
+      {/* <MCA /> */}
       <Footer />
       {/* More sections will go here */}
     </>
