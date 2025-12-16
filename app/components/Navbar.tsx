@@ -11,11 +11,7 @@ const mainLinks: { label: string; href: string }[] = [
   { label: "Registrations", href: "#" },
   { label: "Trademark", href: "#" },
   { label: "GST", href: "#" },
-<<<<<<< HEAD
-  { label: "Income Tax", href: "/incometax" },
-=======
   { label: "Income Tax", href: "/income-tax" },
->>>>>>> menu-updated
   { label: "MCA", href: "/MCA" },
   { label: "Compliance", href: "/compliance" },
   { label: "Personal", href: "#" },
