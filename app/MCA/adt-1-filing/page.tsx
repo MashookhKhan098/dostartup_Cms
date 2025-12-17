@@ -3,14 +3,6 @@
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
 
-/**
- * ADT-1 Filing — final refined version to match provided screenshots closely.
- * - Uses Tailwind utility classes (Tailwind CSS required).
- * - lucide-react for icons (already present in your project).
- *
- * Drop into: app/page.tsx or a component file and import where needed.
- */
-
 const ASSETS = {
   logo: "/images/india-logo.jpg",
   hero: "/images/adt1-hero.jpg",
