@@ -98,7 +98,6 @@ export default async function OurStory() {
             {renderRichText(data.para1)}
             {renderRichText(data.para2)}
           </div>
-
         </div>
       </div>
     </section>
