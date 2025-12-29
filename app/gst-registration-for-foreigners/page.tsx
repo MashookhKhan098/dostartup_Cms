@@ -22,9 +22,9 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
-import DynamicTabContent from '../components/Gst/DynamicTabContent';
-import Faq from '../components/Gst/Faq';
-import Price from '../components/Gst/Price';
+import DynamicTabContent from '../components/DynamicTabContent';
+import Faq from '../components/Faq';
+import Price from '../components/Price';
 
 export default function Home() {
   const pricingData = {
@@ -181,8 +181,8 @@ export default function Home() {
     <>
       <Navbar />
       <Hero {...heroProps} />
-      <Price {...pricingData}/>
-      <DynamicTabContent tabName="GST Registration" />
+      <Price/>
+      <DynamicTabContent category="GST" />
       <Faq />
       <Popularsearches />
       <Footer />

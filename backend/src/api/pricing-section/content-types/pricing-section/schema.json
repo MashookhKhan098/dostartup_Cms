@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pricing_sections",
+  "info": {
+    "singularName": "pricing-section",
+    "pluralName": "pricing-sections",
+    "displayName": "pricingSection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "note": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

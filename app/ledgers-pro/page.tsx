@@ -136,8 +136,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
-import DynamicTabContent from '../components/Gst/DynamicTabContent';
-import Faq from '../components/Gst/Faq';
+import DynamicTabContent from '../components/DynamicTabContent';
+import Faq from '../components/Faq';
 import { Rocket, Zap, Users } from 'lucide-react';
 
 export default function Home() {
@@ -276,7 +276,7 @@ export default function Home() {
         </div>
       </div>
 
-      <DynamicTabContent tabName="GST Registration" />
+      <DynamicTabContent category="GST" />
       <Faq />
       <Popularsearches />
       <Footer />
