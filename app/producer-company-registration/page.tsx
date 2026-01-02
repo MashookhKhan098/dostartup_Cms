@@ -2,9 +2,9 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Startup/Hero3';
-import Price from '../components/Startup/Price';
-import DynamicTabContent from '../components/Startup/DynamicTabContent';
-import Faq from '../components/Startup/Faq';
+import Price from '../components/Price';
+import DynamicTabContent from '../components/DynamicTabContent';
+import Faq from '../components/Faq';
 
 export default function Home() {
   return (
@@ -30,7 +30,7 @@ export default function Home() {
   ]}
 />
       <Price />
-      <DynamicTabContent tabName="Proprietorship" />
+      <DynamicTabContent category="Proprietorship" />
       <Faq />
       <Popularsearches />
       <Footer />

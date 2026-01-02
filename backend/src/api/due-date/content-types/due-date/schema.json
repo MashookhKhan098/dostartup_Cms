@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "due_dates",
+  "info": {
+    "singularName": "due-date",
+    "pluralName": "due-dates",
+    "displayName": "due-date"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "date"
+    }
+  }
+}
