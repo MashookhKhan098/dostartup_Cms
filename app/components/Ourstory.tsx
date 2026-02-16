@@ -43,63 +43,100 @@
 // }
 
 
+// app/components/Ourstory.tsx
 
-async function getOurStory() {
-  const res = await fetch(
-    "http://localhost:1337/api/our-story?populate=image",
-    { cache: "no-store" }
-  );
-  const json = await res.json();
-  return json.data;
-}
+"use client";
 
-function renderRichText(blocks: any[]) {
-  return blocks.map((block, i) => (
-    <p
-      key={i}
-      className="text-gray-600 text-sm md:text-base leading-relaxed mt-2"
-    >
-      {block.children.map((child: any, j: number) => (
-        <span key={j}>{child.text}</span>
-      ))}
-    </p>
-  ));
-}
+import { useEffect, useState } from "react";
 
-export default async function OurStory() {
-  const data = await getOurStory();
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
+
+const API =
+  `https://cms.dostartup.in/api/content/item/OurStory?token=${TOKEN}`;
+
+export default function Ourstory() {
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    async function fetchStory() {
+      try {
+        const res = await fetch(API);
+
+        const text = await res.text();
+
+        // protect against HTML response
+        if (!text.startsWith("{")) {
+          console.error("Not JSON response:", text);
+          return;
+        }
+
+        const json = JSON.parse(text);
+        setData(json);
+      } catch (err) {
+        console.error("Cockpit singleton error:", err);
+      }
+    }
+
+    fetchStory();
+  }, []);
 
   if (!data) return null;
 
-  const imageUrl = data.image?.url;
+  // Cockpit may return rich text OR string
+  const renderPara = (para: any) => {
+    if (!para) return null;
+
+    if (Array.isArray(para)) {
+      return para.map((p: any, i: number) => (
+        <p key={i} className="text-gray-600 text-sm md:text-base mt-2">
+          {typeof p === "string" ? p : p?.children?.[0]?.text || ""}
+        </p>
+      ));
+    }
+
+    if (typeof para === "string") {
+      return (
+        <p className="text-gray-600 text-sm md:text-base mt-2">{para}</p>
+      );
+    }
+
+    return null;
+  };
+
+  const imageUrl =
+    data.image?.path
+      ? `https://cms.dostartup.in${data.image.path}`
+      : null;
 
   return (
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center">
 
-          {/* Left Image */}
+          {/* Image */}
           <div className="w-full md:w-1/2">
             {imageUrl && (
               <img
-                src={`http://localhost:1337${imageUrl}`}
+                src={imageUrl}
                 alt="Our Story"
-                className="w-full h-auto rounded-lg shadow-sm object-cover"
+                className="w-full rounded-lg shadow-sm object-cover"
               />
             )}
           </div>
 
-          {/* Right Text */}
+          {/* Text */}
           <div className="w-full md:w-1/2">
             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
-              {data.Title}
+              {data.Title || data.title}
             </h3>
 
-            {renderRichText(data.para1)}
-            {renderRichText(data.para2)}
+            {renderPara(data.para1)}
+            {renderPara(data.para2)}
           </div>
+
         </div>
       </div>
     </section>
   );
 }
+

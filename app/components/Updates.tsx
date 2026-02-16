@@ -102,25 +102,152 @@
 
 
 
+// "use client";
+
+// import { Bell, CalendarDays } from "lucide-react";
+// import { useEffect, useState } from "react";
+
+// const STRAPI_URL = "http://localhost:1337";
+
+// export default function UpdatesAndDueDates() {
+//   const [updates, setUpdates] = useState<any[]>([]);
+//   const [dueDates, setDueDates] = useState<any[]>([]);
+
+//   useEffect(() => {
+//     fetch(`${STRAPI_URL}/api/updates?sort=publishedDate:desc`)
+//       .then((res) => res.json())
+//       .then((json) => setUpdates(json.data || []));
+
+//     fetch(`${STRAPI_URL}/api/due-dates?sort=dueDate`)
+//       .then((res) => res.json())
+//       .then((json) => setDueDates(json.data || []));
+//   }, []);
+
+//   return (
+//     <section className="bg-white">
+//       <div className="max-w-7xl mx-auto px-6 py-12">
+//         <div className="grid md:grid-cols-2 gap-6">
+
+//           {/* Updates & Alerts */}
+//           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
+//             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+//               <Bell className="w-5 h-5 text-blue-600" />
+//               Updates & Alerts
+//             </h3>
+
+//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+//               {updates.map((item, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
+//                 >
+//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+
+//                   <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
+//                     <a href="#" className="text-blue-600 hover:underline text-sm font-medium">
+//                       {item.title}
+//                     </a>
+//                     <p className="text-xs text-gray-500 mt-1">
+//                       Published on: {item.publishedDate}
+//                     </p>
+//                     <span className="inline-block text-[10px] bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded mt-1">
+//                       {item.tag}
+//                     </span>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Due Dates */}
+//           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
+//             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+//               <CalendarDays className="w-5 h-5 text-blue-600" />
+//               Due Dates
+//             </h3>
+
+//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+//               {dueDates.map((item, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
+//                 >
+//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+
+//                   <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
+//                     <p className="text-gray-800 text-sm font-medium">
+//                       {item.title}
+//                     </p>
+//                     <p className="text-xs text-gray-500 mt-1">
+//                       Due Date: {item.dueDate}
+//                     </p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
 "use client";
 
 import { Bell, CalendarDays } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const STRAPI_URL = "http://localhost:1337";
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
+
+const UPDATE_API =
+  `https://cms.dostartup.in/api/content/items/update?token=${TOKEN}`;
+
+const DUEDATE_API =
+  `https://cms.dostartup.in/api/content/items/duedate?token=${TOKEN}`;
 
 export default function UpdatesAndDueDates() {
   const [updates, setUpdates] = useState<any[]>([]);
   const [dueDates, setDueDates] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`${STRAPI_URL}/api/updates?sort=publishedDate:desc`)
-      .then((res) => res.json())
-      .then((json) => setUpdates(json.data || []));
+    async function fetchData() {
+      try {
+        const [updatesRes, dueDatesRes] = await Promise.all([
+          fetch(UPDATE_API),
+          fetch(DUEDATE_API),
+        ]);
 
-    fetch(`${STRAPI_URL}/api/due-dates?sort=dueDate`)
-      .then((res) => res.json())
-      .then((json) => setDueDates(json.data || []));
+        const updatesData = await updatesRes.json();
+        const dueDatesData = await dueDatesRes.json();
+
+        // Cockpit returns arrays directly
+        if (Array.isArray(updatesData)) {
+          // newest first
+          const sortedUpdates = [...updatesData].sort(
+            (a, b) =>
+              new Date(b.publishedDate || b.PUBLISHEDDATE).getTime() -
+              new Date(a.publishedDate || a.PUBLISHEDDATE).getTime()
+          );
+          setUpdates(sortedUpdates);
+        }
+
+        if (Array.isArray(dueDatesData)) {
+          const sortedDueDates = [...dueDatesData].sort(
+            (a, b) =>
+              new Date(a.dueDate || a.DUEDATE).getTime() -
+              new Date(b.dueDate || b.DUEDATE).getTime()
+          );
+          setDueDates(sortedDueDates);
+        }
+
+      } catch (err) {
+        console.error("Cockpit fetch error:", err);
+      }
+    }
+
+    fetchData();
   }, []);
 
   return (
@@ -128,7 +255,7 @@ export default function UpdatesAndDueDates() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-6">
 
-          {/* Updates & Alerts */}
+          {/* Updates */}
           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <Bell className="w-5 h-5 text-blue-600" />
@@ -138,21 +265,28 @@ export default function UpdatesAndDueDates() {
             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
               {updates.map((item, idx) => (
                 <div
-                  key={idx}
+                  key={item._id || idx}
                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
                 >
                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
 
                   <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
-                    <a href="#" className="text-blue-600 hover:underline text-sm font-medium">
-                      {item.title}
+
+                    <a
+                      href="#"
+                      className="text-blue-600 hover:underline text-sm font-medium"
+                    >
+                      {item.title || item.TITLE}
                     </a>
+
                     <p className="text-xs text-gray-500 mt-1">
-                      Published on: {item.publishedDate}
+                      Published on: {item.publishedDate || item.PUBLISHEDDATE}
                     </p>
+
                     <span className="inline-block text-[10px] bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded mt-1">
-                      {item.tag}
+                      {item.tag || item.TAG}
                     </span>
+
                   </div>
                 </div>
               ))}
@@ -169,18 +303,21 @@ export default function UpdatesAndDueDates() {
             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
               {dueDates.map((item, idx) => (
                 <div
-                  key={idx}
+                  key={item._id || idx}
                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
                 >
                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
 
                   <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
+
                     <p className="text-gray-800 text-sm font-medium">
-                      {item.title}
+                      {item.title || item.TITLE}
                     </p>
+
                     <p className="text-xs text-gray-500 mt-1">
-                      Due Date: {item.dueDate}
+                      Due Date: {item.dueDate || item.DUEDATE}
                     </p>
+
                   </div>
                 </div>
               ))}

@@ -50,6 +50,77 @@
 
 
 
+// import {
+//   Briefcase,
+//   Stamp,
+//   Calculator,
+//   FileText,
+//   Receipt,
+//   Wallet,
+// } from "lucide-react";
+
+// const ICON_MAP: any = {
+//   Briefcase: Briefcase,
+//   Stamp: Stamp,
+//   Calculator: Calculator,
+//   FileText: FileText,
+//   Receipt: Receipt,
+//   Wallet: Wallet,
+// };
+
+// const STRAPI_URL = "http://localhost:1337";
+
+// async function getServicesData() {
+//   const [sectionRes, servicesRes] = await Promise.all([
+//     fetch(`${STRAPI_URL}/api/services-section`, { cache: "no-store" }),
+//     fetch(`${STRAPI_URL}/api/services`, { cache: "no-store" }),
+//   ]);
+
+//   const section = (await sectionRes.json()).data;
+//   const services = (await servicesRes.json()).data;
+
+//   return { section, services };
+// }
+
+// export default async function ServicesSection() {
+//   const { section, services } = await getServicesData();
+
+//   return (
+//     <section className="bg-white">
+//       <div className="max-w-7xl mx-auto px-6 py-12">
+//         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
+//           {section.title}
+//         </h3>
+
+//         <p className="text-gray-600 mb-8 text-sm md:text-base">
+//           {section.description}
+//         </p>
+
+//         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+//           {services.map((service: any, idx: number) => {
+//             const Icon = ICON_MAP[service.icon];
+
+//             return (
+//               <div
+//                 key={idx}
+//                 className="flex flex-col items-center text-center cursor-pointer hover:bg-slate-50 p-3 rounded transition"
+//               >
+//                 {Icon && <Icon className="h-8 w-8 text-blue-600 mb-2" />}
+//                 <span className="text-sm font-medium text-gray-800">
+//                   {service.name}
+//                 </span>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   Briefcase,
   Stamp,
@@ -60,61 +131,104 @@ import {
 } from "lucide-react";
 
 const ICON_MAP: any = {
-  Briefcase: Briefcase,
-  Stamp: Stamp,
-  Calculator: Calculator,
-  FileText: FileText,
-  Receipt: Receipt,
-  Wallet: Wallet,
+  Briefcase,
+  Stamp,
+  Calculator,
+  FileText,
+  Receipt,
+  Wallet,
 };
 
-const STRAPI_URL = "http://localhost:1337";
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
 
-async function getServicesData() {
-  const [sectionRes, servicesRes] = await Promise.all([
-    fetch(`${STRAPI_URL}/api/services-section`, { cache: "no-store" }),
-    fetch(`${STRAPI_URL}/api/services`, { cache: "no-store" }),
-  ]);
+const API =
+  `https://cms.dostartup.in/api/content/items/service?token=${TOKEN}`;
 
-  const section = (await sectionRes.json()).data;
-  const services = (await servicesRes.json()).data;
+export default function ServicesSection() {
+  const [services, setServices] = useState<any[]>([]);
+  const [title, setTitle] = useState("Our Services");
+  const [description, setDescription] = useState(
+    "Explore our professional solutions designed to help your business grow."
+  );
+  const [loading, setLoading] = useState(true);
 
-  return { section, services };
-}
+  useEffect(() => {
+    async function fetchServices() {
+      try {
+        const res = await fetch(API);
+        const json = await res.json();
 
-export default async function ServicesSection() {
-  const { section, services } = await getServicesData();
+        if (Array.isArray(json)) {
+          setServices(json);
+
+          // OPTIONAL: if cockpit stores section info in first record
+          if (json[0]?.sectionTitle) setTitle(json[0].sectionTitle);
+          if (json[0]?.sectionDescription)
+            setDescription(json[0].sectionDescription);
+        }
+      } catch (err) {
+        console.error("Cockpit services fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchServices();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="py-12 text-center text-gray-500">
+        Loading services...
+      </div>
+    );
+  }
 
   return (
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-6 py-12">
+
         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
-          {section.title}
+          {title}
         </h3>
 
         <p className="text-gray-600 mb-8 text-sm md:text-base">
-          {section.description}
+          {description}
         </p>
 
         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+
           {services.map((service: any, idx: number) => {
-            const Icon = ICON_MAP[service.icon];
+
+            const iconName =
+              service.icon ||
+              service.ICON;
+
+            const serviceName =
+              service.name ||
+              service.NAME;
+
+            const Icon = ICON_MAP[iconName];
 
             return (
               <div
-                key={idx}
+                key={service._id || idx}
                 className="flex flex-col items-center text-center cursor-pointer hover:bg-slate-50 p-3 rounded transition"
               >
-                {Icon && <Icon className="h-8 w-8 text-blue-600 mb-2" />}
+                {Icon && (
+                  <Icon className="h-8 w-8 text-blue-600 mb-2" />
+                )}
+
                 <span className="text-sm font-medium text-gray-800">
-                  {service.name}
+                  {serviceName}
                 </span>
+
               </div>
             );
           })}
+
         </div>
       </div>
     </section>
   );
 }
-
