@@ -3,13 +3,22 @@
 import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
 
-const GSTInvoicingComponent = ({ 
+type GSTInvoicingProps = {
+  imageUrl: string;
+  title: string;
+  rating: number | string;
+  description?: string;
+  exclusiveOffersCount?: number;
+  features?: string[];
+};
+
+const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({ 
   imageUrl, 
   title, 
   rating, 
-  description, 
-  exclusiveOffersCount,
-  features 
+  description = '', 
+  exclusiveOffersCount = 0,
+  features = [] 
 }) => {
   return (
     <div className="flex gap-6 p-6 bg-gray-50 min-h-screen">

@@ -145,7 +145,7 @@ const pricingData = {
     <>
       <Navbar />
       <Hero {...heroProps}/>
-      <DynamicTabContent tabName="Startup India Registration" />
+      <DynamicTabContent category="Startup India Registration" />
       <Faq />
       <Popularsearches />
       <Footer />

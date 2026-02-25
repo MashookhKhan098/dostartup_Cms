@@ -27,7 +27,8 @@ type TrademarkServiceProps = {
   serviceName: string;
   serviceDescription: string;
   formFields: FormField[];
-  buttonText: string
+  buttonText: string;
+  onSubmit?: (data: Record<string, FormDataEntryValue>) => void;
 };
 
 
@@ -40,7 +41,8 @@ export default function TrademarkHero({ trademarkService }: Props) {
     serviceName,
     serviceDescription,
     formFields,
-    buttonText
+    buttonText,
+    onSubmit
   } = trademarkService;
 
   return (

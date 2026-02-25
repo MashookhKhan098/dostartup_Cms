@@ -126,7 +126,7 @@ export default function Home() {
     <>
       <Navbar />
       <Hero {...heroProps} />
-      <Price {...pricingData}/>
+      <Price />
       <DynamicTabContent category="Trademark" />
       <Faq />
       <Popularsearches />

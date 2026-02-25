@@ -61,8 +61,8 @@ export default function Home() {
   ],
   
   tabs: [
-    { name: "Individuals & MSMEs", path: null },
-    { name: "All Others", path: null },
+    { name: "Individuals & MSMEs" },
+    { name: "All Others" },
   ],
   defaultTab: "Individuals & MSMEs",
 

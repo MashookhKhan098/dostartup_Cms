@@ -167,7 +167,7 @@ export default function Home() {
     ],
     
     // Right side form - No tabs for this form
-    tabs: null,
+    tabs: [],
     defaultTab: null,
     tabDescriptions: null,
     

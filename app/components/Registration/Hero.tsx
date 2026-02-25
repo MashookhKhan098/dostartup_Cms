@@ -234,42 +234,16 @@ import { useRouter } from "next/navigation";
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
 
-type TextField = {
-  type: "text";
-  content: string;
-};
-
-type InputField = {
-  type: "input";
+type FormField = {
+  type: string;
+  name?: string;
   inputType?: string;
-  name: string;
   placeholder?: string;
+  label?: string;
+  content?: string;
+  options?: any;
+  [key: string]: any;
 };
-
-type SelectField = {
-  type: "select";
-  name: string;
-  placeholder?: string;
-  options?: string[];
-};
-
-type CheckboxField = {
-  type: "checkbox";
-  name: string;
-  label: string;
-};
-
-type ColorOptionsField = {
-  type: "color-options";
-  options: { name: string; hex: string }[];
-};
-
-type FormField =
-  | TextField
-  | InputField
-  | SelectField
-  | CheckboxField
-  | ColorOptionsField;
 
 export type RegistrationHeroProps = {
   heading?: string;
@@ -301,15 +275,15 @@ export default function DynamicHeroSection({
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
 
-  const handleTabClick = (tabName, path) => {
+  const handleTabClick = (tabName: string, path?: string) => {
     setActiveTab(tabName);
     if (path) {
       router.push(path);
     }
   };
 
-  const renderIcon = (iconType) => {
-    const icons = {
+  const renderIcon = (iconType: string) => {
+    const icons: Record<string, JSX.Element> = {
       plus: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd"/>
@@ -331,10 +305,10 @@ export default function DynamicHeroSection({
         </svg>
       ),
     };
-    return icons[iconType] || icons.document;
+    return icons[iconType] ?? icons.document;
   };
 
-  const renderFormField = (field, index) => {
+  const renderFormField = (field: FormField, index: number) => {
     switch (field.type) {
       case "select":
         return (
@@ -344,7 +318,7 @@ export default function DynamicHeroSection({
               className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none cursor-pointer transition"
             >
               <option value="">{field.placeholder}</option>
-              {field.options?.map((option, i) => (
+              {field.options?.map((option: string, i: number) => (
                 <option key={i} value={option}>{option}</option>
               ))}
             </select>
@@ -382,7 +356,7 @@ export default function DynamicHeroSection({
       case "color-options":
         return (
           <div key={index} className="flex flex-wrap gap-4 mt-2">
-            {field.options.map((option, idx) => (
+            {field.options.map((option: any, idx: number) => (
               <label key={idx} className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -410,6 +384,9 @@ export default function DynamicHeroSection({
     }
   };
 
+  const headingParts =
+    heading && headingHighlight ? heading.split(headingHighlight) : [heading ?? "", ""];
+
   return (
     <section className="relative bg-gray-50 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-4 lg:py-20">
@@ -418,11 +395,11 @@ export default function DynamicHeroSection({
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                {heading?.split(headingHighlight)[0]}
+                {headingParts[0]}
                 <span className="text-blue-600 underline decoration-blue-600 decoration-4 underline-offset-8">
                   {headingHighlight}
                 </span>
-                {heading?.split(headingHighlight)[1]}
+                {headingParts[1]}
               </h1>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl">
                 {description}

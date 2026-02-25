@@ -228,8 +228,71 @@
 
 
 "use client";
+import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+type Feature = {
+  icon: string;
+  text: string;
+};
+
+type ColorOption = {
+  name: string;
+  hex: string;
+};
+
+type FormField =
+  | {
+      type: "input";
+      name: string;
+      placeholder: string;
+      inputType?: string;
+    }
+  | {
+      type: "select";
+      name: string;
+      placeholder: string;
+      options: string[];
+    }
+  | {
+      type: "checkbox";
+      name: string;
+      placeholder: string;
+      label: string;
+    }
+  | {
+      type: "color-options";
+      name: string;
+      placeholder: string;
+      options: ColorOption[];
+    }
+  | {
+      type: "text";
+      content: string;
+    }
+  | {
+      type: string;
+      [key: string]: any;
+    };
+
+type Tab = {
+  name: string;
+  path?: string;
+};
+
+type DynamicHeroSectionProps = {
+  heading: string;
+  headingHighlight: string;
+  description: string;
+  features: Feature[];
+  tabs: Tab[];
+  defaultTab?: string | null;
+  tabDescriptions?: Record<string, string> | null;
+  formFields: FormField[];
+  buttonText: string;
+  onSubmit?: (data: Record<string, FormDataEntryValue>) => void;
+};
 
 export default function DynamicHeroSection({
   heading,
@@ -242,19 +305,19 @@ export default function DynamicHeroSection({
   formFields,
   buttonText,
   onSubmit
-}) {
+}: DynamicHeroSectionProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
 
-  const handleTabClick = (tabName, path) => {
+  const handleTabClick = (tabName: string, path?: string): void => {
     setActiveTab(tabName);
     if (path) {
       router.push(path);
     }
   };
 
-  const renderIcon = (iconType) => {
-    const icons = {
+  const renderIcon = (iconType: string): React.ReactNode => {
+    const icons: Record<string, React.ReactNode> = {
       plus: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd"/>
@@ -279,7 +342,7 @@ export default function DynamicHeroSection({
     return icons[iconType] || icons.document;
   };
 
-  const renderFormField = (field, index) => {
+  const renderFormField = (field: FormField, index: number): React.ReactNode => {
     switch (field.type) {
       case "select":
         return (
@@ -289,7 +352,7 @@ export default function DynamicHeroSection({
               className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none cursor-pointer transition"
             >
               <option value="">{field.placeholder}</option>
-              {field.options?.map((option, i) => (
+              {(field as any).options?.map((option: string, i: number) => (
                 <option key={i} value={option}>{option}</option>
               ))}
             </select>
@@ -327,7 +390,7 @@ export default function DynamicHeroSection({
       case "color-options":
         return (
           <div key={index} className="flex flex-wrap gap-4 mt-2">
-            {field.options.map((option, idx) => (
+            {((field as any).options || []).map((option: ColorOption, idx: number) => (
               <label key={idx} className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -426,7 +489,7 @@ export default function DynamicHeroSection({
                 onSubmit={(e) => {
                   e.preventDefault();
                   if (onSubmit) {
-                    const formData = new FormData(e.target);
+                    const formData = new FormData(e.currentTarget as HTMLFormElement);
                     onSubmit(Object.fromEntries(formData));
                   }
                 }}

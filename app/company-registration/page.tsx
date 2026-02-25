@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero defaultEntity = "Company"/>
+      <Hero defaultEntity="Company" />
       <Price />
-      <DynamicTabContent ="Proprietorship" />
+      <DynamicTabContent category="Proprietorship" />
       <Faq />
       <Popularsearches />
       <Footer />

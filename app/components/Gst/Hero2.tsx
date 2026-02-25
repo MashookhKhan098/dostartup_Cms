@@ -228,8 +228,83 @@
 
 
 "use client";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+
+type Tab = { name: string; path?: string };
+type Feature = { icon: string; text: string };
+type FormField = { type: string; [key: string]: any };
+
+export type GstHero2Props = {
+  heading?: string;
+  headingHighlight?: string;
+  description?: string;
+  features?: Feature[];
+  tabs?: Tab[];
+  defaultTab?: string | null;
+  tabDescriptions?: Record<string, string> | null;
+  formFields?: FormField[];
+  buttonText?: string;
+  onSubmit?: (data: Record<string, FormDataEntryValue>) => void;
+};
+
+const ICONS: Record<string, JSX.Element> = {
+  plus: (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        fillRule="evenodd"
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  document: (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        fillRule="evenodd"
+        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  chart: (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        fillRule="evenodd"
+        d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  education: (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+    </svg>
+  ),
+  pause: (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        fillRule="evenodd"
+        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  users: (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+    </svg>
+  ),
+  wallet: (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        fillRule="evenodd"
+        d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+};
 
 export default function DynamicHeroSection({
   // Left side content props
@@ -245,59 +320,22 @@ export default function DynamicHeroSection({
   formFields,
   buttonText,
   onSubmit
-}) {
+}: GstHero2Props) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
 
-  const handleTabClick = (tabName, path) => {
+  const handleTabClick = (tabName: string, path?: string) => {
     setActiveTab(tabName);
     if (path) {
       router.push(path);
     }
   };
 
-  const renderIcon = (iconType) => {
-    const icons = {
-      plus: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd"/>
-        </svg>
-      ),
-      document: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd"/>
-        </svg>
-      ),
-      chart: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-        </svg>
-      ),
-      education: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-        </svg>
-      ),
-      pause: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"/>
-        </svg>
-      ),
-      users: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-        </svg>
-      ),
-      wallet: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
-        </svg>
-      )
-    };
-    return icons[iconType] || icons.document;
+  const renderIcon = (iconType: string) => {
+    return ICONS[iconType] ?? ICONS.document;
   };
 
-  const renderFormField = (field, index) => {
+  const renderFormField = (field: FormField, index: number) => {
     switch (field.type) {
       case "select":
         return (
@@ -307,7 +345,7 @@ export default function DynamicHeroSection({
               className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none cursor-pointer transition"
             >
               <option value="">{field.placeholder}</option>
-              {field.options?.map((option, i) => (
+              {field.options?.map((option: string, i: number) => (
                 <option key={i} value={option}>{option}</option>
               ))}
             </select>
@@ -354,6 +392,9 @@ export default function DynamicHeroSection({
     }
   };
 
+  const headingParts =
+    heading && headingHighlight ? heading.split(headingHighlight) : [heading ?? "", ""];
+
   return (
     <section className="relative bg-gray-50 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 lg:py-20">
@@ -362,11 +403,11 @@ export default function DynamicHeroSection({
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                {heading?.split(headingHighlight)[0]}
+                {headingParts[0]}
                 <span className="text-blue-600 underline decoration-blue-600 decoration-4 underline-offset-8">
                   {headingHighlight}
                 </span>
-                {heading?.split(headingHighlight)[1]}
+                {headingParts[1]}
               </h1>
 
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl">
@@ -425,10 +466,10 @@ export default function DynamicHeroSection({
 
               {/* Form */}
               <form 
-                onSubmit={(e) => {
+                onSubmit={(e: FormEvent<HTMLFormElement>) => {
                   e.preventDefault();
                   if (onSubmit) {
-                    const formData = new FormData(e.target);
+                    const formData = new FormData(e.currentTarget);
                     onSubmit(Object.fromEntries(formData));
                   }
                 }}
