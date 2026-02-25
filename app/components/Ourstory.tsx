@@ -43,61 +43,68 @@
 // }
 
 
+// app/components/Ourstory.tsx
+"use client";
 
-async function getOurStory() {
-  const res = await fetch(
-    "http://localhost:1337/api/our-story?populate=image",
-    { cache: "no-store" }
-  );
-  const json = await res.json();
-  return json.data;
-}
+import { useEffect, useState } from "react";
 
-function renderRichText(blocks: any[]) {
-  return blocks.map((block, i) => (
-    <p
-      key={i}
-      className="text-gray-600 text-sm md:text-base leading-relaxed mt-2"
-    >
-      {block.children.map((child: any, j: number) => (
-        <span key={j}>{child.text}</span>
-      ))}
-    </p>
-  ));
-}
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
 
-export default async function OurStory() {
-  const data = await getOurStory();
+const API =
+"https://cms.dostartup.in/api/content/item/OurStory?token=" + TOKEN;
+
+export default function Ourstory() {
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    async function fetchStory() {
+      try {
+        const res = await fetch(API, { cache: "no-store" });
+        const json = await res.json();
+
+        console.log("OUR STORY:", json);
+
+        setData(json);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchStory();
+  }, []);
 
   if (!data) return null;
 
-  const imageUrl = data.image?.url;
+  const imageUrl = data?.image?.path
+    ? `https://cms.dostartup.in/storage/uploads${data.image.path}`
+    : null;
 
   return (
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center">
 
-          {/* Left Image */}
+          {/* IMAGE */}
           <div className="w-full md:w-1/2">
             {imageUrl && (
               <img
-                src={`http://localhost:1337${imageUrl}`}
-                alt="Our Story"
-                className="w-full h-auto rounded-lg shadow-sm object-cover"
+                src={imageUrl}
+                alt={data.image?.title || "Our Story"}
+                className="w-full rounded-lg shadow-sm object-cover"
               />
             )}
           </div>
 
-          {/* Right Text */}
+          {/* TEXT */}
           <div className="w-full md:w-1/2">
             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
-              {data.Title}
+              {data.title}
             </h3>
 
-            {renderRichText(data.para1)}
-            {renderRichText(data.para2)}
+            <p className="text-gray-600 mt-2">{data.para1}</p>
+            <p className="text-gray-600 mt-2">{data.para2}</p>
           </div>
+
         </div>
       </div>
     </section>

@@ -740,30 +740,236 @@
 
 
 
+// interface DynamicTabContentProps {
+//   category: string;
+// }
+
+// async function getTabData(category: string) {
+//   const res = await fetch(
+//     `http://localhost:1337/api/dynamic-tab-contents?filters[category][$eq]=${category}`,
+//     { cache: "no-store" }
+//   );
+
+//   const json = await res.json();
+
+//   if (!Array.isArray(json.data) || json.data.length === 0) {
+//     return null;
+//   }
+
+//   // assuming `content` is a JSON field in Strapi
+//   return json.data[0].content;
+// }
+
+// export default async function DynamicTabContent({
+//   category,
+// }: DynamicTabContentProps) {
+//   const data = await getTabData(category);
+
+//   if (!data) {
+//     return (
+//       <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+//         <p className="text-red-600 font-medium">
+//           No data found for "{category}". Please check the category.
+//         </p>
+//       </div>
+//     );
+//   }
+
+//   /* ====== BELOW JSX IS 100% SAME AS YOUR CODE ====== */
+//   return (
+//     <div className="bg-gray-50 py-12 px-4">
+//       <div className="max-w-7xl mx-auto flex gap-6">
+//         {/* Main Content */}
+//         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-1">
+          
+//           {/* Author Section */}
+//           <div className="bg-gray-50 px-8 py-6 border-b border-gray-200">
+//             <div className="flex items-center justify-between">
+//               <div className="flex items-center gap-4">
+//                 <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+//                   {data.author.name.split(" ").map((n: string) => n[0]).join("")}
+//                 </div>
+//                 <div>
+//                   <h3 className="text-base font-bold text-gray-900">
+//                     {data.author.name}
+//                   </h3>
+//                   <p className="text-sm text-gray-600">{data.author.role}</p>
+//                 </div>
+//               </div>
+//               <div className="text-right">
+//                 <p className="text-sm text-gray-500">Updated on:</p>
+//                 <p className="text-sm font-semibold text-gray-900">
+//                   {data.author.updatedDate}
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Main Content */}
+//           <div className="px-8 py-10 space-y-8">
+//             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+//               {data.title}
+//             </h1>
+
+//             <p className="text-gray-700 text-base leading-relaxed">
+//               {data.description}
+//             </p>
+
+//             <p className="text-gray-700 text-base leading-relaxed">
+//               {data.introduction}
+//             </p>
+
+//             {data.sections.map((section: any, index: number) => (
+//               <div key={index} className="space-y-5">
+//                 <h2 className="text-2xl font-bold text-gray-900 mt-8">
+//                   {section.heading}
+//                 </h2>
+
+//                 <p className="text-gray-700 text-base leading-relaxed">
+//                   {section.content}
+//                 </p>
+
+//                 <ul className="space-y-4 mt-4">
+//                   {section.points.map((point: string, i: number) => {
+//                     const [title, ...desc] = point.split(":");
+//                     return (
+//                       <li key={i} className="flex items-start gap-3">
+//                         <svg
+//                           className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1"
+//                           fill="currentColor"
+//                           viewBox="0 0 20 20"
+//                         >
+//                           <path
+//                             fillRule="evenodd"
+//                             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+//                             clipRule="evenodd"
+//                           />
+//                         </svg>
+//                         <div>
+//                           <span className="font-semibold text-gray-900">
+//                             {title}:
+//                           </span>
+//                           <span className="text-gray-700">
+//                             {" "}
+//                             {desc.join(":")}
+//                           </span>
+//                         </div>
+//                       </li>
+//                     );
+//                   })}
+//                 </ul>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* Sidebar — unchanged */}
+//         {/* Sidebar */}
+//         <div className="w-80 space-y-6 flex-shrink-0 sticky top-6 self-start">
+//           {/* Consult Experts */}
+//           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//             <h3 className="text-lg font-bold text-gray-900 mb-4">Consult Experts</h3>
+//             <div className="flex items-center gap-3 mb-4">
+//               <div className="flex -space-x-2">
+//                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
+//                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
+//                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
+//               </div>
+//               <span className="text-sm font-semibold text-gray-700">Expert Team</span>
+//             </div>
+//             <p className="text-sm text-gray-600 mb-4">
+//               Get professional guidance from our experienced consultants
+//             </p>
+//             <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+//               Contact Now
+//             </button>
+//           </div>
+
+//           {/* Related Guides */}
+//           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+//             <h3 className="text-lg font-bold text-gray-900 mb-4">Related Guides</h3>
+//             <ul className="space-y-3">
+//               <li>
+//                 <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
+//                   Online EPF account transfer
+//                 </a>
+//               </li>
+//               <li>
+//                 <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
+//                   IEPF Rules 2019 – Investor Education and Protection Fund
+//                 </a>
+//               </li>
+//               <li>
+//                 <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
+//                   Reduced Rate Of EPF Contribution & Impact On Stakeholders
+//                 </a>
+//               </li>
+//               <li>
+//                 <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
+//                   PF Balance Check
+//                 </a>
+//               </li>
+//             </ul>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+// cockpit from here
+"use client";
+
+import { useEffect, useState } from "react";
+
 interface DynamicTabContentProps {
   category: string;
 }
 
-async function getTabData(category: string) {
-  const res = await fetch(
-    `http://localhost:1337/api/dynamic-tab-contents?filters[category][$eq]=${category}`,
-    { cache: "no-store" }
-  );
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
 
-  const json = await res.json();
+const API =
+  `https://cms.dostartup.in/api/content/items/dynamicTabContent?token=${TOKEN}`;
 
-  if (!Array.isArray(json.data) || json.data.length === 0) {
-    return null;
+export default function DynamicTabContent({ category }: DynamicTabContentProps) {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(API);
+        const json = await res.json();
+
+        // Cockpit returns array directly
+        if (Array.isArray(json)) {
+          const matched = json.find(
+            (item: any) =>
+              item.category === category ||
+              item.CATEGORY === category
+          );
+
+          setData(matched?.content || matched || null);
+        }
+      } catch (err) {
+        console.error("Cockpit fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [category]);
+
+  if (loading) {
+    return (
+      <div className="p-10 text-center text-gray-500">
+        Loading content...
+      </div>
+    );
   }
-
-  // assuming `content` is a JSON field in Strapi
-  return json.data[0].content;
-}
-
-export default async function DynamicTabContent({
-  category,
-}: DynamicTabContentProps) {
-  const data = await getTabData(category);
 
   if (!data) {
     return (
@@ -775,67 +981,72 @@ export default async function DynamicTabContent({
     );
   }
 
-  /* ====== BELOW JSX IS 100% SAME AS YOUR CODE ====== */
   return (
     <div className="bg-gray-50 py-12 px-4">
       <div className="max-w-7xl mx-auto flex gap-6">
+
         {/* Main Content */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-1">
-          
-          {/* Author Section */}
+
+          {/* Author */}
           <div className="bg-gray-50 px-8 py-6 border-b border-gray-200">
             <div className="flex items-center justify-between">
+
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                  {data.author.name.split(" ").map((n: string) => n[0]).join("")}
+                  {data.author?.name
+                    ?.split(" ")
+                    .map((n: string) => n[0])
+                    .join("")}
                 </div>
+
                 <div>
                   <h3 className="text-base font-bold text-gray-900">
-                    {data.author.name}
+                    {data.author?.name}
                   </h3>
-                  <p className="text-sm text-gray-600">{data.author.role}</p>
+                  <p className="text-sm text-gray-600">
+                    {data.author?.role}
+                  </p>
                 </div>
               </div>
+
               <div className="text-right">
                 <p className="text-sm text-gray-500">Updated on:</p>
                 <p className="text-sm font-semibold text-gray-900">
-                  {data.author.updatedDate}
+                  {data.author?.updatedDate}
                 </p>
               </div>
+
             </div>
           </div>
 
-          {/* Main Content */}
+          {/* Body */}
           <div className="px-8 py-10 space-y-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
               {data.title}
             </h1>
 
-            <p className="text-gray-700 text-base leading-relaxed">
-              {data.description}
-            </p>
+            <p className="text-gray-700">{data.description}</p>
+            <p className="text-gray-700">{data.introduction}</p>
 
-            <p className="text-gray-700 text-base leading-relaxed">
-              {data.introduction}
-            </p>
-
-            {data.sections.map((section: any, index: number) => (
+            {data.sections?.map((section: any, index: number) => (
               <div key={index} className="space-y-5">
+
                 <h2 className="text-2xl font-bold text-gray-900 mt-8">
                   {section.heading}
                 </h2>
 
-                <p className="text-gray-700 text-base leading-relaxed">
-                  {section.content}
-                </p>
+                <p className="text-gray-700">{section.content}</p>
 
                 <ul className="space-y-4 mt-4">
-                  {section.points.map((point: string, i: number) => {
+                  {section.points?.map((point: string, i: number) => {
                     const [title, ...desc] = point.split(":");
+
                     return (
                       <li key={i} className="flex items-start gap-3">
                         <svg
-                          className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1"
+                          className="w-5 h-5 text-blue-600 mt-1"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -845,73 +1056,46 @@ export default async function DynamicTabContent({
                             clipRule="evenodd"
                           />
                         </svg>
+
                         <div>
                           <span className="font-semibold text-gray-900">
                             {title}:
                           </span>
                           <span className="text-gray-700">
-                            {" "}
-                            {desc.join(":")}
+                            {" "}{desc.join(":")}
                           </span>
                         </div>
+
                       </li>
                     );
                   })}
                 </ul>
+
               </div>
             ))}
+
           </div>
         </div>
 
-        {/* Sidebar — unchanged */}
-        {/* Sidebar */}
+        {/* Sidebar unchanged */}
         <div className="w-80 space-y-6 flex-shrink-0 sticky top-6 self-start">
-          {/* Consult Experts */}
+
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Consult Experts</h3>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex -space-x-2">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
-              </div>
-              <span className="text-sm font-semibold text-gray-700">Expert Team</span>
-            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-4">
+              Consult Experts
+            </h3>
+
             <p className="text-sm text-gray-600 mb-4">
               Get professional guidance from our experienced consultants
             </p>
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+
+            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
               Contact Now
             </button>
           </div>
 
-          {/* Related Guides */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Related Guides</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  Online EPF account transfer
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  IEPF Rules 2019 – Investor Education and Protection Fund
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  Reduced Rate Of EPF Contribution & Impact On Stakeholders
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  PF Balance Check
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
+
       </div>
     </div>
   );

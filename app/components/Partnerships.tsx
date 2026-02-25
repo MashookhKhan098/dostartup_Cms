@@ -85,93 +85,208 @@
 
 // app/components/Partnerships.tsx
 
-const STRAPI_URL = 'http://localhost:1337';
+// const STRAPI_URL = 'http://localhost:1337';
 
-async function getPartnershipSection() {
-  const res = await fetch(
-    `${STRAPI_URL}/api/partnership-section?populate=ctaImage`,
-    { cache: "no-store" }
-  );
-  const json = await res.json();
-  return json.data;
-}
+// async function getPartnershipSection() {
+//   const res = await fetch(
+//     `${STRAPI_URL}/api/partnership-section?populate=ctaImage`,
+//     { cache: "no-store" }
+//   );
+//   const json = await res.json();
+//   return json.data;
+// }
 
-async function getPartners() {
-  const res = await fetch(
-    `${STRAPI_URL}/api/partners?populate=logo`,
-    { cache: "no-store" }
-  );
-  const json = await res.json();
-  return json.data;
-}
+// async function getPartners() {
+//   const res = await fetch(
+//     `${STRAPI_URL}/api/partners?populate=logo`,
+//     { cache: "no-store" }
+//   );
+//   const json = await res.json();
+//   return json.data;
+// }
 
-export default async function Partnerships() {
-  const section = await getPartnershipSection();
-  const partners = await getPartners();
+// export default async function Partnerships() {
+//   const section = await getPartnershipSection();
+//   const partners = await getPartners();
 
-  if (!section) return null;
+//   if (!section) return null;
 
-  const {
-    title,
-    description,
-    ctaTitle,
-    ctaDescription,
-    ctaButtonText,
-    ctaImage,
-  } = section;
+//   const {
+//     title,
+//     description,
+//     ctaTitle,
+//     ctaDescription,
+//     ctaButtonText,
+//     ctaImage,
+//   } = section;
+
+//   return (
+//     <section className="bg-white">
+//       <div className="max-w-7xl mx-auto px-6 py-12">
+
+//         {/* Heading */}
+//         <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
+//           {title}
+//         </h2>
+//         <p className="text-gray-600 mt-1 mb-6">
+//           {description}
+//         </p>
+
+//         {/* Partners */}
+//         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
+//           {partners?.map((partner: any) => (
+//             <img
+//               key={partner.id}
+//               src={`${STRAPI_URL}${partner.logo?.url}`}
+//               alt={partner.name}
+//               className="max-h-10 object-contain"
+//             />
+//           ))}
+//         </div>
+
+//         {/* CTA */}
+//         <div className="mt-10 relative rounded-xl overflow-hidden">
+//           <div className="absolute inset-0 bg-black/70"></div>
+
+//           <div className="relative flex items-center justify-between gap-8 p-8 md:p-12">
+//             <div className="text-white max-w-xl">
+//               <h3 className="text-lg md:text-xl font-semibold mb-3">
+//                 {ctaTitle}
+//               </h3>
+//               <p className="text-sm md:text-base mb-5">
+//                 {ctaDescription}
+//               </p>
+//               <button className="px-5 py-2.5 bg-pink-600 hover:bg-pink-700 rounded-lg">
+//                 {ctaButtonText}
+//               </button>
+//             </div>
+
+//             <div className="hidden md:block">
+//               <img
+//                 src={`${STRAPI_URL}${ctaImage?.url}`}
+//                 alt="Enterprise Partnership"
+//                 className="w-110 rounded-lg shadow-lg"
+//               />
+//             </div>
+//           </div>
+//         </div>
+
+//       </div>
+//     </section>
+//   );
+// }
+
+
+"use client";
+
+import { useEffect, useState } from "react";
+
+const COCKPIT_BASE = "https://cms.dostartup.in";
+const PARTNER_API =
+  `${COCKPIT_BASE}/api/content/items/partner`;
+
+export default function Partnerships() {
+
+  const [partners, setPartners] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchPartners();
+  }, []);
+
+  async function fetchPartners() {
+
+    try {
+
+      const res = await fetch(PARTNER_API, {
+        cache: "no-store"
+      });
+
+      const data = await res.json();
+
+      if (Array.isArray(data)) {
+        setPartners(data);
+      }
+
+    } catch (error) {
+
+      console.error("Partners fetch error:", error);
+
+    }
+
+  }
 
   return (
     <section className="bg-white">
+
       <div className="max-w-7xl mx-auto px-6 py-12">
 
         {/* Heading */}
         <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
-          {title}
+          Industry leading partnerships
         </h2>
+
         <p className="text-gray-600 mt-1 mb-6">
-          {description}
+          We work with top Indian Institutions to further our shared mission of improving ease of doing business and promoting Entrepreneurship in India.
         </p>
 
-        {/* Partners */}
+        {/* Partners Logos */}
         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
-          {partners?.map((partner: any) => (
+
+          {partners.map((partner, idx) => (
+
             <img
-              key={partner.id}
-              src={`${STRAPI_URL}${partner.logo?.url}`}
+              key={partner._id || idx}
+              src={`${COCKPIT_BASE}/storage/uploads${partner.logo?.[0]?.path}`}
               alt={partner.name}
               className="max-h-10 object-contain"
             />
+
           ))}
+
         </div>
 
-        {/* CTA */}
+        {/* CTA section */}
         <div className="mt-10 relative rounded-xl overflow-hidden">
+
           <div className="absolute inset-0 bg-black/70"></div>
 
           <div className="relative flex items-center justify-between gap-8 p-8 md:p-12">
+
             <div className="text-white max-w-xl">
+
               <h3 className="text-lg md:text-xl font-semibold mb-3">
-                {ctaTitle}
+                Enterprise Partnership
               </h3>
-              <p className="text-sm md:text-base mb-5">
-                {ctaDescription}
+
+              <p className="text-sm md:text-base mb-5 leading-relaxed">
+                If you're an independent professional, firm, enterprise client,
+                bank, or government organization, we invite you to reach out to
+                our Enterprise Partnership Team.
               </p>
-              <button className="px-5 py-2.5 bg-pink-600 hover:bg-pink-700 rounded-lg">
-                {ctaButtonText}
+
+              <button className="px-5 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-medium text-sm rounded-lg shadow transition">
+                Get Started
               </button>
+
             </div>
 
             <div className="hidden md:block">
+
               <img
-                src={`${STRAPI_URL}${ctaImage?.url}`}
+                src="/images/hero.webp"
                 alt="Enterprise Partnership"
                 className="w-110 rounded-lg shadow-lg"
               />
+
             </div>
+
           </div>
+
         </div>
 
       </div>
+
     </section>
   );
+
 }
