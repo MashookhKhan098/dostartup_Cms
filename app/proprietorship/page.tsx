@@ -1,24 +1,23 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Startup/Hero';
-import Price from '../components/Price';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
-export default function Home() {
+export default function Page() {
+  // Change this to "gst", "trademark", or "startup" as needed
+  const serviceCategory = "proprietorship"; 
+
   return (
-    <>
+    <main className="min-h-screen bg-white">
       <Navbar />
-      <Hero defaultEntity = "Proprietorship"/>
-      <Price category="registration"/>
-      {/* gst, registration, startup, */}
-      <DynamicTabContent category="GST" />
-      {/* E-Invoice, GST, GST Registration, Partnership, Proprietorship, Startup, Trademark */}
-      <Faq category="startup"/>
-      {/* gst, registration, startup, trademark */}
-      <Popularsearches />
+      <Hero defaultEntity="Proprietorship"/>
+      
+      {/* Both components now use the same variable */}
+      <DynamicTabContent category={serviceCategory} />
+      <Faq category={serviceCategory} />
+      
       <Footer />
-    </>
+    </main>
   );
 }

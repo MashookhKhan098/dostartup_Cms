@@ -199,148 +199,70 @@
 //     </div>
 //   );
 // }
-
-
-
 "use client";
-
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Plus, X, Loader2 } from "lucide-react";
 
-interface FAQ {
-  _id: string;
-  question: string;
-  answer: string;
-  category: string;
-}
-
-interface FAQAccordionProps {
-  category?: string;
-}
-
-export default function FAQAccordion({ category }: FAQAccordionProps) {
-  const [faqs, setFaqs] = useState<FAQ[]>([]);
+export default function Faq({ category }: { category: string }) {
+  const [faqs, setFaqs] = useState<any[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [visibleCount, setVisibleCount] = useState(5);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const baseUrl = process.env.NEXT_PUBLIC_COCKPIT_API_URL;
-    const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
-    
-    // Ensure category matches Cockpit data (which is lowercase in your screenshot)
-    const normalizedCategory = category?.toLowerCase().trim();
-    
-    // COLLECTION NAME: Must match Cockpit exactly (startupFaq)
-    const filter = normalizedCategory ? `&filter={category:'${normalizedCategory}'}` : "";
-    const url = `${baseUrl}/api/content/items/startupFaq?api-key=${token}${filter}`;
+    const fetchFaqs = async () => {
+      const baseUrl = process.env.NEXT_PUBLIC_COCKPIT_API_URL;
+      const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+      
+      // Filter logic: matches the 'category' field in your screenshot
+      const filter = { category: { "$regex": category, "$options": "i" } };
+      const url = `${baseUrl}/api/content/items/startupFaq?filter=${encodeURIComponent(JSON.stringify(filter))}&api-key=${token}`;
 
-    setLoading(true);
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then((json) => {
-        // Cockpit 'items' returns an array. If empty, it returns []
-        setFaqs(Array.isArray(json) ? json : []);
+      try {
+        setLoading(true);
+        const res = await fetch(url);
+        const json = await res.json();
+        const data = Array.isArray(json) ? json : (json?.entries || []);
+        setFaqs(data);
+      } catch (err) {
+        console.error("FAQ Error:", err);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("FAQ fetch error:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchFaqs();
   }, [category]);
 
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const loadMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
-  };
-
-  const visibleFaqs = useMemo(() => faqs.slice(0, visibleCount), [faqs, visibleCount]);
-  const hasMore = visibleCount < faqs.length;
-
-  if (loading) return (
-    <div className="flex flex-col items-center justify-center py-20 bg-white">
-      <Loader2 className="w-8 h-8 text-[#C15F3C] animate-spin mb-4" />
-      <p className="font-['Sora'] text-sm text-[#B1ADA1] animate-pulse">Fetching Questions...</p>
-    </div>
-  );
+  if (loading) return <div className="py-10 text-center"><Loader2 className="animate-spin inline-block text-[#C15F3C]" /></div>;
 
   return (
-    <section className="bg-white py-16 px-6">
+    <section className="bg-white py-16 px-6 font-['Sora']">
       <div className="max-w-4xl mx-auto">
-        
-        <div className="mb-10 text-center md:text-left">
-          <p className="font-['Sora'] text-[10px] font-bold tracking-[0.2em] uppercase text-[#C15F3C] mb-2">
-            Support Center
-          </p>
-          <h2 className="font-['Sora'] text-2xl md:text-4xl font-extrabold text-[#1a1714]">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="bg-white border border-[#B1ADA1]/20 rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.03)] overflow-hidden">
-          <div className="divide-y divide-[#B1ADA1]/10">
-            {visibleFaqs.length > 0 ? (
-              visibleFaqs.map((faq, index) => (
-                <div key={faq._id} className="group transition-all duration-300">
-                  <button
-                    onClick={() => toggleAccordion(index)}
-                    className="w-full px-8 py-7 flex items-center justify-between text-left hover:bg-[#F9F8F4] transition-all"
-                  >
-                    <span className="font-['Sora'] text-sm md:text-base font-bold text-[#3d3a35] group-hover:text-[#1a1714] pr-8 leading-snug">
-                      {faq.question}
-                    </span>
-
-                    <div className={`flex-shrink-0 transition-all duration-500 p-2.5 rounded-full ${
-                      openIndex === index ? "bg-[#C15F3C] text-white rotate-90" : "bg-[#F4F3EE] text-[#B1ADA1]"
-                    }`}>
-                      {openIndex === index ? <X size={16} /> : <Plus size={16} />}
-                    </div>
-                  </button>
-
-                  <div 
-                    className={`transition-all duration-500 ease-in-out ${
-                      openIndex === index ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-                    }`}
-                  >
-                    <div className="px-8 pb-8 pt-0">
-                      <div className="h-[1px] w-12 bg-[#C15F3C]/30 mb-6"></div>
-                      <p className="text-[#7a7570] text-sm md:text-base leading-relaxed max-w-3xl">
-                        {faq.answer}
-                      </p>
-                    </div>
+        <h2 className="text-3xl font-extrabold text-[#1a1714] mb-10">Frequently Asked Questions</h2>
+        <div className="border border-[#B1ADA1]/20 rounded-[2rem] overflow-hidden">
+          {faqs.length > 0 ? (
+            faqs.map((faq, index) => (
+              <div key={faq._id || index} className="border-b border-[#B1ADA1]/10 last:border-0">
+                <button 
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-[#F9F8F4]"
+                >
+                  <span className="font-bold text-[#3d3a35]">{faq.question}</span>
+                  {openIndex === index ? <X className="text-[#C15F3C]" /> : <Plus className="text-[#B1ADA1]" />}
+                </button>
+                {openIndex === index && (
+                  <div className="px-8 pb-6 text-[#7a7570] leading-relaxed">
+                    {faq.answer}
                   </div>
-                </div>
-              ))
-            ) : (
-              <div className="p-20 text-center">
-                <p className="text-[#B1ADA1] font-['Sora'] italic text-sm">
-                  No FAQs found for <span className="font-bold text-[#C15F3C]">"{category}"</span>.
-                </p>
+                )}
               </div>
-            )}
-          </div>
-
-          {hasMore && (
-            <div className="px-8 py-8 bg-[#F9F8F4]/50 border-t border-[#B1ADA1]/10 text-center">
-              <button
-                onClick={loadMore}
-                className="font-['Sora'] px-10 py-4 text-xs font-bold uppercase tracking-widest text-white bg-[#1a1714] rounded-2xl hover:bg-[#C15F3C] transition-all active:scale-95 shadow-lg shadow-black/10"
-              >
-                Load More Questions
-              </button>
+            ))
+          ) : (
+            <div className="p-10 text-center text-gray-400 italic">
+              No FAQs found for "{category}". Check your Cockpit category column.
             </div>
           )}
         </div>
-
-        <p className="mt-10 text-center text-sm text-[#B1ADA1] font-medium">
-          Still confused? <a href="#" className="text-[#C15F3C] font-bold underline decoration-2 underline-offset-4 hover:text-[#1a1714] transition-colors">Speak to an Expert</a>
-        </p>
       </div>
     </section>
   );

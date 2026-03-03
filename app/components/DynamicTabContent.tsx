@@ -734,118 +734,79 @@
 // }
 
 
+"use client";
+import { useEffect, useState } from "react";
 
+export default function DynamicTabContent({ category }: { category: string }) {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-interface DynamicTabContentProps {
-  category: string;
-}
+  useEffect(() => {
+    async function fetchData() {
+      const baseUrl = "https://cms.dostartup.in";
+      const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+      
+      // Matches the category string exactly
+      const filter = JSON.stringify({ category: category });
+      const url = `${baseUrl}/api/content/items/dynamicTabContent?filter=${encodeURIComponent(filter)}&api-key=${token}`;
 
-async function getTabData(category: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_COCKPIT_API_URL;
-  const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
-  
-  // 1. Normalize to lowercase (e.g., "GST" becomes "gst")
-  const cleanCategory = category.toLowerCase().trim();
-  
-  // 2. Build URL with Mongo-style filter for Cockpit
-  const url = `${baseUrl}/api/content/items/dynamic_tabs?filter={category:'${cleanCategory}'}&populate=1&api-key=${token}`;
+      try {
+        const res = await fetch(url);
+        const result = await res.json();
+        // Cockpit 'items' endpoint returns an array
+        const entries = Array.isArray(result) ? result : (result?.entries || []);
+        if (entries.length > 0) setData(entries[0]);
+      } catch (err) {
+        console.error("Fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [category]);
 
-  try {
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) return null;
-    const data = await res.json();
-    
-    // Cockpit returns an array; we want the first match
-    return data && data.length > 0 ? data[0] : null;
-  } catch (error) {
-    console.error("Cockpit Fetch Error:", error);
-    return null;
-  }
-}
-
-export default async function DynamicTabContent({ category }: DynamicTabContentProps) {
-  const data = await getTabData(category);
-
-  // FALLBACK: If no data found in Cockpit
-  if (!data) {
-    return (
-      <div className="max-w-7xl mx-auto my-12 p-16 border-2 border-dashed border-[#B1ADA1]/30 rounded-[3rem] text-center bg-[#F9F8F4]">
-        <div className="w-16 h-16 bg-[#B1ADA1]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-2xl">⏳</span>
-        </div>
-        <h3 className="font-['Sora'] text-xl font-bold text-[#1a1714] mb-2">Content Incoming</h3>
-        <p className="text-[#7a7570] font-['Sora'] text-sm">
-          Information for <span className="font-bold text-[#C15F3C] uppercase">{category}</span> is being verified for 2026 compliance.
-        </p>
-      </div>
-    );
-  }
+  // If no entry exists in Cockpit with that category, return null to remove the white gap
+  if (!loading && !data) return null;
 
   return (
-    <section className="bg-[#F9F8F4] py-20 px-6 font-['Sora']">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
-        {/* Main Content Card */}
-        <div className="flex-1 bg-white rounded-[3rem] shadow-[0_10px_50px_rgba(0,0,0,0.04)] border border-[#B1ADA1]/10 overflow-hidden">
-          {/* Author Header */}
-          <div className="bg-[#F4F3EE]/40 px-10 py-6 border-b border-[#B1ADA1]/10 flex items-center gap-5">
-             <div className="w-12 h-12 bg-[#C15F3C] rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#C15F3C]/20">
-                {data.author_name?.[0] || "E"}
-             </div>
-             <div>
-                <h3 className="text-sm font-extrabold text-[#1a1714]">{data.author_name || "Expert Consultant"}</h3>
-                <p className="text-[10px] font-bold text-[#C15F3C] uppercase tracking-widest">{data.author_role || "Legal Dept"}</p>
-             </div>
-          </div>
-
-          <div className="px-8 md:px-16 py-16">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#1a1714] mb-8 leading-tight">
-              {data.title}
-            </h1>
-            <p className="text-lg text-[#3d3a35] mb-12 border-l-4 border-[#C15F3C] pl-8 py-2 font-medium leading-relaxed italic">
-              {data.description}
-            </p>
-
-            {/* Dynamic Sections */}
-            <div className="space-y-16">
-              {data.sections?.map((section: any, idx: number) => (
-                <div key={idx} className="group">
-                  <h2 className="text-2xl font-bold text-[#1a1714] mb-6 flex items-center gap-4">
-                    <span className="text-[#C15F3C]/30 text-4xl font-black">0{idx + 1}</span>
-                    {section.heading}
-                  </h2>
-                  <p className="text-[#7a7570] leading-relaxed mb-8 text-base md:text-lg">
-                    {section.content}
-                  </p>
-                  
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {section.points?.map((point: string, pIdx: number) => (
-                      <div key={pIdx} className="flex items-center gap-4 p-5 bg-[#F9F8F4] rounded-2xl border border-transparent hover:border-[#C15F3C]/20 hover:bg-white hover:shadow-md transition-all duration-300">
-                        <div className="w-6 h-6 bg-[#C15F3C] rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
-                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <p className="text-sm font-bold text-[#3d3a35]">{point}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+    <section className="py-16 bg-white font-['Sora']">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="bg-[#F9F8F4] rounded-[3rem] p-10 border border-[#B1ADA1]/20 shadow-sm">
+          
+          <div className="flex items-center gap-4 mb-8">
+            <div className="bg-[#C15F3C] text-white w-12 h-12 flex items-center justify-center rounded-xl font-bold italic text-xl shadow-lg">
+              E
+            </div>
+            <div>
+              <h2 className="text-3xl font-extrabold text-[#1a1714]">
+                {data?.title || "Add 'title' field in Cockpit"}
+              </h2>
+              <p className="text-[#C15F3C] text-xs font-bold uppercase tracking-widest mt-1">
+                {category} Expert Guidance
+              </p>
             </div>
           </div>
-        </div>
+          
+          <div className="grid md:grid-cols-2 gap-10 border-t border-[#B1ADA1]/10 pt-8">
+            <div>
+              <h3 className="font-bold text-[#1a1714] mb-4 text-sm uppercase">Overview</h3>
+              <p className="text-[#7a7570] leading-relaxed text-lg italic">
+                {data?.description || "Add 'description' field in Cockpit to fill this space."}
+              </p>
+            </div>
 
-        {/* Sidebar */}
-        <aside className="w-full lg:w-80 space-y-6">
-          <div className="bg-[#1a1714] rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#C15F3C]/20 rounded-full blur-3xl"></div>
-            <h3 className="text-xl font-bold mb-4 relative z-10">Instant Quote</h3>
-            <p className="text-sm text-gray-400 mb-8 leading-relaxed relative z-10">Get expert pricing for {category} registration in seconds.</p>
-            <button className="w-full bg-[#C15F3C] hover:bg-white hover:text-[#1a1714] py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-lg shadow-[#C15F3C]/20">
-              Start Application
-            </button>
+            <div className="bg-white/50 p-6 rounded-2xl border border-[#B1ADA1]/10 self-start">
+              <h3 className="font-bold text-[#C15F3C] mb-2 text-sm uppercase">Verified By</h3>
+              <p className="text-[#1a1714] font-bold text-lg">
+                {data?.author_name || "DoStartup Team"}
+              </p>
+              <p className="text-[#7a7570] text-sm mt-1">
+                Compliance expert for {category} registration.
+              </p>
+            </div>
           </div>
-        </aside>
+
+        </div>
       </div>
     </section>
   );
