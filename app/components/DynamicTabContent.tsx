@@ -736,183 +736,117 @@
 
 
 
-
-
-
-
 interface DynamicTabContentProps {
   category: string;
 }
 
 async function getTabData(category: string) {
-  const res = await fetch(
-    `http://localhost:1337/api/dynamic-tab-contents?filters[category][$eq]=${category}`,
-    { cache: "no-store" }
-  );
+  const baseUrl = process.env.NEXT_PUBLIC_COCKPIT_API_URL;
+  const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+  
+  // 1. Normalize to lowercase (e.g., "GST" becomes "gst")
+  const cleanCategory = category.toLowerCase().trim();
+  
+  // 2. Build URL with Mongo-style filter for Cockpit
+  const url = `${baseUrl}/api/content/items/dynamic_tabs?filter={category:'${cleanCategory}'}&populate=1&api-key=${token}`;
 
-  const json = await res.json();
-
-  if (!Array.isArray(json.data) || json.data.length === 0) {
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    
+    // Cockpit returns an array; we want the first match
+    return data && data.length > 0 ? data[0] : null;
+  } catch (error) {
+    console.error("Cockpit Fetch Error:", error);
     return null;
   }
-
-  // assuming `content` is a JSON field in Strapi
-  return json.data[0].content;
 }
 
-export default async function DynamicTabContent({
-  category,
-}: DynamicTabContentProps) {
+export default async function DynamicTabContent({ category }: DynamicTabContentProps) {
   const data = await getTabData(category);
 
+  // FALLBACK: If no data found in Cockpit
   if (!data) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-600 font-medium">
-          No data found for "{category}". Please check the category.
+      <div className="max-w-7xl mx-auto my-12 p-16 border-2 border-dashed border-[#B1ADA1]/30 rounded-[3rem] text-center bg-[#F9F8F4]">
+        <div className="w-16 h-16 bg-[#B1ADA1]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span className="text-2xl">⏳</span>
+        </div>
+        <h3 className="font-['Sora'] text-xl font-bold text-[#1a1714] mb-2">Content Incoming</h3>
+        <p className="text-[#7a7570] font-['Sora'] text-sm">
+          Information for <span className="font-bold text-[#C15F3C] uppercase">{category}</span> is being verified for 2026 compliance.
         </p>
       </div>
     );
   }
 
-  /* ====== BELOW JSX IS 100% SAME AS YOUR CODE ====== */
   return (
-    <div className="bg-gray-50 py-12 px-4">
-      <div className="max-w-7xl mx-auto flex gap-6">
-        {/* Main Content */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-1">
-          
-          {/* Author Section */}
-          <div className="bg-gray-50 px-8 py-6 border-b border-gray-200">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                  {data.author.name.split(" ").map((n: string) => n[0]).join("")}
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-gray-900">
-                    {data.author.name}
-                  </h3>
-                  <p className="text-sm text-gray-600">{data.author.role}</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-sm text-gray-500">Updated on:</p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {data.author.updatedDate}
-                </p>
-              </div>
-            </div>
+    <section className="bg-[#F9F8F4] py-20 px-6 font-['Sora']">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+        {/* Main Content Card */}
+        <div className="flex-1 bg-white rounded-[3rem] shadow-[0_10px_50px_rgba(0,0,0,0.04)] border border-[#B1ADA1]/10 overflow-hidden">
+          {/* Author Header */}
+          <div className="bg-[#F4F3EE]/40 px-10 py-6 border-b border-[#B1ADA1]/10 flex items-center gap-5">
+             <div className="w-12 h-12 bg-[#C15F3C] rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#C15F3C]/20">
+                {data.author_name?.[0] || "E"}
+             </div>
+             <div>
+                <h3 className="text-sm font-extrabold text-[#1a1714]">{data.author_name || "Expert Consultant"}</h3>
+                <p className="text-[10px] font-bold text-[#C15F3C] uppercase tracking-widest">{data.author_role || "Legal Dept"}</p>
+             </div>
           </div>
 
-          {/* Main Content */}
-          <div className="px-8 py-10 space-y-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+          <div className="px-8 md:px-16 py-16">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-[#1a1714] mb-8 leading-tight">
               {data.title}
             </h1>
-
-            <p className="text-gray-700 text-base leading-relaxed">
+            <p className="text-lg text-[#3d3a35] mb-12 border-l-4 border-[#C15F3C] pl-8 py-2 font-medium leading-relaxed italic">
               {data.description}
             </p>
 
-            <p className="text-gray-700 text-base leading-relaxed">
-              {data.introduction}
-            </p>
-
-            {data.sections.map((section: any, index: number) => (
-              <div key={index} className="space-y-5">
-                <h2 className="text-2xl font-bold text-gray-900 mt-8">
-                  {section.heading}
-                </h2>
-
-                <p className="text-gray-700 text-base leading-relaxed">
-                  {section.content}
-                </p>
-
-                <ul className="space-y-4 mt-4">
-                  {section.points.map((point: string, i: number) => {
-                    const [title, ...desc] = point.split(":");
-                    return (
-                      <li key={i} className="flex items-start gap-3">
-                        <svg
-                          className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        <div>
-                          <span className="font-semibold text-gray-900">
-                            {title}:
-                          </span>
-                          <span className="text-gray-700">
-                            {" "}
-                            {desc.join(":")}
-                          </span>
+            {/* Dynamic Sections */}
+            <div className="space-y-16">
+              {data.sections?.map((section: any, idx: number) => (
+                <div key={idx} className="group">
+                  <h2 className="text-2xl font-bold text-[#1a1714] mb-6 flex items-center gap-4">
+                    <span className="text-[#C15F3C]/30 text-4xl font-black">0{idx + 1}</span>
+                    {section.heading}
+                  </h2>
+                  <p className="text-[#7a7570] leading-relaxed mb-8 text-base md:text-lg">
+                    {section.content}
+                  </p>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {section.points?.map((point: string, pIdx: number) => (
+                      <div key={pIdx} className="flex items-center gap-4 p-5 bg-[#F9F8F4] rounded-2xl border border-transparent hover:border-[#C15F3C]/20 hover:bg-white hover:shadow-md transition-all duration-300">
+                        <div className="w-6 h-6 bg-[#C15F3C] rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+                        <p className="text-sm font-bold text-[#3d3a35]">{point}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Sidebar — unchanged */}
         {/* Sidebar */}
-        <div className="w-80 space-y-6 flex-shrink-0 sticky top-6 self-start">
-          {/* Consult Experts */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Consult Experts</h3>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex -space-x-2">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
-              </div>
-              <span className="text-sm font-semibold text-gray-700">Expert Team</span>
-            </div>
-            <p className="text-sm text-gray-600 mb-4">
-              Get professional guidance from our experienced consultants
-            </p>
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-              Contact Now
+        <aside className="w-full lg:w-80 space-y-6">
+          <div className="bg-[#1a1714] rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#C15F3C]/20 rounded-full blur-3xl"></div>
+            <h3 className="text-xl font-bold mb-4 relative z-10">Instant Quote</h3>
+            <p className="text-sm text-gray-400 mb-8 leading-relaxed relative z-10">Get expert pricing for {category} registration in seconds.</p>
+            <button className="w-full bg-[#C15F3C] hover:bg-white hover:text-[#1a1714] py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-lg shadow-[#C15F3C]/20">
+              Start Application
             </button>
           </div>
-
-          {/* Related Guides */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Related Guides</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  Online EPF account transfer
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  IEPF Rules 2019 – Investor Education and Protection Fund
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  Reduced Rate Of EPF Contribution & Impact On Stakeholders
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-800 hover:underline">
-                  PF Balance Check
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        </aside>
       </div>
-    </div>
+    </section>
   );
 }

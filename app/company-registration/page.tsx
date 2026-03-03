@@ -4,18 +4,27 @@ import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Startup/Hero';
 import Price from '../components/Price';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
+import FAQAccordion from '../components/Faq';
 
 export default function Home() {
+  // Pass the identifier here. 
+  // Code now handles 'GST' vs 'gst' automatically.
+  const serviceCategory = "GST"; 
+
   return (
-    <>
+    <main className="min-h-screen bg-white">
       <Navbar />
-      <Hero defaultEntity = "Company"/>
+      <Hero defaultEntity="GST Registration" />
       <Price />
-      <DynamicTabContent ="Proprietorship" />
-      <Faq />
+      
+      {/* Content from Cockpit */}
+      <DynamicTabContent category={serviceCategory} />
+      
+      {/* FAQ from Cockpit */}
+      <FAQAccordion category={serviceCategory} />
+      
       <Popularsearches />
       <Footer />
-    </>
+    </main>
   );
 }

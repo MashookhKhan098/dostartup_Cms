@@ -204,10 +204,11 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { Plus, X, Loader2 } from "lucide-react";
 
 interface FAQ {
-  id: number;
+  _id: string;
   question: string;
   answer: string;
   category: string;
@@ -221,20 +222,33 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(5);
-  const [title, setTitle] = useState("FAQ's");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let url = "http://localhost:1337/api/startup-faqs";
+    const baseUrl = process.env.NEXT_PUBLIC_COCKPIT_API_URL;
+    const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+    
+    // Ensure category matches Cockpit data (which is lowercase in your screenshot)
+    const normalizedCategory = category?.toLowerCase().trim();
+    
+    // COLLECTION NAME: Must match Cockpit exactly (startupFaq)
+    const filter = normalizedCategory ? `&filter={category:'${normalizedCategory}'}` : "";
+    const url = `${baseUrl}/api/content/items/startupFaq?api-key=${token}${filter}`;
 
-    if (category) {
-      url += `?filters[category][$eq]=${category}`;
-      setTitle(`FAQ's`);
-    }
-
+    setLoading(true);
     fetch(url)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
       .then((json) => {
-        setFaqs(json.data || []);
+        // Cockpit 'items' returns an array. If empty, it returns []
+        setFaqs(Array.isArray(json) ? json : []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("FAQ fetch error:", err);
+        setLoading(false);
       });
   }, [category]);
 
@@ -246,77 +260,88 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
     setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
   };
 
-  const visibleFaqs = faqs.slice(0, visibleCount);
+  const visibleFaqs = useMemo(() => faqs.slice(0, visibleCount), [faqs, visibleCount]);
   const hasMore = visibleCount < faqs.length;
 
+  if (loading) return (
+    <div className="flex flex-col items-center justify-center py-20 bg-white">
+      <Loader2 className="w-8 h-8 text-[#C15F3C] animate-spin mb-4" />
+      <p className="font-['Sora'] text-sm text-[#B1ADA1] animate-pulse">Fetching Questions...</p>
+    </div>
+  );
+
   return (
-    <div className="bg-gray-50 py-12 px-4">
+    <section className="bg-white py-16 px-6">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-          
-          {/* Header */}
-          <div className="px-6 py-5 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900">
-              {title}
-            </h2>
-          </div>
+        
+        <div className="mb-10 text-center md:text-left">
+          <p className="font-['Sora'] text-[10px] font-bold tracking-[0.2em] uppercase text-[#C15F3C] mb-2">
+            Support Center
+          </p>
+          <h2 className="font-['Sora'] text-2xl md:text-4xl font-extrabold text-[#1a1714]">
+            Frequently Asked Questions
+          </h2>
+        </div>
 
-          {/* FAQ Items */}
-          <div className="divide-y divide-gray-200">
-            {visibleFaqs.map((faq, index) => (
-              <div key={faq.id} className="transition-all">
-                
-                {/* Question */}
-                <button
-                  onClick={() => toggleAccordion(index)}
-                  className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                >
-                  <span className="text-sm font-medium text-gray-900 pr-4">
-                    {faq.question}
-                  </span>
-
-                  <svg
-                    className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform ${
-                      openIndex === index ? "rotate-45" : ""
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+        <div className="bg-white border border-[#B1ADA1]/20 rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.03)] overflow-hidden">
+          <div className="divide-y divide-[#B1ADA1]/10">
+            {visibleFaqs.length > 0 ? (
+              visibleFaqs.map((faq, index) => (
+                <div key={faq._id} className="group transition-all duration-300">
+                  <button
+                    onClick={() => toggleAccordion(index)}
+                    className="w-full px-8 py-7 flex items-center justify-between text-left hover:bg-[#F9F8F4] transition-all"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 4v16m8-8H4"
-                    />
-                  </svg>
-                </button>
+                    <span className="font-['Sora'] text-sm md:text-base font-bold text-[#3d3a35] group-hover:text-[#1a1714] pr-8 leading-snug">
+                      {faq.question}
+                    </span>
 
-                {/* Answer */}
-                {openIndex === index && (
-                  <div className="px-6 pb-4 pt-2">
-                    <p className="text-sm text-gray-700 leading-relaxed">
-                      {faq.answer}
-                    </p>
+                    <div className={`flex-shrink-0 transition-all duration-500 p-2.5 rounded-full ${
+                      openIndex === index ? "bg-[#C15F3C] text-white rotate-90" : "bg-[#F4F3EE] text-[#B1ADA1]"
+                    }`}>
+                      {openIndex === index ? <X size={16} /> : <Plus size={16} />}
+                    </div>
+                  </button>
+
+                  <div 
+                    className={`transition-all duration-500 ease-in-out ${
+                      openIndex === index ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                    }`}
+                  >
+                    <div className="px-8 pb-8 pt-0">
+                      <div className="h-[1px] w-12 bg-[#C15F3C]/30 mb-6"></div>
+                      <p className="text-[#7a7570] text-sm md:text-base leading-relaxed max-w-3xl">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
-                )}
+                </div>
+              ))
+            ) : (
+              <div className="p-20 text-center">
+                <p className="text-[#B1ADA1] font-['Sora'] italic text-sm">
+                  No FAQs found for <span className="font-bold text-[#C15F3C]">"{category}"</span>.
+                </p>
               </div>
-            ))}
+            )}
           </div>
 
-          {/* Load More */}
           {hasMore && (
-            <div className="px-6 py-5 border-t border-gray-200">
+            <div className="px-8 py-8 bg-[#F9F8F4]/50 border-t border-[#B1ADA1]/10 text-center">
               <button
                 onClick={loadMore}
-                className="px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors"
+                className="font-['Sora'] px-10 py-4 text-xs font-bold uppercase tracking-widest text-white bg-[#1a1714] rounded-2xl hover:bg-[#C15F3C] transition-all active:scale-95 shadow-lg shadow-black/10"
               >
-                Load More
+                Load More Questions
               </button>
             </div>
           )}
         </div>
+
+        <p className="mt-10 text-center text-sm text-[#B1ADA1] font-medium">
+          Still confused? <a href="#" className="text-[#C15F3C] font-bold underline decoration-2 underline-offset-4 hover:text-[#1a1714] transition-colors">Speak to an Expert</a>
+        </p>
       </div>
-    </div>
+    </section>
   );
 }
