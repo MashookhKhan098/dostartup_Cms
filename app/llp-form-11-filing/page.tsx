@@ -3,7 +3,7 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import { Star, ChevronDown, CheckCircle } from "lucide-react";
-import PopularSearches from "../../components/PopularSearches";
+import PopularSearches from "../components/PopularSearches";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
