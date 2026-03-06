@@ -734,80 +734,223 @@
 // }
 
 
-"use client";
-import { useEffect, useState } from "react";
 
-export default function DynamicTabContent({ category }: { category: string }) {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+interface DynamicTabContentProps {
+  category: string;
+}
 
-  useEffect(() => {
-    async function fetchData() {
-      const baseUrl = "https://cms.dostartup.in";
-      const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
-      
-      // Matches the category string exactly
-      const filter = JSON.stringify({ category: category });
-      const url = `${baseUrl}/api/content/items/dynamicTabContent?filter=${encodeURIComponent(filter)}&api-key=${token}`;
+async function getTabData(category: string) {
+  const res = await fetch(
+    "https://cms.dostartup.in/api/content/items/testing",
+    { cache: "no-store" }
+  );
 
-      try {
-        const res = await fetch(url);
-        const result = await res.json();
-        // Cockpit 'items' endpoint returns an array
-        const entries = Array.isArray(result) ? result : (result?.entries || []);
-        if (entries.length > 0) setData(entries[0]);
-      } catch (err) {
-        console.error("Fetch error:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, [category]);
+  const json = await res.json();
 
-  // If no entry exists in Cockpit with that category, return null to remove the white gap
-  if (!loading && !data) return null;
+  if (!Array.isArray(json) || json.length === 0) {
+    return null;
+  }
+
+  // Cockpit structure
+  return json[0]?.GST || null;
+}
+
+export default async function DynamicTabContent({
+  category,
+}: DynamicTabContentProps) {
+  const data = await getTabData(category);
+
+  if (!data) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+        <p className="text-red-600 font-medium">
+          No data found for "{category}". Please check the category.
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <section className="py-16 bg-white font-['Sora']">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-[#F9F8F4] rounded-[3rem] p-10 border border-[#B1ADA1]/20 shadow-sm">
-          
-          <div className="flex items-center gap-4 mb-8">
-            <div className="bg-[#C15F3C] text-white w-12 h-12 flex items-center justify-center rounded-xl font-bold italic text-xl shadow-lg">
-              E
-            </div>
-            <div>
-              <h2 className="text-3xl font-extrabold text-[#1a1714]">
-                {data?.title || "Add 'title' field in Cockpit"}
-              </h2>
-              <p className="text-[#C15F3C] text-xs font-bold uppercase tracking-widest mt-1">
-                {category} Expert Guidance
-              </p>
+    <div className="bg-gray-50 py-12 px-4">
+      <div className="max-w-7xl mx-auto flex gap-6">
+
+        {/* Main Content */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-1">
+
+          {/* Author Section */}
+          <div className="bg-gray-50 px-8 py-6 border-b border-gray-200">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                  {(data.author?.name || "NA")
+                    .split(" ")
+                    .map((n: string) => n[0])
+                    .join("")}
+                </div>
+
+                <div>
+                  <h3 className="text-base font-bold text-gray-900">
+                    {data.author?.name || "Author"}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {data.author?.role || ""}
+                  </p>
+                </div>
+              </div>
+
+              <div className="text-right">
+                <p className="text-sm text-gray-500">Updated on:</p>
+                <p className="text-sm font-semibold text-gray-900">
+                  {data.author?.updatedDate || ""}
+                </p>
+              </div>
             </div>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-10 border-t border-[#B1ADA1]/10 pt-8">
-            <div>
-              <h3 className="font-bold text-[#1a1714] mb-4 text-sm uppercase">Overview</h3>
-              <p className="text-[#7a7570] leading-relaxed text-lg italic">
-                {data?.description || "Add 'description' field in Cockpit to fill this space."}
-              </p>
-            </div>
 
-            <div className="bg-white/50 p-6 rounded-2xl border border-[#B1ADA1]/10 self-start">
-              <h3 className="font-bold text-[#C15F3C] mb-2 text-sm uppercase">Verified By</h3>
-              <p className="text-[#1a1714] font-bold text-lg">
-                {data?.author_name || "DoStartup Team"}
-              </p>
-              <p className="text-[#7a7570] text-sm mt-1">
-                Compliance expert for {category} registration.
-              </p>
-            </div>
+          {/* Main Content */}
+          <div className="px-8 py-10 space-y-8">
+
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              {data.title}
+            </h1>
+
+            <p className="text-gray-700 text-base leading-relaxed">
+              {data.description}
+            </p>
+
+            <p className="text-gray-700 text-base leading-relaxed">
+              {data.introduction}
+            </p>
+
+            {(data.sections || []).map((section: any, index: number) => (
+              <div key={index} className="space-y-5">
+
+                <h2 className="text-2xl font-bold text-gray-900 mt-8">
+                  {section.heading}
+                </h2>
+
+                <p className="text-gray-700 text-base leading-relaxed">
+                  {section.content}
+                </p>
+
+                <ul className="space-y-4 mt-4">
+                  {(section.points || []).map((point: string, i: number) => {
+                    const [title, ...desc] = point.split(":");
+
+                    return (
+                      <li key={i} className="flex items-start gap-3">
+
+                        <svg
+                          className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+
+                        <div>
+                          <span className="font-semibold text-gray-900">
+                            {title}:
+                          </span>
+                          <span className="text-gray-700">
+                            {" "}
+                            {desc.join(":")}
+                          </span>
+                        </div>
+
+                      </li>
+                    );
+                  })}
+                </ul>
+
+              </div>
+            ))}
           </div>
-
         </div>
+
+        {/* Sidebar */}
+        <div className="w-80 space-y-6 flex-shrink-0 sticky top-6 self-start">
+
+          {/* Consult Experts */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">
+              Consult Experts
+            </h3>
+
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex -space-x-2">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
+              </div>
+
+              <span className="text-sm font-semibold text-gray-700">
+                Expert Team
+              </span>
+            </div>
+
+            <p className="text-sm text-gray-600 mb-4">
+              Get professional guidance from our experienced consultants
+            </p>
+
+            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+              Contact Now
+            </button>
+          </div>
+
+          {/* Related Guides */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">
+              Related Guides
+            </h3>
+
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  Online EPF account transfer
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="#"
+                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  IEPF Rules 2019 – Investor Education and Protection Fund
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="#"
+                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  Reduced Rate Of EPF Contribution & Impact On Stakeholders
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="#"
+                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  PF Balance Check
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
       </div>
-    </section>
+    </div>
   );
 }
