@@ -77,14 +77,6 @@
 // }
 
 
-
-
-
-
-
-
-
-
 import Partnerships from "../components/Partnerships";
 
 export default function PartnershipPage() {

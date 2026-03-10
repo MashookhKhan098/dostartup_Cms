@@ -111,8 +111,8 @@ export default function Home() {
     
     // Right side form - Tabs
     tabs: [
-      { name: "New Registration", path: null },
-      { name: "New State", path: null }
+      { name: "New Registration" },
+      { name: "New State" }
     ],
     defaultTab: "New Registration",
     tabDescriptions: {

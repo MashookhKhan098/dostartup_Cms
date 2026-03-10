@@ -92,8 +92,8 @@ export default function Home() {
     
     // Right side form - Tabs
     tabs: [
-      { name: "File GSTR-1 Return", path: null },
-      { name: "File GSTR-3B Return", path: null }
+      { name: "File GSTR-1 Return" },
+      { name: "File GSTR-3B Return" }
     ],
     defaultTab: "File GSTR-1 Return",
     tabDescriptions: {

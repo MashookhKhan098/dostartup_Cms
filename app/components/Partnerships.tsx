@@ -177,237 +177,116 @@
 // }
 
 
+"use client";
 
+import { useEffect, useState } from "react";
 
+const COCKPIT_BASE = "https://cms.dostartup.in";
+const PARTNER_API =
+  `${COCKPIT_BASE}/api/content/items/partner`;
 
+export default function Partnerships() {
 
+  const [partners, setPartners] = useState<any[]>([]);
 
+  useEffect(() => {
+    fetchPartners();
+  }, []);
 
+  async function fetchPartners() {
 
+    try {
 
+      const res = await fetch(PARTNER_API, {
+        cache: "no-store"
+      });
 
+      const data = await res.json();
 
+      if (Array.isArray(data)) {
+        setPartners(data);
+      }
 
+    } catch (error) {
 
+      console.error("Partners fetch error:", error);
 
+    }
 
-
-
-// https://cms.dostartup.in/api/content/items/Partner
-
-
-
-// "use client";
-
-// import { useEffect, useState } from "react";
-
-// const COCKPIT_BASE = "https://cms.dostartup.in";
-// const PARTNER_API = `${COCKPIT_BASE}/api/content/items/Partner`;
-
-// export default function Partnerships() {
-
-//   const [partners, setPartners] = useState<any[]>([]);
-
-//   useEffect(() => {
-//     fetchPartners();
-//   }, []);
-
-//   async function fetchPartners() {
-
-//     try {
-
-//       const res = await fetch(PARTNER_API, {
-//         cache: "no-store"
-//       });
-
-//       const data = await res.json();
-
-//       if (Array.isArray(data)) {
-//         setPartners(data);
-//       }
-
-//     } catch (error) {
-
-//       console.error("Partners fetch error:", error);
-
-//     }
-
-//   }
-
-//   function getLogoUrl(partner: any) {
-
-//     if (!partner.logo) return "";
-
-//     // CASE 1: Asset object (correct Cockpit format)
-//     if (typeof partner.logo === "object" && partner.logo.path) {
-//       return `${COCKPIT_BASE}/storage/uploads${partner.logo.path}`;
-//     }
-
-//     // CASE 2: String URL
-//     if (typeof partner.logo === "string") {
-
-//       // localhost fix → replace with production base
-//       if (partner.logo.includes("localhost")) {
-//         const filename = partner.logo.split("/uploads/")[1];
-//         return `${COCKPIT_BASE}/storage/uploads/${filename}`;
-//       }
-
-//       return partner.logo;
-//     }
-
-//     return "";
-
-//   }
-
-//   return (
-//     <section className="bg-white">
-
-//       <div className="max-w-7xl mx-auto px-6 py-12">
-
-//         <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
-//           Industry leading partnerships
-//         </h2>
-
-//         <p className="text-gray-600 mt-1 mb-6">
-//           We work with top Indian Institutions to further our shared mission of improving ease of doing business and promoting Entrepreneurship in India.
-//         </p>
-
-//         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
-
-//           {partners.map((partner, idx) => {
-
-//             const logoUrl = getLogoUrl(partner);
-
-//             if (!logoUrl) return null;
-
-//             return (
-//               <img
-//                 key={partner._id || idx}
-//                 src={logoUrl}
-//                 alt={partner.Name}
-//                 className="max-h-10 object-contain"
-//               />
-//             );
-
-//           })}
-
-//         </div>
-
-//         <div className="mt-10 relative rounded-xl overflow-hidden">
-
-//           <div className="absolute inset-0 bg-black/70"></div>
-
-//           <div className="relative flex items-center justify-between gap-8 p-8 md:p-12">
-
-//             <div className="text-white max-w-xl">
-
-//               <h3 className="text-lg md:text-xl font-semibold mb-3">
-//                 Enterprise Partnership
-//               </h3>
-
-//               <p className="text-sm md:text-base mb-5 leading-relaxed">
-//                 If you're an independent professional, firm, enterprise client,
-//                 bank, or government organization, we invite you to reach out to
-//                 our Enterprise Partnership Team.
-//               </p>
-
-//               <button className="px-5 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-medium text-sm rounded-lg shadow transition">
-//                 Get Started
-//               </button>
-
-//             </div>
-
-//             <div className="hidden md:block">
-
-//               <img
-//                 src="/images/hero.webp"
-//                 alt="Enterprise Partnership"
-//                 className="w-110 rounded-lg shadow-lg"
-//               />
-
-//             </div>
-
-//           </div>
-
-//         </div>
-
-//       </div>
-
-//     </section>
-//   );
-
-// }interface PartnershipsProps {
- 
-
-interface Partner {
-  _id: string;
-  Name: string;
-  logo?: {
-    path: string;
-  };
-}
-
-interface PartnershipsProps {
-  partners: Partner[];
-}
-
-export default function Partnerships({ partners = [] }: PartnershipsProps) {
-  const ASSETS_URL = process.env.NEXT_PUBLIC_COCKPIT_ASSETS_URL;
+  }
 
   return (
-    <section className="py-16 bg-[#F9F8F4]">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="mb-10 text-center md:text-left">
-          <p className="font-['Sora'] text-[10px] font-semibold tracking-[0.1em] uppercase text-[#B1ADA1] mb-2">
-            Trusted Partners
-          </p>
-          <h2 className="font-['Sora'] text-2xl md:text-3xl font-semibold text-[#1a1714]">
-            Our Banking & Ecosystem Partners
-          </h2>
+    <section className="bg-white">
+
+      <div className="max-w-7xl mx-auto px-6 py-12">
+
+        {/* Heading */}
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
+          Industry leading partnerships
+        </h2>
+
+        <p className="text-gray-600 mt-1 mb-6">
+          We work with top Indian Institutions to further our shared mission of improving ease of doing business and promoting Entrepreneurship in India.
+        </p>
+
+        {/* Partners Logos */}
+        <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
+
+          {partners.map((partner, idx) => (
+
+            <img
+              key={partner._id || idx}
+              src={`${COCKPIT_BASE}/storage/uploads${partner.logo?.[0]?.path}`}
+              alt={partner.name}
+              className="max-h-10 object-contain"
+            />
+
+          ))}
+
         </div>
 
-        {/* Partners Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {partners.map((partner) => (
-            <div
-              key={partner._id}
-              className="group bg-white border border-[#B1ADA1]/20 p-8 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.02)] flex flex-col items-center justify-center transition-all duration-300"
-            >
-              {partner.logo?.path ? (
-                <div className="relative h-16 w-full mb-4 flex items-center justify-center">
-                  <img
-                    src={`${ASSETS_URL}${partner.logo.path}`}
-                    alt={partner.Name.trim()}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
-              ) : (
-                <div className="h-16 w-16 bg-[#F4F3EE] rounded-full mb-4 flex items-center justify-center text-[#B1ADA1]">
-                  <span className="text-xs">Logo</span>
-                </div>
-              )}
-              
-              <p className="font-['Sora'] text-xs font-semibold text-[#7a7570] transition-colors text-center">
-                {partner.Name.trim()}
+        {/* CTA section */}
+        <div className="mt-10 relative rounded-xl overflow-hidden">
+
+          <div className="absolute inset-0 bg-black/70"></div>
+
+          <div className="relative flex items-center justify-between gap-8 p-8 md:p-12">
+
+            <div className="text-white max-w-xl">
+
+              <h3 className="text-lg md:text-xl font-semibold mb-3">
+                Enterprise Partnership
+              </h3>
+
+              <p className="text-sm md:text-base mb-5 leading-relaxed">
+                If you're an independent professional, firm, enterprise client,
+                bank, or government organization, we invite you to reach out to
+                our Enterprise Partnership Team.
               </p>
+
+              <button className="px-5 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-medium text-sm rounded-lg shadow transition">
+                Get Started
+              </button>
+
             </div>
-          ))}
+
+            <div className="hidden md:block">
+
+              <img
+                src="/images/hero.webp"
+                alt="Enterprise Partnership"
+                className="w-110 rounded-lg shadow-lg"
+              />
+
+            </div>
+
+          </div>
+
         </div>
 
-        {/* Bottom Trust Line */}
-        <div className="mt-12 pt-8 border-t border-[#B1ADA1]/20 flex flex-wrap justify-center gap-x-8 gap-y-4">
-          {["Secure Integration", "Authorized Channel", "Priority Support"].map((benefit) => (
-            <div key={benefit} className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#C15F3C]" />
-              <span className="text-[11px] font-semibold text-[#B1ADA1] uppercase tracking-wider">
-                {benefit}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
+
     </section>
   );
+
 }

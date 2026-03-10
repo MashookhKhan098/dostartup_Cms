@@ -1,9 +1,8 @@
 "use client";
+import React from "react";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { BadgeCheck, Search, User, Briefcase } from "lucide-react";
-
-/* ================= TYPES ================= */
 
 type Feature = {
   icon: React.ReactNode;
@@ -29,57 +28,28 @@ type TrademarkServiceProps = {
   serviceDescription: string;
   formFields: FormField[];
   buttonText: string;
+  onSubmit?: (data: Record<string, FormDataEntryValue>) => void;
 };
+
 
 type Props = {
   trademarkService: TrademarkServiceProps;
-  onSubmit?: (data: Record<string, string>) => Promise<void> | void;
 };
 
-/* ================= COMPONENT ================= */
-
-export default function TrademarkHero({
-  trademarkService,
-  onSubmit,
-}: Props) {
+export default function TrademarkHero({ trademarkService }: Props) {
   const {
     serviceName,
     serviceDescription,
     formFields,
     buttonText,
+    onSubmit
   } = trademarkService;
-
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = Object.fromEntries(
-      new FormData(e.currentTarget)
-    ) as Record<string, string>;
-
-    try {
-      setLoading(true);
-      setSuccess(null);
-
-      if (onSubmit) {
-        await onSubmit(formData);
-      }
-
-      setSuccess("Form submitted successfully!");
-      e.currentTarget.reset();
-    } catch (error) {
-      console.error("Submission error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <section className="bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        {/* ================= LEFT SECTION ================= */}
+
+        {/* ================= LEFT (STATIC) ================= */}
         <div className="space-y-8">
           <h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
             Manage & Track your{" "}
@@ -108,12 +78,12 @@ export default function TrademarkHero({
           </ul>
         </div>
 
-        {/* ================= RIGHT SECTION ================= */}
+        {/* ================= RIGHT (STATIC UI + DYNAMIC DATA) ================= */}
         <div className="bg-white rounded-xl shadow-xl border overflow-hidden">
           <div className="h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-orange-400" />
 
           <div className="p-8 space-y-6">
-            {/* Service Selector */}
+            {/* Dynamic Service Title */}
             <div>
               <h3 className="text-lg font-semibold text-gray-900">
                 Trademark Services
@@ -124,13 +94,24 @@ export default function TrademarkHero({
               </select>
             </div>
 
-            {/* Description */}
+            {/* Dynamic Description */}
             <p className="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border-l-4 border-blue-600">
               {serviceDescription}
             </p>
 
             {/* Dynamic Form */}
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!onSubmit) return;
+
+                const data = Object.fromEntries(
+                  new FormData(e.currentTarget)
+                );
+                onSubmit(data as Record<string, string>);
+              }}
+            >
               {formFields.map((field, i) => {
                 if (field.type === "input") {
                   return (
@@ -139,8 +120,7 @@ export default function TrademarkHero({
                       name={field.name}
                       type={field.inputType || "text"}
                       placeholder={field.placeholder}
-                      required
-                      className="w-full border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full border rounded-lg px-4 py-3 text-sm"
                     />
                   );
                 }
@@ -150,8 +130,7 @@ export default function TrademarkHero({
                     <select
                       key={i}
                       name={field.name}
-                      required
-                      className="w-full border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                      className="w-full border rounded-lg px-4 py-3 text-sm"
                     >
                       <option value="">{field.placeholder}</option>
                       {field.options.map((opt) => (
@@ -168,21 +147,10 @@ export default function TrademarkHero({
 
               <button
                 type="submit"
-                disabled={loading}
-                className={`w-full py-3 rounded-lg font-semibold transition ${
-                  loading
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
-                }`}
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
               >
-                {loading ? "Submitting..." : buttonText}
+                {buttonText}
               </button>
-
-              {success && (
-                <p className="text-green-600 text-sm font-medium">
-                  {success}
-                </p>
-              )}
             </form>
           </div>
         </div>
@@ -191,7 +159,7 @@ export default function TrademarkHero({
   );
 }
 
-/* ================= STATIC FEATURES ================= */
+/* ================= STATIC DATA ================= */
 
 const STATIC_FEATURES: Feature[] = [
   {

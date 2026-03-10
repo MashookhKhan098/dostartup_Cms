@@ -49,6 +49,7 @@
 // }
 
 
+
 // import {
 //   Briefcase,
 //   Stamp,
@@ -67,83 +68,59 @@
 //   Wallet: Wallet,
 // };
 
-// // Cockpit base URL
-// const COCKPIT_BASE = "https://cms.dostartup.in";
+// const STRAPI_URL = "http://localhost:1337";
 
-// // Cockpit APIs
-// const SERVICES_API =
-//   `${COCKPIT_BASE}/api/content/items/service`;
-
-// const SECTION_API =
-//   `${COCKPIT_BASE}/api/content/item/service_section`;
-
-// // Fetch from Cockpit
 // async function getServicesData() {
-
 //   const [sectionRes, servicesRes] = await Promise.all([
-//     fetch(SECTION_API, { cache: "no-store" }),
-//     fetch(SERVICES_API, { cache: "no-store" }),
+//     fetch(`${STRAPI_URL}/api/services-section`, { cache: "no-store" }),
+//     fetch(`${STRAPI_URL}/api/services`, { cache: "no-store" }),
 //   ]);
 
-//   const section = await sectionRes.json();
-//   const services = await servicesRes.json();
+//   const section = (await sectionRes.json()).data;
+//   const services = (await servicesRes.json()).data;
 
 //   return { section, services };
 // }
 
 // export default async function ServicesSection() {
-
 //   const { section, services } = await getServicesData();
 
 //   return (
 //     <section className="bg-white">
-
 //       <div className="max-w-7xl mx-auto px-6 py-12">
-
-//         {/* Section title */}
 //         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
 //           {section.title}
 //         </h3>
 
-//         {/* Section description */}
 //         <p className="text-gray-600 mb-8 text-sm md:text-base">
 //           {section.description}
 //         </p>
 
-//         {/* Services grid */}
 //         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-
 //           {services.map((service: any, idx: number) => {
-
 //             const Icon = ICON_MAP[service.icon];
 
 //             return (
 //               <div
-//                 key={service._id || idx}
+//                 key={idx}
 //                 className="flex flex-col items-center text-center cursor-pointer hover:bg-slate-50 p-3 rounded transition"
 //               >
-
-//                 {Icon && (
-//                   <Icon className="h-8 w-8 text-blue-600 mb-2" />
-//                 )}
-
+//                 {Icon && <Icon className="h-8 w-8 text-blue-600 mb-2" />}
 //                 <span className="text-sm font-medium text-gray-800">
 //                   {service.name}
 //                 </span>
-
 //               </div>
 //             );
-
 //           })}
-
 //         </div>
-
 //       </div>
-
 //     </section>
 //   );
-
 // }
+
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   Briefcase,
   Stamp,
@@ -153,8 +130,7 @@ import {
   Wallet,
 } from "lucide-react";
 
-/* ---------------- ICON MAP ---------------- */
-const ICON_MAP: Record<string, any> = {
+const ICON_MAP: any = {
   Briefcase,
   Stamp,
   Calculator,
@@ -163,61 +139,95 @@ const ICON_MAP: Record<string, any> = {
   Wallet,
 };
 
-/* ---------------- INTERFACE ---------------- */
-interface ServicesProps {
-  initialServices: any[];
-}
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
 
-export default function Services({ initialServices = [] }: ServicesProps) {
+const API =
+  `https://cms.dostartup.in/api/content/items/service?token=${TOKEN}`;
+
+export default function ServicesSection() {
+  const [services, setServices] = useState<any[]>([]);
+  const [title, setTitle] = useState("Our Services");
+  const [description, setDescription] = useState(
+    "Explore our professional solutions designed to help your business grow."
+  );
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchServices() {
+      try {
+        const res = await fetch(API);
+        const json = await res.json();
+
+        if (Array.isArray(json)) {
+          setServices(json);
+
+          // OPTIONAL: if cockpit stores section info in first record
+          if (json[0]?.sectionTitle) setTitle(json[0].sectionTitle);
+          if (json[0]?.sectionDescription)
+            setDescription(json[0].sectionDescription);
+        }
+      } catch (err) {
+        console.error("Cockpit services fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchServices();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="py-12 text-center text-gray-500">
+        Loading services...
+      </div>
+    );
+  }
+
   return (
-    <section className="bg-white py-12">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="mb-8">
-          <p className="font-['Sora'] text-[10px] font-semibold tracking-[0.1em] uppercase text-[#B1ADA1] mb-1.5">
-            Expert Solutions
-          </p>
-          <h3 className="font-['Sora'] text-xl md:text-2xl font-semibold text-[#1a1714]">
-            Our Services
-          </h3>
-          <p className="text-[#7a7570] text-sm md:text-base mt-2 max-w-2xl leading-relaxed">
-            We provide expert financial and legal solutions tailored to your business needs, 
-            ensuring growth and compliance at every step.
-          </p>
-        </div>
+    <section className="bg-white">
+      <div className="max-w-7xl mx-auto px-6 py-12">
 
-        {/* Services Grid Container */}
-        <div className="bg-white border border-[#B1ADA1]/25 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-          {initialServices.map((service: any) => {
-            // Match the string from Cockpit to the Lucide component
-            const Icon = ICON_MAP[service.icon] || Briefcase;
+        <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
+          {title}
+        </h3>
+
+        <p className="text-gray-600 mb-8 text-sm md:text-base">
+          {description}
+        </p>
+
+        <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+
+          {services.map((service: any, idx: number) => {
+
+            const iconName =
+              service.icon ||
+              service.ICON;
+
+            const serviceName =
+              service.name ||
+              service.NAME;
+
+            const Icon = ICON_MAP[iconName];
 
             return (
               <div
-                key={service._id}
-                className="group flex flex-col items-center text-center cursor-pointer p-4 rounded-2xl transition-all duration-300 hover:bg-[#F9F8F4]"
+                key={service._id || idx}
+                className="flex flex-col items-center text-center cursor-pointer hover:bg-slate-50 p-3 rounded transition"
               >
-                {/* Icon Container */}
-                <div className="p-4 rounded-2xl bg-[#F4F3EE] group-hover:bg-white group-hover:shadow-sm transition-all duration-300 mb-4">
-                  <Icon className="h-7 w-7 text-[#C15F3C]" />
-                </div>
+                {Icon && (
+                  <Icon className="h-8 w-8 text-blue-600 mb-2" />
+                )}
 
-                <span className="font-['Sora'] text-xs font-semibold text-[#3d3a35] group-hover:text-[#1a1714] transition-colors leading-tight">
-                  {service.name}
+                <span className="text-sm font-medium text-gray-800">
+                  {serviceName}
                 </span>
+
               </div>
             );
           })}
-        </div>
 
-        {/* Bottom CTA Link */}
-        <div className="mt-8 text-center md:text-right">
-            <button className="text-xs font-['Sora'] font-semibold text-[#C15F3C] hover:text-[#a84e30] flex items-center gap-2 md:ml-auto">
-                View All Services <span>→</span>
-            </button>
         </div>
-
       </div>
     </section>
   );
