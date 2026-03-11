@@ -177,13 +177,32 @@
 // }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// https://cms.dostartup.in/api/content/items/Partner
+
+
+
 "use client";
 
 import { useEffect, useState } from "react";
 
 const COCKPIT_BASE = "https://cms.dostartup.in";
-const PARTNER_API =
-  `${COCKPIT_BASE}/api/content/items/partner`;
+const PARTNER_API = `${COCKPIT_BASE}/api/content/items/Partner`;
 
 export default function Partnerships() {
 
@@ -215,12 +234,36 @@ export default function Partnerships() {
 
   }
 
+  function getLogoUrl(partner: any) {
+
+    if (!partner.logo) return "";
+
+    // CASE 1: Asset object (correct Cockpit format)
+    if (typeof partner.logo === "object" && partner.logo.path) {
+      return `${COCKPIT_BASE}/storage/uploads${partner.logo.path}`;
+    }
+
+    // CASE 2: String URL
+    if (typeof partner.logo === "string") {
+
+      // localhost fix → replace with production base
+      if (partner.logo.includes("localhost")) {
+        const filename = partner.logo.split("/uploads/")[1];
+        return `${COCKPIT_BASE}/storage/uploads/${filename}`;
+      }
+
+      return partner.logo;
+    }
+
+    return "";
+
+  }
+
   return (
     <section className="bg-white">
 
       <div className="max-w-7xl mx-auto px-6 py-12">
 
-        {/* Heading */}
         <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
           Industry leading partnerships
         </h2>
@@ -229,23 +272,27 @@ export default function Partnerships() {
           We work with top Indian Institutions to further our shared mission of improving ease of doing business and promoting Entrepreneurship in India.
         </p>
 
-        {/* Partners Logos */}
         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
 
-          {partners.map((partner, idx) => (
+          {partners.map((partner, idx) => {
 
-            <img
-              key={partner._id || idx}
-              src={`${COCKPIT_BASE}/storage/uploads${partner.logo?.[0]?.path}`}
-              alt={partner.name}
-              className="max-h-10 object-contain"
-            />
+            const logoUrl = getLogoUrl(partner);
 
-          ))}
+            if (!logoUrl) return null;
+
+            return (
+              <img
+                key={partner._id || idx}
+                src={logoUrl}
+                alt={partner.Name}
+                className="max-h-10 object-contain"
+              />
+            );
+
+          })}
 
         </div>
 
-        {/* CTA section */}
         <div className="mt-10 relative rounded-xl overflow-hidden">
 
           <div className="absolute inset-0 bg-black/70"></div>
