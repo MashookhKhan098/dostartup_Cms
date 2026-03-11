@@ -1,0 +1,12 @@
+services:
+  dostartup-web:
+    container_name: dostartup-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    restart: unless-stopped

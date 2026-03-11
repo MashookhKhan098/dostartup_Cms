@@ -226,45 +226,15 @@
 
 
 
-"use client";
 
+"use client";
+import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-/* ================= TYPES ================= */
-
 type Feature = {
-  icon: "plus" | "document" | "chart" | "users";
+  icon: string;
   text: string;
-};
-
-type Tab = {
-  name: string;
-  path?: string;
-};
-
-type TabDescriptions = {
-  [key: string]: string;
-};
-
-type SelectField = {
-  type: "select";
-  name: string;
-  placeholder: string;
-  options: string[];
-};
-
-type InputField = {
-  type: "input";
-  name: string;
-  placeholder: string;
-  inputType?: string;
-};
-
-type CheckboxField = {
-  type: "checkbox";
-  name: string;
-  label: string;
 };
 
 type ColorOption = {
@@ -272,37 +242,57 @@ type ColorOption = {
   hex: string;
 };
 
-type ColorOptionsField = {
-  type: "color-options";
-  options: ColorOption[];
-};
-
-type TextField = {
-  type: "text";
-  content: string;
-};
-
 type FormField =
-  | SelectField
-  | InputField
-  | CheckboxField
-  | ColorOptionsField
-  | TextField;
+  | {
+      type: "input";
+      name: string;
+      placeholder: string;
+      inputType?: string;
+    }
+  | {
+      type: "select";
+      name: string;
+      placeholder: string;
+      options: string[];
+    }
+  | {
+      type: "checkbox";
+      name: string;
+      placeholder: string;
+      label: string;
+    }
+  | {
+      type: "color-options";
+      name: string;
+      placeholder: string;
+      options: ColorOption[];
+    }
+  | {
+      type: "text";
+      content: string;
+    }
+  | {
+      type: string;
+      [key: string]: any;
+    };
 
-type Props = {
+type Tab = {
+  name: string;
+  path?: string;
+};
+
+type DynamicHeroSectionProps = {
   heading: string;
   headingHighlight: string;
   description: string;
-  features?: Feature[];
-  tabs?: Tab[];
-  defaultTab?: string;
-  tabDescriptions?: TabDescriptions;
-  formFields?: FormField[];
-  buttonText?: string;
+  features: Feature[];
+  tabs: Tab[];
+  defaultTab?: string | null;
+  tabDescriptions?: Record<string, string> | null;
+  formFields: FormField[];
+  buttonText: string;
   onSubmit?: (data: Record<string, FormDataEntryValue>) => void;
 };
-
-/* ================= COMPONENT ================= */
 
 export default function DynamicHeroSection({
   heading,
@@ -314,70 +304,64 @@ export default function DynamicHeroSection({
   tabDescriptions,
   formFields,
   buttonText,
-  onSubmit,
-}: Props) {
+  onSubmit
+}: DynamicHeroSectionProps) {
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
 
-  const [activeTab, setActiveTab] = useState<string>(
-    defaultTab || tabs?.[0]?.name || ""
-  );
-
-  /* ================= TAB CLICK ================= */
-
-  const handleTabClick = (tabName: string, path?: string) => {
+  const handleTabClick = (tabName: string, path?: string): void => {
     setActiveTab(tabName);
     if (path) {
       router.push(path);
     }
   };
 
-  /* ================= ICON RENDER ================= */
-
-  const renderIcon = (iconType: Feature["icon"]) => {
-    const icons: Record<Feature["icon"], JSX.Element> = {
+  const renderIcon = (iconType: string): React.ReactNode => {
+    const icons: Record<string, React.ReactNode> = {
       plus: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11H9v2H7v2h2v2h2v-2h2V9h-2V7z" />
+          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd"/>
         </svg>
       ),
       document: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M4 4a2 2 0 012-2h5l5 5v9a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
+          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd"/>
         </svg>
       ),
       chart: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M3 3h2v14H3V3zm4 6h2v8H7V9zm4-4h2v12h-2V5zm4 8h2v4h-2v-4z" />
+          <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
         </svg>
       ),
       users: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M7 10a4 4 0 100-8 4 4 0 000 8zm6 0a4 4 0 100-8 4 4 0 000 8zM2 18a5 5 0 0110 0H2zm10 0a5 5 0 0110 0h-10z" />
+          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
         </svg>
       ),
     };
-
-    return icons[iconType] ?? icons.document;
+    return icons[iconType] || icons.document;
   };
 
-  /* ================= FORM FIELD RENDER ================= */
-
-  const renderFormField = (field: FormField, index: number) => {
+  const renderFormField = (field: FormField, index: number): React.ReactNode => {
     switch (field.type) {
       case "select":
         return (
-          <select
-            key={index}
-            name={field.name}
-            className="w-full border rounded-lg px-4 py-3 text-sm"
-          >
-            <option value="">{field.placeholder}</option>
-            {field.options.map((option: string, i: number) => (
-              <option key={i} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          <div key={index} className="relative">
+            <select 
+              name={field.name}
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none cursor-pointer transition"
+            >
+              <option value="">{field.placeholder}</option>
+              {(field as any).options?.map((option: string, i: number) => (
+                <option key={i} value={option}>{option}</option>
+              ))}
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+          </div>
         );
 
       case "input":
@@ -387,33 +371,38 @@ export default function DynamicHeroSection({
             type={field.inputType || "text"}
             name={field.name}
             placeholder={field.placeholder}
-            className="w-full border rounded-lg px-4 py-3 text-sm"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
         );
 
       case "checkbox":
         return (
-          <label key={index} className="flex gap-2">
-            <input type="checkbox" name={field.name} />
-            <span>{field.label}</span>
+          <label key={index} className="flex items-start gap-3 cursor-pointer">
+            <input 
+              type="checkbox" 
+              name={field.name}
+              className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+            />
+            <span className="text-sm text-gray-600">{field.label}</span>
           </label>
         );
 
       case "color-options":
         return (
-          <div key={index} className="flex flex-wrap gap-3">
-            {field.options.map((option: ColorOption, idx: number) => (
-              <label key={idx} className="flex items-center gap-2">
+          <div key={index} className="flex flex-wrap gap-4 mt-2">
+            {((field as any).options || []).map((option: ColorOption, idx: number) => (
+              <label key={idx} className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  name={option.name}
+                  name={option.name.toLowerCase()}
                   value={option.hex}
+                  className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                 />
                 <span
                   style={{ backgroundColor: option.hex }}
-                  className="w-5 h-5 rounded border"
-                />
-                <span>{option.name}</span>
+                  className="w-6 h-6 border border-gray-300 rounded"
+                ></span>
+                <span className="text-sm text-gray-700">{option.name} ({option.hex})</span>
               </label>
             ))}
           </div>
@@ -421,9 +410,7 @@ export default function DynamicHeroSection({
 
       case "text":
         return (
-          <p key={index} className="text-sm text-gray-600">
-            {field.content}
-          </p>
+          <p key={index} className="text-sm text-gray-600">{field.content}</p>
         );
 
       default:
@@ -431,82 +418,94 @@ export default function DynamicHeroSection({
     }
   };
 
-  /* ================= RETURN ================= */
-
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        {/* LEFT */}
-        <div>
-          <h1 className="text-5xl font-bold">
-            {heading.split(headingHighlight)[0]}
-            <span className="text-blue-600 underline">
-              {headingHighlight}
-            </span>
-            {heading.split(headingHighlight)[1]}
-          </h1>
-
-          <p className="mt-4 text-gray-600">{description}</p>
-
-          <ul className="mt-8 space-y-4">
-            {features?.map((feature: Feature, index: number) => (
-              <li key={index} className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center">
-                  {renderIcon(feature.icon)}
-                </div>
-                <span>{feature.text}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* RIGHT FORM */}
-        <div className="bg-white p-8 rounded-xl shadow-lg">
-          {tabs && tabs.length > 0 && (
-            <div className="flex gap-2 mb-6">
-              {tabs.map(({ name, path }: Tab) => (
-                <button
-                  key={name}
-                  onClick={() => handleTabClick(name, path)}
-                  className={`px-4 py-2 rounded ${
-                    activeTab === name
-                      ? "bg-blue-600 text-white"
-                      : "border"
-                  }`}
-                >
-                  {name}
-                </button>
-              ))}
+    <section className="relative bg-gray-50 overflow-hidden">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-4 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
+          {/* Left Side */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                {heading?.split(headingHighlight)[0]}
+                <span className="text-blue-600 underline decoration-blue-600 decoration-4 underline-offset-8">
+                  {headingHighlight}
+                </span>
+                {heading?.split(headingHighlight)[1]}
+              </h1>
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                {description}
+              </p>
             </div>
-          )}
 
-          {tabDescriptions && activeTab && (
-            <p className="mb-4 text-sm text-gray-600">
-              {tabDescriptions[activeTab]}
-            </p>
-          )}
+            <ul className="space-y-5 pt-4">
+              {features?.map((feature, index) => (
+                <li key={index} className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                    {renderIcon(feature.icon)}
+                  </div>
+                  <span className="text-gray-800 font-medium text-base">
+                    {feature.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <form
-            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-              e.preventDefault();
-              if (onSubmit) {
-                const formData = new FormData(e.currentTarget);
-                onSubmit(Object.fromEntries(formData));
-              }
-            }}
-            className="space-y-4"
-          >
-            {formFields?.map((field: FormField, index: number) =>
-              renderFormField(field, index)
+          {/* Right Form Box */}
+          <div className="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
+            <div className="h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-orange-400"></div>
+
+            {/* Tabs */}
+            {tabs && tabs.length > 0 && (
+              <div className="flex justify-center gap-2 p-4">
+                {tabs.map(({ name, path }) => (
+                  <button
+                    key={name}
+                    onClick={() => handleTabClick(name, path)}
+                    className={`flex-1 px-6 py-3 text-sm font-semibold whitespace-nowrap transition-all rounded-lg ${
+                      activeTab === name
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                    }`}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </div>
             )}
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-lg"
-            >
-              {buttonText || "Submit"}
-            </button>
-          </form>
+            <div className="p-8 space-y-6">
+              {/* Tab Description */}
+              {tabDescriptions && activeTab && tabDescriptions[activeTab] && (
+                <div className="bg-gray-50 border-l-4 border-blue-600 p-4 rounded-r-lg">
+                  <p className="text-gray-800 text-sm leading-relaxed font-medium">
+                    {tabDescriptions[activeTab]}
+                  </p>
+                </div>
+              )}
+
+              {/* Form */}
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (onSubmit) {
+                    const formData = new FormData(e.currentTarget as HTMLFormElement);
+                    onSubmit(Object.fromEntries(formData));
+                  }
+                }}
+                className="space-y-4 pt-2"
+              >
+                {formFields?.map((field, index) => renderFormField(field, index))}
+
+                <button 
+                  type="submit"
+                  className="w-full bg-blue-600 text-white text-sm font-semibold py-3 rounded-lg hover:bg-blue-700 transition shadow-sm hover:shadow-md"
+                >
+                  {buttonText || "Submit"}
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>

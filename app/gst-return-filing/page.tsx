@@ -96,8 +96,8 @@ export default function Home() {
     
     // Right side form - Tabs
     tabs: [
-      { name: "Existing GST", path: null },
-      { name: "GST Registration", path: null }
+      { name: "Existing GST" },
+      { name: "GST Registration" }
     ],
     defaultTab: "Existing GST",
     tabDescriptions: {

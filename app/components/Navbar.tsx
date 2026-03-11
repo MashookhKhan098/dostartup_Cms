@@ -95,7 +95,7 @@ export default function Navbar() {
 
             {/* TRADEMARK */}
             <li className="relative group">
-              <span className="relative cursor-pointer transition-colors duration-200 hover:text-[#C15F3C] after:content-[''] after:block after:h-0.5 after:w-0 after:bg-[#C15F3C] after:transition-all after:duration-300 group-hover:after:w-full after:absolute after:-bottom-1 after:left-0 whitespace-nowrap">Trademark</span>
+              <span className="relative cursor-pointer transition-colors duration-200 hover:text-[#C15F3C] after:content-[''] after:block after:h-0.5 after:w-0 after:bg-[#C15F3C] after:transition-all after:duration-300 group-hover:after:w-full after:absolute after:-bottom-1 after:left-0 whitespace-nowrap">Trademark(IPR)</span>
               <div className="absolute top-full left-0 mt-2 border border-[#B1ADA1]/30 shadow-lg rounded-xl w-[520px] p-4 grid grid-rows-6 grid-flow-col gap-x-5 gap-y-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200" style={{ backgroundColor: "#F4F3EE" }}>
                 {[
                   { label: "Trademark Registration", url: "/trademark-registration" },

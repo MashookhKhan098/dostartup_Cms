@@ -1,280 +1,323 @@
+
+
 // "use client";
-
-// import { Bell, CalendarDays } from "lucide-react";
-// import { useEffect, useState } from "react";
-
-// const UPDATES_API =
-//   "https://cms.dostartup.in/api/content/items/update";
-
-// const DUEDATE_API =
-//   "https://cms.dostartup.in/api/content/items/duedate";
+// import { Bell, CalendarDays } from "lucide-react"; // icons
 
 // export default function UpdatesAndDueDates() {
-
-//   const [updates, setUpdates] = useState<any[]>([]);
-//   const [dueDates, setDueDates] = useState<any[]>([]);
-
-//   useEffect(() => {
-//     fetchUpdates();
-//     fetchDueDates();
-//   }, []);
-
-//   async function fetchUpdates() {
-
-//     try {
-
-//       const res = await fetch(UPDATES_API, {
-//         cache: "no-store",
-//       });
-
-//       const data = await res.json();
-
-//       if (!Array.isArray(data)) return;
-
-//       // Sort by publishedDate (latest first)
-//       const sorted = data.sort(
-//         (a, b) =>
-//           new Date(b.publishedDate).getTime() -
-//           new Date(a.publishedDate).getTime()
-//       );
-
-//       setUpdates(sorted);
-
-//     } catch (error) {
-
-//       console.error("Updates fetch error:", error);
-
-//     }
-
-//   }
-
-//   async function fetchDueDates() {
-
-//     try {
-
-//       const res = await fetch(DUEDATE_API, {
-//         cache: "no-store",
-//       });
-
-//       const data = await res.json();
-
-//       if (!Array.isArray(data)) return;
-
-//       // Sort by due-date (earliest first)
-//       const sorted = data.sort(
-//         (a, b) =>
-//           new Date(a["due-date"]).getTime() -
-//           new Date(b["due-date"]).getTime()
-//       );
-
-//       setDueDates(sorted);
-
-//     } catch (error) {
-
-//       console.error("DueDates fetch error:", error);
-
-//     }
-
-//   }
-
 //   return (
-
 //     <section className="bg-white">
-
 //       <div className="max-w-7xl mx-auto px-6 py-12">
-
 //         <div className="grid md:grid-cols-2 gap-6">
 
-//           {/* Updates & Alerts */}
+//           {/* Left - Updates & Alerts */}
 //           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
-
 //             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
 //               <Bell className="w-5 h-5 text-blue-600" />
 //               Updates & Alerts
 //             </h3>
 
-//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2">
-
-//               {updates.map((item, idx) => (
-
+//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+              
+//               {[
+//                 {
+//                   title: "FLA Return Due Date is Approaching! File on or before July 15, 2025 to stay compliant!",
+//                   date: "Published on: 04-Jul-2025",
+//                   tag: "FLA Return",
+//                 },
+//                 {
+//                   title: "GSTR-3B Auto-Populated Fields will be Hard-Locked from July – No Manual Edits Allowed!",
+//                   date: "Published on: 30-Jun-2025",
+//                   tag: "GSTR 3B",
+//                 },
+//                 {
+//                   title: "CBDT Extends Deadline to Process Delayed ITRs Filed Under Condonation till March 2026!",
+//                   date: "Published on: 27-Jun-2025",
+//                   tag: "ITR",
+//                 },
+//               ].map((item, idx) => (
 //                 <div
-//                   key={item._id || idx}
-//                   className="relative pl-4 border-l border-gray-200"
+//                   key={idx}
+//                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all duration-300"
 //                 >
-
-//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
-
-//                   <div className="p-2 hover:bg-blue-50 rounded-lg">
-
-//                     {/* IMPORTANT: field name is titile */}
-//                     <p className="text-blue-600 text-sm font-medium">
-//                       {item.titile}
-//                     </p>
-
-//                     <p className="text-xs text-gray-500 mt-1">
-//                       Published on: {item.publishedDate}
-//                     </p>
-
+//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full transition-all duration-300"></div>
+                  
+//                   <div className="p-2 rounded-lg hover:bg-blue-50 hover:-translate-y-0.5 transition-all duration-300">
+//                     <a href="#" className="text-blue-600 hover:underline text-sm font-medium">
+//                       {item.title}
+//                     </a>
+//                     <p className="text-xs text-gray-500 mt-1">{item.date}</p>
 //                     <span className="inline-block text-[10px] bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded mt-1">
 //                       {item.tag}
 //                     </span>
-
 //                   </div>
-
 //                 </div>
-
 //               ))}
 
 //             </div>
-
 //           </div>
 
-
-//           {/* Due Dates */}
+//           {/* Right - Due Dates */}
 //           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
-
 //             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
 //               <CalendarDays className="w-5 h-5 text-blue-600" />
 //               Due Dates
 //             </h3>
 
-//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2">
-
-//               {dueDates.map((item, idx) => (
-
+//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+//               {[
+//                 {
+//                   title: "TDS Payment in Form 26QB (Property), 26QC (Rent), 26QD (Contractor Payments), 26QE (Crypto Assets) for Sep 2025",
+//                   due: "Due Date: 30-Oct-2025",
+//                 },
+//                 {
+//                   title: "Income Tax Returns for Non Corporate’s who needs Audit and Corporates for FY 2024-25",
+//                   due: "Due Date: 31-Oct-2025",
+//                 },
+//                 {
+//                   title: "TDS Returns in Form 24Q, 26Q, 27Q for July to Sep 2025",
+//                   due: "Due Date: 31-Oct-2025",
+//                 },
+//               ].map((item, idx) => (
 //                 <div
-//                   key={item._id || idx}
-//                   className="relative pl-4 border-l border-gray-200"
+//                   key={idx}
+//                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all duration-300"
 //                 >
+//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full transition-all duration-300"></div>
 
-//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
-
-//                   <div className="p-2 hover:bg-blue-50 rounded-lg">
-
-//                     <p className="text-gray-800 text-sm font-medium">
-//                       {item.title}
-//                     </p>
-
-//                     <p className="text-xs text-gray-500 mt-1">
-//                       Due Date: {item["due-date"]}
-//                     </p>
-
+//                   <div className="p-2 rounded-lg hover:bg-blue-50 hover:-translate-y-0.5 transition-all duration-300">
+//                     <p className="text-gray-800 text-sm font-medium">{item.title}</p>
+//                     <p className="text-xs text-gray-500 mt-1">{item.due}</p>
 //                   </div>
-
 //                 </div>
-
 //               ))}
-
 //             </div>
-
 //           </div>
 
 //         </div>
-
 //       </div>
-
 //     </section>
-
 //   );
+// }
 
-// }"use client";
+
+
+
+// "use client";
+
+// import { Bell, CalendarDays } from "lucide-react";
+// import { useEffect, useState } from "react";
+
+// const STRAPI_URL = "http://localhost:1337";
+
+// export default function UpdatesAndDueDates() {
+//   const [updates, setUpdates] = useState<any[]>([]);
+//   const [dueDates, setDueDates] = useState<any[]>([]);
+
+//   useEffect(() => {
+//     fetch(`${STRAPI_URL}/api/updates?sort=publishedDate:desc`)
+//       .then((res) => res.json())
+//       .then((json) => setUpdates(json.data || []));
+
+//     fetch(`${STRAPI_URL}/api/due-dates?sort=dueDate`)
+//       .then((res) => res.json())
+//       .then((json) => setDueDates(json.data || []));
+//   }, []);
+
+//   return (
+//     <section className="bg-white">
+//       <div className="max-w-7xl mx-auto px-6 py-12">
+//         <div className="grid md:grid-cols-2 gap-6">
+
+//           {/* Updates & Alerts */}
+//           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
+//             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+//               <Bell className="w-5 h-5 text-blue-600" />
+//               Updates & Alerts
+//             </h3>
+
+//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+//               {updates.map((item, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
+//                 >
+//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+
+//                   <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
+//                     <a href="#" className="text-blue-600 hover:underline text-sm font-medium">
+//                       {item.title}
+//                     </a>
+//                     <p className="text-xs text-gray-500 mt-1">
+//                       Published on: {item.publishedDate}
+//                     </p>
+//                     <span className="inline-block text-[10px] bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded mt-1">
+//                       {item.tag}
+//                     </span>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Due Dates */}
+//           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
+//             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+//               <CalendarDays className="w-5 h-5 text-blue-600" />
+//               Due Dates
+//             </h3>
+
+//             <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+//               {dueDates.map((item, idx) => (
+//                 <div
+//                   key={idx}
+//                   className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
+//                 >
+//                   <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+
+//                   <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
+//                     <p className="text-gray-800 text-sm font-medium">
+//                       {item.title}
+//                     </p>
+//                     <p className="text-xs text-gray-500 mt-1">
+//                       Due Date: {item.dueDate}
+//                     </p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
 "use client";
 
 import { Bell, CalendarDays } from "lucide-react";
+import { useEffect, useState } from "react";
 
-interface UpdateItem {
-  _id: string;
-  titile: string; // CMS typo preserved
-  publishedDate: string;
-  tag?: string;
-}
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
 
-interface DueDateItem {
-  _id: string;
-  title: string;
-  "due-date": string;
-}
+const UPDATE_API =
+  `https://cms.dostartup.in/api/content/items/update?token=${TOKEN}`;
 
-interface UpdatesProps {
-  initialUpdates: UpdateItem[];
-  initialDueDates: DueDateItem[];
-}
+const DUEDATE_API =
+  `https://cms.dostartup.in/api/content/items/duedate?token=${TOKEN}`;
 
-export default function UpdatesAndDueDates({ 
-  initialUpdates = [], 
-  initialDueDates = [] 
-}: UpdatesProps) {
-  
-  // Sort Updates: Latest first
-  const sortedUpdates = [...initialUpdates].sort(
-    (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
-  );
+export default function UpdatesAndDueDates() {
+  const [updates, setUpdates] = useState<any[]>([]);
+  const [dueDates, setDueDates] = useState<any[]>([]);
 
-  // Sort Due Dates: Earliest first
-  const sortedDueDates = [...initialDueDates].sort(
-    (a, b) => new Date(a["due-date"]).getTime() - new Date(b["due-date"]).getTime()
-  );
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [updatesRes, dueDatesRes] = await Promise.all([
+          fetch(UPDATE_API),
+          fetch(DUEDATE_API),
+        ]);
+
+        const updatesData = await updatesRes.json();
+        const dueDatesData = await dueDatesRes.json();
+
+        // Cockpit returns arrays directly
+        if (Array.isArray(updatesData)) {
+          // newest first
+          const sortedUpdates = [...updatesData].sort(
+            (a, b) =>
+              new Date(b.publishedDate || b.PUBLISHEDDATE).getTime() -
+              new Date(a.publishedDate || a.PUBLISHEDDATE).getTime()
+          );
+          setUpdates(sortedUpdates);
+        }
+
+        if (Array.isArray(dueDatesData)) {
+          const sortedDueDates = [...dueDatesData].sort(
+            (a, b) =>
+              new Date(a.dueDate || a.DUEDATE).getTime() -
+              new Date(b.dueDate || b.DUEDATE).getTime()
+          );
+          setDueDates(sortedDueDates);
+        }
+
+      } catch (err) {
+        console.error("Cockpit fetch error:", err);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
-    <section className="bg-white py-12">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-8">
-          
-          {/* 1. Updates & Alerts Panel */}
-          <div className="bg-white border border-[#B1ADA1]/25 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-6 md:p-8">
-            <h3 className="font-['Sora'] text-lg md:text-xl font-semibold text-[#1a1714] mb-6 flex items-center gap-3">
-              <div className="p-2 bg-[#EFEDE6] rounded-lg">
-                <Bell className="w-5 h-5 text-[#C15F3C]" />
-              </div>
+    <section className="bg-white">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid md:grid-cols-2 gap-6">
+
+          {/* Updates */}
+          <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
+            <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <Bell className="w-5 h-5 text-blue-600" />
               Updates & Alerts
             </h3>
 
-            <div className="space-y-2 max-h-[320px] overflow-y-auto pr-2 custom-scrollbar">
-              {sortedUpdates.map((item) => (
-                <div key={item._id} className="group relative pl-6 py-3 border-l-2 border-[#EFEDE6] hover:border-[#C15F3C] transition-colors">
-                  <div className="absolute -left-[5px] top-5 w-2 h-2 bg-[#B1ADA1] group-hover:bg-[#C15F3C] rounded-full transition-colors"></div>
-                  <div className="hover:bg-[#F9F8F4] p-3 rounded-xl transition-all">
-                    <p className="font-['Sora'] text-sm font-semibold text-[#3d3a35] group-hover:text-[#1a1714]">
-                      {item.titile}
+            <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+              {updates.map((item, idx) => (
+                <div
+                  key={item._id || idx}
+                  className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
+                >
+                  <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+
+                  <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
+
+                    <a
+                      href="#"
+                      className="text-blue-600 hover:underline text-sm font-medium"
+                    >
+                      {item.title || item.TITLE}
+                    </a>
+
+                    <p className="text-xs text-gray-500 mt-1">
+                      Published on: {item.publishedDate || item.PUBLISHEDDATE}
                     </p>
-                    <div className="flex items-center gap-3 mt-2">
-                      <p className="text-[11px] text-[#7a7570] font-medium uppercase tracking-wider">
-                        {item.publishedDate}
-                      </p>
-                      {item.tag && (
-                        <span className="text-[9px] bg-[#EFEDE6] text-[#C15F3C] font-bold px-2 py-0.5 rounded uppercase tracking-tighter">
-                          {item.tag}
-                        </span>
-                      )}
-                    </div>
+
+                    <span className="inline-block text-[10px] bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded mt-1">
+                      {item.tag || item.TAG}
+                    </span>
+
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* 2. Due Dates Panel */}
-          <div className="bg-white border border-[#B1ADA1]/25 rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-6 md:p-8">
-            <h3 className="font-['Sora'] text-lg md:text-xl font-semibold text-[#1a1714] mb-6 flex items-center gap-3">
-              <div className="p-2 bg-[#EFEDE6] rounded-lg">
-                <CalendarDays className="w-5 h-5 text-[#C15F3C]" />
-              </div>
-              Important Due Dates
+          {/* Due Dates */}
+          <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
+            <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <CalendarDays className="w-5 h-5 text-blue-600" />
+              Due Dates
             </h3>
 
-            <div className="space-y-3 max-h-[320px] overflow-y-auto pr-2 custom-scrollbar">
-              {sortedDueDates.map((item) => (
-                <div key={item._id} className="flex items-center justify-between p-4 bg-[#F9F8F4] rounded-2xl border border-transparent hover:border-[#B1ADA1]/30 transition-all group">
-                  <div>
-                    <p className="font-['Sora'] text-sm font-semibold text-[#3d3a35]">
-                      {item.title}
+            <div className="space-y-4 max-h-64 overflow-y-auto pr-2 scrollbar-hide">
+              {dueDates.map((item, idx) => (
+                <div
+                  key={item._id || idx}
+                  className="relative pl-4 border-l border-gray-200 hover:border-blue-400 transition-all"
+                >
+                  <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+
+                  <div className="p-2 rounded-lg hover:bg-blue-50 transition-all">
+
+                    <p className="text-gray-800 text-sm font-medium">
+                      {item.title || item.TITLE}
                     </p>
-                    <p className="text-[11px] text-[#C15F3C] font-bold mt-1 uppercase">
-                      Due: {item["due-date"]}
+
+                    <p className="text-xs text-gray-500 mt-1">
+                      Due Date: {item.dueDate || item.DUEDATE}
                     </p>
-                  </div>
-                  <div className="h-8 w-8 rounded-full bg-white flex items-center justify-center text-[#B1ADA1] group-hover:text-[#C15F3C] transition-colors shadow-sm text-[10px] font-bold">
-                    →
+
                   </div>
                 </div>
               ))}
@@ -283,12 +326,6 @@ export default function UpdatesAndDueDates({
 
         </div>
       </div>
-
-      <style jsx>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #F4F3EE; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #B1ADA1; border-radius: 10px; }
-      `}</style>
     </section>
   );
 }

@@ -199,71 +199,284 @@
 //     </div>
 //   );
 // }
-"use client";
-import { useEffect, useState } from "react";
-import { Plus, X, Loader2 } from "lucide-react";
 
-export default function Faq({ category }: { category: string }) {
-  const [faqs, setFaqs] = useState<any[]>([]);
+
+
+// "use client";
+
+// import { useEffect, useState } from "react";
+
+// interface FAQ {
+//   id: number;
+//   question: string;
+//   answer: string;
+//   category: string;
+// }
+
+// interface FAQAccordionProps {
+//   category?: string;
+// }
+
+// export default function FAQAccordion({ category }: FAQAccordionProps) {
+//   const [faqs, setFaqs] = useState<FAQ[]>([]);
+//   const [openIndex, setOpenIndex] = useState<number | null>(null);
+//   const [visibleCount, setVisibleCount] = useState(5);
+//   const [title, setTitle] = useState("FAQ's");
+
+//   useEffect(() => {
+//     let url = "http://localhost:1337/api/startup-faqs";
+
+//     if (category) {
+//       url += `?filters[category][$eq]=${category}`;
+//       setTitle(`FAQ's`);
+//     }
+
+//     fetch(url)
+//       .then((res) => res.json())
+//       .then((json) => {
+//         setFaqs(json.data || []);
+//       });
+//   }, [category]);
+
+//   const toggleAccordion = (index: number) => {
+//     setOpenIndex(openIndex === index ? null : index);
+//   };
+
+//   const loadMore = () => {
+//     setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
+//   };
+
+//   const visibleFaqs = faqs.slice(0, visibleCount);
+//   const hasMore = visibleCount < faqs.length;
+
+//   return (
+//     <div className="bg-gray-50 py-12 px-4">
+//       <div className="max-w-4xl mx-auto">
+//         <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+          
+//           {/* Header */}
+//           <div className="px-6 py-5 border-b border-gray-200">
+//             <h2 className="text-xl font-bold text-gray-900">
+//               {title}
+//             </h2>
+//           </div>
+
+//           {/* FAQ Items */}
+//           <div className="divide-y divide-gray-200">
+//             {visibleFaqs.map((faq, index) => (
+//               <div key={faq.id} className="transition-all">
+                
+//                 {/* Question */}
+//                 <button
+//                   onClick={() => toggleAccordion(index)}
+//                   className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+//                 >
+//                   <span className="text-sm font-medium text-gray-900 pr-4">
+//                     {faq.question}
+//                   </span>
+
+//                   <svg
+//                     className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform ${
+//                       openIndex === index ? "rotate-45" : ""
+//                     }`}
+//                     fill="none"
+//                     stroke="currentColor"
+//                     viewBox="0 0 24 24"
+//                   >
+//                     <path
+//                       strokeLinecap="round"
+//                       strokeLinejoin="round"
+//                       strokeWidth="2"
+//                       d="M12 4v16m8-8H4"
+//                     />
+//                   </svg>
+//                 </button>
+
+//                 {/* Answer */}
+//                 {openIndex === index && (
+//                   <div className="px-6 pb-4 pt-2">
+//                     <p className="text-sm text-gray-700 leading-relaxed">
+//                       {faq.answer}
+//                     </p>
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* Load More */}
+//           {hasMore && (
+//             <div className="px-6 py-5 border-t border-gray-200">
+//               <button
+//                 onClick={loadMore}
+//                 className="px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors"
+//               >
+//                 Load More
+//               </button>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+// cockpit from here
+
+"use client";
+
+import { useEffect, useState } from "react";
+
+interface FAQ {
+  _id?: string;
+  id?: number;
+  question?: string;
+  QUESTION?: string;
+  answer?: string;
+  ANSWER?: string;
+  category?: string;
+  CATEGORY?: string;
+}
+
+interface FAQAccordionProps {
+  category?: string;
+}
+
+const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
+
+const API =
+  `https://cms.dostartup.in/api/content/items/startupFaq?token=${TOKEN}`;
+
+export default function FAQAccordion({ category }: FAQAccordionProps) {
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(5);
+  const [title] = useState("FAQ's");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFaqs = async () => {
-      const baseUrl = process.env.NEXT_PUBLIC_COCKPIT_API_URL;
-      const token = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
-      
-      // Filter logic: matches the 'category' field in your screenshot
-      const filter = { category: { "$regex": category, "$options": "i" } };
-      const url = `${baseUrl}/api/content/items/startupFaq?filter=${encodeURIComponent(JSON.stringify(filter))}&api-key=${token}`;
-
+    async function fetchFaqs() {
       try {
-        setLoading(true);
-        const res = await fetch(url);
+        const res = await fetch(API);
         const json = await res.json();
-        const data = Array.isArray(json) ? json : (json?.entries || []);
-        setFaqs(data);
+
+        if (Array.isArray(json)) {
+
+          // filter by category if provided
+          const filtered = category
+            ? json.filter(
+                (item: FAQ) =>
+                  item.category === category ||
+                  item.CATEGORY === category
+              )
+            : json;
+
+          setFaqs(filtered);
+        }
       } catch (err) {
-        console.error("FAQ Error:", err);
+        console.error("Cockpit FAQ fetch error:", err);
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchFaqs();
   }, [category]);
 
-  if (loading) return <div className="py-10 text-center"><Loader2 className="animate-spin inline-block text-[#C15F3C]" /></div>;
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const loadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
+  };
+
+  if (loading) {
+    return (
+      <div className="py-12 text-center text-gray-500">
+        Loading FAQs...
+      </div>
+    );
+  }
+
+  const visibleFaqs = faqs.slice(0, visibleCount);
+  const hasMore = visibleCount < faqs.length;
 
   return (
-    <section className="bg-white py-16 px-6 font-['Sora']">
+    <div className="bg-gray-50 py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-extrabold text-[#1a1714] mb-10">Frequently Asked Questions</h2>
-        <div className="border border-[#B1ADA1]/20 rounded-[2rem] overflow-hidden">
-          {faqs.length > 0 ? (
-            faqs.map((faq, index) => (
-              <div key={faq._id || index} className="border-b border-[#B1ADA1]/10 last:border-0">
-                <button 
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-[#F9F8F4]"
-                >
-                  <span className="font-bold text-[#3d3a35]">{faq.question}</span>
-                  {openIndex === index ? <X className="text-[#C15F3C]" /> : <Plus className="text-[#B1ADA1]" />}
-                </button>
-                {openIndex === index && (
-                  <div className="px-8 pb-6 text-[#7a7570] leading-relaxed">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="p-10 text-center text-gray-400 italic">
-              No FAQs found for "{category}". Check your Cockpit category column.
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+
+          {/* Header */}
+          <div className="px-6 py-5 border-b border-gray-200">
+            <h2 className="text-xl font-bold text-gray-900">
+              {title}
+            </h2>
+          </div>
+
+          {/* FAQ Items */}
+          <div className="divide-y divide-gray-200">
+            {visibleFaqs.map((faq, index) => {
+
+              const question = faq.question || faq.QUESTION;
+              const answer = faq.answer || faq.ANSWER;
+
+              return (
+                <div key={faq._id || faq.id || index}>
+
+                  <button
+                    onClick={() => toggleAccordion(index)}
+                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                  >
+                    <span className="text-sm font-medium text-gray-900 pr-4">
+                      {question}
+                    </span>
+
+                    <svg
+                      className={`w-5 h-5 text-gray-500 transition-transform ${
+                        openIndex === index ? "rotate-45" : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                  </button>
+
+                  {openIndex === index && (
+                    <div className="px-6 pb-4 pt-2">
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {answer}
+                      </p>
+                    </div>
+                  )}
+
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Load More */}
+          {hasMore && (
+            <div className="px-6 py-5 border-t border-gray-200">
+              <button
+                onClick={loadMore}
+                className="px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors"
+              >
+                Load More
+              </button>
             </div>
           )}
+
         </div>
       </div>
-    </section>
+    </div>
   );
 }

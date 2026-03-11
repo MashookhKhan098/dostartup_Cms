@@ -2,13 +2,14 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Registration/Hero';
+import type { RegistrationHeroProps } from '../components/Registration/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 // import Price from '../components/Price';
 
 export default function Home() {
 
-const heroProps = {
+const heroProps: RegistrationHeroProps = {
   // ================= LEFT SIDE =================
   heading: "Easy & Fast ",
   headingHighlight: "12A & 80G Registration",
