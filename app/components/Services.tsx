@@ -120,7 +120,6 @@
 
 
 
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -188,48 +187,63 @@ export default function ServicesSection() {
   }
 
   return (
-    <section className="bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <section className="bg-white py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Header with orange gradient */}
+        <div className="text-center max-w-2xl mx-auto mb-8">
+          <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-full px-4 py-1.5 mb-4">
+            <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></div>
+            <span className="text-xs font-semibold text-orange-600">WHAT WE OFFER</span>
+          </div>
+          
+          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+            {title}
+          </h3>
 
-        <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
-          {title}
-        </h3>
+          <p className="text-gray-600 text-sm md:text-base">
+            {description}
+          </p>
+        </div>
 
-        <p className="text-gray-600 mb-8 text-sm md:text-base">
-          {description}
-        </p>
+        {/* Services Grid */}
+        <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-4 sm:p-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+            {services.map((service: any, idx: number) => {
+              const iconName = service.icon || service.ICON;
+              const serviceName = service.name || service.NAME;
+              const Icon = ICON_MAP[iconName];
 
-        <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              return (
+                <div
+                  key={service._id || idx}
+                  className="group flex flex-col items-center text-center cursor-pointer hover:bg-orange-50/50 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
+                >
+                  {Icon && (
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-6 w-6 text-orange-600" />
+                    </div>
+                  )}
 
-          {services.map((service: any, idx: number) => {
+                  <span className="text-sm font-medium text-gray-800 group-hover:text-orange-600 transition-colors">
+                    {serviceName}
+                  </span>
 
-            const iconName =
-              service.icon ||
-              service.ICON;
+                  {/* Simple underline effect on hover */}
+                  <div className="w-0 h-0.5 bg-gradient-to-r from-orange-600 to-orange-400 group-hover:w-8 transition-all duration-300 mt-1"></div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-            const serviceName =
-              service.name ||
-              service.NAME;
-
-            const Icon = ICON_MAP[iconName];
-
-            return (
-              <div
-                key={service._id || idx}
-                className="flex flex-col items-center text-center cursor-pointer hover:bg-slate-50 p-3 rounded transition"
-              >
-                {Icon && (
-                  <Icon className="h-8 w-8 text-blue-600 mb-2" />
-                )}
-
-                <span className="text-sm font-medium text-gray-800">
-                  {serviceName}
-                </span>
-
-              </div>
-            );
-          })}
-
+        {/* Bottom CTA */}
+        <div className="text-center mt-8">
+          <p className="text-sm text-gray-500">
+            Need help choosing?{" "}
+            <span className="text-orange-600 font-medium cursor-pointer hover:underline">
+              Talk to an expert →
+            </span>
+          </p>
         </div>
       </div>
     </section>

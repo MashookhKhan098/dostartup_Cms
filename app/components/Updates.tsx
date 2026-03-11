@@ -89,7 +89,7 @@ export default function UpdatesAndDueDates() {
           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
 
             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Bell className="w-5 h-5 text-blue-600" />
+              <Bell className="w-5 h-5 text-orange-600" />
               Updates & Alerts
             </h3>
 
@@ -102,12 +102,12 @@ export default function UpdatesAndDueDates() {
                   className="relative pl-4 border-l border-gray-200"
                 >
 
-                  <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div className="absolute -left-[5px] top-2 w-2 h-2 bg-orange-500 rounded-full"></div>
 
-                  <div className="p-2 hover:bg-blue-50 rounded-lg">
+                  <div className="p-2 hover:bg-orange-50 rounded-lg">
 
                     {/* IMPORTANT: field name is titile */}
-                    <p className="text-blue-600 text-sm font-medium">
+                    <p className="text-orange-600 text-sm font-medium">
                       {item.titile}
                     </p>
 
@@ -134,7 +134,7 @@ export default function UpdatesAndDueDates() {
           <div className="bg-white border rounded-xl shadow-sm p-6 md:p-8">
 
             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <CalendarDays className="w-5 h-5 text-blue-600" />
+              <CalendarDays className="w-5 h-5 text-orange-600" />
               Due Dates
             </h3>
 
@@ -147,9 +147,9 @@ export default function UpdatesAndDueDates() {
                   className="relative pl-4 border-l border-gray-200"
                 >
 
-                  <div className="absolute -left-[5px] top-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div className="absolute -left-[5px] top-2 w-2 h-2 bg-orange-500 rounded-full"></div>
 
-                  <div className="p-2 hover:bg-blue-50 rounded-lg">
+                  <div className="p-2 hover:bg-orange-50 rounded-lg">
 
                     <p className="text-gray-800 text-sm font-medium">
                       {item.title}
