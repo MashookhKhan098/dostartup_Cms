@@ -169,6 +169,7 @@
 
 // app/components/Startup/Price.tsx
 // app/components/Startup/Price.tsx
+
 type PricingProps = {
   category?: string;
 };
@@ -178,15 +179,12 @@ const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 
 async function getPricing(category?: string) {
   try {
-    // 1. Fetch Header (Singleton)
     const sectionRes = await fetch(
       `${COCKPIT_BASE}/api/content/item/pricingSection?api-key=${TOKEN}`,
       { cache: "no-store" }
     );
     const section = await sectionRes.json();
 
-    // 2. Fetch Cards (Collection - plural 'items')
-    // We use a case-insensitive regex to match "Proprietorship" vs "proprietorship"
     const filter = category 
       ? `&filter=${encodeURIComponent(JSON.stringify({ 
           category: { "$regex": category, "$options": "i" } 
@@ -211,49 +209,116 @@ async function getPricing(category?: string) {
 export default async function PricingSection({ category }: PricingProps) {
   const data = await getPricing(category);
 
-  // Removes the gap if no data is found
   if (!data || !data.section || data.cards.length === 0) return null;
 
   const { section, cards } = data;
 
   return (
-    <section className="relative bg-gray-50 py-16 px-4 sm:px-6 lg:px-8 font-['Sora']">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            {section.heading}
+    <section className="bg-white py-16 px-4 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-100 rounded-full blur-3xl -translate-x-1/2"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-100 rounded-full blur-3xl translate-x-1/2"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-3 leading-tight">
+            <span className="text-gray-900">Simple </span>
+            <span className="bg-gradient-to-r from-orange-600 to-blue-600 bg-clip-text text-transparent">
+              Pricing
+            </span>
           </h2>
-          <p className="text-gray-600 text-base sm:text-lg mb-2">
-            {section.subheading}
+          <p className="text-gray-600 text-lg max-w-xl mx-auto">
+            Transparent pricing with no hidden charges
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
-          {cards.map((card: any) => (
-            <div
-              key={card._id}
-              className="bg-white rounded-xl border-2 border-gray-200 hover:border-[#C15F3C] hover:shadow-xl transition-all duration-300 overflow-hidden group w-full max-w-xs flex flex-col"
-            >
-              <div className="p-6 text-center border-b border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 uppercase tracking-tight">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed min-h-[40px]">
-                  {card.description}
-                </p>
+        {/* Cards Grid - Increased gap for more space between columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center max-w-7xl mx-auto">
+          {cards.map((card: any, index: number) => {
+            // Filter out invalid cards
+            if (!card.title || card.title === "Proprietorship.") return null;
+            
+            const colorIndex = index % 3;
+            const colors = colorIndex === 0 ? 'orange' : colorIndex === 1 ? 'blue' : 'orange';
+            
+            return (
+              <div
+                key={card._id}
+                className="group relative bg-white rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl w-full max-w-[280px] shadow-lg border border-gray-200 flex flex-col h-full"
+              >
+                <div className="p-6 flex flex-col h-full">
+                  {/* Title - Increased bottom margin */}
+                  <h3 className={`text-base font-bold mb-3 min-h-[40px] ${
+                    colors === 'orange' ? 'text-orange-600' : 'text-blue-600'
+                  }`}>
+                    {card.title}
+                  </h3>
+                  
+                  {/* Description - Increased bottom margin */}
+                  {card.description && card.description !== card.title && (
+                    <p className="text-gray-500 text-xs mb-4 line-clamp-2 min-h-[32px]">
+                      {card.description}
+                    </p>
+                  )}
+
+                  {/* Price - Increased bottom margin */}
+                  <div className="mb-5">
+                    <div className="flex items-end gap-1">
+                      <span className="text-2xl font-bold text-gray-900">₹{card.price}</span>
+                      <span className="text-gray-400 text-xs mb-1">/year</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">+ Government fees extra</p>
+                  </div>
+
+                  {/* What's included - Increased spacing */}
+                  <div className="mb-5 flex-grow">
+                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                      WHAT'S INCLUDED:
+                    </h4>
+                    <ul className="space-y-2">
+                      {[
+                        'Dedicated Expert',
+                        'Document Preparation',
+                        'Consultation Session',
+                        'Email Support',
+                        'Priority Processing'
+                      ].map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs">
+                          <svg className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${
+                            colors === 'orange' ? 'text-orange-500' : 'text-blue-500'
+                          }`} fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          <span className="text-gray-600">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Button - Increased padding */}
+                  <button className={`w-full py-3 px-4 rounded-lg text-xs font-medium transition-all mt-auto ${
+                    colors === 'orange' 
+                      ? 'bg-orange-50 text-orange-600 hover:bg-orange-100 border border-orange-200' 
+                      : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200'
+                  }`}>
+                    Get Started Now
+                  </button>
+                </div>
               </div>
-              <div className="px-5 py-8 text-center bg-gray-50/50">
-                <span className="text-4xl font-black text-gray-900">₹{card.price}</span>
-              </div>
-              <div className="p-6 mt-auto">
-                <button className="w-full bg-[#C15F3C] text-white text-sm font-bold py-3.5 rounded-xl hover:bg-[#a34f32] transition-all">
-                  Start Filing Now
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <p className="text-gray-500 text-sm">
+            Need a custom plan? <span className="text-orange-600 font-medium cursor-pointer hover:underline">Contact sales</span>
+          </p>
         </div>
       </div>
     </section>
   );
-}
+} 

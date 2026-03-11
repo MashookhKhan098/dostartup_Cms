@@ -732,9 +732,6 @@
 //     </div>
 //   );
 // }
-
-
-
 interface DynamicTabContentProps {
   category: string;
 }
@@ -751,8 +748,13 @@ async function getTabData(category: string) {
     return null;
   }
 
-  // Cockpit structure
-  return json[0]?.GST || null;
+  // FIX: find item by category
+  const item = json.find(
+    (entry: any) =>
+      entry.category?.toLowerCase() === category?.toLowerCase()
+  );
+
+  return item?.description || null;
 }
 
 export default async function DynamicTabContent({
@@ -762,8 +764,8 @@ export default async function DynamicTabContent({
 
   if (!data) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-600 font-medium">
+      <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 sm:p-6 text-center">
+        <p className="text-orange-600 font-medium text-sm sm:text-base">
           No data found for "{category}". Please check the category.
         </p>
       </div>
@@ -771,18 +773,18 @@ export default async function DynamicTabContent({
   }
 
   return (
-    <div className="bg-gray-50 py-12 px-4">
-      <div className="max-w-7xl mx-auto flex gap-6">
+    <div className="bg-gradient-to-br from-orange-50 via-white to-blue-50 py-8 sm:py-12 px-3 sm:px-4">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6">
 
         {/* Main Content */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-1">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex-1 order-2 lg:order-1">
 
           {/* Author Section */}
-          <div className="bg-gray-50 px-8 py-6 border-b border-gray-200">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
+          <div className="bg-gradient-to-r from-orange-50 to-blue-50 px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 border-b border-gray-200">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
 
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg md:text-xl shadow-md">
                   {(data.author?.name || "NA")
                     .split(" ")
                     .map((n: string) => n[0])
@@ -790,59 +792,63 @@ export default async function DynamicTabContent({
                 </div>
 
                 <div>
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900">
                     {data.author?.name || "Author"}
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs sm:text-sm text-gray-600">
                     {data.author?.role || ""}
                   </p>
                 </div>
               </div>
 
-              <div className="text-right">
-                <p className="text-sm text-gray-500">Updated on:</p>
-                <p className="text-sm font-semibold text-gray-900">
+              <div className="text-left sm:text-right">
+                <p className="text-xs text-gray-500">Updated on:</p>
+                <p className="text-xs sm:text-sm font-semibold text-gray-900">
                   {data.author?.updatedDate || ""}
                 </p>
               </div>
+
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="px-8 py-10 space-y-8">
+          <div className="px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-10 space-y-5 sm:space-y-6 md:space-y-8">
 
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
               {data.title}
             </h1>
 
-            <p className="text-gray-700 text-base leading-relaxed">
-              {data.description}
-            </p>
+            <div className="space-y-4 sm:space-y-5">
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                {data.description}
+              </p>
 
-            <p className="text-gray-700 text-base leading-relaxed">
-              {data.introduction}
-            </p>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                {data.introduction}
+              </p>
+            </div>
 
             {(data.sections || []).map((section: any, index: number) => (
-              <div key={index} className="space-y-5">
+              <div key={index} className="space-y-4 sm:space-y-5">
 
-                <h2 className="text-2xl font-bold text-gray-900 mt-8">
+                <h2 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-blue-600 mt-4 sm:mt-6 md:mt-8">
                   {section.heading}
                 </h2>
 
-                <p className="text-gray-700 text-base leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                   {section.content}
                 </p>
 
-                <ul className="space-y-4 mt-4">
+                <ul className="space-y-3 sm:space-y-4 mt-3 sm:mt-4">
                   {(section.points || []).map((point: string, i: number) => {
+
                     const [title, ...desc] = point.split(":");
 
                     return (
-                      <li key={i} className="flex items-start gap-3">
+                      <li key={i} className="flex items-start gap-2 sm:gap-3 bg-orange-50/50 p-3 sm:p-4 rounded-lg hover:bg-orange-100/50 transition-colors">
 
                         <svg
-                          className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1"
+                          className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 flex-shrink-0 mt-0.5"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -853,11 +859,11 @@ export default async function DynamicTabContent({
                           />
                         </svg>
 
-                        <div>
-                          <span className="font-semibold text-gray-900">
+                        <div className="flex-1">
+                          <span className="font-semibold text-gray-900 text-sm sm:text-base">
                             {title}:
                           </span>
-                          <span className="text-gray-700">
+                          <span className="text-gray-700 text-sm sm:text-base">
                             {" "}
                             {desc.join(":")}
                           </span>
@@ -870,84 +876,107 @@ export default async function DynamicTabContent({
 
               </div>
             ))}
+
           </div>
         </div>
 
+
         {/* Sidebar */}
-        <div className="w-80 space-y-6 flex-shrink-0 sticky top-6 self-start">
+        <div className="w-full lg:w-80 space-y-4 sm:space-y-6 flex-shrink-0 lg:sticky lg:top-6 self-start order-1 lg:order-2">
 
           {/* Consult Experts */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
-              Consult Experts
-            </h3>
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
 
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex -space-x-2">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
-              </div>
-
-              <span className="text-sm font-semibold text-gray-700">
-                Expert Team
-              </span>
+            <div className="bg-gradient-to-r from-orange-500 to-blue-600 px-4 sm:px-6 py-3 sm:py-4">
+              <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <span>📞</span> Consult Experts
+              </h3>
             </div>
 
-            <p className="text-sm text-gray-600 mb-4">
-              Get professional guidance from our experienced consultants
-            </p>
+            <div className="p-4 sm:p-6">
 
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-              Contact Now
-            </button>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-white shadow-md"></div>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white shadow-md"></div>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white shadow-md"></div>
+                </div>
+
+                <span className="text-xs sm:text-sm font-semibold text-gray-700">
+                  Expert Team
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-gray-600 mb-4 leading-relaxed">
+                Get professional guidance from our experienced consultants
+              </p>
+
+              <button className="w-full bg-gradient-to-r from-orange-500 to-blue-600 hover:from-orange-600 hover:to-blue-700 text-white font-semibold py-2.5 sm:py-3 px-4 rounded-lg text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                Contact Now
+              </button>
+
+            </div>
           </div>
+
 
           {/* Related Guides */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
-              Related Guides
-            </h3>
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
 
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
-                >
-                  Online EPF account transfer
-                </a>
-              </li>
+            <div className="bg-gradient-to-r from-blue-500 to-orange-600 px-4 sm:px-6 py-3 sm:py-4">
+              <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <span>📚</span> Related Guides
+              </h3>
+            </div>
 
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
-                >
-                  IEPF Rules 2019 – Investor Education and Protection Fund
-                </a>
-              </li>
+            <div className="p-4 sm:p-6">
 
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
-                >
-                  Reduced Rate Of EPF Contribution & Impact On Stakeholders
-                </a>
-              </li>
+              <ul className="space-y-2 sm:space-y-3">
+                {[
+                  "Online EPF account transfer",
+                  "IEPF Rules 2019 – Investor Education and Protection Fund",
+                  "Reduced Rate Of EPF Contribution & Impact On Stakeholders",
+                  "PF Balance Check"
+                ].map((item, index) => (
 
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
-                >
-                  PF Balance Check
-                </a>
-              </li>
-            </ul>
+                  <li key={index}>
+                    <a
+                      href="#"
+                      className="text-xs sm:text-sm text-gray-600 hover:text-orange-600 hover:underline flex items-center gap-2 group"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-500 to-blue-600 group-hover:scale-125 transition-transform"></span>
+                      {item}
+                    </a>
+                  </li>
+
+                ))}
+              </ul>
+
+            </div>
+          </div>
+
+
+          {/* Quick Support */}
+          <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-orange-200">
+
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-orange-500 to-blue-600 flex items-center justify-center text-white text-lg sm:text-xl">
+                💬
+              </div>
+              <h4 className="text-sm sm:text-base font-bold text-gray-900">
+                Need Quick Help?
+              </h4>
+            </div>
+
+            <p className="text-xs sm:text-sm text-gray-600 mb-3">
+              Chat with our support team for instant assistance
+            </p>
+
+            <button className="w-full bg-white border border-orange-300 text-orange-600 hover:bg-orange-50 font-medium py-2 px-4 rounded-lg text-xs sm:text-sm transition-colors">
+              Start Live Chat
+            </button>
 
           </div>
+
         </div>
 
       </div>
