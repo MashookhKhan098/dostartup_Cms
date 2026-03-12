@@ -3,6 +3,7 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import { Star, ChevronDown, CheckCircle } from "lucide-react";
+import Navbar from "../components/Navbar";
 import PopularSearches from "../components/PopularSearches";
 
 const ASSETS = {
@@ -70,268 +71,6 @@ const RatingInline: React.FC = () => (
   </div>
 );
 
-interface NavItemProps {
-  children: React.ReactNode;
-  hasDropdown?: boolean;
-  isActive?: boolean;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-}
-const NavItem: React.FC<NavItemProps> = ({
-  children,
-  hasDropdown = false,
-  isActive = false,
-  onMouseEnter,
-  onMouseLeave,
-}) => (
-  <div
-    className="relative"
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-  >
-    <button
-      type="button"
-      suppressHydrationWarning
-      className={`text-sm flex items-center gap-1 hover:text-slate-900 ${
-        isActive ? "text-slate-900 font-medium" : "text-slate-700"
-      }`}
-      aria-haspopup={hasDropdown ? "true" : undefined}
-    >
-      {children}
-      {hasDropdown && <ChevronDown className="w-3 h-3" />}
-    </button>
-  </div>
-);
-
-const Header: React.FC = () => {
-  const [showMcaDropdown, setShowMcaDropdown] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const primary = [
-    "Startup",
-    "Registrations",
-    "Trademark",
-    "GST",
-    "Income Tax",
-    "MCA",
-    "Compliance",
-    "Personal",
-    "Global",
-    "Cities",
-    "Guides",
-  ];
-
-  return (
-    <header className="site-header bg-white border-b border-slate-200 sticky top-0 z-50">
-      <div className="container max-w-[1200px] mx-auto px-4">
-        <div className="header-row flex items-center justify-between h-16">
-          <a
-            href="/"
-            className="brand flex items-center gap-3 min-w-0 shrink-0"
-            aria-label="IndiaFilings home"
-          >
-            <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-            <span className="brand-text hidden sm:inline-block font-semibold text-slate-800 truncate">
-              IndiaFilings
-            </span>
-          </a>
-
-          <nav
-            className="hidden md:flex items-center gap-6 text-sm flex-1 justify-between px-4"
-            aria-label="Main"
-          >
-            <div className="nav-left flex items-center gap-6 min-w-0">
-              {primary.map((item) =>
-                item === "MCA" ? (
-                  <div
-                    key={item}
-                    className="relative"
-                    onMouseEnter={() => setShowMcaDropdown(true)}
-                    onMouseLeave={() => setShowMcaDropdown(false)}
-                  >
-                    <button
-                      className={`text-sm flex items-center gap-1 hover:text-slate-900 ${
-                        showMcaDropdown
-                          ? "text-slate-900 font-medium"
-                          : "text-slate-700"
-                      }`}
-                      aria-haspopup="true"
-                    >
-                      MCA <ChevronDown className="w-3 h-3" />
-                    </button>
-
-                    {showMcaDropdown && (
-                      <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[780px]">
-                        <div className="bg-white rounded-lg shadow-xl border border-slate-200 p-6">
-                          <div className="grid grid-cols-3 gap-x-6 gap-y-2">
-                            {MCA_DROPDOWN_LINKS.map((link) => (
-                              <a
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-                              >
-                                {link.title}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <a
-                    key={item}
-                    href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="text-sm text-slate-700 hover:text-slate-900 whitespace-nowrap"
-                  >
-                    {item}
-                  </a>
-                )
-              )}
-            </div>
-
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <a
-                href="/llp-form-11-filing"
-                className="hidden lg:inline-block px-3 py-1.5 rounded-md text-sm font-medium bg-emerald-50 text-emerald-700 border border-emerald-100 hover:bg-emerald-100"
-                aria-current="page"
-              >
-                LLP Form 11 Filing
-              </a>
-
-              <a
-                href="/login"
-                className="px-4 py-1.5 border border-slate-300 text-sm rounded-md hover:bg-slate-50"
-              >
-                Login
-              </a>
-            </div>
-          </nav>
-
-          <div className="md:hidden flex items-center gap-2">
-            <a
-              href="/llp-form-11-filing"
-              className="text-xs px-2 py-1 rounded bg-emerald-50 text-emerald-700 hidden sm:inline-block"
-            >
-              LLP Form 11
-            </a>
-
-            <button
-              aria-label="Toggle menu"
-              onClick={() => setMobileOpen((s) => !s)}
-              className="p-2 rounded-md border border-slate-200"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                {mobileOpen ? (
-                  <path
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                ) : (
-                  <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {mobileOpen && (
-          <div className="md:hidden py-3 border-t border-slate-100">
-            <div className="flex flex-col gap-2">
-              {primary.map((item) =>
-                item === "MCA" ? (
-                  <details key={item} className="px-2 py-1">
-                    <summary className="flex items-center justify-between cursor-pointer">
-                      MCA <ChevronDown className="w-4 h-4" />
-                    </summary>
-                    <div className="mt-2 grid grid-cols-1 gap-1 pl-2">
-                      {MCA_DROPDOWN_LINKS.map((l) => (
-                        <a
-                          key={l.href}
-                          href={l.href}
-                          className="py-1 text-sm rounded hover:bg-slate-50 block"
-                        >
-                          {l.title}
-                        </a>
-                      ))}
-                    </div>
-                  </details>
-                ) : (
-                  <a
-                    key={item}
-                    href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-2 py-2 text-sm rounded hover:bg-slate-50"
-                  >
-                    {item}
-                  </a>
-                )
-              )}
-
-              <a
-                href="/llp-form-11-filing"
-                className="px-2 py-2 text-sm rounded bg-emerald-50 text-emerald-700"
-              >
-                LLP Form 11 Filing
-              </a>
-              <a
-                href="/login"
-                className="px-2 py-2 text-sm rounded border border-slate-100 text-center"
-              >
-                Login
-              </a>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <style jsx>{`
-        .site-header .container {
-          width: 100%;
-        }
-        .header-row {
-          gap: 12px;
-        }
-        .brand-text {
-          max-width: 150px;
-        }
-        nav.nav-left a,
-        nav .nav-left .relative > button {
-          flex-shrink: 0;
-        }
-        @media (min-width: 768px) {
-          .relative > div {
-            z-index: 90;
-          }
-        }
-        @media (max-width: 420px) {
-          .brand-text {
-            display: none;
-          }
-          .header-row {
-            padding-left: 6px;
-            padding-right: 6px;
-          }
-        }
-      `}</style>
-    </header>
-  );
-};
-
 const Footer: React.FC = () => {
   const bgImagePath = ASSETS.footerBg;
 
@@ -351,22 +90,22 @@ const Footer: React.FC = () => {
           <div className="card p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
             <div className="flex flex-col gap-4">
               <span className="text-lg font-medium leading-none text-slate-950 mb-4">
-                IndiaFilings
+                Company
               </span>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/about-us"
               >
-                About IndiaFilings
+                About Us
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/careers"
               >
                 Careers
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/contact-us"
               >
                 Contact Us
@@ -380,19 +119,19 @@ const Footer: React.FC = () => {
                 Platforms
               </span>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/search/"
               >
                 Business Search
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/trademark-search"
               >
                 Trademark Search
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="https://filings.ae/"
               >
                 Filings.AE
@@ -406,19 +145,19 @@ const Footer: React.FC = () => {
                 Usage
               </span>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/termsconditions"
               >
                 Terms &amp; Conditions
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/privacypolicy"
               >
                 Privacy Policy
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/refund-policy"
               >
                 Refund Policy
@@ -432,22 +171,22 @@ const Footer: React.FC = () => {
                 &nbsp;
               </span>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/confidentiality-policy"
               >
                 Confidentiality Policy
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/disclaimer"
               >
                 Disclaimer Policy
               </a>
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="/review"
               >
-                IndiaFilings Review
+                Reviews
               </a>
             </div>
           </div>
@@ -456,29 +195,29 @@ const Footer: React.FC = () => {
         <div className="mt-3 pt-3">
           <div className="max-w-screen-2xl mx-auto px-3 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-500">
-              © 2025 IndiaFilings. All Rights Reserved.
+              © 2025 All Rights Reserved.
             </p>
             <p className="text-xs text-slate-500">
               Unless otherwise indicated, all materials on these pages are
-              copyrighted by IndiaFilings Private Limited. All rights reserved.
+              copyrighted. All rights reserved.
             </p>
             <div className="flex items-center gap-2">
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://www.facebook.com"
                 aria-label="facebook"
               >
                 FB
               </a>
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://twitter.com"
                 aria-label="twitter"
               >
                 X
               </a>
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://www.youtube.com"
                 aria-label="youtube"
               >
@@ -512,108 +251,129 @@ export default function LLPForm11Filing(): React.ReactElement {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
           rel="stylesheet"
         />
-        <title>LLP Form 11 Filing - IndiaFilings</title>
+        <title>LLP Form 11 Filing</title>
       </Head>
 
-      <Header />
+      {/* Imported Navbar */}
+      <Navbar />
 
+      {/* Hero Section */}
       <section className="bg-white pt-10 pb-12">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Left Column */}
             <div>
-              <h1 className="text-5xl font-extrabold mb-4 leading-tight">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-4">
+                <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                <span className="text-xs font-medium text-amber-700">LLP COMPLIANCE</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
                 LLP Form 11
-                <span className="text-blue-600 underline decoration-4 decoration-yellow-300">
-                  {" "}
+                <span className="text-amber-700 relative ml-2">
                   Filing
+                  <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-600 to-amber-700 rounded-full"></div>
                 </span>
               </h1>
-              <p className="text-slate-600 mb-6 max-w-xl">
+              <p className="text-slate-600 mb-6 max-w-xl text-sm sm:text-base">
                 File your LLP annual return (Form 11) quickly and accurately. We
                 assist with form preparation, DSC requirements and submission to
                 MCA.
               </p>
 
               <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 text-white">
+                <li className="flex items-start gap-3 group">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-700 group-hover:bg-amber-200 transition-colors">
                     ✓
                   </div>
                   <div>
-                    <div className="font-semibold">Hassle-free Filing</div>
-                    <div className="text-sm text-slate-600">
+                    <div className="font-semibold text-sm sm:text-base">Hassle-free Filing</div>
+                    <div className="text-xs sm:text-sm text-slate-600">
                       We prepare and submit Form 11 on your behalf
                     </div>
                   </div>
                 </li>
 
-                <li className="flex items-start gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 text-white">
+                <li className="flex items-start gap-3 group">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-700 group-hover:bg-amber-200 transition-colors">
                     ✓
                   </div>
                   <div>
-                    <div className="font-semibold">DSC & DIN Assistance</div>
-                    <div className="text-sm text-slate-600">
+                    <div className="font-semibold text-sm sm:text-base">DSC & DIN Assistance</div>
+                    <div className="text-xs sm:text-sm text-slate-600">
                       Guidance on digital signatures and LLP partner details
                     </div>
                   </div>
                 </li>
 
-                <li className="flex items-start gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 text-white">
+                <li className="flex items-start gap-3 group">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-700 group-hover:bg-amber-200 transition-colors">
                     ✓
                   </div>
                   <div>
-                    <div className="font-semibold">Compliance Reminders</div>
-                    <div className="text-sm text-slate-600">
+                    <div className="font-semibold text-sm sm:text-base">Compliance Reminders</div>
+                    <div className="text-xs sm:text-sm text-slate-600">
                       Avoid penalties with timely filings
                     </div>
                   </div>
                 </li>
 
-                <li className="flex items-start gap-3">
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 text-white">
+                <li className="flex items-start gap-3 group">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-700 group-hover:bg-amber-200 transition-colors">
                     ✓
                   </div>
                   <div>
-                    <div className="font-semibold">End-to-end Support</div>
-                    <div className="text-sm text-slate-600">
+                    <div className="font-semibold text-sm sm:text-base">End-to-end Support</div>
+                    <div className="text-xs sm:text-sm text-slate-600">
                       From document checklist to MCA submission
                     </div>
                   </div>
                 </li>
               </ul>
+
+              {/* Trust Badges */}
+              <div className="flex items-center gap-3 mt-6">
+                <div className="flex -space-x-1.5">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 border-2 border-white shadow-sm" />
+                  ))}
+                </div>
+                <span className="text-xs sm:text-sm text-gray-600">Trusted by 10,000+ businesses</span>
+              </div>
             </div>
 
+            {/* Right Column - Form */}
             <div className="relative">
-              <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-6">
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
                 <div
                   className="absolute -top-4 left-6 right-6 h-4 rounded-t-xl"
                   style={{
-                    background: "linear-gradient(90deg, #3b82f6, #06b6d4)",
+                    background: "linear-gradient(90deg, #C15F3C, #A74A2F)",
                   }}
                 />
 
                 <div className="space-y-4 mt-3">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      LLPIN
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
+                      LLPIN <span className="text-amber-600">*</span>
                     </label>
                     <input
                       type="text"
-                      className="w-full px-4 py-2 border border-gray-200 rounded focus:ring-2 focus:ring-blue-400 outline-none"
+                      className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-gray-50 text-sm"
                       placeholder="Enter LLPIN"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       LLP Name
                     </label>
                     <input
                       type="text"
                       placeholder="Filled Automatically"
-                      className="w-full px-4 py-2 border border-gray-200 rounded bg-gray-50 text-slate-500"
+                      className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded bg-gray-100 text-slate-500 text-sm"
+                      readOnly
                     />
                     <p className="text-xs text-slate-400 mt-1">
                       This field will auto-populate after entering LLPIN.
@@ -621,96 +381,104 @@ export default function LLPForm11Filing(): React.ReactElement {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Financial Year
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
+                      Financial Year <span className="text-amber-600">*</span>
                     </label>
                     <input
                       type="text"
-                      className="w-full px-4 py-2 border border-gray-200 rounded focus:ring-2 focus:ring-blue-400 outline-none"
+                      className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-gray-50 text-sm"
                       placeholder="e.g. 2024-2025"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Designated Partner Email
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
+                      Designated Partner Email <span className="text-amber-600">*</span>
                     </label>
                     <input
                       type="email"
-                      className="w-full px-4 py-2 border border-gray-200 rounded focus:ring-2 focus:ring-blue-400 outline-none"
+                      className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-gray-50 text-sm"
                       placeholder="Enter email for contact"
                     />
                   </div>
 
                   <div className="flex justify-end">
-                    <button className="px-5 py-2 rounded bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold shadow">
+                    <button className="px-5 py-2.5 rounded bg-gradient-to-r from-amber-700 to-amber-800 text-white font-semibold text-sm hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
                       Submit Form 11
                     </button>
                   </div>
+
+                  {/* Security Badge */}
+                  <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+                    <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Secure · No spam · Instant confirmation</span>
+                  </div>
                 </div>
               </div>
-
-              <div className="hidden md:block absolute -right-10 top-8 w-6 h-24 rounded-md opacity-30" />
             </div>
           </div>
         </div>
       </section>
 
+      {/* Main Content */}
       <section className="py-10">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Left Main Content */}
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-2xl font-bold mb-3">
+              <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+                <h2 className="text-xl sm:text-2xl font-bold mb-3">
                   LLP Annual Return (Form 11)
                 </h2>
-                <p className="text-slate-600 mb-4 leading-relaxed">
+                <p className="text-slate-600 mb-4 leading-relaxed text-sm sm:text-base">
                   LLP Form 11 is the annual return that every Limited Liability
                   Partnership must file with the Ministry of Corporate Affairs.
                   It contains details of partners, partners' contributions and
                   other statutory particulars for the relevant financial year.
                 </p>
 
-                <h3 className="text-xl font-semibold mt-4 mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold mt-4 mb-2 text-amber-800">
                   Who Must File Form 11
                 </h3>
-                <ul className="list-inside space-y-2 text-slate-600 mb-4">
-                  <li>All registered LLPs must file Form 11 annually.</li>
-                  <li>Non-filing can attract penalties and late fees.</li>
+                <ul className="list-inside space-y-2 text-slate-600 mb-4 text-sm sm:text-base">
+                  <li className="hover:text-amber-700 cursor-pointer transition-colors">All registered LLPs must file Form 11 annually.</li>
+                  <li className="hover:text-amber-700 cursor-pointer transition-colors">Non-filing can attract penalties and late fees.</li>
                 </ul>
 
-                <h3 className="text-lg font-semibold mt-4 mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold mt-4 mb-2 text-amber-800">
                   Key Contents of Form 11
                 </h3>
-                <ul className="space-y-2 ml-4 text-slate-600 mb-4">
-                  <li>
+                <ul className="space-y-2 ml-4 text-slate-600 mb-4 text-sm sm:text-base">
+                  <li className="hover:text-amber-700 cursor-pointer transition-colors">
                     <strong>Partners' Details:</strong> Names, addresses and
                     DIN/DPIN if applicable.
                   </li>
-                  <li>
+                  <li className="hover:text-amber-700 cursor-pointer transition-colors">
                     <strong>Contribution Details:</strong> Capital contribution
                     of partners.
                   </li>
-                  <li>
+                  <li className="hover:text-amber-700 cursor-pointer transition-colors">
                     <strong>Registered Office:</strong> Confirmation of address
                     as per records.
                   </li>
                 </ul>
 
-                <h3 className="text-lg font-semibold mt-4 mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold mt-4 mb-2 text-amber-800">
                   Filing Timeline & Penalties
                 </h3>
-                <p className="text-slate-600 mb-4 leading-relaxed">
+                <p className="text-slate-600 mb-4 leading-relaxed text-sm sm:text-base">
                   Form 11 must be filed within 60 days from the end of the
                   financial year. Late filing attracts additional fees and
                   penalties depending on the delay.
                 </p>
 
                 <div className="mt-6">
-                  <h3 className="text-2xl font-bold mb-4">
-                    Why Use IndiaFilings for Form 11
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4">
+                    Why Choose Us for Form 11
                   </h3>
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
                     We prepare your Form 11, validate partner information,
                     assist with DSC signing and submit the form to MCA to ensure
                     a compliant annual return.
@@ -718,28 +486,28 @@ export default function LLPForm11Filing(): React.ReactElement {
                 </div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-2xl font-bold mb-4">
+              <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4">
                   Documents Required for Form 11
                 </h3>
                 <ul className="space-y-3 text-slate-600">
-                  <li className="flex gap-3 items-start">
-                    <CheckCircle className="w-5 h-5 text-green-600 mt-1" />{" "}
-                    Partners' PAN and address proof
+                  <li className="flex gap-3 items-start hover:text-amber-700 cursor-pointer transition-colors">
+                    <CheckCircle className="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" /> 
+                    <span className="text-sm sm:text-base">Partners' PAN and address proof</span>
                   </li>
-                  <li className="flex gap-3 items-start">
-                    <CheckCircle className="w-5 h-5 text-green-600 mt-1" />{" "}
-                    Details of partners' capital contribution
+                  <li className="flex gap-3 items-start hover:text-amber-700 cursor-pointer transition-colors">
+                    <CheckCircle className="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" /> 
+                    <span className="text-sm sm:text-base">Details of partners' capital contribution</span>
                   </li>
-                  <li className="flex gap-3 items-start">
-                    <CheckCircle className="w-5 h-5 text-green-600 mt-1" /> DSC
-                    of designated partner (if required)
+                  <li className="flex gap-3 items-start hover:text-amber-700 cursor-pointer transition-colors">
+                    <CheckCircle className="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" /> 
+                    <span className="text-sm sm:text-base">DSC of designated partner (if required)</span>
                   </li>
                 </ul>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-2xl font-bold mb-4">
+              <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4">
                   FAQ's on LLP Form 11
                 </h3>
                 <div className="divide-y">
@@ -751,13 +519,13 @@ export default function LLPForm11Filing(): React.ReactElement {
                           setActiveFaq(activeFaq === idx ? null : idx)
                         }
                       >
-                        <span className="text-slate-800 font-medium">{q}</span>
-                        <span className="text-slate-400">
-                          {activeFaq === idx ? "-" : "+"}
+                        <span className="text-slate-800 font-medium text-sm sm:text-base hover:text-amber-700 transition-colors">{q}</span>
+                        <span className="text-amber-700 text-lg">
+                          {activeFaq === idx ? "−" : "+"}
                         </span>
                       </button>
                       {activeFaq === idx && (
-                        <div className="text-slate-600 mt-2">
+                        <div className="text-slate-600 mt-2 text-sm">
                           <p>
                             This answer explains {q.toLowerCase()}. For tailored
                             assistance and templates, get in touch with our
@@ -768,7 +536,7 @@ export default function LLPForm11Filing(): React.ReactElement {
                     </div>
                   ))}
                   <div className="py-4">
-                    <button className="px-4 py-2 border rounded text-sm text-blue-600">
+                    <button className="px-4 py-2 border-2 border-amber-600 rounded text-sm text-amber-700 hover:bg-amber-50 transition-colors font-medium">
                       Load More
                     </button>
                   </div>
@@ -776,52 +544,53 @@ export default function LLPForm11Filing(): React.ReactElement {
               </div>
             </div>
 
+            {/* Right Sidebar */}
             <aside className="space-y-6">
-              <div className="bg-white rounded-lg shadow p-5">
-                <h4 className="font-semibold mb-3">Related Guides</h4>
-                <ul className="text-sm text-slate-700 space-y-2">
+              <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-5">
+                <h4 className="font-semibold mb-3 text-base">Related Guides</h4>
+                <ul className="text-sm space-y-2">
                   <li>
-                    <a className="text-blue-600" href="#">
+                    <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
                       LLP Registration Process
                     </a>
                   </li>
                   <li>
-                    <a className="text-blue-600" href="#">
+                    <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
                       Documents Required for LLP
                     </a>
                   </li>
                   <li>
-                    <a className="text-blue-600" href="#">
+                    <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
                       Advantages of LLP Structure
                     </a>
                   </li>
                   <li>
-                    <a className="text-blue-600" href="#">
+                    <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
                       LLP Compliance Checklist
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 text-center">
                 <img
                   src={ASSETS.cards.compliance}
                   alt="Company Compliance"
-                  className="rounded"
+                  className="rounded w-full"
                 />
-                <div className="mt-3 font-medium">Company Compliance</div>
+                <div className="mt-3 font-medium text-sm">Company Compliance</div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-4 text-center">
+              <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 text-center">
                 <img
                   src={ASSETS.cards.dinEKyc}
                   alt="DIN eKYC"
-                  className="rounded"
+                  className="rounded w-full"
                 />
-                <div className="mt-3 font-medium">DIN eKYC Filing</div>
+                <div className="mt-3 font-medium text-sm">DIN eKYC Filing</div>
               </div>
 
-              <div className="bg-white rounded-lg shadow p-4">
+              <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
                 <h4 className="font-semibold mb-3">Popular Searches</h4>
                 <div className="flex flex-wrap gap-2">
                   <PopularSearches />
@@ -834,8 +603,9 @@ export default function LLPForm11Filing(): React.ReactElement {
 
       <Footer />
 
+      {/* WhatsApp CTA */}
       <div
-        className="whatsapp-cta"
+        className="fixed right-4 sm:right-6 bottom-4 sm:bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer"
         role="button"
         aria-label="Live chat with experts"
         onClick={() => alert("Open WhatsApp chat")}
@@ -846,7 +616,7 @@ export default function LLPForm11Filing(): React.ReactElement {
             d="M12 2a10 10 0 00-8.66 14.2L2 22l5.93-1.7A10 10 0 1012 2z"
           />
         </svg>
-        <span>Live Chat with Experts</span>
+        <span className="text-xs sm:text-sm font-semibold">Live Chat with Experts</span>
       </div>
 
       <style jsx>{`
@@ -873,27 +643,6 @@ export default function LLPForm11Filing(): React.ReactElement {
         .star {
           color: #f59e0b;
         }
-        .whatsapp-cta {
-          position: fixed;
-          right: 18px;
-          bottom: 18px;
-          background: #16a34a;
-          color: white;
-          padding: 12px 18px;
-          border-radius: 999px;
-          display: flex;
-          gap: 8px;
-          align-items: center;
-          box-shadow: 0 10px 30px rgba(22, 163, 74, 0.22);
-          cursor: pointer;
-          z-index: 100;
-        }
-        .max-w-7xl {
-          max-width: 88rem;
-        }
-        .container {
-          width: 100%;
-        }
         @media (max-width: 1024px) {
           .max-w-7xl {
             padding-left: 16px;
@@ -903,11 +652,6 @@ export default function LLPForm11Filing(): React.ReactElement {
         @media (max-width: 768px) {
           h1 {
             font-size: 2rem;
-          }
-          .whatsapp-cta {
-            right: 12px;
-            bottom: 12px;
-            padding: 10px 14px;
           }
         }
       `}</style>

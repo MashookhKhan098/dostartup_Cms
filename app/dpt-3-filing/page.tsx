@@ -1,20 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
-import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
+/* eslint-disable @next/next/no-img-element */
+
+import React, { useMemo, useState } from "react";
+import {
+  ChevronRight,
+  ShoppingCart,
+  Star,
+  ChevronDown,
+  Plus,
+} from "lucide-react";
+import Navbar from "../components/Navbar";
+
+/**
+ * DIN Reactivation page with amber theme and imported Navbar
+ */
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
-  hero: "/images/dpt3-hero.jpg",
-  man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
-  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+  heroBlue: "/images/din-hero-blue.jpg",
+  heroMan:
+    "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
   whatsapp: "/images/whatsapp.svg",
-  adRight1: "/images/company-compliance-ad.png",
-  dinEkyc: "/images/din-ekyc-ad.png",
-  cartIcon: "/images/cart-icon.svg",
-  indiaFlag: "/images/india-flag.png",
-  companyCompliance: "/images/company-compliance.png",
+  promoBlue:
+    "https://img.indiafilings.com/catalog/company-compliance-india.png",
+  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+  gstSave: "https://img.indiafilings.com/catalog/gstin.png",
+  partnershipCard:
+    "https://img.indiafilings.com/catalog/partnership-compliance.png",
 };
+
 const MCA_DROPDOWN_LINKS = [
   { title: "Company Compliance", href: "/MCA/company-compliance" },
   { title: "Director Change", href: "/MCA/director-change" },
@@ -40,21 +55,6 @@ const MCA_DROPDOWN_LINKS = [
   { title: "DIN Reactivation", href: "/MCA/din-reactivation" },
   { title: "MOA Amendment", href: "/MCA/moa-amendment" },
   { title: "Commencement (INC-20A)", href: "/MCA/commencement-inc-20a" },
-];
-const NAV_ITEMS = [
-  "IndiaFilings",
-  "Startup",
-  "Registrations",
-  "Trademark",
-  "GST",
-  "Income Tax",
-  "MCA",
-  "Compliance",
-  "Personal",
-  "Global",
-  "Cities",
-  "Guides",
-  "Login",
 ];
 
 const POPULAR_SEARCHES = [
@@ -111,592 +111,554 @@ const POPULAR_SEARCHES = [
   "EPFO Unified Portal",
 ];
 
-export default function DPT3FilingPage(): React.ReactElement {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+const RELATED_GUIDES = [
+  "Complete Guide on Director Identification Number",
+  "How to Obtain DIN?",
+  "DIN Number Registration & Search",
+  "Designated Partner Identification Number (DPIN)",
+  "How to Change DIN details ?",
+];
+
+export default function DINReactivationPixel() {
+  const [showMcaDropdown, setShowMcaDropdown] = useState(false);
   const [gstChecked, setGstChecked] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqItems = [
-    "Which companies are not required to file DPT-3?",
-    "What is an Exempted Deposit that Requires Filing DPT-3?",
-    "What are the details and documents required for filing DPT-3?",
-    "What is called Return of Deposit?",
-    "What is the due date and who will sign the form DPT-3?",
+    {
+      q: "What exactly is a Director Identification Number (DIN)?",
+      a: "An 8-digit unique identifier allotted by MCA to directors.",
+    },
+    {
+      q: "Can you explain Form DIR-3 KYC in detail?",
+      a: "DIR-3 KYC is the annual KYC form for directors to update contact and personal details on MCA.",
+    },
+    {
+      q: "Who is mandated to file DIR-3 KYC, and when?",
+      a: "Directors allotted DIN by or before March 31, 2018 must file annually by September 30 (subject to extensions).",
+    },
+    {
+      q: "What happens if DIR-3 KYC is not filed by the deadline?",
+      a: "DIN may be deactivated and marked 'Deactivated due to Non-filing of DIR-3 KYC' restricting director functions.",
+    },
+    {
+      q: "How to reactivate DIN number?",
+      a: "File DIR-3 KYC (eForm or web) and follow MCA processes; upon approval DIN is reactivated.",
+    },
   ];
 
-  const faqAnswers: Record<number, string> = {
-    0: "Government companies, certain RBI-regulated entities (banking companies, specified NBFCs), housing finance companies registered under NHB, and any other companies specifically notified by MCA are generally exempt from filing DPT-3.",
-    1: "Exempted deposits are those recognized under the Companies (Acceptance of Deposits) Rules where certain classes of companies or instruments are excluded from the deposit definition. In some cases, even where deposits are exempt, reporting may still be required for transparency — check the Rules and MCA notifications.",
-    2: "Typical documents include an auditor's certificate verifying details in DPT-3, proof of trust deed (if deposits are held in trust), instrument creating charge (if any), details of liquid assets, list of depositors (if required), financial statements and any other attachments supporting amounts declared.",
-    3: "A return of deposit in DPT-3 is a declaration of all money received as deposits or outstanding loans not categorized as deposits, reported for the financial year ending March 31, including outstanding receipts and amounts not qualifying as deposits.",
-    4: "Due date: June 30 each year. DPT-3 must be certified by the company's auditor and filed on the MCA portal; the form is signed/verified by the authorised signatory using DSC as required by MCA.",
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
-      <header className="bg-white border-b sticky top-0 z-50">
-        <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
-          <div className="flex-shrink-0">
-            <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-          </div>
+    <div className="min-h-screen bg-gray-50 text-slate-800 font-sans">
+      {/* Imported Navbar */}
+      <Navbar />
 
-          <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
-            {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => (
-              <a key={item} href="#" className="hover:text-indigo-700">
-                {item}
-              </a>
-            ))}
-            <a className="hover:text-indigo-700">{NAV_ITEMS.at(-1)}</a>
-          </nav>
-
-          <div className="ml-auto">
-            <button className="px-3 py-1 border rounded-md text-sm">
-              Login
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <div className="bg-gray-50 py-5">
-        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
-          IndiaFilings / MCA Services /{" "}
-          <span className="text-indigo-600 font-medium">DPT-3 Filing</span>
+      {/* Breadcrumb */}
+      <div className="bg-gradient-to-r from-white to-slate-50 py-3 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-gray-500">
+          Home / Income Tax /{" "}
+          <span className="text-[#C15F3C] font-medium">DIN Reactivation</span>
         </div>
       </div>
 
-      <main className="max-w-[1180px] mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <section className="lg:col-span-8 space-y-6">
-          <div className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
-            <div className="md:w-1/3 flex-shrink-0">
-              <div className="rounded-lg overflow-hidden">
-                <div className="bg-[#0b4bd6] rounded-t-lg p-4 text-white text-center">
-                  <h2 className="text-2xl font-bold tracking-wide">
-                    DPT-3 FILING
+      {/* PAGE HERO + ACTION cards (three-col layout) */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+          {/* Left hero / image box */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg">
+              <div className="rounded-lg overflow-hidden border border-gray-200">
+                {/* top panel - amber gradient */}
+                <div className="bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] p-6 text-center">
+                  <h2 className="text-white text-xl font-bold tracking-wide">
+                    DIN REACTIVATION
                   </h2>
-                  <div className="text-xs mt-1 opacity-90">
-                    DPT - 3: Filing required for companies with deposits & loans
+                  <div className="mt-2 text-sm text-orange-100">
+                    DIN Reactivation: Quick and hassle-free.
                   </div>
                 </div>
 
-                <div className="bg-white px-4 py-6 flex justify-center">
-                  <div className="w-44 h-44 rounded-full overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4">
-                    <img
-                      src={ASSETS.man}
-                      alt="DPT3 hero"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                {/* man image */}
+                <div className="bg-gray-50 p-6 flex justify-center">
+                  <img
+                    src={ASSETS.heroMan}
+                    alt="hero man"
+                    className="w-full max-w-[320px] object-contain rounded-md"
+                  />
                 </div>
               </div>
 
-              <ul className="mt-4 text-sm space-y-2 text-gray-600">
-                <li>Computation of deposits & outstanding loans</li>
-                <li>Form Preparation (DPT-3)</li>
-                <li>MCA Filing</li>
-                <li className="text-indigo-600 underline">Load More</li>
+              {/* Document links */}
+              <ul className="mt-4 text-xs sm:text-sm space-y-2 text-gray-600">
+                <li className="hover:text-[#C15F3C] cursor-pointer transition-colors">Digital Signature Certificate (DSC)</li>
+                <li className="hover:text-[#C15F3C] cursor-pointer transition-colors">PAN Card (self-attested)</li>
+                <li className="hover:text-[#C15F3C] cursor-pointer transition-colors">Proof of Address</li>
+                <li className="text-[#C15F3C] underline hover:text-[#A74A2F] cursor-pointer font-medium">Load More</li>
               </ul>
             </div>
+          </div>
 
-            <div className="md:w-2/3 flex-1">
-              <div className="flex flex-col sm:flex-row justify-between gap-4">
+          {/* Center content (title, description, offer box) */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg">
+              <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg font-semibold text-slate-900">
-                    DPT-3 Filing
-                  </h2>
-                  <div className="flex items-center gap-3 mt-2">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-1.5 bg-orange-50 border border-[#C15F3C]/20 rounded-full px-3 py-1 mb-2">
+                    <div className="w-1.5 h-1.5 bg-[#C15F3C] rounded-full" />
+                    <span className="text-xs font-medium text-[#C15F3C]">MCA COMPLIANCE</span>
+                  </div>
+                  <h1 className="text-lg font-semibold">DIN Reactivation</h1>
+                  <div className="flex items-center gap-2 mt-2 text-xs text-slate-500">
                     <div className="flex items-center gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={14} className="text-yellow-400" />
+                      {[...Array(4)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                        />
                       ))}
+                      <span className="text-slate-500">(428)</span>
                     </div>
-                    <span className="text-xs text-slate-500">(35)</span>
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-600 max-w-md">
-                  DPT-3 Filing must be completed by all companies having loans
-                  or deposits. If your company has loans, file DPT-3 with MCA
-                  for the financial year to ensure compliance and avoid
-                  penalties.
-                </p>
+                <div className="text-xs text-slate-500 max-w-[200px]">
+                  Director Identification Number (DIN) may be subject to
+                  deactivation due to non-compliance with regulatory
+                  requirements. Reactivate it by filing Form DIR-3 with expert assistance.
+                </div>
               </div>
 
-              <div className="relative mt-6">
-                <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-green-700 border border-[#eff8f0]">
+              {/* dashed offer box */}
+              <div className="mt-5 border-2 border-dashed border-[#C15F3C]/30 rounded-md p-4 relative bg-orange-50/30">
+                <div className="absolute -top-3 left-4 bg-white px-2 text-[11px] text-[#C15F3C] rounded border border-[#C15F3C]/20">
                   2 Exclusive Offers
                 </div>
-                <div className="border-2 border-dashed rounded-md border-[#f0dcd0] p-4 bg-white">
-                  <div className="font-semibold text-slate-900">Basic</div>
-                  <ul className="mt-2 text-sm text-gray-600">
-                    <li className="flex items-center gap-2">
-                      <ChevronRight size={14} /> Computation
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <ChevronRight size={14} /> Form Preparation
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <ChevronRight size={14} /> MCA Filing
-                    </li>
-                  </ul>
-                  <div className="mt-3">
-                    <button className="bg-white border border-green-400 text-green-700 px-3 py-1 rounded">
-                      ADD
-                    </button>
-                  </div>
-                </div>
+                <div className="text-sm font-semibold">DIN Reactivation</div>
+                <ul className="mt-2 text-sm text-slate-600 space-y-1">
+                  <li className="flex items-start gap-2">
+                    <ChevronRight className="w-4 h-4 text-[#C15F3C] mt-1" />{" "}
+                    Application Filing in MCA
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ChevronRight className="w-4 h-4 text-[#C15F3C] mt-1" />{" "}
+                    Provide DIN-eKYC
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ChevronRight className="w-4 h-4 text-[#C15F3C] mt-1" />{" "}
+                    Acknowledgement Copy
+                  </li>
+                </ul>
+
+                <button className="mt-3 ml-auto block px-4 py-1.5 border-2 border-[#C15F3C] text-[#C15F3C] rounded-md text-sm hover:bg-orange-50 transition-colors font-medium">
+                  ADD TO CART
+                </button>
               </div>
 
-              <div className="mt-4 border-t pt-4 text-sm flex justify-between items-center text-slate-600">
-                <a className="text-indigo-600 underline">
+              <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                <a href="#" className="text-[#C15F3C] hover:text-[#A74A2F] hover:underline font-medium">
                   Terms and conditions
                 </a>
-                <a className="text-indigo-600 underline">Refer a Friend</a>
+                <a href="#" className="text-[#C15F3C] hover:text-[#A74A2F] hover:underline font-medium">
+                  Refer a Friend
+                </a>
               </div>
 
-              <div className="mt-6">
-                <h4 className="font-semibold mb-2">Offers and discounts</h4>
-                <div className="p-3 border rounded-md">
-                  <div className="flex items-center gap-3">
+              <div className="mt-5">
+                <div className="text-sm font-semibold mb-3">
+                  Offers and discounts
+                </div>
+                <div className="space-y-3 mt-3">
+                  <div className="flex items-center gap-3 border border-gray-200 rounded-lg p-3 hover:border-[#C15F3C]/30 transition-colors">
                     <img
                       src={ASSETS.ledgers}
                       alt="ledgers"
-                      className="h-8 w-8 object-contain"
+                      className="w-10 h-10 object-contain"
                     />
                     <div className="text-sm">
-                      <div className="text-indigo-600 font-medium">
+                      <div className="font-medium text-[#C15F3C]">
                         LEDGERS - Compliance Platform
                       </div>
-                      <div className="text-gray-500 text-xs">
+                      <div className="text-xs text-slate-500">
                         Invoicing, GST Filing, Banking and Payroll
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="mt-3 p-3 border rounded-md">
-                  <div className="text-sm text-gray-700">
-                    Save 18% with GST Registration — Get GST eInvoice with Input
-                    Tax Credit
+                  <div className="flex items-center gap-3 border border-gray-200 rounded-lg p-3 hover:border-[#C15F3C]/30 transition-colors">
+                    <img
+                      src={ASSETS.gstSave}
+                      alt="gst"
+                      className="w-10 h-10 object-contain"
+                    />
+                    <div className="text-sm">
+                      <div className="font-medium text-[#C15F3C]">
+                        Save 18% with GST Registration
+                      </div>
+                      <div className="text-xs text-slate-500">
+                        Get GST eInvoice with Input Tax Credit
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <article className="bg-white rounded-lg shadow-sm p-6">
-            <h1 className="text-2xl font-semibold text-center">
-              Form DPT-3 Return Filing
-            </h1>
+          {/* Right cart / form */}
+          <aside className="lg:col-span-1">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg sticky top-24">
+              <div className="bg-gray-50 rounded-xl p-6 text-center border border-gray-200">
+                <ShoppingCart className="w-12 h-12 text-[#C15F3C] mx-auto mb-2" />
+                <div className="text-slate-800 font-semibold">
+                  Your cart is empty
+                </div>
+                <div className="text-xs text-slate-500 mt-1">
+                  Browse our services and add some services in cart!
+                </div>
+              </div>
 
-            <div className="mt-4 text-[15px] leading-7 text-gray-700">
-              <p>
-                Every company, excluding government companies, must file a
-                return of deposits in Form DPT-3 with the Ministry of Corporate
-                Affairs (MCA) by June 30th each year. This return should include
-                details of deposits, outstanding loans, and any amounts received
-                that do not qualify as deposits as of March 31st of that year.
-                DPT-3 return is audited by the company's auditor to ensure
-                accuracy and compliance.
+              <div className="mt-4 text-xs text-slate-600 text-center">
+                Existing User?{" "}
+                <a href="#" className="text-[#C15F3C] font-medium hover:text-[#A74A2F]">
+                  Login
+                </a>
+              </div>
+
+              <div className="mt-3 space-y-3">
+                <input
+                  placeholder="Name"
+                  className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
+                />
+                <input
+                  placeholder="Email"
+                  className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
+                />
+                <div className="flex">
+                  <select className="px-3 py-2 border border-gray-200 rounded-l-md text-sm focus:outline-none focus:ring-1 focus:ring-[#C15F3C]">
+                    <option>+91</option>
+                  </select>
+                  <input
+                    placeholder="Phone"
+                    className="flex-1 px-3 py-2 border border-gray-200 rounded-r-md text-sm focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
+                  />
+                </div>
+
+                <label className="flex items-center gap-2 text-xs text-slate-700">
+                  <input
+                    type="checkbox"
+                    checked={gstChecked}
+                    onChange={() => setGstChecked(!gstChecked)}
+                    className="accent-[#C15F3C]"
+                  />
+                  Enter GSTIN to get 18% GST Credit
+                </label>
+
+                {gstChecked && (
+                  <input
+                    placeholder="GSTIN"
+                    className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
+                  />
+                )}
+
+                <button className="w-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] hover:from-[#A74A2F] hover:to-[#8F3F27] text-white py-2 rounded-md font-semibold transition-all shadow-md hover:shadow-lg">
+                  Get Started
+                </button>
+
+                <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+                  <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Secure · No spam · Instant confirmation</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        {/* Long article content & sidebar (two-column) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+          <article className="lg:col-span-2">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg">
+              <h2 className="text-2xl font-semibold mb-4 text-[#C15F3C]">
+                DIN Reactivation - Filing Form DIR-3 KYC
+              </h2>
+
+              <p className="text-sm text-slate-600 mb-4 leading-relaxed">
+                Director Identification Number (DIN) is an essential identifier
+                for anyone aspiring to be a director in Indian companies, issued
+                by the Ministry of Corporate Affairs (MCA). Directors are
+                required to update their KYC details annually through the DIR-3
+                KYC form with the MCA. Failure to do so leads to the
+                deactivation of the DIN, which restricts their ability to
+                function in corporate roles. To reactivate a deactivated DIN,
+                directors must file the DIR-3 KYC form, sometimes with a late
+                fee, depending on the delay.
               </p>
 
-              <p className="mt-3 italic font-medium">
-                IndiaFilings experts can assist you in filing your DPT-3 form
-                accurately and efficiently. Get started today and simplify your
-                compliance process!
-              </p>
-
-              <h3 className="mt-6 text-lg font-semibold">
-                Introduction to DPT-3 Filing
+              <h3 className="text-lg font-semibold mt-4 text-[#C15F3C]">
+                Director Identification Number (DIN)
               </h3>
-              <p className="mt-2">
-                To safeguard the interests of creditors and depositors, the
-                Central Government, in consultation with the Reserve Bank of
-                India, introduced an amendment to the Companies (Acceptance of
-                Deposits) Rules 2014 through the Companies (Acceptance of
-                Deposits) Amendment Rules 2019. MCA vide notification dated 22nd
-                January 2019 notified that every company other than a government
-                company must file a one-time return in DPT-3 and file it
-                annually thereafter.
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                A Director Identification Number (DIN) is an 8-digit unique
+                identifier assigned to directors. Once issued, it remains valid
+                for the lifetime of the director.
               </p>
 
-              <h3 className="mt-6 text-lg font-semibold">
-                Eligible Companies for Form DPT-3 Return Filing
+              <h3 className="text-lg font-semibold mt-4 text-[#C15F3C]">
+                What is Form DIR-3 KYC?
               </h3>
-              <p className="mt-2">
-                Form DPT-3 applies to several types of companies in India
-                including Private Limited Companies, Public Limited Companies,
-                One Person Companies (OPC), and small and non-small companies.
-                Even if a company has received loans from related entities such
-                as holding, subsidiary or associate companies, DPT-3 filing may
-                be required. Government companies are exempt.
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                Form DIR-3 KYC is an electronic form mandated by MCA to update
+                KYC details of directors.
               </p>
 
-              <h3 className="mt-6 text-lg font-semibold">
-                Exempted Companies from Filing Form DPT-3
-              </h3>
-              <p className="mt-2">
-                Certain companies are exempt from filing DPT-3 under the
-                Acceptance of Deposits Rules of 2014 — these include government
-                companies, specified financial institutions (banks,
-                RBI-registered NBFCs, housing finance companies under NHB), and
-                any other entities specifically notified by MCA.
+              <h3 className="text-lg font-semibold mt-4 text-[#C15F3C]">Applicability</h3>
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                Form DIR-3 KYC is mandatory for directors allotted DIN by or
+                before March 31, 2018 and with status 'approved'.
               </p>
 
-              <h3 className="mt-6 text-lg font-semibold">
-                Form DPT-3 Applicability
+              <h3 className="text-lg font-semibold mt-4 text-[#C15F3C]">
+                Purpose of DIR-3 KYC (Know Your Customer)
               </h3>
-              <p className="mt-2">
-                Companies (except exempted entities) must file DPT-3 if they
-                have received deposits from members or directors, loans from
-                third parties, or advances for goods/services (secured or
-                unsecured). The form covers secured and unsecured debts,
-                external borrowings and commercial borrowings.
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                The purpose is to maintain current and accurate director
+                information with the ROC including addresses, contact numbers
+                and email addresses.
               </p>
 
-              <h3 className="mt-6 text-lg font-semibold">
-                Transactions Not Considered as Deposits for DPT-3 Filing
+              <h3 className="text-lg font-semibold mt-4 text-[#C15F3C]">
+                Annual Deadline for Filing Form DIR-3 KYC
               </h3>
-              <ul className="mt-2 list-disc list-inside text-sm text-gray-700 space-y-1">
-                <li>Share Capital — money received for shares.</li>
-                <li>
-                  Debentures Issued — loans from investors treated separately.
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                Deadline is set as September 30th of each year (subject to MCA
+                extensions).
+              </p>
+
+              <h3 className="text-lg font-semibold mt-6 text-[#C15F3C]">
+                Types of DIR-3 KYC Forms
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                DIR-3 KYC eForm (for first-time filers) and DIR-3-KYC-WEB
+                (simplified web form for returning filers).
+              </p>
+
+              <h3 className="text-lg font-semibold mt-6 text-[#C15F3C]">
+                Penalty for Non-Filing of DIR-3 KYC
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                A fine may be imposed for non-compliance within the stipulated
+                timeframe.
+              </p>
+
+              <h3 className="text-lg font-semibold mt-6 text-[#C15F3C]">
+                DIN Deactivation & Reactivation
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-[#C15F3C] transition-colors">
+                If a director does not file, their DIN may be marked
+                'Deactivated due to Non-filing of DIR-3 KYC'. To reactivate,
+                file the appropriate form and follow MCA approvals.
+              </p>
+
+              <h3 className="text-lg font-semibold mt-6 text-[#C15F3C]">Documents Required</h3>
+              <ul className="text-sm text-slate-600 list-disc pl-5 space-y-2">
+                <li className="hover:text-[#C15F3C] transition-colors">Digital Signature Certificate (DSC) linked to PAN.</li>
+                <li className="hover:text-[#C15F3C] transition-colors">PAN Card (self-attested).</li>
+                <li className="hover:text-[#C15F3C] transition-colors">
+                  Proof of Address (Aadhaar / Voter ID / Driving License).
                 </li>
-                <li>
-                  Advances on Orders — payments received upfront for confirmed
-                  orders.
-                </li>
-                <li>
-                  Government Receipts — money from government or foreign
-                  sources.
-                </li>
-                <li>
-                  Loans from Banks — borrowings from banks or financial
-                  institutions.
-                </li>
-                <li>Inter-Company Loans — loans from other companies.</li>
-                <li>
-                  Subscription Advances — advance payments for upcoming
-                  securities.
-                </li>
-                <li>
-                  Employee Deposits — security deposits from employees up to
-                  annual salary.
-                </li>
+                <li className="hover:text-[#C15F3C] transition-colors">Photograph (self-attested passport photo).</li>
+                <li className="hover:text-[#C15F3C] transition-colors">Mobile & Email for OTP verification.</li>
               </ul>
 
-              <h3 className="mt-6 text-lg font-semibold">
-                Form DPT-3 Due Date
-              </h3>
-              <p className="mt-2">
-                The due date for filing Form DPT-3 is <strong>June 30th</strong>{" "}
-                of every year. Companies should report deposits and outstanding
-                receipts for the financial year ending March 31. Example: For FY
-                2023-24 (1 April 2023 to 31 March 2024), the filing deadline is
-                30 June 2024.
-              </p>
+              <div className="mt-6">
+                <h3 className="text-lg font-semibold text-[#C15F3C]">
+                  Streamline Your DIN Reactivation Process
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed mt-2 hover:text-[#C15F3C] transition-colors">
+                  We offer comprehensive assistance at every stage —
+                  application support, form completion guidance, PAN
+                  verification, DSC help, document attachment and SRN generation
+                  & follow-up.
+                </p>
+              </div>
+            </div>
 
-              <h3 className="mt-6 text-lg font-semibold">
-                Documents Required for Filing Form DPT-3
+            {/* FAQ section */}
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
+              <h3 className="text-lg font-semibold mb-4 text-[#C15F3C]">
+                FAQ's on DIN Reactivation
               </h3>
-              <p className="mt-2">
-                Mandatory: Auditor's certificate verifying information in the
-                DPT-3 form. Optional (as applicable): proof of trust deed,
-                instrument creating charge, details of liquid assets, and list
-                of depositors where required by MCA.
-              </p>
-
-              <h3 className="mt-6 text-lg font-semibold">
-                Fees for Filing Form DPT-3
-              </h3>
-              <p className="mt-2">
-                Fees are governed by the Companies (Registration Offices and
-                Fees) Rules and vary based on company capital/nominal values.
-                Refer to the MCA fee schedule for precise amounts.
-              </p>
-
-              <h3 className="mt-6 text-lg font-semibold">
-                Consequences of Non-compliance with the DPT-3 filing
-              </h3>
-              <p className="mt-2">
-                Non-compliance can lead to penalties under the Companies Act,
-                including fines for the company and officers in default.
-                Continuing defaults may attract additional daily fines. Timely
-                filing helps maintain good standing and avoid legal
-                consequences.
-              </p>
-
-              <h3 className="mt-6 text-lg font-semibold">How to File DPT-3?</h3>
-              <ol className="mt-3 list-decimal list-inside text-sm text-gray-600 space-y-2">
-                <li>
-                  Visit the MCA portal and login (register as Business User if
-                  required).
-                </li>
-                <li>
-                  Navigate to Deposit Filings → Deposit Related Filings → DPT-3
-                  Webform.
-                </li>
-                <li>
-                  Fill the form online and attach required documents (CIN, Email
-                  ID, Objects, Net Worth, particulars of charge, total amount
-                  outstanding as of 31st March, credit rating details,
-                  attachments).
-                </li>
-                <li>
-                  Submit the form to generate SRN and affix DSC for
-                  authentication.
-                </li>
-                <li>
-                  Pay required fee and await acknowledgement email confirming
-                  receipt by ROC.
-                </li>
-              </ol>
-
-              <h3 className="mt-6 text-lg font-semibold">
-                File Form DPT-3 with Ease through IndiaFilings!
-              </h3>
-              <p className="mt-2">
-                IndiaFilings provides assistance for DPT-3 filing — document
-                preparation, expert review and end-to-end filing support to
-                ensure compliance and avoid penalties.
-              </p>
+              <div className="space-y-3">
+                {faqItems.map((f, idx) => (
+                  <div key={idx} className="border border-gray-200 rounded">
+                    <button
+                      onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                      className="w-full px-4 py-3 text-left flex items-center justify-between bg-white hover:bg-orange-50/30 transition-colors"
+                    >
+                      <span className="text-sm text-slate-800 hover:text-[#C15F3C] transition-colors">{f.q}</span>
+                      <Plus
+                        className={`w-4 h-4 text-[#C15F3C] ${
+                          openFaq === idx ? "rotate-45" : ""
+                        } transition-transform`}
+                      />
+                    </button>
+                    {openFaq === idx && (
+                      <div className="px-4 py-3 bg-orange-50/30 text-sm text-slate-600 border-t border-gray-200">
+                        {f.a}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <div className="mt-3">
+                  <button className="px-4 py-2 border-2 border-[#C15F3C] rounded text-sm bg-white text-[#C15F3C] hover:bg-orange-50 transition-colors font-medium">
+                    Load More
+                  </button>
+                </div>
+              </div>
             </div>
           </article>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-7 bg-white rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold mb-4">
-                Documents Required for Filing Form DPT-3
-              </h3>
-              <ul className="space-y-3 text-sm text-gray-700">
-                <li className="border-b pb-3">
-                  Auditor's Certificate verifying details in DPT-3
-                </li>
-                <li className="border-b pb-3">
-                  Proof of Trust Deed (if deposits held in trust)
-                </li>
-                <li className="border-b pb-3">
-                  Instrument Creating Charge (if any)
-                </li>
-                <li className="border-b pb-3">Details of Liquid Assets</li>
-                <li className="border-b pb-3">
-                  List of Depositors (if required)
-                </li>
-                <li className="mt-4 inline-block px-3 py-2 border rounded-md text-sm text-indigo-600">
-                  Load More
-                </li>
-              </ul>
-            </div>
-
-            <aside className="lg:col-span-5 bg-white rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold mb-4">
-                Documents Required for Other Registrations
-              </h3>
-              <ul className="space-y-3 text-sm text-indigo-600">
-                {[
-                  ["Documents Required for LLP Registration", 8],
-                  ["Documents Required for Proprietorship Registration", 2],
-                  ["Documents Required for Company Registration", 2],
-                  ["Documents Required for Trademark Registration", 7],
-                  ["Documents Required for GST Registration", 10],
-                ].map(([label, count]) => (
-                  <li
-                    key={label as string}
-                    className="flex justify-between items-center border-b pb-2"
-                  >
-                    <span>{label}</span>
-                    <span className="bg-blue-500 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-xs">
-                      {count}
-                    </span>
+          {/* Right article sidebar (guides + ad) */}
+          <aside>
+            <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg">
+              <h4 className="font-semibold mb-3 text-[#C15F3C]">Related Guides</h4>
+              <ul className="text-sm space-y-2">
+                {RELATED_GUIDES.map((g) => (
+                  <li key={g}>
+                    <a href="#" className="text-[#C15F3C] hover:text-[#A74A2F] hover:underline">
+                      {g}
+                    </a>
                   </li>
                 ))}
               </ul>
-            </aside>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
-              FAQ's on DPT-3 Filing
-            </h3>
-            <div className="space-y-0">
-              {faqItems.map((q, i) => (
-                <div key={i} className="border-b last:border-b-0">
-                  <button
-                    className="w-full text-left py-4 flex justify-between items-center text-sm"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    aria-expanded={openFaq === i}
-                    aria-controls={`faq-${i}`}
-                  >
-                    <span className="text-slate-800">{q}</span>
-                    <span className="text-indigo-600 flex items-center gap-2">
-                      {openFaq === i ? "-" : <Plus size={14} />}
-                    </span>
-                  </button>
-                  {openFaq === i && (
-                    <div
-                      id={`faq-${i}`}
-                      className="px-2 pb-4 text-sm text-gray-600"
-                    >
-                      {faqAnswers[i]}
-                    </div>
-                  )}
-                </div>
-              ))}
             </div>
 
-            <div className="mt-4">
-              <button className="px-4 py-2 border rounded-md text-sm text-indigo-600">
-                Load More
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <aside className="lg:col-span-4 hidden lg:block">
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
-            <div className="text-center text-gray-600">
+            <div className="bg-white rounded-2xl border border-gray-200 p-3 shadow-lg mt-4 hover:border-[#C15F3C]/30 transition-colors">
               <img
-                src={ASSETS.cartIcon}
-                alt="cart"
-                className="mx-auto h-12 w-auto mb-3"
+                src={ASSETS.partnershipCard}
+                className="w-full rounded-lg"
+                alt="ad"
               />
-              <h3 className="font-semibold">Your cart is empty</h3>
-              <p className="text-sm mt-2">
-                Browse our services and add some services in cart!
-              </p>
+              <div className="mt-2 text-sm font-medium text-[#C15F3C]">Partnership Compliance</div>
             </div>
+          </aside>
+        </div>
 
-            <div className="mt-6 text-center">
-              <div className="text-sm text-gray-500">
-                Existing User?{" "}
-                <a className="text-indigo-600 underline">Login</a>
-              </div>
-            </div>
-
-            <form
-              className="mt-4 space-y-3"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                placeholder="Name"
-              />
-              <input
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                placeholder="Email"
-              />
-              <div className="flex gap-2">
-                <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
-                  <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
-                  <span className="text-sm">+91</span>
-                </div>
-                <input
-                  className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                  placeholder="Phone"
-                />
-              </div>
-
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={gstChecked}
-                  onChange={() => setGstChecked((s) => !s)}
-                  className="w-4 h-4"
-                />
-                <span>Enter GSTIN to get 18% GST Credit</span>
-              </label>
-
-              {gstChecked && (
-                <input
-                  className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                  placeholder="GSTIN"
-                />
-              )}
-
-              <button className="w-full bg-green-500 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
-                <ShoppingBag size={16} /> Get Started
-              </button>
-            </form>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
-            <h4 className="font-semibold mb-3">Related Guides</h4>
-            <ul className="text-sm text-indigo-600 space-y-2">
-              <li>
-                Companies (Registration Offices and Fees) Amendment Rules, 2022
-              </li>
-              <li>Companies Rules – Acceptance of Deposits</li>
-            </ul>
-          </div>
-
-          <div className="rounded-lg overflow-hidden shadow-sm mb-4">
-            <img
-              src={ASSETS.adRight1}
-              alt="company compliance"
-              className="w-full h-56 object-cover"
-            />
-          </div>
-
-          <div className="rounded-lg overflow-hidden shadow-sm mb-6">
-            <img
-              src={ASSETS.dinEkyc}
-              alt="din ekyc"
-              className="w-full h-56 object-cover"
-            />
-          </div>
-
-          <div className="bg-white rounded-lg p-4">
-            <h4 className="font-semibold mb-3">Popular Searches</h4>
-            <div className="flex flex-wrap gap-2">
-              {POPULAR_SEARCHES.slice(0, 14).map((t) => (
-                <span
-                  key={t}
-                  className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-        </aside>
-      </main>
-
-      <footer className="bg-white mt-12 py-8 border-t">
-        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-              <a className="block">About IndiaFilings</a>
-              <a className="block">Careers</a>
-              <a className="block">Contact Us</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-              <a className="block">Business Search</a>
-              <a className="block">Trademark Search</a>
-              <a className="block">Filings.AE for UAE</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-              <a className="block">Terms & Conditions</a>
-              <a className="block">Privacy Policy</a>
-              <a className="block">Refund Policy</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-              <a className="block">Confidentiality Policy</a>
-              <a className="block">Disclaimer Policy</a>
-              <a className="block">IndiaFilings Review</a>
-            </div>
-          </div>
-
-          <div className="text-center text-gray-500 mt-6">
-            © {new Date().getFullYear()} IndiaFilings - Sample replica footer
+        {/* Popular Searches */}
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
+          <h4 className="font-semibold mb-4 text-[#C15F3C]">Popular Searches</h4>
+          <div className="flex flex-wrap gap-2">
+            {POPULAR_SEARCHES.slice(0, 20).map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-3 py-1 rounded-md border border-gray-200 bg-white text-slate-600 hover:border-[#C15F3C]/30 hover:text-[#C15F3C] cursor-pointer transition-colors"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
-      </footer>
 
-      <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
-        <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
-        <span className="font-semibold text-sm">Live Chat with Experts</span>
+        {/* Footer block content (expanded) */}
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+              <h5 className="font-semibold mb-2 text-[#C15F3C]">Company</h5>
+              <ul className="text-sm text-slate-600 space-y-2">
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-semibold mb-2 text-[#C15F3C]">Platforms</h5>
+              <ul className="text-sm text-slate-600 space-y-2">
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Business Search
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Trademark Search
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Filings.AE for UAE
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-semibold mb-2 text-[#C15F3C]">Usage</h5>
+              <ul className="text-sm text-slate-600 space-y-2">
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Terms & Conditions
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Refund Policy
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-semibold mb-2 text-[#C15F3C]">Policies</h5>
+              <ul className="text-sm text-slate-600 space-y-2">
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Confidentiality Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Disclaimer Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-[#C15F3C] transition-colors">
+                    Reviews
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-6 text-sm text-slate-500 border-t border-gray-200 pt-4">
+            Copyright © {new Date().getFullYear()} All rights reserved.
+          </div>
+        </div>
+      </main>
+
+      {/* Floating WhatsApp CTA */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button className="flex items-center gap-3 bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white px-4 py-3 rounded-full shadow-lg hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all hover:scale-105">
+          <img src={ASSETS.whatsapp} alt="whatsapp" className="w-5 h-5" />
+          <span className="hidden sm:inline font-medium">Live Chat with Experts</span>
+        </button>
       </div>
     </div>
   );

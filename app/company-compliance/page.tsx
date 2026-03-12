@@ -4,6 +4,7 @@
 
 import React, { useMemo, useState } from "react";
 import { Star, ChevronDown } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 /* ------------------------------
    Assets & Data (unchanged)
@@ -349,119 +350,9 @@ const Rating: React.FC = () => (
 );
 
 /* ------------------------------
-   NavItem for header menu
-   ------------------------------ */
-
-interface NavItemProps {
-  children: React.ReactNode;
-  hasDropdown?: boolean;
-  isActive?: boolean;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-}
-
-const NavItem: React.FC<NavItemProps> = ({
-  children,
-  hasDropdown = false,
-  isActive = false,
-  onMouseEnter,
-  onMouseLeave,
-}) => (
-  <div
-    className="relative"
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-  >
-    <button
-      type="button"
-      suppressHydrationWarning
-      className={`text-sm flex items-center gap-1 hover:text-slate-900 ${
-        isActive ? "text-slate-900 font-medium" : "text-slate-700"
-      }`}
-      aria-haspopup={hasDropdown ? "true" : undefined}
-    >
-      {children}
-      {hasDropdown && <ChevronDown className="w-3 h-3" />}
-    </button>
-  </div>
-);
-
-/* ------------------------------
-   Header (updated to new nav)
-   ------------------------------ */
-const Header: React.FC = () => {
-  const [showMcaDropdown, setShowMcaDropdown] = useState(false);
-
-  return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <img src={ASSETS.logo} alt="IndiaFilings" className="h-10" />
-
-          {/* Navigation Links */}
-          <nav className="flex items-center gap-6 text-sm" aria-label="Main">
-            {["Startup", "Registrations", "Trademark"].map((item) => (
-              <NavItem key={item}>{item}</NavItem>
-            ))}
-
-            <NavItem>GST</NavItem>
-            <NavItem>Income Tax</NavItem>
-
-            {/* MCA with dropdown */}
-            <NavItem
-              hasDropdown
-              isActive
-              onMouseEnter={() => setShowMcaDropdown(true)}
-              onMouseLeave={() => setShowMcaDropdown(false)}
-            >
-              MCA
-              {showMcaDropdown && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[780px]">
-                  <div className="bg-white rounded-lg shadow-xl border border-slate-200 p-6">
-                    <div className="grid grid-cols-3 gap-x-6 gap-y-2">
-                      {MCA_DROPDOWN_LINKS.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-                        >
-                          {link.title}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </NavItem>
-
-            {["Compliance", "Personal", "Global", "Cities", "Guides"].map(
-              (item) => (
-                <NavItem key={item}>{item}</NavItem>
-              )
-            )}
-
-            {/* Login Button */}
-            <button
-              type="button"
-              suppressHydrationWarning
-              className="px-4 py-1.5 border border-slate-300 text-sm rounded-md hover:bg-slate-50"
-            >
-              Login
-            </button>
-          </nav>
-        </div>
-      </div>
-    </header>
-  );
-};
-
-/* ------------------------------
-   Footer (fixed: valid hex + public image path)
+   Footer (updated content)
    ------------------------------ */
 const Footer: React.FC = () => {
-  // NOTE: place your footer background image under public/images/footer-bg.png
-  // or change this path to an appropriate public URL.
   const bgImagePath = "/images/footer-bg.png";
 
   return (
@@ -469,7 +360,7 @@ const Footer: React.FC = () => {
       <div
         className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
         style={{
-          backgroundColor: "#f1f5f9", // fixed invalid hex
+          backgroundColor: "#f1f5f9",
           backgroundImage: `radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%),
                             radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%),
                             url("${bgImagePath}")`,
@@ -480,18 +371,16 @@ const Footer: React.FC = () => {
       >
         <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-7.5 pt-7 pb-10 bg-slate-200 rounded-xl mob-block">
           {/* Column 1 */}
-          <div className="card p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
+          <div className="p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-3">
                 <span className="text-lg font-medium leading-none text-slate-950 mb-4">
-                  IndiaFilings
+                  Company
                 </span>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/about-us"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/about-us"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -500,7 +389,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -509,15 +398,13 @@ const Footer: React.FC = () => {
                         d="m8.25 4.5 7.5 7.5-7.5 7.5"
                       />
                     </svg>
-                    About IndiaFilings
+                    About Us
                   </span>
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/careers"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/careers"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -526,7 +413,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -540,10 +427,8 @@ const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/contact-us"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/contact-us"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -552,7 +437,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -569,7 +454,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Column 2 */}
-          <div className="card p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
+          <div className="p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-3">
                 <span className="text-lg font-medium leading-none text-slate-950 mb-4">
@@ -577,10 +462,8 @@ const Footer: React.FC = () => {
                 </span>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/search/"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/search/"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -589,7 +472,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -603,10 +486,8 @@ const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/trademark-search"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/trademark-search"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -615,7 +496,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -629,7 +510,7 @@ const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
+                  className="leading-none hover:text-amber-700 transition-colors"
                   href="https://filings.ae/"
                   target="_blank"
                   rel="noreferrer"
@@ -641,7 +522,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -658,7 +539,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Column 3 */}
-          <div className="card p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
+          <div className="p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-3">
                 <span className="text-lg font-medium leading-none text-slate-950 mb-4">
@@ -666,10 +547,8 @@ const Footer: React.FC = () => {
                 </span>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/termsconditions"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/termsconditions"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -678,7 +557,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -692,10 +571,8 @@ const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/privacypolicy"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/privacypolicy"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -704,7 +581,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -718,10 +595,8 @@ const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/refund-policy"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/refund-policy"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -730,7 +605,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -747,7 +622,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Column 4 */}
-          <div className="card p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
+          <div className="p-5 lg:p-7.5 lg:pt-4 border-0 shadow-none bg-transparent">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-3">
                 <span className="text-lg font-medium leading-none text-slate-950 mb-4 hidden md:block">
@@ -755,10 +630,8 @@ const Footer: React.FC = () => {
                 </span>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/confidentiality-policy"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/confidentiality-policy"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -767,7 +640,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -781,10 +654,8 @@ const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/disclaimer"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/disclaimer"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -793,7 +664,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -807,10 +678,8 @@ const Footer: React.FC = () => {
                 </a>
 
                 <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/review"
-                  target="_blank"
-                  rel="noreferrer"
+                  className="leading-none hover:text-amber-700 transition-colors"
+                  href="/review"
                 >
                   <span className="flex text-sm text-black leading-5 items-center">
                     <svg
@@ -819,7 +688,7 @@ const Footer: React.FC = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-4"
+                      className="size-4 text-amber-600 mr-1"
                       aria-hidden
                     >
                       <path
@@ -828,7 +697,7 @@ const Footer: React.FC = () => {
                         d="m8.25 4.5 7.5 7.5-7.5 7.5"
                       />
                     </svg>
-                    IndiaFilings Review
+                    Reviews
                   </span>
                 </a>
               </div>
@@ -840,31 +709,31 @@ const Footer: React.FC = () => {
         <div className="mt-3 pt-3">
           <div className="max-w-screen-2xl mx-auto px-3 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-500">
-              © 2025 IndiaFilings. All Rights Reserved.
+              © 2025 All Rights Reserved.
             </p>
 
             <p className="text-xs text-slate-500">
               Unless otherwise indicated, all materials on these pages are
-              copyrighted by IndiaFilings Private Limited. All rights reserved.
+              copyrighted. All rights reserved.
             </p>
 
             <div className="flex items-center gap-2">
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://www.facebook.com"
                 aria-label="facebook"
               >
                 FB
               </a>
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://twitter.com"
                 aria-label="twitter"
               >
                 X
               </a>
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://www.youtube.com"
                 aria-label="youtube"
               >
@@ -890,7 +759,7 @@ const FooterLink = ({
   children: React.ReactNode;
 }) => (
   <a
-    className="leading-none hover:text-primary-active"
+    className="leading-none hover:text-amber-700 transition-colors"
     href={href}
     target="_blank"
     rel="noreferrer"
@@ -902,7 +771,7 @@ const FooterLink = ({
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-4"
+        className="size-4 text-amber-600"
       >
         <path
           strokeLinecap="round"
@@ -923,7 +792,7 @@ const SocialLink = ({
   children: React.ReactNode;
 }) => (
   <a
-    className="text-slate-500 hover:text-slate-700 text-sm"
+    className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
     href="#"
     aria-label={label}
   >
@@ -938,8 +807,6 @@ const SocialLink = ({
 export default function CompanyCompliancePage(): React.ReactElement {
   const [companyInput, setCompanyInput] = useState("");
   const [gstChecked, setGstChecked] = useState(false);
-  const [pan, setPan] = useState("");
-  const [company, setCompany] = useState("");
 
   const basicBullets = useMemo(
     () => [
@@ -1010,14 +877,20 @@ export default function CompanyCompliancePage(): React.ReactElement {
 
   return (
     <div className="page">
-      <Header />
+      {/* Imported Navbar */}
+      <Navbar />
 
       <main>
         {/* Top hero banner */}
         <section className="site-banner">
           <div className="banner-inner">
             <div className="banner-cta">
-              <div className="lead-eyebrow">MCA Compliance</div>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-4">
+                <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                <span className="text-xs font-medium text-amber-700">MCA COMPLIANCE</span>
+              </div>
+
               <h1 className="lead-title">
                 Hassle-free bookkeeping, MCA and Income Tax compliance
               </h1>
@@ -1025,6 +898,16 @@ export default function CompanyCompliancePage(): React.ReactElement {
                 Solutions for companies and LLPs managed with LEDGERS platform
                 and dedicated compliance teams.
               </p>
+
+              {/* Trust Badges */}
+              <div className="flex items-center gap-3 mt-6">
+                <div className="flex -space-x-1.5">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 border-2 border-white shadow-sm" />
+                  ))}
+                </div>
+                <span className="text-xs sm:text-sm text-gray-600">Trusted by 10,000+ businesses</span>
+              </div>
 
               <form
                 className="hero-form"
@@ -1052,7 +935,9 @@ export default function CompanyCompliancePage(): React.ReactElement {
             <div className="banner-media">
               <div className="media-frame">
                 <img src={ASSETS.hero} alt="MCA hero" />
-                <div className="media-badge">MCA Compliance Simplified</div>
+                <div className="media-badge bg-gradient-to-r from-amber-600 to-amber-700">
+                  MCA Compliance Simplified
+                </div>
               </div>
             </div>
           </div>
@@ -1076,18 +961,18 @@ export default function CompanyCompliancePage(): React.ReactElement {
                   className={`pricing-card ${plan.popular ? "popular" : ""}`}
                 >
                   {plan.popular && (
-                    <div className="popular-chip">Most popular</div>
+                    <div className="popular-chip bg-gradient-to-r from-amber-600 to-amber-700">Most popular</div>
                   )}
 
                   <div className="card-top">
-                    <div className="card-title">{plan.name}</div>
-                    <div className="card-price">{plan.price}</div>
+                    <div className="card-title text-amber-800">{plan.name}</div>
+                    <div className="card-price text-amber-700">{plan.price}</div>
                   </div>
 
                   <button
                     type="button"
                     suppressHydrationWarning
-                    className="select-btn"
+                    className="select-btn bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 transition-all"
                     onClick={() => alert(`Selected plan: ${plan.name}`)}
                   >
                     Select
@@ -1096,7 +981,7 @@ export default function CompanyCompliancePage(): React.ReactElement {
                   <ul className="plan-features">
                     {plan.features.map((f, idx) => (
                       <li key={`${plan.name}-feat-${idx}`}>
-                        <span className="feat-check">✔</span>
+                        <span className="feat-check text-amber-600">✓</span>
                         <span>{f}</span>
                       </li>
                     ))}
@@ -1110,16 +995,16 @@ export default function CompanyCompliancePage(): React.ReactElement {
         {/* Benefits boxed style matching screenshot */}
         <section className="benefits-section boxed" aria-label="Benefits">
           <div className="benefits-inner">
-            <div className="benefit-card">
-              <div className="benefit-icon-wrap">
+            <div className="benefit-card hover:border-amber-200 transition-colors">
+              <div className="benefit-icon-wrap bg-amber-100">
                 <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden>
                   <path
-                    fill="#2563EB"
+                    fill="#C15F3C"
                     d="M12 12a3 3 0 100-6 3 3 0 000 6zm0 2c-3.866 0-7 1.79-7 4v1h14v-1c0-2.21-3.134-4-7-4z"
                   />
                 </svg>
               </div>
-              <h3>Dedicated support, flexible cost</h3>
+              <h3 className="text-amber-800">Dedicated support, flexible cost</h3>
               <p>
                 Get an experienced accountant to manage your ledgers, vendor &
                 customer reconciliations, bank reconciliations, and monthly
@@ -1128,16 +1013,16 @@ export default function CompanyCompliancePage(): React.ReactElement {
               </p>
             </div>
 
-            <div className="benefit-card">
-              <div className="benefit-icon-wrap">
+            <div className="benefit-card hover:border-amber-200 transition-colors">
+              <div className="benefit-icon-wrap bg-amber-100">
                 <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden>
                   <path
-                    fill="#059669"
+                    fill="#C15F3C"
                     d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM10.6 14.6l-2.1-2.1 1.4-1.4 0.7 0.7 3.9-3.9 1.4 1.4-5.3 5.3z"
                   />
                 </svg>
               </div>
-              <h3>Accurate & timely compliance</h3>
+              <h3 className="text-amber-800">Accurate & timely compliance</h3>
               <p>
                 End-to-end MCA compliance for Pvt Ltd Companies & LLPs – filing
                 of Annual Returns, DIR-3 KYC, director disclosures, and
@@ -1145,16 +1030,16 @@ export default function CompanyCompliancePage(): React.ReactElement {
               </p>
             </div>
 
-            <div className="benefit-card">
-              <div className="benefit-icon-wrap">
+            <div className="benefit-card hover:border-amber-200 transition-colors">
+              <div className="benefit-icon-wrap bg-amber-100">
                 <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden>
                   <path
-                    fill="#7C3AED"
+                    fill="#C15F3C"
                     d="M13 3L11 3V13l8 4-1 1-7-3V4h2zM4 15v4h8v-4H4z"
                   />
                 </svg>
               </div>
-              <h3>Powered by LEDGERS</h3>
+              <h3 className="text-amber-800">Powered by LEDGERS</h3>
               <p>
                 Experience seamless automation with real-time bank feeds, smart
                 reconciliations, integrated e-invoice/e-way bill generation,
@@ -1170,9 +1055,9 @@ export default function CompanyCompliancePage(): React.ReactElement {
           aria-label="Popular searches"
         >
           <div className="tags-card">
-            <h3>Popular Searches</h3>
+            <h3 className="text-amber-800">Popular Searches</h3>
             <div className="tags-grid">
-              {popularTags.map((t) => (
+              {popularTags.slice(0, 20).map((t) => (
                 <button
                   key={t}
                   type="button"
@@ -1193,13 +1078,14 @@ export default function CompanyCompliancePage(): React.ReactElement {
             <div style={{ minHeight: 120 }} />
             <aside className="sidebar-col" aria-label="Sidebar">
               <div className="whatsapp-card">
-                <div className="whatsapp-title">Live chat with experts</div>
-                <p>
+                <div className="whatsapp-title text-amber-800">Live chat with experts</div>
+                <p className="text-sm text-slate-600 mb-3">
                   Connect instantly with a compliance professional on WhatsApp.
                 </p>
                 <button
                   type="button"
                   suppressHydrationWarning
+                  className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-lg hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg"
                   onClick={() => alert("Open WhatsApp chat")}
                 >
                   Chat now
@@ -1264,13 +1150,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
           color: #0b2545;
           padding: 30px;
         }
-        .lead-eyebrow {
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: #0b5cf0;
-          font-size: 13px;
-          font-weight: 600;
-        }
         .lead-title {
           font-size: 36px;
           margin: 10px 0;
@@ -1300,13 +1179,17 @@ export default function CompanyCompliancePage(): React.ReactElement {
         }
         .hero-button {
           border-radius: 999px;
-          background: #facc15;
-          color: #081433;
+          background: #C15F3C;
+          color: white;
           border: none;
           padding: 12px 20px;
           font-weight: 700;
           cursor: pointer;
-          box-shadow: 0 8px 20px rgba(250, 204, 21, 0.15);
+          box-shadow: 0 8px 20px rgba(193, 95, 60, 0.15);
+          transition: all 0.3s ease;
+        }
+        .hero-button:hover {
+          background: #A74A2F;
         }
 
         .banner-media .media-frame {
@@ -1326,7 +1209,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
           position: absolute;
           left: 20px;
           bottom: 20px;
-          background: #059669;
           color: white;
           padding: 10px 16px;
           border-radius: 999px;
@@ -1363,17 +1245,21 @@ export default function CompanyCompliancePage(): React.ReactElement {
           box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
           position: relative;
           min-height: 360px;
+          transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+          border-color: #C15F3C;
+          box-shadow: 0 12px 30px rgba(193, 95, 60, 0.1);
         }
         .pricing-card.popular {
-          border-color: #0b3b82;
-          box-shadow: 0 12px 40px rgba(11, 60, 130, 0.06);
+          border-color: #C15F3C;
+          box-shadow: 0 12px 40px rgba(193, 95, 60, 0.15);
         }
         .popular-chip {
           position: absolute;
           top: -12px;
           left: 50%;
           transform: translateX(-50%);
-          background: #081433;
           color: white;
           padding: 6px 12px;
           border-radius: 999px;
@@ -1385,7 +1271,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
         .card-title {
           font-weight: 700;
           font-size: 16px;
-          color: #0b2545;
         }
         .card-price {
           font-size: 28px;
@@ -1397,7 +1282,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
           width: 100%;
           padding: 12px 0;
           border-radius: 999px;
-          background: #081433;
           color: white;
           border: none;
           cursor: pointer;
@@ -1421,7 +1305,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
           border-bottom: 1px dashed #eef2fb;
         }
         .feat-check {
-          color: #059669;
           font-weight: 700;
         }
 
@@ -1460,14 +1343,12 @@ export default function CompanyCompliancePage(): React.ReactElement {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.6);
           border-radius: 999px;
           box-shadow: 0 6px 16px rgba(11, 37, 85, 0.04);
         }
         .benefit-card h3 {
           margin: 0;
           font-size: 18px;
-          color: #0b2545;
           font-weight: 700;
         }
         .benefit-card p {
@@ -1497,7 +1378,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
         .tags-card h3 {
           margin: 0 0 12px 0;
           font-size: 16px;
-          color: #0b2545;
         }
         .tags-grid {
           display: flex;
@@ -1505,18 +1385,19 @@ export default function CompanyCompliancePage(): React.ReactElement {
           gap: 8px;
         }
         .tag-pill {
-          background: #eef6ff;
-          color: #0b5cf0;
+          background: #FDF1EC;
+          color: #C15F3C;
           padding: 6px 10px;
           border-radius: 999px;
           font-size: 13px;
-          border: 1px solid rgba(11, 92, 240, 0.08);
+          border: 1px solid rgba(193, 95, 60, 0.15);
           box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.6);
           cursor: pointer;
+          transition: all 0.2s ease;
         }
         .tag-pill:hover {
+          background: #FAE5DC;
           transform: translateY(-1px);
-          transition: all 120ms ease;
         }
 
         /* Content + sidebar (minimal) */
@@ -1533,14 +1414,16 @@ export default function CompanyCompliancePage(): React.ReactElement {
         }
         .whatsapp-card {
           background: white;
-          border-radius: 10px;
-          padding: 14px;
+          border-radius: 12px;
+          padding: 20px;
           border: 1px solid #eef2fb;
           text-align: left;
+          box-shadow: 0 6px 16px rgba(11, 37, 85, 0.03);
         }
         .whatsapp-title {
           font-weight: 700;
           margin-bottom: 8px;
+          font-size: 16px;
         }
 
         /* WhatsApp CTA */
@@ -1548,16 +1431,21 @@ export default function CompanyCompliancePage(): React.ReactElement {
           position: fixed;
           right: 18px;
           bottom: 18px;
-          background: #16a34a;
+          background: #C15F3C;
           color: white;
           padding: 12px 18px;
           border-radius: 999px;
           display: flex;
           gap: 8px;
           align-items: center;
-          box-shadow: 0 10px 30px rgba(22, 163, 74, 0.22);
+          box-shadow: 0 10px 30px rgba(193, 95, 60, 0.22);
           cursor: pointer;
           z-index: 100;
+          transition: all 0.3s ease;
+        }
+        .whatsapp-cta:hover {
+          background: #A74A2F;
+          transform: scale(1.05);
         }
         .whatsapp-cta svg {
           flex: 0 0 auto;

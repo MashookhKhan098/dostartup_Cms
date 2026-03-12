@@ -4,6 +4,7 @@
 
 import React, { useMemo, useState } from "react";
 import { Star, ChevronDown, Search, Menu, X } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 /* ------------------------------
    Assets & Data (merged)
@@ -137,189 +138,6 @@ const Rating: React.FC = () => (
   </div>
 );
 
-interface NavItemProps {
-  children: React.ReactNode;
-  hasDropdown?: boolean;
-  isActive?: boolean;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-}
-
-const NavItem: React.FC<NavItemProps> = ({
-  children,
-  hasDropdown = false,
-  isActive = false,
-  onMouseEnter,
-  onMouseLeave,
-}) => (
-  <div
-    className="relative"
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-  >
-    <button
-      type="button"
-      suppressHydrationWarning
-      className={`text-sm flex items-center gap-1 hover:text-slate-900 ${
-        isActive ? "text-slate-900 font-medium" : "text-slate-700"
-      }`}
-      aria-haspopup={hasDropdown ? "true" : undefined}
-    >
-      {children}
-      {hasDropdown && <ChevronDown className="w-3 h-3" />}
-    </button>
-  </div>
-);
-
-/* ------------------------------
-   Header (updated per requested content)
-   ------------------------------ */
-const Header: React.FC = () => {
-  const [showMcaDropdown, setShowMcaDropdown] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  // Nav items requested to be used exactly
-  const NAV_ITEMS = [
-    "IndiaFilings",
-    "Startup",
-    "Registrations",
-    "Trademark",
-    "GST",
-    "Income Tax",
-    "MCA",
-    "Compliance",
-    "Personal",
-    "Global",
-    "Cities",
-    "Guides",
-  ];
-
-  return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Left: logo and mobile menu icon */}
-          <div className="flex items-center gap-4">
-            <img src={ASSETS.logo} alt="IndiaFilings" className="h-10" />
-
-            <button
-              className="md:hidden p-2 rounded hover:bg-gray-50"
-              aria-label="Open menu"
-              onClick={() => setMobileOpen((s) => !s)}
-            >
-              {mobileOpen ? (
-                <X className="w-5 h-5 text-gray-700" />
-              ) : (
-                <Menu className="w-5 h-5 text-gray-700" />
-              )}
-            </button>
-          </div>
-
-          {/* Desktop nav */}
-          <nav
-            className="hidden md:flex items-center gap-6 text-sm"
-            aria-label="Main"
-          >
-            {NAV_ITEMS.slice(0, 3).map((item) => (
-              <NavItem key={item}>{item}</NavItem>
-            ))}
-
-            <NavItem>GST</NavItem>
-            <NavItem>Income Tax</NavItem>
-
-            {/* MCA with dropdown */}
-            <NavItem
-              hasDropdown
-              isActive
-              onMouseEnter={() => setShowMcaDropdown(true)}
-              onMouseLeave={() => setShowMcaDropdown(false)}
-            >
-              MCA
-              {showMcaDropdown && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[780px]">
-                  <div className="bg-white rounded-lg shadow-xl border border-slate-200 p-6">
-                    <div className="grid grid-cols-3 gap-x-6 gap-y-2">
-                      {MCA_DROPDOWN_LINKS.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-                        >
-                          {link.title}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </NavItem>
-
-            {NAV_ITEMS.slice(6).map((item) =>
-              item === "MCA" ? null : <NavItem key={item}>{item}</NavItem>
-            )}
-
-            <button
-              type="button"
-              suppressHydrationWarning
-              className="px-4 py-1.5 border border-slate-300 text-sm rounded-md hover:bg-slate-50"
-            >
-              Login
-            </button>
-          </nav>
-
-          {/* Right actions (desktop) */}
-          <div className="hidden md:flex items-center gap-3">
-            <button
-              aria-label="search"
-              className="p-2 rounded hover:bg-gray-50"
-            >
-              <Search className="w-5 h-5 text-gray-600" />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile nav panel */}
-        {mobileOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100">
-            <div className="px-4 py-3">
-              <nav className="flex flex-col gap-2 text-sm">
-                {[
-                  "IndiaFilings",
-                  "Startup",
-                  "Registrations",
-                  "Trademark",
-                  "GST",
-                  "Income Tax",
-                  "MCA",
-                  "Compliance",
-                  "Personal",
-                  "Global",
-                  "Cities",
-                  "Guides",
-                ].map((item) => (
-                  <a
-                    key={item}
-                    href="#"
-                    className="py-2 block rounded hover:bg-gray-50 px-2"
-                  >
-                    {item}
-                  </a>
-                ))}
-                <a
-                  href="#"
-                  className="py-2 block rounded hover:bg-gray-50 px-2 font-medium"
-                >
-                  Login
-                </a>
-              </nav>
-            </div>
-          </div>
-        )}
-      </div>
-    </header>
-  );
-};
-
 /* ------------------------------
    Footer (updated content)
    ------------------------------ */
@@ -344,38 +162,74 @@ const Footer: React.FC = () => {
           <div className="p-5 lg:p-7.5">
             <div className="flex flex-col gap-4">
               <span className="text-lg font-medium leading-none text-slate-950 mb-4">
-                IndiaFilings
+                Company
               </span>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/about-us"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/about-us"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
-                  About IndiaFilings
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                  About Us
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/careers"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/careers"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Careers
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/contact-us"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/contact-us"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Contact Us
                 </span>
               </a>
@@ -389,34 +243,72 @@ const Footer: React.FC = () => {
               </span>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/search/"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/search/"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Business Search
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/trademark-search"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/trademark-search"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Trademark Search
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
+                className="leading-none hover:text-amber-700 transition-colors"
                 href="https://filings.ae/"
                 target="_blank"
                 rel="noreferrer"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Filings.AE for UAE
                 </span>
               </a>
@@ -430,34 +322,70 @@ const Footer: React.FC = () => {
               </span>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/termsconditions"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/termsconditions"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Terms &amp; Conditions
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/privacypolicy"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/privacypolicy"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Privacy Policy
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/refund-policy"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/refund-policy"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Refund Policy
                 </span>
               </a>
@@ -471,35 +399,71 @@ const Footer: React.FC = () => {
               </span>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/confidentiality-policy"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/confidentiality-policy"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Confidentiality Policy
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/disclaimer"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/disclaimer"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                   Disclaimer Policy
                 </span>
               </a>
 
               <a
-                className="leading-none hover:text-primary-active"
-                href="https://www.indiafilings.com/review"
-                target="_blank"
-                rel="noreferrer"
+                className="leading-none hover:text-amber-700 transition-colors"
+                href="/review"
               >
                 <span className="flex text-sm text-black leading-5 items-center">
-                  IndiaFilings Review
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4 text-amber-600 mr-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                  Reviews
                 </span>
               </a>
             </div>
@@ -509,31 +473,31 @@ const Footer: React.FC = () => {
         <div className="mt-3 pt-3">
           <div className="max-w-screen-2xl mx-auto px-3 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-500">
-              © 2025 IndiaFilings. All Rights Reserved.
+              © 2025 All Rights Reserved.
             </p>
 
             <p className="text-xs text-slate-500">
               Unless otherwise indicated, all materials on these pages are
-              copyrighted by IndiaFilings Private Limited. All rights reserved.
+              copyrighted. All rights reserved.
             </p>
 
             <div className="flex items-center gap-2">
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://www.facebook.com"
                 aria-label="facebook"
               >
                 FB
               </a>
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://twitter.com"
                 aria-label="twitter"
               >
                 X
               </a>
               <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
+                className="text-slate-500 hover:text-amber-700 transition-colors text-sm"
                 href="https://www.youtube.com"
                 aria-label="youtube"
               >
@@ -548,7 +512,7 @@ const Footer: React.FC = () => {
 };
 
 /* ------------------------------
-   Main Page (AOA Amendment content + merged styles)
+   Main Page (AOA Amendment content)
    ------------------------------ */
 export default function AOAAmendmentMergedPage(): React.ReactElement {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -563,7 +527,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
     "Why might a company amend its AOA?",
     "What is the importance of AOA Amendment?",
     "What must a company do after altering its AOA?",
-    "How does IndiaFilings assist with AOA Amendments?",
+    "How do we assist with AOA Amendments?",
     "What is included in the AOA?",
     "What are the legal guidelines for AOA Amendment?",
     "What is entrenchment in the context of AOA?",
@@ -583,7 +547,6 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
     []
   );
 
-  // move the article items into component scope (fixes TS 'possibly undefined' and JS-in-JSX)
   const articleItems = useMemo(
     () => [
       [
@@ -608,14 +571,20 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
   return (
     <div className="page">
-      <Header />
+      {/* Imported Navbar */}
+      <Navbar />
 
       <main>
-        {/* Top hero banner (from compliance design) */}
+        {/* Top hero banner */}
         <section className="site-banner">
           <div className="banner-inner">
             <div className="banner-cta">
-              <div className="lead-eyebrow">MCA Compliance</div>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-4">
+                <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                <span className="text-xs font-medium text-amber-700">MCA COMPLIANCE</span>
+              </div>
+
               <h1 className="lead-title">
                 AOA Amendment — Articles of Association Changes Made Simple
               </h1>
@@ -623,6 +592,16 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                 Amend your Articles of Association with guidance from experts —
                 board meetings, resolutions and MCA filing handled end-to-end.
               </p>
+
+              {/* Trust Badges */}
+              <div className="flex items-center gap-3 mt-6">
+                <div className="flex -space-x-1.5">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 border-2 border-white shadow-sm" />
+                  ))}
+                </div>
+                <span className="text-xs sm:text-sm text-gray-600">Trusted by 10,000+ businesses</span>
+              </div>
 
               <form
                 className="hero-form"
@@ -650,7 +629,9 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
             <div className="banner-media">
               <div className="media-frame">
                 <img src={ASSETS.hero} alt="MCA hero" />
-                <div className="media-badge">MCA Compliance Simplified</div>
+                <div className="media-badge bg-gradient-to-r from-amber-600 to-amber-700">
+                  MCA Compliance Simplified
+                </div>
               </div>
             </div>
           </div>
@@ -658,13 +639,13 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
         {/* Main container with AOA content and sidebar */}
         <section className="main-container">
-          <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
             <div className="grid grid-cols-12 gap-8">
               {/* Left column */}
               <section className="col-span-12 lg:col-span-8">
                 <div className="flex flex-col lg:flex-row gap-6 items-start">
                   {/* Left box - image */}
-                  <div className="w-full lg:w-1/2 bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                  <div className="w-full lg:w-1/2 bg-white rounded-lg border border-gray-200 overflow-hidden shadow-lg">
                     <img
                       src={ASSETS.heroTile}
                       alt="hero"
@@ -673,11 +654,15 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                   </div>
 
                   {/* Right box - small product card */}
-                  <div className="w-full lg:w-1/2 bg-white rounded-lg border border-gray-200 p-6 shadow-sm flex flex-col justify-between">
+                  <div className="w-full lg:w-1/2 bg-white rounded-lg border border-gray-200 p-6 shadow-lg flex flex-col justify-between hover:border-amber-200 transition-colors">
                     <div>
+                      <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2">
+                        <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                        <span className="text-xs font-medium text-amber-700">MCA COMPLIANCE</span>
+                      </div>
                       <h2 className="text-xl font-semibold">AOA Amendment</h2>
                       <div className="flex items-center gap-3 mt-2">
-                        <div className="flex items-center gap-1 text-yellow-400 text-sm">
+                        <div className="flex items-center gap-1 text-yellow-500 text-sm">
                           ★★★★★
                         </div>
                         <div className="text-sm text-slate-500">(39)</div>
@@ -687,45 +672,45 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                         AOA Amendment for a Private Limited Company &amp; OPC.
                       </p>
 
-                      <div className="mt-5 border rounded-md p-4 border-dashed border-[#f4e6df] bg-[#fffaf8]">
-                        <div className="text-xs text-green-800 font-semibold bg-green-50 inline-flex px-2 py-1 rounded">
+                      <div className="mt-5 border-2 border-dashed rounded-md border-amber-200 p-4 bg-amber-50/30">
+                        <div className="text-xs text-amber-700 font-semibold bg-white inline-flex px-2 py-1 rounded border border-amber-200">
                           1 Exclusive Offers
                         </div>
                         <h4 className="font-semibold mt-3">Basic</h4>
                         <ul className="text-sm text-slate-600 mt-2 list-disc list-inside">
-                          <li>Application Filing in MCA</li>
-                          <li>Provide Updated AOA</li>
+                          <li className="hover:text-amber-700 transition-colors">Application Filing in MCA</li>
+                          <li className="hover:text-amber-700 transition-colors">Provide Updated AOA</li>
                         </ul>
                         <div className="mt-4">
-                          <button className="bg-white border border-green-600 text-green-700 px-3 py-1 rounded">
-                            ADD
+                          <button className="bg-white border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
+                            ADD TO CART
                           </button>
                         </div>
                       </div>
 
                       <div className="mt-4 text-sm">
-                        <a className="text-blue-600 underline">
+                        <a className="text-amber-700 underline hover:text-amber-800 font-medium">
                           Terms and conditions
                         </a>
-                        <span className="mx-4">|</span>
-                        <a className="text-blue-600 underline">
+                        <span className="mx-4 text-gray-300">|</span>
+                        <a className="text-amber-700 underline hover:text-amber-800 font-medium">
                           Refer a Friend
                         </a>
                       </div>
                     </div>
 
                     <div className="mt-6 border-t pt-4">
-                      <h5 className="text-sm font-semibold">
+                      <h5 className="text-sm font-semibold mb-3">
                         Offers and discounts
                       </h5>
-                      <div className="mt-3 p-3 rounded flex items-center gap-3 border border-gray-100 bg-[#f3fcf7]">
+                      <div className="mt-3 p-3 rounded flex items-center gap-3 border border-gray-200 hover:border-amber-200 transition-colors">
                         <img
                           src={ASSETS.ledgers}
                           alt="ledgers"
                           className="h-8 w-8"
                         />
                         <div className="text-sm">
-                          <div className="font-semibold">
+                          <div className="font-semibold text-amber-700">
                             LEDGERS - Compliance Platform
                           </div>
                           <div className="text-xs text-slate-600">
@@ -739,8 +724,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
                 {/* Main article */}
                 <article className="mt-10 space-y-6">
-                  <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
-                    <h1 className="text-2xl font-bold mb-4">
+                  <div className="bg-white border border-gray-200 rounded-lg p-6 sm:p-8 shadow-lg">
+                    <h1 className="text-xl sm:text-2xl font-bold mb-4">
                       Articles of Association (AOA) Amendment
                     </h1>
                     <p className="text-sm text-slate-600 mb-6">
@@ -753,8 +738,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </p>
                   </div>
 
-                  <div className="bg-[#fbfdff] border border-gray-100 rounded-lg p-6 shadow-sm">
-                    <h2 className="text-xl font-semibold mb-3">
+                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+                    <h2 className="text-lg sm:text-xl font-semibold mb-3 text-amber-800">
                       Article of Association
                     </h2>
                     <p className="text-sm text-slate-600 mb-4">
@@ -766,9 +751,9 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
                     <ul className="space-y-3">
                       {articleItems.map((item, idx) => (
-                        <li key={idx} className="flex gap-3 items-start">
-                          <div className="mt-1 text-blue-600">✓</div>
-                          <div>
+                        <li key={idx} className="flex gap-3 items-start hover:text-amber-700 transition-colors">
+                          <div className="mt-1 text-amber-600">✓</div>
+                          <div className="text-sm">
                             <strong>{item[0]}</strong> {item[1]}
                           </div>
                         </li>
@@ -776,8 +761,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </ul>
                   </div>
 
-                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                    <h2 className="text-xl font-semibold mb-3">
+                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+                    <h2 className="text-lg sm:text-xl font-semibold mb-3 text-amber-800">
                       AOA Amendment
                     </h2>
                     <p className="text-sm text-slate-600 mb-6">
@@ -789,7 +774,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                       strategies.
                     </p>
 
-                    <h3 className="font-semibold mb-2">
+                    <h3 className="font-semibold mb-2 text-amber-800">
                       When a Company Can Amend AOA?
                     </h3>
                     <p className="text-sm text-slate-600 mb-4">
@@ -798,8 +783,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </p>
 
                     <div className="grid grid-cols-1 gap-4">
-                      <div className="p-4 rounded bg-[#f8fafc] border border-gray-100">
-                        <strong>
+                      <div className="p-4 rounded bg-amber-50/30 border border-amber-100 hover:border-amber-200 transition-colors">
+                        <strong className="text-amber-800">
                           Conversion of a Private Company into a Public Company
                         </strong>
                         <p className="text-sm text-slate-600 mt-2">
@@ -810,8 +795,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                         </p>
                       </div>
 
-                      <div className="p-4 rounded bg-[#fffaf8] border border-gray-100">
-                        <strong>
+                      <div className="p-4 rounded bg-amber-50/30 border border-amber-100 hover:border-amber-200 transition-colors">
+                        <strong className="text-amber-800">
                           Conversion of Public Company into Private Company
                         </strong>
                         <p className="text-sm text-slate-600 mt-2">
@@ -822,22 +807,22 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                         </p>
                       </div>
 
-                      <div className="p-4 rounded bg-[#f3fcf7] border border-gray-100">
-                        <strong>
+                      <div className="p-4 rounded bg-amber-50/30 border border-amber-100 hover:border-amber-200 transition-colors">
+                        <strong className="text-amber-800">
                           Alteration in any of the Existing Articles
                         </strong>
                         <ul className="list-disc list-inside text-sm text-slate-600 mt-2 space-y-1">
-                          <li>
+                          <li className="hover:text-amber-700 transition-colors">
                             <strong>Change in Business Objectives:</strong> When
                             the company's business objectives or activities
                             evolve or expand.
                           </li>
-                          <li>
+                          <li className="hover:text-amber-700 transition-colors">
                             <strong>Change in Share Capital:</strong> If the
                             company intends to increase or decrease its share
                             capital.
                           </li>
-                          <li>
+                          <li className="hover:text-amber-700 transition-colors">
                             <strong>Change in Name:</strong> When a company
                             decides to change its name.
                           </li>
@@ -846,24 +831,24 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </div>
                   </div>
 
-                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                    <h2 className="text-xl font-semibold">
+                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+                    <h2 className="text-lg sm:text-xl font-semibold text-amber-800">
                       Key Requirements for Changing a Company's AoA
                     </h2>
                     <ul className="list-inside space-y-3 text-sm text-slate-600 mt-4">
-                      <li>
+                      <li className="hover:text-amber-700 transition-colors">
                         <strong>Legal Guidelines:</strong> The changes need to
                         be in line with the rules set by the Companies Act and
                         the company's Memorandum.
                       </li>
-                      <li>
+                      <li className="hover:text-amber-700 transition-colors">
                         <strong>Special Agreement for Entrenchment:</strong> If
                         the company wants to add special, hard-to-change rules
                         (entrenchment provisions), all members of a private
                         company must agree, or a majority vote is needed in a
                         public company.
                       </li>
-                      <li>
+                      <li className="hover:text-amber-700 transition-colors">
                         <strong>Approval for Changing Company Type:</strong> If
                         the company is switching from public to private or vice
                         versa, it must get a majority agreement (Special
@@ -872,8 +857,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </ul>
                   </div>
 
-                  <div className="bg-[#fbfdff] border border-gray-100 rounded-lg p-6 shadow-sm">
-                    <h2 className="text-xl font-semibold mb-3">
+                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+                    <h2 className="text-lg sm:text-xl font-semibold mb-3 text-amber-800">
                       Procedure for AOA Amendment
                     </h2>
                     <p className="text-sm text-slate-600 mb-4">
@@ -882,44 +867,44 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </p>
 
                     <div className="space-y-4 text-sm text-slate-600">
-                      <div>
-                        <h3 className="font-semibold">
+                      <div className="hover:bg-amber-50/30 p-3 rounded transition-colors">
+                        <h3 className="font-semibold text-amber-800">
                           Step 1: Board of Directors Meeting
                         </h3>
                         <ul className="list-inside mt-2 space-y-2">
-                          <li>
+                          <li className="hover:text-amber-700 transition-colors">
                             Notice Issuance: Send a notice of the Board Meeting
                             to all Directors at least 7 days before the meeting
                             date.
                           </li>
-                          <li>
+                          <li className="hover:text-amber-700 transition-colors">
                             Attach Supporting Documents: Include the meeting's
                             agenda, notes and draft resolution with the notice.
                           </li>
                         </ul>
                       </div>
 
-                      <div>
-                        <h3 className="font-semibold">
+                      <div className="hover:bg-amber-50/30 p-3 rounded transition-colors">
+                        <h3 className="font-semibold text-amber-800">
                           Step 2: Convene General Meeting
                         </h3>
                         <ul className="list-inside mt-2 space-y-2">
-                          <li>
+                          <li className="hover:text-amber-700 transition-colors">
                             Issue a written notice for the General Meeting at
                             least 21 days before the scheduled meeting date.
                           </li>
-                          <li>
+                          <li className="hover:text-amber-700 transition-colors">
                             Conduct the General Meeting and pass a Special
                             Resolution for the alteration of the Articles.
                           </li>
                         </ul>
                       </div>
 
-                      <div>
-                        <h3 className="font-semibold">
+                      <div className="hover:bg-amber-50/30 p-3 rounded transition-colors">
+                        <h3 className="font-semibold text-amber-800">
                           Step 3: File Form MGT-14 with ROC
                         </h3>
-                        <p className="mt-2">
+                        <p className="mt-2 hover:text-amber-700 transition-colors">
                           Submit Form MGT-14 to the Registrar of Companies (ROC)
                           within 30 days after the Special Resolution is passed.
                         </p>
@@ -927,12 +912,12 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </div>
                   </div>
 
-                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                    <h3 className="font-semibold">
-                      Streamlining AOA Amendments with IndiaFilings
+                  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+                    <h3 className="font-semibold text-amber-800">
+                      Streamlining AOA Amendments with Us
                     </h3>
                     <p className="text-sm text-slate-600 mt-2">
-                      IndiaFilings offers comprehensive assistance in the
+                      We offer comprehensive assistance in the
                       amendment of the Articles of Association (AOA). Our expert
                       team guides businesses through the entire process,
                       ensuring that all modifications comply with the Companies
@@ -943,8 +928,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                 </article>
 
                 {/* FAQ section */}
-                <section className="mt-8 bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                  <h3 className="text-xl font-semibold mb-4">
+                <section className="mt-8 bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-4">
                     FAQ's on AOA Amendment
                   </h3>
                   <div className="divide-y">
@@ -954,8 +939,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                           onClick={() => setOpenFaq(openFaq === i ? null : i)}
                           className="w-full text-left flex items-center justify-between"
                         >
-                          <span className="text-sm">{q}</span>
-                          <span className="text-xl">
+                          <span className="text-sm hover:text-amber-700 transition-colors">{q}</span>
+                          <span className="text-xl text-amber-700">
                             {openFaq === i ? "−" : "+"}
                           </span>
                         </button>
@@ -968,8 +953,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                       </div>
                     ))}
 
-                    <div className="mt-4">
-                      <button className="text-xs px-3 py-2 border rounded bg-white text-blue-600">
+                    <div className="mt-4 pt-4">
+                      <button className="text-xs px-3 py-2 border-2 border-amber-600 rounded bg-white text-amber-700 hover:bg-amber-50 transition-colors font-medium">
                         Load More
                       </button>
                     </div>
@@ -979,7 +964,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
               {/* Right sidebar */}
               <aside className="col-span-12 lg:col-span-4">
-                <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm sticky top-24">
+                <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-lg sticky top-24">
                   <div className="text-center py-6">
                     <div className="text-slate-700 text-lg font-semibold">
                       Your cart is empty
@@ -989,23 +974,23 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                     </p>
                     <div className="mt-6 space-y-3 text-left">
                       <input
-                        className="w-full border rounded px-3 py-2 text-sm"
+                        className="w-full border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
                         placeholder="Name"
                       />
                       <input
-                        className="w-full border rounded px-3 py-2 text-sm"
+                        className="w-full border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
                         placeholder="Email"
                       />
 
                       <div className="flex gap-2 items-center">
                         <select
-                          className="border rounded px-3 py-2 text-sm flex-shrink-0 w-20 md:w-24"
+                          className="border border-gray-200 rounded px-3 py-2 text-sm flex-shrink-0 w-20 md:w-24 focus:outline-none focus:ring-1 focus:ring-amber-600"
                           aria-label="country code"
                         >
                           <option>+91</option>
                         </select>
                         <input
-                          className="flex-1 min-w-0 border rounded px-3 py-2 text-sm"
+                          className="flex-1 min-w-0 border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
                           placeholder="Phone"
                           inputMode="tel"
                         />
@@ -1016,57 +1001,77 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
                           type="checkbox"
                           checked={gstChecked}
                           onChange={() => setGstChecked((s) => !s)}
+                          className="accent-amber-600"
                         />{" "}
                         Enter GSTIN to get 18% GST Credit
                       </label>
-                      <button className="w-full bg-green-500 text-white rounded py-2 mt-2">
+                      
+                      {gstChecked && (
+                        <input
+                          className="w-full border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
+                          placeholder="GSTIN"
+                        />
+                      )}
+                      
+                      <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white rounded py-2 mt-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
                         Get Started
                       </button>
+                      
+                      <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+                        <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Secure · No spam · Instant confirmation</span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-6 space-y-6">
-                  <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+                  <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-lg hover:border-amber-200 transition-colors">
                     <img
                       src={ASSETS.cards.companyCompliance}
                       alt="comp"
                       className="w-full rounded"
                     />
-                    <div className="mt-3 font-semibold">Company Compliance</div>
+                    <div className="mt-3 font-semibold text-amber-800">Company Compliance</div>
                   </div>
 
-                  <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+                  <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-lg hover:border-amber-200 transition-colors">
                     <img
                       src={ASSETS.cards.dinEKyc}
                       alt="ekyc"
                       className="w-full rounded"
                     />
-                    <div className="mt-3 font-semibold">DIN eKYC Filing</div>
+                    <div className="mt-3 font-semibold text-amber-800">DIN eKYC Filing</div>
                   </div>
                 </div>
 
-                <div className="mt-8 bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
-                  <h4 className="font-semibold">Related Guides</h4>
-                  <ul className="mt-3 space-y-2 text-sm text-blue-600">
-                    <li>
+                <div className="mt-8 bg-white rounded-lg border border-gray-200 p-4 shadow-lg">
+                  <h4 className="font-semibold text-amber-800">Related Guides</h4>
+                  <ul className="mt-3 space-y-2 text-sm">
+                    <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
                       Comprehensive Guide to Articles of Association (AOA)
                     </li>
-                    <li>eAOA – Form INC-34 – SPICe AOA</li>
-                    <li>Articles of Association</li>
+                    <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
+                      eAOA – Form INC-34 – SPICe AOA
+                    </li>
+                    <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
+                      Articles of Association
+                    </li>
                   </ul>
                 </div>
               </aside>
             </div>
 
-            {/* Popular searches (updated to include all memorized tags) */}
-            <section className="mt-10 bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-              <h4 className="font-semibold mb-4">Popular Searches</h4>
+            {/* Popular searches */}
+            <section className="mt-10 bg-white rounded-lg p-6 shadow-lg border border-gray-200">
+              <h4 className="font-semibold mb-4 text-amber-800">Popular Searches</h4>
               <div className="flex flex-wrap gap-2">
-                {popularTags.map((t) => (
+                {popularTags.slice(0, 20).map((t) => (
                   <span
                     key={t}
-                    className="text-xs border px-3 py-1 rounded bg-[#f8fafc] text-slate-700"
+                    className="text-xs border border-gray-200 px-3 py-1.5 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
                   >
                     {t}
                   </span>
@@ -1131,13 +1136,6 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
           color: #0b2545;
           padding: 30px;
         }
-        .lead-eyebrow {
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: #0b5cf0;
-          font-size: 13px;
-          font-weight: 600;
-        }
         .lead-title {
           font-size: 36px;
           margin: 10px 0;
@@ -1167,13 +1165,17 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
         }
         .hero-button {
           border-radius: 999px;
-          background: #facc15;
-          color: #081433;
+          background: #C15F3C;
+          color: white;
           border: none;
           padding: 12px 20px;
           font-weight: 700;
           cursor: pointer;
-          box-shadow: 0 8px 20px rgba(250, 204, 21, 0.15);
+          box-shadow: 0 8px 20px rgba(193, 95, 60, 0.15);
+          transition: all 0.3s ease;
+        }
+        .hero-button:hover {
+          background: #A74A2F;
         }
 
         .banner-media .media-frame {
@@ -1193,7 +1195,6 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
           position: absolute;
           left: 20px;
           bottom: 20px;
-          background: #059669;
           color: white;
           padding: 10px 16px;
           border-radius: 999px;
@@ -1226,39 +1227,24 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
           position: fixed;
           right: 18px;
           bottom: 18px;
-          background: #16a34a;
+          background: #C15F3C;
           color: white;
           padding: 12px 18px;
           border-radius: 999px;
           display: flex;
           gap: 8px;
           align-items: center;
-          box-shadow: 0 10px 30px rgba(22, 163, 74, 0.22);
+          box-shadow: 0 10px 30px rgba(193, 95, 60, 0.22);
           cursor: pointer;
           z-index: 100;
+          transition: all 0.3s ease;
+        }
+        .whatsapp-cta:hover {
+          background: #A74A2F;
+          transform: scale(1.05);
         }
         .whatsapp-cta svg {
           flex: 0 0 auto;
-        }
-
-        /* Article card spacing & utility */
-        .bg-white {
-          background: white;
-        }
-        .border {
-          border: 1px solid #e6eef8;
-        }
-        .rounded-lg {
-          border-radius: 12px;
-        }
-        .p-6 {
-          padding: 1.5rem;
-        }
-        .p-8 {
-          padding: 2rem;
-        }
-        .shadow-sm {
-          box-shadow: 0 6px 16px rgba(11, 37, 85, 0.03);
         }
 
         /* responsive adjustments */

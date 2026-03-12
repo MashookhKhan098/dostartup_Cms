@@ -10,19 +10,15 @@ import {
   ChevronDown,
   Plus,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 /**
- * Pixel-focused recreation of the screenshots you provided.
- * - Tailwind classes used heavily to reproduce spacing, radii, shadows and layout.
- * - Header / navbar, three-column content area (image / center content / right cart),
- *   long article with FAQ, Popular Searches tags and footer are included.
- *
- * Drop this into a Next.js / React app that supports Tailwind and it should be ready to paste/run.
+ * DIN Reactivation page with amber theme and imported Navbar
  */
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
-  heroBlue: "/images/din-hero-blue.jpg", // replace if you want exact hero asset
+  heroBlue: "/images/din-hero-blue.jpg",
   heroMan:
     "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
   whatsapp: "/images/whatsapp.svg",
@@ -33,22 +29,6 @@ const ASSETS = {
   partnershipCard:
     "https://img.indiafilings.com/catalog/partnership-compliance.png",
 };
-
-const NAV_ITEMS = [
-  "IndiaFilings",
-  "Startup",
-  "Registrations",
-  "Trademark",
-  "GST",
-  "Income Tax",
-  "MCA",
-  "Compliance",
-  "Personal",
-  "Global",
-  "Cities",
-  "Guides",
-  "Login",
-];
 
 const MCA_DROPDOWN_LINKS = [
   { title: "Company Compliance", href: "/MCA/company-compliance" },
@@ -169,74 +149,30 @@ export default function DINReactivationPixel() {
 
   return (
     <div className="min-h-screen bg-[#f4f6fa] text-slate-800 font-sans">
-      {/* NAVBAR */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="h-16 flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <img src={ASSETS.logo} alt="IndiaFilings logo" className="h-9" />
-              <nav className="hidden lg:flex items-center gap-6">
-                {NAV_ITEMS.slice(1, 7).map((i) => (
-                  <a
-                    key={i}
-                    className="text-sm text-slate-700 hover:text-slate-900"
-                  >
-                    {i}
-                  </a>
-                ))}
+      {/* Imported Navbar */}
+      <Navbar />
 
-                <div
-                  className="relative"
-                  onMouseEnter={() => setShowMcaDropdown(true)}
-                  onMouseLeave={() => setShowMcaDropdown(false)}
-                >
-                  <button className="flex items-center gap-1 text-sm text-slate-800 font-medium">
-                    MCA <ChevronDown className="w-3 h-3" />
-                  </button>
-
-                  {showMcaDropdown && (
-                    <div className="absolute left-0 mt-3 w-[420px]">
-                      <div className="bg-white rounded-lg border border-slate-200 shadow p-4">
-                        <div className="grid grid-cols-2 gap-2 text-sm">
-                          {MCA_DROPDOWN_LINKS.map((l) => (
-                            <a
-                              key={l.title}
-                              href={l.href}
-                              className="py-1 text-slate-700 hover:text-emerald-600"
-                            >
-                              {l.title}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </nav>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <button className="px-3 py-1.5 border border-slate-200 rounded-md text-sm">
-                Login
-              </button>
-            </div>
-          </div>
+      {/* Breadcrumb */}
+      <div className="bg-gradient-to-r from-white to-slate-50 py-3">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-sm text-gray-500">
+          Home / Income Tax /{" "}
+          <span className="text-amber-700 font-medium">DIN Reactivation</span>
         </div>
-      </header>
+      </div>
 
       {/* PAGE HERO + ACTION cards (three-col layout) */}
-      <main className="max-w-[1200px] mx-auto px-6 pt-8 pb-12">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* Left hero / image box */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
-              <div className="rounded-lg overflow-hidden border border-slate-200">
-                {/* top blue panel that matches screenshot feel */}
-                <div className="bg-[#0727e6] p-6 text-center">
+            <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg">
+              <div className="rounded-lg overflow-hidden border border-gray-200">
+                {/* top blue panel changed to amber */}
+                <div className="bg-gradient-to-r from-amber-700 to-amber-800 p-6 text-center">
                   <h2 className="text-white text-xl font-bold tracking-wide">
                     DIN REACTIVATION
                   </h2>
-                  <div className="mt-2 text-sm text-white/80">
+                  <div className="mt-2 text-sm text-amber-100">
                     DIN Reactivation: Quick and hassle-free.
                   </div>
                 </div>
@@ -250,21 +186,34 @@ export default function DINReactivationPixel() {
                   />
                 </div>
               </div>
+
+              {/* Document links */}
+              <ul className="mt-4 text-xs sm:text-sm space-y-2 text-gray-600">
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Digital Signature Certificate (DSC)</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">PAN Card (self-attested)</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Proof of Address</li>
+                <li className="text-amber-700 underline hover:text-amber-800 cursor-pointer font-medium">Load More</li>
+              </ul>
             </div>
           </div>
 
           {/* Center content (title, description, offer box) */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2">
+                    <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                    <span className="text-xs font-medium text-amber-700">MCA COMPLIANCE</span>
+                  </div>
                   <h1 className="text-lg font-semibold">DIN Reactivation</h1>
                   <div className="flex items-center gap-2 mt-2 text-xs text-slate-500">
                     <div className="flex items-center gap-1">
                       {[...Array(4)].map((_, i) => (
                         <Star
                           key={i}
-                          className="w-4 h-4 text-amber-400 fill-amber-400"
+                          className="w-4 h-4 text-amber-500 fill-amber-500"
                         />
                       ))}
                       <span className="text-slate-500">(428)</span>
@@ -275,59 +224,58 @@ export default function DINReactivationPixel() {
                 <div className="text-xs text-slate-500 max-w-[200px]">
                   Director Identification Number (DIN) may be subject to
                   deactivation due to non-compliance with regulatory
-                  requirements. Reactivate it by filing Form DIR-3 through
-                  IndiaFilings with expert assistance.
+                  requirements. Reactivate it by filing Form DIR-3 with expert assistance.
                 </div>
               </div>
 
               {/* dashed offer box */}
-              <div className="mt-5 border-2 border-dashed border-slate-200 rounded-md p-4 relative">
-                <div className="absolute -top-3 left-4 bg-white px-2 text-[11px] text-emerald-700 rounded">
+              <div className="mt-5 border-2 border-dashed border-amber-200 rounded-md p-4 relative bg-amber-50/30">
+                <div className="absolute -top-3 left-4 bg-white px-2 text-[11px] text-amber-700 rounded border border-amber-200">
                   2 Exclusive Offers
                 </div>
                 <div className="text-sm font-semibold">DIN Reactivation</div>
                 <ul className="mt-2 text-sm text-slate-600 space-y-1">
                   <li className="flex items-start gap-2">
-                    <ChevronRight className="w-4 h-4 text-slate-400 mt-1" />{" "}
+                    <ChevronRight className="w-4 h-4 text-amber-600 mt-1" />{" "}
                     Application Filing in MCA
                   </li>
                   <li className="flex items-start gap-2">
-                    <ChevronRight className="w-4 h-4 text-slate-400 mt-1" />{" "}
+                    <ChevronRight className="w-4 h-4 text-amber-600 mt-1" />{" "}
                     Provide DIN-eKYC
                   </li>
                   <li className="flex items-start gap-2">
-                    <ChevronRight className="w-4 h-4 text-slate-400 mt-1" />{" "}
+                    <ChevronRight className="w-4 h-4 text-amber-600 mt-1" />{" "}
                     Acknowledgement Copy
                   </li>
                 </ul>
 
-                <button className="mt-3 ml-auto block px-4 py-1.5 border border-emerald-600 text-emerald-600 rounded-md text-sm">
-                  ADD
+                <button className="mt-3 ml-auto block px-4 py-1.5 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
+                  ADD TO CART
                 </button>
               </div>
 
               <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
-                <a href="#" className="hover:underline">
+                <a href="#" className="text-amber-700 hover:text-amber-800 hover:underline font-medium">
                   Terms and conditions
                 </a>
-                <a href="#" className="hover:underline">
+                <a href="#" className="text-amber-700 hover:text-amber-800 hover:underline font-medium">
                   Refer a Friend
                 </a>
               </div>
 
               <div className="mt-5">
-                <div className="text-sm font-semibold">
+                <div className="text-sm font-semibold mb-3">
                   Offers and discounts
                 </div>
                 <div className="space-y-3 mt-3">
-                  <div className="flex items-center gap-3 border border-slate-200 rounded-lg p-3">
+                  <div className="flex items-center gap-3 border border-gray-200 rounded-lg p-3 hover:border-amber-200 transition-colors">
                     <img
                       src={ASSETS.ledgers}
                       alt="ledgers"
                       className="w-10 h-10 object-contain"
                     />
                     <div className="text-sm">
-                      <div className="font-medium">
+                      <div className="font-medium text-amber-700">
                         LEDGERS - Compliance Platform
                       </div>
                       <div className="text-xs text-slate-500">
@@ -335,14 +283,14 @@ export default function DINReactivationPixel() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 border border-slate-200 rounded-lg p-3">
+                  <div className="flex items-center gap-3 border border-gray-200 rounded-lg p-3 hover:border-amber-200 transition-colors">
                     <img
                       src={ASSETS.gstSave}
                       alt="gst"
                       className="w-10 h-10 object-contain"
                     />
                     <div className="text-sm">
-                      <div className="font-medium">
+                      <div className="font-medium text-amber-700">
                         Save 18% with GST Registration
                       </div>
                       <div className="text-xs text-slate-500">
@@ -357,9 +305,9 @@ export default function DINReactivationPixel() {
 
           {/* Right cart / form */}
           <aside className="lg:col-span-1">
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm sticky top-24">
-              <div className="bg-[#FAFAFA] rounded-xl p-6 text-center border border-slate-200">
-                <ShoppingCart className="w-12 h-12 text-emerald-500 mx-auto mb-2" />
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg sticky top-24">
+              <div className="bg-[#FAFAFA] rounded-xl p-6 text-center border border-gray-200">
+                <ShoppingCart className="w-12 h-12 text-amber-600 mx-auto mb-2" />
                 <div className="text-slate-800 font-semibold">
                   Your cart is empty
                 </div>
@@ -368,30 +316,29 @@ export default function DINReactivationPixel() {
                 </div>
               </div>
 
-              <div className="mt-4 text-xs text-slate-600">
+              <div className="mt-4 text-xs text-slate-600 text-center">
                 Existing User?{" "}
-                <a href="#" className="text-emerald-600 font-medium">
+                <a href="#" className="text-amber-700 font-medium hover:text-amber-800">
                   Login
                 </a>
               </div>
 
-              <div className="mt-3 space-y-2">
+              <div className="mt-3 space-y-3">
                 <input
                   placeholder="Name"
-                  className="w-full px-3 py-2 border rounded-md text-sm border-slate-200"
+                  className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-amber-600"
                 />
                 <input
                   placeholder="Email"
-                  className="w-full px-3 py-2 border rounded-md text-sm border-slate-200"
+                  className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-amber-600"
                 />
                 <div className="flex">
-                  <select className="px-3 py-2 border border-slate-200 rounded-l-md text-sm">
-                    {" "}
-                    <option>+91</option>{" "}
+                  <select className="px-3 py-2 border border-gray-200 rounded-l-md text-sm focus:outline-none focus:ring-1 focus:ring-amber-600">
+                    <option>+91</option>
                   </select>
                   <input
                     placeholder="Phone"
-                    className="flex-1 px-3 py-2 border border-slate-200 rounded-r-md text-sm"
+                    className="flex-1 px-3 py-2 border border-gray-200 rounded-r-md text-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
                   />
                 </div>
 
@@ -400,6 +347,7 @@ export default function DINReactivationPixel() {
                     type="checkbox"
                     checked={gstChecked}
                     onChange={() => setGstChecked(!gstChecked)}
+                    className="accent-amber-600"
                   />
                   Enter GSTIN to get 18% GST Credit
                 </label>
@@ -407,28 +355,30 @@ export default function DINReactivationPixel() {
                 {gstChecked && (
                   <input
                     placeholder="GSTIN"
-                    className="w-full px-3 py-2 border rounded-md text-sm border-slate-200"
+                    className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-amber-600"
                   />
                 )}
 
-                <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-md font-semibold">
+                <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white py-2 rounded-md font-semibold transition-all shadow-md hover:shadow-lg">
                   Get Started
                 </button>
+
+                <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+                  <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Secure · No spam · Instant confirmation</span>
+                </div>
               </div>
             </div>
           </aside>
         </div>
 
-        {/* Breadcrumb style line */}
-        <div className="mt-4 text-sm text-slate-500">
-          IndiaFilings / Income Tax / DIN Reactivation
-        </div>
-
         {/* Long article content & sidebar (two-column) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
           <article className="lg:col-span-2">
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-              <h2 className="text-2xl font-semibold mb-4">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg">
+              <h2 className="text-2xl font-semibold mb-4 text-amber-800">
                 DIN Reactivation - Filing Form DIR-3 KYC
               </h2>
 
@@ -444,88 +394,88 @@ export default function DINReactivationPixel() {
                 fee, depending on the delay.
               </p>
 
-              <h3 className="text-lg font-semibold mt-4">
+              <h3 className="text-lg font-semibold mt-4 text-amber-700">
                 Director Identification Number (DIN)
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 A Director Identification Number (DIN) is an 8-digit unique
                 identifier assigned to directors. Once issued, it remains valid
                 for the lifetime of the director.
               </p>
 
-              <h3 className="text-lg font-semibold mt-4">
+              <h3 className="text-lg font-semibold mt-4 text-amber-700">
                 What is Form DIR-3 KYC?
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 Form DIR-3 KYC is an electronic form mandated by MCA to update
                 KYC details of directors.
               </p>
 
-              <h3 className="text-lg font-semibold mt-4">Applicability</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <h3 className="text-lg font-semibold mt-4 text-amber-700">Applicability</h3>
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 Form DIR-3 KYC is mandatory for directors allotted DIN by or
                 before March 31, 2018 and with status 'approved'.
               </p>
 
-              <h3 className="text-lg font-semibold mt-4">
+              <h3 className="text-lg font-semibold mt-4 text-amber-700">
                 Purpose of DIR-3 KYC (Know Your Customer)
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 The purpose is to maintain current and accurate director
                 information with the ROC including addresses, contact numbers
                 and email addresses.
               </p>
 
-              <h3 className="text-lg font-semibold mt-4">
+              <h3 className="text-lg font-semibold mt-4 text-amber-700">
                 Annual Deadline for Filing Form DIR-3 KYC
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 Deadline is set as September 30th of each year (subject to MCA
                 extensions).
               </p>
 
-              <h3 className="text-lg font-semibold mt-6">
+              <h3 className="text-lg font-semibold mt-6 text-amber-700">
                 Types of DIR-3 KYC Forms
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 DIR-3 KYC eForm (for first-time filers) and DIR-3-KYC-WEB
                 (simplified web form for returning filers).
               </p>
 
-              <h3 className="text-lg font-semibold mt-6">
+              <h3 className="text-lg font-semibold mt-6 text-amber-700">
                 Penalty for Non-Filing of DIR-3 KYC
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 A fine may be imposed for non-compliance within the stipulated
                 timeframe.
               </p>
 
-              <h3 className="text-lg font-semibold mt-6">
+              <h3 className="text-lg font-semibold mt-6 text-amber-700">
                 DIN Deactivation & Reactivation
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
                 If a director does not file, their DIN may be marked
                 'Deactivated due to Non-filing of DIR-3 KYC'. To reactivate,
                 file the appropriate form and follow MCA approvals.
               </p>
 
-              <h3 className="text-lg font-semibold mt-6">Documents Required</h3>
+              <h3 className="text-lg font-semibold mt-6 text-amber-700">Documents Required</h3>
               <ul className="text-sm text-slate-600 list-disc pl-5 space-y-2">
-                <li>Digital Signature Certificate (DSC) linked to PAN.</li>
-                <li>PAN Card (self-attested).</li>
-                <li>
+                <li className="hover:text-amber-700 transition-colors">Digital Signature Certificate (DSC) linked to PAN.</li>
+                <li className="hover:text-amber-700 transition-colors">PAN Card (self-attested).</li>
+                <li className="hover:text-amber-700 transition-colors">
                   Proof of Address (Aadhaar / Voter ID / Driving License).
                 </li>
-                <li>Photograph (self-attested passport photo).</li>
-                <li>Mobile & Email for OTP verification.</li>
+                <li className="hover:text-amber-700 transition-colors">Photograph (self-attested passport photo).</li>
+                <li className="hover:text-amber-700 transition-colors">Mobile & Email for OTP verification.</li>
               </ul>
 
               <div className="mt-6">
-                <h3 className="text-lg font-semibold">
-                  Streamline Your DIN Reactivation Process with IndiaFilings
+                <h3 className="text-lg font-semibold text-amber-700">
+                  Streamline Your DIN Reactivation Process
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed mt-2">
-                  IndiaFilings offers comprehensive assistance at every stage —
+                <p className="text-sm text-slate-600 leading-relaxed mt-2 hover:text-amber-700 transition-colors">
+                  We offer comprehensive assistance at every stage —
                   application support, form completion guidance, PAN
                   verification, DSC help, document attachment and SRN generation
                   & follow-up.
@@ -534,33 +484,33 @@ export default function DINReactivationPixel() {
             </div>
 
             {/* FAQ section */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mt-6">
-              <h3 className="text-lg font-semibold mb-4">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
+              <h3 className="text-lg font-semibold mb-4 text-amber-800">
                 FAQ's on DIN Reactivation
               </h3>
               <div className="space-y-3">
                 {faqItems.map((f, idx) => (
-                  <div key={idx} className="border border-slate-100 rounded">
+                  <div key={idx} className="border border-gray-200 rounded">
                     <button
                       onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                      className="w-full px-4 py-3 text-left flex items-center justify-between bg-white"
+                      className="w-full px-4 py-3 text-left flex items-center justify-between bg-white hover:bg-amber-50/30 transition-colors"
                     >
-                      <span className="text-sm text-slate-800">{f.q}</span>
+                      <span className="text-sm text-slate-800 hover:text-amber-700 transition-colors">{f.q}</span>
                       <Plus
-                        className={`w-4 h-4 text-slate-400 ${
+                        className={`w-4 h-4 text-amber-600 ${
                           openFaq === idx ? "rotate-45" : ""
-                        }`}
+                        } transition-transform`}
                       />
                     </button>
                     {openFaq === idx && (
-                      <div className="px-4 py-3 bg-slate-50 text-sm text-slate-600">
+                      <div className="px-4 py-3 bg-amber-50/30 text-sm text-slate-600 border-t border-gray-200">
                         {f.a}
                       </div>
                     )}
                   </div>
                 ))}
                 <div className="mt-3">
-                  <button className="px-4 py-2 border border-slate-200 rounded text-sm bg-white">
+                  <button className="px-4 py-2 border-2 border-amber-600 rounded text-sm bg-white text-amber-700 hover:bg-amber-50 transition-colors font-medium">
                     Load More
                   </button>
                 </div>
@@ -570,12 +520,12 @@ export default function DINReactivationPixel() {
 
           {/* Right article sidebar (guides + ad) */}
           <aside>
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
-              <h4 className="font-semibold mb-3">Related Guides</h4>
-              <ul className="text-sm text-slate-600 space-y-2">
+            <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg">
+              <h4 className="font-semibold mb-3 text-amber-800">Related Guides</h4>
+              <ul className="text-sm space-y-2">
                 {RELATED_GUIDES.map((g) => (
                   <li key={g}>
-                    <a href="#" className="text-emerald-600 hover:underline">
+                    <a href="#" className="text-amber-700 hover:text-amber-800 hover:underline">
                       {g}
                     </a>
                   </li>
@@ -583,25 +533,25 @@ export default function DINReactivationPixel() {
               </ul>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200 p-3 shadow-sm mt-4">
+            <div className="bg-white rounded-2xl border border-gray-200 p-3 shadow-lg mt-4 hover:border-amber-200 transition-colors">
               <img
                 src={ASSETS.partnershipCard}
                 className="w-full rounded-lg"
                 alt="ad"
               />
-              <div className="mt-2 text-sm">Partnership Compliance</div>
+              <div className="mt-2 text-sm font-medium text-amber-700">Partnership Compliance</div>
             </div>
           </aside>
         </div>
 
         {/* Popular Searches */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mt-6">
-          <h4 className="font-semibold mb-4">Popular Searches</h4>
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
+          <h4 className="font-semibold mb-4 text-amber-800">Popular Searches</h4>
           <div className="flex flex-wrap gap-2">
-            {POPULAR_SEARCHES.map((tag) => (
+            {POPULAR_SEARCHES.slice(0, 20).map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-3 py-1 rounded-md border border-slate-200 bg-slate-50 text-slate-600"
+                className="text-xs px-3 py-1 rounded-md border border-gray-200 bg-white text-slate-600 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
               >
                 {tag}
               </span>
@@ -610,23 +560,23 @@ export default function DINReactivationPixel() {
         </div>
 
         {/* Footer block content (expanded) */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mt-6">
+        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-              <h5 className="font-semibold mb-2">IndiaFilings</h5>
+              <h5 className="font-semibold mb-2 text-amber-800">Company</h5>
               <ul className="text-sm text-slate-600 space-y-2">
                 <li>
-                  <a href="#" className="hover:underline">
-                    About IndiaFilings
+                  <a href="#" className="hover:text-amber-700 transition-colors">
+                    About Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Careers
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Contact Us
                   </a>
                 </li>
@@ -634,20 +584,20 @@ export default function DINReactivationPixel() {
             </div>
 
             <div>
-              <h5 className="font-semibold mb-2">Platforms</h5>
+              <h5 className="font-semibold mb-2 text-amber-800">Platforms</h5>
               <ul className="text-sm text-slate-600 space-y-2">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Business Search
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Trademark Search
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Filings.AE for UAE
                   </a>
                 </li>
@@ -655,20 +605,20 @@ export default function DINReactivationPixel() {
             </div>
 
             <div>
-              <h5 className="font-semibold mb-2">Usage</h5>
+              <h5 className="font-semibold mb-2 text-amber-800">Usage</h5>
               <ul className="text-sm text-slate-600 space-y-2">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Terms & Conditions
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Refund Policy
                   </a>
                 </li>
@@ -676,39 +626,38 @@ export default function DINReactivationPixel() {
             </div>
 
             <div>
-              <h5 className="font-semibold mb-2">Policies</h5>
+              <h5 className="font-semibold mb-2 text-amber-800">Policies</h5>
               <ul className="text-sm text-slate-600 space-y-2">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Confidentiality Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:text-amber-700 transition-colors">
                     Disclaimer Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
-                    IndiaFilings Review
+                  <a href="#" className="hover:text-amber-700 transition-colors">
+                    Reviews
                   </a>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="mt-6 text-sm text-slate-500">
-            Copyright © {new Date().getFullYear()} IndiaFilings Private Limited.
-            All rights reserved.
+          <div className="mt-6 text-sm text-slate-500 border-t border-gray-200 pt-4">
+            Copyright © {new Date().getFullYear()} All rights reserved.
           </div>
         </div>
       </main>
 
       {/* Floating WhatsApp CTA */}
       <div className="fixed bottom-6 right-6 z-50">
-        <button className="flex items-center gap-3 bg-emerald-600 text-white px-4 py-3 rounded-full shadow-lg">
+        <button className="flex items-center gap-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-lg hover:from-amber-700 hover:to-amber-800 transition-all hover:scale-105">
           <img src={ASSETS.whatsapp} alt="whatsapp" className="w-5 h-5" />
-          <span className="hidden sm:inline">Live Chat with Experts</span>
+          <span className="hidden sm:inline font-medium">Live Chat with Experts</span>
         </button>
       </div>
     </div>

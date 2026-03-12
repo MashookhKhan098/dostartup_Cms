@@ -1,44 +1,75 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 
 export default function CommencementInc20aPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqItems = [
+    {
+      question: "What is the Commencement of Business (COB) Certificate?",
+      answer: "A mandatory declaration confirming subscribers have paid the share value and other statutory checks, filed via Form INC-20A."
+    },
+    {
+      question: "Who must obtain the COB Certificate?",
+      answer: "Companies with share capital incorporated after November 2, 2018 must file within 180 days of incorporation."
+    },
+    {
+      question: "Which companies are exempt?",
+      answer: "Companies incorporated before Nov 2, 2018 and companies without share capital are exempt."
+    },
+    {
+      question: "What documents are required for Form INC-20A?",
+      answer: "Bank statement for subscription money, registered office proof, directors' declaration, liquidator/CA certification where needed."
+    },
+    {
+      question: "What happens if COB is not filed?",
+      answer: "The company cannot commence business, may face penalties and directors can be penalised; RoC may strike off the company for non-compliance."
+    }
+  ];
+
+  const popularSearches = [
+    "Partnership",
+    "Limited Liability Partnership",
+    "Digital Signature",
+    "Copyright Registration",
+    "Unified Portal",
+    "PAN Card Download",
+    "Nadakacheri",
+    "Flipkart Seller",
+    "Caste Certificate",
+    "IAY",
+    "EPFO Passbook",
+    "Domicile Certificate",
+    "Udyog Aadhaar",
+    "PF Withdrawal",
+    "Karnataka One",
+    "Encumbrance Certificate",
+    "Bonafide Certificate",
+    "Instant PAN Card",
+    "E PAN Card",
+    "Income Certificate",
+    "Marriage Certificate",
+    "Passport Renewal",
+    "Nivesh Mitra",
+    "MSME Registration",
+    "Experience Certificate",
+    "Trademark Status",
+    "Trade License",
+    "Domicile",
+    "eMitra",
+    "UAN",
+    "PICME",
+  ];
+
   return (
     <div className="min-h-screen bg-white text-slate-800 antialiased">
-      <header className="w-full border-b border-slate-200 bg-white sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <img
-              src="/images/india-logo.jpg"
-              alt="logo"
-              className="w-28 h-auto object-contain"
-            />
-            <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-700">
-              <a className="hover:underline">Startup</a>
-              <a className="hover:underline">Registrations</a>
-              <a className="hover:underline">Trademark</a>
-              <a className="hover:underline">GST</a>
-              <a className="hover:underline">Income Tax</a>
-              <a className="hover:underline">MCA</a>
-              <a className="hover:underline">Compliance</a>
-              <a className="hover:underline">Personal</a>
-              <a className="hover:underline">Global</a>
-              <a className="hover:underline">Cities</a>
-              <a className="hover:underline">Guides</a>
-            </nav>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="hidden lg:inline-flex items-center justify-center px-4 py-2 border border-slate-200 rounded-md text-sm">
-              🔍
-            </button>
-            <button className="px-4 py-2 bg-white border border-slate-200 rounded-md text-sm">
-              Login
-            </button>
-          </div>
-        </div>
-      </header>
+      {/* Imported Navbar */}
+      <Navbar />
 
       <main className="max-w-7xl mx-auto px-6 py-12">
+        {/* Hero Section */}
         <section
           className="relative rounded-2xl overflow-hidden"
           style={{ minHeight: 420 }}
@@ -64,6 +95,12 @@ export default function CommencementInc20aPage() {
               <div className="mx-auto max-w-[1180px] flex items-center gap-8">
                 <div className="w-7/12">
                   <div className="bg-[rgba(0,0,0,0.45)] border border-[rgba(255,255,255,0.06)] rounded-2xl p-10 backdrop-blur-sm shadow-[0_20px_50px_rgba(2,6,23,0.6)]">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/30 rounded-full px-3 py-1 mb-4">
+                      <div className="w-1.5 h-1.5 bg-amber-400 rounded-full" />
+                      <span className="text-xs font-medium text-amber-300">MCA COMPLIANCE</span>
+                    </div>
+
                     <h1 className="text-white text-[34px] leading-tight font-semibold mb-4">
                       Obtain COB Certificate — Commencement of Business
                     </h1>
@@ -78,20 +115,13 @@ export default function CommencementInc20aPage() {
                       <div className="relative flex items-center w-full">
                         <input
                           placeholder="ENTER COMPANY NAME"
-                          className="w-full max-w-[640px] px-6 py-4 rounded-full bg-transparent text-white placeholder:text-slate-300 border border-[rgba(255,255,255,0.12)] focus:outline-none focus:ring-0"
+                          className="w-full max-w-[640px] px-6 py-4 rounded-full bg-transparent text-white placeholder:text-slate-300 border border-[rgba(255,255,255,0.12)] focus:outline-none focus:ring-1 focus:ring-amber-500"
                         />
                         <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                          <button className="px-5 py-[10px] bg-white rounded-full text-sm font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)]">
+                          <button className="px-5 py-[10px] bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-full text-sm font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)] hover:from-amber-700 hover:to-amber-800 transition-all">
                             Start Filing
                           </button>
                         </div>
-                        <div
-                          className="absolute left-0 top-0 bottom-0 w-full rounded-full pointer-events-none"
-                          style={{
-                            boxShadow:
-                              "inset 0 0 0 1px rgba(255,255,255,0.06), 0 8px 36px rgba(2,6,23,0.45)",
-                          }}
-                        />
                       </div>
                     </div>
                   </div>
@@ -104,30 +134,18 @@ export default function CommencementInc20aPage() {
                       alt="illustration"
                       className="w-full h-auto rounded-2xl shadow-2xl"
                     />
-                    <div
-                      className="absolute -right-4 top-1/4 w-32 h-20 rounded-lg"
-                      style={{ filter: "blur(0px)" }}
-                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 100%)",
-              borderRadius: "1rem",
-            }}
-          />
         </section>
 
+        {/* Features Cards */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-700">
                 👥
               </div>
               <div>
@@ -144,9 +162,9 @@ export default function CommencementInc20aPage() {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-emerald-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-700">
                 ✔
               </div>
               <div>
@@ -164,9 +182,9 @@ export default function CommencementInc20aPage() {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-purple-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-700">
                 ⚡
               </div>
               <div>
@@ -184,12 +202,14 @@ export default function CommencementInc20aPage() {
           </div>
         </section>
 
+        {/* Main Content with Sidebar */}
         <div className="flex flex-col lg:flex-row gap-8 mt-10">
+          {/* Left Content */}
           <article className="flex-1 bg-white p-8 rounded-xl border border-slate-100">
             <div className="mb-6">
               <div className="text-sm text-gray-500 mb-2">
-                IndiaFilings / MCA Services /{" "}
-                <span className="text-indigo-600">
+                Home / MCA Services /{" "}
+                <span className="text-amber-700 font-medium">
                   Commencement of Business
                 </span>
               </div>
@@ -202,7 +222,7 @@ export default function CommencementInc20aPage() {
                 business operations is the declaration of the Commencement of
                 Business. Obtaining the Certificate of Commencement of Business
                 (COB) is mandatory for companies incorporated with share capital
-                after November 2, 2018. IndiaFilings assists with filing Form
+                after November 2, 2018. We assist with filing Form
                 INC-20A and ongoing compliance to make the process simple and
                 reliable.
               </p>
@@ -236,9 +256,9 @@ export default function CommencementInc20aPage() {
                 Significance of COB Certificate
               </h3>
               <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
-                <li>Operational Readiness Confirmation</li>
-                <li>Legitimacy assurance for stakeholders and regulators</li>
-                <li>Enables access to borrowing and business operations</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Operational Readiness Confirmation</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Legitimacy assurance for stakeholders and regulators</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Enables access to borrowing and business operations</li>
               </ul>
             </div>
 
@@ -259,12 +279,12 @@ export default function CommencementInc20aPage() {
                 Documents Required for Form INC-20A
               </h3>
               <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
-                <li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">
                   Proof of payment for share subscription (bank statement)
                 </li>
-                <li>Registered office address verification</li>
-                <li>RBI registration certificate (if applicable)</li>
-                <li>Directors' declaration and board resolution</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Registered office address verification</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">RBI registration certificate (if applicable)</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Directors' declaration and board resolution</li>
               </ul>
             </div>
 
@@ -273,13 +293,13 @@ export default function CommencementInc20aPage() {
                 Procedure to obtain COB (Form INC-20A)
               </h3>
               <ol className="list-decimal list-inside text-sm text-slate-600 space-y-2">
-                <li>Access the MCA portal and download Form INC-20A.</li>
-                <li>Fill company details and attach required documents.</li>
-                <li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Access the MCA portal and download Form INC-20A.</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Fill company details and attach required documents.</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">
                   Affix DSC of an authorised director and get professional
                   certification by CA/CS/CWA.
                 </li>
-                <li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">
                   Submit form, pay fees and note the SRN. Wait for verification
                   and acknowledgement.
                 </li>
@@ -288,43 +308,44 @@ export default function CommencementInc20aPage() {
 
             <div className="mb-6">
               <h3 className="text-lg font-semibold mb-2">
-                Why choose IndiaFilings?
+                Why choose us?
               </h3>
               <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
-                <li>Expert guidance on MCA regulations</li>
-                <li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Expert guidance on MCA regulations</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">
                   End-to-end support: document prep, certification and filing
                 </li>
-                <li>Timely compliance to avoid penalties</li>
-                <li>Transparent process and updates throughout</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Timely compliance to avoid penalties</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">Transparent process and updates throughout</li>
               </ul>
             </div>
 
             <div className="mt-6">
               <h4 className="font-semibold mb-3">Related Guides</h4>
-              <ul className="text-sm text-indigo-600 space-y-2">
-                <li>Certificate of Commencement of Business - A Guide</li>
-                <li>
+              <ul className="text-sm space-y-2">
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Certificate of Commencement of Business - A Guide</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
                   Form INC-20A - Companies (Incorporation) Amendment Rules, 2022
                 </li>
-                <li>Section 10 of Companies Act</li>
-                <li>What is annual compliance of company?</li>
-                <li>Documents Required for Commencement of Business</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Section 10 of Companies Act</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">What is annual compliance of company?</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Documents Required for Commencement of Business</li>
               </ul>
             </div>
           </article>
 
+          {/* Right Sidebar */}
           <aside className="w-full lg:w-80">
             <div className="bg-white p-6 rounded-xl border border-slate-100 mb-6">
               <h4 className="font-semibold mb-3">Related Guides</h4>
-              <ul className="text-sm text-slate-600 space-y-2">
-                <li className="hover:text-indigo-600 cursor-pointer">
+              <ul className="text-sm space-y-2">
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
                   Certificate of Commencement of Business - A Guide
                 </li>
-                <li className="hover:text-indigo-600 cursor-pointer">
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
                   Form INC-20A - Amendment Rules, 2022
                 </li>
-                <li className="hover:text-indigo-600 cursor-pointer">
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
                   Section 10 of Companies Act
                 </li>
               </ul>
@@ -340,124 +361,51 @@ export default function CommencementInc20aPage() {
           </aside>
         </div>
 
+        {/* FAQ Section */}
         <section className="mt-10 bg-white p-6 rounded-xl border border-slate-100">
           <h3 className="text-xl font-semibold mb-4">
             FAQ's on Commencement of Business (COB)
           </h3>
           <ul className="divide-y divide-slate-100">
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What is the Commencement of Business (COB) Certificate?
-                </div>
-                <div className="text-sm text-slate-600">
-                  A mandatory declaration confirming subscribers have paid the
-                  share value and other statutory checks, filed via Form
-                  INC-20A.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  Who must obtain the COB Certificate?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Companies with share capital incorporated after November 2,
-                  2018 must file within 180 days of incorporation.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">Which companies are exempt?</div>
-                <div className="text-sm text-slate-600">
-                  Companies incorporated before Nov 2, 2018 and companies
-                  without share capital are exempt.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What documents are required for Form INC-20A?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Bank statement for subscription money, registered office
-                  proof, directors' declaration, liquidator/CA certification
-                  where needed.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What happens if COB is not filed?
-                </div>
-                <div className="text-sm text-slate-600">
-                  The company cannot commence business, may face penalties and
-                  directors can be penalised; RoC may strike off the company for
-                  non-compliance.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
+            {faqItems.map((item, index) => (
+              <li key={index} className="py-4">
+                <button
+                  className="w-full flex justify-between items-center text-left"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                >
+                  <div className="flex-1">
+                    <div className="font-medium hover:text-amber-700 transition-colors">
+                      {item.question}
+                    </div>
+                    {openFaq === index && (
+                      <div className="text-sm text-slate-600 mt-2">
+                        {item.answer}
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-amber-700 ml-4">
+                    {openFaq === index ? "−" : "+"}
+                  </div>
+                </button>
+              </li>
+            ))}
           </ul>
 
           <div className="mt-4">
-            <button className="px-4 py-2 bg-white border border-slate-200 rounded-md">
+            <button className="px-4 py-2 bg-white border-2 border-amber-600 text-amber-700 rounded-md hover:bg-amber-50 transition-colors font-medium">
               Load More
             </button>
           </div>
         </section>
 
+        {/* Popular Searches */}
         <section className="mt-10 bg-white p-6 rounded-xl border border-slate-100">
           <h4 className="font-semibold mb-4">Popular Searches</h4>
           <div className="flex flex-wrap gap-3">
-            {[
-              "Partnership",
-              "Limited Liability Partnership",
-              "Digital Signature",
-              "Copyright Registration",
-              "Unified Portal",
-              "PAN Card Download",
-              "Nadakacheri",
-              "Flipkart Seller",
-              "Caste Certificate",
-              "IAY",
-              "EPFO Passbook",
-              "Domicile Certificate",
-              "Udyog Aadhaar",
-              "PF Withdrawal",
-              "Karnataka One",
-              "Encumbrance Certificate",
-              "Bonafide Certificate",
-              "Instant PAN Card",
-              "E PAN Card",
-              "Income Certificate",
-              "Marriage Certificate",
-              "Passport Renewal",
-              "Nivesh Mitra",
-              "MSME Registration",
-              "Experience Certificate",
-              "Trademark Status",
-              "Trade License",
-              "Domicile",
-              "eMitra",
-              "UAN",
-              "PICME",
-            ].map((t) => (
+            {popularSearches.map((t) => (
               <span
                 key={t}
-                className="text-xs px-3 py-2 border border-slate-200 rounded-full bg-slate-50"
+                className="text-xs px-3 py-2 border border-slate-200 rounded-full bg-slate-50 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
               >
                 {t}
               </span>
@@ -466,43 +414,44 @@ export default function CommencementInc20aPage() {
         </section>
       </main>
 
+      {/* Footer */}
       <footer className="bg-slate-100 mt-12">
         <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
-            <h5 className="font-semibold mb-4">IndiaFilings</h5>
+            <h5 className="font-semibold mb-4">Company</h5>
             <ul className="text-sm text-slate-600 space-y-2">
-              <li>About IndiaFilings</li>
-              <li>Careers</li>
-              <li>Contact Us</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">About Us</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Careers</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Contact Us</li>
             </ul>
           </div>
           <div>
             <h5 className="font-semibold mb-4">Platforms</h5>
             <ul className="text-sm text-slate-600 space-y-2">
-              <li>Business Search</li>
-              <li>Trademark Search</li>
-              <li>Filings.AE for UAE</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Business Search</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Trademark Search</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Filings.AE for UAE</li>
             </ul>
           </div>
           <div>
             <h5 className="font-semibold mb-4">Usage</h5>
             <ul className="text-sm text-slate-600 space-y-2">
-              <li>Terms &amp; Conditions</li>
-              <li>Privacy Policy</li>
-              <li>Refund Policy</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Terms &amp; Conditions</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Privacy Policy</li>
+              <li className="hover:text-amber-700 cursor-pointer transition-colors">Refund Policy</li>
             </ul>
           </div>
         </div>
         <div className="bg-white border-t border-slate-200 py-6">
           <div className="max-w-7xl mx-auto px-6 text-sm text-slate-500">
-            Copyright © {new Date().getFullYear()} IndiaFilings Private Limited.
-            All rights reserved.
+            Copyright © {new Date().getFullYear()} All rights reserved.
           </div>
         </div>
       </footer>
 
+      {/* WhatsApp CTA */}
       <div className="fixed right-6 bottom-6 z-50">
-        <button className="px-5 py-3 rounded-full bg-emerald-500 text-white shadow-lg">
+        <button className="px-5 py-3 rounded-full bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-lg hover:from-amber-700 hover:to-amber-800 transition-all">
           Live Chat with Experts
         </button>
       </div>

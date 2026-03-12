@@ -1,59 +1,75 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 export default function RemoveDirectorPage() {
-  return (
-    <div className="min-h-screen bg-white text-slate-800 antialiased">
-      <header className="w-full border-b border-slate-200 bg-white sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <img
-              src="/images/india-logo.jpg"
-              alt="logo"
-              className="w-25 h-auto object-contain"
-            />
-            <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-700">
-              <a className="hover:underline">Startup</a>
-              <a className="hover:underline">Registrations</a>
-              <a className="hover:underline">Trademark</a>
-              <a className="hover:underline">GST</a>
-              <a className="hover:underline">Income Tax</a>
-              <a className="hover:underline">MCA</a>
-              <a className="hover:underline">Compliance</a>
-              <a className="hover:underline">Personal</a>
-              <a className="hover:underline">Global</a>
-              <a className="hover:underline">Cities</a>
-              <a className="hover:underline">Guides</a>
-            </nav>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="hidden lg:inline-flex items-center justify-center px-4 py-2 border border-slate-200 rounded-md text-sm">
-              🔍
-            </button>
-            <button className="px-4 py-2 bg-white border border-slate-200 rounded-md text-sm">
-              Login
-            </button>
-          </div>
-        </div>
-      </header>
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <section
-          className="relative rounded-2xl overflow-hidden"
-          style={{ minHeight: 420 }}
-        >
+  const faqItems = [
+    "What prompts the removal of a director in a company?",
+    "What governs the director removal process?",
+    "Can a director be removed for not attending meetings?",
+    "What is the role of shareholders in director removal?",
+    "What are the steps for voluntary director resignation?",
+    "What is an Ordinary Resolution in the context of director removal?",
+    "What is the significance of Form DIR-12?",
+    "Are there penalties for late filing of Form DIR-12?",
+    "How does director removal affect the company?",
+    "What is the importance of a Board Meeting in director removal?",
+  ];
+
+  const faqAnswers: Record<number, string> = {
+    0: "Reasons include disqualification, misconduct, non-attendance or voluntary resignation.",
+    1: "The Companies Act 2013 and related rules govern the removal procedure.",
+    2: "Yes — absence for 12 consecutive months can result in vacation of office under Section 167.",
+    3: "Shareholders can remove directors by passing resolutions in general meetings, following statutory notice and hearing requirements.",
+    4: "Submit resignation in writing, Board acknowledgement, file DIR-12 within 30 days, and update statutory registers.",
+    5: "An Ordinary Resolution is a shareholder vote passed by a simple majority used for standard corporate actions including removal in many cases.",
+    6: "Form DIR-12 is the statutory form to notify the Registrar of Companies about appointment or cessation of directors.",
+    7: "Yes — penalties increase with delay; timely filing avoids escalated government fees and legal consequences.",
+    8: "It affects governance, authority, and potentially reputation; proper procedure helps minimise disruption.",
+    9: "The Board Meeting is required to acknowledge resignation, pass necessary resolutions and initiate filings to the ROC.",
+  };
+
+  const ASSETS = {
+    logo: "/images/india-logo.jpg",
+    hero: "/images/hero.png",
+    remove: "/images/remove.png",
+    ad: "/images/Screenshot (489).png",
+    whatsapp: "/images/whatsapp.svg",
+    cartIcon: "/images/cart-icon.svg",
+    indiaFlag: "/images/india-flag.png",
+    ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+      {/* Navbar - Imported */}
+      <Navbar />
+
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-5">
+        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
+          Home / MCA Services /{" "}
+          <span className="text-amber-700 font-medium">Remove Director</span>
+        </div>
+      </div>
+
+      <main className="max-w-[1180px] mx-auto px-6 py-8">
+        {/* Hero Section */}
+        <section className="relative rounded-2xl overflow-hidden" style={{ minHeight: 420 }}>
           <div className="absolute inset-0 rounded-2xl overflow-hidden">
             <img
-              src="/images/hero.png"
+              src={ASSETS.hero}
               alt="hero-bg"
               className="w-full h-full object-cover"
             />
             <div
               className="absolute inset-0"
               style={{
-                background:
-                  "radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(2,6,23,0.7) 100%)",
+                background: "radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(2,6,23,0.7) 100%)",
                 opacity: 0.95,
               }}
             />
@@ -78,20 +94,13 @@ export default function RemoveDirectorPage() {
                       <div className="relative flex items-center w-full">
                         <input
                           placeholder="ENTER COMPANY NAME"
-                          className="w-full max-w-[640px] px-6 py-4 rounded-full bg-transparent text-white placeholder:text-slate-300 border border-[rgba(255,255,255,0.12)] focus:outline-none focus:ring-0"
+                          className="w-full max-w-[640px] px-6 py-4 rounded-full bg-transparent text-white placeholder:text-slate-300 border border-[rgba(255,255,255,0.12)] focus:outline-none focus:ring-1 focus:ring-amber-600"
                         />
                         <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                          <button className="px-5 py-[10px] bg-white rounded-full text-sm font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)]">
+                          <button className="px-5 py-[10px] bg-white rounded-full text-sm font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)] hover:bg-amber-50 transition-colors text-amber-700">
                             Remove Director
                           </button>
                         </div>
-                        <div
-                          className="absolute left-0 top-0 bottom-0 w-full rounded-full pointer-events-none"
-                          style={{
-                            boxShadow:
-                              "inset 0 0 0 1px rgba(255,255,255,0.06), 0 8px 36px rgba(2,6,23,0.45)",
-                          }}
-                        />
                       </div>
                     </div>
                   </div>
@@ -100,41 +109,29 @@ export default function RemoveDirectorPage() {
                 <div className="w-5/12 flex justify-end pr-6">
                   <div className="relative w-[340px]">
                     <img
-                      src="/images/remove.png"
+                      src={ASSETS.remove}
                       alt="phone"
                       className="w-full h-auto rounded-2xl shadow-2xl"
-                    />
-                    <div
-                      className="absolute -right-4 top-1/4 w-32 h-20 rounded-lg"
-                      style={{ filter: "blur(0px)" }}
                     />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 100%)",
-              borderRadius: "1rem",
-            }}
-          />
         </section>
 
+        {/* Features Grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 👥
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-slate-900">
                   Dedicated support, flexible cost
                 </h3>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-gray-600">
                   Get an experienced accountant to manage your ledgers, vendor
                   &amp; customer reconciliations, bank reconciliations, and
                   monthly close with precision and reliability - all at a
@@ -144,16 +141,16 @@ export default function RemoveDirectorPage() {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-emerald-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 ✔
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-slate-900">
                   Accurate & timely compliance
                 </h3>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-gray-600">
                   End-to-end Director Management for Pvt Ltd Companies &amp;
                   LLPs – filing of DIR-3 KYC, Director Appointments (DIR-12),
                   Director Resignations (DIR-12), Director Disclosures (MGT-6),
@@ -166,16 +163,16 @@ export default function RemoveDirectorPage() {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-purple-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 ⚡
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-slate-900">
                   Powered by LEDGERS
                 </h3>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-gray-600">
                   Experience seamless automation with real-time bank feeds,
                   smart reconciliations, integrated e-invoice/e-way bill
                   generation, secure document vault, and fully audit-ready
@@ -186,17 +183,15 @@ export default function RemoveDirectorPage() {
           </div>
         </section>
 
+        {/* Main Content with Sidebar */}
         <div className="flex flex-col lg:flex-row gap-8 mt-10">
-          <article className="flex-1 bg-white p-8 rounded-xl border border-slate-100">
+          {/* Left Column - Article */}
+          <article className="flex-1 bg-white p-8 rounded-xl border border-gray-200">
             <div className="mb-6">
-              <div className="text-sm text-gray-500 mb-2">
-                IndiaFilings / MCA Services /{" "}
-                <span className="text-indigo-600">Remove Director</span>
-              </div>
-              <h2 className="text-2xl font-semibold mb-4">
+              <h2 className="text-2xl font-semibold mb-4 text-slate-900">
                 Removal of Director from a Company
               </h2>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-gray-600">
                 Company Directors oversee the management and operations of a
                 business, while shareholders own the company. Situations may
                 arise where shareholders opt to remove a director due to
@@ -209,7 +204,7 @@ export default function RemoveDirectorPage() {
                 must be conducted fairly, transparently, and in the company's
                 best interest.
               </p>
-              <p className="text-sm text-slate-600 mt-4">
+              <p className="text-sm text-gray-600 mt-4">
                 IndiaFilings specialises in navigating the intricacies of the
                 director removal or resignation process, ensuring full
                 compliance with legal standards and meticulous attention to
@@ -220,15 +215,15 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Reasons for Director Removal
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-gray-600">
                 Under The Companies Act 2013, it's mandatory for a private
                 limited company to appoint at least two directors to commence
                 its operations.
               </p>
-              <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
+              <ul className="list-disc pl-5 mt-3 text-sm text-gray-600 space-y-2">
                 <li>
                   Being disqualified as per the criteria set out in the
                   Companies Act.
@@ -255,14 +250,14 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Methods for Director Removal from a Company
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-gray-600">
                 There are three primary methods to remove a director from a
                 company:
               </p>
-              <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
+              <ul className="list-disc pl-5 mt-3 text-sm text-gray-600 space-y-2">
                 <li>
                   Resignation by Directors: Directors resign voluntarily by
                   giving notice to the company.
@@ -281,10 +276,10 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Law Governing the Director Removal
               </h3>
-              <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
+              <ul className="list-disc pl-5 mt-3 text-sm text-gray-600 space-y-2">
                 <li>
                   Section 169: Explains how a company can legally remove a
                   director and the required steps.
@@ -306,10 +301,10 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Essential Requirements for Director Removal
               </h3>
-              <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
+              <ul className="list-disc pl-5 mt-3 text-sm text-gray-600 space-y-2">
                 <li>
                   Issuance of Special Notice: A special notice must be issued to
                   initiate the removal process.
@@ -335,18 +330,18 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Procedure for Director Removal
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-gray-600">
                 The procedure involves multiple steps depending on the method
                 used. Below are key procedural elements for common scenarios.
               </p>
 
-              <h4 className="font-semibold mt-4">
+              <h4 className="font-semibold mt-4 text-slate-900">
                 Director's Voluntary Resignation
               </h4>
-              <p className="text-sm text-slate-600 mt-2">
+              <p className="text-sm text-gray-600 mt-2">
                 A director's resignation becomes effective on the date the
                 company receives the notice or on a later date specified by the
                 director, whichever is later. Even after stepping down, a
@@ -354,10 +349,10 @@ export default function RemoveDirectorPage() {
                 during their term.
               </p>
 
-              <h4 className="font-semibold mt-4">
+              <h4 className="font-semibold mt-4 text-slate-900">
                 Mandatory Steps on Resignation
               </h4>
-              <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
+              <ul className="list-disc pl-5 mt-3 text-sm text-gray-600 space-y-2">
                 <li>
                   Schedule a Board Meeting in line with Section 173 and
                   Secretarial Standard-1 (SS-1).
@@ -384,8 +379,8 @@ export default function RemoveDirectorPage() {
                 </li>
               </ul>
 
-              <h4 className="font-semibold mt-4">Submission of Forms</h4>
-              <p className="text-sm text-slate-600 mt-2">
+              <h4 className="font-semibold mt-4 text-slate-900">Submission of Forms</h4>
+              <p className="text-sm text-gray-600 mt-2">
                 File Form DIR-12 with the Registrar of Companies within 30 days
                 of the director's resignation, attaching a certified copy of the
                 Board Resolution, the resignation notice and proof of cessation.
@@ -395,10 +390,10 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Director Absence from Board Meetings for 12 Months
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-gray-600">
                 If a director fails to attend any board meetings for twelve
                 months without leave, their office may be vacated under Section
                 167. Companies should acknowledge the vacancy, file DIR-12 and
@@ -407,23 +402,10 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
-                Director Removal by Shareholders
-              </h3>
-              <p className="text-sm text-slate-600">
-                To remove a director via shareholder resolution, the company
-                should follow a transparent process including convening board
-                and general meetings, issuing proper notices (21 days), allowing
-                the director to be heard, and filing DIR-11 and DIR-12 after the
-                resolution passes.
-              </p>
-            </div>
-
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Penalties for Delayed Submission of Form DIR-12
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-gray-600">
                 Penalties escalate with delay: 30–60 days — double the
                 government fees; 60–90 days — four times the fees; beyond 90
                 days — ten times; beyond 180 days — twelve times and potential
@@ -433,34 +415,10 @@ export default function RemoveDirectorPage() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
-                Impacts and Considerations of Director Removal
-              </h3>
-              <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
-                <li>
-                  End of Directorial Responsibilities and revocation of
-                  authority.
-                </li>
-                <li>
-                  Potential legal ramifications if procedural requirements are
-                  not met.
-                </li>
-                <li>
-                  Impact on company reputation; handle removal discreetly and
-                  professionally.
-                </li>
-                <li>
-                  Possible need to file amendments under GST, Shops &amp;
-                  Establishment, EPF/ESI and other applicable laws.
-                </li>
-              </ul>
-            </div>
-
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">
                 Why choose IndiaFilings for Director removal?
               </h3>
-              <ul className="list-disc pl-5 mt-3 text-sm text-slate-600 space-y-2">
+              <ul className="list-disc pl-5 mt-3 text-sm text-gray-600 space-y-2">
                 <li>
                   Expertise and Experience: Professionals well-versed in
                   corporate law and director removal procedures.
@@ -479,39 +437,92 @@ export default function RemoveDirectorPage() {
                 </li>
               </ul>
             </div>
-
-            <div className="mt-6">
-              <h4 className="font-semibold mb-3">Related Guides</h4>
-              <ul className="text-sm text-indigo-600 space-y-2">
-                <li>
-                  Companies Rules – Appointment and Qualification of Director
-                </li>
-                <li>Independent Director – Companies Act 2013</li>
-                <li>Alternate Director – Companies Act 2013</li>
-                <li>Women Directors</li>
-              </ul>
-            </div>
           </article>
 
+          {/* Right Column - Sidebar */}
           <aside className="w-full lg:w-80">
-            <div className="bg-white p-6 rounded-xl border border-slate-100 mb-6">
-              <h4 className="font-semibold mb-3">Related Guides</h4>
-              <ul className="text-sm text-slate-600 space-y-2">
-                <li className="hover:text-indigo-600 cursor-pointer">
+            {/* Cart Widget */}
+            <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28 border border-gray-200">
+              <div className="text-center text-gray-600">
+                <img
+                  src={ASSETS.cartIcon}
+                  alt="cart"
+                  className="mx-auto h-12 w-auto mb-3"
+                />
+                <h3 className="font-semibold text-slate-900">Your cart is empty</h3>
+                <p className="text-sm mt-2 text-gray-600">
+                  Browse our services and add some services in cart!
+                </p>
+              </div>
+
+              <div className="mt-6 text-center">
+                <div className="text-sm text-gray-500">
+                  Existing User?{" "}
+                  <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">
+                    Login
+                  </a>
+                </div>
+              </div>
+
+              <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                  placeholder="Name"
+                />
+                <input
+                  className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                  placeholder="Email"
+                />
+                <div className="flex gap-2">
+                  <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
+                    <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
+                    <span className="text-sm">+91</span>
+                  </div>
+                  <input
+                    className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                    placeholder="Phone"
+                  />
+                </div>
+
+                <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
+                  <ShoppingBag size={16} /> Get Started
+                </button>
+
+                <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+                  <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Secure · No spam · Instant confirmation</span>
+                </div>
+              </form>
+            </div>
+
+            {/* Related Guides */}
+            <div className="bg-white p-6 rounded-xl border border-gray-200 mb-6">
+              <h4 className="font-semibold mb-3 text-slate-900">Related Guides</h4>
+              <ul className="text-sm text-gray-600 space-y-2">
+                <li className="hover:text-amber-700 cursor-pointer hover:underline">
                   DIN Number Registration and Search
                 </li>
-                <li className="hover:text-indigo-600 cursor-pointer">
+                <li className="hover:text-amber-700 cursor-pointer hover:underline">
                   Articles of Association (AOA)
                 </li>
-                <li className="hover:text-indigo-600 cursor-pointer">
+                <li className="hover:text-amber-700 cursor-pointer hover:underline">
                   Guide to Annual General Meeting
+                </li>
+                <li className="hover:text-amber-700 cursor-pointer hover:underline">
+                  Independent Director – Companies Act 2013
+                </li>
+                <li className="hover:text-amber-700 cursor-pointer hover:underline">
+                  Women Directors
                 </li>
               </ul>
             </div>
 
-            <div className="sticky top-28 bg-white p-4 rounded-xl border border-slate-100">
+            {/* Ad */}
+            <div className="sticky top-28 bg-white p-4 rounded-xl border border-gray-200">
               <img
-                src="/images/Screenshot (489).png"
+                src={ASSETS.ad}
                 alt="ad"
                 className="w-full rounded-lg"
               />
@@ -519,155 +530,43 @@ export default function RemoveDirectorPage() {
           </aside>
         </div>
 
-        <section className="mt-10 bg-white p-6 rounded-xl border border-slate-100">
-          <h3 className="text-xl font-semibold mb-4">
+        {/* FAQ Section */}
+        <section className="mt-10 bg-white p-6 rounded-xl border border-gray-200">
+          <h3 className="text-xl font-semibold mb-4 text-slate-900">
             FAQ's on Remove Director
           </h3>
-          <ul className="divide-y divide-slate-100">
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What prompts the removal of a director in a company?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Reasons include disqualification, misconduct, non-attendance
-                  or voluntary resignation.
-                </div>
+          <div className="space-y-0">
+            {faqItems.map((q, i) => (
+              <div key={i} className="border-b border-gray-200 last:border-b-0">
+                <button
+                  className="w-full text-left py-4 flex justify-between items-center text-sm"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
+                  <span className="text-slate-800 font-medium">{q}</span>
+                  <span className="text-amber-700 flex items-center gap-2">
+                    {openFaq === i ? "−" : <Plus size={14} />}
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-2 pb-4 text-sm text-gray-600">
+                    {faqAnswers[i]}
+                  </div>
+                )}
               </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What governs the director removal process?
-                </div>
-                <div className="text-sm text-slate-600">
-                  The Companies Act 2013 and related rules govern the removal
-                  procedure.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  Can a director be removed for not attending meetings?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Yes — absence for 12 consecutive months can result in vacation
-                  of office under Section 167.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What is the role of shareholders in director removal?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Shareholders can remove directors by passing resolutions in
-                  general meetings, following statutory notice and hearing
-                  requirements.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What are the steps for voluntary director resignation?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Submit resignation in writing, Board acknowledgement, file
-                  DIR-12 within 30 days, and update statutory registers.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What is an Ordinary Resolution in the context of director
-                  removal?
-                </div>
-                <div className="text-sm text-slate-600">
-                  An Ordinary Resolution is a shareholder vote passed by a
-                  simple majority used for standard corporate actions including
-                  removal in many cases.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What is the significance of Form DIR-12?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Form DIR-12 is the statutory form to notify the Registrar of
-                  Companies about appointment or cessation of directors.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  Are there penalties for late filing of Form DIR-12?
-                </div>
-                <div className="text-sm text-slate-600">
-                  Yes — penalties increase with delay; timely filing avoids
-                  escalated government fees and legal consequences.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  How does director removal affect the company?
-                </div>
-                <div className="text-sm text-slate-600">
-                  It affects governance, authority, and potentially reputation;
-                  proper procedure helps minimise disruption.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-
-            <li className="py-4 flex justify-between items-center">
-              <div>
-                <div className="font-medium">
-                  What is the importance of a Board Meeting in director removal?
-                </div>
-                <div className="text-sm text-slate-600">
-                  The Board Meeting is required to acknowledge resignation, pass
-                  necessary resolutions and initiate filings to the ROC.
-                </div>
-              </div>
-              <div className="text-slate-400">+</div>
-            </li>
-          </ul>
+            ))}
+          </div>
 
           <div className="mt-4">
-            <button className="px-4 py-2 bg-white border border-slate-200 rounded-md">
+            <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
               Load More
             </button>
           </div>
         </section>
 
-        <section className="mt-10 bg-white p-6 rounded-xl border border-slate-100">
-          <h4 className="font-semibold mb-4">Popular Searches</h4>
-          <div className="flex flex-wrap gap-3">
+        {/* Popular Searches */}
+        <section className="mt-10 bg-white p-6 rounded-xl border border-gray-200">
+          <h4 className="font-semibold mb-4 text-slate-900">Popular Searches</h4>
+          <div className="flex flex-wrap gap-2">
             {[
               "Partnership",
               "Limited Liability Partnership",
@@ -701,7 +600,7 @@ export default function RemoveDirectorPage() {
             ].map((t) => (
               <span
                 key={t}
-                className="text-xs px-3 py-2 border border-slate-200 rounded-full bg-slate-50"
+                className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
               >
                 {t}
               </span>
@@ -710,45 +609,10 @@ export default function RemoveDirectorPage() {
         </section>
       </main>
 
-      <footer className="bg-slate-100 mt-12">
-        <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <h5 className="font-semibold mb-4">IndiaFilings</h5>
-            <ul className="text-sm text-slate-600 space-y-2">
-              <li>About IndiaFilings</li>
-              <li>Careers</li>
-              <li>Contact Us</li>
-            </ul>
-          </div>
-          <div>
-            <h5 className="font-semibold mb-4">Platforms</h5>
-            <ul className="text-sm text-slate-600 space-y-2">
-              <li>Business Search</li>
-              <li>Trademark Search</li>
-              <li>Filings.AE for UAE</li>
-            </ul>
-          </div>
-          <div>
-            <h5 className="font-semibold mb-4">Usage</h5>
-            <ul className="text-sm text-slate-600 space-y-2">
-              <li>Terms &amp; Conditions</li>
-              <li>Privacy Policy</li>
-              <li>Refund Policy</li>
-            </ul>
-          </div>
-        </div>
-        <div className="bg-white border-t border-slate-200 py-6">
-          <div className="max-w-7xl mx-auto px-6 text-sm text-slate-500">
-            Copyright © {new Date().getFullYear()} IndiaFilings Private Limited.
-            All rights reserved.
-          </div>
-        </div>
-      </footer>
-
-      <div className="fixed right-6 bottom-6 z-50">
-        <button className="px-5 py-3 rounded-full bg-emerald-500 text-white shadow-lg">
-          Live Chat with Experts
-        </button>
+      {/* WhatsApp CTA */}
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
+        <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
+        <span className="font-semibold text-sm">Live Chat with Experts</span>
       </div>
     </div>
   );

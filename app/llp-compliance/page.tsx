@@ -1,39 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
   hero: "https://img.indiafilings.com/catalog/llp-compliance-india.webp",
+  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+  whatsapp: "/images/whatsapp.svg",
+  cartIcon: "/images/cart-icon.svg",
+  indiaFlag: "/images/india-flag.png",
+  adRight1: "/images/company-compliance-ad.png",
+  dinEkyc: "/images/din-ekyc-ad.png",
 };
-
-const MCA_DROPDOWN_LINKS = [
-  { title: "Company Compliance", href: "/MCA/company-compliance" },
-  { title: "Director Change", href: "/MCA/director-change" },
-  { title: "AOA Amendment", href: "/MCA/aoa-amendment" },
-  { title: "LLP Compliance", href: "/MCA/llp-compliance" },
-  { title: "Remove Director", href: "/MCA/remove-director" },
-  {
-    title: "Authorized Capital Increase",
-    href: "/authorized-capital-increase",
-  },
-  { title: "OPC Compliance", href: "/MCA/opc-compliance" },
-  { title: "ADT-1 Filing", href: "/MCA/adt-1-filing" },
-  { title: "Share Transfer", href: "/MCA/share-transfer" },
-  { title: "Name Change - Company", href: "/MCA/name-change-company" },
-  { title: "DPT-3 Filing", href: "/MCA/dpt-3-filing" },
-  { title: "Demat of Shares", href: "/MCA/demat-of-shares" },
-  { title: "Registered Office Change", href: "/MCA/registered-office-change" },
-  { title: "LLP Form 11 Filing", href: "/MCA/llp-form-11-filing" },
-  { title: "Winding Up - LLP", href: "/MCA/winding-up-llp" },
-  { title: "DIN eKYC Filing", href: "/MCA/din-ekyc-filing" },
-  { title: "Dormant Status Filing", href: "/MCA/dormant-status-filing" },
-  { title: "Winding Up - Company", href: "MCA/winding-up-company" },
-  { title: "DIN Reactivation", href: "/MCA/din-reactivation" },
-  { title: "MOA Amendment", href: "/MCA/moa-amendment" },
-  { title: "Commencement (INC-20A)", href: "/MCA/commencement-inc-20a" },
-];
 
 const pricingPlans = [
   {
@@ -114,1056 +94,244 @@ const popularTags = [
   "MSME Registration",
 ];
 
-/* -------- Nav item (same pattern as MCA page) -------- */
-
-interface NavItemProps {
-  children: React.ReactNode;
-  hasDropdown?: boolean;
-  isActive?: boolean;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-}
-
-const NavItem: React.FC<NavItemProps> = ({
-  children,
-  hasDropdown = false,
-  isActive = false,
-  onMouseEnter,
-  onMouseLeave,
-}) => (
-  <div
-    className="relative"
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-  >
-    <button
-      className={`text-sm flex items-center gap-1 hover:text-slate-900 ${
-        isActive ? "text-slate-900 font-medium" : "text-slate-700"
-      }`}
-    >
-      {children}
-      {hasDropdown && <ChevronDown className="w-3 h-3" />}
-    </button>
-  </div>
-);
-
-/* ----------------- Header with MCA dropdown ----------------- */
-
-const Header: React.FC = () => {
-  const [showMcaDropdown, setShowMcaDropdown] = useState(false);
-
-  return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-
-          <nav className="flex items-center gap-6 text-sm" aria-label="Main">
-            {["Startup", "Registrations", "Trademark"].map((item) => (
-              <NavItem key={item}>{item}</NavItem>
-            ))}
-
-            <NavItem>GST</NavItem>
-            <NavItem>Income Tax</NavItem>
-
-            <NavItem
-              hasDropdown
-              isActive
-              onMouseEnter={() => setShowMcaDropdown(true)}
-              onMouseLeave={() => setShowMcaDropdown(false)}
-            >
-              MCA
-              {showMcaDropdown && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[780px]">
-                  <div className="bg-white rounded-lg shadow-xl border border-slate-200 p-6">
-                    <div className="grid grid-cols-3 gap-x-6 gap-y-2">
-                      {MCA_DROPDOWN_LINKS.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-                        >
-                          {link.title}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </NavItem>
-
-            {["Compliance", "Personal", "Global", "Cities", "Guides"].map(
-              (item) => (
-                <NavItem key={item}>{item}</NavItem>
-              )
-            )}
-
-            <button className="px-4 py-1.5 border border-slate-300 text-sm rounded-md hover:bg-slate-50">
-              Login
-            </button>
-          </nav>
-        </div>
-      </div>
-    </header>
-  );
-};
-
-const Footer: React.FC = () => {
-  return (
-    <footer className="pt-10 pb-6">
-      <div
-        className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
-        style={{
-          backgroundColor: "#f1f5f9",
-          backgroundImage:
-            "radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%), radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%)",
-          backgroundSize: "cover, cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-7.5 pt-7 pb-10 bg-slate-200 rounded-xl">
-          <div className="p-5 lg:p-7.5 lg:pt-4">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-3">
-                <span className="text-lg font-medium leading-none text-slate-950 mb-4">
-                  IndiaFilings
-                </span>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/about-us"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    About IndiaFilings
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/careers"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Careers
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/contact-us"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Contact Us
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="p-5 lg:p-7.5 lg:pt-4">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-3">
-                <span className="text-lg font-medium leading-none text-slate-950 mb-4">
-                  Platforms
-                </span>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/search/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Business Search
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/trademark-search"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Trademark Search
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://filings.ae/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Filings.AE for UAE
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="p-5 lg:p-7.5 lg:pt-4">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-3">
-                <span className="text-lg font-medium leading-none text-slate-950 mb-4">
-                  Usage
-                </span>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/termsconditions"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Terms &amp; Conditions
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/privacypolicy"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Privacy Policy
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/refund-policy"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Refund Policy
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="p-5 lg:p-7.5 lg:pt-4">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-3">
-                <span className="text-lg font-medium leading-none text-slate-950 mb-4 hidden md:block">
-                  &nbsp;
-                </span>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/confidentiality-policy"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Confidentiality Policy
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/disclaimer"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    Disclaimer Policy
-                  </span>
-                </a>
-                <a
-                  className="leading-none hover:text-primary-active"
-                  href="https://www.indiafilings.com/review"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="flex text-sm text-black leading-5 items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                      aria-hidden
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    IndiaFilings Review
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-3 pt-3">
-          <div className="max-w-screen-2xl mx-auto px-3 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-slate-500">
-              © 2025 IndiaFilings. All Rights Reserved.
-            </p>
-            <p className="text-xs text-slate-500">
-              Unless otherwise indicated, all materials on these pages are
-              copyrighted by IndiaFilings Private Limited. All rights reserved.
-            </p>
-            <div className="flex items-center gap-2">
-              <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
-                href="https://www.facebook.com"
-                aria-label="facebook"
-              >
-                FB
-              </a>
-              <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
-                href="https://twitter.com"
-                aria-label="twitter"
-              >
-                X
-              </a>
-              <a
-                className="text-slate-500 hover:text-slate-700 text-sm"
-                href="https://www.youtube.com"
-                aria-label="youtube"
-              >
-                YT
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-export default function LlpCompliancePage(): React.ReactElement {
+export default function LlpCompliancePage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [gstChecked, setGstChecked] = useState(false);
   const [companyInput, setCompanyInput] = useState("");
 
+  const faqItems = [
+    "What is LLP compliance?",
+    "What are the annual compliance requirements for an LLP?",
+    "What is Form 8 and Form 11 in LLP compliance?",
+    "What is the due date for LLP annual filing?",
+    "What is the penalty for late filing of LLP returns?",
+    "Is GST registration mandatory for LLPs?",
+    "Can an LLP file income tax return?",
+    "What is DIN KYC for designated partners?",
+  ];
+
+  const faqAnswers: Record<number, string> = {
+    0: "LLP compliance refers to the mandatory filings and legal requirements that a Limited Liability Partnership must fulfill under the Limited Liability Partnership Act, 2008 and Income Tax Act.",
+    1: "Annual compliance includes filing Form 8 (Statement of Account & Solvency) and Form 11 (Annual Return), Income Tax Return filing, and DIN KYC for designated partners.",
+    2: "Form 8 is the Statement of Account and Solvency, while Form 11 is the Annual Return of an LLP. Both must be filed annually with the ROC.",
+    3: "The due date for filing Form 8 and Form 11 is 30th October for the financial year ending 31st March of the previous year.",
+    4: "Late filing attracts additional fees - ₹100 per day for each form. Prolonged non-filing may lead to strike off of the LLP from the register.",
+    5: "GST registration is mandatory for LLPs if their aggregate turnover exceeds ₹20 lakhs (₹10 lakhs for special category states) or if they engage in inter-state supply.",
+    6: "Yes, LLPs are required to file Income Tax Return (ITR-5) annually, regardless of whether they have income or not.",
+    7: "DIN KYC (Form DIR-3 KYC) is an annual filing required for each designated partner of an LLP to update their details with the MCA.",
+  };
+
   return (
-    <div className="page">
-      <Header />
-      <main>
-        <section className="site-banner">
-          <div className="banner-inner">
-            <div className="banner-cta">
-              <div className="lead-eyebrow">LLP Compliance</div>
-              <h1 className="lead-title">
+    <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+      {/* Navbar - Imported */}
+      <Navbar />
+
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-5">
+        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
+          Home / MCA Services /{" "}
+          <span className="text-amber-700 font-medium">LLP Compliance</span>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <main className="max-w-[1180px] mx-auto px-6 py-8">
+        {/* Hero Section */}
+        <section className="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
+          <div className="flex flex-col lg:flex-row">
+            {/* Left Content */}
+            <div className="lg:w-1/2 p-8 lg:p-10">
+              <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-4">
+                <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                <span className="text-xs font-medium text-amber-700">LLP COMPLIANCE</span>
+              </div>
+              
+              <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
                 Simple, end-to-end LLP bookkeeping and compliance
               </h1>
-              <p className="lead-sub">
+              
+              <p className="text-gray-600 text-lg mb-6">
                 Stay on top of all ROC and Income Tax deadlines for your Limited
                 Liability Partnership with LEDGERS platform and a dedicated
                 compliance team.
               </p>
+
               <form
-                className="hero-form"
+                className="flex flex-col sm:flex-row gap-3"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  alert(
-                    `LLP compliance demo requested for "${
-                      companyInput || "Unnamed LLP"
-                    }"`
-                  );
+                  alert(`LLP compliance demo requested for "${companyInput || "Unnamed LLP"}"`);
                 }}
               >
                 <input
-                  id="llp-name"
-                  className="hero-input"
+                  className="flex-1 border border-gray-200 rounded-md px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
                   placeholder="ENTER LLP NAME"
-                  aria-label="Enter LLP name"
                   value={companyInput}
                   onChange={(e) => setCompanyInput(e.target.value)}
                 />
-                <button type="submit" className="hero-button">
+                <button 
+                  type="submit"
+                  className="bg-gradient-to-r from-amber-700 to-amber-800 text-white px-6 py-3 rounded-md font-medium hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg"
+                >
                   Book Demo
                 </button>
               </form>
             </div>
-            <div className="banner-media">
-              <div className="media-frame">
-                <img
-                  src={ASSETS.hero}
-                  alt="LLP compliance"
-                  className="w-full h-[420px] object-contain"
-                />
-                <div className="media-badge">LLP Compliance Simplified</div>
-              </div>
+
+            {/* Right Image */}
+            <div className="lg:w-1/2 bg-gradient-to-br from-amber-50 to-amber-100 p-8 flex items-center justify-center">
+              <img
+                src={ASSETS.hero}
+                alt="LLP compliance"
+                className="w-full max-w-md h-auto object-contain rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </section>
-        <section id="pricing" className="pricing-section">
-          <div className="pricing-inner">
-            <div className="pricing-header">
-              <h2>LLP Compliance Made Easy</h2>
-              <p>
-                Pick the right plan for your LLP and avoid penalties, delays and
-                strike-off risk.
-              </p>
-            </div>
-            <div className="pricing-cards">
-              {pricingPlans.map((plan) => (
-                <article
-                  key={plan.name}
-                  className={`pricing-card ${plan.popular ? "popular" : ""}`}
-                >
-                  {plan.popular && (
-                    <div className="popular-chip">Most popular</div>
-                  )}
-                  <div className="card-top">
-                    <div className="card-title">{plan.name}</div>
-                    <div className="card-price">{plan.price}</div>
-                    <div className="card-subtitle text-xs text-slate-500 mt-1">
-                      {plan.subtitle}
-                    </div>
+
+        {/* Pricing Section */}
+        <section className="mb-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">LLP Compliance Made Easy</h2>
+            <p className="text-gray-600">
+              Pick the right plan for your LLP and avoid penalties, delays and strike-off risk.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pricingPlans.map((plan) => (
+              <div
+                key={plan.name}
+                className={`bg-white rounded-lg shadow-sm border-2 p-6 relative ${
+                  plan.popular ? 'border-amber-600' : 'border-gray-200'
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-amber-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                    Most Popular
                   </div>
-                  <button
-                    className="select-btn"
-                    onClick={() => alert(`Selected plan: ${plan.name}`)}
-                  >
-                    Select
-                  </button>
-                  <ul className="plan-features">
-                    {plan.features.map((f) => (
-                      <li key={f}>
-                        <span className="feat-check">✔</span>
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section className="benefits-section boxed" aria-label="Benefits">
-          <div className="benefits-inner">
-            <div className="benefit-card">
-              <div className="benefit-icon-wrap">
-                <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden>
-                  <path
-                    fill="#2563EB"
-                    d="M12 12a3 3 0 100-6 3 3 0 000 6zm0 2c-3.866 0-7 1.79-7 4v1h14v-1c0-2.21-3.134-4-7-4z"
-                  />
-                </svg>
-              </div>
-              <h3>Dedicated LLP compliance team</h3>
-              <p>
-                Work with professionals who understand LLP structures, partner
-                obligations and ROC rules so that nothing is missed and partners
-                can focus on running the business.
-              </p>
-            </div>
-            <div className="benefit-card">
-              <div className="benefit-icon-wrap">
-                <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden>
-                  <path
-                    fill="#059669"
-                    d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM10.6 14.6l-2.1-2.1 1.4-1.4 0.7 0.7 3.9-3.9 1.4 1.4-5.3 5.3z"
-                  />
-                </svg>
-              </div>
-              <h3>On-time ROC and tax filings</h3>
-              <p>
-                Automated reminders and a clear compliance calendar keep Form 8,
-                Form 11 and Income Tax filings on schedule, avoiding penalties
-                and late fees.
-              </p>
-            </div>
-            <div className="benefit-card">
-              <div className="benefit-icon-wrap">
-                <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden>
-                  <path
-                    fill="#7C3AED"
-                    d="M13 3L11 3V13l8 4-1 1-7-3V4h2zM4 15v4h8v-4H4z"
-                  />
-                </svg>
-              </div>
-              <h3>Powered by LEDGERS</h3>
-              <p>
-                Use LEDGERS for real-time bookkeeping, reconciliations, document
-                storage and partner reports, giving complete visibility into
-                your LLP finances.
-              </p>
-            </div>
-          </div>
-        </section>
-        <section
-          className="tags-section popular-searches"
-          aria-label="Popular searches"
-        >
-          <div className="tags-card">
-            <h3>Popular Searches</h3>
-            <div className="tags-grid">
-              {popularTags.map((t) => (
-                <button
-                  key={t}
-                  className="tag-pill"
-                  type="button"
-                  onClick={() => alert(t)}
+                )}
+                
+                <div className="mb-4">
+                  <h3 className="font-semibold text-slate-900">{plan.name}</h3>
+                  <div className="text-2xl font-bold text-amber-700 mt-2">{plan.price}</div>
+                  <p className="text-xs text-gray-500 mt-1">{plan.subtitle}</p>
+                </div>
+
+                <button 
+                  className="w-full bg-white border-2 border-amber-600 text-amber-700 py-2 rounded-md font-medium hover:bg-amber-50 transition-colors mb-4"
+                  onClick={() => alert(`Selected plan: ${plan.name}`)}
                 >
-                  {t}
+                  Select Plan
                 </button>
-              ))}
-            </div>
+
+                <ul className="space-y-2">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2 text-sm">
+                      <CheckCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-600">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </section>
-        <section className="content-section">
-          <div className="content-inner">
-            <div style={{ minHeight: 120 }} />
-            <aside className="sidebar-col" aria-label="Sidebar">
-              <div className="whatsapp-card">
-                <div className="whatsapp-title">Live chat with LLP experts</div>
-                <p>
-                  Talk to a compliance professional about filings, partner
-                  changes or closing your LLP.
-                </p>
-                <button onClick={() => alert("Open WhatsApp chat")}>
-                  Chat now
+
+        {/* Benefits Section */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-amber-600">
+                <path d="M12 12a3 3 0 100-6 3 3 0 000 6zm0 2c-3.866 0-7 1.79-7 4v1h14v-1c0-2.21-3.134-4-7-4z" strokeWidth="1.5" />
+              </svg>
+            </div>
+            <h3 className="font-semibold text-slate-900 mb-2">Dedicated LLP compliance team</h3>
+            <p className="text-sm text-gray-600">
+              Work with professionals who understand LLP structures, partner
+              obligations and ROC rules so that nothing is missed and partners
+              can focus on running the business.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-amber-600">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" strokeWidth="1.5" />
+              </svg>
+            </div>
+            <h3 className="font-semibold text-slate-900 mb-2">On-time ROC and tax filings</h3>
+            <p className="text-sm text-gray-600">
+              Automated reminders and a clear compliance calendar keep Form 8,
+              Form 11 and Income Tax filings on schedule, avoiding penalties
+              and late fees.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-amber-600">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" strokeWidth="1.5" />
+              </svg>
+            </div>
+            <h3 className="font-semibold text-slate-900 mb-2">Powered by LEDGERS</h3>
+            <p className="text-sm text-gray-600">
+              Use LEDGERS for real-time bookkeeping, reconciliations, document
+              storage and partner reports, giving complete visibility into
+              your LLP finances.
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-slate-900">
+            FAQ's on LLP Compliance
+          </h3>
+          <div className="space-y-0">
+            {faqItems.map((q, i) => (
+              <div key={i} className="border-b last:border-b-0">
+                <button
+                  className="w-full text-left py-4 flex justify-between items-center text-sm"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
+                  <span className="text-slate-800 font-medium">{q}</span>
+                  <span className="text-amber-700 flex items-center gap-2">
+                    {openFaq === i ? "−" : <Plus size={14} />}
+                  </span>
                 </button>
+                {openFaq === i && (
+                  <div className="px-2 pb-4 text-sm text-gray-600">
+                    {faqAnswers[i]}
+                  </div>
+                )}
               </div>
-            </aside>
+            ))}
+          </div>
+        </section>
+
+        {/* Popular Searches */}
+        <section className="bg-white rounded-lg shadow-sm p-6">
+          <h4 className="font-semibold mb-4 text-slate-900">Popular Searches</h4>
+          <div className="flex flex-wrap gap-2">
+            {popularTags.map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+                onClick={() => alert(tag)}
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </section>
       </main>
-      <Footer />
-      <div
-        className="whatsapp-cta"
-        role="button"
-        aria-label="Live chat with experts"
-        onClick={() => alert("Open WhatsApp chat")}
-      >
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
-          <path
-            fill="#fff"
-            d="M12 2a10 10 0 00-8.66 14.2L2 22l5.93-1.7A10 10 0 1012 2z"
-          />
-        </svg>
-        <span>Live Chat with Experts</span>
+
+      {/* WhatsApp CTA */}
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
+        <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
+        <span className="font-semibold text-sm">Live Chat with Experts</span>
       </div>
-      <style jsx>{`
-        :global(body) {
-          margin: 0;
-          font-family: system-ui, -apple-system, "Segoe UI", Roboto,
-            "Helvetica Neue", Arial;
-          background: linear-gradient(
-            135deg,
-            #f5f7ff 0%,
-            #fdf6ff 40%,
-            #f3fbff 100%
-          );
-          color: #0f172a;
-        }
-        .page {
-          min-height: 100vh;
-        }
-        .site-banner {
-          padding: 28px 16px 44px;
-        }
-        .banner-inner {
-          max-width: 1160px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1.4fr 1fr;
-          gap: 32px;
-          align-items: center;
-        }
-        .banner-cta {
-          color: #0b2545;
-          padding: 30px;
-        }
-        .lead-eyebrow {
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: #0b5cf0;
-          font-size: 13px;
-          font-weight: 600;
-        }
-        .lead-title {
-          font-size: 36px;
-          margin: 10px 0;
-          color: #0b2545;
-          line-height: 1.15;
-        }
-        .lead-sub {
-          color: #475569;
-          font-size: 15px;
-          line-height: 1.6;
-        }
-        .hero-form {
-          margin-top: 18px;
-          display: flex;
-          gap: 12px;
-          align-items: center;
-        }
-        .hero-input {
-          flex: 1;
-          background: #fff;
-          color: #0b2545;
-          border-radius: 999px;
-          padding: 12px 16px;
-          border: 1px solid #e6eef8;
-          font-size: 14px;
-          box-shadow: 0 6px 18px rgba(11, 37, 85, 0.04);
-        }
-        .hero-button {
-          border-radius: 999px;
-          background: #facc15;
-          color: #081433;
-          border: none;
-          padding: 12px 20px;
-          font-weight: 700;
-          cursor: pointer;
-          box-shadow: 0 8px 20px rgba(250, 204, 21, 0.15);
-        }
-        .banner-media .media-frame {
-          position: relative;
-          border-radius: 18px;
-          overflow: hidden;
-          background: #000;
-          padding: 12px;
-        }
-        .banner-media img {
-          width: 100%;
-          height: 420px;
-          object-fit: contain;
-          display: block;
-        }
-        .media-badge {
-          position: absolute;
-          left: 20px;
-          bottom: 20px;
-          background: #059669;
-          color: white;
-          padding: 10px 16px;
-          border-radius: 999px;
-          font-weight: 600;
-        }
-        .pricing-section {
-          padding: 44px 16px;
-        }
-        .pricing-inner {
-          max-width: 1160px;
-          margin: 0 auto;
-        }
-        .pricing-header {
-          text-align: center;
-          margin-bottom: 20px;
-        }
-        .pricing-header h2 {
-          font-size: 26px;
-          margin-bottom: 6px;
-          color: #0b2545;
-        }
-        .pricing-cards {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 18px;
-        }
-        .pricing-card {
-          background: white;
-          border-radius: 12px;
-          border: 1px solid #eef2fb;
-          padding: 22px;
-          box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
-          position: relative;
-          min-height: 380px;
-        }
-        .pricing-card.popular {
-          border-color: #0b3b82;
-          box-shadow: 0 12px 40px rgba(11, 60, 130, 0.06);
-        }
-        .popular-chip {
-          position: absolute;
-          top: -12px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: #081433;
-          color: white;
-          padding: 6px 12px;
-          border-radius: 999px;
-          font-size: 12px;
-        }
-        .card-top {
-          margin-bottom: 14px;
-        }
-        .card-title {
-          font-weight: 700;
-          font-size: 16px;
-          color: #0b2545;
-        }
-        .card-price {
-          font-size: 28px;
-          font-weight: 800;
-          margin-top: 8px;
-        }
-        .select-btn {
-          margin-top: 12px;
-          width: 100%;
-          padding: 12px 0;
-          border-radius: 999px;
-          background: #081433;
-          color: white;
-          border: none;
-          cursor: pointer;
-          font-size: 14px;
-        }
-        .plan-features {
-          margin-top: 14px;
-          list-style: none;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          color: #475569;
-          font-size: 13px;
-        }
-        .plan-features li {
-          display: flex;
-          gap: 10px;
-          align-items: center;
-          padding-bottom: 6px;
-          border-bottom: 1px dashed #eef2fb;
-        }
-        .feat-check {
-          color: #059669;
-          font-weight: 700;
-        }
-        .benefits-section.boxed {
-          padding: 26px 16px 18px;
-        }
-        .benefits-inner {
-          max-width: 1160px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 18px;
-        }
-        .benefit-card {
-          background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.9),
-            rgba(255, 255, 255, 0.85)
-          );
-          border: 1px solid rgba(15, 23, 42, 0.04);
-          border-radius: 12px;
-          padding: 22px;
-          box-shadow: 0 6px 22px rgba(11, 37, 85, 0.03);
-          text-align: center;
-          min-height: 160px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          justify-content: center;
-        }
-        .benefit-icon-wrap {
-          width: 48px;
-          height: 48px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(255, 255, 255, 0.6);
-          border-radius: 999px;
-          box-shadow: 0 6px 16px rgba(11, 37, 85, 0.04);
-        }
-        .benefit-card h3 {
-          margin: 0;
-          font-size: 18px;
-          color: #0b2545;
-          font-weight: 700;
-        }
-        .benefit-card p {
-          margin: 0;
-          color: #475569;
-          font-size: 14px;
-          line-height: 1.6;
-        }
-        .tags-section.popular-searches {
-          padding: 22px 16px 36px;
-        }
-        .tags-card {
-          max-width: 1160px;
-          margin: 0 auto;
-          background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.96),
-            rgba(248, 250, 252, 0.96)
-          );
-          border-radius: 12px;
-          padding: 18px;
-          border: 1px solid rgba(14, 45, 92, 0.04);
-          box-shadow: 0 10px 30px rgba(11, 37, 85, 0.03);
-        }
-        .tags-card h3 {
-          margin: 0 0 12px 0;
-          font-size: 16px;
-          color: #0b2545;
-        }
-        .tags-grid {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-        .tag-pill {
-          background: #eef6ff;
-          color: #0b5cf0;
-          padding: 6px 10px;
-          border-radius: 999px;
-          font-size: 13px;
-          border: 1px solid rgba(11, 92, 240, 0.08);
-          box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.6);
-          cursor: pointer;
-        }
-        .tag-pill:hover {
-          transform: translateY(-1px);
-          transition: all 120ms ease;
-        }
-        .content-section {
-          padding: 18px 16px 36px;
-        }
-        .content-inner {
-          max-width: 1160px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 2.1fr 1fr;
-          gap: 24px;
-          align-items: start;
-        }
-        .whatsapp-card {
-          background: white;
-          border-radius: 10px;
-          padding: 14px;
-          border: 1px solid #eef2fb;
-          text-align: left;
-        }
-        .whatsapp-title {
-          font-weight: 700;
-          margin-bottom: 8px;
-        }
-        .whatsapp-card button {
-          margin-top: 10px;
-          border-radius: 999px;
-          background: #16a34a;
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          font-size: 13px;
-          cursor: pointer;
-        }
-        .whatsapp-cta {
-          position: fixed;
-          right: 18px;
-          bottom: 18px;
-          background: #16a34a;
-          color: white;
-          padding: 12px 18px;
-          border-radius: 999px;
-          display: flex;
-          gap: 8px;
-          align-items: center;
-          box-shadow: 0 10px 30px rgba(22, 163, 74, 0.22);
-          cursor: pointer;
-          z-index: 100;
-        }
-        .whatsapp-cta svg {
-          flex: 0 0 auto;
-        }
-        @media (max-width: 1024px) {
-          .banner-inner {
-            grid-template-columns: 1fr;
-            padding: 20px;
-          }
-          .pricing-cards {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .benefits-inner {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .content-inner {
-            grid-template-columns: 1fr;
-          }
-        }
-        @media (max-width: 768px) {
-          .pricing-cards {
-            grid-template-columns: 1fr;
-          }
-          .hero-form {
-            flex-direction: column;
-          }
-          .hero-button {
-            width: 100%;
-          }
-          .benefits-inner {
-            grid-template-columns: 1fr;
-          }
-          .tags-grid {
-            gap: 6px;
-          }
-        }
-      `}</style>
     </div>
   );
 }
