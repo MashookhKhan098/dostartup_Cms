@@ -8,8 +8,8 @@ import {
   Plus,
   ChevronRight,
   ShoppingBag,
-  Check as CheckIcon,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 // Assets and data
 const ASSETS = {
@@ -17,27 +17,16 @@ const ASSETS = {
   heroBg: "/images/hero.png",
   hrPeople: "/images/hr-payroll.png",
   ledgersBadge: "/images/ledgers-badge.png",
-  whatsapp: "/images/whatsapp.png",
+  whatsapp: "/images/whatsapp.svg",
   docsImg: "/images/business-docs.png",
   formsImg: "/images/business-forms.png",
   docsRequiredImg: "/images/business-docs-required.png",
+  cartIcon: "/images/cart-icon.svg",
+  indiaFlag: "/images/india-flag.png",
+  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+  adRight1: "/images/company-compliance-ad.png",
+  dinEkyc: "/images/din-ekyc-ad.png",
 };
-
-const NAV_ITEMS = [
-  "IndiaFilings",
-  "Startup",
-  "Registrations",
-  "Trademark",
-  "GST",
-  "Income Tax",
-  "MCA",
-  "Compliance",
-  "Personal",
-  "Global",
-  "Cities",
-  "Guides",
-  "Login",
-];
 
 const POPULAR_SEARCHES = [
   "Partnership",
@@ -93,419 +82,15 @@ const POPULAR_SEARCHES = [
   "EPFO Unified Portal",
 ];
 
-const INCOME_TAX_DROPDOWN_LINKS = [
-  { title: "Income Tax E-Filing", href: "/income-tax/e-filing" },
-  { title: "Business Tax Filing", href: "/income-tax/business-tax-filing" },
-  {
-    title: "Partnership Firm / LLP ITR",
-    href: "/income-tax/partnership-llp-itr",
-  },
-  { title: "Company ITR Filing", href: "/income-tax/company-itr-filing" },
-  { title: "Trust / NGO Tax Filing", href: "/income-tax/trust-ngo-tax-filing" },
-  { title: "15CA - 15CB Filing", href: "/income-tax/15ca-15cb-filing" },
-  { title: "TAN Registration", href: "/income-tax/tan-registration" },
-  { title: "TDS Return Filing", href: "/income-tax/tds-return-filing" },
-  { title: "Income Tax Notice", href: "/income-tax/income-tax-notice" },
-];
-
-const COMPLIANCE_DROPDOWN_LINKS = [
-  { title: "FDI Filing with RBI", href: "/compliance/fdi-filing-rbi" },
-  { title: "FLA Return Filing", href: "/compliance/fla-return-filing" },
-  { title: "FSSAI Renewal", href: "/compliance/fssai-renewal" },
-  { title: "FSSAI Return Filing", href: "/compliance/fssai-return-filing" },
-  { title: "Business Plan", href: "/compliance/business-plan" },
-  { title: "HR & Payroll", href: "/compliance/hr-payroll" },
-  { title: "PF Return Filing", href: "/compliance/pf-return-filing" },
-  { title: "ESI Return Filing", href: "/compliance/esi-return-filing" },
-  {
-    title: "Professional Tax Return Filing",
-    href: "/compliance/professional-tax-return-filing",
-  },
-  {
-    title: "Partnership Compliance",
-    href: "/compliance/partnership-compliance",
-  },
-  {
-    title: "Proprietorship Compliance",
-    href: "/compliance/proprietorship-compliance",
-  },
-  { title: "Bookkeeping", href: "/compliance/bookkeeping" },
-  { title: "CA Support", href: "/compliance/ca-support" },
-];
-
 const HR_IMG_POS = {
   pc: { x: 66, y: 7, w: 588 },
   md: { x: 40, y: 12, w: 440 },
   sm: { x: 0, y: 0, w: 320 },
 };
 
-// utility hook reused across components
-function useOnClickOutside<T extends HTMLElement = HTMLElement>(
-  ref: React.RefObject<T | null>,
-  handler: () => void
-) {
-  useEffect(() => {
-    const listener = (event: MouseEvent | TouchEvent) => {
-      const el = ref?.current;
-      if (!el || el.contains(event.target as Node)) return;
-      handler();
-    };
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
-    return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
-    };
-  }, [handler, ref]);
-}
-
-// Extracted dropdown components for clarity
-const IncomeTaxDropdown: React.FC = () => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [open, setOpen] = useState(false);
-  useOnClickOutside(ref, () => setOpen(false));
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        aria-haspopup="true"
-        aria-expanded={open}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onClick={() => setOpen((s) => !s)}
-        className="flex items-center gap-1 text-sm text-gray-700 hover:text-slate-900"
-      >
-        Income Tax <ChevronDown className="w-3.5 h-3.5" />
-      </button>
-
-      {open && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[480px] z-50">
-          <div className="bg-white rounded-lg shadow-lg border p-4">
-            <div className="grid grid-cols-2 gap-3">
-              {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-slate-700 hover:text-emerald-600 block"
-                >
-                  {link.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const ComplianceDropdown: React.FC = () => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [open, setOpen] = useState(false);
-  useOnClickOutside(ref, () => setOpen(false));
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        aria-haspopup="true"
-        aria-expanded={open}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onClick={() => setOpen((s) => !s)}
-        className="flex items-center gap-1 text-sm text-gray-700 hover:text-slate-900"
-      >
-        Compliance <ChevronDown className="w-3.5 h-3.5" />
-      </button>
-
-      {open && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[780px] z-50">
-          <div className="bg-white rounded-lg shadow-xl border border-slate-200 p-6">
-            <div className="grid grid-cols-3 gap-x-6 gap-y-2">
-              {COMPLIANCE_DROPDOWN_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  role="menuitem"
-                  className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-                >
-                  {link.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const McAmegaDropdown: React.FC = () => {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
-  useOnClickOutside(ref, () => setOpen(false));
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onClick={() => setOpen((s) => !s)}
-        className="flex items-center gap-1 text-sm text-gray-700 hover:text-slate-900"
-      >
-        MCA <ChevronDown className="w-3 h-3" />
-      </button>
-
-      {open && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[460px] z-50">
-          <div className="bg-white rounded-lg shadow-xl border border-slate-200 p-4">
-            <div className="grid grid-cols-2 gap-3">
-              <a
-                href="/MCA/company-compliance"
-                className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-              >
-                Company Compliance
-              </a>
-              <a
-                href="/MCA/registered-office-change"
-                className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-              >
-                Registered Office Change
-              </a>
-              <a
-                href="/MCA/din-ekyc-filing"
-                className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-              >
-                DIN eKYC Filing
-              </a>
-              <a
-                href="/MCA/share-transfer"
-                className="text-sm text-slate-700 hover:text-emerald-600 py-1.5 block"
-              >
-                Share Transfer
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-// Header component that uses the extracted dropdowns
-const Header: React.FC = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileIncomeOpen, setMobileIncomeOpen] = useState(false);
-  const [mobileComplianceOpen, setMobileComplianceOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  return (
-    <header className="bg-white border-b sticky top-0 z-50">
-      <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
-        <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-
-        <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
-          <a href="#" className="hover:text-indigo-700">
-            Startup
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Registrations
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Trademark
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            GST
-          </a>
-
-          <IncomeTaxDropdown />
-          <McAmegaDropdown />
-          <ComplianceDropdown />
-
-          <a href="#" className="hover:text-indigo-700">
-            Personal
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Global
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Cities
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Guides
-          </a>
-        </nav>
-
-        <div className="ml-auto flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
-            <Search size={14} />
-            <input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search"
-              className="outline-none text-sm bg-transparent w-40"
-            />
-          </div>
-
-          <button className="px-3 py-1 border rounded-md text-sm">Login</button>
-
-          <div className="md:hidden">
-            <button
-              aria-label="Toggle menu"
-              onClick={() => setMobileOpen((s) => !s)}
-              className="p-2 rounded-md border border-slate-200"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                {mobileOpen ? (
-                  <path
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                ) : (
-                  <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile menu using the same dropdown data */}
-      {mobileOpen && (
-        <div className="md:hidden py-3 border-t border-slate-100">
-          <div className="flex flex-col gap-2 px-3">
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Startup
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Registrations
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Trademark
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">GST</a>
-
-            {/* Income Tax mobile */}
-            <div className="px-2 py-1">
-              <button
-                className="w-full flex items-center justify-between px-2 py-2 text-left"
-                onClick={() => setMobileIncomeOpen((s) => !s)}
-              >
-                <span>Income Tax</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              {mobileIncomeOpen && (
-                <div className="pl-4 space-y-1">
-                  {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="block py-1 text-sm text-slate-700"
-                    >
-                      {link.title}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* MCA mobile */}
-            <details className="px-2 py-1">
-              <summary className="flex items-center justify-between cursor-pointer">
-                MCA <ChevronDown className="w-4 h-4" />
-              </summary>
-              <div className="mt-2 grid grid-cols-1 gap-1 pl-2">
-                <a
-                  href="/MCA/company-compliance"
-                  className="py-1 text-sm rounded hover:bg-slate-50 block"
-                >
-                  Company Compliance
-                </a>
-                <a
-                  href="/MCA/registered-office-change"
-                  className="py-1 text-sm rounded hover:bg-slate-50 block"
-                >
-                  Registered Office Change
-                </a>
-                <a
-                  href="/MCA/din-ekyc-filing"
-                  className="py-1 text-sm rounded hover:bg-slate-50 block"
-                >
-                  DIN eKYC Filing
-                </a>
-                <a
-                  href="/MCA/share-transfer"
-                  className="py-1 text-sm rounded hover:bg-slate-50 block"
-                >
-                  Share Transfer
-                </a>
-              </div>
-            </details>
-
-            {/* Compliance mobile */}
-            <div className="px-2 py-1">
-              <button
-                className="w-full flex items-center justify-between px-2 py-2 text-left"
-                onClick={() => setMobileComplianceOpen((s) => !s)}
-              >
-                <span>Compliance</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              {mobileComplianceOpen && (
-                <div className="pl-4 grid grid-cols-1 gap-1">
-                  {COMPLIANCE_DROPDOWN_LINKS.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="block py-1 text-sm text-slate-700"
-                    >
-                      {link.title}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Personal
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Global
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Cities
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Guides
-            </a>
-            <a className="px-2 py-2 text-sm rounded border text-center">
-              Login
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-
-// Main page component (merged HR/Payroll page)
-export default function ComplianceHRPayrollPage(): React.ReactElement {
+export default function ComplianceHRPayrollPage() {
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [gstChecked, setGstChecked] = useState(false);
   const [panGstin, setPanGstin] = useState("");
   const [employees, setEmployees] = useState("");
 
@@ -524,120 +109,128 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
-      <Header />
+    <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+      {/* Navbar - Imported */}
+      <Navbar />
 
-      <div className="py-6">
-        <div className="max-w-[1180px] mx-auto px-6">
-          <section
-            aria-label="HR hero"
-            className="relative rounded-2xl overflow-hidden shadow-sm"
-            style={{ minHeight: 360 }}
-          >
-            <div
-              className="absolute inset-0 bg-center bg-no-repeat bg-cover"
-              style={{ backgroundImage: `url(${ASSETS.heroBg})` }}
-            >
-              <img src={ASSETS.heroBg} alt="hero-bg" className="hidden" />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at left center, rgba(2,6,23,0.85) 0%, rgba(2,6,23,0.7) 45%, rgba(0,0,0,0.12) 100%)",
-                }}
-              />
-            </div>
-
-            <div className="relative z-10">
-              <div className="mx-auto max-w-[1180px] px-6 py-12 flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-1 max-w-2xl">
-                  <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 md:p-10 backdrop-blur-sm shadow-[0_20px_50px_rgba(2,6,23,0.18)]">
-                    <h1 className="text-white text-3xl md:text-[34px] leading-tight font-semibold mb-3">
-                      IndiaFilings HR
-                    </h1>
-
-                    <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
-                      Get a Dedicated Accountant, a Qualified HR Professional
-                      (minimum 3 years’ experience) and LEDGERS compliance
-                      platform for your business.
-                    </p>
-
-                    <form
-                      onSubmit={(e) => e.preventDefault()}
-                      className="flex flex-col sm:flex-row items-center gap-4"
-                    >
-                      <input
-                        aria-label="PAN or GSTIN"
-                        placeholder="PAN / GSTIN"
-                        value={panGstin}
-                        onChange={(e) => setPanGstin(e.target.value)}
-                        className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none"
-                      />
-                      <input
-                        aria-label="Number of Employees"
-                        placeholder="Number of Employees"
-                        value={employees}
-                        onChange={(e) => setEmployees(e.target.value)}
-                        className="w-full sm:w-[220px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none"
-                      />
-                    </form>
-
-                    <div className="mt-6">
-                      <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)]">
-                        Request Demo
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full md:w-96 flex justify-end">
-                  <div
-                    className="relative"
-                    style={{ width: HR_IMG_POS.pc.w, maxWidth: "100%" }}
-                  >
-                    <img
-                      src={ASSETS.hrPeople}
-                      alt="HR professionals"
-                      style={{
-                        position: "relative",
-                        left: HR_IMG_POS.pc.x,
-                        top: HR_IMG_POS.pc.y,
-                        width: HR_IMG_POS.pc.w,
-                        height: "auto",
-                        maxWidth: "100%",
-                        display: "block",
-                      }}
-                      className="pointer-events-none select-none"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                borderRadius: "1rem",
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 100%)",
-              }}
-            />
-          </section>
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-5">
+        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
+          Home / Compliance Services /{" "}
+          <span className="text-amber-700 font-medium">HR & Payroll</span>
         </div>
       </div>
 
-      <div className="max-w-[1180px] mx-auto px-6 -mt-4">
+      {/* Main Content */}
+      <main className="max-w-[1180px] mx-auto px-6 py-8">
+        {/* Hero Section */}
+        <section
+          aria-label="HR hero"
+          className="relative rounded-2xl overflow-hidden shadow-sm mb-8"
+          style={{ minHeight: 360 }}
+        >
+          <div
+            className="absolute inset-0 bg-center bg-no-repeat bg-cover"
+            style={{ backgroundImage: `url(${ASSETS.heroBg})` }}
+          >
+            <img src={ASSETS.heroBg} alt="hero-bg" className="hidden" />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse at left center, rgba(2,6,23,0.85) 0%, rgba(2,6,23,0.7) 45%, rgba(0,0,0,0.12) 100%)",
+              }}
+            />
+          </div>
+
+          <div className="relative z-10">
+            <div className="mx-auto max-w-[1180px] px-6 py-12 flex flex-col md:flex-row items-center gap-8">
+              <div className="flex-1 max-w-2xl">
+                <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 md:p-10 backdrop-blur-sm shadow-[0_20px_50px_rgba(2,6,23,0.18)]">
+                  <h1 className="text-white text-3xl md:text-[34px] leading-tight font-semibold mb-3">
+                    IndiaFilings HR
+                  </h1>
+
+                  <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
+                    Get a Dedicated Accountant, a Qualified HR Professional
+                    (minimum 3 years' experience) and LEDGERS compliance
+                    platform for your business.
+                  </p>
+
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="flex flex-col sm:flex-row items-center gap-4"
+                  >
+                    <input
+                      aria-label="PAN or GSTIN"
+                      placeholder="PAN / GSTIN"
+                      value={panGstin}
+                      onChange={(e) => setPanGstin(e.target.value)}
+                      className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none focus:ring-1 focus:ring-amber-600"
+                    />
+                    <input
+                      aria-label="Number of Employees"
+                      placeholder="Number of Employees"
+                      value={employees}
+                      onChange={(e) => setEmployees(e.target.value)}
+                      className="w-full sm:w-[220px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none focus:ring-1 focus:ring-amber-600"
+                    />
+                  </form>
+
+                  <div className="mt-6">
+                    <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)] hover:bg-amber-50 transition-colors">
+                      Request Demo
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-full md:w-96 flex justify-end">
+                <div
+                  className="relative"
+                  style={{ width: HR_IMG_POS.pc.w, maxWidth: "100%" }}
+                >
+                  <img
+                    src={ASSETS.hrPeople}
+                    alt="HR professionals"
+                    style={{
+                      position: "relative",
+                      left: HR_IMG_POS.pc.x,
+                      top: HR_IMG_POS.pc.y,
+                      width: HR_IMG_POS.pc.w,
+                      height: "auto",
+                      maxWidth: "100%",
+                      display: "block",
+                    }}
+                    className="pointer-events-none select-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: "1rem",
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 100%)",
+            }}
+          />
+        </section>
+
+        {/* Features Grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 👥
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-slate-900">
                   Dedicated support, flexible cost
                 </h3>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-gray-600">
                   Get an experienced accountant to manage your ledgers, vendor
                   &amp; customer reconciliations, bank reconciliations, and
                   monthly close with precision and reliability - all at a
@@ -647,16 +240,16 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-emerald-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 ✔
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-slate-900">
                   Accurate & timely compliance
                 </h3>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-gray-600">
                   End-to-end Director Management for Pvt Ltd Companies &amp;
                   LLPs – filing of DIR-3 KYC, Director Appointments (DIR-12),
                   Director Resignations (DIR-12), Director Disclosures (MGT-6),
@@ -666,16 +259,16 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-purple-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 ⚡
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-slate-900">
                   Powered by LEDGERS
                 </h3>
-                <p className="text-sm text-slate-600">
+                <p className="text-sm text-gray-600">
                   Experience seamless automation with real-time bank feeds,
                   smart reconciliations, integrated e-invoice/e-way bill
                   generation, secure document vault, and fully audit-ready
@@ -685,12 +278,10 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
             </div>
           </div>
         </section>
-      </div>
 
-      <main className="max-w-[1180px] mx-auto px-6 py-10 space-y-8">
-        {/* Pricing, services, FAQ sections retained from original */}
-        <section>
-          <h2 className="text-2xl md:text-3xl font-semibold text-center">
+        {/* Pricing Section */}
+        <section className="mt-12">
+          <h2 className="text-2xl md:text-3xl font-semibold text-center text-slate-900">
             Simple, Transparent HR & Payroll Management Pricing
           </h2>
           <p className="text-sm text-gray-600 mt-2 text-center max-w-[880px] mx-auto">
@@ -699,215 +290,222 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
           </p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl border p-6 shadow-sm">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+            {/* Payroll Plan */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:border-amber-200 transition-colors">
+              <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
                 Payroll
               </div>
-              <h3 className="font-semibold text-lg">Payroll Management</h3>
+              <h3 className="font-semibold text-lg text-slate-900">Payroll Management</h3>
               <p className="text-sm text-gray-600 mt-2">
                 Manage your HR and payroll online with guided onboarding and
                 automated salary processing.
               </p>
-              <div className="mt-4 text-2xl font-bold">
-                ₹12,899 <span className="text-sm font-normal">/yr + GST</span>
+              <div className="mt-4 text-2xl font-bold text-slate-900">
+                ₹12,899 <span className="text-sm font-normal text-gray-500">/yr + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all">
                 Start Now
               </button>
 
-              <ul className="mt-5 space-y-3 text-sm text-gray-700">
+              <ul className="mt-5 space-y-3 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> LEDGERS HR
-                  Software (1 Year Subscription)
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  LEDGERS HR Software (1 Year Subscription)
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Attendance
-                  Platform
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Attendance Platform
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Employee
-                  Self-Serve
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Employee Self-Serve
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> 12 Months
-                  Managed Payroll Service
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  12 Months Managed Payroll Service
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> 12 Months HR
-                  Support & Assistance
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  12 Months HR Support & Assistance
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Upto 20
-                  Employees
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Upto 20 Employees
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white rounded-xl border p-6 shadow-sm ring-2 ring-indigo-600/20">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
-                Most popular
+            {/* Fractional HR Plan */}
+            <div className="bg-white rounded-xl border-2 border-amber-600 p-6 shadow-sm relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-amber-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                Most Popular
               </div>
-              <h3 className="font-semibold text-lg">Fractional HR</h3>
+              <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
+                Fractional HR
+              </div>
+              <h3 className="font-semibold text-lg text-slate-900">Fractional HR</h3>
               <p className="text-sm text-gray-600 mt-2">
                 Managed HR support with dedicated partner for up to 20
                 employees.
               </p>
-              <div className="mt-4 text-2xl font-bold">
-                ₹42,899 <span className="text-sm font-normal">/yr + GST</span>
+              <div className="mt-4 text-2xl font-bold text-slate-900">
+                ₹42,899 <span className="text-sm font-normal text-gray-500">/yr + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all">
                 Start Now
               </button>
 
-              <ul className="mt-5 space-y-3 text-sm text-gray-700">
+              <ul className="mt-5 space-y-3 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> LEDGERS HR
-                  Platform setup & migration
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  LEDGERS HR Platform setup & migration
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> 1 Year
-                  Monthly Payroll Service
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  1 Year Monthly Payroll Service
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Dedicated
-                  Accountant
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Dedicated Accountant
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Attendance
-                  Platform
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Attendance Platform
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> 1 Year PF &
-                  ESI Filing
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  1 Year PF & ESI Filing
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> 1 Year TDS
-                  Return Filing
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  1 Year TDS Return Filing
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Employee KYC,
-                  Offer letter, Leave & holiday policy setup
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Employee KYC, Offer letter, Leave & holiday policy setup
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> HR Reports &
-                  MIS
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  HR Reports & MIS
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Upto 20
-                  Employees
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Upto 20 Employees
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white rounded-xl border p-6 shadow-sm">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+            {/* Compliance Plan */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:border-amber-200 transition-colors">
+              <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
                 Compliance
               </div>
-              <h3 className="font-semibold text-lg">PF & ESI Compliance</h3>
+              <h3 className="font-semibold text-lg text-slate-900">PF & ESI Compliance</h3>
               <p className="text-sm text-gray-600 mt-2">
                 Comprehensive PF/ESI management for your workforce.
               </p>
-              <div className="mt-4 text-2xl font-bold">
-                ₹17,899 <span className="text-sm font-normal">/yr + GST</span>
+              <div className="mt-4 text-2xl font-bold text-slate-900">
+                ₹17,899 <span className="text-sm font-normal text-gray-500">/yr + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all">
                 Start Now
               </button>
 
-              <ul className="mt-5 space-y-3 text-sm text-gray-700">
+              <ul className="mt-5 space-y-3 text-sm text-gray-600">
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> 12 Months
-                  Managed PF Return Filing
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  12 Months Managed PF Return Filing
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> 12 Months
-                  Managed ESI Return Filing
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  12 Months Managed ESI Return Filing
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} className="text-emerald-500" /> Up to 20
-                  Employees
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  Up to 20 Employees
                 </li>
               </ul>
             </div>
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-center">
+        {/* Services Offered */}
+        <section className="bg-white rounded-lg shadow-sm p-6 mt-12 border border-gray-200">
+          <h3 className="text-xl font-semibold text-center text-slate-900">
             Services Offered
           </h3>
           <p className="text-gray-600 mt-3 text-center">
             Smart solutions for HR operations, compliance, and employee growth.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm text-gray-700">
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Payroll Processing</h4>
-              <p className="mt-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Payroll Processing</h4>
+              <p className="mt-2 text-gray-600">
                 Accurate and timely salary processing with payslips, tax
                 deductions.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Attendance & Leave Management</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Attendance & Leave Management</h4>
+              <p className="mt-2 text-gray-600">
                 Track working hours, shifts, overtime, and leave requests with
                 integrated approval workflows.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Compliance & Statutory Filings</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Compliance & Statutory Filings</h4>
+              <p className="mt-2 text-gray-600">
                 Complete support for PF, ESI, Professional Tax, TDS, and labour
                 law compliance.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Employee Onboarding</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Employee Onboarding</h4>
+              <p className="mt-2 text-gray-600">
                 Digital offer letters, contracts, policy acknowledgments, and
                 smooth employee joining experience.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">HR Policies & Contracts</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">HR Policies & Contracts</h4>
+              <p className="mt-2 text-gray-600">
                 Custom drafting of HR policies, employee handbooks, contracts,
                 and compliance documentation.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Employee Self-Service Portal</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Employee Self-Service Portal</h4>
+              <p className="mt-2 text-gray-600">
                 Employee-friendly portal for leave requests, payslips, and HR
                 document access.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">HR Reports & Analytics</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">HR Reports & Analytics</h4>
+              <p className="mt-2 text-gray-600">
                 Custom dashboards and reports on payroll, headcount, and
                 compliance status.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Secure Document Storage</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Secure Document Storage</h4>
+              <p className="mt-2 text-gray-600">
                 Employee and compliance documents stored safely in our cloud for
                 up to 8 years, ensuring easy access and audit readiness.
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">V-KYC Platform</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">V-KYC Platform</h4>
+              <p className="mt-2 text-gray-600">
                 Real-time, auditable video KYC verification integrated into the
                 LEDGERS HR Platform for instant identity validation and
                 compliance logs.
@@ -916,8 +514,9 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-center">How It Works</h3>
+        {/* How It Works */}
+        <section className="bg-white rounded-lg shadow-sm p-6 mt-8 border border-gray-200">
+          <h3 className="text-xl font-semibold text-center text-slate-900">How It Works</h3>
           <p className="text-gray-600 mt-3 text-center">
             A simple, guided process to set up and run HR smoothly, with ongoing
             reviews and compliance support.
@@ -925,10 +524,10 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg font-semibold text-amber-700">
                 1
               </div>
-              <h4 className="font-semibold mt-4">HR Partner Assignment</h4>
+              <h4 className="font-semibold mt-4 text-slate-900">HR Partner Assignment</h4>
               <p className="text-sm text-gray-600 mt-2">
                 We assign a dedicated HR professional and support team who
                 understand your business, workforce, and compliance needs.
@@ -936,10 +535,10 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
             </div>
 
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg font-semibold text-amber-700">
                 2
               </div>
-              <h4 className="font-semibold mt-4">LEDGERS HR Setup</h4>
+              <h4 className="font-semibold mt-4 text-slate-900">LEDGERS HR Setup</h4>
               <p className="text-sm text-gray-600 mt-2">
                 We configure your payroll, attendance, leave policies, employee
                 records, and compliance workflows inside the LEDGERS HR
@@ -948,12 +547,10 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
             </div>
 
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg font-semibold text-amber-700">
                 3
               </div>
-              <h4 className="font-semibold mt-4">
-                Payroll, Compliance & Reviews
-              </h4>
+              <h4 className="font-semibold mt-4 text-slate-900">Payroll, Compliance & Reviews</h4>
               <p className="text-sm text-gray-600 mt-2">
                 We handle monthly payroll, statutory filings (PF, ESI, PT, TDS),
                 and conduct quarterly HR reviews to ensure accuracy and employee
@@ -963,19 +560,20 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold mb-4">FAQs</h3>
+        {/* FAQ Section */}
+        <section className="bg-white rounded-lg shadow-sm p-6 mt-8 border border-gray-200">
+          <h3 className="text-xl font-semibold mb-4 text-slate-900">FAQs</h3>
           <div className="space-y-0">
             {faqQuestions.map((q, i) => (
-              <div key={i} className="border-b last:border-b-0">
+              <div key={i} className="border-b border-gray-200 last:border-b-0">
                 <button
                   className="w-full text-left py-4 flex justify-between items-center text-sm"
                   onClick={() => setFaqOpen(faqOpen === i ? null : i)}
                   aria-expanded={faqOpen === i}
                 >
-                  <span className="text-slate-800">{q}</span>
-                  <span className="text-indigo-600 flex items-center gap-2">
-                    {faqOpen === i ? "-" : <Plus size={14} />}
+                  <span className="text-slate-800 font-medium">{q}</span>
+                  <span className="text-amber-600 flex items-center gap-2">
+                    {faqOpen === i ? "−" : <Plus size={14} />}
                   </span>
                 </button>
 
@@ -989,12 +587,12 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
           </div>
 
           <div className="mt-6">
-            <h4 className="font-semibold mb-3">Popular Searches</h4>
+            <h4 className="font-semibold mb-3 text-slate-900">Popular Searches</h4>
             <div className="flex flex-wrap gap-2">
-              {POPULAR_SEARCHES.map((s) => (
+              {POPULAR_SEARCHES.slice(0, 20).map((s) => (
                 <span
                   key={s}
-                  className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+                  className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
                 >
                   {s}
                 </span>
@@ -1002,68 +600,86 @@ export default function ComplianceHRPayrollPage(): React.ReactElement {
             </div>
           </div>
         </section>
+
+        {/* Cart Widget */}
+        <div className="mt-8 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <div className="text-center text-gray-600">
+            <img
+              src={ASSETS.cartIcon}
+              alt="cart"
+              className="mx-auto h-12 w-auto mb-3"
+            />
+            <h3 className="font-semibold text-slate-900">Your cart is empty</h3>
+            <p className="text-sm mt-2 text-gray-600">
+              Browse our services and add some services in cart!
+            </p>
+          </div>
+
+          <div className="mt-6 text-center">
+            <div className="text-sm text-gray-500">
+              Existing User?{" "}
+              <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">
+                Login
+              </a>
+            </div>
+          </div>
+
+          <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
+            <input
+              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+              placeholder="Name"
+            />
+            <input
+              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+              placeholder="Email"
+            />
+            <div className="flex gap-2">
+              <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
+                <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
+                <span className="text-sm">+91</span>
+              </div>
+              <input
+                className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                placeholder="Phone"
+              />
+            </div>
+
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={gstChecked}
+                onChange={() => setGstChecked((s) => !s)}
+                className="w-4 h-4 accent-amber-600"
+              />
+              <span>Enter GSTIN to get 18% GST Credit</span>
+            </label>
+
+            {gstChecked && (
+              <input
+                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                placeholder="GSTIN"
+              />
+            )}
+
+            <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
+              <ShoppingBag size={16} /> Get Started
+            </button>
+
+            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+              <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Secure · No spam · Instant confirmation</span>
+            </div>
+          </form>
+        </div>
       </main>
 
-      <footer className="bg-white mt-12 py-12 border-t">
-        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-              <a className="block">About IndiaFilings</a>
-              <a className="block">Careers</a>
-              <a className="block">Contact Us</a>
-            </div>
-
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-              <a className="block">Business Search</a>
-              <a className="block">Trademark Search</a>
-              <a className="block">Filings.AE for UAE</a>
-            </div>
-
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-              <a className="block">Terms & Conditions</a>
-              <a className="block">Privacy Policy</a>
-              <a className="block">Refund Policy</a>
-            </div>
-
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-              <a className="block">Confidentiality Policy</a>
-              <a className="block">Disclaimer Policy</a>
-              <a className="block">IndiaFilings Review</a>
-            </div>
-          </div>
-
-          <div className="text-center text-gray-500 mt-6">
-            © {new Date().getFullYear()} IndiaFilings - HR & Payroll
-          </div>
-        </div>
-      </footer>
-
-      <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
+      {/* WhatsApp CTA */}
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
         <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
         <span className="font-semibold text-sm">Live Chat with Experts</span>
       </div>
-
-      <style jsx>{`
-        :global(body) {
-          margin: 0;
-          font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
-            "Helvetica Neue", Arial;
-          background: #f3f4f6;
-          color: #0f172a;
-        }
-        .page {
-          min-height: 100vh;
-        }
-        h1,
-        h2,
-        h3 {
-          color: #0b2545;
-        }
-      `}</style>
     </div>
   );
 }

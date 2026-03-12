@@ -8,6 +8,7 @@ import {
   Plus,
   ChevronDown,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -20,89 +21,6 @@ const ASSETS = {
   indiaFlag: "/images/india-flag.png",
   assuredBadge: "/images/assured-ledgers.png",
 };
-
-const INCOME_TAX_DROPDOWN_LINKS = [
-  { title: "Income Tax E-Filing", href: "/income-tax/e-filing" },
-  { title: "Business Tax Filing", href: "/income-tax/business-tax-filing" },
-  {
-    title: "Partnership Firm / LLP ITR",
-    href: "/income-tax/partnership-llp-itr",
-  },
-  { title: "Company ITR Filing", href: "/income-tax/company-itr-filing" },
-  { title: "Trust / NGO Tax Filing", href: "/income-tax/trust-ngo-tax-filing" },
-  { title: "15CA - 15CB Filing", href: "/income-tax/15ca-15cb-filing" },
-  { title: "TAN Registration", href: "/income-tax/tan-registration" },
-  { title: "TDS Return Filing", href: "/income-tax/tds-return-filing" },
-  { title: "Income Tax Notice", href: "/income-tax/income-tax-notice" },
-];
-
-const MCA_DROPDOWN_LINKS = [
-  { title: "Company Compliance", href: "/MCA/company-compliance" },
-  { title: "Director Change", href: "/MCA/director-change" },
-  { title: "AOA Amendment", href: "/MCA/aoa-amendment" },
-  { title: "LLP Compliance", href: "/MCA/llp-compliance" },
-  { title: "Remove Director", href: "/MCA/remove-director" },
-  {
-    title: "Authorized Capital Increase",
-    href: "/authorized-capital-increase",
-  },
-  { title: "OPC Compliance", href: "/MCA/opc-compliance" },
-  { title: "ADT-1 Filing", href: "/MCA/adt-1-filing" },
-  { title: "Share Transfer", href: "/MCA/share-transfer" },
-  { title: "Name Change - Company", href: "/MCA/name-change-company" },
-  { title: "DPT-3 Filing", href: "/MCA/dpt-3-filing" },
-  { title: "Demat of Shares", href: "/MCA/demat-of-shares" },
-  { title: "Registered Office Change", href: "/MCA/registered-office-change" },
-  { title: "LLP Form 11 Filing", href: "/MCA/llp-form-11-filing" },
-  { title: "Winding Up - LLP", href: "/MCA/winding-up-llp" },
-  { title: "DIN eKYC Filing", href: "/MCA/din-ekyc-filing" },
-  { title: "Dormant Status Filing", href: "/MCA/dormant-status-filing" },
-  { title: "Winding Up - Company", href: "MCA/winding-up-company" },
-  { title: "DIN Reactivation", href: "/MCA/din-reactivation" },
-  { title: "MOA Amendment", href: "/MCA/moa-amendment" },
-  { title: "Commencement (INC-20A)", href: "/MCA/commencement-inc-20a" },
-];
-
-const COMPLIANCE_DROPDOWN_LINKS = [
-  { title: "FDI Filing with RBI", href: "/compliance/fdi-filing-rbi" },
-  { title: "FLA Return Filing", href: "/compliance/fla-return-filing" },
-  { title: "FSSAI Renewal", href: "/compliance/fssai-renewal" },
-  { title: "FSSAI Return Filing", href: "/compliance/fssai-return-filing" },
-  { title: "Business Plan", href: "/compliance/business-plan" },
-  { title: "HR & Payroll", href: "/compliance/hr-payroll" },
-  { title: "PF Return Filing", href: "/compliance/pf-return-filing" },
-  { title: "ESI Return Filing", href: "/compliance/esi-return-filing" },
-  {
-    title: "Professional Tax Return Filing",
-    href: "/compliance/professional-tax-return-filing",
-  },
-  {
-    title: "Partnership Compliance",
-    href: "/compliance/partnership-compliance",
-  },
-  {
-    title: "Proprietorship Compliance",
-    href: "/compliance/proprietorship-compliance",
-  },
-  { title: "Bookkeeping", href: "/compliance/bookkeeping" },
-  { title: "CA Support", href: "/compliance/ca-support" },
-];
-
-const NAV_ITEMS = [
-  "IndiaFilings",
-  "Startup",
-  "Registrations",
-  "Trademark",
-  "GST",
-  "Income Tax",
-  "MCA",
-  "Compliance",
-  "Personal",
-  "Global",
-  "Cities",
-  "Guides",
-  "Login",
-];
 
 const POPULAR_SEARCHES = [
   "Partnership",
@@ -180,10 +98,6 @@ function useOutsideClick<T extends HTMLElement = HTMLElement>(
 export default function BusinessPlanPage(): React.ReactElement {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [gstChecked, setGstChecked] = useState(false);
-  const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
-  const [showMcaDropdown, setShowMcaDropdown] = useState(false);
-  const [showComplianceDropdown, setShowComplianceDropdown] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const OFFER_OPTIONS = [
     "Pitch Deck",
@@ -194,25 +108,13 @@ export default function BusinessPlanPage(): React.ReactElement {
   const [selectedOffer, setSelectedOffer] = useState<string>("Pitch Deck");
   const [showOfferDropdown, setShowOfferDropdown] = useState(false);
 
-  const incomeRef = useRef<HTMLDivElement | null>(null);
-  const mcaRef = useRef<HTMLDivElement | null>(null);
-  const compRef = useRef<HTMLDivElement | null>(null);
-  const mobileNavRef = useRef<HTMLDivElement | null>(null);
   const offerRef = useRef<HTMLDivElement | null>(null);
 
-  useOutsideClick(incomeRef, () => setShowIncomeDropdown(false));
-  useOutsideClick(mcaRef, () => setShowMcaDropdown(false));
-  useOutsideClick(compRef, () => setShowComplianceDropdown(false));
-  useOutsideClick(mobileNavRef, () => setMobileMenuOpen(false));
   useOutsideClick(offerRef, () => setShowOfferDropdown(false));
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        setShowIncomeDropdown(false);
-        setShowMcaDropdown(false);
-        setShowComplianceDropdown(false);
-        setMobileMenuOpen(false);
         setShowOfferDropdown(false);
       }
     }
@@ -233,310 +135,40 @@ export default function BusinessPlanPage(): React.ReactElement {
     "How detailed should financial projections be in a business plan?",
   ];
 
+  const faqAnswers: Record<number, string> = {
+    0: "A business plan is a formal document that defines your business objectives, strategies, market research, and financial projections.",
+    1: "A business plan is important because it provides a roadmap for your business, helps secure funding, and guides strategic decisions.",
+    2: "Key elements include executive summary, company description, market analysis, organization structure, product line, marketing strategy, and financial projections.",
+    3: "A business plan demonstrates to investors that you have a viable business model, understand your market, and have realistic financial projections.",
+    4: "Types include startup plans, strategic plans, feasibility plans, expansion plans, and operational plans.",
+    5: "Business plans should be reviewed annually and updated when significant changes occur in your business or market.",
+    6: "A business continuity plan outlines how your business will continue operating during unexpected disruptions.",
+    7: "Market analysis helps identify target customers, understand competition, and validate your business strategy.",
+    8: "The executive summary should concisely capture the essence of your business and investment opportunity.",
+    9: "Financial projections should include income statements, cash flow statements, and balance sheets for 3-5 years.",
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 antialiased">
-      <header className="bg-white border-b sticky top-0 z-50">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 md:gap-6 h-16">
-            <div className="flex items-center gap-4 md:gap-6 w-full">
-              <a href="/" className="flex items-center shrink-0">
-                <img
-                  src={ASSETS.logo}
-                  alt="IndiaFilings"
-                  className="h-9 w-auto"
-                />
-              </a>
+    <div className="min-h-screen bg-gray-100 text-gray-800 antialiased">
+      {/* Navbar - Imported from reference */}
+      <Navbar />
 
-              <nav className="hidden lg:flex items-center gap-6 text-sm text-gray-700 flex-1">
-                {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => {
-                  if (item === "Income Tax") {
-                    return (
-                      <div
-                        key={item}
-                        ref={incomeRef}
-                        className="relative"
-                        onMouseEnter={() => setShowIncomeDropdown(true)}
-                        onMouseLeave={() => setShowIncomeDropdown(false)}
-                      >
-                        <button
-                          aria-haspopup="true"
-                          aria-expanded={showIncomeDropdown}
-                          className="flex items-center gap-1 ui-focus"
-                        >
-                          {item} <ChevronDown className="w-3.5 h-3.5" />
-                        </button>
-
-                        {showIncomeDropdown && (
-                          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[480px] z-50">
-                            <div className="bg-white rounded-lg shadow-lg border p-4">
-                              <div className="grid grid-cols-2 gap-3">
-                                {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
-                                  <a
-                                    key={link.href}
-                                    href={link.href}
-                                    className="text-sm text-slate-700 hover:text-emerald-600 block"
-                                  >
-                                    {link.title}
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  }
-
-                  if (item === "MCA") {
-                    return (
-                      <div
-                        key={item}
-                        ref={mcaRef}
-                        className="relative"
-                        onMouseEnter={() => setShowMcaDropdown(true)}
-                        onMouseLeave={() => setShowMcaDropdown(false)}
-                      >
-                        <button
-                          aria-haspopup="true"
-                          aria-expanded={showMcaDropdown}
-                          className="flex items-center gap-1 ui-focus"
-                        >
-                          {item} <ChevronDown className="w-3.5 h-3.5" />
-                        </button>
-
-                        {showMcaDropdown && (
-                          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] z-50">
-                            <div className="bg-white rounded-lg shadow-lg border p-5">
-                              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                {MCA_DROPDOWN_LINKS.map((link) => (
-                                  <a
-                                    key={link.href}
-                                    href={link.href}
-                                    className="text-sm text-slate-700 hover:text-emerald-600 block py-1.5"
-                                  >
-                                    {link.title}
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  }
-
-                  if (item === "Compliance") {
-                    return (
-                      <div
-                        key={item}
-                        ref={compRef}
-                        className="relative"
-                        onMouseEnter={() => setShowComplianceDropdown(true)}
-                        onMouseLeave={() => setShowComplianceDropdown(false)}
-                      >
-                        <button
-                          aria-haspopup="true"
-                          aria-expanded={showComplianceDropdown}
-                          onClick={() => setShowComplianceDropdown((s) => !s)}
-                          className="flex items-center gap-1 ui-focus"
-                        >
-                          {item} <ChevronDown className="w-3.5 h-3.5" />
-                        </button>
-
-                        {showComplianceDropdown && (
-                          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[780px] z-50">
-                            <div className="bg-white rounded-lg shadow-lg border p-6">
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-3">
-                                {COMPLIANCE_DROPDOWN_LINKS.map((link) => (
-                                  <a
-                                    key={link.href}
-                                    href={link.href}
-                                    className="text-sm text-slate-700 hover:text-emerald-600 block py-1.5"
-                                  >
-                                    {link.title}
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <a
-                      key={item}
-                      href="#"
-                      className="hover:text-indigo-700 text-sm"
-                    >
-                      {item}
-                    </a>
-                  );
-                })}
-                <a className="ml-auto hover:text-indigo-700">
-                  {NAV_ITEMS.at(-1)}
-                </a>
-              </nav>
-
-              <div className="lg:hidden ml-auto flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Open menu"
-                  onClick={() => setMobileMenuOpen((s) => !s)}
-                  className="p-2 rounded-md border"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    {mobileMenuOpen ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    ) : (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                      />
-                    )}
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {mobileMenuOpen && (
-          <div ref={mobileNavRef} className="lg:hidden bg-white border-t">
-            <div className="px-4 py-4 space-y-3">
-              {NAV_ITEMS.map((item) => {
-                if (item === "Income Tax") {
-                  return (
-                    <div key={item} className="space-y-1">
-                      <button
-                        className="w-full flex items-center justify-between px-2 py-2 text-left"
-                        onClick={() => setShowIncomeDropdown((s) => !s)}
-                      >
-                        <span>{item}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      {showIncomeDropdown && (
-                        <div className="pl-4 space-y-1">
-                          {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              className="block py-1 text-sm text-slate-700"
-                            >
-                              {link.title}
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                if (item === "MCA") {
-                  return (
-                    <div key={item} className="space-y-1">
-                      <button
-                        className="w-full flex items-center justify-between px-2 py-2 text-left"
-                        onClick={() => setShowMcaDropdown((s) => !s)}
-                      >
-                        <span>{item}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      {showMcaDropdown && (
-                        <div className="pl-4 grid grid-cols-1 gap-1">
-                          {MCA_DROPDOWN_LINKS.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              className="block py-1 text-sm text-slate-700"
-                            >
-                              {link.title}
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                if (item === "Compliance") {
-                  return (
-                    <div key={item} className="space-y-1">
-                      <button
-                        className="w-full flex items-center justify-between px-2 py-2 text-left"
-                        onClick={() => setShowComplianceDropdown((s) => !s)}
-                      >
-                        <span>{item}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      {showComplianceDropdown && (
-                        <div className="pl-4 grid grid-cols-1 gap-1">
-                          {COMPLIANCE_DROPDOWN_LINKS.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              className="block py-1 text-sm text-slate-700"
-                            >
-                              {link.title}
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                return (
-                  <a
-                    key={item}
-                    href="#"
-                    className="block px-2 py-2 text-sm text-slate-700"
-                  >
-                    {item}
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </header>
-
-      <div className="bg-gray-50">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="text-sm text-gray-500 flex flex-wrap gap-2 items-center">
-            <a href="#" className="hover:underline">
-              IndiaFilings
-            </a>
-            <ChevronRight className="w-3 h-3 text-gray-400" />
-            <a href="#" className="hover:underline">
-              MCA Services
-            </a>
-            <ChevronRight className="w-3 h-3 text-gray-400" />
-            <span className="text-indigo-600 font-medium">Business Plan</span>
-          </div>
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-5">
+        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
+          Home / MCA Services /{" "}
+          <span className="text-amber-700 font-medium">Business Plan</span>
         </div>
       </div>
 
-      <main className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Main - Using max-w-[1180px] from reference */}
+      <main className="max-w-[1180px] mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <section className="lg:col-span-9 space-y-6">
-            <div className="bg-white rounded-2xl shadow-sm p-6 md:flex md:gap-6">
+          <section className="lg:col-span-8 space-y-6">
+            <div className="bg-white rounded-lg shadow-sm p-6 md:flex md:gap-6">
               <div className="md:w-1/3 flex-shrink-0">
                 <div className="rounded-lg overflow-hidden">
-                  <div className="bg-gradient-to-r from-[#0b4bd6] to-[#0734a6] p-4 text-white text-center">
+                  <div className="bg-gradient-to-r from-amber-700 to-amber-800 rounded-t-lg p-4 text-white text-center">
                     <h2 className="text-2xl font-bold tracking-tight">
                       Business Plan
                     </h2>
@@ -555,28 +187,32 @@ export default function BusinessPlanPage(): React.ReactElement {
                 </div>
 
                 <ul className="mt-4 text-sm space-y-2 text-gray-600">
-                  <li>Business Plan</li>
-                  <li className="text-indigo-600">Business Plan</li>
-                  <li>
+                  <li className="hover:text-amber-700 cursor-pointer transition-colors">Business Plan</li>
+                  <li className="text-amber-700 cursor-pointer">Business Plan</li>
+                  <li className="hover:text-amber-700 cursor-pointer transition-colors">
                     A business plan with pitch deck and financial model is
                     essential for business owners to raise loan or equity
                     funding. Get a professional pitch deck and financial model
                     prepared for your business through Experts.
                   </li>
-                  <li className="text-indigo-600 underline">Load More</li>
+                  <li className="text-amber-700 underline cursor-pointer hover:text-amber-800">Load More</li>
                 </ul>
               </div>
 
               <div className="md:flex-1">
                 <div className="flex flex-col sm:flex-row justify-between gap-4 items-start">
                   <div>
+                    <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2">
+                      <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                      <span className="text-xs font-medium text-amber-700">COMPLIANCE SERVICE</span>
+                    </div>
                     <h2 className="text-lg font-semibold text-slate-900">
                       Business Plan
                     </h2>
                     <div className="flex items-center gap-3 mt-2">
                       <div className="flex items-center gap-1">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={14} className="text-yellow-400" />
+                          <Star key={i} size={14} className="fill-yellow-500 text-yellow-500" />
                         ))}
                       </div>
                       <span className="text-xs text-slate-500">(5)</span>
@@ -597,7 +233,7 @@ export default function BusinessPlanPage(): React.ReactElement {
                     onClick={() => setShowOfferDropdown((s) => !s)}
                     aria-haspopup="listbox"
                     aria-expanded={showOfferDropdown}
-                    className="w-full sm:w-80 flex items-center justify-between border rounded-md px-4 py-2 bg-white text-left shadow-sm focus:outline-none"
+                    className="w-full sm:w-80 flex items-center justify-between border rounded-md px-4 py-2 bg-white text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
                   >
                     <span className="text-sm text-slate-700">
                       {selectedOffer}
@@ -628,9 +264,9 @@ export default function BusinessPlanPage(): React.ReactElement {
                               setShowOfferDropdown(false);
                             }
                           }}
-                          className={`px-3 py-2 cursor-pointer hover:bg-gray-50 ${
+                          className={`px-3 py-2 cursor-pointer hover:bg-amber-50 ${
                             selectedOffer === opt
-                              ? "bg-gray-100 font-medium"
+                              ? "bg-amber-50 text-amber-700 font-medium"
                               : ""
                           }`}
                         >
@@ -645,11 +281,11 @@ export default function BusinessPlanPage(): React.ReactElement {
                   <div
                     className={`border-2 border-dashed rounded-md p-4 bg-white relative ${
                       selectedOffer === "Pitch Deck"
-                        ? "border-[#f0dcd0] ring-1 ring-green-100"
-                        : "border-[#f0dcd0]"
+                        ? "border-amber-200 ring-1 ring-amber-100"
+                        : "border-amber-200"
                     }`}
                   >
-                    <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-green-700 border border-[#eff8f0]">
+                    <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-amber-700 border border-amber-200">
                       2 Exclusive Offers
                     </div>
                     <div className="font-semibold text-slate-900">
@@ -660,7 +296,7 @@ export default function BusinessPlanPage(): React.ReactElement {
                       <div>Market Research</div>
                     </div>
                     <div className="mt-3">
-                      <button className="bg-white border border-green-400 text-green-700 px-3 py-1 rounded">
+                      <button className="bg-white border-2 border-amber-600 text-amber-700 px-3 py-1 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
                         ADD
                       </button>
                     </div>
@@ -669,11 +305,11 @@ export default function BusinessPlanPage(): React.ReactElement {
                   <div
                     className={`border-2 border-dashed rounded-md p-4 bg-white relative ${
                       selectedOffer === "Equity Raise"
-                        ? "border-[#f0dcd0] ring-1 ring-green-100"
-                        : "border-[#f0dcd0]"
+                        ? "border-amber-200 ring-1 ring-amber-100"
+                        : "border-amber-200"
                     }`}
                   >
-                    <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-green-700 border border-[#eff8f0]">
+                    <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-amber-700 border border-amber-200">
                       2 Exclusive Offers
                     </div>
                     <div className="font-semibold text-slate-900">
@@ -684,7 +320,7 @@ export default function BusinessPlanPage(): React.ReactElement {
                       <div>Equity Raise Support</div>
                     </div>
                     <div className="mt-3">
-                      <button className="bg-white border border-green-400 text-green-700 px-3 py-1 rounded">
+                      <button className="bg-white border-2 border-amber-600 text-amber-700 px-3 py-1 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
                         ADD
                       </button>
                     </div>
@@ -692,16 +328,16 @@ export default function BusinessPlanPage(): React.ReactElement {
                 </div>
 
                 <div className="mt-4 border-t pt-4 text-sm flex flex-col sm:flex-row justify-between items-start sm:items-center text-slate-600 gap-3">
-                  <a className="text-indigo-600 underline">
+                  <a className="text-amber-700 underline hover:text-amber-800 cursor-pointer">
                     Terms and conditions
                   </a>
-                  <a className="text-indigo-600 underline">Refer a Friend</a>
+                  <a className="text-amber-700 underline hover:text-amber-800 cursor-pointer">Refer a Friend</a>
                 </div>
 
                 <div className="mt-6">
                   <h4 className="font-semibold mb-2">Offers and discounts</h4>
 
-                  <div className="p-3 border rounded-md">
+                  <div className="p-3 border border-gray-200 rounded-lg hover:border-amber-200 transition-colors">
                     <div className="flex items-center gap-3">
                       <img
                         src={ASSETS.ledgers}
@@ -709,7 +345,7 @@ export default function BusinessPlanPage(): React.ReactElement {
                         className="h-8 w-8 object-contain"
                       />
                       <div className="text-sm">
-                        <div className="text-indigo-600 font-medium">
+                        <div className="text-amber-700 font-medium">
                           LEDGERS - Compliance Platform
                         </div>
                         <div className="text-gray-500 text-xs">
@@ -719,7 +355,7 @@ export default function BusinessPlanPage(): React.ReactElement {
                     </div>
                   </div>
 
-                  <div className="mt-3 p-3 border rounded-md flex items-center gap-3">
+                  <div className="mt-3 p-3 border border-gray-200 rounded-lg hover:border-amber-200 transition-colors flex items-center gap-3">
                     <img
                       src={ASSETS.logo}
                       alt="save gst"
@@ -738,15 +374,15 @@ export default function BusinessPlanPage(): React.ReactElement {
               </div>
             </div>
 
-            <article className="bg-white rounded-2xl shadow-sm p-6 min-h-[60vh] h-full">
+            <article className="bg-white rounded-lg shadow-sm p-6">
               <h1 className="text-2xl font-semibold text-center">
                 Business Plan
               </h1>
 
               <div className="mt-4 text-[15px] leading-7 text-gray-700 space-y-4">
                 <p>
-                  A business plan is more than just a document—it’s a strategic
-                  tool that outlines your company’s objectives, provides a
+                  A business plan is more than just a document—it's a strategic
+                  tool that outlines your company's objectives, provides a
                   roadmap for achieving them, and acts as a persuasive document
                   for potential investors and stakeholders. Whether you're a
                   startup seeking your first round of funding or an established
@@ -776,44 +412,43 @@ export default function BusinessPlanPage(): React.ReactElement {
             </article>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              <div className="lg:col-span-7 bg-white rounded-2xl shadow-sm p-6 h-full">
+              <div className="lg:col-span-7 bg-white rounded-lg shadow-sm p-6">
                 <h3 className="text-lg font-semibold mb-4">Related Guides</h3>
-                <ul className="space-y-3 text-sm text-indigo-600 h-full">
-                  <li>Importance of Business Plan</li>
-                  <li>Types of Business Plan</li>
-                  <li>How to write a Business Plan?</li>
-                  <li>Business Plan Template</li>
-                  <li>Checklist for Starting a Business</li>
+                <ul className="space-y-3 text-sm text-amber-700">
+                  <li className="hover:text-amber-800 cursor-pointer hover:underline">Importance of Business Plan</li>
+                  <li className="hover:text-amber-800 cursor-pointer hover:underline">Types of Business Plan</li>
+                  <li className="hover:text-amber-800 cursor-pointer hover:underline">How to write a Business Plan?</li>
+                  <li className="hover:text-amber-800 cursor-pointer hover:underline">Business Plan Template</li>
+                  <li className="hover:text-amber-800 cursor-pointer hover:underline">Checklist for Starting a Business</li>
                 </ul>
               </div>
 
-              <aside className="lg:col-span-5 bg-white rounded-2xl shadow-sm p-6 h-full">
+              <aside className="lg:col-span-5 bg-white rounded-lg shadow-sm p-6">
                 <h3 className="text-lg font-semibold mb-4">
                   FAQ's on Business Plan
                 </h3>
-                <div className="space-y-2 text-sm text-gray-700 max-h-[56vh] overflow-y-auto pr-2">
-                  {faqItems.map((q, i) => (
-                    <div key={q} className="border-b pb-2">
+                <div className="space-y-2 text-sm text-gray-700">
+                  {faqItems.slice(0, 6).map((q, i) => (
+                    <div key={q} className="border-b last:border-b-0">
                       <button
-                        className="w-full text-left py-2 flex justify-between items-center text-sm"
+                        className="w-full text-left py-3 flex justify-between items-center text-sm"
                         onClick={() => setOpenFaq(openFaq === i ? null : i)}
                         aria-expanded={openFaq === i}
                       >
                         <span className="text-slate-800">{q}</span>
-                        <span className="text-indigo-600 flex items-center gap-2">
-                          {openFaq === i ? "-" : <Plus size={14} />}
+                        <span className="text-amber-700 flex items-center gap-2">
+                          {openFaq === i ? "−" : <Plus size={14} />}
                         </span>
                       </button>
                       {openFaq === i && (
-                        <div className="px-2 pb-2 text-sm text-gray-600">
-                          Please contact our advisors for tailored guidance on
-                          business plans and pitch decks.
+                        <div className="px-2 pb-3 text-sm text-gray-600">
+                          {faqAnswers[i]}
                         </div>
                       )}
                     </div>
                   ))}
-                  <div className="mt-3">
-                    <button className="px-4 py-2 border rounded-md text-sm text-indigo-600">
+                  <div className="mt-4">
+                    <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
                       Load More
                     </button>
                   </div>
@@ -822,191 +457,128 @@ export default function BusinessPlanPage(): React.ReactElement {
             </div>
           </section>
 
-          <aside className="lg:col-span-3 hidden lg:block">
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
-                <div className="text-center text-gray-600">
-                  <img
-                    src={ASSETS.cartIcon}
-                    alt="cart"
-                    className="mx-auto h-12 w-auto mb-3"
-                  />
-                  <h3 className="font-semibold">Your cart is empty</h3>
-                  <p className="text-sm mt-2">
-                    Browse our services and add some services in cart!
-                  </p>
-                </div>
-
-                <div className="mt-6 text-center">
-                  <div className="text-sm text-gray-500">
-                    Existing User?{" "}
-                    <a className="text-indigo-600 underline">Login</a>
-                  </div>
-                </div>
-
-                <form
-                  className="mt-4 space-y-3"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <input
-                    className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                    placeholder="Name"
-                  />
-                  <input
-                    className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                    placeholder="Email"
-                  />
-                  <div className="flex gap-2">
-                    <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
-                      <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
-                      <span className="text-sm">+91</span>
-                    </div>
-                    <input
-                      className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                      placeholder="Phone"
-                    />
-                  </div>
-
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={gstChecked}
-                      onChange={() => setGstChecked((s) => !s)}
-                      className="w-4 h-4"
-                    />
-                    <span>Enter GSTIN to get 18% GST Credit</span>
-                  </label>
-
-                  {gstChecked && (
-                    <input
-                      className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
-                      placeholder="GSTIN"
-                    />
-                  )}
-
-                  <button className="w-full bg-green-500 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
-                    <ShoppingBag size={16} /> Get Started
-                  </button>
-                </form>
-              </div>
-
-              <div className="bg-white rounded-lg shadow-sm p-4 sticky top-[26rem]">
-                <h4 className="font-semibold mb-3">Company Compliance</h4>
-                <div className="p-3 border rounded-md flex items-center gap-3">
-                  <img
-                    src={ASSETS.ledgers}
-                    alt="ledgers"
-                    className="h-8 w-8 object-contain"
-                  />
-                  <div className="text-sm">
-                    <div className="text-indigo-600 font-medium">
-                      Company Compliance
-                    </div>
-                    <div className="text-gray-500 text-xs">DIN eKYC Filing</div>
-                  </div>
-                </div>
-                <div className="mt-3 text-sm">
-                  <div className="font-medium">DIN eKYC Filing</div>
-                  <div className="text-gray-500">DIN eKYC Filing</div>
-                </div>
-              </div>
-
-              <div className="rounded-lg overflow-hidden shadow-sm">
+          <aside className="lg:col-span-4 hidden lg:block">
+            <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
+              <div className="text-center text-gray-600">
                 <img
-                  src={ASSETS.adRight1}
-                  alt="company compliance"
-                  className="w-full h-48 object-cover"
+                  src={ASSETS.cartIcon}
+                  alt="cart"
+                  className="mx-auto h-12 w-auto mb-3"
                 />
-              </div>
-
-              <div className="rounded-lg overflow-hidden shadow-sm">
-                <img
-                  src={ASSETS.dinEkyc}
-                  alt="din ekyc"
-                  className="w-full h-48 object-cover"
-                />
-              </div>
-
-              <div className="bg-white rounded-lg p-4">
-                <h4 className="font-semibold mb-3">Popular Searches</h4>
-                <div className="flex flex-wrap gap-2">
-                  {POPULAR_SEARCHES.slice(0, 20).map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg shadow-sm p-4">
-                <h4 className="font-semibold mb-3">Contact Advisor</h4>
-                <p className="text-sm text-gray-600">
-                  Need help with a business plan? Our experts can assist with
-                  pitch decks, financial models and investor-ready
-                  presentations.
+                <h3 className="font-semibold">Your cart is empty</h3>
+                <p className="text-sm mt-2">
+                  Browse our services and add some services in cart!
                 </p>
-                <div className="mt-3">
-                  <button className="w-full bg-indigo-600 text-white py-2 rounded-md text-sm">
-                    Schedule a Call
-                  </button>
+              </div>
+
+              <div className="mt-6 text-center">
+                <div className="text-sm text-gray-500">
+                  Existing User?{" "}
+                  <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">Login</a>
                 </div>
+              </div>
+
+              <form
+                className="mt-4 space-y-3"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <input
+                  className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                  placeholder="Name"
+                />
+                <input
+                  className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                  placeholder="Email"
+                />
+                <div className="flex gap-2">
+                  <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
+                    <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
+                    <span className="text-sm">+91</span>
+                  </div>
+                  <input
+                    className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                    placeholder="Phone"
+                  />
+                </div>
+
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={gstChecked}
+                    onChange={() => setGstChecked((s) => !s)}
+                    className="w-4 h-4 accent-amber-600"
+                  />
+                  <span>Enter GSTIN to get 18% GST Credit</span>
+                </label>
+
+                {gstChecked && (
+                  <input
+                    className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                    placeholder="GSTIN"
+                  />
+                )}
+
+                <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
+                  <ShoppingBag size={16} /> Get Started
+                </button>
+
+                <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+                  <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Secure · No spam · Instant confirmation</span>
+                </div>
+              </form>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+              <h4 className="font-semibold mb-3">Related Guides</h4>
+              <ul className="text-sm space-y-2">
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Business Plan Template</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
+                  How to Create a Pitch Deck for Investors
+                </li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Financial Model Best Practices</li>
+              </ul>
+            </div>
+
+            <div className="rounded-lg overflow-hidden shadow-sm mb-4">
+              <img
+                src={ASSETS.adRight1}
+                alt="company compliance"
+                className="w-full h-48 object-cover"
+              />
+            </div>
+
+            <div className="rounded-lg overflow-hidden shadow-sm mb-6">
+              <img
+                src={ASSETS.dinEkyc}
+                alt="din ekyc"
+                className="w-full h-48 object-cover"
+              />
+            </div>
+
+            <div className="bg-white rounded-lg p-4">
+              <h4 className="font-semibold mb-3">Popular Searches</h4>
+              <div className="flex flex-wrap gap-2">
+                {POPULAR_SEARCHES.slice(0, 14).map((t) => (
+                  <span
+                    key={t}
+                    className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+                  >
+                    {t}
+                  </span>
+                ))}
               </div>
             </div>
           </aside>
         </div>
       </main>
 
-      <footer className="bg-white">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-              <a className="block text-sm text-gray-600">About IndiaFilings</a>
-              <a className="block text-sm text-gray-600">Careers</a>
-              <a className="block text-sm text-gray-600">Contact Us</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-              <a className="block text-sm text-gray-600">Business Search</a>
-              <a className="block text-sm text-gray-600">Trademark Search</a>
-              <a className="block text-sm text-gray-600">Filings.AE for UAE</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-              <a className="block text-sm text-gray-600">Terms & Conditions</a>
-              <a className="block text-sm text-gray-600">Privacy Policy</a>
-              <a className="block text-sm text-gray-600">Refund Policy</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-              <a className="block text-sm text-gray-600">
-                Confidentiality Policy
-              </a>
-              <a className="block text-sm text-gray-600">Disclaimer Policy</a>
-              <a className="block text-sm text-gray-600">IndiaFilings Review</a>
-            </div>
-          </div>
-
-          <div className="text-center text-gray-500 mt-6">
-            © {new Date().getFullYear()} IndiaFilings
-          </div>
-        </div>
-      </footer>
-
-      <div className="fixed right-4 bottom-4 md:right-6 md:bottom-6 z-50">
-        <a
-          href="#"
-          className="flex items-center gap-3 bg-green-500 text-white px-4 py-3 rounded-full shadow-xl"
-          aria-label="Live Chat with Experts"
-        >
-          <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
-          <span className="hidden sm:inline-block font-medium text-sm">
-            Live Chat with Experts
-          </span>
-        </a>
+      {/* WhatsApp CTA - Matching reference */}
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
+        <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
+        <span className="font-semibold text-sm">Live Chat with Experts</span>
       </div>
     </div>
   );

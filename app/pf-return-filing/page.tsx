@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Search, Check, Plus, ChevronDown } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -87,118 +88,6 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   }, [handler, ref]);
 }
 
-const Header: React.FC = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const ref = useRef<HTMLDivElement | null>(null);
-  useOnClickOutside(ref, () => setMobileOpen(false));
-
-  return (
-    <header className="bg-white border-b sticky top-0 z-50">
-      <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
-        <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-        <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
-          <a href="#" className="hover:text-indigo-700">
-            Startup
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Registrations
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Trademark
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            GST
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Income Tax
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            MCA
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Compliance
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Guides
-          </a>
-        </nav>
-        <div className="ml-auto flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
-            <Search size={14} />
-            <input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search"
-              className="outline-none text-sm bg-transparent w-40"
-            />
-          </div>
-          <button className="px-3 py-1 border rounded-md text-sm">Login</button>
-          <div className="md:hidden">
-            <button
-              aria-label="Toggle menu"
-              onClick={() => setMobileOpen((s) => !s)}
-              className="p-2 rounded-md border border-slate-200"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                {mobileOpen ? (
-                  <path
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                ) : (
-                  <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      {mobileOpen && (
-        <div className="md:hidden py-3 border-t border-slate-100">
-          <div className="flex flex-col gap-2 px-3">
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Startup
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Registrations
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Trademark
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">GST</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Income Tax
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">MCA</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Compliance
-            </a>
-            <a className="px-2 py-2 text-sm rounded border text-center">
-              Login
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-
 export default function TDSReturnFilingPage(): React.ReactElement {
   const [gstin, setGstin] = useState("");
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
@@ -221,7 +110,9 @@ export default function TDSReturnFilingPage(): React.ReactElement {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
-      <Header />
+      {/* Navbar - Imported */}
+      <Navbar />
+
       <div className="py-8">
         <div className="max-w-[1180px] mx-auto px-6">
           <section
@@ -262,9 +153,9 @@ export default function TDSReturnFilingPage(): React.ReactElement {
                         placeholder="ENTER GSTIN"
                         value={gstin}
                         onChange={(e) => setGstin(e.target.value)}
-                        className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none"
+                        className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none focus:border-amber-400"
                       />
-                      <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium">
+                      <button className="px-6 py-3 bg-amber-600 text-white rounded-md font-medium hover:bg-amber-700 transition-colors">
                         Get Accountant
                       </button>
                     </form>
@@ -303,9 +194,9 @@ export default function TDSReturnFilingPage(): React.ReactElement {
 
       <div className="max-w-[1180px] mx-auto px-6 -mt-4">
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 👥
               </div>
               <div>
@@ -321,9 +212,9 @@ export default function TDSReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-emerald-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 ✔
               </div>
               <div>
@@ -340,9 +231,9 @@ export default function TDSReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-purple-500">
+              <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                 ⚡
               </div>
               <div>
@@ -371,8 +262,8 @@ export default function TDSReturnFilingPage(): React.ReactElement {
           </p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl border p-6 shadow-sm">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+            <div className="bg-white rounded-xl border p-6 shadow-sm hover:border-amber-200 transition-colors">
+              <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
                 LEDGERS
               </div>
               <h3 className="font-semibold text-lg">Software Only</h3>
@@ -382,28 +273,31 @@ export default function TDSReturnFilingPage(): React.ReactElement {
               <div className="mt-4 text-2xl font-bold">
                 ₹5,899 <span className="text-sm font-normal">/ yr + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button className="mt-4 w-full bg-amber-600 text-white py-3 rounded-full hover:bg-amber-700 transition-colors">
                 Start Filing Now
               </button>
               <ul className="mt-5 space-y-3 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> LEDGERS Software Access - 1 Year
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>LEDGERS Software Access - 1 Year</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> TDS Compliance Dashboard & Alerts
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>TDS Compliance Dashboard & Alerts</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Deductor–Deductee Reconciliation & PAN
-                  Validation
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Deductor–Deductee Reconciliation & PAN Validation</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Automated TDS calculations (section-wise)
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Automated TDS calculations (section-wise)</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white rounded-xl border p-6 shadow-sm ring-2 ring-indigo-600/20">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+            <div className="bg-white rounded-xl border p-6 shadow-sm ring-2 ring-amber-600/20 hover:border-amber-200 transition-colors">
+              <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
                 Accounting Software + Service
               </div>
               <h3 className="font-semibold text-lg">Accountant</h3>
@@ -413,38 +307,43 @@ export default function TDSReturnFilingPage(): React.ReactElement {
               <div className="mt-4 text-2xl font-bold">
                 ₹15,899 <span className="text-sm font-normal">/ FY + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button className="mt-4 w-full bg-amber-600 text-white py-3 rounded-full hover:bg-amber-700 transition-colors">
                 Start Filing Now
               </button>
               <ul className="mt-5 space-y-3 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Dedicated Accountant Support - 1 Assigned
-                  Accountant
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Dedicated Accountant Support - 1 Assigned Accountant</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Quarterly TDS Return Filing (24Q, 26Q,
-                  27Q, 27EQ) - 1 Year
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Quarterly TDS Return Filing (24Q, 26Q, 27Q, 27EQ) - 1 Year</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> TRACES Validation Before Filing
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>TRACES Validation Before Filing</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> TDS Certificate Generation
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>TDS Certificate Generation</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Correction Statement Filing
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Correction Statement Filing</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Deductor–Deductee Reconciliation
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Deductor–Deductee Reconciliation</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Ledgers Accounting Software - 1 Year
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Ledgers Accounting Software - 1 Year</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white rounded-xl border p-6 shadow-sm">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+            <div className="bg-white rounded-xl border p-6 shadow-sm hover:border-amber-200 transition-colors">
+              <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
                 Most popular
               </div>
               <h3 className="font-semibold text-lg">TDS Filing – 2 Years</h3>
@@ -455,24 +354,29 @@ export default function TDSReturnFilingPage(): React.ReactElement {
                 ₹25,899{" "}
                 <span className="text-sm font-normal">/ 2 FY + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button className="mt-4 w-full bg-amber-600 text-white py-3 rounded-full hover:bg-amber-700 transition-colors">
                 Start Filing Now
               </button>
               <ul className="mt-5 space-y-3 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Quarterly TDS Return Filing - 2 Years
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Quarterly TDS Return Filing - 2 Years</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> TRACES Validation Before Filing
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>TRACES Validation Before Filing</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> TDS Certificate Generation
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>TDS Certificate Generation</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Deductor–Deductee Reconciliation
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Deductor–Deductee Reconciliation</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Ledgers Accounting Software - 2 Years
+                  <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
+                  <span>Ledgers Accounting Software - 2 Years</span>
                 </li>
               </ul>
             </div>
@@ -488,7 +392,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
             day-to-day financial needs of your business
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm text-gray-700">
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">Access to LEDGERS</h4>
               <p className="mt-2">
                 Record and review TDS deductions, challans, and payments in real
@@ -496,14 +400,14 @@ export default function TDSReturnFilingPage(): React.ReactElement {
                 audit trail—inside one shared workspace.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">TDS Return Filing</h4>
               <p className="mt-2">
                 Preparation and filing of all TDS returns with reconciliation,
                 automated due-date tracking, and timely submission.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">
                 Preparation of TDS Summary & Reports
               </h4>
@@ -512,14 +416,14 @@ export default function TDSReturnFilingPage(): React.ReactElement {
                 mismatch reports, and year-end Form 16/16A generation.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">Quarterly TDS Return Filing</h4>
               <p className="mt-2">
                 24Q for salaries, 26Q for non-salary payments, 27Q for
                 non-residents, and 27EQ for TCS—prepared and filed each quarter.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">
                 Deductor–Deductee Reconciliation
               </h4>
@@ -529,7 +433,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
                 notices.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">TRACES Validation Before Filing</h4>
               <p className="mt-2">
                 Ensure PAN details, challans, and deductee-wise entries match
@@ -547,7 +451,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
           </p>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg text-amber-700">
                 1
               </div>
               <h4 className="font-semibold mt-4">Assign your accountant</h4>
@@ -557,7 +461,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
               </p>
             </div>
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg text-amber-700">
                 2
               </div>
               <h4 className="font-semibold mt-4">System Setup</h4>
@@ -567,7 +471,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
               </p>
             </div>
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg text-amber-700">
                 3
               </div>
               <h4 className="font-semibold mt-4">Monthly close & compliance</h4>
@@ -584,19 +488,19 @@ export default function TDSReturnFilingPage(): React.ReactElement {
             Why IndiaFilings for TDS Compliance
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">Affordable Expertise</h4>
               <p className="mt-2">
                 Skilled accountants without full-time hiring costs.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">Zero Surprises</h4>
               <p className="mt-2">
                 Transparent reporting and proactive due-date alerts.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
+            <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">Scalable Service</h4>
               <p className="mt-2">
                 Start with books; add TDS returns, challans, and GST/IT/ROC
@@ -679,21 +583,21 @@ export default function TDSReturnFilingPage(): React.ReactElement {
             Documents Required For TDS Return Filing
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
-            <div className="p-3 border rounded">
+            <div className="p-3 border rounded hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">TAN Details</h4>
               <p className="mt-2">
                 Tax Deduction and Collection Account Number (TAN) of the
                 deductor is mandatory.
               </p>
             </div>
-            <div className="p-3 border rounded">
+            <div className="p-3 border rounded hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">PAN Details</h4>
               <p className="mt-2">
                 PAN of deductor and deductees for accurate attribution of tax
                 payments.
               </p>
             </div>
-            <div className="p-3 border rounded">
+            <div className="p-3 border rounded hover:border-amber-200 transition-colors">
               <h4 className="font-semibold">Bank Statements & Challans</h4>
               <p className="mt-2">
                 Proof of TDS deposit and challan details for reconciliation and
@@ -714,8 +618,8 @@ export default function TDSReturnFilingPage(): React.ReactElement {
                   aria-expanded={faqOpen === i}
                 >
                   <span className="text-slate-800">{q}</span>
-                  <span className="text-indigo-600 flex items-center gap-2">
-                    {faqOpen === i ? "-" : <Plus size={14} />}
+                  <span className="text-amber-600 flex items-center gap-2">
+                    {faqOpen === i ? "−" : <Plus size={14} />}
                   </span>
                 </button>
                 {faqOpen === i && (
@@ -732,7 +636,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
               {POPULAR_SEARCHES.map((s) => (
                 <span
                   key={s}
-                  className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+                  className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
                 >
                   {s}
                 </span>
@@ -747,27 +651,27 @@ export default function TDSReturnFilingPage(): React.ReactElement {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-              <a className="block">About IndiaFilings</a>
-              <a className="block">Careers</a>
-              <a className="block">Contact Us</a>
+              <a className="block hover:text-amber-600">About IndiaFilings</a>
+              <a className="block hover:text-amber-600">Careers</a>
+              <a className="block hover:text-amber-600">Contact Us</a>
             </div>
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-              <a className="block">Business Search</a>
-              <a className="block">Trademark Search</a>
-              <a className="block">Filings.AE for UAE</a>
+              <a className="block hover:text-amber-600">Business Search</a>
+              <a className="block hover:text-amber-600">Trademark Search</a>
+              <a className="block hover:text-amber-600">Filings.AE for UAE</a>
             </div>
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-              <a className="block">Terms & Conditions</a>
-              <a className="block">Privacy Policy</a>
-              <a className="block">Refund Policy</a>
+              <a className="block hover:text-amber-600">Terms & Conditions</a>
+              <a className="block hover:text-amber-600">Privacy Policy</a>
+              <a className="block hover:text-amber-600">Refund Policy</a>
             </div>
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-              <a className="block">Confidentiality Policy</a>
-              <a className="block">Disclaimer Policy</a>
-              <a className="block">IndiaFilings Review</a>
+              <a className="block hover:text-amber-600">Confidentiality Policy</a>
+              <a className="block hover:text-amber-600">Disclaimer Policy</a>
+              <a className="block hover:text-amber-600">IndiaFilings Review</a>
             </div>
           </div>
           <div className="text-center text-gray-500 mt-6">
@@ -776,7 +680,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
         </div>
       </footer>
 
-      <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
         <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
         <span className="font-semibold text-sm">Live Chat with Experts</span>
       </div>

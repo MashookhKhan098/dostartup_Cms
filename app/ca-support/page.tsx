@@ -1,33 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { Search, Plus } from "lucide-react";
+import React, { useState } from "react";
+import { Search, Plus, ShoppingBag, CheckCircle } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
   heroBg: "/images/hero.png",
-  whatsapp: "/images/whatsapp.png",
+  whatsapp: "/images/whatsapp.svg",
   hrPeople: "/images/hr-payroll.png",
+  cartIcon: "/images/cart-icon.svg",
+  indiaFlag: "/images/india-flag.png",
+  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
 };
-
-function useOnClickOutside<T extends HTMLElement = HTMLElement>(
-  ref: React.RefObject<T | null>,
-  handler: () => void
-) {
-  useEffect(() => {
-    const listener = (event: MouseEvent | TouchEvent) => {
-      const el = ref?.current;
-      if (!el || el.contains(event.target as Node)) return;
-      handler();
-    };
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
-    return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
-    };
-  }, [handler, ref]);
-}
 
 const POPULAR_SEARCHES = [
   "Partnership",
@@ -83,121 +68,10 @@ const POPULAR_SEARCHES = [
   "EPFO Unified Portal",
 ];
 
-const Header: React.FC = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const ref = useRef<HTMLDivElement | null>(null);
-  useOnClickOutside(ref, () => setMobileOpen(false));
-
-  return (
-    <header className="bg-white border-b sticky top-0 z-50">
-      <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
-        <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-        <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
-          <a href="#" className="hover:text-indigo-700">
-            Startup
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Registrations
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Trademark
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            GST
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Income Tax
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            MCA
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Compliance
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Guides
-          </a>
-        </nav>
-        <div className="ml-auto flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
-            <Search size={14} />
-            <input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search"
-              className="outline-none text-sm bg-transparent w-40"
-            />
-          </div>
-          <button className="px-3 py-1 border rounded-md text-sm">Login</button>
-          <div className="md:hidden">
-            <button
-              aria-label="Toggle menu"
-              onClick={() => setMobileOpen((s) => !s)}
-              className="p-2 rounded-md border border-slate-200"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                {mobileOpen ? (
-                  <path
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                ) : (
-                  <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      {mobileOpen && (
-        <div className="md:hidden py-3 border-t border-slate-100">
-          <div className="flex flex-col gap-2 px-3">
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Startup
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Registrations
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Trademark
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">GST</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Income Tax
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">MCA</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Compliance
-            </a>
-            <a className="px-2 py-2 text-sm rounded border text-center">
-              Login
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-
-export default function IndiaFilingsCA(): React.ReactElement {
+export default function IndiaFilingsCA() {
   const [gstin, setGstin] = useState("");
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [gstChecked, setGstChecked] = useState(false);
 
   const faqQuestions = [
     "How is Fractional CA different from a regular accountant?",
@@ -214,15 +88,24 @@ export default function IndiaFilingsCA(): React.ReactElement {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
-      <Header />
+    <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+      {/* Navbar - Imported */}
+      <Navbar />
+
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-5">
+        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
+          Home / Compliance Services /{" "}
+          <span className="text-amber-700 font-medium">IndiaFilings CA</span>
+        </div>
+      </div>
 
       {/* HERO */}
       <div className="py-8">
         <div className="max-w-[1180px] mx-auto px-6">
           <section
             aria-label="hero"
-            className="relative rounded-2xl overflow-hidden shadow-sm"
+            className="relative rounded-2xl overflow-hidden shadow-sm mb-8"
             style={{ minHeight: 320 }}
           >
             <div
@@ -261,9 +144,9 @@ export default function IndiaFilingsCA(): React.ReactElement {
                         placeholder="ENTER GSTIN"
                         value={gstin}
                         onChange={(e) => setGstin(e.target.value)}
-                        className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none"
+                        className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none focus:ring-1 focus:ring-amber-600"
                       />
-                      <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium">
+                      <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium hover:bg-amber-50 transition-colors">
                         Request Demo
                       </button>
                     </form>
@@ -300,18 +183,18 @@ export default function IndiaFilingsCA(): React.ReactElement {
             />
           </section>
 
-          {/* Updated 3-card section (keeps original styling but uses the new content) */}
+          {/* Features Grid */}
           <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+            <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
+                <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                   👥
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1 text-slate-800">
+                  <h3 className="font-semibold mb-1 text-slate-900">
                     Affordable Expertise
                   </h3>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm text-gray-600">
                     Access IndiaFilings Chartered Accountants without the high
                     cost of full-time hiring.
                   </p>
@@ -319,16 +202,16 @@ export default function IndiaFilingsCA(): React.ReactElement {
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+            <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-emerald-500">
+                <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                   ✔
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1 text-slate-800">
+                  <h3 className="font-semibold mb-1 text-slate-900">
                     Seamless Compliance
                   </h3>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm text-gray-600">
                     Monthly GST, quarterly CA review, and annual ITRs managed
                     with accuracy and care.
                   </p>
@@ -336,16 +219,16 @@ export default function IndiaFilingsCA(): React.ReactElement {
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+            <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-purple-500">
+                <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
                   ⚡
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1 text-slate-800">
+                  <h3 className="font-semibold mb-1 text-slate-900">
                     Trusted Oversight
                   </h3>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm text-gray-600">
                     Your finances are reviewed by expert Chartered Accountants
                     with years of industry experience.
                   </p>
@@ -359,8 +242,8 @@ export default function IndiaFilingsCA(): React.ReactElement {
       {/* MAIN CONTENT */}
       <main className="max-w-[1180px] mx-auto px-6 py-10 space-y-8">
         {/* Services Offered */}
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-center">
+        <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold text-center text-slate-900">
             Services Offered
           </h3>
           <p className="text-gray-600 mt-3 text-center">
@@ -368,105 +251,105 @@ export default function IndiaFilingsCA(): React.ReactElement {
             growing businesses.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm text-gray-700">
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Flash Reports</h4>
-              <p className="mt-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Flash Reports</h4>
+              <p className="mt-2 text-gray-600">
                 Monthly Flash P&L statements featuring key metrics: Revenue,
                 Expenses, and EBITDA
               </p>
-              <p className="mt-1">
+              <p className="mt-1 text-gray-600">
                 Executive summary format for busy entrepreneurs
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Variance Analysis</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Variance Analysis</h4>
+              <p className="mt-2 text-gray-600">
                 Detailed comparison of actual performance vs. prior year
               </p>
-              <p className="mt-1">Identification of trends and anomalies</p>
+              <p className="mt-1 text-gray-600">Identification of trends and anomalies</p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">
                 Management Information Systems (MIS)
               </h4>
-              <p className="mt-2">Detailed Profit & Loss Statement</p>
-              <p className="mt-1">Balance Sheet</p>
-              <p className="mt-1">Cash Flow Statement</p>
+              <p className="mt-2 text-gray-600">Detailed Profit & Loss Statement</p>
+              <p className="mt-1 text-gray-600">Balance Sheet</p>
+              <p className="mt-1 text-gray-600">Cash Flow Statement</p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Annual Tax Consultation</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Annual Tax Consultation</h4>
+              <p className="mt-2 text-gray-600">
                 Comprehensive tax planning strategy for the entire financial
                 year
               </p>
-              <p className="mt-1">
+              <p className="mt-1 text-gray-600">
                 Optimization of tax liabilities within legal frameworks
               </p>
-              <p className="mt-1">
+              <p className="mt-1 text-gray-600">
                 Proactive planning to maximize savings and minimize risks
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Income Notice Support</h4>
-              <p className="mt-2">Expert handling of notices under</p>
-              <ul className="list-disc list-inside mt-1 text-sm">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Income Notice Support</h4>
+              <p className="mt-2 text-gray-600">Expert handling of notices under</p>
+              <ul className="list-disc list-inside mt-1 text-sm text-gray-600">
                 <li>Sections 139(9) - Defective Return</li>
                 <li>Section 143(1) - Intimation</li>
                 <li>Section 245 - Refund Adjustment</li>
               </ul>
-              <p className="mt-1">Response preparation</p>
+              <p className="mt-1 text-gray-600">Response preparation</p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">GST Notice Support</h4>
-              <p className="mt-2">Resolution of notices under</p>
-              <ul className="list-disc list-inside mt-1 text-sm">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">GST Notice Support</h4>
+              <p className="mt-2 text-gray-600">Resolution of notices under</p>
+              <ul className="list-disc list-inside mt-1 text-sm text-gray-600">
                 <li>Section 63 - Assessment of Unregistered Persons</li>
                 <li>Section 46 - Intimation of Tax as per Return</li>
                 <li>Rule 88C - Intimation of Discrepancy</li>
                 <li>Rule 142(1A) - DRC-01A (Intimation before SCN)</li>
               </ul>
-              <p className="mt-1">
+              <p className="mt-1 text-gray-600">
                 Ensuring timely responses and strategic advice on GST
                 optimization
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">TDS Notice Support</h4>
-              <p className="mt-2">Handling notices under</p>
-              <ul className="list-disc list-inside mt-1 text-sm">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">TDS Notice Support</h4>
+              <p className="mt-2 text-gray-600">Handling notices under</p>
+              <ul className="list-disc list-inside mt-1 text-sm text-gray-600">
                 <li>Section 200(3) & Rule 31A - Non-filing of TDS Return</li>
                 <li>Section 234E - Late Filing Fee Notice</li>
                 <li>Section 197 - Lower/Nil Deduction Mismatch</li>
                 <li>TRACES notices for Form 26AS mismatches</li>
               </ul>
-              <p className="mt-1">
+              <p className="mt-1 text-gray-600">
                 Resolution of TDS mismatches in Form 26AS and streamlined TDS
                 compliance processes
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">
                 Tailored Standard Operating Procedures
               </h4>
-              <p className="mt-2">
+              <p className="mt-2 text-gray-600">
                 Department-wise SOPs designed as per industry standards
               </p>
-              <p className="mt-1">
+              <p className="mt-1 text-gray-600">
                 Customized procedures aligned with your business processes
               </p>
             </div>
 
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Dedicated Support</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Dedicated Support</h4>
+              <p className="mt-2 text-gray-600">
                 Continuous assistance with compliance matters and financial
                 advisory services.
               </p>
@@ -475,8 +358,8 @@ export default function IndiaFilingsCA(): React.ReactElement {
         </section>
 
         {/* How It Works */}
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-center">How It Works</h3>
+        <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold text-center text-slate-900">How It Works</h3>
           <p className="text-gray-600 mt-3 text-center">
             A simple, guided onboarding process followed by consistent monthly
             filings and quarterly CA reviews.
@@ -484,30 +367,30 @@ export default function IndiaFilingsCA(): React.ReactElement {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg font-semibold text-amber-700">
                 1
               </div>
-              <h4 className="font-semibold mt-4">Team assignment</h4>
+              <h4 className="font-semibold mt-4 text-slate-900">Team assignment</h4>
               <p className="text-sm text-gray-600 mt-2">
                 We assign a dedicated accountant and CA team who are experts in
                 your industry and understand your workflows.
               </p>
             </div>
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg font-semibold text-amber-700">
                 2
               </div>
-              <h4 className="font-semibold mt-4">LEDGERS Setup</h4>
+              <h4 className="font-semibold mt-4 text-slate-900">LEDGERS Setup</h4>
               <p className="text-sm text-gray-600 mt-2">
                 We connect your banking, import master data, enable GST/TDS, and
                 configure your systems to meet your specific needs.
               </p>
             </div>
             <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
+              <div className="mx-auto w-12 h-12 rounded-full border-2 border-amber-600 flex items-center justify-center text-lg font-semibold text-amber-700">
                 3
               </div>
-              <h4 className="font-semibold mt-4">Filings & Reviews</h4>
+              <h4 className="font-semibold mt-4 text-slate-900">Filings & Reviews</h4>
               <p className="text-sm text-gray-600 mt-2">
                 Timely monthly filings and quarterly CA meetings for planning,
                 handling queries, and addressing notices.
@@ -517,44 +400,44 @@ export default function IndiaFilingsCA(): React.ReactElement {
         </section>
 
         {/* Why IndiaFilings */}
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold mb-4">
+        <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold mb-4 text-slate-900">
             Why IndiaFilings for Fractional CA
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Experienced CA Team</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Experienced CA Team</h4>
+              <p className="mt-2 text-gray-600">
                 Specialists across GST, direct tax, payroll and notices.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Process-driven Delivery</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Process-driven Delivery</h4>
+              <p className="mt-2 text-gray-600">
                 Monthly checklists, maker-checker reviews and SLAs.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Nationwide Coverage</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Nationwide Coverage</h4>
+              <p className="mt-2 text-gray-600">
                 Serving 1,00,000+ businesses across India since 2014
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Transparent Communication</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Transparent Communication</h4>
+              <p className="mt-2 text-gray-600">
                 Single point of contact with clear updates.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Scales with You</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Scales with You</h4>
+              <p className="mt-2 text-gray-600">
                 Move from basic filings to full-stack CA oversight as you grow.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Software-enabled</h4>
-              <p className="mt-2">
+            <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">
+              <h4 className="font-semibold text-slate-900">Software-enabled</h4>
+              <p className="mt-2 text-gray-600">
                 Workflows and reports are digitised for accuracy and speed.
               </p>
             </div>
@@ -562,19 +445,19 @@ export default function IndiaFilingsCA(): React.ReactElement {
         </section>
 
         {/* FAQs */}
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold mb-4">FAQs</h3>
+        <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold mb-4 text-slate-900">FAQs</h3>
           <div className="space-y-0">
             {faqQuestions.map((q, i) => (
-              <div key={i} className="border-b last:border-b-0">
+              <div key={i} className="border-b border-gray-200 last:border-b-0">
                 <button
                   className="w-full text-left py-4 flex justify-between items-center text-sm"
                   onClick={() => setFaqOpen(faqOpen === i ? null : i)}
                   aria-expanded={faqOpen === i}
                 >
-                  <span className="text-slate-800">{q}</span>
-                  <span className="text-indigo-600 flex items-center gap-2">
-                    {faqOpen === i ? "-" : <Plus size={14} />}
+                  <span className="text-slate-800 font-medium">{q}</span>
+                  <span className="text-amber-600 flex items-center gap-2">
+                    {faqOpen === i ? "−" : <Plus size={14} />}
                   </span>
                 </button>
                 {faqOpen === i && (
@@ -585,79 +468,102 @@ export default function IndiaFilingsCA(): React.ReactElement {
               </div>
             ))}
           </div>
-
-          {/* Popular Searches below FAQs as requested */}
-          <div className="mt-6">
-            <h4 className="font-semibold mb-3">Popular Searches</h4>
-            <div className="flex flex-wrap gap-2">
-              {POPULAR_SEARCHES.map((s) => (
-                <span
-                  key={s}
-                  className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
         </section>
-      </main>
 
-      {/* FOOTER */}
-      <footer className="bg-white mt-12 py-12 border-t">
-        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-              <a className="block">About IndiaFilings</a>
-              <a className="block">Careers</a>
-              <a className="block">Contact Us</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-              <a className="block">Business Search</a>
-              <a className="block">Trademark Search</a>
-              <a className="block">Filings.AE for UAE</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-              <a className="block">Terms & Conditions</a>
-              <a className="block">Privacy Policy</a>
-              <a className="block">Refund Policy</a>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-              <a className="block">Confidentiality Policy</a>
-              <a className="block">Disclaimer Policy</a>
-              <a className="block">IndiaFilings Review</a>
+        {/* Cart Widget */}
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <div className="text-center text-gray-600">
+            <img
+              src={ASSETS.cartIcon}
+              alt="cart"
+              className="mx-auto h-12 w-auto mb-3"
+            />
+            <h3 className="font-semibold text-slate-900">Your cart is empty</h3>
+            <p className="text-sm mt-2 text-gray-600">
+              Browse our services and add some services in cart!
+            </p>
+          </div>
+
+          <div className="mt-6 text-center">
+            <div className="text-sm text-gray-500">
+              Existing User?{" "}
+              <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">
+                Login
+              </a>
             </div>
           </div>
-          <div className="text-center text-gray-500 mt-6">
-            © {new Date().getFullYear()} IndiaFilings - Chartered Accountants
+
+          <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
+            <input
+              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+              placeholder="Name"
+            />
+            <input
+              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+              placeholder="Email"
+            />
+            <div className="flex gap-2">
+              <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
+                <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
+                <span className="text-sm">+91</span>
+              </div>
+              <input
+                className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                placeholder="Phone"
+              />
+            </div>
+
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={gstChecked}
+                onChange={() => setGstChecked((s) => !s)}
+                className="w-4 h-4 accent-amber-600"
+              />
+              <span>Enter GSTIN to get 18% GST Credit</span>
+            </label>
+
+            {gstChecked && (
+              <input
+                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
+                placeholder="GSTIN"
+              />
+            )}
+
+            <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
+              <ShoppingBag size={16} /> Get Started
+            </button>
+
+            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+              <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Secure · No spam · Instant confirmation</span>
+            </div>
+          </form>
+        </div>
+
+        {/* Popular Searches */}
+        <div className="bg-white rounded-lg p-6 border border-gray-200">
+          <h4 className="font-semibold mb-3 text-slate-900">Popular Searches</h4>
+          <div className="flex flex-wrap gap-2">
+            {POPULAR_SEARCHES.slice(0, 30).map((s) => (
+              <span
+                key={s}
+                className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+              >
+                {s}
+              </span>
+            ))}
           </div>
         </div>
-      </footer>
+      </main>
 
       {/* WhatsApp CTA */}
-      <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
         <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
         <span className="font-semibold text-sm">Live Chat with Experts</span>
       </div>
-
-      <style jsx>{`
-        :global(body) {
-          margin: 0;
-          font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
-            "Helvetica Neue", Arial;
-          background: #f3f4f6;
-          color: #0f172a;
-        }
-        h1,
-        h2,
-        h3 {
-          color: #0b2545;
-        }
-      `}</style>
     </div>
   );
 }

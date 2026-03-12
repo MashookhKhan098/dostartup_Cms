@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Search, Check, Plus } from "lucide-react";
+import { Search, Check, Plus, ChevronRight, Star, Shield, Clock, Users, X } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -84,175 +85,72 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   }, [handler, ref]);
 }
 
-const Header: React.FC = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const ref = useRef<HTMLDivElement | null>(null);
-  useOnClickOutside(ref, () => setMobileOpen(false));
+export default function PartnershipCompliancePage(): React.ReactElement {
+  const [gstin, setGstin] = useState("");
+  const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+
+  const faqQuestions = [
+    "What is a partnership firm?",
+    "What are the types of partnership firms?",
+    "Is it mandatory for a partnership firm to file income tax returns?",
+    "What are the partnership firm tax slabs?",
+    "What is Minimum Alternate Tax (MAT) for partnership firms?",
+    "What deductions are allowed for partnership firms?",
+  ];
+
+  const faqAnswers: Record<number, string> = {
+    0: "A partnership firm is a business entity formed by two or more individuals working together under a single enterprise. It may be registered or unregistered.",
+    1: "There are Registered Partnership Firms (registered with Registrar of Firms) and Unregistered Partnership Firms (without registration certificate).",
+    2: "Yes — every partnership firm must file its income tax return annually, even if there is nil income. Different ITR forms apply depending on the situation.",
+    3: "Partnership firms are generally taxed at a flat rate (30%) on taxable income. Surcharge, cess and marginal relief may apply as per thresholds.",
+    4: "MAT (Minimum Alternate Tax) for partnership firms is applicable — effective rates and mechanics depend on adjusted total income (commonly around 18.5% of adjusted total income).",
+    5: "Deductions include certain partner remunerations/interest (subject to conditions), legitimate business expenses, and other deductions as per the Income Tax Act.",
+  };
+
+  const handlePlanSelect = (planName: string) => {
+    setSelectedPlan(planName);
+    setShowPaymentModal(true);
+  };
 
   return (
-    <header className="bg-white border-b sticky top-0 z-50">
-      <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
-        <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-        <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
-          <a href="#" className="hover:text-indigo-700">
-            Startup
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Registrations
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Trademark
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            GST
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Income Tax
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            MCA
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Compliance
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Guides
-          </a>
-        </nav>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
 
-        <div className="ml-auto flex items-center gap-3" ref={ref}>
-          <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
-            <Search size={14} />
-            <input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search"
-              className="outline-none text-sm bg-transparent w-40"
-            />
-          </div>
-          <button className="px-3 py-1 border rounded-md text-sm">Login</button>
-          <div className="md:hidden">
-            <button
-              aria-label="Toggle menu"
-              onClick={() => setMobileOpen((s) => !s)}
-              className="p-2 rounded-md border border-slate-200"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                {mobileOpen ? (
-                  <path
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                ) : (
-                  <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                )}
-              </svg>
-            </button>
+      {/* Breadcrumb */}
+      <div className="bg-white border-b border-gray-200 py-3">
+        <div className="max-w-[1180px] mx-auto px-6">
+          <div className="flex items-center text-sm text-gray-500">
+            <span>Home</span>
+            <ChevronRight className="w-4 h-4 mx-2" />
+            <span>Services</span>
+            <ChevronRight className="w-4 h-4 mx-2" />
+            <span className="text-[#C15F3C] font-medium">Partnership Compliance</span>
           </div>
         </div>
       </div>
 
-      {mobileOpen && (
-        <div className="md:hidden py-3 border-t border-slate-100">
-          <div className="flex flex-col gap-2 px-3">
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Startup
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Registrations
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Trademark
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">GST</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Income Tax
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">MCA</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Compliance
-            </a>
-            <a className="px-2 py-2 text-sm rounded border text-center">
-              Login
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-
-export default function ProprietorshipCompliancePage(): React.ReactElement {
-  const [gstin, setGstin] = useState("");
-  const [faqOpen, setFaqOpen] = useState<number | null>(null);
-
-  const faqQuestions = [
-    "Is it mandatory to file ITR for a proprietorship?",
-    "Which ITR form should a proprietor use?",
-    "When does a proprietorship require an audit?",
-    "When is GST registration required for proprietorships?",
-    "What documents are needed to file ITR for a proprietorship?",
-    "How does presumptive taxation help proprietors?",
-  ];
-
-  const faqAnswers: Record<number, string> = {
-    0: "Yes — proprietorship income is treated as the proprietor's personal income. Filing ITR is mandatory if income crosses applicable thresholds or in other specified scenarios.",
-    1: "Proprietors generally use ITR-3 (if not under presumptive scheme) or ITR-4 (Sugam) if opting for presumptive taxation under Sections like 44AD/44ADA.",
-    2: "An audit is required when turnover/receipts exceed statutory limits (e.g., turnover > Rs. 5 crore for some cases or professional receipts > Rs. 50 lakh), or when specific provisions apply.",
-    3: "GST registration is required when aggregate turnover exceeds the threshold (generally Rs. 20 lakh in many states; thresholds may vary). Once registered, GSTR-1 and GSTR-3B (and others where applicable) must be filed.",
-    4: "Key documents: PAN, Aadhaar, bank statements, books of accounts, challans (advance tax/TDS), Form 16/16A/26AS, invoices and proofs of expenses.",
-    5: "Presumptive taxation simplifies compliance for small taxpayers by allowing income to be declared at prescribed rates (Section 44AD/44ADA), reducing record-keeping and audit requirements for eligible businesses.",
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
-      <Header />
-
+      {/* Hero Section */}
       <div className="py-8">
         <div className="max-w-[1180px] mx-auto px-6">
-          <section
-            aria-label="hero"
-            className="relative rounded-2xl overflow-hidden shadow-sm"
-            style={{ minHeight: 320 }}
-          >
-            <div
-              className="absolute inset-0 bg-center bg-no-repeat bg-cover"
-              style={{ backgroundImage: `url(${ASSETS.heroBg})` }}
-            >
-              <img src={ASSETS.heroBg} alt="hero-bg" className="hidden" />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(90deg, rgba(2,6,23,0.85) 0%, rgba(2,6,23,0.55) 50%, rgba(0,0,0,0.12) 100%)",
-                }}
-              />
-            </div>
-
+          <section className="relative rounded-2xl overflow-hidden shadow-lg bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] min-h-[320px]">
+            <div className="absolute inset-0 bg-black/20"></div>
+            
             <div className="relative z-10">
               <div className="mx-auto max-w-[1180px] px-6 py-12 flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-1 max-w-2xl">
-                  <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 md:p-10 backdrop-blur-sm">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-10">
+                    <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 mb-4">
+                      <Star className="w-4 h-4 text-white fill-current" />
+                      <span className="text-xs font-medium text-white">PARTNERSHIP COMPLIANCE</span>
+                    </div>
+                    
                     <h1 className="text-white text-3xl md:text-[34px] leading-tight font-semibold mb-3">
-                      Proprietorship Compliance
+                      Partnership Compliance
                     </h1>
-                    <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
+                    <p className="text-white/90 text-sm md:text-base mb-6 max-w-prose">
                       File GST & IT returns, handle financial statement
                       preparation, and manage all monthly and annual compliances
                       effortlessly using our Accountants & LEDGERS platform.
@@ -263,18 +161,18 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
                       className="flex flex-col sm:flex-row items-center gap-4"
                     >
                       <input
-                        aria-label="ENTER GSTIN"
+                        aria-label="Enter GSTIN"
                         placeholder="ENTER GSTIN"
                         value={gstin}
                         onChange={(e) => setGstin(e.target.value)}
-                        className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none"
+                        className="w-full sm:w-[360px] bg-white/10 border border-white/20 rounded-md px-4 py-3 placeholder:text-white/60 text-white outline-none focus:ring-2 focus:ring-white"
                       />
-                      <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium">
+                      <button className="px-6 py-3 bg-white text-[#C15F3C] rounded-md font-medium hover:bg-gray-100 transition-colors shadow-lg">
                         Get Accountant
                       </button>
                     </form>
 
-                    <div className="mt-4 text-sm text-slate-300">
+                    <div className="mt-4 text-sm text-white/80">
                       Dedicated support, flexible cost — Experienced accountant
                       managing your monthly ledgers, vendor/customer/bank
                       reconciliations, and monthly close — at a fraction of a
@@ -284,100 +182,93 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
                 </div>
 
                 <div className="w-full md:w-96 flex justify-end">
-                  <div
-                    className="relative"
-                    style={{ width: 420, maxWidth: "100%" }}
-                  >
+                  <div className="relative w-full max-w-[420px]">
                     <img
                       src={ASSETS.hrPeople}
-                      alt="Proprietorship"
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        display: "block",
-                      }}
-                      className="pointer-events-none select-none rounded-lg shadow-md"
+                      alt="Accountants"
+                      className="pointer-events-none select-none rounded-lg shadow-2xl"
                     />
                   </div>
                 </div>
               </div>
             </div>
-
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                borderRadius: "1rem",
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 100%)",
-              }}
-            />
           </section>
         </div>
       </div>
 
+      {/* Stats Section */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-[1180px] mx-auto px-6 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+              <div className="text-3xl font-bold text-[#C15F3C]">10K+</div>
+              <div className="text-gray-600">Active Clients</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-[#C15F3C]">50K+</div>
+              <div className="text-gray-600">Returns Filed</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-[#C15F3C]">4.8/5</div>
+              <div className="text-gray-600">Client Rating</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-[#C15F3C]">24/7</div>
+              <div className="text-gray-600">Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Feature Cards */}
       <div className="max-w-[1180px] mx-auto px-6 -mt-4">
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
-                ✔
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
-                  Accurate & timely compliance
-                </h3>
-                <p className="text-sm text-slate-600">
-                  End-to-end preparation and filing of GST, Income Tax with
-                  due-date tracking and timely reviews to keep filings
-                  error-free and on schedule.
-                </p>
-              </div>
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
+            <div className="w-12 h-12 bg-[#C15F3C]/10 rounded-lg flex items-center justify-center mb-4">
+              <Users className="w-6 h-6 text-[#C15F3C]" />
             </div>
+            <h3 className="font-semibold text-[#C15F3C] mb-2">
+              Dedicated Accountants
+            </h3>
+            <p className="text-sm text-gray-600">
+              Experienced accountants to manage monthly bookkeeping, GST/IT
+              filings, reconciliations and monthly close activities.
+            </p>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-purple-500">
-                ⚡
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
-                  Powered by LEDGERS
-                </h3>
-                <p className="text-sm text-slate-600">
-                  Automated bank feeds and reconciliations, e-invoice/e-way bill
-                  (where applicable), document vault, and audit-ready
-                  reports—inside one secure system.
-                </p>
-              </div>
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
+            <div className="w-12 h-12 bg-[#C15F3C]/10 rounded-lg flex items-center justify-center mb-4">
+              <Clock className="w-6 h-6 text-[#C15F3C]" />
             </div>
+            <h3 className="font-semibold text-[#C15F3C] mb-2">
+              Accurate & timely compliance
+            </h3>
+            <p className="text-sm text-gray-600">
+              End-to-end preparation and filing of GST, Income Tax with
+              due-date tracking and timely reviews.
+            </p>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
-                👥
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
-                  Dedicated Accountants
-                </h3>
-                <p className="text-sm text-slate-600">
-                  Experienced accountants to manage monthly bookkeeping, GST/IT
-                  filings, reconciliations and monthly close activities for
-                  proprietorships.
-                </p>
-              </div>
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
+            <div className="w-12 h-12 bg-[#C15F3C]/10 rounded-lg flex items-center justify-center mb-4">
+              <Shield className="w-6 h-6 text-[#C15F3C]" />
             </div>
+            <h3 className="font-semibold text-[#C15F3C] mb-2">
+              Powered by LEDGERS
+            </h3>
+            <p className="text-sm text-gray-600">
+              Automated bank feeds and reconciliations, e-invoice/e-way bill,
+              document vault, and audit-ready reports.
+            </p>
           </div>
         </section>
       </div>
 
       <main className="max-w-[1180px] mx-auto px-6 py-10 space-y-8">
+        {/* Pricing Section */}
         <section>
-          <h2 className="text-2xl md:text-3xl font-semibold text-center">
-            Simplified Proprietorship Compliance with Clear, Transparent
-            Pricing.
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900">
+            Simplified Partnership Compliance with Clear, Transparent Pricing.
           </h2>
           <p className="text-sm text-gray-600 mt-2 text-center max-w-[880px] mx-auto">
             File your GST and Income Tax returns online with expert assistance,
@@ -385,379 +276,297 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
           </p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl border p-6 shadow-sm">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+            {/* Software Only Plan */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs font-medium mb-3">
                 LEDGERS
               </div>
-              <h3 className="font-semibold text-lg">Software Only</h3>
+              <h3 className="font-semibold text-xl text-gray-900">Software Only</h3>
               <p className="text-sm text-gray-600 mt-2">
                 LEDGERS GST Software Access - 1 Year
               </p>
-              <div className="mt-4 text-2xl font-bold">
-                ₹5,899 <span className="text-sm font-normal">/yr + GST</span>
+              <div className="mt-4">
+                <span className="text-3xl font-bold text-[#C15F3C]">₹5,899</span>
+                <span className="text-sm text-gray-500"> /yr + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button className="mt-4 w-full bg-[#C15F3C] text-white py-3 rounded-lg font-semibold hover:bg-[#A74A2F] transition-colors">
                 Start Filing Now
               </button>
               <ul className="mt-5 space-y-3 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> LEDGERS GST Software Access - 1 Year
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>LEDGERS GST Software Access - 1 Year</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Compliance Dashboard & Alerts
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Compliance Dashboard & Alerts</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> GST Invoicing & e-Invoicing
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>GST Invoicing & e-Invoicing</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Invoice Management System (IMS)
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Invoice Management System (IMS)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> eWay Billing & GST ITC Tools
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>eWay Billing & GST ITC Tools</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Accounting Software
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Accounting Software</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Payroll Software
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Payroll Software</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white rounded-xl border p-6 shadow-sm ring-2 ring-indigo-600/20">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+            {/* Accountant Quarterly Plan - Recommended */}
+            <div className="bg-white rounded-xl border-2 border-[#C15F3C] p-6 shadow-xl relative transform md:scale-105">
+              <div className="absolute top-0 right-0 bg-[#C15F3C] text-white px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+                RECOMMENDED
+              </div>
+              <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs font-medium mb-3">
                 Accounting Software + Service
               </div>
-              <h3 className="font-semibold text-lg">Accountant</h3>
+              <h3 className="font-semibold text-xl text-gray-900">Accountant</h3>
               <p className="text-sm text-gray-600 mt-2">
                 Accountant – Quarterly Plan
               </p>
-              <div className="mt-4 text-2xl font-bold">
-                ₹7,899{" "}
-                <span className="text-sm font-normal">/quarter + GST</span>
+              <div className="mt-4">
+                <span className="text-3xl font-bold text-[#C15F3C]">₹7,899</span>
+                <span className="text-sm text-gray-500"> /quarter + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button 
+                onClick={() => handlePlanSelect("Quarterly Plan")}
+                className="mt-4 w-full bg-[#C15F3C] text-white py-3 rounded-lg font-semibold hover:bg-[#A74A2F] transition-colors"
+              >
                 Start Filing Now
               </button>
               <ul className="mt-5 space-y-3 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Dedicated Accountant Support - 1 Assigned
-                  Accountant
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Dedicated Accountant Support - 1 Assigned Accountant</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> GST Return Filing (GSTR-1, 3B) - 1 Quarter
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>GST Return Filing (GSTR-1, 3B) - 1 Quarter</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> LEDGERS GST Software Access - 1 Year
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>LEDGERS GST Software Access - 1 Year</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Compliance Dashboard & Alerts
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Compliance Dashboard & Alerts</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> GST Invoicing & e-Invoicing
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>GST Invoicing & e-Invoicing</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Invoice Management System (IMS)
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check size={16} /> eWay Billing & GST ITC Tools
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check size={16} /> Accounting Software
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check size={16} /> Payroll Software
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>eWay Billing & GST ITC Tools</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-white rounded-xl border p-6 shadow-sm">
-              <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
-                Most popular
+            {/* Annual Plan */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs font-medium mb-3">
+                Most Popular
               </div>
-              <h3 className="font-semibold text-lg">
-                Accountant – Annual Plan
-              </h3>
+              <h3 className="font-semibold text-xl text-gray-900">Accountant – Annual Plan</h3>
               <p className="text-sm text-gray-600 mt-2">
                 Dedicated Accountant Support with annual coverage
               </p>
-              <div className="mt-4 text-2xl font-bold">
-                ₹19,899 <span className="text-sm font-normal">/yr + GST</span>
+              <div className="mt-4">
+                <span className="text-3xl font-bold text-[#C15F3C]">₹19,899</span>
+                <span className="text-sm text-gray-500"> /yr + GST</span>
               </div>
-              <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
+              <button 
+                onClick={() => handlePlanSelect("Annual Plan")}
+                className="mt-4 w-full bg-[#C15F3C] text-white py-3 rounded-lg font-semibold hover:bg-[#A74A2F] transition-colors"
+              >
                 Start Filing Now
               </button>
               <ul className="mt-5 space-y-3 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Dedicated Accountant Support
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Dedicated Accountant Support</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> GST Return Filing (GSTR-1, 3B) - 1 Year
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>GST Return Filing (GSTR-1, 3B) - 1 Year</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> GST Annual Filing (GSTR-9) - Included (If
-                  Applicable)
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>GST Annual Filing (GSTR-9) - Included</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Annual Financial Statements
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Annual Financial Statements</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> Income Tax Return Filing (for Business or
-                  Proprietor)
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>Income Tax Return Filing</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check size={16} /> CA Consultation - 4 Consultations
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check size={16} /> Notice Handling Support
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check size={16} /> LEDGERS GST Software Access - 1 Year
+                  <Check size={16} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
+                  <span>CA Consultation - 4 Consultations</span>
                 </li>
               </ul>
             </div>
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-center">
+        {/* Services Offered */}
+        <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+          <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">
             Services Offered
           </h3>
-          <p className="text-gray-600 mt-3 text-center">
+          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
             We provide comprehensive accounting support tailored to meet the
             day-to-day financial needs of your business
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm text-gray-700">
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Access to LEDGERS</h4>
-              <p className="mt-2">
-                Record and review transactions in real time with shared access —
-                clean books, clear audit trail, one workspace.
-              </p>
-            </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">
-                GST Return Filing (Monthly/Quarterly)
-              </h4>
-              <p className="mt-2">
-                GSTR-1, GSTR-3B (and others as needed) prepared, reconciled, and
-                filed on time with input/output matching.
-              </p>
-            </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">
-                Preparation of Financial Statements
-              </h4>
-              <p className="mt-2">
-                We prepare Balance Sheet, Profit & Loss Account, and Trial
-                Balance as per accounting standards, providing clarity for
-                decision-making and audits.
-              </p>
-            </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Income Tax Return Filing</h4>
-              <p className="mt-2">
-                ITR preparation and filing for businesses/individuals with
-                correct income, deductions, and disclosures — optimized within
-                law.
-              </p>
-            </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">E-Invoicing & E-Way Bill</h4>
-              <p className="mt-2">
-                Easy IRN-based e-invoice generation with priority focus on
-                accurate and timely E-Way Bill creation and tracking to keep
-                your goods movement fully GST-compliant.
-              </p>
-            </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">CA Assistance</h4>
-              <p className="mt-2">
-                Get 4 consultations with a Chartered Accountant for guidance on
-                accounting, taxation, and compliance matters. This ensures
-                expert support whenever you need clarity or professional advice.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              "Access to LEDGERS",
+              "GST Return Filing",
+              "Preparation of Financial Statements",
+              "Income Tax Return Filing",
+              "E-Invoicing & E-Way Bill",
+              "CA Assistance"
+            ].map((service, index) => (
+              <div key={index} className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] hover:shadow-md transition-all">
+                <h4 className="font-semibold text-[#C15F3C] mb-2">{service}</h4>
+                <p className="text-sm text-gray-600">
+                  Professional {service.toLowerCase()} services with expert guidance
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-center">How It Works</h3>
-          <p className="text-gray-600 mt-3 text-center">
+        {/* How It Works */}
+        <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+          <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">How It Works</h3>
+          <p className="text-gray-600 text-center mb-8">
             A guided onboarding process with consistent monthly accounting and
             reporting.
           </p>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
-                1
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { step: 1, title: "Assign your accountant", desc: "You get a named accountant familiar with your industry and a clear kickoff checklist." },
+              { step: 2, title: "System Setup", desc: "Connect bank feeds, import masters & opening balances, map ledgers/tax series, and configure LEDGERS." },
+              { step: 3, title: "Monthly close & compliance", desc: "Bank/vendor/customer reconciliations, MIS, and on-time GST, Finance Statement Preparation and Income Tax filings." }
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="w-16 h-16 bg-[#C15F3C] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+                  {item.step}
+                </div>
+                <h4 className="font-semibold text-[#C15F3C] mb-2">{item.title}</h4>
+                <p className="text-sm text-gray-600">{item.desc}</p>
               </div>
-              <h4 className="font-semibold mt-4">Assign your accountant</h4>
-              <p className="text-sm text-gray-600 mt-2">
-                You get a named accountant familiar with your industry and a
-                clear kickoff checklist.
-              </p>
-            </div>
-            <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
-                2
-              </div>
-              <h4 className="font-semibold mt-4">System Setup</h4>
-              <p className="text-sm text-gray-600 mt-2">
-                Connect bank feeds, import masters & opening balances, map
-                ledgers/tax series, and configure LEDGERS.
-              </p>
-            </div>
-            <div>
-              <div className="mx-auto w-12 h-12 rounded-full border flex items-center justify-center text-lg">
-                3
-              </div>
-              <h4 className="font-semibold mt-4">Monthly close & compliance</h4>
-              <p className="text-sm text-gray-600 mt-2">
-                Bank/vendor/customer reconciliations, MIS, and on-time GST,
-                Finance Statement Preparation and Income Tax filings.
-              </p>
-            </div>
+            ))}
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold mb-4">
+        {/* Why IndiaFilings */}
+        <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+          <h3 className="text-2xl font-bold text-[#C15F3C] mb-6">
             Why IndiaFilings for Fractional Accountant
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Affordable Expertise</h4>
-              <p className="mt-2">
+            <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
+              <h4 className="font-semibold text-[#C15F3C] mb-2">Affordable Expertise</h4>
+              <p className="text-sm text-gray-600">
                 Skilled accountants without full-time hiring costs.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Zero Surprises</h4>
-              <p className="mt-2">
+            <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
+              <h4 className="font-semibold text-[#C15F3C] mb-2">Zero Surprises</h4>
+              <p className="text-sm text-gray-600">
                 Transparent reporting and proactive due-date alerts.
               </p>
             </div>
-            <div className="p-4 rounded-lg border">
-              <h4 className="font-semibold">Scalable Service</h4>
-              <p className="mt-2">
-                Start with books; add GST/IT filings and compliance advisory as
-                you grow.
+            <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
+              <h4 className="font-semibold text-[#C15F3C] mb-2">Scalable Service</h4>
+              <p className="text-sm text-gray-600">
+                Start with books; add GST/IT filings and compliance advisory as you grow.
               </p>
             </div>
           </div>
-          <div className="mt-6">
-            <h4 className="font-semibold mb-2">Software + Service</h4>
-            <p className="text-sm text-gray-600">
-              The LEDGERS platform, bundled with experts who run it.
-            </p>
-          </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold mb-4">
-            Proprietorship Compliance — What you need to know
+        {/* Partnership Tax Return Filing Info */}
+        <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+          <h3 className="text-2xl font-bold text-[#C15F3C] mb-4">
+            Partnership Tax Return Filing
           </h3>
           <p className="text-sm text-gray-700 leading-relaxed">
-            Running a Sole Proprietorship in India comes with a set of crucial
-            financial and legal responsibilities. Compliance with various tax
-            and regulatory requirements is essential to ensure your business's
-            smooth operation and growth. This includes filing Income Tax
-            Returns, TDS Returns, GST Returns, EPF Returns, maintaining accurate
-            accounting records, and sometimes undergoing a Tax Audit.
+            Operating a Partnership Firm in India involves a range of crucial
+            financial and legal responsibilities. It is imperative to adhere to
+            various tax and regulatory requirements to ensure the smooth
+            functioning and growth of your business. These obligations encompass
+            filing Income Tax Returns, TDS Returns, GST Returns, EPF Returns,
+            and occasionally undergoing a Tax Audit if the partnership firm
+            audit limit exceeds.
           </p>
 
-          <h4 className="font-semibold mt-4">
-            Income Tax Return filing for Proprietorship
-          </h4>
-          <p className="mt-2 text-sm text-gray-700">
-            Every proprietorship in India is obligated to file income tax
-            returns annually as it is treated as an extension of the proprietor.
-            The proprietor's PAN is used for filing. Filing a NIL return is
-            required if income is zero.
-          </p>
-
-          <h4 className="font-semibold mt-4">
-            Is it necessary for Proprietorship to File ITR?
-          </h4>
-          <p className="mt-2 text-sm text-gray-700">
-            Yes. Proprietors must file ITR if total income exceeds thresholds
-            based on age and other conditions. Filing on time allows losses to
-            be carried forward and certain deductions to be claimed.
-          </p>
-
-          <h4 className="font-semibold mt-4">
-            Income Tax Slabs & Alternate Regime
-          </h4>
-          <p className="mt-2 text-sm text-gray-700">
-            Proprietors follow the individual tax slabs for their personal
-            income. An alternate tax regime (Section 115BAC) is available with
-            specific rates and conditions — opting for it requires giving up
-            certain exemptions/deductions.
-          </p>
-
-          <h4 className="font-semibold mt-4">Presumptive Taxation Scheme</h4>
-          <p className="mt-2 text-sm text-gray-700">
-            Small taxpayers can opt for presumptive taxation (Section
-            44AD/44ADA), enabling taxation on estimated income and reducing
-            record-keeping and audit burdens.
-          </p>
-
-          <h4 className="font-semibold mt-4">Deadlines & Audit</h4>
-          <p className="mt-2 text-sm text-gray-700">
-            Typical ITR deadline (no audit): July 31. If audit required,
-            deadlines vary (commonly September/November depending on
-            circumstances). Audit thresholds depend on turnover/receipts and
-            scheme applicability.
-          </p>
-
-          <h4 className="font-semibold mt-4">Required Documents</h4>
-          <div className="docs-list">
-            <div className="p-3 border rounded">PAN Card</div>
-            <div className="p-3 border rounded">
-              Bank Account Details & Statements
+          <div className="mt-6 space-y-4">
+            <div>
+              <h4 className="font-semibold text-[#C15F3C]">Income Tax Return filing for Partnership Firm</h4>
+              <p className="mt-2 text-sm text-gray-700">
+                Every partnership firm in India is obligated to file income tax
+                returns annually, regardless of whether the firm has generated
+                income or incurred losses during the financial year. Even if
+                there was no business activity, filing a NIL income tax return
+                within the stipulated due date is mandatory.
+              </p>
             </div>
-            <div className="p-3 border rounded">Aadhaar Card</div>
-            <div className="p-3 border rounded">
-              Advance Tax Payment Challan, Form 16/16A/26AS
-            </div>
-            <div className="p-3 border rounded">
-              Invoices and proofs of expenses
+
+            <div>
+              <h4 className="font-semibold text-[#C15F3C]">Partnership Firm Income Tax slabs for AY 2023-24</h4>
+              <p className="mt-2 text-sm text-gray-700">
+                Under the provisions of the Income Tax Act 1961, a partnership
+                firm in India is subject to the partnership firm tax rate of 30%
+                on taxable income. Surcharge, cess and marginal relief apply as
+                relevant.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold mb-4">Related Guides</h3>
-          <div className="flex flex-wrap gap-3 text-sm">
-            <a className="px-3 py-2 border rounded">
-              Income Tax Rate for Proprietorship – AY 2019-20
-            </a>
-            <a className="px-3 py-2 border rounded">
-              FAQ's on Proprietorship Compliance
-            </a>
-            <a className="px-3 py-2 border rounded">
-              How to file income tax returns for a Proprietorship?
-            </a>
-            <a className="px-3 py-2 border rounded">
-              When to file ITR-4 / ITR-3 for proprietorship?
-            </a>
+        {/* Related Guides */}
+        <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+          <h3 className="text-xl font-semibold text-[#C15F3C] mb-4">Related Guides</h3>
+          <div className="flex flex-wrap gap-3">
+            {["ITR 5 Form", "What is a partnership firm?", "How to file GST returns for Partnership firm", "FAQ's on Partnership Compliance"].map((guide, index) => (
+              <a key={index} className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:border-[#C15F3C] hover:text-[#C15F3C] transition-colors cursor-pointer">
+                {guide}
+              </a>
+            ))}
           </div>
         </section>
 
-        <section className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-xl font-semibold mb-4">FAQ's</h3>
+        {/* FAQ Section */}
+        <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+          <h3 className="text-xl font-semibold text-[#C15F3C] mb-4">FAQ's</h3>
           <div className="space-y-0">
             {faqQuestions.map((q, i) => (
-              <div key={i} className="border-b last:border-b-0">
+              <div key={i} className="border-b border-gray-200 last:border-b-0">
                 <button
-                  className="w-full text-left py-4 flex justify-between items-center text-sm"
+                  className="w-full text-left py-4 flex justify-between items-center text-sm hover:bg-orange-50 transition-colors"
                   onClick={() => setFaqOpen(faqOpen === i ? null : i)}
                   aria-expanded={faqOpen === i}
                 >
-                  <span className="text-slate-800">{q}</span>
-                  <span className="text-indigo-600 flex items-center gap-2">
-                    {faqOpen === i ? "-" : <Plus size={14} />}
+                  <span className="text-gray-800 font-medium">{q}</span>
+                  <span className="text-[#C15F3C] flex items-center gap-2">
+                    {faqOpen === i ? "−" : <Plus size={14} />}
                   </span>
                 </button>
                 {faqOpen === i && (
@@ -770,12 +579,12 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
           </div>
 
           <div className="mt-6">
-            <h4 className="font-semibold mb-3">Popular Searches</h4>
+            <h4 className="font-semibold text-[#C15F3C] mb-3">Popular Searches</h4>
             <div className="flex flex-wrap gap-2">
-              {POPULAR_SEARCHES.map((s) => (
+              {POPULAR_SEARCHES.slice(0, 20).map((s) => (
                 <span
                   key={s}
-                  className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+                  className="text-xs px-3 py-1 border border-gray-200 rounded-full bg-white text-gray-700 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-colors"
                 >
                   {s}
                 </span>
@@ -785,61 +594,96 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
         </section>
       </main>
 
-      <footer className="bg-white mt-12 py-12 border-t">
-        <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white mt-12 py-12">
+        <div className="max-w-[1180px] mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
-              <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-              <a className="block">About IndiaFilings</a>
-              <a className="block">Careers</a>
-              <a className="block">Contact Us</a>
+              <h5 className="font-semibold text-[#C15F3C] mb-4">IndiaFilings</h5>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About IndiaFilings</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+              </ul>
             </div>
             <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-              <a className="block">Business Search</a>
-              <a className="block">Trademark Search</a>
-              <a className="block">Filings.AE for UAE</a>
+              <h5 className="font-semibold text-[#C15F3C] mb-4">Platforms</h5>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Business Search</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Trademark Search</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Filings.AE for UAE</a></li>
+              </ul>
             </div>
             <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-              <a className="block">Terms & Conditions</a>
-              <a className="block">Privacy Policy</a>
-              <a className="block">Refund Policy</a>
+              <h5 className="font-semibold text-[#C15F3C] mb-4">Usage</h5>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Refund Policy</a></li>
+              </ul>
             </div>
             <div>
-              <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-              <a className="block">Confidentiality Policy</a>
-              <a className="block">Disclaimer Policy</a>
-              <a className="block">IndiaFilings Review</a>
+              <h5 className="font-semibold text-[#C15F3C] mb-4">Policies</h5>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Confidentiality Policy</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Disclaimer Policy</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">IndiaFilings Review</a></li>
+              </ul>
             </div>
           </div>
 
-          <div className="text-center text-gray-500 mt-6">
-            © {new Date().getFullYear()} IndiaFilings - Proprietorship
-            Compliance
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+            © {new Date().getFullYear()} IndiaFilings - Partnership Compliance
           </div>
         </div>
       </footer>
 
-      <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
-        <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
-        <span className="font-semibold text-sm">Live Chat with Experts</span>
-      </div>
+      {/* WhatsApp CTA */}
+      <button 
+        onClick={() => setShowChat(true)}
+        className="fixed right-6 bottom-6 bg-[#C15F3C] text-white p-4 rounded-full shadow-2xl hover:bg-[#A74A2F] transition-all hover:scale-110 z-50"
+      >
+        <img src={ASSETS.whatsapp} alt="WhatsApp" className="w-6 h-6" />
+      </button>
 
-      <style jsx>{`
-        :global(body) {
-          margin: 0;
-          font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
-            "Helvetica Neue", Arial;
-          background: #f3f4f6;
-          color: #0f172a;
-        }
-        h1,
-        h2,
-        h3 {
-          color: #0b2545;
-        }
-      `}</style>
+      {/* Payment Modal */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-md w-full p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-gray-900">Complete Payment</h3>
+              <button onClick={() => setShowPaymentModal(false)} className="hover:bg-gray-100 p-1 rounded-full transition-colors">
+                <X className="w-6 h-6 text-gray-500" />
+              </button>
+            </div>
+            <p className="text-gray-600 mb-4">
+              You've selected the <span className="font-semibold text-[#C15F3C]">{selectedPlan}</span>
+            </p>
+            <div className="space-y-4">
+              <input
+                type="text"
+                placeholder="Card Number"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C15F3C]"
+              />
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C15F3C]"
+                />
+                <input
+                  type="text"
+                  placeholder="CVV"
+                  className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C15F3C]"
+                />
+              </div>
+              <button className="w-full bg-[#C15F3C] text-white py-2 rounded-lg font-semibold hover:bg-[#A74A2F] transition-colors">
+                Pay Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -13,6 +13,7 @@ import {
   FileText,
   File,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -102,149 +103,38 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   }, [handler, ref]);
 }
 
-const Header: React.FC = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const ref = useRef<HTMLDivElement | null>(null);
-  useOnClickOutside(ref, () => setMobileOpen(false));
-  return (
-    <header className="bg-white border-b sticky top-0 z-50">
-      <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
-        <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-        <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
-          <a href="#" className="hover:text-indigo-700">
-            Startup
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Registrations
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Trademark
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            GST
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Income Tax
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            MCA
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Compliance
-          </a>
-          <a href="#" className="hover:text-indigo-700">
-            Guides
-          </a>
-        </nav>
-        <div className="ml-auto flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
-            <Search size={14} />
-            <input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search"
-              className="outline-none text-sm bg-transparent w-40"
-            />
-          </div>
-          <button className="px-3 py-1 border rounded-md text-sm">Login</button>
-          <div className="md:hidden">
-            <button
-              aria-label="Toggle menu"
-              onClick={() => setMobileOpen((s) => !s)}
-              className="p-2 rounded-md border border-slate-200"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden
-              >
-                {mobileOpen ? (
-                  <path
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                ) : (
-                  <path
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      {mobileOpen && (
-        <div className="md:hidden py-3 border-t border-slate-100">
-          <div className="flex flex-col gap-2 px-3">
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Startup
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Registrations
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Trademark
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">GST</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Income Tax
-            </a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">MCA</a>
-            <a className="px-2 py-2 text-sm rounded hover:bg-slate-50">
-              Compliance
-            </a>
-            <a className="px-2 py-2 text-sm rounded border text-center">
-              Login
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-};
-
 const Footer: React.FC = () => {
   return (
     <footer className="bg-white mt-12 py-12 border-t">
-      <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-gray-600">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div>
-            <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-            <a className="block">About IndiaFilings</a>
-            <a className="block">Careers</a>
-            <a className="block">Contact Us</a>
+            <h5 className="font-semibold text-[#C15F3C] mb-2">Company</h5>
+            <a className="block hover:text-[#C15F3C] transition-colors">About Us</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Careers</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Contact Us</a>
           </div>
           <div>
-            <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-            <a className="block">Business Search</a>
-            <a className="block">Trademark Search</a>
-            <a className="block">Filings.AE for UAE</a>
+            <h5 className="font-semibold text-[#C15F3C] mb-2">Platforms</h5>
+            <a className="block hover:text-[#C15F3C] transition-colors">Business Search</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Trademark Search</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Filings.AE for UAE</a>
           </div>
           <div>
-            <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-            <a className="block">Terms & Conditions</a>
-            <a className="block">Privacy Policy</a>
-            <a className="block">Refund Policy</a>
+            <h5 className="font-semibold text-[#C15F3C] mb-2">Usage</h5>
+            <a className="block hover:text-[#C15F3C] transition-colors">Terms & Conditions</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Privacy Policy</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Refund Policy</a>
           </div>
           <div>
-            <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-            <a className="block">Confidentiality Policy</a>
-            <a className="block">Disclaimer Policy</a>
-            <a className="block">IndiaFilings Review</a>
+            <h5 className="font-semibold text-[#C15F3C] mb-2">Policies</h5>
+            <a className="block hover:text-[#C15F3C] transition-colors">Confidentiality Policy</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Disclaimer Policy</a>
+            <a className="block hover:text-[#C15F3C] transition-colors">Reviews</a>
           </div>
         </div>
         <div className="text-center text-gray-500 mt-6">
-          © {new Date().getFullYear()} IndiaFilings - ESI Return Filing
+          © {new Date().getFullYear()} All rights reserved.
         </div>
       </div>
     </footer>
@@ -281,7 +171,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
     5: "Failing to file returns can result in penalties, interest, and potential legal consequences including fines and prosecution in severe cases.",
     6: "Essential documents include attendance registers, Form 6, register of wages, PAN of the organisation, cancelled cheque, monthly challans and return records.",
     7: "Delayed or non-payment can attract interest, damages, and in cases of deliberate non-payment, prosecution under relevant provisions which can include imprisonment or fines.",
-    8: "IndiaFilings assists by collecting documents, preparing returns, validating contribution details, filing returns on the ESIC portal, and providing support during audits.",
+    8: "We assist by collecting documents, preparing returns, validating contribution details, filing returns on the ESIC portal, and providing support during audits.",
   };
 
   useEffect(() => {
@@ -294,11 +184,22 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
-      <Header />
+      {/* Imported Navbar */}
+      <Navbar />
+
+      {/* Breadcrumb */}
+      <div className="bg-gradient-to-r from-white to-slate-50 py-3 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-gray-500">
+          Home / Services /{" "}
+          <span className="text-[#C15F3C] font-medium">ESI Return Filing</span>
+        </div>
+      </div>
+
       <main className="py-8">
+        {/* HERO SECTION */}
         <section
           aria-label="hero"
-          className="relative rounded-2xl overflow-hidden shadow-sm max-w-[1180px] mx-auto px-6"
+          className="relative rounded-2xl overflow-hidden shadow-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
           style={{ minHeight: 360 }}
         >
           <div
@@ -315,18 +216,35 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             />
           </div>
           <div className="relative z-10">
-            <div className="mx-auto max-w-[1180px] px-6 py-12 flex flex-col md:flex-row items-center gap-8">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1 max-w-2xl">
                 <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 md:p-10 backdrop-blur-sm">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-1.5 bg-[#C15F3C]/20 border border-[#C15F3C]/30 rounded-full px-3 py-1 mb-4">
+                    <div className="w-1.5 h-1.5 bg-[#C15F3C] rounded-full" />
+                    <span className="text-xs font-medium text-white">HR & PAYROLL</span>
+                  </div>
+
                   <h1 className="text-white text-3xl md:text-[34px] leading-tight font-semibold mb-3">
                     PF Return Filing
                   </h1>
                   <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
                     Ensure timely PF contribution management, challan
-                    generation, and monthly return filing with IndiaFilings.
-                    Supported by a Dedicated Accountant and the LEDGERS payroll
+                    generation, and monthly return filing. Supported by a
+                    Dedicated Accountant and the LEDGERS payroll
                     compliance system.
                   </p>
+
+                  {/* Trust Badges */}
+                  <div className="flex items-center gap-3 mt-4 mb-6">
+                    <div className="flex -space-x-1.5">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] border-2 border-white shadow-sm" />
+                      ))}
+                    </div>
+                    <span className="text-xs text-gray-300">Trusted by 10,000+ businesses</span>
+                  </div>
+
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -339,22 +257,19 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                       placeholder="PAN / GSTIN"
                       value={companyId}
                       onChange={(e) => setCompanyId(e.target.value)}
-                      className="w-full sm:w-[240px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none"
+                      className="w-full sm:w-[240px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none focus:ring-1 focus:ring-[#C15F3C]"
                     />
                     <input
                       aria-label="Number of Employees"
                       placeholder="Number of Employees"
                       value={employees}
                       onChange={(e) => setEmployees(e.target.value)}
-                      className="w-full sm:w-[180px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none"
+                      className="w-full sm:w-[180px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none focus:ring-1 focus:ring-[#C15F3C]"
                     />
-                    <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium">
+                    <button className="px-6 py-3 bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white rounded-md font-medium hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg">
                       Request Demo
                     </button>
                   </form>
-                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div className="flex items-start gap-3"></div>
-                  </div>
                 </div>
               </div>
               <div className="w-full md:w-96 flex justify-end">
@@ -386,14 +301,15 @@ export default function EsiReturnFilingPage(): React.ReactElement {
           />
         </section>
 
-        <section className="max-w-[1180px] mx-auto px-6 mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+        {/* 3 Feature Cards */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-15 h-10 rounded-full bg-slate-50 grid place-items-center text-indigo-500">
+              <div className="w-15 h-10 rounded-full bg-orange-50 grid place-items-center">
                 <img src={ASSETS.pfIcon} alt="pf" className="w-8 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-[#C15F3C]">
                   PF Return Expertise
                 </h3>
                 <p className="text-sm text-slate-600">
@@ -404,13 +320,13 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-16 h-10 rounded-full bg-slate-50 grid place-items-center text-emerald-500">
+              <div className="w-16 h-10 rounded-full bg-orange-50 grid place-items-center">
                 <img src={ASSETS.esiIcon} alt="esi" className="w-8 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-[#C15F3C]">
                   ESI Return Support
                 </h3>
                 <p className="text-sm text-slate-600">
@@ -421,9 +337,9 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm">
+          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-16 h-10 rounded-full bg-slate-50 grid place-items-center text-purple-500">
+              <div className="w-16 h-10 rounded-full bg-orange-50 grid place-items-center">
                 <img
                   src={ASSETS.payrollIcon}
                   alt="payroll"
@@ -431,7 +347,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                 />
               </div>
               <div>
-                <h3 className="font-semibold mb-1 text-slate-800">
+                <h3 className="font-semibold mb-1 text-[#C15F3C]">
                   Payroll & HR
                 </h3>
                 <p className="text-sm text-slate-600">
@@ -443,9 +359,11 @@ export default function EsiReturnFilingPage(): React.ReactElement {
           </div>
         </section>
 
-        <section className="max-w-[1180px] mx-auto px-6 py-8 space-y-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm">
-            <h2 className="text-2xl md:text-3xl font-semibold text-center">
+        {/* Main Content */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          {/* Pricing Section */}
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center text-[#C15F3C]">
               Simple, Transparent HR & Payroll Management Pricing
             </h2>
             <p className="text-sm text-gray-600 mt-2 text-center max-w-[880px] mx-auto">
@@ -455,57 +373,54 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
               <div
-                className={`bg-white rounded-xl border p-6 shadow-sm ${
-                  selectedPlan === "payroll" ? "ring-2 ring-indigo-600/20" : ""
+                className={`bg-white rounded-xl border p-6 shadow-lg hover:border-[#C15F3C]/30 transition-colors ${
+                  selectedPlan === "payroll" ? "ring-2 ring-[#C15F3C]/20" : ""
                 }`}
               >
-                <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+                <div className="inline-block bg-orange-100 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
                   Payroll
                 </div>
                 <h3 className="font-semibold text-lg">Payroll Management</h3>
                 <p className="text-sm text-gray-600 mt-2">
                   LEDGERS HR Software (1 Year Subscription)
                 </p>
-                <div className="mt-4 text-2xl font-bold">
-                  ₹12,899 <span className="text-sm font-normal">/yr + GST</span>
+                <div className="mt-4 text-2xl font-bold text-[#C15F3C]">
+                  ₹12,899 <span className="text-sm font-normal text-gray-600">/yr + GST</span>
                 </div>
                 <button
                   onClick={() => setSelectedPlan("payroll")}
-                  className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full"
+                  className="mt-4 w-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white py-3 rounded-full hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg"
                 >
                   Start Now
                 </button>
                 <ul className="mt-5 space-y-3 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> LEDGERS HR Software (1 Year
-                    Subscription)
+                    <Check size={16} className="text-[#C15F3C]" /> LEDGERS HR Software (1 Year Subscription)
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> Attendance Platform
+                    <Check size={16} className="text-[#C15F3C]" /> Attendance Platform
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> Employee Self-Serve
+                    <Check size={16} className="text-[#C15F3C]" /> Employee Self-Serve
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> 12 Months Managed Payroll Service
+                    <Check size={16} className="text-[#C15F3C]" /> 12 Months Managed Payroll Service
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> 12 Months HR Support & Assistance
+                    <Check size={16} className="text-[#C15F3C]" /> 12 Months HR Support & Assistance
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> Upto 20 Employees
+                    <Check size={16} className="text-[#C15F3C]" /> Upto 20 Employees
                   </li>
                 </ul>
               </div>
 
               <div
-                className={`bg-white rounded-xl border p-6 shadow-sm ${
-                  selectedPlan === "fractional-hr"
-                    ? "ring-2 ring-indigo-600/20"
-                    : ""
+                className={`bg-white rounded-xl border p-6 shadow-lg hover:border-[#C15F3C]/30 transition-colors ${
+                  selectedPlan === "fractional-hr" ? "ring-2 ring-[#C15F3C]/20" : ""
                 }`}
               >
-                <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+                <div className="inline-block bg-[#C15F3C] text-white px-3 py-1 rounded-full text-xs mb-3">
                   Most popular
                 </div>
                 <h3 className="font-semibold text-lg">Fractional HR</h3>
@@ -513,77 +428,76 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                   LEDGERS HR Platform setup & migration with a dedicated
                   accountant for 1 year.
                 </p>
-                <div className="mt-4 text-2xl font-bold">
-                  ₹42,899 <span className="text-sm font-normal">/yr + GST</span>
+                <div className="mt-4 text-2xl font-bold text-[#C15F3C]">
+                  ₹42,899 <span className="text-sm font-normal text-gray-600">/yr + GST</span>
                 </div>
                 <button
                   onClick={() => setSelectedPlan("fractional-hr")}
-                  className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full"
+                  className="mt-4 w-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white py-3 rounded-full hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg"
                 >
                   Start Now
                 </button>
                 <ul className="mt-5 space-y-3 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> LEDGERS HR Platform setup & migration
+                    <Check size={16} className="text-[#C15F3C]" /> LEDGERS HR Platform setup & migration
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> 1 Year Monthly Payroll Service
+                    <Check size={16} className="text-[#C15F3C]" /> 1 Year Monthly Payroll Service
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> Dedicated Accountant
+                    <Check size={16} className="text-[#C15F3C]" /> Dedicated Accountant
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> Attendance Platform
+                    <Check size={16} className="text-[#C15F3C]" /> Attendance Platform
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> 1 Year PF & ESI Filing
+                    <Check size={16} className="text-[#C15F3C]" /> 1 Year PF & ESI Filing
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> Upto 20 Employees
+                    <Check size={16} className="text-[#C15F3C]" /> Upto 20 Employees
                   </li>
                 </ul>
               </div>
 
               <div
-                className={`bg-white rounded-xl border p-6 shadow-sm ${
-                  selectedPlan === "compliance"
-                    ? "ring-2 ring-indigo-600/20"
-                    : ""
+                className={`bg-white rounded-xl border p-6 shadow-lg hover:border-[#C15F3C]/30 transition-colors ${
+                  selectedPlan === "compliance" ? "ring-2 ring-[#C15F3C]/20" : ""
                 }`}
               >
-                <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+                <div className="inline-block bg-orange-100 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
                   Compliance
                 </div>
                 <h3 className="font-semibold text-lg">PF & ESI Compliance</h3>
                 <p className="text-sm text-gray-600 mt-2">
                   Managed PF and ESI return filing for your establishment.
                 </p>
-                <div className="mt-4 text-2xl font-bold">
-                  ₹17,899 <span className="text-sm font-normal">/yr + GST</span>
+                <div className="mt-4 text-2xl font-bold text-[#C15F3C]">
+                  ₹17,899 <span className="text-sm font-normal text-gray-600">/yr + GST</span>
                 </div>
                 <button
                   onClick={() => setSelectedPlan("compliance")}
-                  className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full"
+                  className="mt-4 w-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white py-3 rounded-full hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg"
                 >
                   Start Now
                 </button>
                 <ul className="mt-5 space-y-3 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> 12 Months Managed PF Return Filing
+                    <Check size={16} className="text-[#C15F3C]" /> 12 Months Managed PF Return Filing
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> 12 Months Managed ESI Return Filing
+                    <Check size={16} className="text-[#C15F3C]" /> 12 Months Managed ESI Return Filing
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check size={16} /> Up to 20 Employees
+                    <Check size={16} className="text-[#C15F3C]" /> Up to 20 Employees
                   </li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* HR Compliance Made Easy */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               HR Compliance Made Easy
             </h3>
             <p className="text-gray-600">
@@ -592,22 +506,22 @@ export default function EsiReturnFilingPage(): React.ReactElement {
               filings-handled accurately and on time.
             </p>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 rounded-lg border">
-                <h4 className="font-semibold">Onboarding & Contracts</h4>
+              <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Onboarding & Contracts</h4>
                 <p className="mt-2 text-sm">
                   Offer letters, joining formalities, employee KYC and
                   documentation setup.
                 </p>
               </div>
-              <div className="p-4 rounded-lg border">
-                <h4 className="font-semibold">Attendance & Payroll</h4>
+              <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Attendance & Payroll</h4>
                 <p className="mt-2 text-sm">
                   Attendance platform integration, automated salary runs, and
                   statutory deductions processed through LEDGERS.
                 </p>
               </div>
-              <div className="p-4 rounded-lg border">
-                <h4 className="font-semibold">Compliance & Returns</h4>
+              <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Compliance & Returns</h4>
                 <p className="mt-2 text-sm">
                   PF, ESI, PT, TDS returns and challan reconciliation with
                   alerts and audit-ready records.
@@ -616,8 +530,9 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* Expert Guidance */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               Expert Guidance on ESI Return Filing
             </h3>
             <p className="text-sm text-gray-700 leading-relaxed">
@@ -628,8 +543,8 @@ export default function EsiReturnFilingPage(): React.ReactElement {
               to file ESI returns quarterly, detailing the contributions made
               towards the scheme for each employee. These returns are crucial
               for maintaining compliance with the ESIC regulations and ensuring
-              that employees can avail the benefits they are entitled to. At
-              IndiaFilings, we specialize in simplifying this process for
+              that employees can avail the benefits they are entitled to. We
+              specialize in simplifying this process for
               businesses. Our experts guide you through every step of ESI
               registration and the crucial process of how to file ESIC returns,
               ensuring accuracy, compliance, and peace of mind for employers and
@@ -638,7 +553,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold">
+                <h4 className="font-semibold text-[#C15F3C]">
                   Employees' State Insurance (ESI) Scheme
                 </h4>
                 <p className="mt-2 text-sm text-gray-600">
@@ -654,21 +569,20 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold">
-                  IndiaFilings assists businesses with the process of ESI
-                  registration.
+                <h4 className="font-semibold text-[#C15F3C]">
+                  We assist businesses with the process of ESI registration.
                 </h4>
                 <p className="mt-2 text-sm text-gray-600">
-                  Get Started with IndiaFilings and ensure your employees are
+                  Get Started and ensure your employees are
                   protected with timely registration and accurate return filing.
                 </p>
                 <div className="mt-3 flex gap-3">
-                  <button className="px-4 py-2 bg-slate-900 text-white rounded">
+                  <button className="px-4 py-2 bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white rounded hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg">
                     Get Started
                   </button>
                   <button
                     onClick={() => setContactOpen((s) => !s)}
-                    className="px-4 py-2 border rounded"
+                    className="px-4 py-2 border-2 border-[#C15F3C] text-[#C15F3C] rounded hover:bg-orange-50 transition-colors"
                   >
                     Talk to an Expert
                   </button>
@@ -676,7 +590,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                 {contactOpen && (
                   <div
                     ref={contactRef}
-                    className="mt-4 p-4 border rounded bg-gray-50"
+                    className="mt-4 p-4 border border-gray-200 rounded bg-orange-50/30"
                   >
                     <div className="flex items-center gap-3">
                       <img
@@ -685,7 +599,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                         className="w-10 h-10 rounded-full"
                       />
                       <div>
-                        <div className="font-semibold">HR Specialist</div>
+                        <div className="font-semibold text-[#C15F3C]">HR Specialist</div>
                         <div className="text-sm text-gray-600">
                           Available to help with ESI registration and returns
                         </div>
@@ -693,10 +607,10 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                     </div>
                     <div className="mt-3 grid grid-cols-1 gap-2">
                       <div className="flex items-center gap-2 text-sm">
-                        <Phone size={14} /> <span>+91-XXXXXXXXXX</span>
+                        <Phone size={14} className="text-[#C15F3C]" /> <span>+91-XXXXXXXXXX</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
-                        <Mail size={14} /> <span>hr@indiafilings.example</span>
+                        <Mail size={14} className="text-[#C15F3C]" /> <span>hr@example.com</span>
                       </div>
                     </div>
                   </div>
@@ -705,8 +619,9 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* Who should Register */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               Who should Register for the ESI scheme?
             </h3>
             <p className="text-sm text-gray-600">
@@ -719,7 +634,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
               becoming eligible.
             </p>
             <div className="mt-4">
-              <h4 className="font-semibold">Filing ESI Returns: An Overview</h4>
+              <h4 className="font-semibold text-[#C15F3C]">Filing ESI Returns: An Overview</h4>
               <p className="mt-2 text-sm text-gray-600">
                 ESI Registered employers are required to submit ESI Returns
                 every sixth month, providing critical information about the
@@ -735,8 +650,9 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* ESI Return Filing Deadlines */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               ESI Return Filing Deadlines
             </h3>
             <p className="text-sm text-gray-700">
@@ -749,25 +665,25 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm text-left">
                 <thead>
-                  <tr>
-                    <th className="py-3 px-2 border-b">Return Type</th>
-                    <th className="py-3 px-2 border-b">Due Date</th>
+                  <tr className="bg-orange-50">
+                    <th className="py-3 px-2 border-b text-[#C15F3C]">Return Type</th>
+                    <th className="py-3 px-2 border-b text-[#C15F3C]">Due Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr className="hover:bg-orange-50/30 transition-colors">
                     <td className="py-3 px-2 border-b">Monthly Contribution</td>
                     <td className="py-3 px-2 border-b">
                       15th of the following month
                     </td>
                   </tr>
-                  <tr>
+                  <tr className="hover:bg-orange-50/30 transition-colors">
                     <td className="py-3 px-2 border-b">Annual Return</td>
                     <td className="py-3 px-2 border-b">
                       31st January of the following year
                     </td>
                   </tr>
-                  <tr>
+                  <tr className="hover:bg-orange-50/30 transition-colors">
                     <td className="py-3 px-2 border-b">
                       Half-yearly Contribution Returns
                     </td>
@@ -784,35 +700,35 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <h4 className="font-semibold">
+                <h4 className="font-semibold text-[#C15F3C]">
                   Essential Documents for Filing ESI Returns
                 </h4>
                 <ul className="mt-2 text-sm space-y-1 list-inside">
-                  <li className="flex items-start gap-2">
-                    <File size={14} /> Attendance register
+                  <li className="flex items-start gap-2 hover:text-[#C15F3C] transition-colors">
+                    <File size={14} className="text-[#C15F3C]" /> Attendance register
                   </li>
-                  <li className="flex items-start gap-2">
-                    <FileText size={14} /> Form 6
+                  <li className="flex items-start gap-2 hover:text-[#C15F3C] transition-colors">
+                    <FileText size={14} className="text-[#C15F3C]" /> Form 6
                   </li>
-                  <li className="flex items-start gap-2">
-                    <FileText size={14} /> Register of wages
+                  <li className="flex items-start gap-2 hover:text-[#C15F3C] transition-colors">
+                    <FileText size={14} className="text-[#C15F3C]" /> Register of wages
                   </li>
-                  <li className="flex items-start gap-2">
-                    <FileText size={14} /> Accident register
+                  <li className="flex items-start gap-2 hover:text-[#C15F3C] transition-colors">
+                    <FileText size={14} className="text-[#C15F3C]" /> Accident register
                   </li>
-                  <li className="flex items-start gap-2">
-                    <File size={14} /> Cancelled cheque of the company
+                  <li className="flex items-start gap-2 hover:text-[#C15F3C] transition-colors">
+                    <File size={14} className="text-[#C15F3C]" /> Cancelled cheque of the company
                   </li>
-                  <li className="flex items-start gap-2">
-                    <FileText size={14} /> PAN card of the organisation
+                  <li className="flex items-start gap-2 hover:text-[#C15F3C] transition-colors">
+                    <FileText size={14} className="text-[#C15F3C]" /> PAN card of the organisation
                   </li>
-                  <li className="flex items-start gap-2">
-                    <File size={14} /> Monthly challans and returns for ESI
+                  <li className="flex items-start gap-2 hover:text-[#C15F3C] transition-colors">
+                    <File size={14} className="text-[#C15F3C]" /> Monthly challans and returns for ESI
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold">
+                <h4 className="font-semibold text-[#C15F3C]">
                   Consequences of Non-Payment or Late Payment
                 </h4>
                 <p className="mt-2 text-sm text-gray-600">
@@ -823,19 +739,19 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                   possible prosecution under relevant legal provisions.
                 </p>
                 <div className="mt-3">
-                  <h5 className="font-semibold">
+                  <h5 className="font-semibold text-[#C15F3C]">
                     Penalty Structure for Delayed or Unpaid ESI Contributions
                   </h5>
                   <ul className="mt-2 text-sm space-y-1">
-                    <li>Delay under 2 months: Damages at 5% per annum</li>
-                    <li>
+                    <li className="hover:text-[#C15F3C] transition-colors">Delay under 2 months: Damages at 5% per annum</li>
+                    <li className="hover:text-[#C15F3C] transition-colors">
                       Delay between 2 to 4 months: Damages at 10% per annum
                     </li>
-                    <li>
+                    <li className="hover:text-[#C15F3C] transition-colors">
                       Delay between 4 to 6 months: Damages at 15% per annum
                     </li>
-                    <li>Delay over 6 months: Damages at 25% per annum</li>
-                    <li>
+                    <li className="hover:text-[#C15F3C] transition-colors">Delay over 6 months: Damages at 25% per annum</li>
+                    <li className="hover:text-[#C15F3C] transition-colors">
                       Interest for delayed payments: 12% annually applied per
                       day of delay
                     </li>
@@ -845,34 +761,35 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* Procedure to File ESI Returns */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               Procedure to File ESI Returns for Employers
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <ol className="list-decimal list-inside text-sm space-y-2">
-                  <li>Registration on ESIC Portal</li>
-                  <li>Login to ESIC Portal using employer code and password</li>
-                  <li>Employee Enrollment and data update</li>
-                  <li>Download the Return Form</li>
-                  <li>Review Contribution Details</li>
-                  <li>Correct Discrepancies if Any</li>
-                  <li>Submit the Return</li>
-                  <li>Save Acknowledgment Receipt</li>
-                  <li>Maintain Records for Audits</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Registration on ESIC Portal</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Login to ESIC Portal using employer code and password</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Employee Enrollment and data update</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Download the Return Form</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Review Contribution Details</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Correct Discrepancies if Any</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Submit the Return</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Save Acknowledgment Receipt</li>
+                  <li className="hover:text-[#C15F3C] transition-colors">Maintain Records for Audits</li>
                 </ol>
               </div>
               <div>
                 <p className="text-sm text-gray-600">
-                  IndiaFilings offers comprehensive assistance in both obtaining
+                  We offer comprehensive assistance in both obtaining
                   ESI registration and managing the ESI return filing process
                   for businesses. Our ESI experts collect documents, prepare
                   returns, validate contribution details, file on the ESIC
                   portal and provide support during audits.
                 </p>
                 <div className="mt-3">
-                  <button className="px-4 py-2 bg-indigo-600 text-white rounded">
+                  <button className="px-4 py-2 bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white rounded hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg">
                     Request ESI Assistance
                   </button>
                 </div>
@@ -880,28 +797,29 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
-              How IndiaFilings Supports ESI Return Filing
+          {/* How We Support ESI Return Filing */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
+              How We Support ESI Return Filing
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">Document Collection</h4>
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Document Collection</h4>
                 <p className="mt-2 text-sm text-gray-600">
                   An expert will gather all necessary data and documents
                   required for ESI return preparation specific to your business
                   needs.
                 </p>
               </div>
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">Return Preparation</h4>
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Return Preparation</h4>
                 <p className="mt-2 text-sm text-gray-600">
                   Our ESI expert will meticulously prepare your ESI return
                   ensuring accuracy and compliance with regulations.
                 </p>
               </div>
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">Return Filing</h4>
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Return Filing</h4>
                 <p className="mt-2 text-sm text-gray-600">
                   Following your verification, our dedicated professional will
                   file the ESI return with the ESIC department and secure your
@@ -911,77 +829,80 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* Benefits of Timely ESI Return Filing */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               Benefits of Timely ESI Return Filing
             </h3>
             <ul className="list-inside list-disc text-sm space-y-2">
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Compliance: Avoid legal penalties and fines associated with
                 non-compliance
               </li>
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Record Keeping: Maintain accurate records of contributions
               </li>
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Benefit Entitlement: Ensures employees can access medical and
                 other benefits
               </li>
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Transparency: Promotes trust between employer and employees
               </li>
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Dispute Resolution: Filed returns serve as reference points for
                 discrepancies
               </li>
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Ease of Benefit Processing: Facilitates smooth processing of
                 claims
               </li>
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Financial Health: Reflects positively on business operations
               </li>
-              <li>
+              <li className="hover:text-[#C15F3C] transition-colors">
                 Updates and Adjustments: Allows corrections and updates to
                 records
               </li>
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">Related Guides</h3>
+          {/* Related Guides */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">Related Guides</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <a className="p-4 border rounded hover:shadow-sm">
-                <div className="font-semibold">Employees Compensation Act</div>
+              <a className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 hover:shadow-lg transition-all">
+                <div className="font-semibold text-[#C15F3C]">Employees Compensation Act</div>
               </a>
-              <a className="p-4 border rounded hover:shadow-sm">
-                <div className="font-semibold">
+              <a className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 hover:shadow-lg transition-all">
+                <div className="font-semibold text-[#C15F3C]">
                   Requirements for Operating Commercial Establishment – COVID-19
                 </div>
               </a>
-              <a className="p-4 border rounded hover:shadow-sm">
-                <div className="font-semibold">
+              <a className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 hover:shadow-lg transition-all">
+                <div className="font-semibold text-[#C15F3C]">
                   Benefits of ESI registration
                 </div>
               </a>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* FAQ Section */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               FAQ's on ESI Return Filing
             </h3>
             <div className="space-y-0">
               {faqQuestions.map((q, i) => (
-                <div key={i} className="border-b last:border-b-0">
+                <div key={i} className="border-b border-gray-200 last:border-b-0">
                   <button
-                    className="w-full text-left py-4 flex justify-between items-center text-sm"
+                    className="w-full text-left py-4 flex justify-between items-center text-sm hover:bg-orange-50/30 transition-colors"
                     onClick={() => setFaqOpen(faqOpen === i ? null : i)}
                     aria-expanded={faqOpen === i}
                   >
-                    <span className="text-slate-800">{q}</span>
-                    <span className="text-indigo-600 flex items-center gap-2">
-                      {faqOpen === i ? "-" : <Plus size={14} />}
+                    <span className="text-slate-800 hover:text-[#C15F3C] transition-colors">{q}</span>
+                    <span className="text-[#C15F3C] flex items-center gap-2">
+                      {faqOpen === i ? "−" : <Plus size={14} />}
                     </span>
                   </button>
                   {faqOpen === i && (
@@ -992,32 +913,19 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                 </div>
               ))}
             </div>
-
-            <div className="mt-6">
-              <h4 className="font-semibold mb-3">Popular Searches</h4>
-              <div className="flex flex-wrap gap-2">
-                {POPULAR_SEARCHES.map((s) => (
-                  <span
-                    key={s}
-                    className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* What is ESI registration? (Quick section) */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               What is ESI registration?
             </h3>
             <p className="text-sm text-gray-700">
               ESI registration is the formal enrollment of an employer and
-              eligible employees into the Employees’ State Insurance scheme
+              eligible employees into the Employees' State Insurance scheme
               ensuring access to social security benefits.
             </p>
-            <h3 className="text-xl font-semibold mt-6 mb-4">
+            <h3 className="text-xl font-semibold mt-6 mb-4 text-[#C15F3C]">
               Why is ESI return filing important?
             </h3>
             <p className="text-sm text-gray-700">
@@ -1026,8 +934,8 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </p>
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">
                   When should ESI returns be filed?
                 </h4>
                 <p className="text-sm text-gray-600 mt-2">
@@ -1036,8 +944,8 @@ export default function EsiReturnFilingPage(): React.ReactElement {
                   dates.
                 </p>
               </div>
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">
                   What happens if ESI returns are not filed?
                 </h4>
                 <p className="text-sm text-gray-600 mt-2">
@@ -1048,21 +956,23 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* Procedure Checklist */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               Procedure to File ESI Returns for Employers - Quick Checklist
             </h3>
             <ul className="list-inside list-decimal text-sm space-y-2">
-              <li>Register establishment on ESIC portal</li>
-              <li>Maintain attendance registers and wage registers</li>
-              <li>Reconcile monthly challans and contributions</li>
-              <li>Download and review returns on ESIC portal</li>
-              <li>Submit returns and save acknowledgment</li>
+              <li className="hover:text-[#C15F3C] transition-colors">Register establishment on ESIC portal</li>
+              <li className="hover:text-[#C15F3C] transition-colors">Maintain attendance registers and wage registers</li>
+              <li className="hover:text-[#C15F3C] transition-colors">Reconcile monthly challans and contributions</li>
+              <li className="hover:text-[#C15F3C] transition-colors">Download and review returns on ESIC portal</li>
+              <li className="hover:text-[#C15F3C] transition-colors">Submit returns and save acknowledgment</li>
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
+          {/* Consequences of Delayed Payment */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
               Consequences of Delayed Payment
             </h3>
             <p className="text-sm text-gray-600">
@@ -1074,27 +984,28 @@ export default function EsiReturnFilingPage(): React.ReactElement {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-xl font-semibold mb-4">
-              How IndiaFilings Makes ESI Return Filing Easy
+          {/* How We Make ESI Return Filing Easy */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
+              How We Make ESI Return Filing Easy
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">Dedicated Expert</h4>
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Dedicated Expert</h4>
                 <p className="text-sm text-gray-600 mt-2">
                   A named ESI expert will handle your filings and
                   reconciliations.
                 </p>
               </div>
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">Automated Reconciliation</h4>
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Automated Reconciliation</h4>
                 <p className="text-sm text-gray-600 mt-2">
                   Match challans, employee contributions and ensure records
                   reflect correctly.
                 </p>
               </div>
-              <div className="p-4 border rounded">
-                <h4 className="font-semibold">Audit-Ready Reports</h4>
+              <div className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 transition-colors">
+                <h4 className="font-semibold text-[#C15F3C]">Audit-Ready Reports</h4>
                 <p className="text-sm text-gray-600 mt-2">
                   Maintain files and receipts for statutory audits and
                   inquiries.
@@ -1102,33 +1013,33 @@ export default function EsiReturnFilingPage(): React.ReactElement {
               </div>
             </div>
           </div>
+
+          {/* Popular Searches */}
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <h4 className="font-semibold mb-3 text-[#C15F3C]">Popular Searches</h4>
+            <div className="flex flex-wrap gap-2">
+              {POPULAR_SEARCHES.slice(0, 20).map((s) => (
+                <span
+                  key={s}
+                  className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-[#C15F3C]/30 hover:text-[#C15F3C] cursor-pointer transition-colors"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
         </section>
       </main>
 
       <Footer />
 
-      <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
-        <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
-        <span className="font-semibold text-sm">Live Chat with Experts</span>
+      {/* WhatsApp CTA */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button className="flex items-center gap-3 bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white px-4 py-3 rounded-full shadow-lg hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all hover:scale-105">
+          <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
+          <span className="hidden sm:inline font-medium text-sm">Live Chat with Experts</span>
+        </button>
       </div>
-
-      <style jsx>{`
-        :global(body) {
-          margin: 0;
-          font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
-            "Helvetica Neue", Arial;
-          background: #f3f4f6;
-          color: #0f172a;
-        }
-        h1,
-        h2,
-        h3 {
-          color: #0b2545;
-        }
-        .page {
-          min-height: 100vh;
-        }
-      `}</style>
     </div>
   );
 }

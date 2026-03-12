@@ -8,6 +8,7 @@ import {
   Plus,
   ChevronDown,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -225,273 +226,14 @@ export default function FdiFilingRbiPage(): React.ReactElement {
 
   return (
     <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
-      <header className="bg-white border-b sticky top-0 z-50">
-        <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
-          <div className="flex-shrink-0">
-            <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-          </div>
+      {/* Navbar - Imported */}
+      <Navbar />
 
-          <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
-            {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => {
-              if (item === "Income Tax") {
-                return (
-                  <div
-                    key={item}
-                    ref={incomeRef}
-                    onMouseEnter={() => setShowIncomeDropdown(true)}
-                    onMouseLeave={() => setShowIncomeDropdown(false)}
-                    className="relative"
-                  >
-                    <button
-                      aria-haspopup="true"
-                      aria-expanded={showIncomeDropdown}
-                      className="flex items-center gap-1 text-sm font-medium"
-                    >
-                      {item} <ChevronDown className="w-3 h-3" />
-                    </button>
-                    {showIncomeDropdown && (
-                      <div
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[520px] z-50"
-                        role="menu"
-                      >
-                        <div className="bg-white rounded-lg shadow-lg border p-4">
-                          <div className="grid grid-cols-2 gap-3">
-                            {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
-                              <a
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm text-slate-700 hover:text-emerald-600 block"
-                              >
-                                {link.title}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-              if (item === "MCA") {
-                return (
-                  <div
-                    key={item}
-                    ref={mcaRef}
-                    onMouseEnter={() => setShowMcaDropdown(true)}
-                    onMouseLeave={() => setShowMcaDropdown(false)}
-                    className="relative"
-                  >
-                    <button
-                      aria-haspopup="true"
-                      aria-expanded={showMcaDropdown}
-                      className="flex items-center gap-1 text-sm font-medium"
-                    >
-                      {item} <ChevronDown className="w-3 h-3" />
-                    </button>
-                    {showMcaDropdown && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] z-50">
-                        <div className="bg-white rounded-lg shadow-lg border p-5">
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                            {MCA_DROPDOWN_LINKS.map((link) => (
-                              <a
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm text-slate-700 hover:text-emerald-600 block py-1.5"
-                              >
-                                {link.title}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-              if (item === "Compliance") {
-                return (
-                  <div
-                    key={item}
-                    ref={compRef}
-                    onMouseEnter={() => setShowComplianceDropdown(true)}
-                    onMouseLeave={() => setShowComplianceDropdown(false)}
-                    className="relative"
-                  >
-                    <button
-                      aria-haspopup="true"
-                      aria-expanded={showComplianceDropdown}
-                      onClick={() => setShowComplianceDropdown((s) => !s)}
-                      className="flex items-center gap-1 text-sm font-medium"
-                    >
-                      {item} <ChevronDown className="w-3 h-3" />
-                    </button>
-                    {showComplianceDropdown && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[780px] z-50">
-                        <div className="bg-white rounded-lg shadow-lg border p-6">
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-3">
-                            {COMPLIANCE_DROPDOWN_LINKS.map((link) => (
-                              <a
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm text-slate-700 hover:text-emerald-600 block py-1.5"
-                              >
-                                {link.title}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-              return (
-                <a
-                  key={item}
-                  href="#"
-                  className="hover:text-indigo-700 text-sm"
-                >
-                  {item}
-                </a>
-              );
-            })}
-            <a className="ml-auto hover:text-indigo-700">{NAV_ITEMS.at(-1)}</a>
-          </nav>
-
-          <div className="lg:hidden ml-auto flex items-center gap-2">
-            <button
-              type="button"
-              aria-label="Open menu"
-              onClick={() => setMobileMenuOpen((s) => !s)}
-              className="p-2 rounded-md border"
-            >
-              <svg
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                {mobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {mobileMenuOpen && (
-          <div ref={mobileNavRef} className="lg:hidden bg-white border-t">
-            <div className="px-4 py-4 space-y-3">
-              {NAV_ITEMS.map((item) => {
-                if (item === "Income Tax") {
-                  return (
-                    <div key={item} className="space-y-1">
-                      <button
-                        className="w-full flex items-center justify-between px-2 py-2 text-left"
-                        onClick={() => setShowIncomeDropdown((s) => !s)}
-                      >
-                        <span>{item}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      {showIncomeDropdown && (
-                        <div className="pl-4 space-y-1">
-                          {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              className="block py-1 text-sm text-slate-700"
-                            >
-                              {link.title}
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-                if (item === "MCA") {
-                  return (
-                    <div key={item} className="space-y-1">
-                      <button
-                        className="w-full flex items-center justify-between px-2 py-2 text-left"
-                        onClick={() => setShowMcaDropdown((s) => !s)}
-                      >
-                        <span>{item}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      {showMcaDropdown && (
-                        <div className="pl-4 grid grid-cols-1 gap-1">
-                          {MCA_DROPDOWN_LINKS.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              className="block py-1 text-sm text-slate-700"
-                            >
-                              {link.title}
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-                if (item === "Compliance") {
-                  return (
-                    <div key={item} className="space-y-1">
-                      <button
-                        className="w-full flex items-center justify-between px-2 py-2 text-left"
-                        onClick={() => setShowComplianceDropdown((s) => !s)}
-                      >
-                        <span>{item}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      {showComplianceDropdown && (
-                        <div className="pl-4 grid grid-cols-1 gap-1">
-                          {COMPLIANCE_DROPDOWN_LINKS.map((link) => (
-                            <a
-                              key={link.href}
-                              href={link.href}
-                              className="block py-1 text-sm text-slate-700"
-                            >
-                              {link.title}
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-                return (
-                  <a
-                    key={item}
-                    href="#"
-                    className="block px-2 py-2 text-sm text-slate-700"
-                  >
-                    {item}
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </header>
-
+      {/* Breadcrumb */}
       <div className="bg-gray-50 py-5">
         <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
           IndiaFilings / MCA Services /{" "}
-          <span className="text-indigo-600 font-medium">
+          <span className="text-amber-700 font-medium">
             FDI filing with RBI
           </span>
         </div>
@@ -502,7 +244,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
           <div className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
             <div className="md:w-1/3 flex-shrink-0">
               <div className="rounded-lg overflow-hidden">
-                <div className="bg-[#0b4bd6] rounded-t-lg p-4 text-white text-center">
+                <div className="bg-gradient-to-r from-amber-700 to-amber-800 rounded-t-lg p-4 text-white text-center">
                   <h2 className="text-2xl font-bold tracking-wide">
                     FDI filing with RBI
                   </h2>
@@ -521,25 +263,29 @@ export default function FdiFilingRbiPage(): React.ReactElement {
                 </div>
               </div>
               <ul className="mt-4 text-sm space-y-2 text-gray-600">
-                <li>FDI filing with RBI</li>
-                <li className="text-indigo-600">FDI filing with RBI</li>
-                <li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">FDI filing with RBI</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer transition-colors">FDI filing with RBI</li>
+                <li className="hover:text-amber-700 cursor-pointer transition-colors">
                   FCGPR for filing Convertible Note including CS certificate
                 </li>
-                <li className="text-indigo-600 underline">Load More</li>
+                <li className="text-amber-700 underline cursor-pointer hover:text-amber-800">Load More</li>
               </ul>
             </div>
 
             <div className="md:w-2/3 flex-1">
               <div className="flex flex-col sm:flex-row justify-between gap-4">
                 <div>
+                  <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2">
+                    <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                    <span className="text-xs font-medium text-amber-700">RBI COMPLIANCE</span>
+                  </div>
                   <h2 className="text-lg font-semibold text-slate-900">
                     FDI filing with RBI
                   </h2>
                   <div className="flex items-center gap-3 mt-2">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={14} className="text-yellow-400" />
+                        <Star key={i} size={14} className="fill-yellow-500 text-yellow-500" />
                       ))}
                     </div>
                     <span className="text-xs text-slate-500">(5)</span>
@@ -551,8 +297,8 @@ export default function FdiFilingRbiPage(): React.ReactElement {
               </div>
 
               <div className="grid grid-cols-2 gap-4 mt-6">
-                <div className="border-2 border-dashed rounded-md border-[#f0dcd0] p-4 bg-white relative">
-                  <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-green-700 border border-[#eff8f0]">
+                <div className="border-2 border-dashed rounded-md border-amber-200 p-4 bg-amber-50/30 relative">
+                  <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-amber-700 border border-amber-200">
                     2 Exclusive Offers
                   </div>
                   <div className="font-semibold text-slate-900">Basic</div>
@@ -562,7 +308,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
                     <div>Approval and Acknowledgement Copy</div>
                   </div>
                   <div className="mt-3">
-                    <button className="bg-white border border-green-400 text-green-700 px-3 py-1 rounded">
+                    <button className="bg-white border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
                       ADD
                     </button>
                   </div>
@@ -570,15 +316,15 @@ export default function FdiFilingRbiPage(): React.ReactElement {
               </div>
 
               <div className="mt-4 border-t pt-4 text-sm flex justify-between items-center text-slate-600">
-                <a className="text-indigo-600 underline">
+                <a className="text-amber-700 underline hover:text-amber-800 cursor-pointer">
                   Terms and conditions
                 </a>
-                <a className="text-indigo-600 underline">Refer a Friend</a>
+                <a className="text-amber-700 underline hover:text-amber-800 cursor-pointer">Refer a Friend</a>
               </div>
 
               <div className="mt-6">
                 <h4 className="font-semibold mb-2">Offers and discounts</h4>
-                <div className="p-3 border rounded-md">
+                <div className="p-3 border border-gray-200 rounded-lg hover:border-amber-200 transition-colors">
                   <div className="flex items-center gap-3">
                     <img
                       src={ASSETS.ledgers}
@@ -586,7 +332,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
                       className="h-8 w-8 object-contain"
                     />
                     <div className="text-sm">
-                      <div className="text-indigo-600 font-medium">
+                      <div className="text-amber-700 font-medium">
                         LEDGERS - Compliance Platform
                       </div>
                       <div className="text-gray-500 text-xs">
@@ -596,7 +342,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
                   </div>
                 </div>
 
-                <div className="mt-3 p-3 border rounded-md flex items-center gap-3">
+                <div className="mt-3 p-3 border border-gray-200 rounded-lg hover:border-amber-200 transition-colors flex items-center gap-3">
                   <img
                     src={ASSETS.logo}
                     alt="save gst"
@@ -729,15 +475,15 @@ export default function FdiFilingRbiPage(): React.ReactElement {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-7 bg-white rounded-lg shadow-sm p-6">
               <h3 className="text-lg font-semibold mb-4">Related Guides</h3>
-              <ul className="space-y-3 text-sm text-indigo-600">
-                <li>FDI Reporting to RBI using Form FC-GPR</li>
-                <li>RBI Retail Direct Scheme</li>
-                <li>Foreign Exchange Management Act, 1999</li>
-                <li>Reserve Bank of India (RBI)</li>
-                <li>
+              <ul className="space-y-3 text-sm">
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">FDI Reporting to RBI using Form FC-GPR</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">RBI Retail Direct Scheme</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Foreign Exchange Management Act, 1999</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Reserve Bank of India (RBI)</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
                   RBI allows International Trade Settlement in Indian Rupees
                 </li>
-                <li>Foreign Investment Facilitation Portal (FIFP)</li>
+                <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Foreign Investment Facilitation Portal (FIFP)</li>
               </ul>
             </div>
 
@@ -745,29 +491,29 @@ export default function FdiFilingRbiPage(): React.ReactElement {
               <h3 className="text-lg font-semibold mb-4">
                 FAQ's on FDI filing with RBI
               </h3>
-              <div className="space-y-2 text-sm text-gray-700">
+              <div className="space-y-0 text-sm">
                 {faqItems.map((q, i) => (
-                  <div key={q} className="border-b pb-2">
+                  <div key={q} className="border-b last:border-b-0">
                     <button
-                      className="w-full text-left py-2 flex justify-between items-center text-sm"
+                      className="w-full text-left py-4 flex justify-between items-center text-sm"
                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
                       aria-expanded={openFaq === i}
                     >
                       <span className="text-slate-800">{q}</span>
-                      <span className="text-indigo-600 flex items-center gap-2">
-                        {openFaq === i ? "-" : <Plus size={14} />}
+                      <span className="text-amber-700 flex items-center gap-2">
+                        {openFaq === i ? "−" : <Plus size={14} />}
                       </span>
                     </button>
                     {openFaq === i && (
-                      <div className="px-2 pb-2 text-sm text-gray-600">
+                      <div className="px-2 pb-4 text-sm text-gray-600">
                         Please contact our advisors for a tailored reply or
                         consult the RBI / FEMA guidance for authoritative rules.
                       </div>
                     )}
                   </div>
                 ))}
-                <div className="mt-3">
-                  <button className="px-4 py-2 border rounded-md text-sm text-indigo-600">
+                <div className="mt-4">
+                  <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
                     Load More
                   </button>
                 </div>
@@ -793,7 +539,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
             <div className="mt-6 text-center">
               <div className="text-sm text-gray-500">
                 Existing User?{" "}
-                <a className="text-indigo-600 underline">Login</a>
+                <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">Login</a>
               </div>
             </div>
 
@@ -802,11 +548,11 @@ export default function FdiFilingRbiPage(): React.ReactElement {
               onSubmit={(e) => e.preventDefault()}
             >
               <input
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
+                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
                 placeholder="Name"
               />
               <input
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
+                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
                 placeholder="Email"
               />
               <div className="flex gap-2">
@@ -815,7 +561,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
                   <span className="text-sm">+91</span>
                 </div>
                 <input
-                  className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
+                  className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
                   placeholder="Phone"
                 />
               </div>
@@ -825,34 +571,41 @@ export default function FdiFilingRbiPage(): React.ReactElement {
                   type="checkbox"
                   checked={gstChecked}
                   onChange={() => setGstChecked((s) => !s)}
-                  className="w-4 h-4"
+                  className="w-4 h-4 accent-amber-600"
                 />
                 <span>Enter GSTIN to get 18% GST Credit</span>
               </label>
 
               {gstChecked && (
                 <input
-                  className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
+                  className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
                   placeholder="GSTIN"
                 />
               )}
 
-              <button className="w-full bg-green-500 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
+              <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
                 <ShoppingBag size={16} /> Get Started
               </button>
+
+              <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
+                <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Secure · No spam · Instant confirmation</span>
+              </div>
             </form>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
             <h4 className="font-semibold mb-3">Offers and discounts</h4>
-            <div className="p-3 border rounded-md flex items-center gap-3">
+            <div className="p-3 border border-gray-200 rounded-lg hover:border-amber-200 transition-colors flex items-center gap-3">
               <img
                 src={ASSETS.ledgers}
                 alt="ledgers"
                 className="h-8 w-8 object-contain"
               />
               <div className="text-sm">
-                <div className="text-indigo-600 font-medium">
+                <div className="text-amber-700 font-medium">
                   LEDGERS - Compliance Platform
                 </div>
                 <div className="text-gray-500 text-xs">
@@ -884,7 +637,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
               {POPULAR_SEARCHES.slice(0, 20).map((t) => (
                 <span
                   key={t}
-                  className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+                  className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
                 >
                   {t}
                 </span>
@@ -899,7 +652,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
               end-to-end filing and documentation.
             </p>
             <div className="mt-3">
-              <button className="w-full bg-indigo-600 text-white py-2 rounded-md text-sm">
+              <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md text-sm hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
                 Schedule a Call
               </button>
             </div>
@@ -912,27 +665,27 @@ export default function FdiFilingRbiPage(): React.ReactElement {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
-              <a className="block">About IndiaFilings</a>
-              <a className="block">Careers</a>
-              <a className="block">Contact Us</a>
+              <a className="block hover:text-amber-600">About IndiaFilings</a>
+              <a className="block hover:text-amber-600">Careers</a>
+              <a className="block hover:text-amber-600">Contact Us</a>
             </div>
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
-              <a className="block">Business Search</a>
-              <a className="block">Trademark Search</a>
-              <a className="block">Filings.AE for UAE</a>
+              <a className="block hover:text-amber-600">Business Search</a>
+              <a className="block hover:text-amber-600">Trademark Search</a>
+              <a className="block hover:text-amber-600">Filings.AE for UAE</a>
             </div>
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
-              <a className="block">Terms & Conditions</a>
-              <a className="block">Privacy Policy</a>
-              <a className="block">Refund Policy</a>
+              <a className="block hover:text-amber-600">Terms & Conditions</a>
+              <a className="block hover:text-amber-600">Privacy Policy</a>
+              <a className="block hover:text-amber-600">Refund Policy</a>
             </div>
             <div>
               <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
-              <a className="block">Confidentiality Policy</a>
-              <a className="block">Disclaimer Policy</a>
-              <a className="block">IndiaFilings Review</a>
+              <a className="block hover:text-amber-600">Confidentiality Policy</a>
+              <a className="block hover:text-amber-600">Disclaimer Policy</a>
+              <a className="block hover:text-amber-600">IndiaFilings Review</a>
             </div>
           </div>
 
@@ -942,7 +695,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
         </div>
       </footer>
 
-      <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
         <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
         <span className="font-semibold text-sm">Live Chat with Experts</span>
       </div>
