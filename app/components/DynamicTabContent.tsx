@@ -732,6 +732,7 @@
 //     </div>
 //   );
 // }
+
 interface DynamicTabContentProps {
   category: string;
 }
@@ -773,18 +774,18 @@ export default async function DynamicTabContent({
   }
 
   return (
-    <div className="bg-gradient-to-br from-orange-50 via-white to-blue-50 py-8 sm:py-12 px-3 sm:px-4">
+    <div className="bg-orange-50 py-8 sm:py-12 px-3 sm:px-4">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6">
 
         {/* Main Content */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex-1 order-2 lg:order-1">
 
           {/* Author Section */}
-          <div className="bg-gradient-to-r from-orange-50 to-blue-50 px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 border-b border-gray-200">
+          <div className="bg-orange-50 px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 border-b border-gray-200">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg md:text-xl shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-700 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg md:text-xl shadow-md">
                   {(data.author?.name || "NA")
                     .split(" ")
                     .map((n: string) => n[0])
@@ -831,7 +832,7 @@ export default async function DynamicTabContent({
             {(data.sections || []).map((section: any, index: number) => (
               <div key={index} className="space-y-4 sm:space-y-5">
 
-                <h2 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-blue-600 mt-4 sm:mt-6 md:mt-8">
+                <h2 className="text-xl sm:text-2xl font-bold text-orange-600 mt-4 sm:mt-6 md:mt-8">
                   {section.heading}
                 </h2>
 
@@ -845,7 +846,7 @@ export default async function DynamicTabContent({
                     const [title, ...desc] = point.split(":");
 
                     return (
-                      <li key={i} className="flex items-start gap-2 sm:gap-3 bg-orange-50/50 p-3 sm:p-4 rounded-lg hover:bg-orange-100/50 transition-colors">
+                      <li key={i} className="flex items-start gap-2 sm:gap-3 bg-orange-50 p-3 sm:p-4 rounded-lg hover:bg-orange-100 transition-colors">
 
                         <svg
                           className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600 flex-shrink-0 mt-0.5"
@@ -887,7 +888,7 @@ export default async function DynamicTabContent({
           {/* Consult Experts */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
 
-            <div className="bg-gradient-to-r from-orange-500 to-blue-600 px-4 sm:px-6 py-3 sm:py-4">
+            <div className="bg-gradient-to-r from-orange-600 to-orange-700 px-4 sm:px-6 py-3 sm:py-4">
               <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                 <span>📞</span> Consult Experts
               </h3>
@@ -897,9 +898,9 @@ export default async function DynamicTabContent({
 
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex -space-x-2">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-white shadow-md"></div>
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white shadow-md"></div>
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white shadow-md"></div>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-700 to-orange-600 border-2 border-white shadow-md"></div>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-700 border-2 border-white shadow-md"></div>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-600 to-orange-700 border-2 border-white shadow-md"></div>
                 </div>
 
                 <span className="text-xs sm:text-sm font-semibold text-gray-700">
@@ -911,7 +912,7 @@ export default async function DynamicTabContent({
                 Get professional guidance from our experienced consultants
               </p>
 
-              <button className="w-full bg-gradient-to-r from-orange-500 to-blue-600 hover:from-orange-600 hover:to-blue-700 text-white font-semibold py-2.5 sm:py-3 px-4 rounded-lg text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+              <button className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-600 text-white font-semibold py-2.5 sm:py-3 px-4 rounded-lg text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                 Contact Now
               </button>
 
@@ -922,7 +923,7 @@ export default async function DynamicTabContent({
           {/* Related Guides */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
 
-            <div className="bg-gradient-to-r from-blue-500 to-orange-600 px-4 sm:px-6 py-3 sm:py-4">
+            <div className="bg-gradient-to-r from-orange-700 to-orange-600 px-4 sm:px-6 py-3 sm:py-4">
               <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                 <span>📚</span> Related Guides
               </h3>
@@ -943,7 +944,7 @@ export default async function DynamicTabContent({
                       href="#"
                       className="text-xs sm:text-sm text-gray-600 hover:text-orange-600 hover:underline flex items-center gap-2 group"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-500 to-blue-600 group-hover:scale-125 transition-transform"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-orange-700 group-hover:scale-125 transition-transform"></span>
                       {item}
                     </a>
                   </li>
@@ -956,10 +957,10 @@ export default async function DynamicTabContent({
 
 
           {/* Quick Support */}
-          <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-orange-200">
+          <div className="bg-orange-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-orange-200">
 
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-orange-500 to-blue-600 flex items-center justify-center text-white text-lg sm:text-xl">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-orange-600 to-orange-700 flex items-center justify-center text-white text-lg sm:text-xl">
                 💬
               </div>
               <h4 className="text-sm sm:text-base font-bold text-gray-900">
@@ -971,7 +972,7 @@ export default async function DynamicTabContent({
               Chat with our support team for instant assistance
             </p>
 
-            <button className="w-full bg-white border border-orange-300 text-orange-600 hover:bg-orange-50 font-medium py-2 px-4 rounded-lg text-xs sm:text-sm transition-colors">
+            <button className="w-full bg-white border border-orange-700 text-orange-600 hover:bg-orange-50 font-medium py-2 px-4 rounded-lg text-xs sm:text-sm transition-colors">
               Start Live Chat
             </button>
 
@@ -980,6 +981,6 @@ export default async function DynamicTabContent({
         </div>
 
       </div>
-    </div>
+    </div> 
   );
 }

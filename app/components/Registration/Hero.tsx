@@ -225,25 +225,59 @@
 // }
 
 "use client";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
+type Tab = {
+  name: string;
+  path?: string;
+};
+
+type Feature = {
+  icon: string;
+  text: string;
+};
+
+type FormField = {
+  type: string;
+  name?: string;
+  placeholder?: string;
+  inputType?: string;
+  options?: string[];
+  label?: string;
+  content?: string;
+  [key: string]: any;
+};
+
+type DynamicHeroSectionProps = {
+  heading?: string;
+  headingHighlight?: string;
+  description?: string;
+  features?: Feature[];
+  tabs?: Tab[];
+  defaultTab?: string | null;
+  tabDescriptions?: Record<string, string> | null;
+  formFields?: FormField[];
+  buttonText?: string;
+  onSubmit?: (data: Record<string, FormDataEntryValue>) => void;
+};
+
 export default function DynamicHeroSection({
-  heading,
-  headingHighlight,
-  description,
+  heading = "Start Your",
+  headingHighlight = "Dream Business",
+  description = "A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using IndiaFilings and ensure full compliance with local municipal regulations.",
   features,
   tabs,
   defaultTab,
   tabDescriptions,
   formFields,
-  buttonText,
+  buttonText = "Continue",
   onSubmit
-}) {
+}: DynamicHeroSectionProps) {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
+  const [activeTab, setActiveTab] = useState<string>(defaultTab || tabs?.[0]?.name || "");
 
-  const handleTabClick = (tabName, path) => {
+  const handleTabClick = (tabName: string, path?: string): void => {
     setActiveTab(tabName);
     if (path) {
       router.push(path);
@@ -256,25 +290,25 @@ export default function DynamicHeroSection({
       <div className="max-w-7xl mx-auto px-3 sm:px-5 py-6 sm:py-8">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {/* Left Column */}
-          <div className="space-y-4 sm:space-y-5">
+          <div className="space-y-5 sm:space-y-6">
             {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1">
-              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full" />
-              <span className="text-xs sm:text-sm font-medium text-orange-600">TRUSTED BY 50K+ BUSINESSES</span>
+            <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1">
+              <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+              <span className="text-xs sm:text-sm font-medium text-amber-700">TRUSTED BY 50K+ BUSINESSES</span>
             </div>
 
             {/* Heading */}
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-                <span className="text-gray-900">Start Your</span>
+                <span className="text-gray-900">{heading}</span>
                 <br />
-                <span className="bg-gradient-to-r from-orange-600 to-blue-600 bg-clip-text text-transparent">
-                  Dream Business
+                <span className="text-amber-700">
+                  {headingHighlight}
                 </span>
               </h1>
               
-              <p className="text-sm sm:text-base text-gray-600 max-w-lg leading-relaxed">
-                A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using IndiaFilings and ensure full compliance with local municipal regulations.
+              <p className="text-sm sm:text-base text-gray-600 max-w-lg">
+                {description}
               </p>
             </div>
 
@@ -285,7 +319,7 @@ export default function DynamicHeroSection({
                 <span className="text-sm text-gray-700">Digital Process</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 bg-orange-600 rounded flex items-center justify-center text-white text-xs">✓</div>
+                <div className="w-5 h-5 bg-amber-600 rounded flex items-center justify-center text-white text-xs">✓</div>
                 <span className="text-sm text-gray-700">Super Fast Service</span>
               </div>
               <div className="flex items-center gap-3">
@@ -297,11 +331,9 @@ export default function DynamicHeroSection({
             {/* Rating */}
             <div className="flex items-center gap-3 pt-1">
               <div className="flex items-center gap-0.5">
-                <span className="text-yellow-400 text-base">★</span>
-                <span className="text-yellow-400 text-base">★</span>
-                <span className="text-yellow-400 text-base">★</span>
-                <span className="text-yellow-400 text-base">★</span>
-                <span className="text-yellow-400 text-base">★</span>
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-500 text-base">★</span>
+                ))}
               </div>
               <span className="text-sm font-medium text-gray-900">4.9/5</span>
               <span className="text-gray-300 text-sm">|</span>
@@ -312,42 +344,42 @@ export default function DynamicHeroSection({
           {/* Right Column - Form */}
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
             {/* Form Header */}
-            <div className="bg-gradient-to-r from-orange-600 to-blue-600 px-4 sm:px-5 py-3">
+            <div className="bg-gradient-to-r from-amber-700 to-amber-800 px-4 sm:px-5 py-2.5 sm:py-3">
               <h2 className="text-sm sm:text-base font-bold text-white">Sign In</h2>
-              <p className="text-orange-100 text-xs mt-0.5">to get started with your registration</p>
+              <p className="text-amber-100 text-xs">to get started with your registration</p>
             </div>
 
             {/* Form Body */}
             <div className="p-4 sm:p-5">
-              <form onSubmit={(e) => {
+              <form onSubmit={(e: FormEvent<HTMLFormElement>) => {
                 e.preventDefault();
                 if (onSubmit) {
-                  const formData = new FormData(e.target);
+                  const formData = new FormData(e.currentTarget);
                   onSubmit(Object.fromEntries(formData));
                 }
-              }} className="space-y-3">
+              }} className="space-y-3 sm:space-y-4">
                 {/* PAN / GSTIN */}
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
-                    PAN / GSTIN <span className="text-orange-500">*</span>
+                    PAN / GSTIN <span className="text-amber-600">*</span>
                   </label>
                   <input
                     type="text"
                     name="pan"
                     placeholder="Enter PAN or GSTIN"
-                    className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-lg text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
                   />
                 </div>
 
                 {/* State */}
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
-                    State <span className="text-orange-500">*</span>
+                    State <span className="text-amber-600">*</span>
                   </label>
                   <div className="relative">
                     <select
                       name="state"
-                      className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs sm:text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-orange-500 appearance-none cursor-pointer"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-lg text-xs sm:text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-amber-600 appearance-none cursor-pointer"
                     >
                       <option value="" className="text-gray-500">Select State</option>
                       <option className="text-gray-900">Maharashtra</option>
@@ -367,27 +399,27 @@ export default function DynamicHeroSection({
                 {/* Nature of Trade */}
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
-                    Nature of Trade <span className="text-orange-500">*</span>
+                    Nature of Trade <span className="text-amber-600">*</span>
                   </label>
                   <input
                     type="text"
                     name="trade"
                     placeholder="e.g., Retail, Manufacturing, Services"
-                    className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 border border-gray-200 rounded-lg text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
                   />
                 </div>
 
                 {/* Continue Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-orange-600 to-blue-600 text-white font-semibold py-3 px-4 rounded-lg text-sm sm:text-base hover:from-orange-700 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
+                  className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white font-semibold py-3 sm:py-3.5 px-4 rounded-lg text-sm sm:text-base hover:from-amber-800 hover:to-amber-900 transition-all mt-2 shadow-md hover:shadow-lg"
                 >
-                  Continue
+                  {buttonText}
                 </button>
 
                 {/* Security Badge */}
-                <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500">
-                  <svg className="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 pt-1">
+                  <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>Secure · Instant access</span>
@@ -396,14 +428,31 @@ export default function DynamicHeroSection({
             </div>
 
             {/* Footer */}
-            <div className="bg-gray-50 px-4 sm:px-5 py-3 border-t border-gray-200">
+            <div className="bg-gray-50 px-4 sm:px-5 py-2.5 sm:py-3 border-t border-gray-200">
               <p className="text-xs sm:text-sm text-center text-gray-600">
                 New user?{' '}
-                <a href="/signup" className="text-orange-600 hover:text-orange-700 font-semibold">
+                <a href="/signup" className="text-amber-700 hover:text-amber-800 font-semibold">
                   Create account →
                 </a>
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-6">
+          <div className="flex items-center gap-1">
+            <span className="text-yellow-500 text-sm sm:text-base">★★★★★</span>
+            <span className="text-xs sm:text-sm text-gray-600">4.9/5 (2.5k+ reviews)</span>
+          </div>
+          <div className="w-px h-3 bg-gray-200 hidden sm:block" />
+          <div className="flex items-center gap-2">
+            <div className="flex -space-x-1.5">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-amber-500 to-amber-700 border-2 border-white" />
+              ))}
+            </div>
+            <span className="text-xs sm:text-sm text-gray-600">Trusted by 50k+ businesses</span>
           </div>
         </div>
       </div>

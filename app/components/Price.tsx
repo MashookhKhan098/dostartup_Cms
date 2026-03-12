@@ -85,7 +85,7 @@
 //             <select
 //               value={selectedState}
 //               onChange={(e) => setSelectedState(e.target.value)}
-//               className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer transition"
+//               className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 appearance-none cursor-pointer transition"
 //             >
 //               <option value="">Select State</option>
 //               {states.map((state) => (
@@ -107,7 +107,7 @@
 //           {pricingData.cards.map((card) => (
 //             <div
 //               key={card.id}
-//               className="bg-white rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:shadow-xl transition-all duration-300 overflow-hidden group w-full max-w-xs"
+//               className="bg-white rounded-xl border-2 border-gray-200 hover:border-orange-400 hover:shadow-xl transition-all duration-300 overflow-hidden group w-full max-w-xs"
 //             >
 //               {/* Card Header */}
 //               <div className="p-5 pb-3 text-center border-b border-gray-100">
@@ -131,7 +131,7 @@
 
 //               {/* CTA Button */}
 //               <div className="px-5 pb-5">
-//                 <button className="w-full blue-600 text-white text-xs font-semibold py-2.5 rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all shadow-md hover:shadow-lg">
+//                 <button className="w-full orange-600 text-white text-xs font-semibold py-2.5 rounded-lg hover:from-orange-600 hover:to-cyan-600 transition-all shadow-md hover:shadow-lg">
 //                   {card.buttonText}
 //                 </button>
 //               </div>
@@ -218,7 +218,7 @@ export default async function PricingSection({ category }: PricingProps) {
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-100 rounded-full blur-3xl -translate-x-1/2"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-100 rounded-full blur-3xl translate-x-1/2"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-100 rounded-full blur-3xl translate-x-1/2"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -226,7 +226,7 @@ export default async function PricingSection({ category }: PricingProps) {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-3 leading-tight">
             <span className="text-gray-900">Simple </span>
-            <span className="bg-gradient-to-r from-orange-600 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-600 to-orange-600 bg-clip-text text-transparent">
               Pricing
             </span>
           </h2>
@@ -242,7 +242,7 @@ export default async function PricingSection({ category }: PricingProps) {
             if (!card.title || card.title === "Proprietorship.") return null;
             
             const colorIndex = index % 3;
-            const colors = colorIndex === 0 ? 'orange' : colorIndex === 1 ? 'blue' : 'orange';
+            const colors = colorIndex === 0 ? 'orange' : colorIndex === 1 ? 'orange' : 'orange';
             
             return (
               <div
@@ -252,7 +252,7 @@ export default async function PricingSection({ category }: PricingProps) {
                 <div className="p-6 flex flex-col h-full">
                   {/* Title - Increased bottom margin */}
                   <h3 className={`text-base font-bold mb-3 min-h-[40px] ${
-                    colors === 'orange' ? 'text-orange-600' : 'text-blue-600'
+                    colors === 'orange' ? 'text-orange-600' : 'text-orange-600'
                   }`}>
                     {card.title}
                   </h3>
@@ -288,7 +288,7 @@ export default async function PricingSection({ category }: PricingProps) {
                       ].map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-xs">
                           <svg className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${
-                            colors === 'orange' ? 'text-orange-500' : 'text-blue-500'
+                            colors === 'orange' ? 'text-orange-500' : 'text-orange-500'
                           }`} fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
@@ -302,7 +302,7 @@ export default async function PricingSection({ category }: PricingProps) {
                   <button className={`w-full py-3 px-4 rounded-lg text-xs font-medium transition-all mt-auto ${
                     colors === 'orange' 
                       ? 'bg-orange-50 text-orange-600 hover:bg-orange-100 border border-orange-200' 
-                      : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200'
+                      : 'bg-orange-50 text-orange-600 hover:bg-orange-100 border border-orange-200'
                   }`}>
                     Get Started Now
                   </button>
