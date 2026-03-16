@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Hero2() {
+export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
-  const [activeEntity, setActiveEntity] = useState("Startup");
+  const [activeEntity, setActiveEntity] = useState(defaultEntity);
   const [formData, setFormData] = useState({
     state: "",
     name: "",

@@ -100,7 +100,7 @@
 //           <div className="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
 //             {/* Gradient Bar */}
 //             <div className="h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-orange-400"></div>
-            
+
 //             {/* Tabs */}
 //             <div className="flex border-b border-gray-200 overflow-x-auto scrollbar-hide">
 //               {entities.map(({ name, path }) => (
@@ -177,9 +177,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function StartBusinessPage() {
+export default function StartBusinessPage({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
-  const [activeEntity, setActiveEntity] = useState("Startup");
+  const [activeEntity, setActiveEntity] = useState(defaultEntity);
   const [formData, setFormData] = useState({
     state: "",
     name: "",
@@ -243,7 +243,7 @@ export default function StartBusinessPage() {
                   Dream Business
                 </span>
               </h1>
-              
+
               <p className="text-sm sm:text-base text-gray-600 max-w-lg">
                 Join 50,000+ entrepreneurs. Complete digital process, expert support.
               </p>
@@ -298,11 +298,10 @@ export default function StartBusinessPage() {
                   <button
                     key={name}
                     onClick={() => setActiveEntity(name)}
-                    className={`px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-lg transition-all whitespace-nowrap ${
-                      activeEntity === name
+                    className={`px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-lg transition-all whitespace-nowrap ${activeEntity === name
                         ? "bg-amber-700 text-white"
                         : "bg-white text-gray-600 border border-gray-200 hover:bg-amber-50"
-                    }`}
+                      }`}
                   >
                     {name}
                   </button>

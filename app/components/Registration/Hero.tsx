@@ -10,7 +10,7 @@
 //   headingHighlight,
 //   description,
 //   features,
-  
+
 //   // Right side tab/form props
 //   tabs,
 //   defaultTab,
@@ -91,7 +91,7 @@
 //             </div>
 //           </div>
 //         );
-      
+
 //       case "input":
 //         return (
 //           <input
@@ -102,7 +102,7 @@
 //             className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
 //           />
 //         );
-      
+
 //       case "checkbox":
 //         return (
 //           <label key={index} className="flex items-start gap-3 cursor-pointer">
@@ -114,14 +114,14 @@
 //             <span className="text-sm text-gray-600">{field.label}</span>
 //           </label>
 //         );
-      
+
 //       case "text":
 //         return (
 //           <p key={index} className="text-sm text-gray-600">
 //             {field.content}
 //           </p>
 //         );
-      
+
 //       default:
 //         return null;
 //     }
@@ -165,7 +165,7 @@
 //           <div className="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
 //             {/* Gradient Bar */}
 //             <div className="h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-orange-400"></div>
-            
+
 //             {/* Tabs (if provided) */}
 //             {tabs && tabs.length > 0 && (
 //               <div className="flex justify-center gap-2 p-4">
@@ -248,7 +248,7 @@ type FormField = {
   [key: string]: any;
 };
 
-type DynamicHeroSectionProps = {
+export type DynamicHeroSectionProps = {
   heading?: string;
   headingHighlight?: string;
   description?: string;
@@ -288,7 +288,7 @@ export default function DynamicHeroSection({
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-3 sm:px-5 py-4 sm:py-6">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-          
+
           {/* Left Column */}
           <div className="space-y-5 sm:space-y-6">
 
