@@ -16,19 +16,19 @@ export default function Footer() {
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">About DoStartup</a>
+                  <a href="/about" className="hover:underline">About DoStartup</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Careers</a>
+                  <a href="/careers" className="hover:underline">Careers</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Contact Us</a>
+                  <a href="/contact" className="hover:underline">Contact Us</a>
                 </li>
               </ul>
             </div>
@@ -41,21 +41,21 @@ export default function Footer() {
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Business Search</a>
+                  <a href="/Business-Search" className="hover:underline">Business Search</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Trademark Search</a>
+                  <a href="/Trademark-Search" className="hover:underline">Trademark Search</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Filings.AE for UAE</a>
+                  <a href="/Filings-AE-for-UAE" className="hover:underline">Filings.AE for UAE</a>
                 </li>
-              </ul>
+              </ul> 
             </div>
 
             {/* Column 3 */}
@@ -66,19 +66,19 @@ export default function Footer() {
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Terms &amp; Conditions</a>
+                  <a href="/Terms-Conditions" className="hover:underline">Terms &amp; Conditions</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Privacy Policy</a>
+                  <a href="/Privacy-Policy" className="hover:underline">Privacy Policy</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Refund Policy</a>
+                  <a href="/Refund-policy" className="hover:underline">Refund Policy</a>
                 </li>
               </ul>
             </div>
@@ -91,19 +91,19 @@ export default function Footer() {
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Confidentiality Policy</a>
+                  <a href="/Confidentiality-Policy" className="hover:underline">Confidentiality Policy</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">Disclaimer Policy</a>
+                  <a href="/Disclaimer-Policy" className="hover:underline">Disclaimer Policy</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-4 h-4 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <a href="#" className="hover:underline">DoStartup Review</a>
+                  <a href="/DoStartup-Review" className="hover:underline">DoStartup Review</a>
                 </li>
               </ul>
             </div>
@@ -113,7 +113,7 @@ export default function Footer() {
         {/* bottom copyright / disclaimer + social icons */}
         <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="text-slate-500 text-sm md:flex-1">
-            <p>Copyright © 2025 DoStartup Private Limited. All rights reserved.</p>
+            <p>Copyright © 2025 Ure Consulting LLP. All rights reserved.</p>
 
             <p className="mt-3 text-xs text-slate-400 max-w-3xl">
               Unless otherwise indicated, all materials on these pages are copyrighted by DoStartup Private Limited. All rights reserved. No part of these pages, either text or image may be used for any purpose.

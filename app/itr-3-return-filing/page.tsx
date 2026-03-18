@@ -378,7 +378,7 @@ export default function ITR3Page() {
                                 File <span className="text-orange-500">ITR-3</span> Online
                                 <br />
                                 For <span className="text-orange-500">Business & F&O</span>
-                            </h1>
+                            </h1> 
 
                             <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-lg">
                                 For freelancers, business owners, F&O traders & professionals. Our AI imports your books, computes turnover, maximizes expenses, and files ITR-3 without errors.
