@@ -1,0 +1,6 @@
+﻿app/components/Price.tsx(184,1): error TS1185: Merge conflict marker encountered.
+app/components/Price.tsx(186,1): error TS1185: Merge conflict marker encountered.
+app/components/Price.tsx(188,1): error TS1185: Merge conflict marker encountered.
+app/components/Price.tsx(200,1): error TS1185: Merge conflict marker encountered.
+app/components/Price.tsx(202,1): error TS1185: Merge conflict marker encountered.
+app/components/Price.tsx(204,1): error TS1185: Merge conflict marker encountered.
