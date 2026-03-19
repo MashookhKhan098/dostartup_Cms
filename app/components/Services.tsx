@@ -119,7 +119,6 @@
 // }
 
 
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -163,7 +162,6 @@ export default function ServicesSection() {
         if (Array.isArray(json)) {
           setServices(json);
 
-          // OPTIONAL: if cockpit stores section info in first record
           if (json[0]?.sectionTitle) setTitle(json[0].sectionTitle);
           if (json[0]?.sectionDescription)
             setDescription(json[0].sectionDescription);
@@ -189,11 +187,11 @@ export default function ServicesSection() {
   return (
     <section className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Header with orange gradient */}
+        {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-full px-4 py-1.5 mb-4">
-            <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-pulse"></div>
-            <span className="text-xs font-semibold text-orange-600">WHAT WE OFFER</span>
+          <div className="inline-flex items-center gap-2 bg-[#C15F3C]/10 border border-[#C15F3C]/30 rounded-full px-4 py-1.5 mb-4">
+            <div className="w-1.5 h-1.5 bg-[#C15F3C] rounded-full animate-pulse"></div>
+            <span className="text-xs font-semibold text-[#C15F3C]">WHAT WE OFFER</span>
           </div>
           
           <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
@@ -216,20 +214,19 @@ export default function ServicesSection() {
               return (
                 <div
                   key={service._id || idx}
-                  className="group flex flex-col items-center text-center cursor-pointer hover:bg-orange-50/50 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
+                  className="group flex flex-col items-center text-center cursor-pointer hover:bg-[#C15F3C]/10 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
                 >
                   {Icon && (
-                    <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-6 w-6 text-orange-600" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#C15F3C]/20 to-[#C15F3C]/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-6 w-6 text-[#C15F3C]" />
                     </div>
                   )}
 
-                  <span className="text-sm font-medium text-gray-800 group-hover:text-orange-600 transition-colors">
+                  <span className="text-sm font-medium text-gray-800 group-hover:text-[#C15F3C] transition-colors">
                     {serviceName}
                   </span>
 
-                  {/* Simple underline effect on hover */}
-                  <div className="w-0 h-0.5 bg-gradient-to-r from-orange-600 to-orange-400 group-hover:w-8 transition-all duration-300 mt-1"></div>
+                  <div className="w-0 h-0.5 bg-gradient-to-r from-[#C15F3C] to-[#C15F3C] group-hover:w-8 transition-all duration-300 mt-1"></div>
                 </div>
               );
             })}
@@ -240,7 +237,7 @@ export default function ServicesSection() {
         <div className="text-center mt-8">
           <p className="text-sm text-gray-500">
             Need help choosing?{" "}
-            <span className="text-orange-600 font-medium cursor-pointer hover:underline">
+            <span className="text-[#C15F3C] font-medium cursor-pointer hover:underline">
               Talk to an expert →
             </span>
           </p>

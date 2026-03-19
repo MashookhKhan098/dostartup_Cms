@@ -19,9 +19,15 @@ export default function Navbar() {
 
         {/* Left: Logo (no background) + Desktop Links */}
         <div className="flex items-center">
-          <div className="flex items-center shrink-0">
-            <img src="/logo2.png" alt="doStartup" className="h-9 sm:h-10 w-auto" />
-          </div>
+         <div className="flex items-center shrink-0">
+  <a href="/">
+    <img
+      src="/logo2.png"
+      alt="doStartup"
+      className="h-9 sm:h-10 w-auto cursor-pointer"
+    />
+  </a>
+</div>
 
           {/* Desktop Nav */}
           <ul className="hidden lg:flex items-center space-x-5 xl:space-x-6 px-4 text-sm font-semibold" style={{ color: "#3d3a35" }}>
