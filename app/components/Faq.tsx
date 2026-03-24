@@ -1,329 +1,3 @@
-// // Dynamic FAQ Accordion Component
-// "use client";
-// import { useState } from "react";
-
-// // Import your FAQ data from utils folder
-// // import faqData from "@/utils/faqData.json";
-
-// // Example data structure - replace this with your actual import
-// const faqData = {
-//   title: "FAQ's on Company Registration",
-//   faqs: [
-//     {
-//       id: 1,
-//       question: "What is the registration process of a company?",
-//       answer: "The company registration process in India involves several steps: obtaining Digital Signature Certificate (DSC), applying for Director Identification Number (DIN), name approval through RUN (Reserve Unique Name), filing incorporation documents including MOA and AOA, and finally receiving the Certificate of Incorporation from the Ministry of Corporate Affairs (MCA). The entire process typically takes 7-10 working days and can be completed online through the MCA portal."
-//     },
-//     {
-//       id: 2,
-//       question: "How much is the private limited company registration fees?",
-//       answer: "The registration fees for a Private Limited Company in India varies based on the authorized capital. For companies with authorized capital up to ₹1 lakh, the government fees are approximately ₹4,000-₹5,000. Professional fees for documentation, filing, and expert assistance typically range from ₹6,000 to ₹15,000. Additional costs may include DSC (₹1,500-₹2,000), DIN application fees, and stamp duty charges which vary by state."
-//     },
-//     {
-//       id: 3,
-//       question: "What are the types of registration?",
-//       answer: "In India, businesses can register under various structures including Private Limited Company, Public Limited Company, One Person Company (OPC), Limited Liability Partnership (LLP), Partnership Firm, Sole Proprietorship, Section 8 Company (for non-profit), Producer Company, and Indian Subsidiary. Each structure has different compliance requirements, liability protection, and taxation benefits suitable for different business needs and scales of operation."
-//     },
-//     {
-//       id: 4,
-//       question: "Can NRIs or foreign national or foreign entities register a company in India?",
-//       answer: "Yes, NRIs and foreign nationals can register a company in India. However, at least one director must be a resident of India. Foreign entities can establish a wholly-owned subsidiary or joint venture in India, subject to Foreign Direct Investment (FDI) regulations and sector-specific caps. The process requires additional documentation including passport copies, overseas address proof, and compliance with FEMA (Foreign Exchange Management Act) regulations."
-//     },
-//     {
-//       id: 5,
-//       question: "How do I check the availability of names for my company?",
-//       answer: "You can check name availability through the MCA portal's RUN (Reserve Unique Name) service. The name should be unique and not similar to existing company names or trademarks. It should not contain prohibited words or violate the Company Name Guidelines. You can submit up to two name choices with their significance. The MCA typically approves or rejects the name within 2-3 working days."
-//     },
-//     {
-//       id: 6,
-//       question: "Is GST registration mandatory at this stage?",
-//       answer: "GST registration is not mandatory at the time of company incorporation. However, it becomes mandatory if your annual turnover exceeds ₹40 lakhs (₹20 lakhs for service providers) or ₹20 lakhs/₹10 lakhs for special category states. You must register within 30 days of crossing the threshold. Even if turnover is below the limit, voluntary GST registration is recommended for businesses that need to issue GST invoices or claim input tax credit."
-//     },
-//     {
-//       id: 7,
-//       question: "What are the compliances of a Private Limited Company?",
-//       answer: "Private Limited Companies must comply with various statutory requirements including holding Board Meetings (minimum 4 per year) and Annual General Meetings, filing Annual Returns (Form MGT-7) and Financial Statements (Form AOC-4) with MCA, maintaining statutory registers and books of accounts, filing Income Tax Returns, conducting statutory audits, and maintaining proper accounting records. Director KYC must be filed annually, and any changes in directors or registered office must be reported to MCA within prescribed timelines."
-//     },
-//     {
-//       id: 8,
-//       question: "how to register a private limited company in India?",
-//       answer: "To register a Private Limited Company in India, first obtain DSC and DIN for proposed directors, then file SPICe+ form (INC-32) for name reservation and incorporation along with MOA, AOA, and other required documents. Submit proof of registered office, director declarations, and payment of government fees. Upon approval, you'll receive Certificate of Incorporation, PAN, TAN, and other registration documents. The entire process can be completed online through the MCA portal within 7-15 working days."
-//     },
-//     {
-//       id: 9,
-//       question: "Which Form is to be filed for the ITR filing of Private Limited Company?",
-//       answer: "Private Limited Companies must file their Income Tax Return using ITR-6 form. This form is specifically designed for companies other than those claiming exemption under Section 11. The return must be filed electronically with digital signature and should include audited financial statements, tax audit report (if applicable), and other required attachments. The due date for filing is typically October 31st of the assessment year, or November 30th if a tax audit is required."
-//     },
-//     {
-//       id: 10,
-//       question: "Which form is to be filed for filing the annual returns of a Company?",
-//       answer: "Companies must file their annual returns using Form MGT-7 with the Ministry of Corporate Affairs. This form contains details about the company's management, shareholders, directors, and compliance status. It must be filed within 60 days from the date of the Annual General Meeting (AGM). Along with MGT-7, companies must also file Form AOC-4 (financial statements) and other applicable forms for a complete annual compliance package."
-//     },
-//     {
-//       id: 11,
-//       question: "What is the minimum capital requirement for Private Limited Company?",
-//       answer: "There is no minimum capital requirement for registering a Private Limited Company in India since the Companies Act, 2013 removed this requirement. Previously, a minimum paid-up capital of ₹1 lakh was required. Now, companies can be incorporated with any amount of authorized and paid-up capital based on business requirements. However, adequate capital should be maintained to meet business operational needs and demonstrate financial credibility."
-//     },
-//     {
-//       id: 12,
-//       question: "Can a Private Limited Company be converted to LLP?",
-//       answer: "Yes, a Private Limited Company can be converted into a Limited Liability Partnership (LLP) under the provisions of the Companies Act and LLP Act. The conversion process requires approval from all shareholders and creditors, filing of prescribed forms with MCA, obtaining a certificate of incorporation for the LLP, and transferring all assets and liabilities. The company must not have defaulted in filing returns or violated any provisions. Professional assistance is recommended for smooth conversion."
-//     },
-//     {
-//       id: 13,
-//       question: "What documents are required for company registration?",
-//       answer: "Required documents include PAN card, Aadhaar card, passport-size photographs of directors, proof of identity and address of directors and shareholders, Digital Signature Certificate (DSC), Director Identification Number (DIN), registered office address proof (rental agreement or ownership deed), utility bills not older than 2 months, and NOC from the property owner. Foreign nationals need additional documents including passport, overseas address proof, and notarized affidavits."
-//     },
-//     {
-//       id: 14,
-//       question: "How many directors are required for a Private Limited Company?",
-//       answer: "A Private Limited Company requires a minimum of two directors and can have a maximum of 15 directors. At least one director must be a resident of India who has stayed in India for a minimum of 182 days in the previous calendar year. Directors must obtain Director Identification Number (DIN) before incorporation. Additional directors beyond 15 can be appointed by passing a special resolution in the general meeting and obtaining Central Government approval."
-//     },
-//     {
-//       id: 15,
-//       question: "What is the difference between authorized and paid-up capital?",
-//       answer: "Authorized capital is the maximum amount of share capital a company is authorized to issue to shareholders as per its Memorandum of Association. Paid-up capital is the actual amount of money received from shareholders against issued shares. For example, if authorized capital is ₹10 lakhs but only ₹2 lakhs worth of shares are issued and paid by shareholders, the paid-up capital is ₹2 lakhs. Stamp duty is payable on authorized capital, while compliance requirements depend on paid-up capital."
-//     },
-//     {
-//       id: 16,
-//       question: "Can a company have only one shareholder?",
-//       answer: "A Private Limited Company requires a minimum of two shareholders. However, if you want single ownership, you can opt for a One Person Company (OPC) which allows a single shareholder and director. In a Private Limited Company, one person can be both director and shareholder, but there must be at least two distinct shareholders at any given time. The maximum number of shareholders in a Private Limited Company is 200, excluding current and former employees."
-//     },
-//     {
-//       id: 17,
-//       question: "What is the validity of company name approval?",
-//       answer: "Once a company name is approved by the Ministry of Corporate Affairs through the RUN (Reserve Unique Name) service, it remains valid for 20 days from the date of approval. The company must complete its incorporation within this period. If the incorporation is not completed within 20 days, the name approval lapses and you need to apply for name reservation again. It's advisable to have all required documents ready before applying for name approval to avoid expiry."
-//     },
-//     {
-//       id: 18,
-//       question: "Is physical presence required for company registration?",
-//       answer: "No, physical presence is not mandatory for company registration in India. The entire process can be completed online through the MCA portal. Directors need to obtain Digital Signature Certificates (DSC) which can be obtained online. All documents can be submitted electronically, and video verification (KYC) of directors can be done remotely. However, original documents must be maintained at the registered office for inspection. Some service providers may require one physical meeting for document collection and verification."
-//     },
-//     {
-//       id: 19,
-//       question: "What is the difference between a Private and Public Limited Company?",
-//       answer: "A Private Limited Company requires minimum 2 directors and 2 shareholders (maximum 200 shareholders), cannot invite public to subscribe to shares, has restrictions on share transfer, and requires 'Private Limited' suffix in name. A Public Limited Company requires minimum 3 directors and 7 shareholders with no maximum limit, can raise capital from public through IPO, has freely transferable shares, faces higher compliance requirements including mandatory appointment of whole-time company secretary, and requires 'Limited' suffix in name."
-//     },
-//     {
-//       id: 20,
-//       question: "Can the registered office address be a residential address?",
-//       answer: "Yes, a residential address can be used as the registered office of a Private Limited Company. However, you need to provide proof of ownership or a rent agreement along with a No Objection Certificate (NOC) from the property owner. The address should be a physical location where official communication can be received. Some states or municipalities may have restrictions on using residential properties for commercial purposes, so it's advisable to check local regulations. The registered office address must be verified and can be changed later by filing the appropriate form with MCA."
-//     }
-//   ]
-// };
-
-// interface FAQAccordionProps {
-//   category?: string; // Optional prop to filter by category if needed
-// }
-
-// export default function FAQAccordion({ category }: FAQAccordionProps) {
-//   const [openIndex, setOpenIndex] = useState<number | null>(null);
-//   const [visibleCount, setVisibleCount] = useState(5);
-
-//   const toggleAccordion = (index: number) => {
-//     setOpenIndex(openIndex === index ? null : index);
-//   };
-
-//   const loadMore = () => {
-//     setVisibleCount(prev => Math.min(prev + 3, faqData.faqs.length));
-//   };
-
-//   const visibleFaqs = faqData.faqs.slice(0, visibleCount);
-//   const hasMore = visibleCount < faqData.faqs.length;
-
-//   return (
-//     <div className="bg-gray-50 py-12 px-4">
-//       <div className="max-w-4xl mx-auto">
-//         <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-//           {/* Header */}
-//           <div className="px-6 py-5 border-b border-gray-200">
-//             <h2 className="text-xl font-bold text-gray-900">
-//               {faqData.title}
-//             </h2>
-//           </div>
-
-//           {/* FAQ Items */}
-//           <div className="divide-y divide-gray-200">
-//             {visibleFaqs.map((faq, index) => (
-//               <div key={faq.id} className="transition-all">
-//                 {/* Question */}
-//                 <button
-//                   onClick={() => toggleAccordion(index)}
-//                   className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-//                 >
-//                   <span className="text-sm font-medium text-gray-900 pr-4">
-//                     {faq.question}
-//                   </span>
-//                   <svg
-//                     className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform ${
-//                       openIndex === index ? "transform rotate-45" : ""
-//                     }`}
-//                     fill="none"
-//                     stroke="currentColor"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <path
-//                       strokeLinecap="round"
-//                       strokeLinejoin="round"
-//                       strokeWidth="2"
-//                       d="M12 4v16m8-8H4"
-//                     />
-//                   </svg>
-//                 </button>
-
-//                 {/* Answer */}
-//                 {openIndex === index && (
-//                   <div className="px-6 pb-4 pt-2">
-//                     <p className="text-sm text-gray-700 leading-relaxed">
-//                       {faq.answer}
-//                     </p>
-//                   </div>
-//                 )}
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Load More Button */}
-//           {hasMore && (
-//             <div className="px-6 py-5 border-t border-gray-200">
-//               <button
-//                 onClick={loadMore}
-//                 className="px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors"
-//               >
-//                 Load More
-//               </button>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-// "use client";
-
-// import { useEffect, useState } from "react";
-
-// interface FAQ {
-//   id: number;
-//   question: string;
-//   answer: string;
-//   category: string;
-// }
-
-// interface FAQAccordionProps {
-//   category?: string;
-// }
-
-// export default function FAQAccordion({ category }: FAQAccordionProps) {
-//   const [faqs, setFaqs] = useState<FAQ[]>([]);
-//   const [openIndex, setOpenIndex] = useState<number | null>(null);
-//   const [visibleCount, setVisibleCount] = useState(5);
-//   const [title, setTitle] = useState("FAQ's");
-
-//   useEffect(() => {
-//     let url = "http://localhost:1337/api/startup-faqs";
-
-//     if (category) {
-//       url += `?filters[category][$eq]=${category}`;
-//       setTitle(`FAQ's`);
-//     }
-
-//     fetch(url)
-//       .then((res) => res.json())
-//       .then((json) => {
-//         setFaqs(json.data || []);
-//       });
-//   }, [category]);
-
-//   const toggleAccordion = (index: number) => {
-//     setOpenIndex(openIndex === index ? null : index);
-//   };
-
-//   const loadMore = () => {
-//     setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
-//   };
-
-//   const visibleFaqs = faqs.slice(0, visibleCount);
-//   const hasMore = visibleCount < faqs.length;
-
-//   return (
-//     <div className="bg-gray-50 py-12 px-4">
-//       <div className="max-w-4xl mx-auto">
-//         <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-          
-//           {/* Header */}
-//           <div className="px-6 py-5 border-b border-gray-200">
-//             <h2 className="text-xl font-bold text-gray-900">
-//               {title}
-//             </h2>
-//           </div>
-
-//           {/* FAQ Items */}
-//           <div className="divide-y divide-gray-200">
-//             {visibleFaqs.map((faq, index) => (
-//               <div key={faq.id} className="transition-all">
-                
-//                 {/* Question */}
-//                 <button
-//                   onClick={() => toggleAccordion(index)}
-//                   className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-//                 >
-//                   <span className="text-sm font-medium text-gray-900 pr-4">
-//                     {faq.question}
-//                   </span>
-
-//                   <svg
-//                     className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform ${
-//                       openIndex === index ? "rotate-45" : ""
-//                     }`}
-//                     fill="none"
-//                     stroke="currentColor"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <path
-//                       strokeLinecap="round"
-//                       strokeLinejoin="round"
-//                       strokeWidth="2"
-//                       d="M12 4v16m8-8H4"
-//                     />
-//                   </svg>
-//                 </button>
-
-//                 {/* Answer */}
-//                 {openIndex === index && (
-//                   <div className="px-6 pb-4 pt-2">
-//                     <p className="text-sm text-gray-700 leading-relaxed">
-//                       {faq.answer}
-//                     </p>
-//                   </div>
-//                 )}
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Load More */}
-//           {hasMore && (
-//             <div className="px-6 py-5 border-t border-gray-200">
-//               <button
-//                 onClick={loadMore}
-//                 className="px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors"
-//               >
-//                 Load More
-//               </button>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-// cockpit from here
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -352,7 +26,7 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(5);
-  const [title] = useState("FAQ's");
+  const [title] = useState("Frequently Asked Questions");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -362,14 +36,12 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
         const json = await res.json();
 
         if (Array.isArray(json)) {
-
-          // filter by category if provided
           const filtered = category
             ? json.filter(
-                (item: FAQ) =>
-                  item.category === category ||
-                  item.CATEGORY === category
-              )
+              (item: FAQ) =>
+                item.category === category ||
+                item.CATEGORY === category
+            )
             : json;
 
           setFaqs(filtered);
@@ -394,8 +66,15 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
 
   if (loading) {
     return (
-      <div className="py-12 text-center text-gray-500">
-        Loading FAQs...
+      <div className="bg-[#F4F3EE] py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-12 text-center">
+            <div className="inline-block">
+              <div className="w-12 h-12 border-4 border-[#E5E2DA] border-t-[#C15F3C] rounded-full animate-spin"></div>
+            </div>
+            <p className="mt-4 text-[#6F6B63]">Loading FAQs...</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -404,39 +83,60 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
   const hasMore = visibleCount < faqs.length;
 
   return (
-    <div className="bg-gray-50 py-12 px-4">
+    <div className="bg-[#F4F3EE] py-16 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
 
-          {/* Header */}
-          <div className="px-6 py-5 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900">
-              {title}
-            </h2>
+        {/* Header Section */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-4">
+            <div className="w-2 h-2 bg-[#C15F3C] rounded-full animate-pulse" />
+            <span className="text-xs font-medium text-[#C15F3C] uppercase tracking-wider">
+              Knowledge Base
+            </span>
           </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#2F2E2B] mb-3">
+            {title}
+          </h2>
+          <p className="text-[#6F6B63] text-base max-w-2xl mx-auto">
+            Find answers to commonly asked questions about our services
+          </p>
+          <div className="h-1 w-20 bg-gradient-to-r from-[#C15F3C] to-[#A94E30] rounded-full mx-auto mt-4"></div>
+        </div>
+
+        {/* FAQ Container */}
+        <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
 
           {/* FAQ Items */}
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-[#E5E2DA]">
             {visibleFaqs.map((faq, index) => {
-
               const question = faq.question || faq.QUESTION;
               const answer = faq.answer || faq.ANSWER;
+              const isOpen = openIndex === index;
 
               return (
-                <div key={faq._id || faq.id || index}>
-
+                <div key={faq._id || faq.id || index} className="group">
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                    className="w-full px-6 sm:px-8 py-5 flex items-center justify-between text-left hover:bg-[#F4F3EE] transition-all duration-200"
                   >
-                    <span className="text-sm font-medium text-gray-900 pr-4">
-                      {question}
-                    </span>
+                    <div className="flex items-start gap-3 pr-4">
+                      <div className={`flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-200 ${isOpen
+                          ? 'bg-[#C15F3C] text-white'
+                          : 'bg-[#F4F3EE] text-[#C15F3C] group-hover:bg-[#C15F3C]/10'
+                        }`}>
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className={`text-sm sm:text-base font-medium transition-colors ${isOpen ? 'text-[#C15F3C]' : 'text-[#2F2E2B]'
+                        }`}>
+                        {question}
+                      </span>
+                    </div>
 
                     <svg
-                      className={`w-5 h-5 text-gray-500 transition-transform ${
-                        openIndex === index ? "rotate-45" : ""
-                      }`}
+                      className={`w-5 h-5 text-[#6F6B63] transition-all duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -445,37 +145,73 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
-                        d="M12 4v16m8-8H4"
+                        d="M19 9l-7 7-7-7"
                       />
                     </svg>
                   </button>
 
-                  {openIndex === index && (
-                    <div className="px-6 pb-4 pt-2">
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        {answer}
-                      </p>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                  >
+                    <div className="px-6 sm:px-8 pb-5 pt-2">
+                      <div className="flex gap-3">
+                        <div className="w-6 flex-shrink-0"></div>
+                        <div className="flex-1">
+                          <div className="h-px w-full bg-gradient-to-r from-[#C15F3C] to-transparent mb-4"></div>
+                          <p className="text-sm text-[#6F6B63] leading-relaxed">
+                            {answer}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  )}
-
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Load More */}
+          {/* Load More Section */}
           {hasMore && (
-            <div className="px-6 py-5 border-t border-gray-200">
+            <div className="px-6 sm:px-8 py-6 border-t border-[#E5E2DA] bg-gradient-to-r from-white to-[#FEF9F5]">
               <button
                 onClick={loadMore}
-                className="px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors"
+                className="group w-full sm:w-auto px-6 py-3 text-sm font-medium text-[#C15F3C] border-2 border-[#C15F3C] rounded-xl hover:bg-[#C15F3C] hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
               >
-                Load More
+                <span>Load More Questions</span>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
             </div>
           )}
 
         </div>
+
+        {/* Still Have Questions Section */}
+        <div className="mt-10 text-center">
+          <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-left">
+                <h3 className="text-lg font-semibold text-[#2F2E2B] mb-1">
+                  Still have questions?
+                </h3>
+                <p className="text-sm text-[#6F6B63]">
+                  Can't find the answer you're looking for?
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <button className="px-5 py-2.5 bg-[#C15F3C] text-white rounded-xl text-sm font-medium hover:bg-[#A94E30] transition-all shadow-sm hover:shadow-md">
+                  Contact Support
+                </button>
+                <button className="px-5 py-2.5 border border-[#E5E2DA] text-[#6F6B63] rounded-xl text-sm font-medium hover:border-[#C15F3C] hover:text-[#C15F3C] transition-all">
+                  Live Chat
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

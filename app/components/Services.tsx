@@ -1,124 +1,3 @@
-// // app/components/ServicesSection.tsx
-// import {
-//   Briefcase,
-//   Stamp,
-//   Calculator,
-//   FileText,
-//   Receipt,
-//   Wallet,
-// } from "lucide-react";
-
-// const services = [
-//   { name: "Incorporation", icon: Briefcase },
-//   { name: "Trademark", icon: Stamp },
-//   { name: "Accounting", icon: Calculator },
-//   { name: "Income Tax", icon: FileText },
-//   { name: "GST Services", icon: Receipt },
-//   { name: "Payroll", icon: Wallet },
-// ];
-
-// export default function ServicesSection() {
-//   return (
-//     <section className="bg-white">
-//       <div className="max-w-7xl mx-auto px-6 py-12">
-//         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
-//           Explore our digital services stack
-//         </h3>
-//         <p className="text-gray-600 mb-8 text-sm md:text-base">
-//           Grow your business and remain compliant by partnering with DoStartup
-//           for a range of high-quality, business services from incorporation to
-//           payroll delivered through a seamless online platform.
-//         </p>
-
-//         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-//           {services.map((service, idx) => (
-//             <div
-//               key={idx}
-//               className="flex flex-col items-center text-center cursor-pointer hover:bg-slate-50 p-3 rounded transition"
-//             >
-//               <service.icon className="h-8 w-8 text-blue-600 mb-2" />
-//               <span className="text-sm font-medium text-gray-800">
-//                 {service.name}
-//               </span>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
-// import {
-//   Briefcase,
-//   Stamp,
-//   Calculator,
-//   FileText,
-//   Receipt,
-//   Wallet,
-// } from "lucide-react";
-
-// const ICON_MAP: any = {
-//   Briefcase: Briefcase,
-//   Stamp: Stamp,
-//   Calculator: Calculator,
-//   FileText: FileText,
-//   Receipt: Receipt,
-//   Wallet: Wallet,
-// };
-
-// const STRAPI_URL = "http://localhost:1337";
-
-// async function getServicesData() {
-//   const [sectionRes, servicesRes] = await Promise.all([
-//     fetch(`${STRAPI_URL}/api/services-section`, { cache: "no-store" }),
-//     fetch(`${STRAPI_URL}/api/services`, { cache: "no-store" }),
-//   ]);
-
-//   const section = (await sectionRes.json()).data;
-//   const services = (await servicesRes.json()).data;
-
-//   return { section, services };
-// }
-
-// export default async function ServicesSection() {
-//   const { section, services } = await getServicesData();
-
-//   return (
-//     <section className="bg-white">
-//       <div className="max-w-7xl mx-auto px-6 py-12">
-//         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">
-//           {section.title}
-//         </h3>
-
-//         <p className="text-gray-600 mb-8 text-sm md:text-base">
-//           {section.description}
-//         </p>
-
-//         <div className="bg-white border rounded-xl shadow-sm p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-//           {services.map((service: any, idx: number) => {
-//             const Icon = ICON_MAP[service.icon];
-
-//             return (
-//               <div
-//                 key={idx}
-//                 className="flex flex-col items-center text-center cursor-pointer hover:bg-slate-50 p-3 rounded transition"
-//               >
-//                 {Icon && <Icon className="h-8 w-8 text-blue-600 mb-2" />}
-//                 <span className="text-sm font-medium text-gray-800">
-//                   {service.name}
-//                 </span>
-//               </div>
-//             );
-//           })}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -129,6 +8,7 @@ import {
   FileText,
   Receipt,
   Wallet,
+  ArrowRight,
 } from "lucide-react";
 
 const ICON_MAP: any = {
@@ -141,9 +21,7 @@ const ICON_MAP: any = {
 };
 
 const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
-
-const API =
-  `https://cms.dostartup.in/api/content/items/service?token=${TOKEN}`;
+const API = `https://cms.dostartup.in/api/content/items/service?token=${TOKEN}`;
 
 export default function ServicesSection() {
   const [services, setServices] = useState<any[]>([]);
@@ -152,19 +30,17 @@ export default function ServicesSection() {
     "Explore our professional solutions designed to help your business grow."
   );
   const [loading, setLoading] = useState(true);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchServices() {
       try {
         const res = await fetch(API);
         const json = await res.json();
-
         if (Array.isArray(json)) {
           setServices(json);
-
           if (json[0]?.sectionTitle) setTitle(json[0].sectionTitle);
-          if (json[0]?.sectionDescription)
-            setDescription(json[0].sectionDescription);
+          if (json[0]?.sectionDescription) setDescription(json[0].sectionDescription);
         }
       } catch (err) {
         console.error("Cockpit services fetch error:", err);
@@ -172,77 +48,199 @@ export default function ServicesSection() {
         setLoading(false);
       }
     }
-
     fetchServices();
   }, []);
 
   if (loading) {
     return (
-      <div className="py-12 text-center text-gray-500">
-        Loading services...
-      </div>
+      <section style={{ background: "#F4F3EE" }} className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="rounded-2xl animate-pulse"
+                style={{ background: "#E5E2DA", height: "120px" }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
     );
   }
 
   return (
-    <section className="bg-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 bg-[#C15F3C]/10 border border-[#C15F3C]/30 rounded-full px-4 py-1.5 mb-4">
-            <div className="w-1.5 h-1.5 bg-[#C15F3C] rounded-full animate-pulse"></div>
-            <span className="text-xs font-semibold text-[#C15F3C]">WHAT WE OFFER</span>
-          </div>
-          
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-            {title}
-          </h3>
+    <>
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
 
-          <p className="text-gray-600 text-sm md:text-base">
-            {description}
-          </p>
-        </div>
+        .service-card-line {
+          width: 0;
+          height: 2px;
+          background: #C15F3C;
+          transition: width 0.3s ease;
+          margin-top: 8px;
+          border-radius: 99px;
+        }
+        .service-card:hover .service-card-line {
+          width: 28px;
+        }
 
-        {/* Services Grid */}
-        <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-4 sm:p-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-            {services.map((service: any, idx: number) => {
-              const iconName = service.icon || service.ICON;
-              const serviceName = service.name || service.NAME;
-              const Icon = ICON_MAP[iconName];
+        .service-icon-wrap {
+          transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                      background 0.2s ease,
+                      box-shadow 0.2s ease;
+        }
+        .service-card:hover .service-icon-wrap {
+          transform: translateY(-3px) scale(1.08);
+          box-shadow: 0 6px 18px rgba(193,95,60,0.18);
+        }
 
-              return (
-                <div
-                  key={service._id || idx}
-                  className="group flex flex-col items-center text-center cursor-pointer hover:bg-[#C15F3C]/10 p-4 rounded-xl transition-all duration-300 hover:shadow-md"
+        .star-fill { fill: #C15F3C; color: #C15F3C; }
+      `}</style>
+
+      <section style={{ background: "#F4F3EE" }} className="py-10 sm:py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
+          {/* ── HEADER ─────────────────────────────────── */}
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+            <div>
+              {/* Badge */}
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-3"
+                style={{
+                  background: "#fff",
+                  border: "1px solid #E5E2DA",
+                }}
+              >
+                <span
+                  className="w-2 h-2 rounded-full animate-pulse"
+                  style={{ background: "#C15F3C" }}
+                />
+                <span
+                  className="text-xs font-semibold tracking-widest uppercase"
+                  style={{ color: "#C15F3C", fontFamily: "'Sora', sans-serif" }}
                 >
-                  {Icon && (
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#C15F3C]/20 to-[#C15F3C]/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-6 w-6 text-[#C15F3C]" />
-                    </div>
-                  )}
+                  What We Offer
+                </span>
+              </span>
 
-                  <span className="text-sm font-medium text-gray-800 group-hover:text-[#C15F3C] transition-colors">
-                    {serviceName}
-                  </span>
+              <h2
+                className="text-2xl md:text-3xl font-semibold leading-tight"
+                style={{ color: "#2F2E2B", fontFamily: "'Sora', sans-serif" }}
+              >
+                {title}
+              </h2>
+              <p className="mt-1.5 text-sm max-w-lg" style={{ color: "#6F6B63" }}>
+                {description}
+              </p>
+            </div>
 
-                  <div className="w-0 h-0.5 bg-gradient-to-r from-[#C15F3C] to-[#C15F3C] group-hover:w-8 transition-all duration-300 mt-1"></div>
-                </div>
-              );
-            })}
+
           </div>
-        </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-8">
-          <p className="text-sm text-gray-500">
-            Need help choosing?{" "}
-            <span className="text-[#C15F3C] font-medium cursor-pointer hover:underline">
-              Talk to an expert →
-            </span>
-          </p>
+          {/* ── SERVICES GRID ──────────────────────────── */}
+          <div
+            className="rounded-2xl p-5 sm:p-6"
+            style={{
+              background: "#fff",
+              border: "1px solid #E5E2DA",
+              boxShadow: "0 2px 16px rgba(47,46,43,0.06)",
+            }}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+              {services.map((service: any, idx: number) => {
+                const iconName = service.icon || service.ICON;
+                const serviceName = service.name || service.NAME;
+                const Icon = ICON_MAP[iconName];
+                const isHovered = hoveredIdx === idx;
+
+                return (
+                  <div
+                    key={service._id || idx}
+                    className="service-card group flex flex-col items-center text-center cursor-pointer rounded-xl py-5 px-3 transition-all duration-200"
+                    style={{
+                      background: isHovered ? "#F4F3EE" : "transparent",
+                      border: isHovered ? "1px solid #E5E2DA" : "1px solid transparent",
+                    }}
+                    onMouseEnter={() => setHoveredIdx(idx)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                  >
+                    {/* Icon */}
+                    {Icon && (
+                      <div
+                        className="service-icon-wrap w-12 h-12 rounded-full flex items-center justify-center mb-3"
+                        style={{
+                          background: isHovered ? "#fff" : "#F4F3EE",
+                          border: "1px solid #E5E2DA",
+                          color: "#C15F3C",
+                        }}
+                      >
+                        <Icon size={20} />
+                      </div>
+                    )}
+
+                    {/* Label */}
+                    <span
+                      className="text-xs sm:text-sm font-medium leading-snug transition-colors duration-200"
+                      style={{
+                        color: isHovered ? "#C15F3C" : "#2F2E2B",
+                        fontFamily: "'Sora', sans-serif",
+                      }}
+                    >
+                      {serviceName}
+                    </span>
+
+                    {/* Animated underline */}
+                    <div className="service-card-line" />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ── BOTTOM STRIP ───────────────────────────── */}
+          <div
+            className="mt-5 rounded-2xl px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            style={{ background: "#fff", border: "1px solid #E5E2DA" }}
+          >
+            {/* Stars + Reviews */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="star-fill" width="14" height="14" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <span className="text-xs font-semibold" style={{ color: "#2F2E2B" }}>4.9</span>
+              <span className="text-xs" style={{ color: "#B1ADA1" }}>· 2,400+ happy clients</span>
+            </div>
+
+            {/* CTA */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs" style={{ color: "#6F6B63" }}>
+                Not sure which service fits?
+              </span>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3.5 py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1"
+                style={{
+                  background: "#C15F3C",
+                  color: "#fff",
+                  fontFamily: "'Sora', sans-serif",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
+                onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
+              >
+                Talk to an Expert
+                <ArrowRight size={12} />
+              </a>
+            </div>
+          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

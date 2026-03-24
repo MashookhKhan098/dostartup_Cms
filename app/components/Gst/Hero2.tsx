@@ -1,237 +1,10 @@
-// "use client";
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-
-// export default function DynamicHeroSection({
-//   // Left side content props
-//   heading,
-//   headingHighlight,
-//   description,
-//   features,
-  
-//   // Right side tab/form props
-//   tabs,
-//   defaultTab,
-//   tabDescriptions,
-//   formFields,
-//   buttonText,
-//   onSubmit
-// }) {
-//   const router = useRouter();
-//   const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
-
-//   const handleTabClick = (tabName, path) => {
-//     setActiveTab(tabName);
-//     if (path) {
-//       router.push(path);
-//     }
-//   };
-
-//   const renderIcon = (iconType) => {
-//     const icons = {
-//       plus: (
-//         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-//           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd"/>
-//         </svg>
-//       ),
-//       document: (
-//         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-//           <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd"/>
-//         </svg>
-//       ),
-//       chart: (
-//         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-//           <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-//         </svg>
-//       ),
-//       education: (
-//         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-//           <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-//         </svg>
-//       ),
-//       pause: (
-//         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-//           <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd"/>
-//         </svg>
-//       ),
-//       users: (
-//         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-//           <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-//         </svg>
-//       ),
-//       wallet: (
-//         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-//           <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
-//         </svg>
-//       )
-//     };
-//     return icons[iconType] || icons.document;
-//   };
-
-//   const renderFormField = (field, index) => {
-//     switch (field.type) {
-//       case "select":
-//         return (
-//           <div key={index} className="relative">
-//             <select 
-//               name={field.name}
-//               className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none cursor-pointer transition"
-//             >
-//               <option value="">{field.placeholder}</option>
-//               {field.options?.map((option, i) => (
-//                 <option key={i} value={option}>{option}</option>
-//               ))}
-//             </select>
-//             <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-//               <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
-//               </svg>
-//             </div>
-//           </div>
-//         );
-      
-//       case "input":
-//         return (
-//           <input
-//             key={index}
-//             type={field.inputType || "text"}
-//             name={field.name}
-//             placeholder={field.placeholder}
-//             className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-//           />
-//         );
-      
-//       case "checkbox":
-//         return (
-//           <label key={index} className="flex items-start gap-3 cursor-pointer">
-//             <input 
-//               type="checkbox" 
-//               name={field.name}
-//               className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-//             />
-//             <span className="text-sm text-gray-600">{field.label}</span>
-//           </label>
-//         );
-      
-//       case "text":
-//         return (
-//           <p key={index} className="text-sm text-gray-600">
-//             {field.content}
-//           </p>
-//         );
-      
-//       default:
-//         return null;
-//     }
-//   };
-
-//   return (
-//     <section className="relative bg-gray-50 overflow-hidden">
-//       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 lg:py-20">
-//         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
-//           {/* Left Side */}
-//           <div className="space-y-8">
-//             <div className="space-y-4">
-//               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-//                 {heading?.split(headingHighlight)[0]}
-//                 <span className="text-blue-600 underline decoration-blue-600 decoration-4 underline-offset-8">
-//                   {headingHighlight}
-//                 </span>
-//                 {heading?.split(headingHighlight)[1]}
-//               </h1>
-
-//               <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl">
-//                 {description}
-//               </p>
-//             </div>
-
-//             <ul className="space-y-5 pt-4">
-//               {features?.map((feature, index) => (
-//                 <li key={index} className="flex items-center gap-4">
-//                   <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
-//                     {renderIcon(feature.icon)}
-//                   </div>
-//                   <span className="text-gray-800 font-medium text-base">
-//                     {feature.text}
-//                   </span>
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-
-//           {/* Right Form Box */}
-//           <div className="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
-//             {/* Gradient Bar */}
-//             <div className="h-1 bg-gradient-to-r from-blue-600 via-purple-500 to-orange-400"></div>
-            
-//             {/* Tabs (if provided) */}
-//             {tabs && tabs.length > 0 && (
-//               <div className="justify-center flex border-b border-gray-200 overflow-x-auto scrollbar-hide">
-//                 {tabs.map(({ name, path }) => (
-//                   <button
-//                     key={name}
-//                     onClick={() => handleTabClick(name, path)}
-//                     className={`px-6 py-4 text-sm font-semibold whitespace-nowrap transition-all relative ${
-//                       activeTab === name
-//                         ? "text-blue-600 bg-blue-50"
-//                         : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
-//                     }`}
-//                   >
-//                     {name}
-//                     {activeTab === name && (
-//                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"></div>
-//                     )}
-//                   </button>
-//                 ))}
-//               </div>
-//             )}
-
-//             {/* Content */}
-//             <div className="p-8 space-y-6">
-//               {/* Description (if tab descriptions provided) */}
-//               {tabDescriptions && activeTab && tabDescriptions[activeTab] && (
-//                 <div className="bg-gray-50 border-l-4 border-blue-600 p-4 rounded-r-lg">
-//                   <p className="text-gray-800 text-sm leading-relaxed font-medium">
-//                     {tabDescriptions[activeTab]}
-//                   </p>
-//                 </div>
-//               )}
-
-//               {/* Form */}
-//               <form 
-//                 onSubmit={(e) => {
-//                   e.preventDefault();
-//                   if (onSubmit) {
-//                     const formData = new FormData(e.target);
-//                     onSubmit(Object.fromEntries(formData));
-//                   }
-//                 }}
-//                 className="space-y-4 pt-2"
-//               >
-//                 {formFields?.map((field, index) => renderFormField(field, index))}
-
-//                 <button 
-//                   type="submit"
-//                   className="w-full bg-blue-600 text-white text-sm font-semibold py-3 rounded-lg hover:bg-blue-700 transition shadow-sm hover:shadow-md"
-//                 >
-//                   {buttonText || "Submit"}
-//                 </button>
-//               </form>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
-type FormField = { type: string; [key: string]: any };
+type FormField = { type: string;[key: string]: any };
 
 export type GstHero2Props = {
   heading?: string;
@@ -248,7 +21,7 @@ export type GstHero2Props = {
 
 const ICONS: Record<string, JSX.Element> = {
   plus: (
-    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path
         fillRule="evenodd"
         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
@@ -257,7 +30,7 @@ const ICONS: Record<string, JSX.Element> = {
     </svg>
   ),
   document: (
-    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path
         fillRule="evenodd"
         d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
@@ -266,7 +39,7 @@ const ICONS: Record<string, JSX.Element> = {
     </svg>
   ),
   chart: (
-    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path
         fillRule="evenodd"
         d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
@@ -275,12 +48,12 @@ const ICONS: Record<string, JSX.Element> = {
     </svg>
   ),
   education: (
-    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
     </svg>
   ),
   pause: (
-    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path
         fillRule="evenodd"
         d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
@@ -289,12 +62,12 @@ const ICONS: Record<string, JSX.Element> = {
     </svg>
   ),
   users: (
-    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
     </svg>
   ),
   wallet: (
-    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
       <path
         fillRule="evenodd"
         d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
@@ -305,13 +78,10 @@ const ICONS: Record<string, JSX.Element> = {
 };
 
 export default function DynamicHeroSection({
-  // Left side content props
   heading,
   headingHighlight,
   description,
   features,
-  
-  // Right side tab/form props
   tabs,
   defaultTab,
   tabDescriptions,
@@ -338,62 +108,62 @@ export default function DynamicHeroSection({
       case "select":
         return (
           <div key={index}>
-            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
-              {field.placeholder} <span className="text-amber-600">*</span>
+            <label className="block text-xs text-[#6F6B63] mb-1">
+              {field.placeholder}
             </label>
             <div className="relative">
-              <select 
+              <select
                 name={field.name}
-                className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-amber-600 focus:border-transparent bg-gray-50 appearance-none cursor-pointer"
+                className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-[#F4F3EE] appearance-none cursor-pointer"
               >
                 <option value="">Select {field.placeholder}</option>
                 {field.options?.map((option: string, i: number) => (
-                  <option key={i} value={option} className="text-gray-900">{option}</option>
+                  <option key={i} value={option}>{option}</option>
                 ))}
               </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
             </div>
           </div>
         );
-      
+
       case "input":
         return (
           <div key={index}>
-            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
-              {field.placeholder} <span className="text-amber-600">*</span>
+            <label className="block text-xs text-[#6F6B63] mb-1">
+              {field.placeholder}
             </label>
             <input
               type={field.inputType || "text"}
               name={field.name}
               placeholder={field.placeholder}
-              className="w-full border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600 focus:border-transparent bg-gray-50"
+              className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-[#F4F3EE]"
             />
           </div>
         );
-      
+
       case "checkbox":
         return (
-          <label key={index} className="flex items-start gap-2 cursor-pointer">
-            <input 
-              type="checkbox" 
+          <label key={index} className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
               name={field.name}
-              className="mt-1 w-3.5 h-3.5 text-amber-600 border-gray-300 rounded focus:ring-1 focus:ring-amber-600"
+              className="mt-1 w-4 h-4 accent-[#C15F3C] border-[#E5E2DA] rounded focus:ring-1 focus:ring-[#C15F3C]"
             />
-            <span className="text-xs sm:text-sm text-gray-600">{field.label}</span>
+            <span className="text-sm text-[#6F6B63]">{field.label}</span>
           </label>
         );
-      
+
       case "text":
         return (
-          <p key={index} className="text-xs sm:text-sm text-gray-500">
+          <p key={index} className="text-sm text-[#6F6B63]">
             {field.content}
           </p>
         );
-      
+
       default:
         return null;
     }
@@ -403,80 +173,121 @@ export default function DynamicHeroSection({
     heading && headingHighlight ? heading.split(headingHighlight) : [heading ?? "", ""];
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-3 sm:px-5 py-6 sm:py-8">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-          {/* Left Column */}
-          <div className="space-y-5 sm:space-y-6">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1">
-              <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
-              <span className="text-xs sm:text-sm font-medium text-amber-700">#1 REGISTRATION PLATFORM</span>
-            </div>
+    <div className="min-h-screen bg-[#F4F3EE]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
 
-            {/* Heading */}
-            <div className="space-y-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-                <span className="text-gray-900">{headingParts[0]}</span>
-                <span className="text-amber-700">
-                  {headingHighlight}
-                </span>
-                <span className="text-gray-900">{headingParts[1]}</span>
-              </h1>
+          {/* LEFT SECTION */}
+          <div className="flex-1 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6">
+            <div className="flex flex-col md:flex-row gap-8">
 
-              <p className="text-sm sm:text-base text-gray-600 max-w-lg">
-                {description}
-              </p>
-            </div>
+              {/* LEFT SIDEBAR WITH IMAGE PLACEHOLDER */}
+              <div className="w-full md:w-64 flex-shrink-0">
+                <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">GST</span>
+                </div>
 
-            {/* Features */}
-            <ul className="space-y-3 pt-1">
-              {features?.map((feature, index) => (
-                <li key={index} className="flex items-center gap-3 group">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 bg-amber-100 rounded-full flex items-center justify-center group-hover:bg-amber-200 transition-colors">
-                    <div className="text-amber-700 w-4 h-4 sm:w-5 sm:h-5">
-                      {renderIcon(feature.icon)}
-                    </div>
-                  </div>
-                  <span className="text-xs sm:text-sm font-medium text-gray-700 group-hover:text-amber-700 transition-colors">
-                    {feature.text}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Trust Badges */}
-            <div className="flex items-center gap-3 pt-2">
-              <div className="flex -space-x-1.5">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 border-2 border-white shadow-sm" />
-                ))}
+                <div className="mt-4 space-y-2">
+                  {["Why Choose Us", "Documentation", "Pricing"].map((item) => (
+                    <p key={item} className="text-sm text-[#6F6B63] hover:text-[#C15F3C] cursor-pointer">
+                      {item}
+                    </p>
+                  ))}
+                  <button className="text-sm text-[#C15F3C] font-medium hover:underline">
+                    Learn More →
+                  </button>
+                </div>
               </div>
-              <span className="text-xs sm:text-sm text-gray-600">Trusted by 50k+ businesses</span>
+
+              {/* MAIN CONTENT */}
+              <div className="flex-1 space-y-6">
+
+                {/* BADGE */}
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-3 py-1">
+                    <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
+                    <span className="text-xs font-medium text-[#C15F3C]">
+                      #1 REGISTRATION PLATFORM
+                    </span>
+                  </div>
+                </div>
+
+                {/* HEADING */}
+                <div>
+                  <h1 className="text-2xl font-semibold text-[#2F2E2B] leading-tight">
+                    {headingParts[0]}
+                    <span className="text-[#C15F3C]">
+                      {headingHighlight}
+                    </span>
+                    {headingParts[1]}
+                  </h1>
+
+                  <p className="text-sm text-[#6F6B63] leading-relaxed mt-3">
+                    {description}
+                  </p>
+                </div>
+
+                {/* FEATURES */}
+                <div className="bg-[#F4F3EE] border border-[#E5E2DA] rounded-xl p-5">
+                  <span className="inline-block bg-[#C15F3C] text-white text-xs px-3 py-1.5 rounded-full mb-4">
+                    Key Benefits
+                  </span>
+
+                  <div className="space-y-3">
+                    {features?.map((feature, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA]">
+                          {renderIcon(feature.icon)}
+                        </div>
+                        <span className="text-sm font-medium text-[#2F2E2B]">
+                          {feature.text}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* TRUST BADGES */}
+                <div className="flex items-center gap-4 text-sm text-[#6F6B63]">
+                  <span>★★★★★ 4.9/5 (2.5k+ reviews)</span>
+                  <span>Trusted by 50k+ businesses</span>
+                </div>
+
+                {/* LINKS */}
+                <div className="flex justify-between text-sm">
+                  <button className="text-[#C15F3C] hover:underline">
+                    Terms and conditions
+                  </button>
+                  <button className="text-[#C15F3C] hover:underline">
+                    Refer a Friend
+                  </button>
+                </div>
+
+              </div>
             </div>
           </div>
 
-          {/* Right Column - Form */}
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-            {/* Form Header */}
-            <div className="bg-gradient-to-r from-amber-700 to-amber-800 px-4 sm:px-5 py-2.5 sm:py-3">
-              <h2 className="text-sm sm:text-base font-bold text-white">Get Started Today</h2>
-              <p className="text-amber-100 text-xs">Free consultation • No hidden charges</p>
+          {/* RIGHT SIDEBAR */}
+          <div className="lg:w-80 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+
+            {/* FORM HEADER */}
+            <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
+              <h2 className="text-lg font-semibold text-white">Get Started Today</h2>
+              <p className="text-sm text-[#F4F3EE]">Free consultation • No hidden charges</p>
             </div>
 
-            {/* Tabs (if provided) */}
+            {/* TABS */}
             {tabs && tabs.length > 0 && (
-              <div className="border-b border-gray-200 bg-gray-50 px-3 sm:px-4 py-2 overflow-x-auto">
-                <div className="flex gap-1 min-w-max">
+              <div className="border-b border-[#E5E2DA] bg-[#F4F3EE] px-4 py-3">
+                <div className="flex gap-2">
                   {tabs.map(({ name, path }) => (
                     <button
                       key={name}
                       onClick={() => handleTabClick(name, path)}
-                      className={`px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-lg transition-all whitespace-nowrap ${
-                        activeTab === name
-                          ? "bg-amber-700 text-white"
-                          : "bg-white text-gray-600 border border-gray-200 hover:bg-amber-50"
-                      }`}
+                      className={`px-4 py-2 text-xs font-medium rounded-lg transition-all whitespace-nowrap ${activeTab === name
+                        ? "bg-[#C15F3C] text-white"
+                        : "bg-white text-[#6F6B63] border border-[#E5E2DA] hover:border-[#C15F3C] hover:text-[#C15F3C]"
+                        }`}
                     >
                       {name}
                     </button>
@@ -485,19 +296,20 @@ export default function DynamicHeroSection({
               </div>
             )}
 
-            {/* Content */}
-            <div className="p-4 sm:p-5 space-y-4">
-              {/* Description (if tab descriptions provided) */}
+            {/* CONTENT */}
+            <div className="p-6 space-y-6">
+
+              {/* TAB DESCRIPTION */}
               {tabDescriptions && activeTab && tabDescriptions[activeTab] && (
-                <div className="bg-amber-50 p-3 sm:p-4 rounded-lg border-l-4 border-amber-600">
-                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-medium">
+                <div className="bg-[#F4F3EE] border-l-4 border-[#C15F3C] p-4 rounded-r-lg">
+                  <p className="text-sm text-[#2F2E2B] leading-relaxed">
                     {tabDescriptions[activeTab]}
                   </p>
                 </div>
               )}
 
-              {/* Form */}
-              <form 
+              {/* FORM */}
+              <form
                 onSubmit={(e: FormEvent<HTMLFormElement>) => {
                   e.preventDefault();
                   if (onSubmit) {
@@ -505,20 +317,20 @@ export default function DynamicHeroSection({
                     onSubmit(Object.fromEntries(formData));
                   }
                 }}
-                className="space-y-3 sm:space-y-4"
+                className="space-y-4"
               >
                 {formFields?.map((field, index) => renderFormField(field, index))}
 
-                <button 
+                <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white font-semibold py-3 sm:py-3.5 px-4 rounded-lg text-sm sm:text-base hover:from-amber-800 hover:to-amber-900 transition-all mt-2 shadow-md hover:shadow-lg"
+                  className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition shadow-sm hover:shadow-md"
                 >
-                  {buttonText || "Submit"} →
+                  {buttonText || "Get Started"} →
                 </button>
 
-                {/* Security Badge */}
-                <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 pt-1">
-                  <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {/* SECURITY BADGE */}
+                <div className="flex items-center justify-center gap-2 text-xs text-[#B1ADA1] pt-2">
+                  <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>100% secure · No spam · Instant confirmation</span>
@@ -526,17 +338,18 @@ export default function DynamicHeroSection({
               </form>
             </div>
 
-            {/* Footer */}
-            <div className="bg-gray-50 px-4 sm:px-5 py-2.5 sm:py-3 border-t border-gray-200">
-              <p className="text-xs sm:text-sm text-center text-gray-600">
+            {/* FOOTER */}
+            <div className="bg-[#F4F3EE] px-6 py-3 border-t border-[#E5E2DA]">
+              <p className="text-sm text-center text-[#6F6B63]">
                 Already started?{' '}
-                <a href="/track" className="text-amber-700 hover:text-amber-800 font-semibold">
+                <button className="text-[#C15F3C] hover:underline font-semibold">
                   Track Application →
-                </a>
+                </button>
               </p>
             </div>
+
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );

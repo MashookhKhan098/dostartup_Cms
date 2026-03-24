@@ -178,9 +178,8 @@ export default function HeroSection() {
               <img
                 src={`${STRAPI_URL}/storage/uploads${imageUrl}`}
                 alt={`Slide ${current + 1}`}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-                  fade ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${fade ? "opacity-100" : "opacity-0"
+                  }`}
               />
             )}
 
@@ -215,9 +214,8 @@ export default function HeroSection() {
                 {images.map((_, i) => (
                   <button
                     key={i}
-                    className={`h-1.5 rounded-full transition-all ${
-                      i === current ? "bg-[#C15F3C] w-5" : "bg-white/50 w-1.5"
-                    }`}
+                    className={`h-1.5 rounded-full transition-all ${i === current ? "bg-[#C15F3C] w-5" : "bg-white/50 w-1.5"
+                      }`}
                     onClick={() => slideTo(i)}
                   />
                 ))}
