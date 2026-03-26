@@ -411,18 +411,18 @@ export default function Navbar() {
               </button>
             )}
 
-            <button className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F4F3EE] transition-all duration-200 whitespace-nowrap">
+            <Link href="/login" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F4F3EE] transition-all duration-200 whitespace-nowrap">
               <FiUser size={15} /> Login
-            </button>
+            </Link>
 
-            <button
+            <Link href="/signup"
               className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-white transition-all duration-200 shadow-sm whitespace-nowrap"
               style={{ background: "#C15F3C" }}
               onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
               onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
             >
               Sign up
-            </button>
+            </Link>
 
             <button
               className="lg:hidden p-2 rounded-lg text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F4F3EE] transition-all duration-200"
@@ -441,17 +441,16 @@ export default function Navbar() {
           <div className="p-4 space-y-4">
             {/* Login / Signup */}
             <div className="flex gap-3">
-              <button className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#E5E2DA] text-[#6F6B63] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200">
+              <Link href="/login" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#E5E2DA] text-[#6F6B63] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200">
                 <FiLogIn size={16} /> Login
-              </button>
-              <button
-                className="flex-1 px-4 py-3 rounded-lg font-semibold text-white shadow-sm transition-all duration-200"
+              </Link>
+              <Link href="/signup" className="flex-1 px-4 py-3 rounded-lg font-semibold text-white shadow-sm transition-all duration-200"
                 style={{ background: "#C15F3C" }}
                 onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
                 onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
               >
                 Sign up
-              </button>
+              </Link>
             </div>
 
             {/* Search */}

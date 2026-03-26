@@ -407,18 +407,24 @@ export default function HiringPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 hover:shadow-md transition-all">
                             <FiMapPin className="w-8 h-8 text-[#C15F3C] mb-3" />
-                            <h3 className="font-semibold text-[#2F2E2B] mb-2">Mumbai Office</h3>
-                            <p className="text-sm text-[#6F6B63]">Aurum PropTech Ltd (Majesco Ltd)<br />6th Floor, MBP, Mahape<br />Navi Mumbai, Maharashtra – 400710</p>
+                            <h3 className="font-semibold text-[#2F2E2B] mb-2">Noida </h3>
+                            <p className="text-sm text-[#6F6B63]">C-84, Sector 2 , Noida , UP India
+
+                            </p>
                         </div>
                         <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 hover:shadow-md transition-all">
                             <FiMapPin className="w-8 h-8 text-[#C15F3C] mb-3" />
-                            <h3 className="font-semibold text-[#2F2E2B] mb-2">Chennai – Chetpet</h3>
-                            <p className="text-sm text-[#6F6B63]">KRM Center – 6th Floor<br />Shoppers Stop Building<br />Harrington Road, Chetpet<br />Chennai – 600031</p>
+                            <h3 className="font-semibold text-[#2F2E2B] mb-2">Noida </h3>
+                            <p className="text-sm text-[#6F6B63]">C-84, Sector 2 , Noida , UP India
+
+                            </p>
                         </div>
                         <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 hover:shadow-md transition-all">
                             <FiMapPin className="w-8 h-8 text-[#C15F3C] mb-3" />
-                            <h3 className="font-semibold text-[#2F2E2B] mb-2">Chennai – Guindy</h3>
-                            <p className="text-sm text-[#6F6B63]">RR Tower IV<br />Thiru Vi Ka Industrial Estate<br />SIDCO Industrial Estate, Guindy<br />Chennai, Tamil Nadu – 600032</p>
+                            <h3 className="font-semibold text-[#2F2E2B] mb-2">Noida </h3>
+                            <p className="text-sm text-[#6F6B63]">C-84, Sector 2 , Noida , UP India
+
+                            </p>
                         </div>
                     </div>
                 </div>
