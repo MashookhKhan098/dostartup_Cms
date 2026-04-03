@@ -569,10 +569,10 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  []
  );
 
- return (
- <div className="page">
- {/* Imported Navbar */}
- <Navbar />
+  return (
+    <div className="page">
+      {/* Imported Navbar */}
+      <Navbar />
 
  <main>
  {/* Top hero banner */}
@@ -1101,20 +1101,20 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
  <Footer />
 
- {/* ---------- Styles (merged + updated) ---------- */}
- <style jsx>{`
- :global(body) {
- margin: 0;
- font-family: system-ui, -apple-system, "Segoe UI", Roboto,
- "Helvetica Neue", Arial;
- background: linear-gradient(
- 135deg,
- #f5f7ff 0%,
- #fdf6ff 40%,
- #f3fbff 100%
- );
- color: #0f172a;
- }
+      {/* ---------- Styles (merged + updated) ---------- */}
+      <style jsx>{`
+        :global(body) {
+          margin: 0;
+          font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial;
+          background: linear-gradient(
+            135deg,
+            #f5f7ff 0%,
+            #fdf6ff 40%,
+            #f3fbff 100%
+          );
+          color: #0f172a;
+        }
 
  .page {
  min-height: 100vh;
