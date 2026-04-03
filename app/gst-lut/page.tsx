@@ -6,27 +6,27 @@ import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
 export default function Home() {
-  return (
-    <>
-      <Navbar />
-      <Hero
-  imageUrl="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop"
-  title="GST LUT Form"
-  rating={5}
-  description="Filing of GST LUT Form for Exporters."
-  exclusiveOffersCount={2}
-  features={[
-    "Preparation of LUT Application",
-    "Filing of LUT on GST Portal",
-    "LUT Acknowledgement (FY-wise)",
-    "Export/SEZ Invoice on LEDGERS",
-    "Compliance Reminder Alerts"
-  ]}
+ return (
+ <>
+ <Navbar />
+ <Hero
+ imageUrl="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop"
+ title="GST LUT Form"
+ rating={5}
+ description="Filing of GST LUT Form for Exporters."
+ exclusiveOffersCount={2}
+ features={[
+ "Preparation of LUT Application",
+ "Filing of LUT on GST Portal",
+ "LUT Acknowledgement (FY-wise)",
+ "Export/SEZ Invoice on LEDGERS",
+ "Compliance Reminder Alerts"
+ ]}
 />
-      <DynamicTabContent category="GST" />
-      <Faq />
-      <Popularsearches />
-      <Footer />
-    </>
-  );
+ <DynamicTabContent category="GST" />
+ <Faq />
+ <Popularsearches />
+ <Footer />
+ </>
+ );
 }

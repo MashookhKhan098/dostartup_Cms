@@ -8,147 +8,147 @@ import Faq from '../components/Faq';
 
 export default function Home() {
 
-    const heroProps = {
-  // ================= LEFT SIDE =================
-  heading: "Trusted & Legal ",
-  headingHighlight: "Drug License",
-  description:
-    "Obtain your Drug License easily to start manufacturing or selling medicines legally and safely, ensuring compliance with the Drugs & Cosmetics Act.",
+ const heroProps = {
+ // ================= LEFT SIDE =================
+ heading: "Trusted & Legal ",
+ headingHighlight: "Drug License",
+ description:
+ "Obtain your Drug License easily to start manufacturing or selling medicines legally and safely, ensuring compliance with the Drugs & Cosmetics Act.",
 
-  features: [
-    {
-      icon: "document",
-      text: "End-to-End Assistance for All Registrations",
-    },
-    {
-      icon: "chart",
-      text: "Smart Solutions Tailored to Your Business Needs",
-    },
-    {
-      icon: "plus",
-      text: "100% Online and Paperless Process",
-    },
-    {
-      icon: "users",
-      text: "Quick Turnaround with Zero Hassle",
-    },
-    {
-      icon: "document",
-      text: "Dedicated Experts to Guide You at Every Step",
-    },
-  ],
+ features: [
+ {
+ icon: "document",
+ text: "End-to-End Assistance for All Registrations",
+ },
+ {
+ icon: "chart",
+ text: "Smart Solutions Tailored to Your Business Needs",
+ },
+ {
+ icon: "plus",
+ text: "100% Online and Paperless Process",
+ },
+ {
+ icon: "users",
+ text: "Quick Turnaround with Zero Hassle",
+ },
+ {
+ icon: "document",
+ text: "Dedicated Experts to Guide You at Every Step",
+ },
+ ],
 
-  // ================= RIGHT SIDE =================
-  tabs: [],
-  defaultTab: null,
-  tabDescriptions: null,
+ // ================= RIGHT SIDE =================
+ tabs: [],
+ defaultTab: null,
+ tabDescriptions: null,
 
-  // ================= FORM FIELDS =================
-  formFields: [
-    // 🔹 TEXT BLOCKS
-    {
-      type: "text",
-      content: "Service",
-    },
-    {
-      type: "text",
-      content:
-        "Drug License\nMandatory license to manufacture, distribute, or sell medicines. Issued by the drug control authority under the Drugs & Cosmetics Act.",
-    },
+ // ================= FORM FIELDS =================
+ formFields: [
+ // 🔹 TEXT BLOCKS
+ {
+ type: "text",
+ content: "Service",
+ },
+ {
+ type: "text",
+ content:
+ "Drug License\nMandatory license to manufacture, distribute, or sell medicines. Issued by the drug control authority under the Drugs & Cosmetics Act.",
+ },
 
-    // 🔹 INPUT & SELECT FIELDS
-    {
-      type: "input",
-      inputType: "text",
-      name: "pan_gstin",
-      placeholder: "PAN / GSTIN",
-    },
-    {
-      type: "select",
-      name: "state",
-      placeholder: "Select State / UT",
-      options: [
-        "Andaman & Nicobar Islands",
-        "Delhi",
-        "Gujarat",
-        "Karnataka",
-        "Maharashtra",
-        "Tamil Nadu",
-        "Telangana",
-        "Uttar Pradesh",
-        "West Bengal",
-      ],
-    },
-  ],
+ // 🔹 INPUT & SELECT FIELDS
+ {
+ type: "input",
+ inputType: "text",
+ name: "pan_gstin",
+ placeholder: "PAN / GSTIN",
+ },
+ {
+ type: "select",
+ name: "state",
+ placeholder: "Select State / UT",
+ options: [
+ "Andaman & Nicobar Islands",
+ "Delhi",
+ "Gujarat",
+ "Karnataka",
+ "Maharashtra",
+ "Tamil Nadu",
+ "Telangana",
+ "Uttar Pradesh",
+ "West Bengal",
+ ],
+ },
+ ],
 
-  buttonText: "Apply Now",
+ buttonText: "Apply Now",
 };
 
 const pricingData = {
-  heading: "Simple, Transparent Professional Tax Pricing",
-  subheading:
-    "Get expert assistance for Professional Tax Registration, Return Filing, and Cancellation — with accurate state-wise pricing, quick processing, and complete compliance support.",
-  note: "",
-  showStateSelector: true,
-  cards: [
-    {
-      id: 1,
-      title: "Professional Tax Registration Certificate",
-      price: "7,899",
-      priceNote: "+ GST | Govt. fee included",
-      buttonText: "Start Filing Now",
-      stateLabel: "Select Your State for Accurate Pricing",
-      defaultState: "Telangana",
-      features: [
-        "Application Preparation",
-        "Application Submission",
-        "PTRC & PTEC Number",
-        "Professional Tax Registration Certificate",
-        "All-inclusive pricing"
-      ]
-    },
-    {
-      id: 2,
-      title: "Professional Tax Return Filing",
-      price: "5,899",
-      priceNote: "+ GST",
-      buttonText: "Start Filing Now",
-      stateLabel: "Select Your State for Accurate Pricing",
-      defaultState: "Karnataka (Without Employees)",
-      features: [
-        "Filing of PT Return for 2 Directors",
-        "Filing of Professional Tax Return for 1 Year",
-        "Compliance Review & Expert Support",
-        "All-inclusive pricing"
-      ]
-    },
-    {
-      id: 3,
-      title: "Professional Tax Cancellation",
-      price: "12,899",
-      priceNote: "+ GST",
-      buttonText: "Start Cancellation",
-      stateLabel: "Select Your State for Accurate Pricing",
-      defaultState: "Karnataka",
-      features: [
-        "Cancellation of PTEC",
-        "Cancellation of PTRC",
-        "Application Filing & Follow-up",
-        "All-inclusive pricing"
-      ]
-    }
-  ]
+ heading: "Simple, Transparent Professional Tax Pricing",
+ subheading:
+ "Get expert assistance for Professional Tax Registration, Return Filing, and Cancellation — with accurate state-wise pricing, quick processing, and complete compliance support.",
+ note: "",
+ showStateSelector: true,
+ cards: [
+ {
+ id: 1,
+ title: "Professional Tax Registration Certificate",
+ price: "7,899",
+ priceNote: "+ GST | Govt. fee included",
+ buttonText: "Start Filing Now",
+ stateLabel: "Select Your State for Accurate Pricing",
+ defaultState: "Telangana",
+ features: [
+ "Application Preparation",
+ "Application Submission",
+ "PTRC & PTEC Number",
+ "Professional Tax Registration Certificate",
+ "All-inclusive pricing"
+ ]
+ },
+ {
+ id: 2,
+ title: "Professional Tax Return Filing",
+ price: "5,899",
+ priceNote: "+ GST",
+ buttonText: "Start Filing Now",
+ stateLabel: "Select Your State for Accurate Pricing",
+ defaultState: "Karnataka (Without Employees)",
+ features: [
+ "Filing of PT Return for 2 Directors",
+ "Filing of Professional Tax Return for 1 Year",
+ "Compliance Review & Expert Support",
+ "All-inclusive pricing"
+ ]
+ },
+ {
+ id: 3,
+ title: "Professional Tax Cancellation",
+ price: "12,899",
+ priceNote: "+ GST",
+ buttonText: "Start Cancellation",
+ stateLabel: "Select Your State for Accurate Pricing",
+ defaultState: "Karnataka",
+ features: [
+ "Cancellation of PTEC",
+ "Cancellation of PTRC",
+ "Application Filing & Follow-up",
+ "All-inclusive pricing"
+ ]
+ }
+ ]
 };
 
 
-  return (
-    <>
-      <Navbar />
-      <Hero {...heroProps}/>
-      <DynamicTabContent category="Trademark" />
-      <Faq />
-      <Popularsearches />
-      <Footer />
-    </>
-  );
+ return (
+ <>
+ <Navbar />
+ <Hero {...heroProps}/>
+ <DynamicTabContent category="Trademark" />
+ <Faq />
+ <Popularsearches />
+ <Footer />
+ </>
+ );
 }

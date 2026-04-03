@@ -8,27 +8,27 @@ import Faq from '../components/Faq';
 
 export default function Home() {
 
-  return (
-    <>
-      <Navbar />
-      <Hero
-  imageUrl="/images/apeda-registration.png"   // use your local image or CDN image
-  title="APEDA Registration"
-  rating={4.5}
-  description="APEDA Registration is essential for exporters of agricultural and processed food products. Simplify the registration process and receive your RCMC certificate quickly with IndiaFilings expert assistance."
-  exclusiveOffersCount={2}
-  features={[
-    "Application Preparation",
-    "Application Filing",
-    "RCMC Number",
-    "RCMC Certificate"
-  ]}
+ return (
+ <>
+ <Navbar />
+ <Hero
+ imageUrl="/images/apeda-registration.png" // use your local image or CDN image
+ title="APEDA Registration"
+ rating={4.5}
+ description="APEDA Registration is essential for exporters of agricultural and processed food products. Simplify the registration process and receive your RCMC certificate quickly with IndiaFilings expert assistance."
+ exclusiveOffersCount={2}
+ features={[
+ "Application Preparation",
+ "Application Filing",
+ "RCMC Number",
+ "RCMC Certificate"
+ ]}
 />
 
-      <DynamicTabContent category="E-Invoice" />
-      <Faq />
-      <Popularsearches />
-      <Footer />
-    </>
-  );
+ <DynamicTabContent category="E-Invoice" />
+ <Faq />
+ <Popularsearches />
+ <Footer />
+ </>
+ );
 }

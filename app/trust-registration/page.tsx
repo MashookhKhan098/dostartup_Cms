@@ -7,15 +7,15 @@ import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
 export default function Home() {
-  return (
-    <>
-      <Navbar />
-      <Hero defaultEntity = "Trust"/>
-      <Price />
-      <DynamicTabContent category="Startup" />
-      <Faq />
-      <Popularsearches />
-      <Footer />
-    </>
-  );
+ return (
+ <>
+ <Navbar />
+ <Hero defaultEntity = "Trust"/>
+ <Price />
+ <DynamicTabContent category="Startup" />
+ <Faq />
+ <Popularsearches />
+ <Footer />
+ </>
+ );
 }

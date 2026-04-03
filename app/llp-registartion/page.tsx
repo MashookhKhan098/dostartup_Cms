@@ -7,23 +7,23 @@ import DynamicTabContent from "../components/DynamicTabContent";
 import Faq from "../components/Faq";
 
 export default function Page() {
-  const serviceCategory = "proprietorship";
+ const serviceCategory = "proprietorship";
 
-  return (
-    <main className="min-h-screen bg-white">
-      <Navbar />
+ return (
+ <main className="min-h-screen bg-white">
+ <Navbar />
 
-      <Hero defaultEntity="LLP" />
+ <Hero defaultEntity="LLP" />
 
-      <Price />
+ <Price />
 
-      <DynamicTabContent category={serviceCategory} />
+ <DynamicTabContent category={serviceCategory} />
 
-      <Faq category={serviceCategory} />
+ <Faq category={serviceCategory} />
 
-      <Popularsearches />
+ <Popularsearches />
 
-      <Footer />
-    </main>
-  );
+ <Footer />
+ </main>
+ );
 }

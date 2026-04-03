@@ -8,31 +8,31 @@ import Faq from '../components/Faq';
 
 export default function Home() {
 
-  return (
-    <>
-      <Navbar />
-      <Hero
-  imageUrl="/images/apeda-registration.png"   // replace with your actual image path or CDN URL
-  title="BIS Registration"
-  rating={5}
-  description="Get BIS Certification with IndiaFilings to ensure your products meet Indian safety and quality standards."
-  exclusiveOffersCount={2}
-  features={[
-    "Consult Senior Scientist",
-    "Personalised Consultation",
-    "Process & Pricing Finalisation",
-    "100% Refund Guarantee",
-    "Application Preparation",
-    "Lab Testing Support",
-    "Application Filing",
-    "BIS Certification"
-  ]}
+ return (
+ <>
+ <Navbar />
+ <Hero
+ imageUrl="/images/apeda-registration.png" // replace with your actual image path or CDN URL
+ title="BIS Registration"
+ rating={5}
+ description="Get BIS Certification with IndiaFilings to ensure your products meet Indian safety and quality standards."
+ exclusiveOffersCount={2}
+ features={[
+ "Consult Senior Scientist",
+ "Personalised Consultation",
+ "Process & Pricing Finalisation",
+ "100% Refund Guarantee",
+ "Application Preparation",
+ "Lab Testing Support",
+ "Application Filing",
+ "BIS Certification"
+ ]}
 />
 
-      <DynamicTabContent category="E-Invoice" />
-      <Faq />
-      <Popularsearches />
-      <Footer />
-    </>
-  );
+ <DynamicTabContent category="E-Invoice" />
+ <Faq />
+ <Popularsearches />
+ <Footer />
+ </>
+ );
 }
