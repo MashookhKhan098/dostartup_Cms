@@ -38,8 +38,8 @@ export default async function DynamicTabContent({
   }
 
   return (
-    <div className="bg-[#F4F3EE] py-12 sm:py-16 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-white py-10 px-6">
+      <div className="max-w-[1200px] mx-auto">
 
         {/* Modern Hero with Split Layout */}
         <div className="relative mb-16">

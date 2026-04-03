@@ -148,7 +148,7 @@ export default function DINReactivationPixel() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f4f6fa] text-slate-800 font-sans">
+    <div className="min-h-screen bg-white text-slate-800 font-sans">
       {/* Imported Navbar */}
       <Navbar />
 

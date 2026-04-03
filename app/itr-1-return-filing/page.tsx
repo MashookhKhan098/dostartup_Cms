@@ -699,9 +699,14 @@ export default function ITR1Page() {
         ══════════════════════════════════════ */}
                 <section className="bg-orange-50 py-16 px-4 sm:px-6" id="faq">
                     <div className="max-w-4xl mx-auto">
-                        <div className="text-center mb-10">
-                            <p className="text-orange-500 text-xs font-bold uppercase tracking-widest mb-2">FAQ</p>
-                            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
+                            <div className="text-left">
+                                <p className="text-orange-500 text-xs font-bold uppercase tracking-widest mb-2">FAQ</p>
+                                <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+                            </div>
+                            <button className="px-5 py-2.5 bg-orange-500 text-white rounded-xl text-sm font-medium hover:bg-orange-600 transition-all shadow-sm">
+                                + Add Question
+                            </button>
                         </div>
                         <div className="space-y-3">
                             {FAQS.map((faq, i) => (

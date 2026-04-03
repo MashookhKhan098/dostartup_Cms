@@ -48,8 +48,8 @@ export default async function PricingSection({ category }: PricingProps) {
   });
 
   return (
-    <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-white py-10 px-6 sm:px-6 relative overflow-hidden">
+      <div className="max-w-[1200px] mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12">

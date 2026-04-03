@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import React, { useMemo, useState } from "react";
+import Faq from "../components/Faq";
 import {
   ChevronRight,
   ShoppingCart,
@@ -331,7 +332,7 @@ export default function MCA() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F4F6FA] text-slate-800">
+    <div className="min-h-screen bg-white text-slate-800">
       {/* NAVIGATION */}
       <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-[1200px] mx-auto px-4">
@@ -677,6 +678,9 @@ export default function MCA() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <Faq category="MCA" />
 
       {/* FOOTER */}
       <footer className="py-8 bg-white border-t border-slate-200 text-center text-sm text-slate-500">

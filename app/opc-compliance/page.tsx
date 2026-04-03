@@ -925,9 +925,14 @@ export default function OPCCompliancePage(): React.ReactElement {
         <section className="py-20 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 grid md:grid-cols-3 gap-10">
             <div className="md:col-span-2">
-              <h2 className="text-3xl font-bold text-amber-800 mb-8">
-                Frequently Asked Questions
-              </h2>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+                <h2 className="text-3xl font-bold text-amber-800">
+                  Frequently Asked Questions
+                </h2>
+                <button className="px-5 py-2.5 bg-amber-700 text-white rounded-xl text-sm font-medium hover:bg-amber-800 transition-all shadow-sm">
+                  + Add Question
+                </button>
+              </div>
 
               <div className="space-y-6">
                 <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
@@ -1071,12 +1076,7 @@ export default function OPCCompliancePage(): React.ReactElement {
           margin: 0;
           font-family: system-ui, -apple-system, "Segoe UI", Roboto,
             "Helvetica Neue", Arial;
-          background: linear-gradient(
-            135deg,
-            #f5f7ff 0%,
-            #fdf6ff 40%,
-            #f3fbff 100%
-          );
+          background: #ffffff;
           color: #0f172a;
         }
         .page {

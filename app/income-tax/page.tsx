@@ -234,7 +234,7 @@ export default function IncomeTaxPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F4F6FA] text-slate-800">
+    <div className="min-h-screen bg-white text-slate-800">
       <header className="bg-white/95 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -771,11 +771,16 @@ export default function IncomeTaxPage() {
                 className="mt-3 rounded-xl border border-slate-200"
               />
 
-              <div className="mt-8">
-                <h4 className="text-xl font-bold">
-                  FAQ&apos;s on Income Tax E-Filing
-                </h4>
-                <div className="mt-3 bg-white rounded-xl border border-slate-200">
+              <div className="mt-12 mb-10">
+                <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
+                  <h4 className="text-xl font-bold">
+                    FAQ&apos;s on Income Tax E-Filing
+                  </h4>
+                  <button className="mt-4 sm:mt-0 px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition-all shadow-sm">
+                    + Add Question
+                  </button>
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200">
                   {faqList.map((q, i) => {
                     const open = expandedFaq === i;
                     return (

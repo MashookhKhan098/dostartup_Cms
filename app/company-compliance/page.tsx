@@ -1121,12 +1121,7 @@ export default function CompanyCompliancePage(): React.ReactElement {
           margin: 0;
           font-family: system-ui, -apple-system, "Segoe UI", Roboto,
             "Helvetica Neue", Arial;
-          background: linear-gradient(
-            135deg,
-            #f5f7ff 0%,
-            #fdf6ff 40%,
-            #f3fbff 100%
-          );
+          background: #ffffff;
           color: #0f172a;
         }
 

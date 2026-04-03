@@ -51,8 +51,8 @@ export default function PopularSearches() {
   ];
 
   return (
-    <section className="bg-[#F4F3EE] py-8 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-white py-10 px-6 sm:px-6">
+      <div className="max-w-[1200px] mx-auto">
 
         {/* Header Section */}
         <div className="text-center mb-6">

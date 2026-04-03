@@ -303,7 +303,7 @@ export default function Navbar() {
               {/* GST */}
               <NavItem
                 label="GST"
-                panelStyle={{ left: "50%", transform: "translateX(-40%)", width: "min(480px, calc(100vw - 2rem))" }}
+                panelStyle={{ left: "50%", transform: "translateX(-40%)", width: "min(600px, calc(100vw - 2rem))" }}
               >
                 <div
                   className="grid gap-x-6 gap-y-1"

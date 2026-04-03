@@ -83,24 +83,31 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
   const hasMore = visibleCount < faqs.length;
 
   return (
-    <div className="bg-[#F4F3EE] py-16 px-4 sm:px-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-white py-10 px-6">
+      <div className="max-w-[1200px] mx-auto">
 
         {/* Header Section */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-4">
-            <div className="w-2 h-2 bg-[#C15F3C] rounded-full animate-pulse" />
-            <span className="text-xs font-medium text-[#C15F3C] uppercase tracking-wider">
-              Knowledge Base
-            </span>
+        <div className="flex flex-col sm:flex-row items-center justify-between text-left mb-10">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-1.5 mb-4 shadow-sm">
+              <div className="w-2 h-2 bg-emerald-600 rounded-full animate-pulse" />
+              <span className="text-xs font-medium text-emerald-600 uppercase tracking-wider">
+                Knowledge Base
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
+              {title}
+            </h2>
+            <p className="text-slate-600 text-base max-w-2xl">
+              Find answers to commonly asked questions about our services
+            </p>
+            <div className="h-1 w-20 bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-full mt-4"></div>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2F2E2B] mb-3">
-            {title}
-          </h2>
-          <p className="text-[#6F6B63] text-base max-w-2xl mx-auto">
-            Find answers to commonly asked questions about our services
-          </p>
-          <div className="h-1 w-20 bg-gradient-to-r from-[#C15F3C] to-[#A94E30] rounded-full mx-auto mt-4"></div>
+          <div className="mt-6 sm:mt-0 flex-shrink-0">
+            <button className="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition-all shadow-sm">
+              + Add Question
+            </button>
+          </div>
         </div>
 
         {/* FAQ Container */}
@@ -117,18 +124,18 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
                 <div key={faq._id || faq.id || index} className="group">
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full px-6 sm:px-8 py-5 flex items-center justify-between text-left hover:bg-[#F4F3EE] transition-all duration-200"
+                    className="w-full px-6 sm:px-8 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition-all duration-200"
                   >
                     <div className="flex items-start gap-3 pr-4">
                       <div className={`flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-200 ${isOpen
-                          ? 'bg-[#C15F3C] text-white'
-                          : 'bg-[#F4F3EE] text-[#C15F3C] group-hover:bg-[#C15F3C]/10'
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-slate-100 text-emerald-600 group-hover:bg-emerald-50'
                         }`}>
                         <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      <span className={`text-sm sm:text-base font-medium transition-colors ${isOpen ? 'text-[#C15F3C]' : 'text-[#2F2E2B]'
+                      <span className={`text-sm sm:text-base font-medium transition-colors ${isOpen ? 'text-emerald-700' : 'text-slate-900'
                         }`}>
                         {question}
                       </span>
@@ -158,8 +165,8 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
                       <div className="flex gap-3">
                         <div className="w-6 flex-shrink-0"></div>
                         <div className="flex-1">
-                          <div className="h-px w-full bg-gradient-to-r from-[#C15F3C] to-transparent mb-4"></div>
-                          <p className="text-sm text-[#6F6B63] leading-relaxed">
+                          <div className="h-px w-full bg-gradient-to-r from-emerald-500 to-transparent mb-4"></div>
+                          <p className="text-sm text-slate-600 leading-relaxed">
                             {answer}
                           </p>
                         </div>
@@ -173,10 +180,10 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
 
           {/* Load More Section */}
           {hasMore && (
-            <div className="px-6 sm:px-8 py-6 border-t border-[#E5E2DA] bg-gradient-to-r from-white to-[#FEF9F5]">
+            <div className="px-6 sm:px-8 py-6 border-t border-slate-200 bg-gradient-to-r from-white to-slate-50">
               <button
                 onClick={loadMore}
-                className="group w-full sm:w-auto px-6 py-3 text-sm font-medium text-[#C15F3C] border-2 border-[#C15F3C] rounded-xl hover:bg-[#C15F3C] hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
+                className="group w-full sm:w-auto px-6 py-3 text-sm font-medium text-emerald-600 border-2 border-emerald-600 rounded-xl hover:bg-emerald-600 hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
               >
                 <span>Load More Questions</span>
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,23 +195,22 @@ export default function FAQAccordion({ category }: FAQAccordionProps) {
 
         </div>
 
-        {/* Still Have Questions Section */}
         <div className="mt-10 text-center">
-          <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6 sm:p-8">
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-left">
-                <h3 className="text-lg font-semibold text-[#2F2E2B] mb-1">
+                <h3 className="text-lg font-semibold text-slate-900 mb-1">
                   Still have questions?
                 </h3>
-                <p className="text-sm text-[#6F6B63]">
+                <p className="text-sm text-slate-600">
                   Can't find the answer you're looking for?
                 </p>
               </div>
               <div className="flex gap-3">
-                <button className="px-5 py-2.5 bg-[#C15F3C] text-white rounded-xl text-sm font-medium hover:bg-[#A94E30] transition-all shadow-sm hover:shadow-md">
+                <button className="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition-all shadow-sm hover:shadow-md">
                   Contact Support
                 </button>
-                <button className="px-5 py-2.5 border border-[#E5E2DA] text-[#6F6B63] rounded-xl text-sm font-medium hover:border-[#C15F3C] hover:text-[#C15F3C] transition-all">
+                <button className="px-5 py-2.5 border border-slate-200 text-slate-600 rounded-xl text-sm font-medium hover:border-emerald-600 hover:text-emerald-600 transition-all">
                   Live Chat
                 </button>
               </div>
