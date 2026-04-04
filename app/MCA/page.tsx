@@ -331,7 +331,7 @@ export default function MCA() {
  );
 
  return (
- <div className="min-h-screen bg-[#F4F6FA] text-slate-800">
+ <div className="min-h-screen bg-white text-slate-800">
  {/* NAVIGATION */}
  <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
  <div className="max-w-[1200px] mx-auto px-4">

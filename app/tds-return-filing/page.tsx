@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import {
@@ -554,11 +555,14 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  ))}
  </div>
 
- <div className="mt-4">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
  <button className="px-4 py-2 border rounded text-sm">
  Load More
  </button>
- </div>
+ 
+<AddQuestionModal />
+</div>
  </div>
  <div className="bg-white rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>

@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
@@ -444,11 +445,14 @@ const ADT1FilingMergedPage: React.FC<ADT1FilingMergedPageProps> = () => {
  ))}
  </div>
 
- <div className="mt-4">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
  <button className="px-4 py-2 border-2 border-[#C15F3C] text-[#C15F3C] rounded-lg text-sm hover:bg-[#C15F3C] hover:text-white transition-colors font-medium">
  Load More
  </button>
- </div>
+ 
+<AddQuestionModal />
+</div>
  </div>
 
  {/* Trust Badges */}

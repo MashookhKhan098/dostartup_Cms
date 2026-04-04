@@ -22,6 +22,7 @@ interface FAQAccordionProps {
 const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
 const FAQ_API = `https://cms.dostartup.in/api/content/items/startupFaq?token=${TOKEN}`;
 const BLOG_API = `https://cms.dostartup.in/api/content/items/blogs?token=${TOKEN}`;
+const N8N_WEBHOOK_URL = "https://your-n8n-webhook-url.com/"; // Replace with actual n8n webhook URL
 
 export default function FAQAccordion({ category: propCategory }: FAQAccordionProps) {
   const pathname = usePathname();
@@ -31,6 +32,14 @@ export default function FAQAccordion({ category: propCategory }: FAQAccordionPro
   const [visibleCount, setVisibleCount] = useState(5);
   const [loading, setLoading] = useState(true);
 
+  // Modal State for n8n Webhook
+  const [modalType, setModalType] = useState<'faq' | 'question' | null>(null);
+  const [formQuestion, setFormQuestion] = useState("");
+  const [formAnswer, setFormAnswer] = useState("");
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
   // Derive category from pathname if not provided
   const derivedCategory = propCategory || 
     pathname.split('/').filter(Boolean).pop()?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 
@@ -38,6 +47,7 @@ export default function FAQAccordion({ category: propCategory }: FAQAccordionPro
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       try {
         // Fetch FAQs and Blogs in parallel
         const [faqRes, blogRes] = await Promise.all([
@@ -81,6 +91,60 @@ export default function FAQAccordion({ category: propCategory }: FAQAccordionPro
 
   const loadMore = () => {
     setVisibleCount((prev) => Math.min(prev + 3, faqs.length));
+  };
+
+  const openModal = (type: 'faq' | 'question') => {
+    setModalType(type);
+    setFormQuestion("");
+    setFormAnswer("");
+    setSubmitSuccess(false);
+    setSubmitError("");
+  };
+
+  const closeModal = () => {
+    setModalType(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formQuestion.trim()) {
+      setSubmitError("Question is required.");
+      return;
+    }
+    if (modalType === 'faq' && !formAnswer.trim()) {
+      setSubmitError("Answer is required.");
+      return;
+    }
+
+    setSubmitLoading(true);
+    setSubmitError("");
+    setSubmitSuccess(false);
+
+    try {
+      const payload = {
+        question: formQuestion,
+        answer: modalType === 'faq' ? formAnswer : undefined,
+        type: modalType,
+        category: derivedCategory || "general",
+      };
+
+      const res = await fetch(N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok || res.type === 'opaque') {
+        setSubmitSuccess(true);
+        setTimeout(() => closeModal(), 2000);
+      } else {
+        setSubmitError("Failed to submit. Please check your n8n URL.");
+      }
+    } catch (err) {
+      setSubmitError("Network error. Please check your connection.");
+    } finally {
+      setSubmitLoading(false);
+    }
   };
 
   if (loading) {
@@ -180,8 +244,9 @@ export default function FAQAccordion({ category: propCategory }: FAQAccordionPro
                 )}
               </div>
 
-              {hasMore && (
-                <div className="px-6 py-6 border-t border-[#E5E2DA] bg-[#FDFCFB]">
+              {/* Load More & Add Question Section */}
+              <div className="px-6 py-6 border-t border-[#E5E2DA] bg-[#FDFCFB] flex flex-col sm:flex-row items-center justify-start gap-4">
+                {hasMore && (
                   <button
                     onClick={loadMore}
                     className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-[#C15F3C] border-2 border-[#C15F3C] rounded-xl hover:bg-[#C15F3C] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-widest"
@@ -191,8 +256,17 @@ export default function FAQAccordion({ category: propCategory }: FAQAccordionPro
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                </div>
-              )}
+                )}
+                <button
+                  onClick={() => openModal('question')}
+                  className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-[#6F6B63] border-2 border-[#E5E2DA] rounded-xl hover:border-[#C15F3C] hover:text-[#C15F3C] bg-white transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-widest"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span>Add Question</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -226,6 +300,99 @@ export default function FAQAccordion({ category: propCategory }: FAQAccordionPro
         </div>
 
       </div>
+
+      {/* Modal Overlay Component */}
+      {modalType && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 bg-[#2F2E2B]/50 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <div className="flex items-center justify-between px-6 sm:px-8 py-5 border-b border-[#E5E2DA] bg-[#FAFAFA]">
+              <h3 className="text-lg font-bold text-[#2F2E2B]">
+                {modalType === 'faq' ? 'Add New FAQ' : 'Submit a Question'}
+              </h3>
+              <button 
+                onClick={closeModal} 
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-[#E5E2DA] text-[#6F6B63] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all shadow-sm"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="p-6 sm:p-8 overflow-y-auto">
+              {submitSuccess ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="text-xl font-bold text-[#2F2E2B] mb-2">Success!</h4>
+                  <p className="text-[#6F6B63]">Your submission has been securely sent.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {submitError && (
+                    <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 flex items-start gap-3">
+                      <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+                  
+                  <div>
+                    <label className="block text-sm font-semibold text-[#2F2E2B] mb-2">
+                      Question <span className="text-red-500">*</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      value={formQuestion}
+                      onChange={(e) => setFormQuestion(e.target.value)}
+                      placeholder="Enter the question..."
+                      className="w-full px-4 py-3 rounded-xl border border-[#E5E2DA] focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/20 transition-all text-[#2F2E2B] placeholder-[#A3A099]"
+                    />
+                  </div>
+
+                  {modalType === 'faq' && (
+                    <div>
+                      <label className="block text-sm font-semibold text-[#2F2E2B] mb-2">
+                        Answer <span className="text-red-500">*</span>
+                      </label>
+                      <textarea 
+                        value={formAnswer}
+                        onChange={(e) => setFormAnswer(e.target.value)}
+                        placeholder="Enter the detailed answer..."
+                        rows={5}
+                        className="w-full px-4 py-3 rounded-xl border border-[#E5E2DA] focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/20 transition-all resize-none text-[#2F2E2B] placeholder-[#A3A099]"
+                      />
+                    </div>
+                  )}
+
+                  <div className="pt-4 flex flex-col-reverse sm:flex-row justify-end gap-3 mt-2">
+                    <button 
+                      type="button" 
+                      onClick={closeModal}
+                      className="w-full sm:w-auto px-6 py-3 text-sm font-medium text-[#6F6B63] hover:text-[#2F2E2B] bg-white border border-[#E5E2DA] rounded-xl hover:border-[#6F6B63] transition-all"
+                    >
+                      Cancel
+                    </button>
+                    <button 
+                      type="submit" 
+                      disabled={submitLoading}
+                      className="w-full sm:w-auto px-6 py-3 bg-[#C15F3C] text-white rounded-xl text-sm font-medium hover:bg-[#A94E30] transition-all shadow-sm hover:shadow-md disabled:bg-[#d99f8c] disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {submitLoading && (
+                        <div className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin"></div>
+                      )}
+                      <span>{submitLoading ? 'Submitting...' : 'Submit'}</span>
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

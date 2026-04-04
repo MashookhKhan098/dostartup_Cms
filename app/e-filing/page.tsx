@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import { ChevronDown, ShoppingBag, Plus, Check, Search } from "lucide-react";
@@ -952,11 +953,14 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  ))}
  </div>
 
- <div className="mt-4">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
  <button className="px-4 py-2 border rounded text-sm">
  Load More
  </button>
- </div>
+ 
+<AddQuestionModal />
+</div>
  </div>
  </section>
 

@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 /* eslint-disable @next/next/no-img-element */
 

@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
@@ -391,11 +392,14 @@ export default function CommencementInc20aPage() {
  ))}
  </ul>
 
- <div className="mt-4">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
  <button className="px-4 py-2 bg-white border-2 border-amber-600 text-amber-700 rounded-md hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- </div>
+ 
+<AddQuestionModal />
+</div>
  </section>
 
  {/* Popular Searches */}

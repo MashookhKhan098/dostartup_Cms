@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, CheckCircle, ShoppingBag, Plus } from "lucide-react";
