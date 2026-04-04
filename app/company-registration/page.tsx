@@ -13,7 +13,7 @@ export default function Home() {
  <Hero defaultEntity="Company" />
  <Price />
  <DynamicTabContent category="Proprietorship" />
- <Faq />
+ <Faq category="Proprietorship" />
  <Popularsearches />
  <Footer />
  </>

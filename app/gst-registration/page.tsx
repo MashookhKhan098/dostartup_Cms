@@ -126,7 +126,14 @@ export default function Home() {
  type: "input",
  inputType: "text",
  name: "pan",
- placeholder: "PAN"
+ placeholder: "PAN",
+ showVerify: true
+ },
+ {
+ type: "input",
+ inputType: "tel",
+ name: "phone",
+ placeholder: "Phone Number"
  },
  {
  type: "select",
@@ -168,7 +175,7 @@ export default function Home() {
  <Hero {...heroProps} />
  <Price/>
  <DynamicTabContent category="GST" />
- <Faq />
+ <Faq category="GST" />
  <Popularsearches />
  <Footer />
  </>

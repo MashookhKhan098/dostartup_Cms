@@ -36,8 +36,8 @@ export default function Home() {
  buttonText: "Get Quote"
  }}
  />
- <DynamicTabContent category="Trademark" />
- <Faq />
+  <DynamicTabContent category="Trademark" />
+  <Faq category="Trademark" />
  <Popularsearches />
  <Footer />
  </>

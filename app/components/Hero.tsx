@@ -139,7 +139,7 @@ export default function HeroSection() {
  useEffect(() => {
  if (!images.length || isHovered) return;
 
- const t = setInterval(goNext, 5000);
+ const t = setInterval(goNext, 2000);
 
  return () => clearInterval(t);
  }, [goNext, images.length, isHovered]);

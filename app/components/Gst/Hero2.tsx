@@ -103,47 +103,101 @@ export default function DynamicHeroSection({
  return ICONS[iconType] ?? ICONS.document;
  };
 
- const renderFormField = (field: FormField, index: number) => {
- switch (field.type) {
- case "select":
- return (
- <div key={index}>
- <label className="block text-xs text-[#6F6B63] mb-1">
- {field.placeholder}
- </label>
- <div className="relative">
- <select
- name={field.name}
- className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-[#F4F3EE] appearance-none cursor-pointer"
- >
- <option value="">Select {field.placeholder}</option>
- {field.options?.map((option: string, i: number) => (
- <option key={i} value={option}>{option}</option>
- ))}
- </select>
- <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
- <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
- </svg>
- </div>
- </div>
- </div>
- );
+  const [verificationStates, setVerificationStates] = useState<Record<string, 'idle' | 'loading' | 'verified' | 'error'>>({});
 
- case "input":
- return (
- <div key={index}>
- <label className="block text-xs text-[#6F6B63] mb-1">
- {field.placeholder}
- </label>
- <input
- type={field.inputType || "text"}
- name={field.name}
- placeholder={field.placeholder}
- className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-[#F4F3EE]"
- />
- </div>
- );
+  const handleVerify = async (fieldName: string) => {
+    setVerificationStates(prev => ({ ...prev, [fieldName]: 'loading' }));
+    
+    // Mocking API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Simple mock logic: check if PAN matches standard format
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    const form = document.querySelector('form');
+    const input = form?.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
+    const value = input?.value?.toUpperCase() || "";
+    
+    if (input && panRegex.test(value)) {
+      setVerificationStates(prev => ({ ...prev, [fieldName]: 'verified' }));
+    } else {
+      setVerificationStates(prev => ({ ...prev, [fieldName]: 'error' }));
+    }
+  };
+
+  const renderFormField = (field: FormField, index: number) => {
+    const fieldVerificationState = verificationStates[field.name] || 'idle';
+
+    switch (field.type) {
+      case "select":
+        return (
+          <div key={index}>
+            <label className="block text-xs text-[#6F6B63] mb-1">
+              {field.placeholder}
+            </label>
+            <div className="relative">
+              <select
+                name={field.name}
+                className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-[#F4F3EE] appearance-none cursor-pointer"
+              >
+                <option value="">Select {field.placeholder}</option>
+                {field.options?.map((option: string, i: number) => (
+                  <option key={i} value={option}>{option}</option>
+                ))}
+              </select>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "input":
+        return (
+          <div key={index}>
+            <label className="block text-xs text-[#6F6B63] mb-1 flex justify-between items-center">
+              {field.placeholder}
+              {field.showVerify && fieldVerificationState === 'verified' && (
+                <span className="text-[10px] text-green-600 font-bold uppercase tracking-wider bg-green-50 px-2 py-0.5 rounded-full border border-green-100 flex items-center gap-1">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Verified
+                </span>
+              )}
+            </label>
+            <div className="relative">
+              <input
+                type={field.inputType || "text"}
+                name={field.name}
+                placeholder={field.placeholder}
+                className={`w-full border rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-[#F4F3EE] ${field.showVerify ? 'pr-20' : ''} ${fieldVerificationState === 'verified' ? 'border-green-200' : 'border-[#E5E2DA]'}`}
+              />
+              {field.showVerify && (
+                <button
+                  type="button"
+                  onClick={() => handleVerify(field.name)}
+                  disabled={fieldVerificationState === 'loading'}
+                  className={`absolute right-2 top-1.5 bottom-1.5 px-3 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${
+                    fieldVerificationState === 'loading'
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : fieldVerificationState === 'verified'
+                    ? 'bg-green-600 text-white shadow-sm'
+                    : fieldVerificationState === 'error'
+                    ? 'bg-red-500 text-white'
+                    : 'bg-[#C15F3C] text-white hover:bg-[#A94E30] shadow-sm'
+                  }`}
+                >
+                  {fieldVerificationState === 'loading' ? '...' : fieldVerificationState === 'verified' ? 'Verify' : fieldVerificationState === 'error' ? 'Retry' : 'Verify'}
+                </button>
+              )}
+            </div>
+            {field.showVerify && fieldVerificationState === 'error' && (
+              <p className="mt-1 text-[10px] text-red-500 font-medium">Invalid {field.placeholder} format</p>
+            )}
+          </div>
+        );
 
  case "checkbox":
  return (
