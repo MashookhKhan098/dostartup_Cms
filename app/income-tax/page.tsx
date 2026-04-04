@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useMemo, useState } from "react";
 import {
@@ -234,7 +235,7 @@ export default function IncomeTaxPage() {
  );
 
  return (
- <div className="min-h-screen bg-[#F4F6FA] text-slate-800">
+ <div className="min-h-screen bg-white text-slate-800">
  <header className="bg-white/95 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
  <div className="max-w-[1200px] mx-auto px-4">
  <div className="flex items-center justify-between h-16">

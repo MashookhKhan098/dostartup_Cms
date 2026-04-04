@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import {
@@ -605,11 +606,14 @@ export default function TanRegistrationPage(): React.ReactElement {
  ))}
  </div>
 
- <div className="mt-4">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
  <button className="px-4 py-2 border rounded-md text-sm text-indigo-600">
  Load More
  </button>
- </div>
+ 
+<AddQuestionModal />
+</div>
  </div>
 
  {/* Extra long content block — to expand file length and provide more reference text */}

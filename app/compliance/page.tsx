@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Inter } from "next/font/google";
@@ -1189,12 +1190,15 @@ function ArticleAndSidebar() {
  </div>
  ))}
  </div>
- <button
- className="mt-3 border rounded px-4 py-2 text-[13px]"
- style={{ borderColor: "#E5E7EB" }}
- >
- Load More
- </button>
+ <div className="mt-3 flex gap-3 items-center flex-wrap">
+    <button
+      className="border rounded px-4 py-2 text-[13px]"
+      style={{ borderColor: "#E5E7EB" }}
+    >
+      Load More
+    </button>
+    <AddQuestionModal />
+  </div>
  </div>
  </div>
  </article>

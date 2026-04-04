@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useCallback, useState } from "react";
 import Image from "next/image";
@@ -396,7 +397,8 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  <li>Corporate Financial Consultation</li>
  <li>Consultation report - Financial</li>
  </ul>
- <div className="mt-4">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
  <button className="bg-white border border-green-400 text-green-700 px-3 py-2 rounded">
  ADD
  </button>
@@ -543,7 +545,9 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  <button className="px-4 py-2 border rounded text-sm">
  Load More
  </button>
- </div>
+ 
+<AddQuestionModal />
+</div>
  </div>
  </section>
 

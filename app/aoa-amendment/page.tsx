@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -681,7 +682,8 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  <li className="hover:text-amber-700 transition-colors">Application Filing in MCA</li>
  <li className="hover:text-amber-700 transition-colors">Provide Updated AOA</li>
  </ul>
- <div className="mt-4">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
  <button className="bg-white border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
  ADD TO CART
  </button>
@@ -957,7 +959,9 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  <button className="text-xs px-3 py-2 border-2 border-amber-600 rounded bg-white text-amber-700 hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- </div>
+ 
+<AddQuestionModal />
+</div>
  </div>
  </section>
  </section>
@@ -1107,12 +1111,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
           margin: 0;
           font-family: system-ui, -apple-system, "Segoe UI", Roboto,
             "Helvetica Neue", Arial;
-          background: linear-gradient(
-            135deg,
-            #f5f7ff 0%,
-            #fdf6ff 40%,
-            #f3fbff 100%
-          );
+          background: #ffffff;
           color: #0f172a;
         }
 

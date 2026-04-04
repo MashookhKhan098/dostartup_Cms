@@ -1,4 +1,5 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 import Head from "next/head";
 import React, { useState } from "react";
