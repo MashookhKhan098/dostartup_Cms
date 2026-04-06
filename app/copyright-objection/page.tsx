@@ -9,7 +9,7 @@ import Price from '../components/Price';
 export default function Home() {
  const pricingData = {
  heading: "Simple, Transparent Patent Registration Pricing",
- subheading: "File your patent easily with IndiaFilings — guided by experts, transparent pricing, and complete support for provisional and complete patent filings.",
+ subheading: "File your patent easily with DoStartup — guided by experts, transparent pricing, and complete support for provisional and complete patent filings.",
  note: "",
  showStateSelector: false, // Image does not show state selection
  cards: [

@@ -10,6 +10,8 @@ import {
  Search,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
+import Footer from "../components/Footer";
 
 /**
  * DIR-3 KYC Page with amber theme and imported Navbar
@@ -21,9 +23,9 @@ const ASSETS = {
  heroPortrait:
  "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- whatsapp: "/images/whatsapp.svg",
- adRight1: "/images/company-compliance-ad.png",
- dinEkyc: "/images/din-ekyc-ad.png",
+ whatsapp: "/images/whatsapp.png",
+ adRight1: "/images/company-compliance.jpg",
+ dinEkyc: "/images/din.jpg",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
  heroImage: "/images/hero.png",
@@ -228,63 +230,7 @@ export default function DIR3KycPage(): React.ReactElement {
  }}
  aria-hidden
  />
- </section>
-
- {/* Pricing */}
- <section>
- <h2 className="text-xl sm:text-2xl text-center font-semibold">
- Simple, Transparent DIN eKYC Filing Pricing
- </h2>
- <p className="text-center text-xs sm:text-sm text-gray-600 mt-2">
- Apply for your DIR 3 KYC filing online with expert assistance and
- complete end-to-end tracking.
- </p>
-
- <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="bg-white rounded-xl border-2 border-amber-200 p-6 shadow-sm hover:border-amber-300 transition-colors">
- <div className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-3 py-1 rounded-full text-xs mb-3">
- Most popular
- </div>
- <h3 className="font-semibold text-lg">DIN eKYC Filing</h3>
- <div className="mt-3 text-3xl font-bold">₹1,899</div>
- <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- Complete eKYC
- </button>
-
- <ul className="mt-5 space-y-3 text-sm text-gray-600">
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> LEDGERS Accounting Software - 1 Year
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> LEDGERS Compliance Platform
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> Dedicated Accountant
- </li>
- </ul>
- </div>
-
- <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:border-amber-200 transition-colors">
- <h3 className="font-semibold text-lg">Dual DIN eKYC Filing</h3>
- <div className="mt-3 text-3xl font-bold">₹2,899</div>
- <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- Complete eKYC
- </button>
-
- <ul className="mt-5 space-y-3 text-sm text-gray-600">
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> LEDGERS Accounting Software - 1 Year
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> Dedicated Compliance Advisor
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> DIN KYC for 2 Directors
- </li>
- </ul>
- </div>
- </div>
- </section>
+ </section>
 
  {/* Article content */}
  <article className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
@@ -368,6 +314,64 @@ export default function DIR3KycPage(): React.ReactElement {
  </div>
  </article>
 
+ {/* Pricing */}
+ <section>
+ <h2 className="text-xl sm:text-2xl text-center font-semibold">
+ Simple, Transparent DIN eKYC Filing Pricing
+ </h2>
+ <p className="text-center text-xs sm:text-sm text-gray-600 mt-2">
+ Apply for your DIR 3 KYC filing online with expert assistance and
+ complete end-to-end tracking.
+ </p>
+
+ <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+ <div className="bg-white rounded-xl border-2 border-amber-200 p-6 shadow-sm hover:border-amber-300 transition-colors">
+ <div className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-3 py-1 rounded-full text-xs mb-3">
+ Most popular
+ </div>
+ <h3 className="font-semibold text-lg">DIN eKYC Filing</h3>
+ <div className="mt-3 text-3xl font-bold">₹1,899</div>
+ <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
+ Complete eKYC
+ </button>
+
+ <ul className="mt-5 space-y-3 text-sm text-gray-600">
+ <li className="flex items-center gap-3">
+ <Check size={16} className="text-amber-600" /> LEDGERS Accounting Software - 1 Year
+ </li>
+ <li className="flex items-center gap-3">
+ <Check size={16} className="text-amber-600" /> LEDGERS Compliance Platform
+ </li>
+ <li className="flex items-center gap-3">
+ <Check size={16} className="text-amber-600" /> Dedicated Accountant
+ </li>
+ </ul>
+ </div>
+
+ <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:border-amber-200 transition-colors">
+ <h3 className="font-semibold text-lg">Dual DIN eKYC Filing</h3>
+ <div className="mt-3 text-3xl font-bold">₹2,899</div>
+ <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
+ Complete eKYC
+ </button>
+
+ <ul className="mt-5 space-y-3 text-sm text-gray-600">
+ <li className="flex items-center gap-3">
+ <Check size={16} className="text-amber-600" /> LEDGERS Accounting Software - 1 Year
+ </li>
+ <li className="flex items-center gap-3">
+ <Check size={16} className="text-amber-600" /> Dedicated Compliance Advisor
+ </li>
+ <li className="flex items-center gap-3">
+ <Check size={16} className="text-amber-600" /> DIN KYC for 2 Directors
+ </li>
+ </ul>
+ </div>
+ </div>
+ </section>
+
+
+
  {/* FAQ */}
  <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
  <h3 className="text-lg sm:text-xl font-semibold mb-4">FAQ's on DIR-3 KYC</h3>
@@ -401,78 +405,7 @@ export default function DIR3KycPage(): React.ReactElement {
 
  {/* Sidebar */}
  <aside className="lg:col-span-4 hidden lg:block">
- <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
- <div className="text-center text-gray-600">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold">Your cart is empty</h3>
- <p className="text-sm mt-2">
- Browse our services and add some services in cart!
- </p>
- </div>
-
- <div className="mt-6 text-center">
- <div className="text-sm text-gray-500">
- Existing User?{" "}
- <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">Login</a>
- </div>
- </div>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4 accent-amber-600"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- <ShoppingBag size={16} /> Get Started
- </button>
-
- <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
- <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- <span>Secure · No spam · Instant confirmation</span>
- </div>
- </form>
- </div>
+          <SidebarCart />
 
  <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Related Guides</h4>

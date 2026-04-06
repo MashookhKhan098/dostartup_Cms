@@ -1,599 +1,292 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
+
+/* eslint-disable @next/next/no-img-element */
 
 import React, { useState } from "react";
-import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
+import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
-
-interface ADT1FilingMergedPageProps {
- // Add any props if needed
-}
+import PopularSearches from "../components/PopularSearches";
+import SidebarCart from "../components/SidebarCart";
 
 const ASSETS = {
- logo: "/images/india-logo.jpg",
- hero: "/images/adt1-hero.jpg",
- man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- whatsapp: "/images/whatsapp.svg",
- adRight1: "/images/company-compliance-ad.png",
- dinEkyc: "/images/din-ekyc-ad.png",
- cartIcon: "/images/cart-icon.svg",
- indiaFlag: "/images/india-flag.png",
- companyCompliance: "/images/company-compliance.png",
+  logo: "/images/india-logo.jpg",
+  heroImage: "/images/adt1-hero.jpg",
+  man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
+  ledgers: "/images/ledgers.jpg",
+  whatsapp: "/images/whatsapp.png",
+  companyCompliance: "/images/company-compliance.jpg",
+  cartIcon: "/images/cart.png",
+  indiaFlag: "/images/india-flag.png",
 };
 
-const MCA_DROPDOWN_LINKS = [
- { title: "Company Compliance", href: "/MCA/company-compliance" },
- { title: "Director Change", href: "/MCA/director-change" },
- { title: "AOA Amendment", href: "/MCA/aoa-amendment" },
- { title: "LLP Compliance", href: "/MCA/llp-compliance" },
- { title: "Remove Director", href: "/MCA/remove-director" },
- {
- title: "Authorized Capital Increase",
- href: "/authorized-capital-increase",
- },
- { title: "OPC Compliance", href: "/MCA/opc-compliance" },
- { title: "ADT-1 Filing", href: "/MCA/adt-1-filing" },
- { title: "Share Transfer", href: "/MCA/share-transfer" },
- { title: "Name Change - Company", href: "/MCA/name-change-company" },
- { title: "DPT-3 Filing", href: "/MCA/dpt-3-filing" },
- { title: "Demat of Shares", href: "/MCA/demat-of-shares" },
- { title: "Registered Office Change", href: "/MCA/registered-office-change" },
- { title: "LLP Form 11 Filing", href: "/MCA/llp-form-11-filing" },
- { title: "Winding Up - LLP", href: "/MCA/winding-up-llp" },
- { title: "DIN eKYC Filing", href: "/MCA/din-ekyc-filing" },
- { title: "Dormant Status Filing", href: "/MCA/dormant-status-filing" },
- { title: "Winding Up - Company", href: "MCA/winding-up-company" },
- { title: "DIN Reactivation", href: "/MCA/din-reactivation" },
- { title: "MOA Amendment", href: "/MCA/moa-amendment" },
- { title: "Commencement (INC-20A)", href: "/MCA/commencement-inc-20a" },
-];
+export default function ADT1FilingPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-const POPULAR_SEARCHES = [
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Nadakacheri",
- "Flipkart Seller",
- "Caste Certificate",
- "IAY",
- "EPFO Passbook",
- "Domicile Certificate",
- "Udyog Aadhaar",
- "PF Withdrawal",
- "Karnataka One",
- "Encumbrance Certificate",
- "Bonafide Certificate",
- "Instant PAN Card",
- "E PAN Card",
- "Income Certificate",
- "Marriage Certificate",
- "Passport Renewal",
- "Nivesh Mitra",
- "MSME Registration",
- "Experience Certificate",
- "Trademark Status",
- "Trade License",
- "Domicile",
- "eMitra",
- "UAN",
- "PICME",
- "Resignation Letter Format",
- "Ration Card",
- "TNREGINET",
- "RAJSSP",
- "LLP Compliance",
- "Form 16",
- "Police Clearance Certificate",
- "OBC Certificate",
- "Jamabandi",
- "Mee Bhoomi",
- "SC Certificate",
- "UAN Login",
- "eAadhaar Download",
- "Linking Aadhaar To Bank Accounts",
- "mAadhaar",
- "Aadhaar Enrollment Centre",
- "UAN Passbook",
- "Amazon How to Sell",
- "PAN Card Apply",
- "EPFO Unified Portal",
-];
+  const faqItems = [
+    { q: "What is Form ADT-1?", a: "Form ADT-1 is a statutory return filed by companies with the Registrar of Companies (ROC) to report the appointment of an auditor." },
+    { q: "Who is responsible for filing Form ADT-1?", a: "The company is responsible for filing Form ADT-1 when an auditor is appointed or reappointed." },
+    { q: "Is Form ADT-1 required for the appointment of the first auditor?", a: "Yes ΓÇö ADT-1 is mandatory for first auditor appointments under the updated rules." },
+    { q: "When should Form ADT-1 be filed?", a: "ADT-1 must be filed within 15 days from the date of the auditor's appointment." },
+    { q: "What is the penalty for late filing of Form ADT-1?", a: "Late filing attracts additional fees ranging from 2 to 12 times the normal fee depending on the delay." },
+    { q: "What are the documents required for filing Form ADT-1?", a: "Typical attachments include: Board resolution, consent of auditor, auditor certificate under Section 141, and intimation copy to auditor." },
+  ];
 
-const ADT1FilingMergedPage: React.FC<ADT1FilingMergedPageProps> = () => {
- const [openFaq, setOpenFaq] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
+  const DOCUMENTS_REQUIRED = [
+    { name: "Consent for Appointment as Statutory Auditor" },
+    { name: "Appointment as Statutory Auditor" },
+    { name: "Board Resolution for Auditor Appointment" },
+  ];
 
- const faqItems = [
- "What is Form ADT-1?",
- "Who is responsible for filing Form ADT-1?",
- "Is Form ADT-1 required for the appointment of the first auditor?",
- "When should Form ADT-1 be filed?",
- "What is the penalty for late filing of Form ADT-1?",
- "What are the documents required for filing Form ADT-1?",
- ];
+  const OTHER_REGISTRATIONS = [
+    { name: "Documents Required for LLP Registration", count: 8 },
+    { name: "Documents Required for Proprietorship Registration", count: 2 },
+    { name: "Documents Required for Company Registration", count: 2 },
+    { name: "Documents Required for Trademark Registration", count: 7 },
+    { name: "Documents Required for GST Registration", count: 10 },
+  ];
 
- const faqAnswers: Record<number, string> = {
- 0: "Form ADT-1 is a statutory return filed by companies with the Registrar of Companies (ROC) to report the appointment of an auditor.",
- 1: "The company is responsible for filing Form ADT-1 when an auditor is appointed or reappointed.",
- 2: "Yes — ADT-1 is mandatory for first auditor appointments under the updated rules (check latest MCA rules for exemptions).",
- 3: "ADT-1 must be filed within 15 days from the date of the auditor's appointment.",
- 4: "Late filing attracts additional fees (multiples of normal fee based on delay).",
- 5: "Typical attachments: Board resolution, consent of auditor, auditor certificate under Section 141, intimation copy to auditor.",
- };
+  return (
+    <div className="min-h-screen bg-[#f4f6fa] text-slate-800 font-sans">
+      <Navbar />
 
- return (
- <div className="min-h-screen bg-[#F4F3EE] font-sans text-[#2F2E2B]">
- {/* Navbar - Imported */}
- <Navbar />
+      {/* Breadcrumb */}
+      <div className="bg-gradient-to-r from-white to-slate-50 py-3 text-slate-800 border-b border-slate-100 font-bold italic">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 text-sm text-gray-500">
+          Home / MCA Services / <span className="text-amber-700 font-medium">ADT-1 Filing</span>
+        </div>
+      </div>
 
+      {/* Main Container: Persistent Sticky Sidebar */}
+      <main className="max-w-[1240px] mx-auto px-4 sm:px-6 py-8 flex flex-col lg:flex-row gap-8 items-start">
+        
+        {/* Left Section: All main content */}
+        <section className="flex-1 space-y-12 overflow-hidden">
+          
+          {/* Header Block: 2-Col Hero Area */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+             {/* Col 1: Hero Image Card */}
+             <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
+               <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
+                <div className="bg-[#9e4a2d] p-6 text-center">
+                  <h2 className="text-white text-xl font-bold uppercase tracking-tight">ADT-1 FILING</h2>
+                  <div className="mt-2 text-sm text-amber-100 uppercase font-bold italic">Auditor notification to ROC</div>
+                </div>
+                <div className="bg-[rgb(243,246,249)] p-8 flex justify-center items-center flex-1">
+                   <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10 scale-110">
+                      <img src={ASSETS.man} alt="ADT-1" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/5" />
+                   </div>
+                </div>
+              </div>
+              <ul className="mt-4 text-[13px] space-y-2 text-gray-600 font-bold italic px-2 pb-2">
+                {["Form ADT-1 Filed", "Acknowledgement Copy"].map(s => (
+                  <li key={s} className="hover:text-amber-700 transition-colors flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-600/30 rounded-full" /> {s}
+                  </li>
+                ))}
+                <li className="text-amber-700 underline hover:text-amber-800 cursor-pointer font-bold pl-3.5 italic">Load More</li>
+              </ul>
+            </div>
 
- {/* Main */}
- <main className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col lg:flex-row gap-8">
- {/* Left column */}
- <section className="flex-1 space-y-6">
- {/* Top card */}
- <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col md:flex-row gap-6">
- {/* Left image card */}
- <div className="md:w-1/3 flex-shrink-0">
- <div className="rounded-xl overflow-hidden">
- <div className="bg-[#C15F3C] rounded-t-xl p-4 text-white text-center">
- <h2 className="text-2xl font-bold ">
- ADT-1 FILING
- </h2>
- <div className="text-xs mt-1 opacity-90">
- ADT - 1: Notifies first auditor appointment to ROC
- </div>
- </div>
+            {/* Col 2: Info Card */}
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
+               <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2 w-fit">
+                    <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA COMPLIANCE</span>
+               </div>
+               <h1 className="text-2xl font-bold text-slate-900 mb-1">ADT-1 Filing</h1>
+               <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />)}
+                  <span className="text-[11px] text-slate-400 ml-1">(2,709 reviews)</span>
+               </div>
 
- <div className="bg-white px-4 py-6 flex justify-center">
- <div className="w-44 h-44 rounded-full overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4">
- <img
- src={ASSETS.man}
- alt="ADT hero"
- className="w-full h-full object-cover"
- />
- </div>
- </div>
- </div>
+               <p className="text-[14px] text-slate-500 leading-relaxed mb-6 font-bold italic">
+                 Auditor appointment services include help with discovering, engaging and appointing of Auditor for newly incorporated Private Limited Company (Audit fee will be extra based on the nature and volume of transaction).
+               </p>
 
- <ul className="mt-4 text-sm space-y-2 text-[#6F6B63]">
- <li className="hover:text-[#C15F3C] cursor-pointer transition-colors">Consent for Appointment as Statutory Auditor</li>
- <li className="hover:text-[#C15F3C] cursor-pointer transition-colors">Appointment as Statutory Auditor</li>
- <li className="hover:text-[#C15F3C] cursor-pointer transition-colors">Board Resolution for Auditor Appointment</li>
- <li className="text-[#C15F3C] underline cursor-pointer hover:text-[#A94E30]">Load More</li>
- </ul>
- </div>
+               <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto">
+                  <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Compliance</div>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                      <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Form ADT-1 E-filing with MCA
+                    </li>
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                      <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> ROC Acknowledgement Copy delivery
+                    </li>
+                  </ul>
+                  <button className="mt-5 w-full bg-[#9e4a2d] text-white py-3 rounded-lg font-bold hover:bg-[#8b4127] transition-all shadow-md uppercase text-sm tracking-wide">ADD TO CART</button>
+               </div>
 
- {/* Right content */}
- <div className="md:w-2/3 flex-1">
- <div className="flex flex-col sm:flex-row justify-between gap-4">
- <div>
- <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-3 py-1 mb-2">
- <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
- <span className="text-xs font-medium text-[#C15F3C]">MCA COMPLIANCE</span>
- </div>
- <h2 className="text-lg font-semibold text-[#2F2E2B]">
- ADT-1 Filing
- </h2>
- <div className="flex items-center gap-3 mt-2">
- <div className="flex items-center gap-1">
- {[...Array(5)].map((_, i) => (
- <Star key={i} size={14} className="fill-[#C15F3C] text-[#C15F3C]" />
- ))}
- </div>
- <span className="text-xs text-[#B1ADA1]">(2709)</span>
- </div>
- </div>
+               <div className="mt-6 flex flex-col gap-3 font-bold italic">
+                  <div className="flex items-center justify-between text-[11px] text-amber-700 border-b border-gray-50 pb-2">
+                     <span className="underline cursor-pointer">Terms and conditions</span>
+                     <span className="underline cursor-pointer">Refer a Friend</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 border border-gray-100 rounded-xl hover:border-amber-200 transition-colors">
+                    <img src={ASSETS.ledgers} alt="ledgers" className="w-10 h-10 object-contain" />
+                    <div>
+                      <div className="text-[11px] font-bold text-amber-700 uppercase">LEDGERS Platform</div>
+                      <div className="text-[10px] text-slate-400 italic font-bold">Secure Document Management</div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </div>
 
- <p className="text-sm text-[#6F6B63] max-w-md">
- Auditor appointment services include help with discovering,
- engaging and appointing of Auditor for newly incorporated
- Private Limited Company (Audit fee will be extra based on the
- nature and volume of transaction).
- </p>
- </div>
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { title: "Statutory Filing", desc: "Notification to ROC about auditor appointment as per Companies Act 2013.", icon: "📋" },
+              { title: "Avoid Late Fees", desc: "Submit within 15 days to avoid high additional fees from MCA.", icon: "🛡" },
+              { title: "Expert Services", desc: "Complete support for board resolutions and auditor consents.", icon: "🎓" }
+            ].map((b, i) => (
+              <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:border-amber-200 transition-colors">
+                 <div className="text-2xl mb-3">{b.icon}</div>
+                 <h3 className="font-bold text-slate-900 mb-2 uppercase tracking-tighter text-sm">{b.title}</h3>
+                 <p className="text-[13px] text-gray-500 font-bold italic leading-relaxed">{b.desc}</p>
+              </div>
+            ))}
+          </section>
 
- {/* Offer box */}
- <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-[#C15F3C] border border-[#E5E2DA]">
- 1 Exclusive Offers
- </div>
- <div className="border-2 border-dashed rounded-xl border-[#E5E2DA] p-4 bg-[#F4F3EE]">
- <div className="font-semibold text-[#2F2E2B]">Basic</div>
- <ul className="mt-2 text-sm text-[#6F6B63]">
- <li className="flex items-center gap-2">
- <ChevronRight size={14} className="text-[#C15F3C]" /> Filed Form ADT-1
- </li>
- <li className="flex items-center gap-2">
- <ChevronRight size={14} className="text-[#C15F3C]" /> Acknowledgement Copy
- </li>
- </ul>
- <div className="mt-3">
- <button className="bg-white border-2 border-[#C15F3C] text-[#C15F3C] px-4 py-1.5 rounded-lg hover:bg-[#C15F3C] hover:text-white transition text-sm font-medium">
- ADD TO CART
- </button>
- </div>
- </div>
- </div>
+          <div className="space-y-12">
+             <article className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                <h1 className="text-2xl font-bold text-[#9e4a2d] mb-8 border-b-2 border-amber-600/10 pb-4 text-center uppercase tracking-tighter italic">
+                   ADT-1 Filing Guide
+                </h1>
 
- <div className="mt-4 border-t border-[#E5E2DA] pt-4 text-sm flex justify-between items-center text-[#6F6B63]">
- <a className="text-[#C15F3C] underline hover:text-[#A94E30] cursor-pointer">
- Terms and conditions
- </a>
- <a className="text-[#C15F3C] underline hover:text-[#A94E30] cursor-pointer">Refer a Friend</a>
- </div>
+                <div className="prose prose-sm max-w-none text-slate-600 space-y-6 leading-relaxed font-bold italic">
+                   <p>
+                    Appointing an auditor is a mandatory compliance step for every company, and filing Form ADT-1 with the Registrar of Companies (ROC) is a legal requirement under the Companies Act, 2013. Whether you're appointing your first auditor after incorporation or reappointing one at your Annual General Meeting (AGM), timely and accurate filing is essential to avoid penalties.
+                   </p>
+                   
+                   <h3 className="text-xl font-bold text-slate-900 pt-4 uppercase tracking-tighter">What is the ADT 1 Form?</h3>
+                   <p>Form ADT 1 is a statutory return filed by companies with the Registrar of Companies (ROC) to report the appointment of an auditor, as required under Section 139 of the Companies Act, 2013. It is used to formally notify the ROC when a company appoints its first auditor after incorporation or appoints/reappoints an auditor at the Annual General Meeting (AGM).</p>
 
- <div className="mt-6">
- <h4 className="font-semibold mb-2 text-[#2F2E2B]">Offers and discounts</h4>
- <div className="p-3 border border-[#E5E2DA] rounded-xl hover:border-[#C15F3C] transition-colors">
- <div className="flex items-center gap-3">
- <img
- src={ASSETS.ledgers}
- alt="ledgers"
- className="h-8 w-8 object-contain"
- />
- <div className="text-sm">
- <div className="text-[#C15F3C] font-medium">
- LEDGERS - Compliance Platform
- </div>
- <div className="text-[#B1ADA1] text-xs">
- Invoicing, GST Filing, Banking and Payroll
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">Requirements for Filing ADT 1 Form</h3>
+                   <p>Filing ADT 1 Form is mandatory for all companies, including public, private, listed, unlisted, and one-person companies (OPCs), upon the appointment of an auditor, whether for the first time or at a subsequent Annual General Meeting (AGM). The form must be submitted to the Registrar of Companies (ROC) within 15 days from the date of the auditor's appointment.</p>
 
- {/* Article */}
- <article className="bg-white rounded-2xl shadow-sm p-6">
- <h1 className="text-2xl font-semibold text-center text-[#2F2E2B]">
- Form ADT-1 Filing for Auditor Appointment
- </h1>
+                   <div className="overflow-x-auto my-6 border border-amber-100 rounded-xl">
+                     <table className="min-w-full divide-y divide-amber-100 font-bold italic">
+                       <thead className="bg-amber-50">
+                         <tr>
+                            <th className="px-4 py-3 text-left text-[11px] font-bold text-amber-900 uppercase tracking-widest">Sl. No.</th>
+                            <th className="px-4 py-3 text-left text-[11px] font-bold text-amber-900 uppercase tracking-widest">Delay in Filing (Number of Days)</th>
+                            <th className="px-4 py-3 text-left text-[11px] font-bold text-amber-900 uppercase tracking-widest">Penalty</th>
+                         </tr>
+                       </thead>
+                       <tbody className="bg-white divide-y divide-gray-50 text-[13px] text-slate-700">
+                         <tr><td className="px-4 py-3">1</td><td className="px-4 py-3 font-bold italic">Up to 30 days</td><td className="px-4 py-3 font-bold italic text-amber-700">2 times the normal fee</td></tr>
+                         <tr><td className="px-4 py-3">2</td><td className="px-4 py-3 font-bold italic">More than 30 days and up to 60 days</td><td className="px-4 py-3 font-bold italic text-amber-700">4 times the normal fee</td></tr>
+                         <tr><td className="px-4 py-3">3</td><td className="px-4 py-3 font-bold italic">More than 60 days and up to 90 days</td><td className="px-4 py-3 font-bold italic text-amber-700">6 times the normal fee</td></tr>
+                         <tr><td className="px-4 py-3">4</td><td className="px-4 py-3 font-bold italic">More than 90 days and up to 180 days</td><td className="px-4 py-3 font-bold italic text-amber-700">10 times the normal fee</td></tr>
+                         <tr><td className="px-4 py-3">5</td><td className="px-4 py-3 font-bold italic">More than 180 days</td><td className="px-4 py-3 font-bold italic text-amber-700">12 times the normal fee</td></tr>
+                       </tbody>
+                     </table>
+                   </div>
 
- <div className="mt-4 text-[15px] leading-7 text-[#6F6B63]">
- <p>
- Appointing an auditor is a mandatory compliance step for every
- company, and filing Form ADT-1 with the Registrar of Companies
- (ROC) is a legal requirement under the Companies Act, 2013.
- Whether you're appointing your first auditor after incorporation
- or reappointing one at your Annual General Meeting (AGM), timely
- and accurate filing is essential to avoid penalties.
- </p>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">How to File Form ADT 1 (E-Filing Process)</h3>
+                   <ol className="list-decimal pl-5 space-y-2 font-bold text-slate-700 italic">
+                      <li>Download the E-Form ADT 1.</li>
+                      <li>Fill in the required details precisely.</li>
+                      <li>Attach all supporting documents (Resolutions, Consents).</li>
+                      <li>Verify and submit the form through the MCA portal.</li>
+                   </ol>
 
- <h3 className="mt-6 text-lg font-semibold text-[#2F2E2B]">
- What is the ADT 1 Form?
- </h3>
- <p className="mt-2">
- Form ADT 1 is a statutory return filed by companies with the
- Registrar of Companies (ROC) to report the appointment of an
- auditor, as required under Section 139 of the Companies Act,
- 2013. It is used to formally notify the ROC when a company
- appoints its first auditor after incorporation or
- appoints/reappoints an auditor at the Annual General Meeting
- (AGM).
- </p>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">How We Can Assist with Filing Form ADT-1</h3>
+                   <ul className="list-disc pl-5 space-y-2 font-bold italic text-amber-700">
+                     <li>Document Preparation: We help prepare all the necessary documents required for Form ADT-1, including board resolutions, auditor consents, and declarations.</li>
+                     <li>Expert Review: Our professionals thoroughly review your documentation to ensure accuracy, completeness, and adherence to statutory requirements.</li>
+                     <li>End-to-End Filing Support: We handle the complete filing process on your behalf, ensuring timely and error-free submission of Form ADT-1 through the MCA portal.</li>
+                   </ul>
+                </div>
+             </article>
 
- <h3 className="mt-6 text-lg font-semibold text-[#2F2E2B]">
- Requirements for Filing ADT 1 Form
- </h3>
- <p className="mt-2">
- Filing ADT 1 Form is mandatory for all companies, including
- public, private, listed, unlisted, and one-person companies
- (OPCs), upon the appointment of an auditor, whether for the
- first time or at a subsequent Annual General Meeting (AGM). The
- form must be submitted to the Registrar of Companies (ROC)
- within 15 days from the date of the auditor's appointment.
- </p>
+             {/* Documents Sections */}
+             <div className="space-y-8">
+                <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                   <h3 className="text-xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-3 uppercase tracking-tighter italic text-[16px]">Documents Required For ADT-1 Filing</h3>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {DOCUMENTS_REQUIRED.map((doc, idx) => (
+                        <div key={idx} className="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-100 font-bold italic group hover:border-amber-200 transition-colors">
+                           <span className="text-sm text-slate-700 group-hover:text-amber-800 tracking-tighter leading-tight italic">{doc.name}</span>
+                        </div>
+                      ))}
+                   </div>
+                   <button className="mt-8 text-amber-700 underline font-bold italic text-sm pl-2">Load More</button>
+                </div>
 
- <h3 className="mt-6 text-lg font-semibold text-[#2F2E2B]">ADT 1 Late Fees</h3>
- <div className="mt-4 overflow-auto">
- <table className="w-full text-sm table-auto border-collapse">
- <thead>
- <tr className="bg-[#F4F3EE]">
- <th className="p-5 border border-[#E5E2DA] text-left">Sl. No.</th>
- <th className="p-5 border border-[#E5E2DA] text-left">
- Delay in Filing (Number of Days)
- </th>
- <th className="p-5 border border-[#E5E2DA] text-left">Penalty</th>
- </tr>
- </thead>
- <tbody>
- {[
- [1, "Up to 30 days", "2 times the normal fee"],
- [
- 2,
- "More than 30 days and up to 60 days",
- "4 times the normal fee",
- ],
- [
- 3,
- "More than 60 days and up to 90 days",
- "6 times the normal fee",
- ],
- [
- 4,
- "More than 90 days and up to 180 days",
- "10 times the normal fee",
- ],
- [5, "More than 180 days", "12 times the normal fee"],
- ].map((row) => (
- <tr
- key={row[0] as number}
- className="odd:bg-white even:bg-[#F4F3EE]"
- >
- <td className="p-5 border border-[#E5E2DA] text-center">{row[0]}</td>
- <td className="p-5 border border-[#E5E2DA]">{row[1]}</td>
- <td className="p-5 border border-[#E5E2DA]">{row[2]}</td>
- </tr>
- ))}
- </tbody>
- </table>
- </div>
+                <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                   <h3 className="text-xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-3 uppercase tracking-tighter italic text-[16px]">Documents Required for Other Registrations</h3>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {OTHER_REGISTRATIONS.map((doc, idx) => (
+                        <div key={idx} className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-200 font-bold italic group hover:border-amber-300 transition-all hover:shadow-md">
+                           <span className="text-[13px] text-slate-700 group-hover:text-amber-800 tracking-tighter">{doc.name}</span>
+                           <span className="bg-amber-100 text-amber-700 w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold">{doc.count}</span>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+             </div>
 
- <h3 className="mt-6 text-lg font-semibold text-[#2F2E2B]">
- How to File Form ADT 1 (E-Filing Process)
- </h3>
- <ol className="mt-3 list-decimal list-inside text-sm text-[#6F6B63] space-y-2">
- <li>Download the E-Form ADT 1</li>
- <li>Fill in the required details</li>
- <li>Attach supporting documents</li>
- <li>Verify and submit the form</li>
- </ol>
+             {/* FAQ Section */}
+             <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's</h3>
+                <div className="space-y-4">
+                  {faqItems.map((faq, idx) => (
+                    <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white">
+                      <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50/10 transition-colors group">
+                        <span className="text-sm font-bold text-slate-800 group-hover:text-amber-700 italic">{faq.q}</span>
+                        <div className={`p-1.5 rounded-full bg-amber-50 transition-all shrink-0 ${openFaq === idx ? 'rotate-45' : ''}`}>
+                           <Plus className="w-4 h-4 text-amber-600" />
+                        </div>
+                      </button>
+                      {openFaq === idx && (
+                        <div className="p-5 bg-amber-50/5 text-sm text-slate-500 border-t border-slate-100 leading-relaxed font-bold italic">{faq.a}</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <button className="mt-10 px-10 py-2.5 border-2 border-amber-600 text-amber-700 rounded-lg text-sm font-bold hover:bg-amber-50 uppercase tracking-wide">Load More</button>
+             </div>
+          </div>
+        </section>
 
- <h3 className="mt-6 text-lg font-semibold text-[#2F2E2B]">
- How We Can Assist with Filing Form ADT-1
- </h3>
- <ul className="mt-3 text-sm text-[#6F6B63] space-y-2">
- <li>
- Document Preparation: We help prepare all the necessary
- documents required for Form ADT-1, including board
- resolutions, auditor consents, and declarations.
- </li>
- <li>
- Expert Review: Our professionals thoroughly review your
- documentation to ensure accuracy, completeness, and adherence
- to statutory requirements.
- </li>
- <li>
- End-to-End Filing Support: We handles the complete
- filing process on your behalf, ensuring timely and error-free
- submission of Form ADT-1 through the MCA portal.
- </li>
- </ul>
- </div>
- </article>
+        {/* Global Sidebar: Persistent Sticky Content */}
+        <aside className="lg:w-80 flex-shrink-0 space-y-6">
+           <div className="sticky top-28 space-y-6">
+              <SidebarCart />
+              
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold italic">
+                <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
+                <ul className="text-[13px] space-y-4 text-amber-700">
+                  {["Form ADT-1 Overview", "MCA Fee Exemption Rules", "Audit Appointment Exemptions"].map((item) => (
+                    <li key={item} className="hover:text-amber-800 cursor-pointer flex gap-3 group items-center">
+                       <div className="w-1.5 h-1.5 bg-amber-600/50 rounded-full group-hover:scale-125 transition-transform" />
+                       <span className="group-hover:translate-x-1 transition-transform">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
- {/* Documents + other registrations */}
- <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
- <div className="lg:col-span-7 bg-white rounded-2xl shadow-sm p-6">
- <h3 className="text-lg font-semibold mb-4 text-[#2F2E2B]">
- Documents Required For ADT-1 Filing
- </h3>
- <ul className="space-y-3 text-sm text-[#6F6B63]">
- <li className="border-b border-[#E5E2DA] pb-3 hover:text-[#C15F3C] cursor-pointer transition-colors">
- Consent for Appointment as Statutory Auditor
- </li>
- <li className="border-b border-[#E5E2DA] pb-3 hover:text-[#C15F3C] cursor-pointer transition-colors">
- Appointment as Statutory Auditor
- </li>
- <li className="border-b border-[#E5E2DA] pb-3 hover:text-[#C15F3C] cursor-pointer transition-colors">
- Board Resolution for Auditor Appointment
- </li>
- <li className="mt-4 inline-block px-3 py-2 border-2 border-[#C15F3C] rounded-lg text-sm text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white cursor-pointer transition-colors">
- Load More
- </li>
- </ul>
- </div>
+              <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:scale-[1.02] transition-transform">
+                <img src={ASSETS.companyCompliance} alt="compliance" className="w-full h-auto object-cover" />
+                <div className="p-5 bg-white font-bold italic">
+                   <div className="text-[13px] text-slate-800 uppercase italic tracking-tighter">Corporate Compliance</div>
+                   <div className="text-[11px] text-slate-400 mt-1 italic font-bold">Comprehensive Protection</div>
+                </div>
+              </div>
+           </div>
+        </aside>
+      </main>
 
- <aside className="lg:col-span-5 bg-white rounded-2xl shadow-sm p-6">
- <h3 className="text-lg font-semibold mb-4 text-[#2F2E2B]">
- Documents Required for Other Registrations
- </h3>
- <ul className="space-y-3 text-sm">
- {[
- ["Documents Required for LLP Registration", 8],
- ["Documents Required for Proprietorship Registration", 2],
- ["Documents Required for Company Registration", 2],
- ["Documents Required for Trademark Registration", 7],
- ["Documents Required for GST Registration", 10],
- ].map(([label, count]) => (
- <li
- key={label as string}
- className="flex justify-between items-center border-b border-[#E5E2DA] pb-2 hover:text-[#C15F3C] cursor-pointer transition-colors"
- >
- <span className="text-[#6F6B63]">{label}</span>
- <span className="bg-[#C15F3C] text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-xs">
- {count}
- </span>
- </li>
- ))}
- </ul>
- </aside>
- </div>
+      <PopularSearches />
+      <Footer />
 
- {/* FAQ */}
- <div className="bg-white rounded-2xl shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4 text-[#2F2E2B]">
- FAQ's on ADT-1 Filing
- </h3>
- <div className="space-y-0">
- {faqItems.map((q, i) => (
- <div key={i} className="border-b border-[#E5E2DA] last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setOpenFaq(openFaq === i ? null : i)}
- >
- <span className="text-[#2F2E2B] font-medium">{q}</span>
- <span className="text-[#C15F3C] flex items-center gap-2">
- {openFaq === i ? "−" : <Plus size={14} />}
- </span>
- </button>
- {openFaq === i && (
- <div className="px-2 pb-4 text-sm text-[#6F6B63]">
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
-
- <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-
- <button className="px-4 py-2 border-2 border-[#C15F3C] text-[#C15F3C] rounded-lg text-sm hover:bg-[#C15F3C] hover:text-white transition-colors font-medium">
- Load More
- </button>
- 
-<AddQuestionModal />
-</div>
- </div>
-
- {/* Trust Badges */}
- <div className="mt-2 pb-0">
- <div className="flex items-center justify-center gap-4 flex-wrap">
- {[...Array(5)].map((_, i) => (
- <Star key={i} size={16} className="fill-[#C15F3C] text-[#C15F3C]" />
- ))}
- <span className="text-sm text-[#6F6B63]">Trusted by 10,000+ Businesses</span>
- </div>
- </div>
- </section>
-
- {/* Right column (sidebar) */}
- <aside className="lg:w-96 space-y-6">
- <div className="bg-white rounded-2xl shadow-sm p-6 top-28">
- <div className="text-center text-[#6F6B63]">
- <img
- src={"/adt1_filing.webp"}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-[#2F2E2B]">Your cart is empty</h3>
- <p className="text-sm mt-2 text-[#B1ADA1]">
- Browse our services and add some services in cart!
- </p>
- </div>
-
- <div className="mt-6 text-center">
- <div className="text-sm text-[#6F6B63]">
- Existing User?{" "}
- <a className="text-[#C15F3C] underline hover:text-[#A94E30] font-medium cursor-pointer">Login</a>
- </div>
- </div>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
- placeholder="Name"
- />
- <input
- className="w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-[#E5E2DA] rounded-lg px-3 bg-[#F4F3EE]">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm text-[#2F2E2B]">+91</span>
- </div>
- <input
- className="flex-1 bg-[#F4F3EE] border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm text-[#6F6B63]">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4 accent-[#C15F3C]"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-[#C15F3C] text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-[#A94E30] transition shadow-md">
- <ShoppingBag size={16} /> Get Started
- </button>
-
- <div className="flex items-center justify-center gap-1.5 text-xs text-[#B1ADA1] pt-1">
- <svg className="w-3.5 h-3.5 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- <span>Secure · No spam · Instant confirmation</span>
- </div>
- </form>
- </div>
-
- <div className="bg-white rounded-2xl shadow-sm p-4">
- <h4 className="font-semibold mb-3 text-[#2F2E2B]">Related Guides</h4>
- <ul className="text-sm space-y-2">
- <li className="text-[#C15F3C] hover:text-[#A94E30] cursor-pointer hover:underline">Form-ADT-1</li>
- <li className="text-[#C15F3C] hover:text-[#A94E30] cursor-pointer hover:underline">
- MCA Relaxes Levy of Additional Fee in the Filing of certain forms under companies act
- </li>
- <li className="text-[#C15F3C] hover:text-[#A94E30] cursor-pointer hover:underline">Exemption for Form Adt 1</li>
- </ul>
- </div>
-
- <div className="rounded-2xl overflow-hidden shadow-sm">
- <img
- src={ASSETS.adRight1}
- alt="company compliance"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="rounded-2xl overflow-hidden shadow-sm">
- <img
- src={ASSETS.dinEkyc}
- alt="din ekyc"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="bg-white rounded-2xl p-4">
- <h4 className="font-semibold mb-3 text-[#2F2E2B]">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 14).map((t) => (
- <span
- key={t}
- className="text-xs px-3 py-1 border border-[#E5E2DA] rounded-lg bg-white text-[#6F6B63] hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-colors"
- >
- {t}
- </span>
- ))}
- </div>
- </div>
- </aside>
- </main>
-
- {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-[#C15F3C] text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:bg-[#A94E30] transition-all cursor-pointer">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
- <Footer />
-
- </div>
-
- );
-};
-
-export default ADT1FilingMergedPage;
+      {/* WhatsApp CTA */}
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-[#9e4a2d] to-[#8b4127] text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:scale-105 transition-all cursor-pointer group">
+        <img src={ASSETS.whatsapp} alt="wa" className="w-6 h-6" />
+        <span className="font-bold text-[15px]">Expert Chat</span>
+      </div>
+    </div>
+  );
+}

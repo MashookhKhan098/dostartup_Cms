@@ -1,5 +1,8 @@
 "use client";
 import AddQuestionModal from "../components/AddQuestionModal";
+import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
+import Footer from "../components/Footer";
 
 import React, { useState } from "react";
 import {
@@ -24,7 +27,7 @@ const ASSETS = {
 };
 
 const NAV_ITEMS = [
- "IndiaFilings",
+ "DoStartup",
  "Startup",
  "Registrations",
  "Trademark",
@@ -91,93 +94,15 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
- {/* Header */}
- <header className="bg-white border-b sticky top-0 z-50">
- <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
- <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-
- <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
- {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => {
- if (item === "Income Tax") {
- return (
- <div
- key={item}
- onMouseEnter={() => setShowIncomeDropdown(true)}
- onMouseLeave={() => setShowIncomeDropdown(false)}
- className="relative"
- >
- <button className="flex items-center gap-1 text-sm font-medium">
- {item} <ChevronDown className="w-3 h-3" />
- </button>
-
- {showIncomeDropdown && (
- <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[480px] z-50">
- <div className="bg-white rounded-lg shadow-lg border p-4">
- <div className="grid grid-cols-2 gap-3">
- <a
- href="/income-tax/e-filing"
- className="text-sm text-slate-700 hover:text-emerald-600"
- >
- Income Tax E-Filing
- </a>
- <a
- href="/income-tax/tds-return-filing"
- className="text-sm text-slate-700 hover:text-emerald-600"
- >
- TDS Return Filing
- </a>
- <a
- href="/income-tax/company-itr-filing"
- className="text-sm text-slate-700 hover:text-emerald-600"
- >
- Company ITR Filing
- </a>
- <a
- href="/income-tax/tan-registration"
- className="text-sm text-slate-700 hover:text-emerald-600"
- >
- TAN Registration
- </a>
- </div>
- </div>
- </div>
- )}
- </div>
- );
- }
-
- return (
- <a key={item} href="#" className="hover:text-indigo-700">
- {item}
- </a>
- );
- })}
- </nav>
-
- <div className="ml-auto flex items-center gap-3">
- <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
- <Search size={14} />
- <input
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- placeholder="Search"
- className="outline-none text-sm bg-transparent w-40"
- />
- </div>
- <button className="px-3 py-1 border rounded-md text-sm">
- Login
- </button>
- </div>
- </div>
- </header>
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
+ <Navbar />
 
  {/* Breadcrumb & Hero */}
  <div className="bg-gradient-to-r from-white to-slate-50 py-6">
  <div className="max-w-[1180px] mx-auto px-6">
  <div className="text-sm text-gray-500 mb-4">
- IndiaFilings / Income Tax /{" "}
- <span className="text-indigo-600 font-medium">
+ DoStartup / Income Tax /{" "}
+ <span className="text-[#C15F3C] font-medium">
  TDS Return Filing
  </span>
  </div>
@@ -228,7 +153,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  />
  </div>
 
- <button className="whitespace-nowrap px-5 py-3 bg-emerald-600 text-white rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)]">
+ <button className="whitespace-nowrap px-5 py-3 bg-[#C15F3C] text-white rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)]">
  Get Accountant
  </button>
  </form>
@@ -368,7 +293,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  <Check size={16} /> Deductor–Deductee Reconciliation
  </li>
  <li className="flex items-center gap-2">
- <Check size={16} /> TDS Certificate Generation
+ <Check size={16} className="text-[#C15F3C]" /> TDS Certificate Generation
  </li>
  </ul>
  </div>
@@ -465,7 +390,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </p>
 
  <p>
- IndiaFilings provides expert assistance to streamline the
+ DoStartup provides expert assistance to streamline the
  process — from deposit of TDS online to filing TDS returns and
  reconciling them with TRACES and Form 26AS.
  </p>
@@ -538,7 +463,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  aria-controls={`faq-${i}`}
  >
  <span className="text-slate-800">{q}</span>
- <span className="text-indigo-600 flex items-center gap-2">
+ <span className="text-[#C15F3C] flex items-center gap-2">
  {faqOpen === i ? "-" : <Plus size={14} />}
  </span>
  </button>
@@ -580,138 +505,12 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </section>
 
  {/* Sidebar */}
- <aside className="lg:col-span-4 hidden lg:block">
- <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-center">
- Accurate & timely compliance
- </h3>
- <p className="text-sm mt-2 text-center">
- End-to-end preparation and filing of all TDS returns (24Q, 26Q,
- 27Q, etc.) with due-date tracking, reconciliation of challans and
- deductions, and periodic reviews to avoid interest, late fees, and
- notices.
- </p>
-
- <div className="mt-4 text-sm text-gray-700">
- <h4 className="font-semibold mb-2">Powered by LEDGERS</h4>
- <p>
- Automated bank feeds and reconciliations, document vault, and
- audit-ready reports—inside one secure system.
- </p>
- </div>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-emerald-600 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
- <ShoppingBag size={16} /> Get Started
- </button>
- </form>
- </div>
-
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
- <h4 className="font-semibold mb-3">Related Guides</h4>
- <ul className="text-sm text-indigo-600 space-y-2">
- <li>Form 24Q – TDS Return for Salary Payment</li>
- <li>Form 26Q – Non-Salary Deductions</li>
- <li>Form 27Q – NRI TDS Returns</li>
- <li>Form 27EQ – TCS Return</li>
- </ul>
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-4">
- <img
- src={ASSETS.pricingBadge}
- alt="ledgers"
- className="w-full h-56 object-cover"
- />
- </div>
- </aside>
+         <aside className="lg:col-span-4 hidden lg:block">
+          <SidebarCart />
+        </aside>
  </main>
 
- {/* Footer */}
- <footer className="bg-white mt-12 py-3 border-t">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
- <a className="block">About IndiaFilings</a>
- <a className="block">Careers</a>
- <a className="block">Contact Us</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
- <a className="block">Business Search</a>
- <a className="block">Trademark Search</a>
- <a className="block">Filings.AE for UAE</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
- <a className="block">Terms & Conditions</a>
- <a className="block">Privacy Policy</a>
- <a className="block">Refund Policy</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
- <a className="block">Confidentiality Policy</a>
- <a className="block">Disclaimer Policy</a>
- <a className="block">IndiaFilings Review</a>
- </div>
- </div>
-
- <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} IndiaFilings - TDS Return Filing
- </div>
- </div>
- </footer>
-
- {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
+ <Footer />
  </div>
  );
 }

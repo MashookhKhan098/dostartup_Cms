@@ -39,7 +39,7 @@ export type DynamicHeroSectionProps = {
 export default function DynamicHeroSection({
  heading = "Start Your",
  headingHighlight = "Dream Business",
- description = "A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using IndiaFilings and ensure full compliance with local municipal regulations.",
+ description = "A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using DoStartup and ensure full compliance with local municipal regulations.",
  features,
  tabs,
  defaultTab,

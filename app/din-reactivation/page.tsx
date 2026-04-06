@@ -1,666 +1,261 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 /* eslint-disable @next/next/no-img-element */
 
-import React, { useMemo, useState } from "react";
-import {
- ChevronRight,
- ShoppingCart,
- Star,
- ChevronDown,
- Plus,
-} from "lucide-react";
+import React, { useState } from "react";
+import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
 import Navbar from "../components/Navbar";
-
-/**
- * DIN Reactivation page with amber theme and imported Navbar
- */
+import Footer from "../components/Footer";
+import PopularSearches from "../components/PopularSearches";
+import SidebarCart from "../components/SidebarCart";
 
 const ASSETS = {
- logo: "/images/india-logo.jpg",
- heroBlue: "/images/din-hero-blue.jpg",
- heroMan:
- "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
- whatsapp: "/images/whatsapp.svg",
- promoBlue:
- "https://img.indiafilings.com/catalog/company-compliance-india.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- gstSave: "https://img.indiafilings.com/catalog/gstin.png",
- partnershipCard:
- "https://img.indiafilings.com/catalog/partnership-compliance.png",
+  logo: "/images/india-logo.jpg",
+  heroImage: "/images/din.jpg",
+  man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
+  ledgers: "/images/ledgers.jpg",
+  whatsapp: "/images/whatsapp.png",
+  companyCompliance: "/images/company-compliance.jpg",
+  cartIcon: "/images/cart.png",
+  indiaFlag: "/images/india-flag.png",
 };
 
-const MCA_DROPDOWN_LINKS = [
- { title: "Company Compliance", href: "/MCA/company-compliance" },
- { title: "Director Change", href: "/MCA/director-change" },
- { title: "AOA Amendment", href: "/MCA/aoa-amendment" },
- { title: "LLP Compliance", href: "/MCA/llp-compliance" },
- { title: "Remove Director", href: "/MCA/remove-director" },
- {
- title: "Authorized Capital Increase",
- href: "/authorized-capital-increase",
- },
- { title: "OPC Compliance", href: "/MCA/opc-compliance" },
- { title: "ADT-1 Filing", href: "/MCA/adt-1-filing" },
- { title: "Share Transfer", href: "/MCA/share-transfer" },
- { title: "Name Change - Company", href: "/MCA/name-change-company" },
- { title: "DPT-3 Filing", href: "/MCA/dpt-3-filing" },
- { title: "Demat of Shares", href: "/MCA/demat-of-shares" },
- { title: "Registered Office Change", href: "/MCA/registered-office-change" },
- { title: "LLP Form 11 Filing", href: "/MCA/llp-form-11-filing" },
- { title: "Winding Up - LLP", href: "/MCA/winding-up-llp" },
- { title: "DIN eKYC Filing", href: "/MCA/din-ekyc-filing" },
- { title: "Dormant Status Filing", href: "/MCA/dormant-status-filing" },
- { title: "Winding Up - Company", href: "MCA/winding-up-company" },
- { title: "DIN Reactivation", href: "/MCA/din-reactivation" },
- { title: "MOA Amendment", href: "/MCA/moa-amendment" },
- { title: "Commencement (INC-20A)", href: "/MCA/commencement-inc-20a" },
-];
+export default function DINReactivationPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-const POPULAR_SEARCHES = [
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Nadakacheri",
- "Flipkart Seller",
- "Caste Certificate",
- "IAY",
- "EPFO Passbook",
- "Domicile Certificate",
- "Udyog Aadhaar",
- "PF Withdrawal",
- "Karnataka One",
- "Encumbrance Certificate",
- "Bonafide Certificate",
- "Instant PAN Card",
- "E PAN Card",
- "Income Certificate",
- "Marriage Certificate",
- "Passport Renewal",
- "Nivesh Mitra",
- "MSME Registration",
- "Experience Certificate",
- "Trademark Status",
- "Trade License",
- "Domicile",
- "eMitra",
- "UAN",
- "PICME",
- "Resignation Letter Format",
- "Ration Card",
- "TNREGINET",
- "RAJSSP",
- "LLP Compliance",
- "Form 16",
- "Police Clearance Certificate",
- "OBC Certificate",
- "Jamabandi",
- "Mee Bhoomi",
- "SC Certificate",
- "UAN Login",
- "eAadhaar Download",
- "Linking Aadhaar To Bank Accounts",
- "mAadhaar",
- "Aadhaar Enrollment Centre",
- "UAN Passbook",
- "Amazon How to Sell",
- "PAN Card Apply",
- "EPFO Unified Portal",
-];
+  const faqItems = [
+    { q: "What is Director Identification Number (DIN)?", a: "A Director Identification Number (DIN) is an 8-digit unique identifier assigned to directors. Once issued, it remains valid for the lifetime of the director." },
+    { q: "What is Form DIR-3 KYC?", a: "Form DIR-3 KYC is an electronic form mandated by MCA to update KYC details of directors." },
+    { q: "When is the deadline for DIR-3 KYC filing?", a: "The deadline is set as September 30th of each year (subject to MCA extensions)." },
+    { q: "What happens if I don't file DIR-3 KYC?", a: "Failure to file leads to deactivation of the DIN, and a late fee may be imposed for reactivation." },
+    { q: "Can I reactivate my deactivated DIN?", a: "Yes ΓÇö to reactivate, file the appropriate DIR-3 KYC form and follow MCA approvals." }
+  ];
 
-const RELATED_GUIDES = [
- "Complete Guide on Director Identification Number",
- "How to Obtain DIN?",
- "DIN Number Registration & Search",
- "Designated Partner Identification Number (DPIN)",
- "How to Change DIN details ?",
-];
+  const DOCUMENTS_REQUIRED = [
+    { name: "Digital Signature Certificate (DSC) (self-attested copy of PAN)" },
+    { name: "PAN Card (self-attested)" },
+    { name: "Proof of Address (Aadhaar / Voter ID / DL)" },
+    { name: "Photograph (Self-attestation passport photo)" },
+    { name: "Mobile & Email for OTP verification" }
+  ];
 
-export default function DINReactivationPixel() {
- const [showMcaDropdown, setShowMcaDropdown] = useState(false);
- const [gstChecked, setGstChecked] = useState(false);
- const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const OTHER_REGISTRATIONS = [
+    { name: "Documents Required for LLP Registration", count: 8 },
+    { name: "Documents Required for Proprietorship Registration", count: 2 },
+    { name: "Documents Required for Company Registration", count: 2 },
+    { name: "Documents Required for Trademark Registration", count: 7 },
+    { name: "Documents Required for GST Registration", count: 10 },
+  ];
 
- const faqItems = [
- {
- q: "What exactly is a Director Identification Number (DIN)?",
- a: "An 8-digit unique identifier allotted by MCA to directors.",
- },
- {
- q: "Can you explain Form DIR-3 KYC in detail?",
- a: "DIR-3 KYC is the annual KYC form for directors to update contact and personal details on MCA.",
- },
- {
- q: "Who is mandated to file DIR-3 KYC, and when?",
- a: "Directors allotted DIN by or before March 31, 2018 must file annually by September 30 (subject to extensions).",
- },
- {
- q: "What happens if DIR-3 KYC is not filed by the deadline?",
- a: "DIN may be deactivated and marked 'Deactivated due to Non-filing of DIR-3 KYC' restricting director functions.",
- },
- {
- q: "How to reactivate DIN number?",
- a: "File DIR-3 KYC (eForm or web) and follow MCA processes; upon approval DIN is reactivated.",
- },
- ];
+  return (
+    <div className="min-h-screen bg-[#f4f6fa] text-slate-800 font-sans">
+      <Navbar />
 
- return (
- <div className="min-h-screen bg-[#f4f6fa] text-slate-800 font-sans">
- {/* Imported Navbar */}
- <Navbar />
+      {/* Breadcrumb */}
+      <div className="bg-gradient-to-r from-white to-slate-50 py-3 text-slate-800 border-b border-slate-100 font-bold italic">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 text-sm text-gray-500">
+          Home / MCA Services / <span className="text-amber-700 font-medium tracking-tight">DIN Reactivation</span>
+        </div>
+      </div>
 
- {/* Breadcrumb */}
- <div className="bg-gradient-to-r from-white to-slate-50 py-3">
- <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-sm text-gray-500">
- Home / Income Tax /{" "}
- <span className="text-amber-700 font-medium">DIN Reactivation</span>
- </div>
- </div>
+      {/* Main Container: Persistent Sticky Sidebar */}
+      <main className="max-w-[1240px] mx-auto px-4 sm:px-6 py-8 flex flex-col lg:flex-row gap-8 items-start">
+        
+        {/* Left Section: All main content */}
+        <section className="flex-1 space-y-12 overflow-hidden">
+          
+          {/* Header Block: 2-Col Hero Area */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+             {/* Col 1: Hero Image Card */}
+             <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
+               <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
+                <div className="bg-[#9e4a2d] p-6 text-center">
+                  <h2 className="text-white text-xl font-bold uppercase tracking-tight">DIN REACTIVATION</h2>
+                  <div className="mt-2 text-sm text-amber-100 uppercase font-bold italic">Director Compliance Recovery</div>
+                </div>
+                <div className="bg-[rgb(243,246,249)] p-8 flex justify-center items-center flex-1">
+                   <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10 scale-110">
+                      <img src={ASSETS.man} alt="DIN Reactivation" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/5" />
+                   </div>
+                </div>
+              </div>
+              <ul className="mt-4 text-[13px] space-y-2 text-gray-600 font-bold italic px-2 pb-2">
+                {["Digital Signature Certificate (DSC)", "PAN Card (self-attested)", "Proof of Address"].map(s => (
+                  <li key={s} className="hover:text-amber-700 transition-colors flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-600/30 rounded-full" /> {s}
+                  </li>
+                ))}
+                <li className="text-amber-700 underline hover:text-amber-800 cursor-pointer font-bold pl-3.5 italic">Load More</li>
+              </ul>
+            </div>
 
- {/* PAGE HERO + ACTION cards (three-col layout) */}
- <main className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6 pb-12">
- <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
- {/* Left hero / image box */}
- <div className="lg:col-span-1">
- <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg">
- <div className="rounded-lg overflow-hidden border border-gray-200">
- {/* top blue panel changed to amber */}
- <div className="bg-gradient-to-r from-amber-700 to-amber-800 p-6 text-center">
- <h2 className="text-white text-xl font-bold ">
- DIN REACTIVATION
- </h2>
- <div className="mt-2 text-sm text-amber-100">
- DIN Reactivation: Quick and hassle-free.
- </div>
- </div>
+            {/* Col 2: Info Card */}
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
+               <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2 w-fit">
+                    <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA COMPLIANCE</span>
+               </div>
+               <h1 className="text-2xl font-bold text-slate-900 mb-1">DIN Reactivation</h1>
+               <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />)}
+                  <span className="text-[11px] text-slate-400 ml-1">(2,709 reviews)</span>
+               </div>
 
- {/* man image */}
- <div className="bg-[rgb(243,246,249)] p-6 flex justify-center">
- <img
- src={ASSETS.heroMan}
- alt="hero man"
- className="w-full max-w-[320px] object-contain rounded-md"
- />
- </div>
- </div>
+               <p className="text-[14px] text-slate-500 leading-relaxed mb-6 font-bold italic">
+                 Director Identification Number (DIN) is an essential identifier for directors. Reactivate your deactivated DIN through DIR-3 KYC filing.
+               </p>
 
- {/* Document links */}
- <ul className="mt-4 text-xs sm:text-sm space-y-2 text-gray-600">
- <li className="hover:text-amber-700 cursor-pointer transition-colors">Digital Signature Certificate (DSC)</li>
- <li className="hover:text-amber-700 cursor-pointer transition-colors">PAN Card (self-attested)</li>
- <li className="hover:text-amber-700 cursor-pointer transition-colors">Proof of Address</li>
- <li className="text-amber-700 underline hover:text-amber-800 cursor-pointer font-medium">Load More</li>
- </ul>
- </div>
- </div>
+               <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto">
+                  <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Help</div>
+                  <ul className="space-y-3 mt-1">
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                      <ChevronRight className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Application Filing in MCA
+                    </li>
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                      <ChevronRight className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Provide DIN-eKYC & Acknowledgement Copy
+                    </li>
+                  </ul>
+                  <button className="mt-4 w-full bg-[#9e4a2d] text-white py-3 rounded-lg font-bold hover:bg-[#8b4127] transition-all shadow-md uppercase text-sm tracking-wide">Add to Cart</button>
+               </div>
 
- {/* Center content (title, description, offer box) */}
- <div className="lg:col-span-1">
- <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg">
- <div className="flex items-center justify-between">
- <div>
- {/* Badge */}
- <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2">
- <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
- <span className="text-xs font-medium text-amber-700">MCA COMPLIANCE</span>
- </div>
- <h1 className="text-lg font-semibold">DIN Reactivation</h1>
- <div className="flex items-center gap-2 mt-2 text-xs text-slate-500">
- <div className="flex items-center gap-1">
- {[...Array(4)].map((_, i) => (
- <Star
- key={i}
- className="w-4 h-4 text-amber-500 fill-amber-500"
- />
- ))}
- <span className="text-slate-500">(428)</span>
- </div>
- </div>
- </div>
+               <div className="mt-6 flex flex-col gap-3 font-bold italic">
+                  <div className="flex items-center justify-between text-[11px] text-amber-700 border-b border-gray-50 pb-2">
+                     <span className="underline cursor-pointer">Terms and conditions</span>
+                     <span className="underline cursor-pointer">Refer a Friend</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 border border-gray-100 rounded-xl hover:border-amber-200 transition-colors">
+                    <img src={ASSETS.ledgers} alt="ledgers" className="w-10 h-10 object-contain" />
+                    <div>
+                      <div className="text-[11px] font-bold text-amber-700 uppercase">LEDGERS Platform</div>
+                      <div className="text-[10px] text-slate-400 font-bold tracking-tighter">Automatic KYC Reminders</div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </div>
 
- <div className="text-xs text-slate-500 max-w-[200px]">
- Director Identification Number (DIN) may be subject to
- deactivation due to non-compliance with regulatory
- requirements. Reactivate it by filing Form DIR-3 with expert assistance.
- </div>
- </div>
+          <div className="space-y-12">
+             <article className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                <h1 className="text-2xl font-bold text-[#9e4a2d] mb-8 border-b-2 border-amber-600/10 pb-4 text-center uppercase tracking-tighter italic">
+                   DIN Reactivation Guide (DIR-3 KYC)
+                </h1>
 
- {/* dashed offer box */}
- <div className="mt-5 border-2 border-dashed border-amber-200 rounded-md p-4 relative bg-amber-50/30">
- <div className="absolute -top-3 left-4 bg-white px-2 text-[11px] text-amber-700 rounded border border-amber-200">
- 2 Exclusive Offers
- </div>
- <div className="text-sm font-semibold">DIN Reactivation</div>
- <ul className="mt-2 text-sm text-slate-600 space-y-1">
- <li className="flex items-start gap-2">
- <ChevronRight className="w-4 h-4 text-amber-600 mt-1" />{" "}
- Application Filing in MCA
- </li>
- <li className="flex items-start gap-2">
- <ChevronRight className="w-4 h-4 text-amber-600 mt-1" />{" "}
- Provide DIN-eKYC
- </li>
- <li className="flex items-start gap-2">
- <ChevronRight className="w-4 h-4 text-amber-600 mt-1" />{" "}
- Acknowledgement Copy
- </li>
- </ul>
+                <div className="prose prose-sm max-w-none text-slate-600 space-y-6 leading-relaxed font-bold italic">
+                   <p>
+                    Director Identification Number (DIN) is an essential identifier for anyone aspiring to be a director in Indian companies, issued by the Ministry of Corporate Affairs (MCA). Directors are required to update their KYC details annually through the DIR-3 KYC form with the MCA. Failure to do so leads to the deactivation of the DIN, which restricts their ability to function in corporate roles. To reactivate a deactivated DIN, directors must file the DIR-3 KYC form, sometimes with a late fee, depending on the delay.
+                   </p>
+                   
+                   <h3 className="text-xl font-bold text-slate-900 pt-4 uppercase tracking-tighter">Director Identification Number (DIN)</h3>
+                   <p>A Director Identification Number (DIN) is an 8-digit unique identifier assigned to directors. Once issued, it remains valid for the lifetime of the director.</p>
 
- <button className="mt-3 ml-auto block px-4 py-1.5 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
- ADD TO CART
- </button>
- </div>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">What is Form DIR-3 KYC?</h3>
+                   <p>Form DIR-3 KYC is an electronic form mandated by MCA to update KYC details of directors.</p>
 
- <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
- <a href="#" className="text-amber-700 hover:text-amber-800 hover:underline font-medium">
- Terms and conditions
- </a>
- <a href="#" className="text-amber-700 hover:text-amber-800 hover:underline font-medium">
- Refer a Friend
- </a>
- </div>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">Applicability</h3>
+                   <p>Form DIR-3 KYC is mandatory for directors allotted DIN by or before March 31, 2018 and with status 'approved'.</p>
 
- <div className="mt-5">
- <div className="text-sm font-semibold mb-3">
- Offers and discounts
- </div>
- <div className="space-y-3 mt-3">
- <div className="flex items-center gap-3 border border-gray-200 rounded-lg p-3 hover:border-amber-200 transition-colors">
- <img
- src={ASSETS.ledgers}
- alt="ledgers"
- className="w-10 h-10 object-contain"
- />
- <div className="text-sm">
- <div className="font-medium text-amber-700">
- LEDGERS - Compliance Platform
- </div>
- <div className="text-xs text-slate-500">
- Invoicing, GST Filing, Banking and Payroll
- </div>
- </div>
- </div>
- <div className="flex items-center gap-3 border border-gray-200 rounded-lg p-3 hover:border-amber-200 transition-colors">
- <img
- src={ASSETS.gstSave}
- alt="gst"
- className="w-10 h-10 object-contain"
- />
- <div className="text-sm">
- <div className="font-medium text-amber-700">
- Save 18% with GST Registration
- </div>
- <div className="text-xs text-slate-500">
- Get GST eInvoice with Input Tax Credit
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">Purpose of DIR-3 KYC (Know Your Customer)</h3>
+                   <p>The purpose is to maintain current and accurate director information with the ROC including addresses, contact numbers and email addresses.</p>
 
- {/* Right cart / form */}
- <aside className="lg:col-span-1">
- <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg sticky top-24">
- <div className="bg-[#FAFAFA] rounded-xl p-6 text-center border border-gray-200">
- <ShoppingCart className="w-12 h-12 text-amber-600 mx-auto mb-2" />
- <div className="text-slate-800 font-semibold">
- Your cart is empty
- </div>
- <div className="text-xs text-slate-500 mt-1">
- Browse our services and add some services in cart!
- </div>
- </div>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase underline">Annual Deadline for Filing Form DIR-3 KYC</h3>
+                   <p>Deadline is set as September 30th of each year (subject to MCA extensions).</p>
 
- <div className="mt-4 text-xs text-slate-600 text-center">
- Existing User?{" "}
- <a href="#" className="text-amber-700 font-medium hover:text-amber-800">
- Login
- </a>
- </div>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">Types of DIR-3 KYC Forms</h3>
+                   <p>DIR-3 KYC eForm (for first-time filers) and DIR-3-KYC-WEB (simplified web form for returning filers).</p>
 
- <div className="mt-3 space-y-3">
- <input
- placeholder="Name"
- className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-amber-600"
- />
- <input
- placeholder="Email"
- className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-amber-600"
- />
- <div className="flex">
- <select className="px-3 py-2 border border-gray-200 rounded-l-md text-sm focus:outline-none focus:ring-1 focus:ring-amber-600">
- <option>+91</option>
- </select>
- <input
- placeholder="Phone"
- className="flex-1 px-3 py-2 border border-gray-200 rounded-r-md text-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
- />
- </div>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase">DIN Deactivation & Reactivation</h3>
+                   <p>If a director does not file, their DIN may be marked 'Deactivated due to Non-filing of DIR-3 KYC'. To reactivate, file the appropriate form and follow MCA approvals.</p>
 
- <label className="flex items-center gap-2 text-xs text-slate-700">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked(!gstChecked)}
- className="accent-amber-600"
- />
- Enter GSTIN to get 18% GST Credit
- </label>
+                   <h3 className="text-lg font-bold text-slate-900 pt-6 tracking-tighter italic uppercase underline">Streamline Your DIN Reactivation Process</h3>
+                   <p>We offer comprehensive assistance at every stage ΓÇö application support, form completion guidance, PAN verification, DSC help, document attachment and SRN generation & follow-up.</p>
+                </div>
+             </article>
 
- {gstChecked && (
- <input
- placeholder="GSTIN"
- className="w-full px-3 py-2 border rounded-md text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-amber-600"
- />
- )}
+             {/* Documents Sections */}
+             <div className="space-y-8">
+                <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                   <h3 className="text-xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-3 uppercase tracking-tighter italic text-[16px]">Documents Required For DIN Reactivation</h3>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {DOCUMENTS_REQUIRED.map((doc, idx) => (
+                        <div key={idx} className="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-100 font-bold italic group hover:border-amber-200 transition-colors">
+                           <span className="text-sm text-slate-700 group-hover:text-amber-800 italic">{doc.name}</span>
+                        </div>
+                      ))}
+                   </div>
+                </div>
 
- <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white py-2 rounded-md font-semibold transition-all shadow-md hover:shadow-lg">
- Get Started
- </button>
+                <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                   <h3 className="text-xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-3 uppercase tracking-tighter italic text-[16px]">Documents Required for Other Registrations</h3>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {OTHER_REGISTRATIONS.map((doc, idx) => (
+                        <div key={idx} className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-200 font-bold italic group hover:border-amber-300 transition-all hover:shadow-md">
+                           <span className="text-[13px] text-slate-700 group-hover:text-amber-800 tracking-tighter">{doc.name}</span>
+                           <span className="bg-amber-100 text-amber-700 w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold">{doc.count}</span>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+             </div>
 
- <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
- <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- <span>Secure · No spam · Instant confirmation</span>
- </div>
- </div>
- </div>
- </aside>
- </div>
+             {/* FAQ Section */}
+             <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+                <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's</h3>
+                <div className="space-y-4 font-bold italic">
+                  {faqItems.map((faq, idx) => (
+                    <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white">
+                      <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50/10 transition-colors group">
+                        <span className="text-sm font-bold text-slate-800 group-hover:text-amber-700 italic">{faq.q}</span>
+                        <div className={`p-1.5 rounded-full bg-amber-50 transition-all shrink-0 ${openFaq === idx ? 'rotate-45' : ''}`}>
+                           <Plus className="w-4 h-4 text-amber-600" />
+                        </div>
+                      </button>
+                      {openFaq === idx && (
+                        <div className="p-5 bg-amber-50/5 text-sm text-slate-500 border-t border-slate-100 leading-relaxed font-bold italic">{faq.a}</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+             </div>
+          </div>
+        </section>
 
- {/* Long article content & sidebar (two-column) */}
- <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
- <article className="lg:col-span-2">
- <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg">
- <h2 className="text-2xl font-semibold mb-4 text-amber-800">
- DIN Reactivation - Filing Form DIR-3 KYC
- </h2>
+        {/* Global Sidebar: Persistent Sticky Content */}
+        <aside className="lg:w-80 flex-shrink-0 space-y-6">
+           <div className="sticky top-28 space-y-6">
+              <SidebarCart />
+              
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold italic">
+                <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
+                <ul className="text-[13px] space-y-4 text-amber-700">
+                  {["Complete Guide on DIN", "How to Obtain DIN?", "DIN Number Search"].map((item) => (
+                    <li key={item} className="hover:text-amber-800 cursor-pointer flex gap-3 group items-center">
+                       <div className="w-1.5 h-1.5 bg-amber-600/50 rounded-full group-hover:scale-125 transition-transform" />
+                       <span className="group-hover:translate-x-1 transition-transform">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
- <p className="text-sm text-slate-600 mb-4 leading-relaxed">
- Director Identification Number (DIN) is an essential identifier
- for anyone aspiring to be a director in Indian companies, issued
- by the Ministry of Corporate Affairs (MCA). Directors are
- required to update their KYC details annually through the DIR-3
- KYC form with the MCA. Failure to do so leads to the
- deactivation of the DIN, which restricts their ability to
- function in corporate roles. To reactivate a deactivated DIN,
- directors must file the DIR-3 KYC form, sometimes with a late
- fee, depending on the delay.
- </p>
+              <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:scale-[1.02] transition-transform">
+                <img src={ASSETS.companyCompliance} alt="compliance" className="w-full h-auto object-cover" />
+                <div className="p-5 bg-white font-bold italic">
+                  <div className="text-[14px] text-slate-800 uppercase italic tracking-tighter">Director Compliance</div>
+                  <div className="text-[11px] text-slate-400 mt-1 font-bold italic">Stay active in MCA records</div>
+                </div>
+              </div>
+           </div>
+        </aside>
+      </main>
 
- <h3 className="text-lg font-semibold mt-4 text-amber-700">
- Director Identification Number (DIN)
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- A Director Identification Number (DIN) is an 8-digit unique
- identifier assigned to directors. Once issued, it remains valid
- for the lifetime of the director.
- </p>
+      <PopularSearches />
+      <Footer />
 
- <h3 className="text-lg font-semibold mt-4 text-amber-700">
- What is Form DIR-3 KYC?
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- Form DIR-3 KYC is an electronic form mandated by MCA to update
- KYC details of directors.
- </p>
-
- <h3 className="text-lg font-semibold mt-4 text-amber-700">Applicability</h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- Form DIR-3 KYC is mandatory for directors allotted DIN by or
- before March 31, 2018 and with status 'approved'.
- </p>
-
- <h3 className="text-lg font-semibold mt-4 text-amber-700">
- Purpose of DIR-3 KYC (Know Your Customer)
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- The purpose is to maintain current and accurate director
- information with the ROC including addresses, contact numbers
- and email addresses.
- </p>
-
- <h3 className="text-lg font-semibold mt-4 text-amber-700">
- Annual Deadline for Filing Form DIR-3 KYC
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- Deadline is set as September 30th of each year (subject to MCA
- extensions).
- </p>
-
- <h3 className="text-lg font-semibold mt-6 text-amber-700">
- Types of DIR-3 KYC Forms
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- DIR-3 KYC eForm (for first-time filers) and DIR-3-KYC-WEB
- (simplified web form for returning filers).
- </p>
-
- <h3 className="text-lg font-semibold mt-6 text-amber-700">
- Penalty for Non-Filing of DIR-3 KYC
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- A fine may be imposed for non-compliance within the stipulated
- timeframe.
- </p>
-
- <h3 className="text-lg font-semibold mt-6 text-amber-700">
- DIN Deactivation & Reactivation
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed hover:text-amber-700 transition-colors">
- If a director does not file, their DIN may be marked
- 'Deactivated due to Non-filing of DIR-3 KYC'. To reactivate,
- file the appropriate form and follow MCA approvals.
- </p>
-
- <h3 className="text-lg font-semibold mt-6 text-amber-700">Documents Required</h3>
- <ul className="text-sm text-slate-600 list-disc pl-5 space-y-2">
- <li className="hover:text-amber-700 transition-colors">Digital Signature Certificate (DSC) linked to PAN.</li>
- <li className="hover:text-amber-700 transition-colors">PAN Card (self-attested).</li>
- <li className="hover:text-amber-700 transition-colors">
- Proof of Address (Aadhaar / Voter ID / Driving License).
- </li>
- <li className="hover:text-amber-700 transition-colors">Photograph (self-attested passport photo).</li>
- <li className="hover:text-amber-700 transition-colors">Mobile & Email for OTP verification.</li>
- </ul>
-
- <div className="mt-6">
- <h3 className="text-lg font-semibold text-amber-700">
- Streamline Your DIN Reactivation Process
- </h3>
- <p className="text-sm text-slate-600 leading-relaxed mt-2 hover:text-amber-700 transition-colors">
- We offer comprehensive assistance at every stage —
- application support, form completion guidance, PAN
- verification, DSC help, document attachment and SRN generation
- & follow-up.
- </p>
- </div>
- </div>
-
- {/* FAQ section */}
- <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
- <h3 className="text-lg font-semibold mb-4 text-amber-800">
- FAQ's on DIN Reactivation
- </h3>
- <div className="space-y-3">
- {faqItems.map((f, idx) => (
- <div key={idx} className="border border-gray-200 rounded">
- <button
- onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
- className="w-full px-4 py-3 text-left flex items-center justify-between bg-white hover:bg-amber-50/30 transition-colors"
- >
- <span className="text-sm text-slate-800 hover:text-amber-700 transition-colors">{f.q}</span>
- <Plus
- className={`w-4 h-4 text-amber-600 ${
- openFaq === idx ? "rotate-45" : ""
- } transition-transform`}
- />
- </button>
- {openFaq === idx && (
- <div className="px-4 py-3 bg-amber-50/30 text-sm text-slate-600 border-t border-gray-200">
- {f.a}
- </div>
- )}
- </div>
- ))}
- <div className="mt-3">
- <button className="px-4 py-2 border-2 border-amber-600 rounded text-sm bg-white text-amber-700 hover:bg-amber-50 transition-colors font-medium">
- Load More
- </button>
- </div>
- </div>
- </div>
- </article>
-
- {/* Right article sidebar (guides + ad) */}
- <aside>
- <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg">
- <h4 className="font-semibold mb-3 text-amber-800">Related Guides</h4>
- <ul className="text-sm space-y-2">
- {RELATED_GUIDES.map((g) => (
- <li key={g}>
- <a href="#" className="text-amber-700 hover:text-amber-800 hover:underline">
- {g}
- </a>
- </li>
- ))}
- </ul>
- </div>
-
- <div className="bg-white rounded-2xl border border-gray-200 p-3 shadow-lg mt-4 hover:border-amber-200 transition-colors">
- <img
- src={ASSETS.partnershipCard}
- className="w-full rounded-lg"
- alt="ad"
- />
- <div className="mt-2 text-sm font-medium text-amber-700">Partnership Compliance</div>
- </div>
- </aside>
- </div>
-
- {/* Popular Searches */}
- <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
- <h4 className="font-semibold mb-4 text-amber-800">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 20).map((tag) => (
- <span
- key={tag}
- className="text-xs px-3 py-1 rounded-md border border-gray-200 bg-white text-slate-600 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
- >
- {tag}
- </span>
- ))}
- </div>
- </div>
-
- {/* Footer block content (expanded) */}
- <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg mt-6">
- <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold mb-2 text-amber-800">Company</h5>
- <ul className="text-sm text-slate-600 space-y-2">
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- About Us
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Careers
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Contact Us
- </a>
- </li>
- </ul>
- </div>
-
- <div>
- <h5 className="font-semibold mb-2 text-amber-800">Platforms</h5>
- <ul className="text-sm text-slate-600 space-y-2">
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Business Search
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Trademark Search
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Filings.AE for UAE
- </a>
- </li>
- </ul>
- </div>
-
- <div>
- <h5 className="font-semibold mb-2 text-amber-800">Usage</h5>
- <ul className="text-sm text-slate-600 space-y-2">
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Terms & Conditions
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Privacy Policy
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Refund Policy
- </a>
- </li>
- </ul>
- </div>
-
- <div>
- <h5 className="font-semibold mb-2 text-amber-800">Policies</h5>
- <ul className="text-sm text-slate-600 space-y-2">
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Confidentiality Policy
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Disclaimer Policy
- </a>
- </li>
- <li>
- <a href="#" className="hover:text-amber-700 transition-colors">
- Reviews
- </a>
- </li>
- </ul>
- </div>
- </div>
-
- <div className="mt-6 text-sm text-slate-500 border-t border-gray-200 pt-4">
- Copyright © {new Date().getFullYear()} All rights reserved.
- </div>
- </div>
- </main>
-
- {/* Floating WhatsApp CTA */}
- <div className="fixed bottom-6 right-6 z-50">
- <button className="flex items-center gap-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-lg hover:from-amber-700 hover:to-amber-800 transition-all hover:scale-105">
- <img src={ASSETS.whatsapp} alt="whatsapp" className="w-5 h-5" />
- <span className="hidden sm:inline font-medium">Live Chat with Experts</span>
- </button>
- </div>
- </div>
- );
+      {/* WhatsApp CTA */}
+      <div className="fixed right-6 bottom-6 bg-gradient-to-r from-[#9e4a2d] to-[#8b4127] text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:scale-105 transition-all cursor-pointer group">
+        <img src={ASSETS.whatsapp} alt="wa" className="w-6 h-6" />
+        <span className="font-bold text-[15px]">Expert Chat</span>
+      </div>
+    </div>
+  );
 }

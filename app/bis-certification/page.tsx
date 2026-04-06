@@ -15,7 +15,7 @@ export default function Home() {
  imageUrl="/images/apeda-registration.png" // replace with your actual image path or CDN URL
  title="BIS Registration"
  rating={5}
- description="Get BIS Certification with IndiaFilings to ensure your products meet Indian safety and quality standards."
+ description="Get BIS Certification with DoStartup to ensure your products meet Indian safety and quality standards."
  exclusiveOffersCount={2}
  features={[
  "Consult Senior Scientist",

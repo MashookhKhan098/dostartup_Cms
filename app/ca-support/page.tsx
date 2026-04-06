@@ -3,15 +3,16 @@
 import React, { useState } from "react";
 import { Search, Plus, ShoppingBag, CheckCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
  heroBg: "/images/hero.png",
- whatsapp: "/images/whatsapp.svg",
+ whatsapp: "/images/whatsapp.png",
  hrPeople: "/images/hr-payroll.png",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+ ledgers: "/images/ledgers.png",
 };
 
 const POPULAR_SEARCHES = [
@@ -68,7 +69,7 @@ const POPULAR_SEARCHES = [
  "EPFO Unified Portal",
 ];
 
-export default function IndiaFilingsCA() {
+export default function DoStartupCA() {
  const [gstin, setGstin] = useState("");
  const [faqOpen, setFaqOpen] = useState<number | null>(null);
  const [gstChecked, setGstChecked] = useState(false);
@@ -96,7 +97,7 @@ export default function IndiaFilingsCA() {
  <div className="bg-gray-50 py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / Compliance Services /{" "}
- <span className="text-amber-700 font-medium">IndiaFilings CA</span>
+ <span className="text-amber-700 font-medium">DoStartup CA</span>
  </div>
  </div>
 
@@ -127,7 +128,7 @@ export default function IndiaFilingsCA() {
  <div className="flex-1 max-w-2xl">
  <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 md:p-10 backdrop-blur-sm">
  <h1 className="text-white text-3xl md:text-[34px] leading-tight font-semibold mb-3">
- IndiaFilings CA
+ DoStartup CA
  </h1>
  <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
  Chartered Accountants for your business compliance - from
@@ -195,7 +196,7 @@ export default function IndiaFilingsCA() {
  Affordable Expertise
  </h3>
  <p className="text-sm text-gray-600">
- Access IndiaFilings Chartered Accountants without the high
+ Access DoStartup Chartered Accountants without the high
  cost of full-time hiring.
  </p>
  </div>
@@ -399,10 +400,10 @@ export default function IndiaFilingsCA() {
  </div>
  </section>
 
- {/* Why IndiaFilings */}
+ {/* Why DoStartup */}
  <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-slate-900">
- Why IndiaFilings for Fractional CA
+ Why DoStartup for Fractional CA
  </h3>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  <div className="p-4 rounded-lg border border-gray-200 hover:border-amber-200 transition-colors">

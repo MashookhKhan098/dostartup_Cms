@@ -5,7 +5,7 @@ export default function Footer() {
 
   const footerColumns = [
     {
-      title: "INDIAFILINGS",
+      title: "DOSTARTUP",
       links: [
         { name: "About DoStartup", href: "/about" },
         { name: "Careers", href: "/careers" },

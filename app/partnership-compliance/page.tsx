@@ -500,7 +500,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
 
  <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
- Why IndiaFilings for Fractional Accountant
+ Why DoStartup for Fractional Accountant
  </h3>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
@@ -660,8 +660,8 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>
- <h5 className="font-semibold text-[#C15F3C] mb-2">IndiaFilings</h5>
- <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">About IndiaFilings</a>
+ <h5 className="font-semibold text-[#C15F3C] mb-2">DoStartup</h5>
+ <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">About DoStartup</a>
  <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">Careers</a>
  <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">Contact Us</a>
  </div>
@@ -681,12 +681,12 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  <h5 className="font-semibold text-[#C15F3C] mb-2">Policies</h5>
  <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">Confidentiality Policy</a>
  <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">Disclaimer Policy</a>
- <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">IndiaFilings Review</a>
+ <a className="block hover:text-[#C15F3C] transition-colors cursor-pointer">DoStartup Review</a>
  </div>
  </div>
 
  <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} IndiaFilings - Proprietorship Compliance
+ © {new Date().getFullYear()} DoStartup - Proprietorship Compliance
  </div>
  </div>
  </footer>

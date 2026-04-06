@@ -1,337 +1,279 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import React, { useState } from "react";
-import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle } from "lucide-react";
+import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import DoStartupPricing from "../components/DoStartupPricing";
+import PopularSearches from "../components/PopularSearches";
+import SidebarCart from "../components/SidebarCart";
 
 const ASSETS = {
- logo: "/images/india-logo.jpg",
- hero: "https://img.indiafilings.com/catalog/llp-compliance-india.webp",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- whatsapp: "/images/whatsapp.svg",
- cartIcon: "/images/cart-icon.svg",
- indiaFlag: "/images/india-flag.png",
- adRight1: "/images/company-compliance-ad.png",
- dinEkyc: "/images/din-ekyc-ad.png",
+  logo: "/images/india-logo.jpg",
+  heroImage: "/images/llp-hero.jpg",
+  man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
+  ledgers: "/images/ledgers.jpg",
+  whatsapp: "/images/whatsapp.png",
+  companyCompliance: "/images/company-compliance.jpg",
 };
 
-const pricingPlans = [
- {
- name: "LLP Compliance - 1 Year",
- subtitle: "Basic annual compliance for Limited Liability Partnerships",
- price: "₹14,899",
- popular: true,
- features: [
- "LEDGERS Accounting Software - 1 Year",
- "LLP Annual Filing (Form 8 & 11)",
- "Dedicated Accountant",
- "Dedicated Compliance Advisor",
- "Annual Bookkeeping",
- "Financial Statement Preparation",
- "Partner Capital Account Statement",
- "Income Tax Return Filing for LLP",
- "DIN KYC for 2 Designated Partners",
- ],
- },
- {
- name: "LLP Compliance - 2 Year",
- subtitle: "Extended LLP compliance support & better value",
- price: "₹23,899",
- features: [
- "Everything in 1-Year LLP plan",
- "Priority support",
- "Quarterly compliance review meetings",
- "Proactive ROC and tax filing alerts",
- "ROC filing support for event based changes",
- "Tax planning review for partners",
- "Digital document vault for LLP records",
- ],
- },
- {
- name: "LLP Compliance - 3 Year",
- subtitle: "Long-term LLP compliance management",
- price: "₹36,899",
- features: [
- "Everything in 2-Year LLP plan",
- "Dedicated compliance manager",
- "On-demand advisory calls for partners",
- "Custom LLP compliance calendar",
- "Secretarial support for partner meetings",
- "Detailed annual compliance report",
- ],
- },
-];
+export default function LLPCompliancePage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-const popularTags = [
- "LLP Compliance",
- "LLP Registration",
- "LLP Agreement",
- "LLP Form 8",
- "LLP Form 11",
- "LLP Name Change",
- "Add Partner in LLP",
- "Remove Partner from LLP",
- "Winding Up - LLP",
- "DIN eKYC Filing",
- "Digital Signature",
- "Trademark Registration",
- "GST Registration",
- "Income Tax Filing",
- "Professional Tax",
- "Partnership Firm",
- "Private Limited Company",
- "OPC Compliance",
- "Form 10BD Filing",
- "Authorized Capital Increase",
- "Registered Office Change",
- "Business Plan",
- "Experience Certificate",
- "Trademark Status",
- "PAN Card Apply",
- "EPFO Passbook",
- "UAN Login",
- "eAadhaar Download",
- "MSME Registration",
-];
+  const plans = [
+    {
+      name: "LLP Compliance - 1 Year",
+      desc: "Basic annual compliance for Limited Liability Partnerships",
+      features: [
+        "LEDGERS Accounting Software - 1 Year",
+        "LLP Annual Filing (Form 8 & 11)",
+        "Dedicated Accountant",
+        "Dedicated Compliance Advisor",
+        "Annual Bookkeeping",
+        "Financial Statement Preparation",
+        "Partner Capital Account Statement",
+        "Income Tax Return Filing for LLP",
+        "DIN KYC for 2 Designated Partners"
+      ]
+    },
+    {
+      name: "LLP Compliance - 2 Year",
+      desc: "Extended LLP compliance support & better value",
+      features: [
+        "Everything in 1-Year LLP plan",
+        "Priority support",
+        "Quarterly compliance review meetings",
+        "Proactive ROC and tax filing alerts",
+        "ROC filing support for event based changes",
+        "Tax planning review for partners",
+        "Digital document vault for LLP records"
+      ]
+    },
+    {
+      name: "LLP Compliance - 3 Year",
+      desc: "Long-term LLP compliance management",
+      features: [
+        "Everything in 2-Year LLP plan",
+        "Dedicated compliance manager",
+        "On-demand advisory calls for partners",
+        "Custom LLP compliance calendar",
+        "Secretarial support for partner meetings",
+        "Detailed annual compliance report"
+      ]
+    }
+  ];
 
-export default function LlpCompliancePage() {
- const [openFaq, setOpenFaq] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
- const [companyInput, setCompanyInput] = useState("");
+  return (
+    <div className="min-h-screen bg-[#f4f6fa] text-slate-800 font-sans">
+      <Navbar />
 
- const faqItems = [
- "What is LLP compliance?",
- "What are the annual compliance requirements for an LLP?",
- "What is Form 8 and Form 11 in LLP compliance?",
- "What is the due date for LLP annual filing?",
- "What is the penalty for late filing of LLP returns?",
- "Is GST registration mandatory for LLPs?",
- "Can an LLP file income tax return?",
- "What is DIN KYC for designated partners?",
- ];
+      {/* Breadcrumb */}
+      <div className="bg-gradient-to-r from-white to-slate-50 py-3 text-slate-800 border-b border-slate-100 font-bold italic">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 text-sm text-gray-500">
+          Home / MCA Services / <span className="text-amber-700 font-medium">LLP Compliance</span>
+        </div>
+      </div>
 
- const faqAnswers: Record<number, string> = {
- 0: "LLP compliance refers to the mandatory filings and legal requirements that a Limited Liability Partnership must fulfill under the Limited Liability Partnership Act, 2008 and Income Tax Act.",
- 1: "Annual compliance includes filing Form 8 (Statement of Account & Solvency) and Form 11 (Annual Return), Income Tax Return filing, and DIN KYC for designated partners.",
- 2: "Form 8 is the Statement of Account and Solvency, while Form 11 is the Annual Return of an LLP. Both must be filed annually with the ROC.",
- 3: "The due date for filing Form 8 and Form 11 is 30th October for the financial year ending 31st March of the previous year.",
- 4: "Late filing attracts additional fees - ₹100 per day for each form. Prolonged non-filing may lead to strike off of the LLP from the register.",
- 5: "GST registration is mandatory for LLPs if their aggregate turnover exceeds ₹20 lakhs (₹10 lakhs for special category states) or if they engage in inter-state supply.",
- 6: "Yes, LLPs are required to file Income Tax Return (ITR-5) annually, regardless of whether they have income or not.",
- 7: "DIN KYC (Form DIR-3 KYC) is an annual filing required for each designated partner of an LLP to update their details with the MCA.",
- };
+      {/* Main Container: Persistent Sticky Sidebar */}
+      <main className="max-w-[1240px] mx-auto px-4 sm:px-6 py-8 flex flex-col lg:flex-row gap-8 items-start">
+        
+        {/* Left Section: All main content */}
+        <section className="flex-1 space-y-12 overflow-hidden">
+          
+          {/* Header Block: 2-Col Hero Area */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+             {/* Col 1: Hero Image Card */}
+             <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
+               <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
+                <div className="bg-[#9e4a2d] p-6 text-center">
+                  <h2 className="text-white text-xl font-bold uppercase tracking-tight">LLP COMPLIANCE</h2>
+                  <div className="mt-2 text-sm text-amber-100 uppercase font-bold italic">Dedicated compliance team</div>
+                </div>
+                <div className="bg-[rgb(243,246,249)] p-8 flex justify-center items-center flex-1">
+                   <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10 scale-110">
+                      <img src={ASSETS.man} alt="LLP Compliance" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/5" />
+                   </div>
+                </div>
+              </div>
+              <ul className="mt-4 text-[13px] space-y-2 text-gray-600 font-bold italic px-2 pb-2">
+                {["Form 8 & 11 Filings", "Income Tax Filing", "Accounting & Bookkeeping"].map(s => (
+                  <li key={s} className="hover:text-amber-700 transition-colors flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-600/30 rounded-full" /> {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
- return (
- <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
- {/* Navbar - Imported */}
- <Navbar />
+            {/* Col 2: Info Card */}
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
+               <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2 w-fit">
+                    <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
+                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA & TAX</span>
+               </div>
+               <h1 className="text-2xl font-bold text-slate-900 mb-1 leading-tight">Simple, end-to-end LLP bookkeeping and compliance</h1>
+               <p className="text-[14px] text-slate-500 leading-relaxed mb-6 font-bold italic">
+                 Stay on top of all ROC and Income Tax deadlines for your Limited Liability Partnership with LEDGERS platform and a dedicated compliance team.
+               </p>
 
- {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
- Home / MCA Services /{" "}
- <span className="text-amber-700 font-medium">LLP Compliance</span>
- </div>
- </div>
+               <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto">
+                  <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Help</div>
+                  <ul className="space-y-3 mt-1">
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                      <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Pick the right plan for your LLP
+                    </li>
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                      <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Avoid penalties, delays and strike-off risk
+                    </li>
+                  </ul>
+                  <button className="mt-4 w-full bg-[#9e4a2d] text-white py-3 rounded-lg font-bold hover:bg-[#8b4127] transition-all shadow-md uppercase text-sm tracking-wide">Get Started</button>
+               </div>
+            </div>
+          </div>
 
- {/* Main Content */}
- <main className="max-w-[1180px] mx-auto px-6 py-3">
- {/* Hero Section */}
- <section className="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
- <div className="flex flex-col lg:flex-row">
- {/* Left Content */}
- <div className="lg:w-1/2 p-8 lg:p-10">
- <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-4">
- <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
- <span className="text-xs font-medium text-amber-700">LLP COMPLIANCE</span>
- </div>
- 
- <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
- Simple, end-to-end LLP bookkeeping and compliance
- </h1>
- 
- <p className="text-gray-600 text-lg mb-6">
- Stay on top of all ROC and Income Tax deadlines for your Limited
- Liability Partnership with LEDGERS platform and a dedicated
- compliance team.
- </p>
 
- <form
- className="flex flex-col sm:flex-row gap-3"
- onSubmit={(e) => {
- e.preventDefault();
- alert(`LLP compliance demo requested for "${companyInput || "Unnamed LLP"}"`);
- }}
- >
- <input
- className="flex-1 border border-gray-200 rounded-md px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="ENTER LLP NAME"
- value={companyInput}
- onChange={(e) => setCompanyInput(e.target.value)}
- />
- <button 
- type="submit"
- className="bg-gradient-to-r from-amber-700 to-amber-800 text-white px-6 py-3 rounded-md font-medium hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg"
- >
- Book Demo
- </button>
- </form>
- </div>
 
- {/* Right Image */}
- <div className="lg:w-1/2 bg-gradient-to-br from-amber-50 to-amber-100 p-8 flex items-center justify-center">
- <img
- src={ASSETS.hero}
- alt="LLP compliance"
- className="w-full max-w-md h-auto object-contain rounded-lg shadow-lg"
- />
- </div>
- </div>
- </section>
+          <div className="space-y-12">
+             {/* Feature Sections Restoration */}
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="group">
+                   <h3 className="text-sm font-bold text-[#9e4a2d] mb-3 uppercase tracking-widest border-b border-amber-100 pb-2">Dedicated team</h3>
+                   <p className="text-[13px] text-slate-500 font-bold italic leading-relaxed">Work with professionals who understand LLP structures, partner obligations and ROC rules so that nothing is missed and partners can focus on running the business.</p>
+                </div>
+                <div className="group">
+                   <h3 className="text-sm font-bold text-[#9e4a2d] mb-3 uppercase tracking-widest border-b border-amber-100 pb-2">On-time Filings</h3>
+                   <p className="text-[13px] text-slate-500 font-bold italic leading-relaxed">Automated reminders and a clear compliance calendar keep Form 8, Form 11 and Income Tax filings on schedule, avoiding penalties and late fees.</p>
+                </div>
+                <div className="group">
+                   <h3 className="text-sm font-bold text-[#9e4a2d] mb-3 uppercase tracking-widest border-b border-amber-100 pb-2">Powered by LEDGERS</h3>
+                   <p className="text-[13px] text-slate-500 font-bold italic leading-relaxed">Use LEDGERS for real-time bookkeeping, reconciliations, document storage and partner reports, giving complete visibility into your LLP finances.</p>
+                </div>
+             </div>
 
- {/* Pricing Section */}
- <section className="mb-8">
- <div className="text-center mb-8">
- <h2 className="text-2xl font-bold text-slate-900 mb-2">LLP Compliance Made Easy</h2>
- <p className="text-gray-600">
- Pick the right plan for your LLP and avoid penalties, delays and strike-off risk.
- </p>
- </div>
 
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
- {pricingPlans.map((plan) => (
- <div
- key={plan.name}
- className={`bg-white rounded-lg shadow-sm border-2 p-6 relative ${
- plan.popular ? 'border-amber-600' : 'border-gray-200'
- }`}
- >
- {plan.popular && (
- <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-amber-600 text-white px-3 py-1 rounded-full text-xs font-medium">
- Most Popular
- </div>
- )}
- 
- <div className="mb-4">
- <h3 className="font-semibold text-slate-900">{plan.name}</h3>
- <div className="text-2xl font-bold text-amber-700 mt-2">{plan.price}</div>
- <p className="text-xs text-gray-500 mt-1">{plan.subtitle}</p>
- </div>
 
- <button 
- className="w-full bg-white border-2 border-amber-600 text-amber-700 py-2 rounded-md font-medium hover:bg-amber-50 transition-colors mb-4"
- onClick={() => alert(`Selected plan: ${plan.name}`)}
- >
- Select Plan
- </button>
 
- <ul className="space-y-2">
- {plan.features.map((feature) => (
- <li key={feature} className="flex items-start gap-2 text-sm">
- <CheckCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
- <span className="text-gray-600">{feature}</span>
- </li>
- ))}
- </ul>
- </div>
- ))}
- </div>
- </section>
+          </div>
+        </section>
 
- {/* Benefits Section */}
- <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
- <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
- <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-amber-600">
- <path d="M12 12a3 3 0 100-6 3 3 0 000 6zm0 2c-3.866 0-7 1.79-7 4v1h14v-1c0-2.21-3.134-4-7-4z" strokeWidth="1.5" />
- </svg>
- </div>
- <h3 className="font-semibold text-slate-900 mb-2">Dedicated LLP compliance team</h3>
- <p className="text-sm text-gray-600">
- Work with professionals who understand LLP structures, partner
- obligations and ROC rules so that nothing is missed and partners
- can focus on running the business.
- </p>
- </div>
+        {/* Global Sidebar: Persistent Sticky Content */}
+        <aside className="lg:w-80 flex-shrink-0 space-y-6">
+           <div className="sticky top-28 space-y-6">
+              <SidebarCart />
+              
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold italic">
+                <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
+                <ul className="text-[13px] space-y-4 text-amber-700">
+                  {["LLP Form 11 Guide", "LLP Form 8 Guide", "Drafting LLP Agreement", "Adding Partner in LLP"].map((item) => (
+                    <li key={item} className="hover:text-amber-800 cursor-pointer flex gap-3 group items-center">
+                       <div className="w-1.5 h-1.5 bg-amber-600/50 rounded-full group-hover:scale-125 transition-transform" />
+                       <span className="group-hover:translate-x-1 transition-transform">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
- <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
- <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-amber-600">
- <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" strokeWidth="1.5" />
- </svg>
- </div>
- <h3 className="font-semibold text-slate-900 mb-2">On-time ROC and tax filings</h3>
- <p className="text-sm text-gray-600">
- Automated reminders and a clear compliance calendar keep Form 8,
- Form 11 and Income Tax filings on schedule, avoiding penalties
- and late fees.
- </p>
- </div>
+              <div className="bg-[#9e4a2d] p-6 rounded-2xl text-white shadow-xl text-center font-bold italic">
+                 <div className="text-sm font-bold uppercase tracking-widest mb-2">Need Help?</div>
+                 <p className="text-xs opacity-90 leading-tight">Our experts are here to help you stay compliant.</p>
+              </div>
+           </div>
+        </aside>
+      </main>
 
- <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
- <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-amber-600">
- <path d="M13 10V3L4 14h7v7l9-11h-7z" strokeWidth="1.5" />
- </svg>
- </div>
- <h3 className="font-semibold text-slate-900 mb-2">Powered by LEDGERS</h3>
- <p className="text-sm text-gray-600">
- Use LEDGERS for real-time bookkeeping, reconciliations, document
- storage and partner reports, giving complete visibility into
- your LLP finances.
- </p>
- </div>
- </section>
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-12">
+        <DoStartupPricing 
+          title="Simple packages. Transparent pricing."
+          plans={[
+            {
+              title: "LLP Compliance - 1 Year",
+              price: "",
+              description: "Basic annual compliance for Limited Liability Partnerships",
+              features: [
+                "LEDGERS Accounting Software - 1 Year",
+                "LLP Annual Filing (Form 8 & 11)",
+                "Dedicated Accountant",
+                "Dedicated Compliance Advisor",
+                "Annual Bookkeeping",
+                "Financial Statement Preparation",
+                "Partner Capital Account Statement",
+                "Income Tax Return Filing for LLP",
+                "DIN KYC for 2 Designated Partners"
+              ],
+              buttonText: "Select Plan"
+            },
+            {
+              title: "LLP Compliance - 2 Year",
+              price: "",
+              description: "Extended LLP compliance support & better value",
+              isPopular: true,
+              features: [
+                "Everything in 1-Year LLP plan",
+                "Priority support",
+                "Quarterly compliance review meetings",
+                "Proactive ROC and tax filing alerts",
+                "ROC filing support for event based changes",
+                "Tax planning review for partners",
+                "Digital document vault for LLP records"
+              ],
+              buttonText: "Select Plan"
+            },
+            {
+              title: "LLP Compliance - 3 Year",
+              price: "",
+              description: "Long-term LLP compliance management",
+              features: [
+                "Everything in 2-Year LLP plan",
+                "Dedicated compliance manager",
+                "On-demand advisory calls for partners",
+                "Custom LLP compliance calendar",
+                "Secretarial support for partner meetings",
+                "Detailed annual compliance report"
+              ],
+              buttonText: "Select Plan"
+            }
+          ]}
+        />
+      </div>
 
- {/* FAQ Section */}
- <section className="bg-white rounded-lg shadow-sm p-6 mb-8">
- <h3 className="text-xl font-semibold mb-4 text-slate-900">
- FAQ's on LLP Compliance
- </h3>
- <div className="space-y-0">
- {faqItems.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setOpenFaq(openFaq === i ? null : i)}
- >
- <span className="text-slate-800 font-medium">{q}</span>
- <span className="text-amber-700 flex items-center gap-2">
- {openFaq === i ? "−" : <Plus size={14} />}
- </span>
- </button>
- {openFaq === i && (
- <div className="px-2 pb-4 text-sm text-gray-600">
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
- </section>
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-12">
+        {/* FAQ Section */}
+        <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+           <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's on LLP Compliance</h3>
+           <div className="space-y-4 font-bold italic">
+             {[
+               { q: "What are the common compliance requirements for LLPs?", a: "Minimum compliance includes filing Form 8 (Statement of Accounts) and Form 11 (Annual Return) with the ROC, along with filing Income Tax Returns." },
+               { q: "What is Form 11?", a: "Form 11 is an Annual Return of an LLP containing partner details and contributions. It must be filed by 30th May every year." },
+               { q: "What is Form 8?", a: "Form 8 is a Statement of Accounts and Solvency, disclosing the financial state of the LLP. It must be filed by 30th October every year." }
+             ].map((faq, idx) => (
+               <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white">
+                 <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50/10 transition-colors group">
+                   <span className="text-sm font-bold text-slate-800 group-hover:text-amber-700">{faq.q}</span>
+                   <div className={`p-1.5 rounded-full bg-amber-50 transition-all shrink-0 ${openFaq === idx ? 'rotate-45' : ''}`}>
+                      <Plus className="w-4 h-4 text-amber-600" />
+                   </div>
+                 </button>
+                 {openFaq === idx && (
+                   <div className="p-5 bg-amber-50/5 text-sm text-slate-500 border-t border-slate-100 leading-relaxed">{faq.a}</div>
+                 )}
+               </div>
+             ))}
+           </div>
+        </div>
+      </div>
 
- {/* Popular Searches */}
- <section className="bg-white rounded-lg shadow-sm p-6">
- <h4 className="font-semibold mb-4 text-slate-900">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {popularTags.map((tag) => (
- <span
- key={tag}
- className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
- onClick={() => alert(tag)}
- >
- {tag}
- </span>
- ))}
- </div>
- </section>
- </main>
+      <PopularSearches />
+      <Footer />
 
- {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
- </div>
- );
+      {/* Floating CTA */}
+      <div className="fixed right-6 bottom-6 flex flex-col gap-4 z-50">
+         <div className="bg-gradient-to-r from-[#9e4a2d] to-[#8b4127] text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 hover:scale-105 transition-all cursor-pointer group">
+            <img src={ASSETS.whatsapp} alt="wa" className="w-6 h-6" />
+            <span className="font-bold text-[15px]">Expert Chat</span>
+         </div>
+      </div>
+    </div>
+  );
 }

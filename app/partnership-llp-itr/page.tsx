@@ -1,4 +1,7 @@
 "use client";
+import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
+import Footer from "../components/Footer";
 import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
@@ -37,7 +40,7 @@ const ASSETS = {
 };
 
 const NAV_ITEMS = [
- "IndiaFilings",
+ "DoStartup",
  "Startup",
  "Registrations",
  "Trademark",
@@ -151,78 +154,15 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
- {/* Header */}
- <header className="bg-white border-b sticky top-0 z-50">
- <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
- <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
-
- <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
- {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => {
- if (item === "Income Tax") {
- return (
- <div
- key={item}
- onMouseEnter={() => setShowIncomeDropdown(true)}
- onMouseLeave={() => setShowIncomeDropdown(false)}
- className="relative"
- >
- <button className="flex items-center gap-1 text-sm font-medium">
- {item} <ChevronDown className="w-3 h-3" />
- </button>
-
- {showIncomeDropdown && (
- <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[540px] z-50">
- <div className="bg-white rounded-lg shadow-lg border p-4">
- <div className="grid grid-cols-2 gap-3">
- {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
- <a
- key={link.href}
- href={link.href}
- className="text-sm text-slate-700 hover:text-emerald-600"
- >
- {link.title}
- </a>
- ))}
- </div>
- </div>
- </div>
- )}
- </div>
- );
- }
-
- return (
- <a key={item} href="#" className="hover:text-indigo-700">
- {item}
- </a>
- );
- })}
- </nav>
-
- <div className="ml-auto flex items-center gap-3">
- <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
- <Search size={14} />
- <input
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- placeholder="Search"
- className="outline-none text-sm bg-transparent w-40"
- />
- </div>
- <button className="px-3 py-1 border rounded-md text-sm">
- Login
- </button>
- </div>
- </div>
- </header>
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
+ <Navbar />
 
  {/* Breadcrumb & Hero */}
  <div className="bg-gradient-to-r from-white to-slate-50 py-6">
  <div className="max-w-[1180px] mx-auto px-6">
  <div className="text-sm text-gray-500 mb-4">
- IndiaFilings / Income Tax /{" "}
- <span className="text-indigo-600 font-medium">
+ DoStartup / Income Tax /{" "}
+ <span className="text-[#C15F3C] font-medium">
  Partnership / LLP Tax Filing
  </span>
  </div>
@@ -331,7 +271,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Personal */}
  <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+ <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Personal
  </div>
  <h3 className="font-semibold text-lg">Personal Tax Filing</h3>
@@ -360,7 +300,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
 
  {/* Business */}
  <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+ <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Business
  </div>
  <h3 className="font-semibold text-lg">Business Tax Filing</h3>
@@ -393,7 +333,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
 
  {/* Not for Profit */}
  <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+ <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Not for Profit
  </div>
  <h3 className="font-semibold text-lg">Not for Profit</h3>
@@ -443,7 +383,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
 
  <div className="mt-4 text-[15px] leading-7 text-gray-700 space-y-4">
  <p>
- At IndiaFilings, we're your trusted partner for simplifying the
+ At DoStartup, we're your trusted partner for simplifying the
  ITR-3 form filing process, making it easy, precise, and
  stress-free. As a leading online platform specializing in tax
  and compliance solutions, we understand that navigating the
@@ -560,7 +500,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  Documents required for ITR 3 Form
  </h3>
  <p>
- To file your income tax return (ITR) on IndiaFilings for ITR-3,
+ To file your income tax return (ITR) on DoStartup for ITR-3,
  the following documents are typically needed:
  </p>
  <ul className="list-disc list-inside">
@@ -585,28 +525,28 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  </p>
 
  <h3 className="text-lg font-semibold">
- Why Choose IndiaFilings for ITR3 Form Filing?
+ Why Choose DoStartup for ITR3 Form Filing?
  </h3>
  <p>
- IndiaFilings is your ideal partner for ITR3 Form filing,
+ DoStartup is your ideal partner for ITR3 Form filing,
  offering expert guidance, accuracy, timely filing, documentation
  assistance, and a secure platform. We simplify the process,
  ensuring your compliance with tax regulations.
  </p>
 
  <h3 className="text-lg font-semibold">
- How IndiaFilings Simplifies Your ITR-3 Filing
+ How DoStartup Simplifies Your ITR-3 Filing
  </h3>
  <p>
  Filing your ITR-3 form accurately and on time is crucial.
- IndiaFilings makes it hassle-free with expert guidance, a
+ DoStartup makes it hassle-free with expert guidance, a
  user-friendly platform, document management, deduction
  optimization, review and verification of ITR 3 applicability,
  secure filing, timely reminders, and post-filing support.
  </p>
 
  <p>
- Let IndiaFilings assist you in filing your ITR-3 form, allowing
+ Let DoStartup assist you in filing your ITR-3 form, allowing
  you to focus on your business and financial well-being. Contact
  us today for expert assistance in meeting your tax obligations
  and ensuring a smooth filing experience.
@@ -651,7 +591,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  aria-controls={`faq-${i}`}
  >
  <span className="text-slate-800">{q}</span>
- <span className="text-indigo-600 flex items-center gap-2">
+ <span className="text-[#C15F3C] flex items-center gap-2">
  {faqOpen === i ? "-" : <Plus size={14} />}
  </span>
  </button>
@@ -680,152 +620,12 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  </section>
 
  {/* Sidebar */}
- <aside className="lg:col-span-4 hidden lg:block">
- <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-center">
- Get your Income Tax Return filed accurately
- </h3>
- <p className="text-sm mt-2 text-center">
- Get your Income Tax Return filed accurately and on time by
- seasoned tax professionals. We handle everything — from document
- review and tax computation to e-filing and compliance checks.
- </p>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-green-500 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
- <ShoppingBag size={16} /> Get Started
- </button>
- </form>
- </div>
-
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
- <h4 className="font-semibold mb-3">Related Guides</h4>
- <ul className="text-sm text-indigo-600 space-y-2">
- <li>Form ITR 1 (Sahaj) for AY 2020-21</li>
- <li>ITR-1 For AY 2020-21 Notified: Key Changes</li>
- <li>Guidelines for Filling ITR-2 for AY 2020-2021</li>
- <li>ITR-3 for AY 2020-2021</li>
- </ul>
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-4">
- <img
- src={ASSETS.adRight1}
- alt="adRight"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-6">
- <img
- src={ASSETS.itrAd1}
- alt="itrAd"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="bg-white rounded-lg p-4">
- <h4 className="font-semibold mb-3">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.map((s) => (
- <span
- key={s}
- className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
- >
- {s}
- </span>
- ))}
- </div>
- </div>
- </aside>
+         <aside className="lg:col-span-4 hidden lg:block">
+          <SidebarCart />
+        </aside>
  </main>
 
- {/* Footer */}
- <footer className="bg-white mt-12 py-3 border-t">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
- <a className="block">About IndiaFilings</a>
- <a className="block">Careers</a>
- <a className="block">Contact Us</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
- <a className="block">Business Search</a>
- <a className="block">Trademark Search</a>
- <a className="block">Filings.AE for UAE</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
- <a className="block">Terms & Conditions</a>
- <a className="block">Privacy Policy</a>
- <a className="block">Refund Policy</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
- <a className="block">Confidentiality Policy</a>
- <a className="block">Disclaimer Policy</a>
- <a className="block">IndiaFilings Review</a>
- </div>
- </div>
-
- <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} IndiaFilings - Partnership / LLP Tax
- Filing
- </div>
- </div>
- </footer>
-
- {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
+ <Footer />
  </div>
  );
 }

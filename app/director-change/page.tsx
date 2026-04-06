@@ -1,9 +1,10 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
+import Footer from "../components/Footer";
 
 export default function AppointmentOfDirectorReplica() {
  const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -36,7 +37,7 @@ export default function AppointmentOfDirectorReplica() {
  hero: "/images/hero.png",
  remove: "/images/remove.png",
  ad: "/images/Screenshot (489).png",
- whatsapp: "/images/whatsapp.svg",
+ whatsapp: "/images/whatsapp.png",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
@@ -315,78 +316,7 @@ export default function AppointmentOfDirectorReplica() {
 
  {/* Right Column - Sidebar */}
  <aside className="w-full lg:w-80">
- {/* Cart Widget */}
- <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28 border border-gray-200">
- <div className="text-center text-gray-600">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-slate-900">Your cart is empty</h3>
- <p className="text-sm mt-2 text-gray-600">
- Browse our services and add some services in cart!
- </p>
- </div>
-
- <div className="mt-6 text-center">
- <div className="text-sm text-gray-500">
- Existing User?{" "}
- <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">
- Login
- </a>
- </div>
- </div>
-
- <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4 accent-amber-600"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- <ShoppingBag size={16} /> Get Started
- </button>
-
- <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
- <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- <span>Secure · No spam · Instant confirmation</span>
- </div>
- </form>
- </div>
+          <SidebarCart />
 
  {/* Related Guides */}
  <div className="bg-white p-6 rounded-xl border border-gray-200 mb-6">
@@ -447,14 +377,11 @@ export default function AppointmentOfDirectorReplica() {
  ))}
  </div>
 
- <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-
+ <div className="mt-4">
  <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- 
-<AddQuestionModal />
-</div>
+ </div>
  </section>
 
  {/* Popular Searches */}

@@ -264,7 +264,137 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </section>
  </div>
 
- <main className="max-w-[1180px] mx-auto px-6 py-4 space-y-8">
+ <main className="max-w-[1180px] mx-auto px-6 py-4 space-y-8">
+
+ {/* Services Offered */}
+ <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">
+ Services Offered
+ </h3>
+ <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
+ We provide comprehensive accounting support tailored to meet the
+ day-to-day financial needs of your business
+ </p>
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+ {[
+ "Access to LEDGERS",
+ "GST Return Filing",
+ "Preparation of Financial Statements",
+ "Income Tax Return Filing",
+ "E-Invoicing & E-Way Bill",
+ "CA Assistance"
+ ].map((service, index) => (
+ <div key={index} className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] hover:shadow-md transition-all">
+ <h4 className="font-semibold text-[#C15F3C] mb-2">{service}</h4>
+ <p className="text-sm text-gray-600">
+ Professional {service.toLowerCase()} services with expert guidance
+ </p>
+ </div>
+ ))}
+ </div>
+ </section>
+
+ {/* How It Works */}
+ <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">How It Works</h3>
+ <p className="text-gray-600 text-center mb-8">
+ A guided onboarding process with consistent monthly accounting and
+ reporting.
+ </p>
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+ {[
+ { step: 1, title: "Assign your accountant", desc: "You get a named accountant familiar with your industry and a clear kickoff checklist." },
+ { step: 2, title: "System Setup", desc: "Connect bank feeds, import masters & opening balances, map ledgers/tax series, and configure LEDGERS." },
+ { step: 3, title: "Monthly close & compliance", desc: "Bank/vendor/customer reconciliations, MIS, and on-time GST, Finance Statement Preparation and Income Tax filings." }
+ ].map((item) => (
+ <div key={item.step} className="text-center">
+ <div className="w-16 h-16 bg-[#C15F3C] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+ {item.step}
+ </div>
+ <h4 className="font-semibold text-[#C15F3C] mb-2">{item.title}</h4>
+ <p className="text-sm text-gray-600">{item.desc}</p>
+ </div>
+ ))}
+ </div>
+ </section>
+
+ {/* Why DoStartup */}
+ <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <h3 className="text-2xl font-bold text-[#C15F3C] mb-6">
+ Why DoStartup for Fractional Accountant
+ </h3>
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+ <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
+ <h4 className="font-semibold text-[#C15F3C] mb-2">Affordable Expertise</h4>
+ <p className="text-sm text-gray-600">
+ Skilled accountants without full-time hiring costs.
+ </p>
+ </div>
+ <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
+ <h4 className="font-semibold text-[#C15F3C] mb-2">Zero Surprises</h4>
+ <p className="text-sm text-gray-600">
+ Transparent reporting and proactive due-date alerts.
+ </p>
+ </div>
+ <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
+ <h4 className="font-semibold text-[#C15F3C] mb-2">Scalable Service</h4>
+ <p className="text-sm text-gray-600">
+ Start with books; add GST/IT filings and compliance advisory as you grow.
+ </p>
+ </div>
+ </div>
+ </section>
+
+ {/* Partnership Tax Return Filing Info */}
+ <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <h3 className="text-2xl font-bold text-[#C15F3C] mb-4">
+ Partnership Tax Return Filing
+ </h3>
+ <p className="text-sm text-gray-700 leading-relaxed">
+ Operating a Partnership Firm in India involves a range of crucial
+ financial and legal responsibilities. It is imperative to adhere to
+ various tax and regulatory requirements to ensure the smooth
+ functioning and growth of your business. These obligations encompass
+ filing Income Tax Returns, TDS Returns, GST Returns, EPF Returns,
+ and occasionally undergoing a Tax Audit if the partnership firm
+ audit limit exceeds.
+ </p>
+
+ <div className="mt-6 space-y-4">
+ <div>
+ <h4 className="font-semibold text-[#C15F3C]">Income Tax Return filing for Partnership Firm</h4>
+ <p className="mt-2 text-sm text-gray-700">
+ Every partnership firm in India is obligated to file income tax
+ returns annually, regardless of whether the firm has generated
+ income or incurred losses during the financial year. Even if
+ there was no business activity, filing a NIL income tax return
+ within the stipulated due date is mandatory.
+ </p>
+ </div>
+
+ <div>
+ <h4 className="font-semibold text-[#C15F3C]">Partnership Firm Income Tax slabs for AY 2023-24</h4>
+ <p className="mt-2 text-sm text-gray-700">
+ Under the provisions of the Income Tax Act 1961, a partnership
+ firm in India is subject to the partnership firm tax rate of 30%
+ on taxable income. Surcharge, cess and marginal relief apply as
+ relevant.
+ </p>
+ </div>
+ </div>
+ </section>
+
+ {/* Related Guides */}
+ <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <h3 className="text-xl font-semibold text-[#C15F3C] mb-4">Related Guides</h3>
+ <div className="flex flex-wrap gap-3">
+ {["ITR 5 Form", "What is a partnership firm?", "How to file GST returns for Partnership firm", "FAQ's on Partnership Compliance"].map((guide, index) => (
+ <a key={index} className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:border-[#C15F3C] hover:text-[#C15F3C] transition-colors cursor-pointer">
+ {guide}
+ </a>
+ ))}
+ </div>
+ </section>
  {/* Pricing Section */}
  <section>
  <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900">
@@ -423,135 +553,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- {/* Services Offered */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
- <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">
- Services Offered
- </h3>
- <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">
- We provide comprehensive accounting support tailored to meet the
- day-to-day financial needs of your business
- </p>
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
- {[
- "Access to LEDGERS",
- "GST Return Filing",
- "Preparation of Financial Statements",
- "Income Tax Return Filing",
- "E-Invoicing & E-Way Bill",
- "CA Assistance"
- ].map((service, index) => (
- <div key={index} className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] hover:shadow-md transition-all">
- <h4 className="font-semibold text-[#C15F3C] mb-2">{service}</h4>
- <p className="text-sm text-gray-600">
- Professional {service.toLowerCase()} services with expert guidance
- </p>
- </div>
- ))}
- </div>
- </section>
 
- {/* How It Works */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
- <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">How It Works</h3>
- <p className="text-gray-600 text-center mb-8">
- A guided onboarding process with consistent monthly accounting and
- reporting.
- </p>
- <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
- {[
- { step: 1, title: "Assign your accountant", desc: "You get a named accountant familiar with your industry and a clear kickoff checklist." },
- { step: 2, title: "System Setup", desc: "Connect bank feeds, import masters & opening balances, map ledgers/tax series, and configure LEDGERS." },
- { step: 3, title: "Monthly close & compliance", desc: "Bank/vendor/customer reconciliations, MIS, and on-time GST, Finance Statement Preparation and Income Tax filings." }
- ].map((item) => (
- <div key={item.step} className="text-center">
- <div className="w-16 h-16 bg-[#C15F3C] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
- {item.step}
- </div>
- <h4 className="font-semibold text-[#C15F3C] mb-2">{item.title}</h4>
- <p className="text-sm text-gray-600">{item.desc}</p>
- </div>
- ))}
- </div>
- </section>
-
- {/* Why IndiaFilings */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
- <h3 className="text-2xl font-bold text-[#C15F3C] mb-6">
- Why IndiaFilings for Fractional Accountant
- </h3>
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
- <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
- <h4 className="font-semibold text-[#C15F3C] mb-2">Affordable Expertise</h4>
- <p className="text-sm text-gray-600">
- Skilled accountants without full-time hiring costs.
- </p>
- </div>
- <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
- <h4 className="font-semibold text-[#C15F3C] mb-2">Zero Surprises</h4>
- <p className="text-sm text-gray-600">
- Transparent reporting and proactive due-date alerts.
- </p>
- </div>
- <div className="p-6 rounded-lg border border-gray-200 hover:border-[#C15F3C] transition-colors">
- <h4 className="font-semibold text-[#C15F3C] mb-2">Scalable Service</h4>
- <p className="text-sm text-gray-600">
- Start with books; add GST/IT filings and compliance advisory as you grow.
- </p>
- </div>
- </div>
- </section>
-
- {/* Partnership Tax Return Filing Info */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
- <h3 className="text-2xl font-bold text-[#C15F3C] mb-4">
- Partnership Tax Return Filing
- </h3>
- <p className="text-sm text-gray-700 leading-relaxed">
- Operating a Partnership Firm in India involves a range of crucial
- financial and legal responsibilities. It is imperative to adhere to
- various tax and regulatory requirements to ensure the smooth
- functioning and growth of your business. These obligations encompass
- filing Income Tax Returns, TDS Returns, GST Returns, EPF Returns,
- and occasionally undergoing a Tax Audit if the partnership firm
- audit limit exceeds.
- </p>
-
- <div className="mt-6 space-y-4">
- <div>
- <h4 className="font-semibold text-[#C15F3C]">Income Tax Return filing for Partnership Firm</h4>
- <p className="mt-2 text-sm text-gray-700">
- Every partnership firm in India is obligated to file income tax
- returns annually, regardless of whether the firm has generated
- income or incurred losses during the financial year. Even if
- there was no business activity, filing a NIL income tax return
- within the stipulated due date is mandatory.
- </p>
- </div>
-
- <div>
- <h4 className="font-semibold text-[#C15F3C]">Partnership Firm Income Tax slabs for AY 2023-24</h4>
- <p className="mt-2 text-sm text-gray-700">
- Under the provisions of the Income Tax Act 1961, a partnership
- firm in India is subject to the partnership firm tax rate of 30%
- on taxable income. Surcharge, cess and marginal relief apply as
- relevant.
- </p>
- </div>
- </div>
- </section>
-
- {/* Related Guides */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
- <h3 className="text-xl font-semibold text-[#C15F3C] mb-4">Related Guides</h3>
- <div className="flex flex-wrap gap-3">
- {["ITR 5 Form", "What is a partnership firm?", "How to file GST returns for Partnership firm", "FAQ's on Partnership Compliance"].map((guide, index) => (
- <a key={index} className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:border-[#C15F3C] hover:text-[#C15F3C] transition-colors cursor-pointer">
- {guide}
- </a>
- ))}
- </div>
- </section>
 
  {/* FAQ Section */}
  <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
@@ -599,9 +601,9 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  <div className="max-w-[1180px] mx-auto px-6">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
  <div>
- <h5 className="font-semibold text-[#C15F3C] mb-4">IndiaFilings</h5>
+ <h5 className="font-semibold text-[#C15F3C] mb-4">DoStartup</h5>
  <ul className="space-y-2">
- <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About IndiaFilings</a></li>
+ <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About DoStartup</a></li>
  <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a></li>
  <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
  </ul>
@@ -627,13 +629,13 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  <ul className="space-y-2">
  <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Confidentiality Policy</a></li>
  <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Disclaimer Policy</a></li>
- <li><a href="#" className="text-gray-400 hover:text-white transition-colors">IndiaFilings Review</a></li>
+ <li><a href="#" className="text-gray-400 hover:text-white transition-colors">DoStartup Review</a></li>
  </ul>
  </div>
  </div>
 
  <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
- © {new Date().getFullYear()} IndiaFilings - Partnership Compliance
+ © {new Date().getFullYear()} DoStartup - Partnership Compliance
  </div>
  </div>
  </footer>

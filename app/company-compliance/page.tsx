@@ -5,46 +5,48 @@
 import React, { useMemo, useState } from "react";
 import { Star, ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
+import LiveChatCard from "../components/LiveChatCard";
+import SidebarCart from "../components/SidebarCart";
 
 /* ------------------------------
  Assets & Data (unchanged)
  ------------------------------ */
 const ASSETS = {
  logo: "/images/india-logo.jpg",
- hero: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
+ hero: "/images/mca-compliance-simplified-india.webp",
  promoBlue:
- "https://img.indiafilings.com/catalog/company-compliance-india.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- gstSave: "https://img.indiafilings.com/catalog/gstin.png",
+ "/images/company-compliance-india.png",
+ ledgers: "/images/ledgers.png",
+ gstSave: "/images/gstin.png",
  cards: {
  companyCompliance:
- "https://img.indiafilings.com/catalog/company-compliance-india.png",
- dinEKyc: "https://img.indiafilings.com/catalog/din-ekyc.png",
- directorChange: "https://img.indiafilings.com/catalog/director-change.png",
- removeDirector: "https://img.indiafilings.com/catalog/remove-director.png",
- shareTransfer: "https://img.indiafilings.com/catalog/share-transfer.png",
- moaAmendment: "https://img.indiafilings.com/catalog/moa-amendment.png",
+ "/images/company-compliance-india.png",
+ dinEKyc: "/images/din-ekyc.png",
+ directorChange: "/images/director-change.png",
+ removeDirector: "/images/remove-director.png",
+ shareTransfer: "/images/share-transfer.png",
+ moaAmendment: "/images/moa-amendment.png",
  officeChange:
- "https://img.indiafilings.com/catalog/registered-office-change.png",
+ "/images/registered-office-change.png",
  capitalIncrease:
- "https://img.indiafilings.com/catalog/authorized-capital-increase.png",
- form10bd: "https://img.indiafilings.com/catalog/form-10bd-filing.png",
- llpForm11: "https://img.indiafilings.com/catalog/llp-form-11.png",
+ "/images/authorized-capital-increase.png",
+ form10bd: "/images/form-10bd-filing.png",
+ llpForm11: "/images/llp-form-11.png",
  strikeOffRevival:
- "https://img.indiafilings.com/catalog/strike-off-revival.png",
- fdiRbi: "https://img.indiafilings.com/catalog/fdi-filing-rbi.png",
- rera: "https://img.indiafilings.com/catalog/rera.png",
- opcCompliance: "https://img.indiafilings.com/catalog/opc-compliance.png",
- dpt3: "https://img.indiafilings.com/catalog/dpt3.png",
- aoaAmendment: "https://img.indiafilings.com/catalog/aoa-amendment.png",
- lei: "https://img.indiafilings.com/catalog/lei.png",
- chargeCreate: "https://img.indiafilings.com/catalog/charge-creation.png",
+ "/images/strike-off-revival.png",
+ fdiRbi: "/images/fdi-filing-rbi.png",
+ rera: "/images/rera.png",
+ opcCompliance: "/images/opc-compliance.png",
+ dpt3: "/images/dpt3.png",
+ aoaAmendment: "/images/aoa-amendment.png",
+ lei: "/images/lei.png",
+ chargeCreate: "/images/charge-creation.png",
  chargeSatisfaction:
- "https://img.indiafilings.com/catalog/charge-satisfaction.png",
- dematShares: "https://img.indiafilings.com/catalog/demat-shares.png",
- businessPlan: "https://img.indiafilings.com/catalog/business-plan.png",
+ "/images/charge-satisfaction.png",
+ dematShares: "/images/demat-shares.png",
+ businessPlan: "/images/business-plan.png",
  professionalTax:
- "https://img.indiafilings.com/catalog/professional-tax-return.png",
+ "/images/professional-tax-return.png",
  },
 };
 
@@ -78,32 +80,32 @@ const MCA_DROPDOWN_LINKS = [
 const categories = [
  {
  name: "Startup",
- icon: "https://img.indiafilings.com/catalog/startup-icon.png",
+ icon: "/images/startup-icon.png",
  },
  {
  name: "Registrations",
- icon: "https://img.indiafilings.com/catalog/registration-icon.png",
+ icon: "/images/registration-icon.png",
  },
  {
  name: "Trademark",
- icon: "https://img.indiafilings.com/catalog/trademark-icon.png",
+ icon: "/images/trademark-icon.png",
  },
  {
  name: "Goods & Services Tax",
- icon: "https://img.indiafilings.com/catalog/gst.png",
+ icon: "/images/gst.png",
  },
  {
  name: "Income Tax",
- icon: "https://img.indiafilings.com/catalog/income-tax.png",
+ icon: "/images/income-tax.png",
  },
- { name: "MCA", icon: "https://img.indiafilings.com/catalog/mca.png" },
+ { name: "MCA", icon: "/images/mca.png" },
  {
  name: "Compliance",
- icon: "https://img.indiafilings.com/catalog/compliance.png",
+ icon: "/images/compliance.png",
  },
  {
  name: "Consultation",
- icon: "https://img.indiafilings.com/catalog/consultation.png",
+ icon: "/images/consultation.png",
  },
 ];
 
@@ -1076,22 +1078,9 @@ export default function CompanyCompliancePage(): React.ReactElement {
  <section className="content-section">
  <div className="content-inner">
  <div style={{ minHeight: 120 }} />
- <aside className="sidebar-col" aria-label="Sidebar">
- <div className="whatsapp-card">
- <div className="whatsapp-title text-amber-800">Live chat with experts</div>
- <p className="text-sm text-slate-600 mb-3">
- Connect instantly with a compliance professional on WhatsApp.
- </p>
- <button
- type="button"
- suppressHydrationWarning
- className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-lg hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg"
- onClick={() => alert("Open WhatsApp chat")}
- >
- Chat now
- </button>
- </div>
- </aside>
+         <aside className="sidebar-col" aria-label="Sidebar">
+          <LiveChatCard />
+        </aside>
  </div>
  </section>
  </main>

@@ -1,811 +1,427 @@
 "use client";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import DoStartupPricing from "../components/DoStartupPricing";
 import AddQuestionModal from "../components/AddQuestionModal";
+import SidebarCart from "../components/SidebarCart";
 
 import React, { useState } from "react";
 import {
- ChevronDown,
- ShoppingBag,
- Plus,
- Check,
- Search,
- ChevronRight,
+  ChevronDown,
+  ShoppingBag,
+  Plus,
+  Check,
+  Search,
+  ChevronRight,
+  Briefcase,
+  Shield,
+  Clock,
+  FileCheck,
+  ShoppingCart
 } from "lucide-react";
 
-/**
- * File: app/business-tax-filing/page.tsx
- * Ready-to-copy Next.js client page (TypeScript React).
- * Replaces the original income-tax e-filing page content with
- * Business Tax Filing content. Put images in /public/images/ with the filenames used below.
- */
-
-const ASSETS = {
- logo: "/images/india-logo.jpg",
- heroBusiness: "/images/hero.png",
- ledgersBadge: "/images/ledgers-badge.png",
- whatsapp: "/images/whatsapp.png",
- adRight1: "/images/business-ad-right.png",
- itrAd1: "/images/business-itr-ad.png",
- cartIcon: "/images/cart.png",
- indiaFlag: "/images/india-flag.png",
- phoneMock: "/images/remove.png",
- docsImg: "/images/business-docs.png",
- stepsImg: "/images/business-steps.png",
- formsImg: "/images/business-forms.png",
- dueDatesImg: "/images/business-due-dates.png",
- docsRequiredImg: "/images/business-docs-required.png",
- moreImg: "/images/business-more.png",
- more2Img: "/images/business-more2.png",
-};
-
-const NAV_ITEMS = [
- "IndiaFilings",
- "Startup",
- "Registrations",
- "Trademark",
- "GST",
- "Income Tax",
- "MCA",
- "Compliance",
- "Personal",
- "Global",
- "Cities",
- "Guides",
- "Login",
-];
-
-const INCOME_TAX_DROPDOWN_LINKS = [
- { title: "Income Tax E-Filing", href: "income-tax/e-filing" },
- { title: "Business Tax Filing", href: "income-tax/business-tax-filing" },
- {
- title: "Partnership Firm / LLP ITR",
- href: "/income-tax/partnership-llp-itr",
- },
- { title: "Company ITR Filing", href: "/income-tax/company-itr-filing" },
- { title: "Trust / NGO Tax Filing", href: "/income-tax/trust-ngo-tax-filing" },
- { title: "15CA - 15CB Filing", href: "/income-tax/15ca-15cb-filing" },
- { title: "TAN Registration", href: "/income-tax/tan-registration" },
- { title: "TDS Return Filing", href: "/income-tax/tds-return-filing" },
- { title: "Income Tax Notice", href: "/income-tax/income-tax-notice" },
-];
-
 const POPULAR_SEARCHES = [
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Nadakacheri",
- "Flipkart Seller",
- "Caste Certificate",
- "IAY",
- "EPFO Passbook",
- "Domicile Certificate",
- "Udyog Aadhaar",
- "PF Withdrawal",
- "Karnataka One",
- "Encumbrance Certificate",
- "Bonafide Certificate",
- "Instant PAN Card",
- "E PAN Card",
- "Income Certificate",
+  "Partnership",
+  "Limited Liability Partnership",
+  "Digital Signature",
+  "Copyright Registration",
+  "Unified Portal",
+  "PAN Card Download",
+  "Nadakacheri",
+  "Flipkart Seller",
+  "Caste Certificate",
+  "IAY",
+  "EPFO Passbook",
+  "Domicile Certificate",
+  "Udyog Aadhaar",
+  "PF Withdrawal",
+  "Karnataka One",
+  "Encumbrance Certificate",
+  "Bonafide Certificate",
+  "Instant PAN Card",
+  "E PAN Card",
+  "Income Certificate",
 ];
 
 export default function BusinessTaxFilingPage(): React.ReactElement {
- const [faqOpen, setFaqOpen] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
- const [searchQuery, setSearchQuery] = useState("");
- const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
+  const [faqOpen, setFaqOpen] = useState<number | null>(null);
 
- const faqQuestions = [
- "When must a company tax return be filed?",
- "Which ITR should a company file?",
- "What happens if a company does not file ITR?",
- "What are the different types of Business Tax Filing?",
- "Can ITR be filed for the previous year?",
- "Who should pay advance tax?",
- "How is Income Tax calculated on business income?",
- "What are the criteria for opting for the Presumptive Taxation Scheme?",
- ];
+  const faqQuestions = [
+    "When must a company tax return be filed?",
+    "Which ITR should a company file?",
+    "What happens if a company does not file ITR?",
+    "What are the different types of Business Tax Filing?",
+    "Can ITR be filed for the previous year?",
+    "Who should pay advance tax?",
+    "How is Income Tax calculated on business income?",
+    "What are the criteria for opting for the Presumptive Taxation Scheme?",
+  ];
 
- const faqAnswers: Record<number, string> = {
- 0: "Company tax returns must be filed annually before the specified due date (usually September 30 for companies). Specific timelines may vary when audit requirements apply.",
- 1: "Companies generally file ITR-6. The exact form depends on the entity type and income sources. ITR-6 is common for companies not claiming exemptions under section 11.",
- 2: "Failure to file ITR can lead to penalties, interest, notices from the tax department, and potential restrictions on bank transactions and credit facilities.",
- 3: "Business tax filing categories include Proprietorship (ITR-3/ITR-4), Partnership (ITR-5/ITR-7 as applicable), LLPs (ITR-5), and Companies (ITR-6).",
- 4: "Yes — with the correct forms and supporting documents, ITR can be filed for earlier assessment years subject to limitations on refunds and revisions.",
- 5: "Advance tax is payable by businesses and professionals if the expected tax liability exceeds the threshold set by the Income Tax Act. Quarterly instalments are required.",
- 6: "Business income is computed by aggregating all revenue, subtracting allowable expenses, and applying the relevant tax rates for the entity type, plus surcharge and cess as applicable.",
- 7: "Presumptive schemes allow taxpayers to declare income as a prescribed percentage of turnover. Eligibility depends on business turnover and the nature of the business; check sections 44AD/44ADA/44AE as applicable.",
- };
+  const faqAnswers: Record<number, string> = {
+    0: "Company tax returns must be filed annually before the specified due date (usually September 30 for companies). Specific timelines may vary when audit requirements apply.",
+    1: "Companies generally file ITR-6. The exact form depends on the entity type and income sources. ITR-6 is common for companies not claiming exemptions under section 11.",
+    2: "Failure to file ITR can lead to penalties, interest, notices from the tax department, and potential restrictions on bank transactions and credit facilities.",
+    3: "Business tax filing categories include Proprietorship (ITR-3/ITR-4), Partnership (ITR-5/ITR-7 as applicable), LLPs (ITR-5), and Companies (ITR-6).",
+    4: "Yes — with the correct forms and supporting documents, ITR can be filed for earlier assessment years subject to limitations on refunds and revisions.",
+    5: "Advance tax is payable by businesses and professionals if the expected tax liability exceeds the threshold set by the Income Tax Act. Quarterly instalments are required.",
+    6: "Business income is computed by aggregating all revenue, subtracting allowable expenses, and applying the relevant tax rates for the entity type, plus surcharge and cess as applicable.",
+    7: "Presumptive schemes allow taxpayers to declare income as a prescribed percentage of turnover. Eligibility depends on business turnover and the nature of the business; check sections 44AD/44ADA/44AE as applicable.",
+  };
 
- return (
- <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
- {/* Header */}
- <header className="bg-white border-b sticky top-0 z-50">
- <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
- <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
+  return (
+    <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
+      <Navbar />
 
- <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
- {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => {
- if (item === "Income Tax") {
- return (
- <div
- key={item}
- onMouseEnter={() => setShowIncomeDropdown(true)}
- onMouseLeave={() => setShowIncomeDropdown(false)}
- className="relative"
- >
- <button className="flex items-center gap-1 text-sm font-medium">
- {item} <ChevronDown className="w-3 h-3" />
- </button>
+      {/* Hero Section */}
+      <div className="bg-[#F4F3EE] py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="bg-[#2F2E2B] rounded-[32px] overflow-hidden relative shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#C15F3C]/20 to-transparent pointer-events-none" />
+            <div className="relative z-10 px-8 py-16 md:px-16 md:py-20 flex flex-col md:flex-row items-center justify-between gap-12">
+              <div className="flex-1 max-w-2xl text-center md:text-left">
+                <div className="inline-flex items-center gap-2 bg-[#C15F3C]/10 border border-[#C15F3C]/20 text-[#C15F3C] text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider">
+                  <Shield size={14} /> Professional Tax Services
+                </div>
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                  Business Tax Filing <span className="text-[#C15F3C] italic text-3xl md:text-5xl">Made Simple</span>
+                </h1>
+                <p className="text-[#B1ADA1] text-lg mb-8 max-w-xl leading-relaxed">
+                  For individuals/HUFs whose income includes business or professional profits (e.g., shop owners, freelancers, firm partners); covers all other income too.
+                </p>
 
- {showIncomeDropdown && (
- <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[540px] z-50">
- <div className="bg-white rounded-lg shadow-lg border p-4">
- <div className="grid grid-cols-2 gap-3">
- {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
- <a
- key={link.href}
- href={link.href}
- className="text-sm text-slate-700 hover:text-emerald-600"
- >
- {link.title}
- </a>
- ))}
- </div>
- </div>
- </div>
- )}
- </div>
- );
- }
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-5 py-4 w-full sm:w-auto backdrop-blur-md">
+                    <span className="text-[#C15F3C] font-bold text-sm">ITR-3</span>
+                    <input
+                      className="bg-transparent outline-none placeholder:text-gray-500 text-white text-sm w-40"
+                      placeholder="Enter PAN Number"
+                    />
+                  </div>
+                  <button className="w-full sm:w-auto px-8 py-4 bg-[#C15F3C] text-white rounded-2xl font-bold hover:bg-[#A94E30] transition-all shadow-lg shadow-[#C15F3C]/20 flex items-center justify-center gap-2">
+                    Get Started <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
 
- return (
- <a key={item} href="#" className="hover:text-indigo-700">
- {item}
- </a>
- );
- })}
- </nav>
+              <div className="flex-1 flex justify-center md:justify-end">
+                <div className="relative group">
+                  <div className="absolute -inset-4 bg-[#C15F3C]/20 rounded-full blur-3xl group-hover:bg-[#C15F3C]/30 transition-all duration-500" />
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 relative">
+                    <div className="grid grid-cols-2 gap-4">
+                      {[
+                        { icon: <Briefcase />, label: "Business ITR" },
+                        { icon: <Shield />, label: "Secure Filing" },
+                        { icon: <Clock />, label: "Timely Filing" },
+                        { icon: <FileCheck />, label: "Verified data" },
+                      ].map((item, idx) => (
+                        <div key={idx} className="bg-white/5 rounded-2xl p-4 border border-white/10 flex flex-col items-center text-center gap-2">
+                          <div className="text-[#C15F3C] w-6 h-6">{item.icon}</div>
+                          <span className="text-white text-[10px] font-bold uppercase tracking-tighter">{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
- <div className="ml-auto flex items-center gap-3">
- <div className="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm text-slate-500">
- <Search size={14} />
- <input
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- placeholder="Search"
- className="outline-none text-sm bg-transparent w-40"
- />
- </div>
- <button className="px-3 py-1 border rounded-md text-sm">
- Login
- </button>
- </div>
- </div>
- </header>
+      {/* Main content grid */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Left column */}
+        <section className="lg:col-span-8 space-y-12">
+          {/* Content article */}
+          <article className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+            <h2 className="text-3xl font-bold text-[#2F2E2B] mb-8">
+              Business Income Tax Return (ITR) Filing Online
+            </h2>
 
- {/* Breadcrumb & Hero */}
- <div className="bg-gradient-to-r from-white to-slate-50 py-6">
- <div className="max-w-[1180px] mx-auto px-6">
- <div className="text-sm text-gray-500 mb-4">
- IndiaFilings / Income Tax /{" "}
- <span className="text-indigo-600 font-medium">
- Business Tax Filing
- </span>
- </div>
+            <div className="prose prose-slate max-w-none space-y-8 text-[#6F6B63] leading-relaxed">
+              <p>
+                Setting up a business and understanding the complexities of filing returns is essential to running a business. A business tax filing is an income tax return filing applicable to companies and other business entities. It serves as a comprehensive record of the business's earnings and expenses.
+              </p>
 
- <section
- aria-label="Hero"
- className="relative rounded-2xl overflow-hidden shadow-sm"
- style={{ minHeight: 380 }}
- >
- <div
- className="absolute inset-0 bg-center bg-no-repeat bg-cover"
- style={{
- backgroundImage: `url(${ASSETS.heroBusiness})`,
- }}
- >
- <img
- src={ASSETS.heroBusiness}
- alt="hero background"
- className="hidden"
- loading="eager"
- draggable={false}
- />
- <div
- className="absolute inset-0"
- style={{
- background:
- "radial-gradient(ellipse at left center, rgba(0,0,0,0.45) 0%, rgba(2,6,23,0.6) 100%)",
- }}
- />
- </div>
+              <p>
+                Business Income Tax return filings in India just got more straightforward with <strong className="text-[#C15F3C]">DoStartup</strong>. We help businesses easily file their tax returns and offer specialized business tax filing assistance. Our expert team makes the process less stressful and ensures deadlines and compliance requirements are met.
+              </p>
 
- <div className="relative z-10">
- <div className="mx-auto max-w-[1180px] px-6 py-5 flex flex-col md:flex-row items-center gap-8">
- {/* left text */}
- <div className="flex-1 max-w-2xl">
- <div className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 md:p-10 backdrop-blur-sm shadow-[0_20px_50px_rgba(2,6,23,0.2)]">
- <h1 className="text-white text-3xl md:text-[34px] leading-tight font-semibold mb-4">
- Business Tax Filing
- </h1>
- <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
- For individuals/HUFs whose income includes business or
- professional profits (e.g., shop owners, freelancers, firm
- partners); covers all other income too.
- </p>
+              <div className="bg-[#F4F3EE] p-8 rounded-3xl border border-[#C15F3C]/10">
+                <h3 className="text-xl font-bold text-[#2F2E2B] mb-4">What is a business tax return?</h3>
+                <p className="text-sm">
+                  A business tax return is a comprehensive report that outlines a business's income, expenses, and pertinent tax details, all presented in the designated ITR form. It entails annual submission and reporting of TDS, payroll-related entries and other statutory disclosures.
+                </p>
+              </div>
 
- {/* small form row */}
- <form
- onSubmit={(e) => e.preventDefault()}
- className="flex flex-col sm:flex-row gap-3 items-center"
- >
- <div className="flex items-center gap-2 bg-transparent rounded-full border border-[rgba(255,255,255,0.08)] px-3 py-2 w-full sm:w-auto">
- <div className="text-white text-xs px-3 py-1 bg-[rgba(255,255,255,0.05)] rounded-md">
- ITR-3
- </div>
- <input
- className="bg-transparent outline-none placeholder:text-slate-300 text-white text-sm w-full"
- placeholder="PAN Number"
- />
- </div>
+              <h3 className="text-xl font-bold text-[#2F2E2B]">Who should file a Business Income Tax Return?</h3>
+              <p>Filing a business income tax return is mandatory for:</p>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0">
+                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                  <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
+                  <span>Sole Proprietorships</span>
+                </li>
+                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                  <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
+                  <span>Partnership Firms</span>
+                </li>
+                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                  <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
+                  <span>Limited Liability Partnerships (LLPs)</span>
+                </li>
+                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                  <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
+                  <span>Companies (Private/Public/OPC)</span>
+                </li>
+              </ul>
 
- <button className="whitespace-nowrap px-5 py-3 bg-white text-slate-900 rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)]">
- File ITR
- </button>
- </form>
- </div>
+              <h3 className="text-xl font-bold text-[#2F2E2B]">Types of Business Tax Filing</h3>
+              <p>
+                Different entity types use different forms: Proprietorships may use ITR-3 or ITR-4 (Sugam); Partnership firms file ITR-5; LLPs file ITR-5; Companies file ITR-6 (as applicable). The correct choice depends on turnover, nature of income, and audit status.
+              </p>
 
- {/* <div className="mt-4">
- <img
- src={ASSETS.docsImg}
- alt="business docs"
- className="w-full rounded shadow-sm"
- />
- </div> */}
- </div>
+              <div className="my-8 rounded-3xl overflow-hidden border border-gray-100 shadow-sm">
+                <img src="/images/itr-forms.png" alt="Business Tax Forms" className="w-full h-auto" />
+              </div>
 
- {/* right image - phone / illustration */}
- <div className="w-full md:w-96 flex justify-end">
- <div className="relative w-[340px]">
- <img
- src={ASSETS.phoneMock}
- alt="phone"
- className="w-full h-auto rounded-2xl shadow-2xl"
- />
- </div>
- </div>
- </div>
- </div>
+              <div className="grid grid-cols-1 gap-6 my-8">
+                <div className="border-l-4 border-[#C15F3C] pl-6 py-2">
+                  <h4 className="font-bold text-[#2F2E2B] mb-2">Proprietorship Tax Return Filing</h4>
+                  <p className="text-sm italic text-gray-400 mb-2">Government fee is ₹4,500 for Individuals and valid UDYAM-registered MSMEs.</p>
+                  <p className="text-sm">Proprietorship income is taxed in the hands of the proprietor. Thresholds and slab rates are the same as individual tax rules. Proprietors may file ITR-3 or ITR-4 depending on whether they opt for presumptive taxation.</p>
+                </div>
+                <div className="border-l-4 border-[#C15F3C] pl-6 py-2">
+                  <h4 className="font-bold text-[#2F2E2B] mb-2">Partnership Firm Tax Return Filing</h4>
+                  <p className="text-sm italic text-gray-400 mb-2">Applicable for companies, LLPs, foreign entities, and others. Government fees differ as per entity type.</p>
+                  <p className="text-sm">Partnership firms are taxed as separate entities and must file an income tax return every year irrespective of profit or loss. Partnership firms typically file ITR-5.</p>
+                </div>
+                <div className="border-l-4 border-[#C15F3C] pl-6 py-2">
+                  <h4 className="font-bold text-[#2F2E2B] mb-2">LLP & Company Filing</h4>
+                  <p className="text-sm">LLPs and Companies are taxed at corporate rates and are required to file ITR-5 / ITR-6 respectively. Audit, transfer pricing, and other compliance obligations can affect due dates and filing methods.</p>
+                </div>
+              </div>
 
- <div
- className="absolute inset-0 pointer-events-none"
- style={{
- background:
- "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 100%)",
- borderRadius: "1rem",
- }}
- />
- </section>
- </div>
- </div>
+              <h3 className="text-xl font-bold text-[#2F2E2B] mt-12 pb-4 border-b border-gray-100 italic">How DoStartup helps</h3>
+              <p>We provide end-to-end support for your business calculations, documents verification, and seamless e-filing through our dedicated experts and tax technology.</p>
 
- {/* Main content */}
- <main className="max-w-[1180px] mx-auto px-6 py-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
- {/* Left column */}
- <section className="lg:col-span-8 space-y-6">
- {/* Pricing cards */}
- <section>
- <h2 className="text-2xl font-semibold text-center lg:text-left">
- Simple, Transparent ITR Filing Pricing
- </h2>
- <p className="text-sm text-gray-600 mt-2 max-w-prose">
- Apply for your ITR Filing online with expert assistance and
- complete end-to-end tracking.
- </p>
+              <div className="my-10 bg-[#2F2E2B] p-1 rounded-3xl overflow-hidden">
+                <div className="bg-[#2F2E2B] p-8 border border-white/5 rounded-[28px]">
+                  <h4 className="text-white font-bold mb-4 flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-[#C15F3C]" />
+                    Advanced Tax Platform
+                  </h4>
+                  <p className="text-gray-400 text-sm">Powered by modern integration, our platform ensures your financial data is captured accurately, minimizing errors and maximizing your allowable deductions automatically.</p>
+                </div>
+              </div>
 
- <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
- {/* Personal */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
- Personal
- </div>
- <h3 className="font-semibold text-lg">Personal Tax Filing</h3>
- <p className="text-sm text-gray-600 mt-2">
- For resident salaried/pension earners with total income up to
- ₹50 lakh, one house, and basic interest or dividends.
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹1,499 <span className="text-sm font-normal">/ yr + GST</span>
- </div>
- <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
- Start Filing
- </button>
- <ul className="mt-5 space-y-2 text-sm text-gray-700">
- <li className="flex items-center gap-2">
- <Check size={16} /> Income Tax computation
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> Tax Consultation
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> E Filing
- </li>
- </ul>
- </div>
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold text-[#2F2E2B]">Due Date & Important Timelines</h3>
+                <p>Missing deadlines can lead to heavy penalties and interest. Here is the typical timeline for business tax filings in India:</p>
+                <div className="rounded-3xl overflow-hidden border border-gray-100 shadow-xl">
+                  <img src="/images/due-dates.png" alt="Business Tax Timelines" className="w-full h-auto" />
+                </div>
+              </div>
 
- {/* Business */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
- Business
- </div>
- <h3 className="font-semibold text-lg">Business Tax Filing</h3>
- <p className="text-sm text-gray-600 mt-2">
- For individuals/HUFs whose income includes business or
- professional profits (e.g., shop owners, freelancers, firm
- partners); covers all other income too.
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹4,899 <span className="text-sm font-normal">/ yr + GST</span>
- </div>
- <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
- Start Filing
- </button>
- <ul className="mt-5 space-y-2 text-sm text-gray-700">
- <li className="flex items-center gap-2">
- <Check size={16} /> Income Tax computation
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> Tax Consultation
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> E Filing
- </li>
- </ul>
- <div className="mt-3 text-xs text-gray-500">
- LEDGERS Platform — Most popular
- </div>
- </div>
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold text-[#2F2E2B] mt-12">Procedure for Business ITR Filing</h3>
+                <div className="rounded-3xl overflow-hidden border border-gray-100 shadow-sm mb-8">
+                  <img src="/images/who-must-file.png" alt="Filing Procedure" className="w-full h-auto" />
+                </div>
+                <ol className="space-y-6 list-none p-0">
+                  {[
+                    "Gather and validate business accounts and supporting documents.",
+                    "Choose the correct ITR form based on entity type.",
+                    "Compute taxable income after allowable deductions and expenses.",
+                    "Pay any tax due / advance tax as applicable.",
+                    "File the return on the Income Tax e-Filing portal and e-verify."
+                  ].map((step, i) => (
+                    <li key={i} className="flex gap-6 items-start">
+                      <div className="w-8 h-8 rounded-xl bg-[#C15F3C] text-white flex-shrink-0 flex items-center justify-center text-sm font-bold shadow-lg shadow-[#C15F3C]/20">
+                        {i + 1}
+                      </div>
+                      <span className="text-[#2F2E2B] font-medium">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
 
- {/* Not for Profit */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
- Not for Profit
- </div>
- <h3 className="font-semibold text-lg">Not for Profit</h3>
- <p className="text-sm text-gray-600 mt-2">
- For all companies except those claiming charitable or
- religious exemption under applicable provisions.
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹19,899{" "}
- <span className="text-sm font-normal">/ yr + GST</span>
- </div>
- <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
- Start Filing
- </button>
- <ul className="mt-5 space-y-2 text-sm text-gray-700">
- <li className="flex items-center gap-2">
- <Check size={16} /> Income Tax computation
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> Tax Consultation
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> E Filing
- </li>
- </ul>
- </div>
- </div>
+              <div className="mt-12 bg-gray-50 rounded-3xl p-8 border border-gray-100">
+                <h3 className="text-xl font-bold text-[#2F2E2B] mb-6">Documents Required</h3>
+                <div className="rounded-2xl overflow-hidden border border-gray-100 mb-8">
+                  <img src="/images/docrequired.png" alt="Documents Needed" className="w-full h-auto" />
+                </div>
+                <p className="mb-6">Typical documents include PAN, Aadhaar (linked), books of accounts or balance sheet, profit & loss statements, bank statements, TDS certificates, Form 16/16A where applicable, GST & ledger extracts, invoices and loan statements.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    "PAN & Aadhaar Card",
+                    "Books of Accounts / Financials",
+                    "Bank Statements (All accounts)",
+                    "GST Returns (if applicable)",
+                    "TDS Certificates & Form 26AS",
+                    "Invoices & supporting vouchers"
+                  ].map((doc, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#C15F3C]" />
+                      {doc}
+                    </div>
+                  ))}
+                </div>
+              </div>
 
- <div className="mt-6 text-gray-700">
- <img
- src={ASSETS.formsImg}
- alt="which itr form"
- className="w-full rounded shadow-sm"
- />
- </div>
- </section>
+              <div className="mt-12 text-center py-12 border-t border-gray-50">
+                <h3 className="text-2xl font-bold text-[#2F2E2B] mb-4">Why timely filing matters</h3>
+                <div className="rounded-3xl overflow-hidden border border-gray-100 mb-8 max-w-lg mx-auto">
+                  <img src="/images/more.png" alt="Benefits of Filing" className="w-full h-auto" />
+                </div>
+                <p className="max-w-2xl mx-auto">
+                  Timely and accurate filings help you claim refunds, carry forward losses, support loan applications, and avoid penalties and notices. They also build credibility with banks, investors and regulators.
+                </p>
+              </div>
+            </div>
+          </article>
 
- {/* long textual content */}
- <article className="bg-white rounded-lg shadow-sm p-6">
- <h1 className="text-2xl font-semibold text-center">
- Business Income Tax Return (ITR) Filing Online
- </h1>
+          {/* FAQ */}
+          <div className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+            <h3 className="text-2xl font-bold text-[#2F2E2B] mb-8 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C]">
+                <Plus size={20} />
+              </div>
+              Frequently Asked Questions
+            </h3>
+            <div className="divide-y divide-gray-100">
+              {faqQuestions.map((q, i) => (
+                <div key={i} className="py-2">
+                  <button
+                    className="w-full text-left py-4 flex justify-between items-center group"
+                    onClick={() => setFaqOpen(faqOpen === i ? null : i)}
+                    aria-expanded={faqOpen === i}
+                  >
+                    <span className={`font-semibold transition-colors ${faqOpen === i ? "text-[#C15F3C]" : "text-[#2F2E2B] group-hover:text-[#C15F3C]"}`}>
+                      {q}
+                    </span>
+                    <span className={`transition-transform duration-300 ${faqOpen === i ? "rotate-45 text-[#C15F3C]" : "text-[#B1ADA1]"}`}>
+                      <Plus size={18} />
+                    </span>
+                  </button>
 
- <div className="mt-4 text-[15px] leading-7 text-gray-700 space-y-4">
- <p>
- Setting up a business and understanding the complexities of
- filing returns is essential to running a business. A business
- tax filing is an income tax return filing applicable to
- companies and other business entities. It serves as a
- comprehensive record of the business's earnings and expenses.
- </p>
+                  {faqOpen === i && (
+                    <div className="pb-6 text-[#6F6B63] text-sm leading-relaxed max-w-2xl">
+                      {faqAnswers[i]}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
 
- <p>
- Business Income Tax return filings in India just got more
- straightforward with IndiaFilings. We help businesses easily
- file their tax returns and offer LEDGERS small business tax
- filing software. Our expert team makes the process less
- stressful and ensures deadlines and compliance requirements are
- met.
- </p>
+            <div className="mt-10 pt-10 border-t border-gray-100 flex items-center justify-between flex-wrap gap-6">
+              <p className="text-sm text-[#6F6B63]">Still have questions? Our tax experts are here to help.</p>
+              <div className="flex gap-4">
+                <button className="px-6 py-3 rounded-xl border border-[#E5E2DA] font-semibold text-[#2F2E2B] hover:bg-gray-50 transition-all text-sm">
+                  Read Guides
+                </button>
+                <AddQuestionModal category="Business Tax" />
+              </div>
+            </div>
+          </div>
+        </section>
 
- <h3 className="text-lg font-semibold">
- What is a business tax return?
- </h3>
- <p>
- A business tax return is a comprehensive report that outlines a
- business's income, expenses, and pertinent tax details, all
- presented in the designated ITR form. It entails annual
- submission and reporting of TDS, payroll-related entries and
- other statutory disclosures.
- </p>
+        {/* Sidebar */}
+        <aside className="lg:col-span-4 space-y-8">
+          <SidebarCart />
 
- <h3 className="text-lg font-semibold">
- Who should file a Business Income Tax Return?
- </h3>
- <p>Filing a business income tax return is mandatory for:</p>
- <ul className="list-disc list-inside">
- <li>Sole Proprietorships</li>
- <li>Partnership Firms</li>
- <li>Limited Liability Partnerships (LLPs)</li>
- <li>Companies (Private/Public/One Person Companies)</li>
- </ul>
+          <div className="bg-white rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
+            <h4 className="font-bold text-[#2F2E2B] mb-6 flex items-center gap-2 uppercase tracking-wider text-xs">
+              <div className="w-2 h-2 rounded-full bg-[#C15F3C]" />
+              Related Guides
+            </h4>
+            <ul className="space-y-4">
+              {[
+                "Why is it necessary to outsource the Finance and Accounting services?",
+                "Accounting areas to take care of before the financial year",
+                "Method of Accounting for IT Payers",
+                "ITR Filing in India: Your Complete Guide"
+              ].map((item, idx) => (
+                <li key={idx} className="group">
+                  <a href="#" className="text-sm text-[#6F6B63] group-hover:text-[#C15F3C] transition-colors leading-relaxed block">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
- <h3 className="text-lg font-semibold mt-2">
- Types of Business Tax Filing
- </h3>
- <p>
- Different entity types use different forms: Proprietorships may
- use ITR-3 or ITR-4 (Sugam); Partnership firms file ITR-5; LLPs
- file ITR-5; Companies file ITR-6 (as applicable). The correct
- choice depends on turnover, nature of income, and audit status.
- </p>
+          <div className="bg-white rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
+            <h4 className="font-bold text-[#2F2E2B] mb-6 flex items-center gap-2 uppercase tracking-wider text-xs">
+              <div className="w-2 h-2 rounded-full bg-[#C15F3C]" />
+              Popular Searches
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {POPULAR_SEARCHES.map((s) => (
+                <span
+                  key={s}
+                  className="text-[10px] font-bold px-3 py-2 border border-[#E5E2DA] rounded-xl text-[#6F6B63] hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-default transition-all"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </main>
 
- <h3 className="text-lg font-semibold mt-2">
- Proprietorship Tax Return Filing
- </h3>
- <p>
- Proprietorship income is taxed in the hands of the proprietor.
- Thresholds and slab rates are the same as individual tax rules.
- Proprietors may file ITR-3 or ITR-4 depending on whether they
- opt for presumptive taxation.
- </p>
+      {/* Standardized Pricing Section */}
+      <section className="bg-white">
+        <DoStartupPricing
+          title="Transparent Business Tax Filing Pricing"
+          subtitle="Expert-assisted ITR filing for proprietorships, partnerships, LLPs and companies."
+          plans={[
+            {
+              title: "Personal Tax Filing",
+              price: "1,499",
+              subtitle: "yr + GST",
+              description: "For resident salaried/pension earners with total income up to ₹50 lakh and simple income sources.",
+              features: [
+                "Income Tax computation",
+                "Tax Consultation",
+                "E-Filing on Portal",
+                "Email Support"
+              ],
+              buttonText: "Register Now"
+            },
+            {
+              title: "Business Tax Filing",
+              price: "4,899",
+              subtitle: "yr + GST",
+              description: "For individuals/HUFs with business income, freelancers, and small firm partners.",
+              isPopular: true,
+              features: [
+                "Expert Tax Consultation",
+                "Business Income Audit Review",
+                "Standard Deduction optimization",
+                "GST Reconcilliation help",
+                "Priority Support"
+              ],
+              buttonText: "Register Now"
+            },
+            {
+              title: "Multi-State Business",
+              price: "19,899",
+              subtitle: "yr + GST",
+              description: "For companies and large entities with multi-state operations and complex filing needs.",
+              features: [
+                "Dedicated Account Manager",
+                "Corporate Tax Planning",
+                "Audit Support Docs",
+                "Compliance Dashboard",
+                "Unlimited Consultations"
+              ],
+              buttonText: "Register Now"
+            }
+          ]}
+        />
+      </section>
 
- <h3 className="text-lg font-semibold mt-2">
- Partnership Firm Tax Return Filing
- </h3>
- <p>
- Partnership firms are taxed as separate entities and must file
- an income tax return every year irrespective of profit or loss.
- Partnership firms typically file ITR-5.
- </p>
-
- <h3 className="text-lg font-semibold mt-2">
- LLP & Company Filing
- </h3>
- <p>
- LLPs and Companies are taxed at corporate rates and are required
- to file ITR-5 / ITR-6 respectively. Audit, transfer pricing, and
- other compliance obligations can affect due dates and filing
- methods.
- </p>
-
- <div className="mt-6">
- <img
- src={ASSETS.stepsImg}
- alt="5 steps"
- className="w-full rounded shadow-sm"
- />
- </div>
-
- <h3 className="text-lg font-semibold mt-4">
- How IndiaFilings helps
- </h3>
- <p>
- We offer end-to-end Income Tax Return preparation and filing —
- income aggregation, deductions review, tax computation, and
- submission — with automated document reminders and expert
- verification.
- </p>
-
- <h3 className="text-lg font-semibold mt-4">Powered by LEDGERS</h3>
- <p>
- Leverage intelligent automation to import financial data, detect
- eligible deductions, validate computations, securely manage
- documents, and generate fully compliant ITR forms — all from one
- unified platform.
- </p>
-
- <h3 className="text-lg font-semibold mt-4">
- Due Date & Important Timelines
- </h3>
- <div className="mt-3 text-gray-700">
- <img
- src={ASSETS.dueDatesImg}
- alt="due dates"
- className="w-full rounded shadow-sm"
- />
- </div>
-
- <p className="mt-3">
- Due dates depend on entity type and audit requirement —
- companies and audited entities often have later deadlines.
- Always confirm the due date applicable to your entity and
- assessment year.
- </p>
-
- <h3 className="text-lg font-semibold mt-4">Documents Required</h3>
- <div className="mt-2">
- <img
- src={ASSETS.docsRequiredImg}
- alt="documents required"
- className="w-full rounded shadow-sm"
- />
- </div>
-
- <p>
- Typical documents: PAN, Aadhaar (linked), books of accounts or
- balance sheet, profit & loss statements, bank statements, TDS
- certificates, Form 16/16A where applicable, GST & ledger
- extracts, invoices and loan statements.
- </p>
-
- <h3 className="text-lg font-semibold mt-4">
- Procedure for Business ITR Filing
- </h3>
- <ol className="list-decimal list-inside space-y-2">
- <li>
- Gather and validate business accounts and supporting
- documents.
- </li>
- <li>Choose the correct ITR form based on entity type.</li>
- <li>
- Compute taxable income after allowable deductions and
- expenses.
- </li>
- <li>Pay any tax due / advance tax as applicable.</li>
- <li>
- File the return on the Income Tax e-Filing portal and
- e-verify.
- </li>
- </ol>
-
- <div className="mt-4">
- <img
- src={ASSETS.moreImg}
- alt="procedure illustration"
- className="w-full rounded shadow-sm"
- />
- </div>
-
- <h3 className="text-lg font-semibold mt-4">
- Why timely filing matters
- </h3>
- <p>
- Timely and accurate filings help you claim refunds, carry
- forward losses, support loan applications, and avoid penalties
- and notices. They also build credibility with banks, investors
- and regulators.
- </p>
- </div>
- </article>
-
- {/* Documents required card — screenshot501 already included */}
- <article className="bg-white rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- Documents Required to File Your Business ITR
- </h3>
- <div className="mt-2 text-gray-700">
- <img
- src={ASSETS.docsRequiredImg}
- alt="documents required"
- className="w-full rounded shadow-sm"
- />
- <ul className="list-disc list-inside mt-4 space-y-2">
- <li>PAN & Aadhaar</li>
- <li>Books of Accounts / Financial Statements</li>
- <li>Bank Statements</li>
- <li>GST Returns (if applicable)</li>
- <li>TDS Certificates & Form 26AS</li>
- <li>Invoices & supporting vouchers</li>
- </ul>
- </div>
- </article>
-
- {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- FAQ's on Business Tax Filing
- </h3>
- <div className="space-y-0">
- {faqQuestions.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setFaqOpen(faqOpen === i ? null : i)}
- aria-expanded={faqOpen === i}
- aria-controls={`faq-${i}`}
- >
- <span className="text-slate-800">{q}</span>
- <span className="text-indigo-600 flex items-center gap-2">
- {faqOpen === i ? "-" : <Plus size={14} />}
- </span>
- </button>
-
- {faqOpen === i && (
- <div
- id={`faq-${i}`}
- className="px-2 pb-4 text-sm text-gray-600"
- >
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
-
- <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-
- <button className="px-4 py-2 border rounded text-sm">
- Load More
- </button>
- 
-<AddQuestionModal />
-</div>
- </div>
- </section>
-
- {/* Sidebar */}
- <aside className="lg:col-span-4 hidden lg:block">
- <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-center">Your cart is empty</h3>
- <p className="text-sm mt-2 text-center">
- Browse services and add to cart!
- </p>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-green-500 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
- <ShoppingBag size={16} /> Get Started
- </button>
- </form>
- </div>
-
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
- <h4 className="font-semibold mb-3">Related Guides</h4>
- <ul className="text-sm text-indigo-600 space-y-2">
- <li>
- Why is it necessary to outsource the Finance and Accounting
- services?
- </li>
- <li>
- Accounting areas to take care of before the financial year
- </li>
- <li>Method of Accounting for IT Payers</li>
- <li>ITR Filing in India: Your Complete Guide</li>
- </ul>
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-4">
- <img
- src={ASSETS.adRight1}
- alt="adRight"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-6">
- <img
- src={ASSETS.itrAd1}
- alt="itrAd"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="bg-white rounded-lg p-4">
- <h4 className="font-semibold mb-3">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.map((s) => (
- <span
- key={s}
- className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
- >
- {s}
- </span>
- ))}
- </div>
- </div>
- </aside>
- </main>
-
- {/* Footer */}
- <footer className="bg-white mt-12 py-3 border-t">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
- <a className="block">About IndiaFilings</a>
- <a className="block">Careers</a>
- <a className="block">Contact Us</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
- <a className="block">Business Search</a>
- <a className="block">Trademark Search</a>
- <a className="block">Filings.AE for UAE</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
- <a className="block">Terms & Conditions</a>
- <a className="block">Privacy Policy</a>
- <a className="block">Refund Policy</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
- <a className="block">Confidentiality Policy</a>
- <a className="block">Disclaimer Policy</a>
- <a className="block">IndiaFilings Review</a>
- </div>
- </div>
-
- <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} IndiaFilings - Business Tax Filing
- </div>
- </div>
- </footer>
-
- {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
- </div>
- );
+      <Footer />
+    </div>
+  );
 }

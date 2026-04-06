@@ -6,12 +6,54 @@ import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
-import Price from '../components/Price';
+import DoStartupPricing from '../components/DoStartupPricing';
 import { supabase } from '../../lib/supabase';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
+
+  const gstPlans = [
+    {
+      title: "GST Registration + Monthly Filing",
+      price: "1,499",
+      description: "Get complete GST registration and monthly filing services, ensuring compliance and smooth processing of GSTR-1 and GSTR-3B.",
+      features: [
+        "GST Registration Support",
+        "GST Certificate",
+        "Dedicated Accountant",
+        "GSTR-1 Monthly Filing",
+        "GSTR-3B Monthly Filing",
+        "Monthly Profit & Loss Report"
+      ]
+    },
+    {
+      title: "1 Year GST Filing",
+      price: "12,899",
+      isPopular: true,
+      description: "Comprehensive GST compliance for businesses, including 12 months of GSTR-1 and GSTR-3B filing and LEDGERS software.",
+      features: [
+        "Dedicated Accountant",
+        "GSTR-1 Filing – 12 Months",
+        "GSTR-3B Filing – 12 Months",
+        "Accountant (Assigned)",
+        "LEDGERS GST Software Access – 12 Months"
+      ]
+    },
+    {
+      title: "1 Year GST Filing + ITR",
+      price: "19,899",
+      description: "Complete tax compliance package for small businesses, including GST filings and annual Income Tax return filing.",
+      features: [
+        "Dedicated Accountant",
+        "GSTR-1 Filing – 12 Months",
+        "GSTR-3B Filing – 12 Months",
+        "Income Tax Filing",
+        "Financial Statements",
+        "LEDGERS Software Access – 12 Months"
+      ]
+    }
+  ];
 
   const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {
     const { data, error } = await supabase
@@ -137,7 +179,7 @@ export default function Home() {
     <>
       <Navbar />
       <Hero {...heroProps} />
-      <Price />
+      <DoStartupPricing plans={gstPlans} />
       <DynamicTabContent category="GST" />
       <Faq category="GST" />
       <Popularsearches />

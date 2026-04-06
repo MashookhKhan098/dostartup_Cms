@@ -155,7 +155,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </div>
 
  <h1 className="text-white text-3xl md:text-[34px] font-semibold leading-tight mb-3">
- IndiaFilings Accountant
+ DoStartup Accountant
  </h1>
  <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
  A dedicated accountant to keep your books accurate,
@@ -368,7 +368,7 @@ export default function BookkeepingPage(): React.ReactElement {
  {/* WHY INDIAFILINGS */}
  <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
- Why IndiaFilings for Fractional Accountant
+ Why DoStartup for Fractional Accountant
  </h3>
 
  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

@@ -31,7 +31,7 @@
 // <div className="bg-white border rounded-xl shadow-sm p-4 flex justify-center">
 // {/* Fixed‑size banner: 1220 × 277 px */}
 // <img
-// src="https://img.indiafilings.com/catalog/indiafilings-partnershiops.webp"
+// src="/images/dostartup-partnershiops.webp"
 // alt="Industry‑Leading Partnerships – ICICI Bank"
 // width={1220}
 // height={277}

@@ -5,15 +5,16 @@ import Head from "next/head";
 import React, { useState } from "react";
 import { Star, ChevronDown, CheckCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
 import PopularSearches from "../components/PopularSearches";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
- hero: "https://img.indiafilings.com/catalog/registered-office-change.png",
+ hero: "/images/registered-office-change.png",
  cards: {
  compliance:
- "https://img.indiafilings.com/catalog/company-compliance-india.png",
- dinEKyc: "https://img.indiafilings.com/catalog/din-ekyc.png",
+ "/images/company-compliance-india.png",
+ dinEKyc: "/images/din-ekyc.png",
  },
  footerBg: "/images/footer-bg.png",
 };
@@ -428,7 +429,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
  {/* Left Main Content */}
- <div className="lg:col-span-2 space-y-6">
+ <div className="lg:col-span-3 space-y-6">
  <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h2 className="text-xl sm:text-2xl font-bold mb-3">
  LLP Annual Return (Form 11)
@@ -545,59 +546,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </div>
  </div>
 
- {/* Right Sidebar */}
- <aside className="space-y-6">
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-5">
- <h4 className="font-semibold mb-3 text-base">Related Guides</h4>
- <ul className="text-sm space-y-2">
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
- LLP Registration Process
- </a>
- </li>
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
- Documents Required for LLP
- </a>
- </li>
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
- Advantages of LLP Structure
- </a>
- </li>
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline" href="#">
- LLP Compliance Checklist
- </a>
- </li>
- </ul>
- </div>
 
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 text-center">
- <img
- src={ASSETS.cards.compliance}
- alt="Company Compliance"
- className="rounded w-full"
- />
- <div className="mt-3 font-medium text-sm">Company Compliance</div>
- </div>
-
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 text-center">
- <img
- src={ASSETS.cards.dinEKyc}
- alt="DIN eKYC"
- className="rounded w-full"
- />
- <div className="mt-3 font-medium text-sm">DIN eKYC Filing</div>
- </div>
-
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
- <h4 className="font-semibold mb-3">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- <PopularSearches />
- </div>
- </div>
- </aside>
  </div>
  </div>
  </section>

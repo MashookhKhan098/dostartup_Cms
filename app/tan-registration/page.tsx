@@ -1,4 +1,7 @@
 "use client";
+import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
+import Footer from "../components/Footer";
 import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
@@ -16,11 +19,11 @@ import {
 const ASSETS = {
  logo: "/images/india-logo.jpg",
  hero: "/images/tan-reg.png", // square hero image (replace file as needed)
- man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- whatsapp: "/images/whatsapp.svg",
- adRight1: "/images/company-compliance-ad.png",
- dinEkyc: "/images/din-ekyc-ad.png",
+ man: "/images/mca-compliance-simplified-india.webp",
+ ledgers: "/images/ledgers.png",
+ whatsapp: "/images/whatsapp.png",
+ adRight1: "/images/company-compliance.jpg",
+ dinEkyc: "/images/din.jpg",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
  companyCompliance: "/images/company-compliance.png",
@@ -42,7 +45,7 @@ const INCOME_TAX_DROPDOWN_LINKS = [
 ];
 
 const NAV_ITEMS = [
- "IndiaFilings",
+ "DoStartup",
  "Startup",
  "Registrations",
  "Trademark",
@@ -116,7 +119,7 @@ const POPULAR_SEARCHES = [
  --------------------------- */
 export default function TanRegistrationPage(): React.ReactElement {
  const [openFaq, setOpenFaq] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
+ 
  const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
 
  const faqItems = [
@@ -160,79 +163,14 @@ export default function TanRegistrationPage(): React.ReactElement {
  Render
  ----------------------------------- */
  return (
- <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
- {/* Header */}
- <header className="bg-white border-b sticky top-0 z-50">
- <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
- <div className="flex-shrink-0">
- <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
- </div>
-
- <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
- {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => {
- if (item === "Income Tax") {
- return (
- <div
- key={item}
- onMouseEnter={() => setShowIncomeDropdown(true)}
- onMouseLeave={() => setShowIncomeDropdown(false)}
- className="relative"
- >
- <button
- aria-haspopup="true"
- aria-expanded={showIncomeDropdown}
- className="flex items-center gap-1 text-sm font-medium"
- >
- {item} <ChevronDown className="w-3 h-3" />
- </button>
-
- {showIncomeDropdown && (
- <div
- className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[520px] z-50"
- role="menu"
- >
- <div className="bg-white rounded-lg shadow-lg border p-4">
- <div className="grid grid-cols-2 gap-3">
- {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
- <a
- key={link.href}
- href={link.href}
- className="text-sm text-slate-700 hover:text-emerald-600 block"
- role="menuitem"
- >
- {link.title}
- </a>
- ))}
- </div>
- </div>
- </div>
- )}
- </div>
- );
- }
-
- return (
- <a key={item} href="#" className="hover:text-indigo-700">
- {item}
- </a>
- );
- })}
- <a className="hover:text-indigo-700">{NAV_ITEMS.at(-1)}</a>
- </nav>
-
- <div className="ml-auto">
- <button className="px-3 py-1 border rounded-md text-sm">
- Login
- </button>
- </div>
- </div>
- </header>
+ <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
+ <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
+ <div className="bg-white py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
- IndiaFilings / Business Registration /{" "}
- <span className="text-indigo-600 font-medium">TAN Registration</span>
+ DoStartup / Business Registration /{" "}
+ <span className="text-[#C15F3C] font-medium">TAN Registration</span>
  </div>
  </div>
 
@@ -245,7 +183,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  {/* Left image card (square hero image) */}
  <div className="md:w-1/3 flex-shrink-0">
  <div className="rounded-lg overflow-hidden">
- <div className="bg-[#0b4bd6] rounded-t-lg p-4 text-white text-center">
+ <div className="bg-[#C15F3C] rounded-t-lg p-4 text-white text-center">
  <h2 className="text-2xl font-bold ">
  TAN Registration
  </h2>
@@ -270,7 +208,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  <li>TAN Application filing</li>
  <li>TAN Certificate and Number</li>
  <li>Support for TDS/TCS compliance</li>
- <li className="text-indigo-600 underline">Load More</li>
+ <li className="text-[#C15F3C] underline">Load More</li>
  </ul>
  </div>
 
@@ -301,7 +239,7 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  {/* Offer box */}
  <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-green-700 border border-[#eff8f0]">
+ <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-[#C15F3C] border border-[#eff8f0]">
  1 Exclusive Offers
  </div>
  <div className="border-2 border-dashed rounded-md border-[#f0dcd0] p-4 bg-white">
@@ -315,7 +253,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </li>
  </ul>
  <div className="mt-3">
- <button className="bg-white border border-green-400 text-green-700 px-3 py-1 rounded">
+ <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-1 rounded">
  ADD
  </button>
  </div>
@@ -323,10 +261,10 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
 
  <div className="mt-4 border-t pt-4 text-sm flex justify-between items-center text-slate-600">
- <a className="text-indigo-600 underline">
+ <a className="text-[#C15F3C] underline">
  Terms and conditions
  </a>
- <a className="text-indigo-600 underline">Refer a Friend</a>
+ <a className="text-[#C15F3C] underline">Refer a Friend</a>
  </div>
 
  <div className="mt-6">
@@ -339,7 +277,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  className="h-8 w-8 object-contain"
  />
  <div className="text-sm">
- <div className="text-indigo-600 font-medium">
+ <div className="text-[#C15F3C] font-medium">
  LEDGERS - Compliance Platform
  </div>
  <div className="text-gray-500 text-xs">
@@ -370,11 +308,11 @@ export default function TanRegistrationPage(): React.ReactElement {
  </p>
 
  <p>
- IndiaFilings can help both individuals and companies with their
+ DoStartup can help both individuals and companies with their
  TAN application online and secure their company TAN Number (Tax
  Deduction and Collection Account Number) in a prompt and
  efficient manner. Leveraging our proficiency in tax and
- regulatory affairs, IndiaFilings makes the complex TAN
+ regulatory affairs, DoStartup makes the complex TAN
  Registration process straightforward.
  </p>
 
@@ -553,7 +491,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  <li className="border-b pb-3">
  Passport size photograph (if applicable)
  </li>
- <li className="mt-4 inline-block px-3 py-2 border rounded-md text-sm text-indigo-600">
+ <li className="mt-4 inline-block px-3 py-2 border rounded-md text-sm text-[#C15F3C]">
  Load More
  </li>
  </ul>
@@ -561,7 +499,7 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  <aside className="lg:col-span-5 bg-white rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold mb-4">Related Guides</h3>
- <ul className="space-y-3 text-sm text-indigo-600">
+ <ul className="space-y-3 text-sm text-[#C15F3C]">
  <li>
  Private Limited Company Registration – Process & Documents
  Required
@@ -592,7 +530,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  aria-expanded={openFaq === i}
  >
  <span className="text-slate-800">{q}</span>
- <span className="text-indigo-600 flex items-center gap-2">
+ <span className="text-[#C15F3C] flex items-center gap-2">
  {openFaq === i ? "-" : <Plus size={14} />}
  </span>
  </button>
@@ -608,7 +546,7 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
 
- <button className="px-4 py-2 border rounded-md text-sm text-indigo-600">
+ <button className="px-4 py-2 border rounded-md text-sm text-[#C15F3C]">
  Load More
  </button>
  
@@ -670,71 +608,7 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  {/* Right column (sidebar) */}
  <aside className="lg:col-span-4 hidden lg:block">
- <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
- <div className="text-center text-gray-600">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold">Your cart is empty</h3>
- <p className="text-sm mt-2">
- Browse our services and add some services in cart!
- </p>
- </div>
-
- <div className="mt-6 text-center">
- <div className="text-sm text-gray-500">
- Existing User?{" "}
- <a className="text-indigo-600 underline">Login</a>
- </div>
- </div>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-200"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-green-500 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
- <ShoppingBag size={16} /> Get Started
- </button>
- </form>
- </div>
+ <SidebarCart />
 
  <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Offers and discounts</h4>
@@ -745,7 +619,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  className="h-8 w-8 object-contain"
  />
  <div className="text-sm">
- <div className="text-indigo-600 font-medium">
+ <div className="text-[#C15F3C] font-medium">
  LEDGERS - Compliance Platform
  </div>
  <div className="text-gray-500 text-xs">
@@ -793,7 +667,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  and documentation.
  </p>
  <div className="mt-3">
- <button className="w-full bg-indigo-600 text-white py-2 rounded-md text-sm">
+ <button className="w-full bg-[#C15F3C] text-white py-2 rounded-md text-sm">
  Schedule a Call
  </button>
  </div>
@@ -801,47 +675,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </aside>
  </main>
 
- {/* Footer */}
- <footer className="bg-white mt-12 py-3 border-t">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
- <a className="block">About IndiaFilings</a>
- <a className="block">Careers</a>
- <a className="block">Contact Us</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
- <a className="block">Business Search</a>
- <a className="block">Trademark Search</a>
- <a className="block">Filings.AE for UAE</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
- <a className="block">Terms & Conditions</a>
- <a className="block">Privacy Policy</a>
- <a className="block">Refund Policy</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
- <a className="block">Confidentiality Policy</a>
- <a className="block">Disclaimer Policy</a>
- <a className="block">IndiaFilings Review</a>
- </div>
- </div>
-
- <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} IndiaFilings - TAN Registration
- </div>
- </div>
- </footer>
-
- {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
+ <Footer />
  </div>
  );
 }

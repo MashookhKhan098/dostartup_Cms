@@ -3,6 +3,8 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import DoStartupPricing from "../components/DoStartupPricing";
 import {
  CheckCircle,
  XCircle,
@@ -334,8 +336,9 @@ export default function ITR3Page() {
  });
 
  const upd = useCallback(
- <K extends keyof CalcState>(k: K, v: CalcState[K]) =>
- setCalc((p) => ({ ...p, [k]: v })),
+ function update<K extends keyof CalcState>(k: K, v: CalcState[K]) {
+ setCalc((p) => ({ ...p, [k]: v }));
+ },
  []
  );
 
@@ -952,46 +955,56 @@ export default function ITR3Page() {
  {/* ════════════════════════════════════
  PRICING
  ════════════════════════════════════ */}
- <section className="bg-white py-6 px-4 sm:px-6" id="pricing">
- <div className="max-w-7xl mx-auto">
- <div className="text-center mb-10">
- <p className="text-orange-500 text-xs font-bold uppercase mb-2">Pricing</p>
- <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-2">Simple Pricing for ITR-3</h2>
- <p className="text-gray-500 text-sm">No hidden charges. Cheaper than every major competitor.</p>
- </div>
- <div className="grid md:grid-cols-3 gap-6">
- {PLANS.map((plan) => (
- <div key={plan.name} className="relative rounded-3xl p-7 border-2 border-gray-200 bg-white transition-all duration-200 hover:-translate-y-2 hover:border-orange-500 hover:shadow-lg hover:shadow-orange-100">
- {plan.badge && (
- <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
- {plan.badge}
- </span>
- )}
- <div className="font-display font-bold text-lg mb-1 text-black">{plan.name}</div>
- <div className="flex items-end gap-1 my-3">
- <span className="font-display text-4xl font-extrabold text-orange-500">{plan.price}</span>
- <span className="text-sm pb-1 text-gray-400">{plan.period}</span>
- </div>
- <p className="text-sm mb-5 leading-relaxed text-gray-500">{plan.desc}</p>
- <ul className="space-y-2.5 mb-6">
- {plan.features.map((f) => (
- <li key={f.text} className="flex items-center gap-2 text-sm">
- {f.ok
- ? <CheckCircle size={15} className="flex-shrink-0 text-orange-500" />
- : <XCircle size={15} className="flex-shrink-0 text-gray-300" />}
- <span className="text-black">{f.text}</span>
- </li>
- ))}
- </ul>
- <button className="w-full py-3 rounded-full font-bold text-sm border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-150">
- {plan.cta}
- </button>
- </div>
- ))}
- </div>
- <p className="text-center text-xs text-gray-400 mt-6">* All plans include free revisions. GST included in price.</p>
- </div>
- </section>
+ <div id="pricing">
+<DoStartupPricing 
+  title="Simple Pricing for ITR-3"
+  subtitle="No hidden charges. Cheaper than every major competitor. All plans include free revisions. GST included in price."
+  plans={[
+    {
+      title: "Self File",
+      price: "999",
+      subtitle: "GST Included",
+      description: "For freelancers & professionals with simple business income",
+      features: [
+        "P&L & Balance Sheet import",
+        "Business income calculation",
+        "F&O turnover check",
+        "e-File to IT Dept"
+      ],
+      buttonText: "Start Filing"
+    },
+    {
+      title: "AI Pro",
+      price: "1,499",
+      subtitle: "GST Included",
+      description: "Best for business owners, traders & multiple income sources",
+      features: [
+        "Everything in Self File",
+        "AI expense maximizer",
+        "Depreciation calculator",
+        "AIS deep reconciliation",
+        "Capital gains + F&O income"
+      ],
+      isPopular: true,
+      buttonText: "Get AI Pro"
+    },
+    {
+      title: "CA Expert",
+      price: "2,999",
+      subtitle: "GST Included",
+      description: "Dedicated CA + Tax Audit for complex business filing",
+      features: [
+        "Everything in AI Pro",
+        "Dedicated CA assigned",
+        "Tax audit (3CA/3CB/3CD)",
+        "Notice response support",
+        "Year-round tax planning"
+      ],
+      buttonText: "Hire a CA"
+    }
+  ]}
+/>
+</div>
 
  {/* ════════════════════════════════════
  FAQ
@@ -1046,7 +1059,7 @@ export default function ITR3Page() {
  </h2>
  <p className="text-gray-500 text-lg mb-8 max-w-2xl mx-auto">
  Join 1 lakh+ business owners, freelancers & F&O traders who trust DoStartup AI to file ITR-3 accurately.
- <span className="block mt-2 text-black font-semibold">Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner — we're 40% cheaper!</span>
+ <span className="block mt-2 text-black font-semibold">Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner — we&apos;re 40% cheaper!</span>
  </p>
  <div className="flex flex-wrap gap-4 justify-center">
  <Link href="#pricing"
@@ -1070,48 +1083,7 @@ export default function ITR3Page() {
  {/* ════════════════════════════════════
  FOOTER
  ════════════════════════════════════ */}
- <footer className="bg-orange-500 text-white py-5 px-4 sm:px-6">
- <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
- <div>
- <h3 className="text-white font-bold text-lg mb-4">DoStartup<span className="text-orange-200">.in</span></h3>
- <p className="text-orange-100 text-sm mb-4">India's most advanced AI-powered ITR-3 filing platform. Tally import, F&O turnover, depreciation & tax audit support.</p>
- <div className="flex gap-3">
- {["f", "t", "in", "yt", "ig"].map((s) => (
- <a key={s} href="#"
- className="w-8 h-8 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center text-xs font-bold text-white transition-colors">{s}</a>
- ))}
- </div>
- </div>
- <div>
- <h4 className="text-white font-semibold text-sm mb-4">ITR Forms</h4>
- <ul className="space-y-2 text-sm text-orange-100">
- {["ITR-1 (Sahaj)", "ITR-2", "ITR-3", "ITR-4 (Sugam)", "ITR-5"].map((item) => (
- <li key={item}><Link href="#" className="hover:text-white transition-colors">{item}</Link></li>
- ))}
- </ul>
- </div>
- <div>
- <h4 className="text-white font-semibold text-sm mb-4">Company</h4>
- <ul className="space-y-2 text-sm text-orange-100">
- {["About Us", "Careers", "Blog", "Press", "Contact"].map((item) => (
- <li key={item}><Link href="#" className="hover:text-white transition-colors">{item}</Link></li>
- ))}
- </ul>
- </div>
- <div>
- <h4 className="text-white font-semibold text-sm mb-4">Support</h4>
- <ul className="space-y-2 text-sm text-orange-100">
- {["Help Center", "FAQ", "Privacy Policy", "Terms of Use", "Refund Policy"].map((item) => (
- <li key={item}><Link href="#" className="hover:text-white transition-colors">{item}</Link></li>
- ))}
- </ul>
- </div>
- </div>
- <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-orange-400 text-center text-xs text-orange-200">
- <p>© 2026 DoStartup.in — Compare with ClearTax, Tax2Win, Quicko, H&R Block, TaxSpanner. All rights reserved.</p>
- <p className="mt-2 text-orange-300">* Competitor prices based on publicly available information as of March 2026.</p>
- </div>
- </footer>
+ <Footer />
 
  </main>
  </>

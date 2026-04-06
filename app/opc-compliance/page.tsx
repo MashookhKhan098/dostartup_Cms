@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",

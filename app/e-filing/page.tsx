@@ -2,15 +2,16 @@
 import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
+import SidebarCart from "../components/SidebarCart";
 import { ChevronDown, ShoppingBag, Plus, Check, Search } from "lucide-react";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
  hero: "/images/hero.png",
  bannerFileItr: "/images/file-itr-banner.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+ ledgers: "/images/ledgers.png",
  whatsapp: "/images/whatsapp.png",
- adRight1: "/images/company-compliance-ad.png",
+ adRight1: "/images/company-compliance.jpg",
  itrAd1: "/images/itr-ad-orange.png",
  cartIcon: "/images/cart.png",
  indiaFlag: "/images/india-flag.png",
@@ -25,7 +26,7 @@ const ASSETS = {
 };
 
 const NAV_ITEMS = [
- "IndiaFilings",
+ "DoStartup",
  "Startup",
  "Registrations",
  "Trademark",
@@ -80,7 +81,7 @@ const POPULAR_SEARCHES = [
 
 export default function IncomeTaxFilingPage(): React.ReactElement {
  const [faqOpen, setFaqOpen] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
+ 
  const [searchQuery, setSearchQuery] = useState("");
  const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
 
@@ -111,11 +112,11 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
+ <div className="min-h-screen bg-[#F4F3EE] text-slate-800 font-sans">
  {/* Header */}
  <header className="bg-white border-b sticky top-0 z-50">
  <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
- <img src={ASSETS.logo} alt="IndiaFilings" className="h-10 w-auto" />
+ <img src={ASSETS.logo} alt="DoStartup" className="h-10 w-auto" />
 
  <nav className="hidden lg:flex gap-6 items-center text-sm text-gray-700">
  {NAV_ITEMS.slice(1, NAV_ITEMS.length - 1).map((item) => {
@@ -139,7 +140,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  <a
  key={link.href}
  href={link.href}
- className="text-sm text-slate-700 hover:text-emerald-600"
+ className="text-sm text-slate-700 hover:text-[#C15F3C]"
  >
  {link.title}
  </a>
@@ -153,7 +154,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  }
 
  return (
- <a key={item} href="#" className="hover:text-indigo-700">
+ <a key={item} href="#" className="hover:text-[#C15F3C]">
  {item}
  </a>
  );
@@ -181,8 +182,8 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  <div className="bg-gradient-to-r from-white to-slate-50 py-6">
  <div className="max-w-[1180px] mx-auto px-6">
  <div className="text-sm text-gray-500 mb-4">
- IndiaFilings / Income Tax /{" "}
- <span className="text-indigo-600 font-medium">
+ DoStartup / Income Tax /{" "}
+ <span className="text-[#C15F3C] font-medium">
  Income Tax E-Filing
  </span>
  </div>
@@ -303,7 +304,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Personal */}
  <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+ <div className="inline-block bg-[#F4F3EE] text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Personal
  </div>
  <h3 className="font-semibold text-lg">Personal Tax Filing</h3>
@@ -332,7 +333,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
 
  {/* Business */}
  <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+ <div className="inline-block bg-[#F4F3EE] text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Business
  </div>
  <h3 className="font-semibold text-lg">Business Tax Filing</h3>
@@ -364,7 +365,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
 
  {/* Not for Profit */}
  <div className="bg-white rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs mb-3">
+ <div className="inline-block bg-[#F4F3EE] text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Not for Profit
  </div>
  <h3 className="font-semibold text-lg">Not for Profit</h3>
@@ -430,7 +431,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </div>
 
  <p>
- IndiaFilings simplifies the entire Income Tax e Filing process,
+ DoStartup simplifies the entire Income Tax e Filing process,
  making it quick, easy, and hassle-free. Our platform guides you
  step-by-step, from auto-fetching your pre-filled data to
  assisting you in choosing the right tax regime. Whether you're
@@ -440,7 +441,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
 
  <p>
  Experience a seamless ITR filing process online with
- IndiaFilings and say goodbye to tax season stress!
+ DoStartup and say goodbye to tax season stress!
  </p>
 
  <h3 className="text-lg font-semibold">
@@ -966,62 +967,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
 
  {/* Sidebar */}
  <aside className="lg:col-span-4 hidden lg:block">
- <div className="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-28">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-center">Your cart is empty</h3>
- <p className="text-sm mt-2 text-center">
- Browse services and add to cart!
- </p>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-green-500 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2">
- <ShoppingBag size={16} /> Get Started
- </button>
- </form>
- </div>
+ <SidebarCart />
 
  <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Related Guides</h4>
@@ -1072,8 +1018,8 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>
- <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
- <a className="block">About IndiaFilings</a>
+ <h5 className="font-semibold text-gray-800 mb-2">DoStartup</h5>
+ <a className="block">About DoStartup</a>
  <a className="block">Careers</a>
  <a className="block">Contact Us</a>
  </div>
@@ -1093,12 +1039,12 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
  <a className="block">Confidentiality Policy</a>
  <a className="block">Disclaimer Policy</a>
- <a className="block">IndiaFilings Review</a>
+ <a className="block">DoStartup Review</a>
  </div>
  </div>
 
  <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} IndiaFilings - Sample replica footer
+ © {new Date().getFullYear()} DoStartup - Sample replica footer
  </div>
  </div>
  </footer>

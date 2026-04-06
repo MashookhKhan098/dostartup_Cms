@@ -13,7 +13,7 @@ export default function Home() {
  heading: "Get your ",
  headingHighlight: "Trade License",
  description:
- "A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using IndiaFilings and ensure full compliance with local municipal regulations.",
+ "A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using DoStartup and ensure full compliance with local municipal regulations.",
 
  features: [
  {

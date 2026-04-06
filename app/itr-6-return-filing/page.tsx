@@ -3,6 +3,8 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
 import {
  ChevronRight,
  ChevronLeft,
@@ -331,8 +333,12 @@ export default function TaxCalculatorPage() {
  ded80G: 0, ded80E: 0, ded80TTA: 10000, nps80CCD: 0,
  });
 
- const updS2 = <K extends keyof Step2Data>(k: K, v: Step2Data[K]) => setS2(p => ({ ...p, [k]: v }));
- const updS3 = <K extends keyof Step3Data>(k: K, v: Step3Data[K]) => setS3(p => ({ ...p, [k]: v }));
+  const updS2 = function updateS2<K extends keyof Step2Data>(k: K, v: Step2Data[K]) {
+    setS2((p) => ({ ...p, [k]: v }));
+  };
+  const updS3 = function updateS3<K extends keyof Step3Data>(k: K, v: Step3Data[K]) {
+    setS3((p) => ({ ...p, [k]: v }));
+  };
 
  const result = compute(s1, s2, s3);
 
@@ -346,14 +352,14 @@ export default function TaxCalculatorPage() {
  return (
  <>
  <Navbar />
- <main className="min-h-screen bg-gray-50 font-sans">
+ <main className="min-h-screen bg-[#F4F3EE] font-sans">
 
  {/* ── PAGE HEADER ── */}
  <div className="bg-white border-b border-gray-100 py-3 px-4 sm:px-6">
  <div className="max-w-5xl mx-auto">
  <div className="flex items-start justify-between flex-wrap gap-4">
  <div>
- <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 text-orange-500 text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase ">
+ <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#C15F3C]/20 text-[#C15F3C] text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase ">
  <Zap size={12} /> Free Tool — Updated for Budget 2025
  </div>
  <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-black mb-1">
@@ -365,7 +371,7 @@ export default function TaxCalculatorPage() {
  </div>
  <div className="flex gap-2">
  <button onClick={reset}
- className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-orange-500 border border-gray-200 hover:border-orange-300 px-3 py-2 rounded-lg transition-colors">
+ className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-[#C15F3C] border border-gray-200 hover:border-[#C15F3C]/50 px-3 py-2 rounded-lg transition-colors">
  <RefreshCw size={13} /> Reset
  </button>
  </div>
@@ -376,11 +382,11 @@ export default function TaxCalculatorPage() {
  {[
  { icon: <Brain size={13} />, label: "AI-Powered" },
  { icon: <Shield size={13} />, label: "100% Secure" },
- { icon: <Star size={13} className="fill-orange-500" />, label: "4.9★ Rated" },
+ { icon: <Star size={13} className="fill-[#C15F3C]" />, label: "4.9★ Rated" },
  { icon: <Users size={13} />, label: "50L+ Users" },
  ].map((b) => (
  <div key={b.label} className="flex items-center gap-1.5 text-xs text-gray-500">
- <span className="text-orange-500">{b.icon}</span>{b.label}
+ <span className="text-[#C15F3C]">{b.icon}</span>{b.label}
  </div>
  ))}
  </div>
@@ -407,7 +413,7 @@ export default function TaxCalculatorPage() {
  <div className="grid grid-cols-2 gap-3">
  {(["2025-26", "2024-25"] as FinancialYear[]).map((fy) => (
  <button key={fy} onClick={() => setS1(p => ({ ...p, fy }))}
- className={`py-3 rounded-xl border-2 text-sm font-semibold transition-all ${s1.fy === fy ? "bg-orange-500 border-orange-500 text-white" : "border-gray-200 text-black hover:border-orange-300"}`}>
+ className={`py-3 rounded-xl border-2 text-sm font-semibold transition-all ${s1.fy === fy ? "bg-[#C15F3C] border-[#C15F3C] text-white" : "border-gray-200 text-black hover:border-[#C15F3C]/50"}`}>
  FY {fy}
  </button>
  ))}
@@ -423,17 +429,17 @@ export default function TaxCalculatorPage() {
  { val: "above80", label: "Above 80", sub: "Super Senior" },
  ] as { val: AgeGroup; label: string; sub: string }[]).map((opt) => (
  <button key={opt.val} onClick={() => setS1(p => ({ ...p, age: opt.val }))}
- className={`py-3 px-2 rounded-xl border-2 text-sm transition-all text-center ${s1.age === opt.val ? "bg-orange-500 border-orange-500 text-white" : "border-gray-200 text-black hover:border-orange-300"}`}>
+ className={`py-3 px-2 rounded-xl border-2 text-sm transition-all text-center ${s1.age === opt.val ? "bg-[#C15F3C] border-[#C15F3C] text-white" : "border-gray-200 text-black hover:border-[#C15F3C]/50"}`}>
  <div className="font-bold">{opt.label}</div>
- <div className={`text-[10px] mt-0.5 ${s1.age === opt.val ? "text-orange-100" : "text-gray-400"}`}>{opt.sub}</div>
+ <div className={`text-[10px] mt-0.5 ${s1.age === opt.val ? "text-[#C15F3C]/20" : "text-gray-400"}`}>{opt.sub}</div>
  </button>
  ))}
  </div>
  </div>
 
- <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 mb-6">
+ <div className="bg-[#F4F3EE] border border-[#C15F3C]/10 rounded-xl p-4 mb-6">
  <div className="flex items-start gap-2">
- <Info size={15} className="text-orange-500 flex-shrink-0 mt-0.5" />
+ <Info size={15} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
  <p className="text-xs text-gray-600">
  <strong className="text-black">New Regime is Default</strong> for FY 2025-26. You can still opt for Old Regime while filing. This calculator computes both and recommends the better one.
  </p>
@@ -441,7 +447,7 @@ export default function TaxCalculatorPage() {
  </div>
 
  <button onClick={() => setStep(2)}
- className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
+ className="w-full bg-[#C15F3C] hover:bg-[#C15F3C]/90 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
  Go to Next Step <ChevronRight size={18} />
  </button>
  </div>
@@ -453,8 +459,8 @@ export default function TaxCalculatorPage() {
  <SectionTitle icon={<Briefcase size={16} />} title="Step 2: Income Details" />
 
  {/* Salary */}
- <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 mb-6">
- <h4 className="text-xs font-bold text-orange-600 uppercase mb-4">💼 Salary Income</h4>
+ <div className="bg-[#F4F3EE] border border-[#C15F3C]/10 rounded-xl p-4 mb-6">
+ <h4 className="text-xs font-bold text-[#C15F3C] uppercase mb-4">💼 Salary Income</h4>
  <div className="grid sm:grid-cols-2 gap-x-4">
  <InputField label="Basic Salary (Annual)" value={s2.basicSalary} onChange={(v) => updS2("basicSalary", v)} />
  <InputField label="HRA Received (Annual)" value={s2.hra} onChange={(v) => updS2("hra", v)} />
@@ -466,7 +472,7 @@ export default function TaxCalculatorPage() {
  <div className="grid grid-cols-2 gap-2 mt-2">
  {[{ val: true, label: "Metro City" }, { val: false, label: "Non-Metro" }].map((opt) => (
  <button key={String(opt.val)} onClick={() => updS2("isMetro", opt.val)}
- className={`py-2.5 rounded-lg border-2 text-xs font-semibold transition-all ${s2.isMetro === opt.val ? "bg-orange-500 border-orange-500 text-white" : "border-gray-200 text-black hover:border-orange-300"}`}>
+ className={`py-2.5 rounded-lg border-2 text-xs font-semibold transition-all ${s2.isMetro === opt.val ? "bg-[#C15F3C] border-[#C15F3C] text-white" : "border-gray-200 text-black hover:border-[#C15F3C]/50"}`}>
  {opt.label}
  </button>
  ))}
@@ -498,11 +504,11 @@ export default function TaxCalculatorPage() {
 
  <div className="flex gap-3">
  <button onClick={() => setStep(1)}
- className="flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-orange-500 border border-gray-200 hover:border-orange-300 px-5 py-3 rounded-xl transition-colors">
+ className="flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-[#C15F3C] border border-gray-200 hover:border-[#C15F3C]/50 px-5 py-3 rounded-xl transition-colors">
  <ChevronLeft size={16} /> Back
  </button>
  <button onClick={() => setStep(3)}
- className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
+ className="flex-1 bg-[#C15F3C] hover:bg-[#C15F3C]/90 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
  Go to Next Step <ChevronRight size={18} />
  </button>
  </div>
@@ -514,8 +520,8 @@ export default function TaxCalculatorPage() {
  <div className="p-6 sm:p-8">
  <SectionTitle icon={<Shield size={16} />} title="Step 3: Tax Saving Deductions (Old Regime)" />
 
- <div className="bg-orange-50 border border-orange-100 rounded-xl p-3 mb-5 flex items-start gap-2">
- <Info size={14} className="text-orange-500 flex-shrink-0 mt-0.5" />
+ <div className="bg-[#F4F3EE] border border-[#C15F3C]/10 rounded-xl p-3 mb-5 flex items-start gap-2">
+ <Info size={14} className="text-[#C15F3C] flex-shrink-0 mt-0.5" />
  <p className="text-xs text-gray-600">These deductions apply to the <strong className="text-black">Old Tax Regime only</strong>. They are not available under the New Regime. Enter 0 if not applicable.</p>
  </div>
 
@@ -559,11 +565,11 @@ export default function TaxCalculatorPage() {
 
  <div className="flex gap-3 mt-2">
  <button onClick={() => setStep(2)}
- className="flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-orange-500 border border-gray-200 hover:border-orange-300 px-5 py-3 rounded-xl transition-colors">
+ className="flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-[#C15F3C] border border-gray-200 hover:border-[#C15F3C]/50 px-5 py-3 rounded-xl transition-colors">
  <ChevronLeft size={16} /> Back
  </button>
  <button onClick={() => setStep(4)}
- className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
+ className="flex-1 bg-[#C15F3C] hover:bg-[#C15F3C]/90 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
  Calculate Tax <ChevronRight size={18} />
  </button>
  </div>
@@ -576,33 +582,33 @@ export default function TaxCalculatorPage() {
  <div className="flex items-center justify-between mb-6">
  <SectionTitle icon={<FileText size={16} />} title="Tax Computation Summary" />
  <button onClick={() => setStep(1)}
- className="text-xs text-orange-500 font-semibold hover:underline flex items-center gap-1">
+ className="text-xs text-[#C15F3C] font-semibold hover:underline flex items-center gap-1">
  <RefreshCw size={12} /> Recalculate
  </button>
  </div>
 
  {/* AI Recommendation Banner */}
- <div className={`rounded-2xl p-5 mb-6 border-2 text-center ${result.recommendation === "new" ? "bg-green-50 border-green-300" : "bg-orange-50 border-orange-300"}`}>
+ <div className={`rounded-2xl p-5 mb-6 border-2 text-center ${result.recommendation === "new" ? "bg-green-50 border-green-300" : "bg-[#F4F3EE] border-[#C15F3C]/30"}`}>
  <div className="flex items-center justify-center gap-2 mb-1">
- <Brain size={18} className="text-orange-500" />
- <span className="text-xs font-bold uppercase text-orange-500">AI Recommendation</span>
+ <Brain size={18} className="text-[#C15F3C]" />
+ <span className="text-xs font-bold uppercase text-[#C15F3C]">AI Recommendation</span>
  </div>
  <p className="font-display font-extrabold text-xl text-black">
  {result.recommendation === "new" ? "✨ New Tax Regime saves you more" : "🏛️ Old Tax Regime saves you more"}
  </p>
  <p className="text-gray-500 text-sm mt-1">
- You save <strong className="text-orange-500 text-lg">{fmt(result.savings)}</strong> by choosing {result.recommendation === "new" ? "New" : "Old"} Regime
+ You save <strong className="text-[#C15F3C] text-lg">{fmt(result.savings)}</strong> by choosing {result.recommendation === "new" ? "New" : "Old"} Regime
  </p>
  </div>
 
  {/* Side by side comparison */}
  <div className="grid sm:grid-cols-2 gap-4 mb-6">
  {/* OLD REGIME */}
- <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "old" ? "border-orange-500 bg-orange-50/50" : "border-gray-200 bg-white"}`}>
+ <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "old" ? "border-[#C15F3C] bg-[#F4F3EE]/50" : "border-gray-200 bg-white"}`}>
  <div className="flex items-center justify-between mb-3">
  <h4 className="font-display font-bold text-black text-sm">🏛️ Old Tax Regime</h4>
  {result.recommendation === "old" && (
- <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">BETTER</span>
+ <span className="bg-[#C15F3C] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">BETTER</span>
  )}
  </div>
  <ResultLine label="Gross Salary" value={fmt(result.oldGrossSalary)} />
@@ -620,20 +626,20 @@ export default function TaxCalculatorPage() {
  {result.ltcgTax > 0 && <ResultLine label="LTCG Tax" value={fmt(result.ltcgTax)} />}
  {result.stcgTax > 0 && <ResultLine label="STCG Tax" value={fmt(result.stcgTax)} />}
  {result.digitalTax > 0 && <ResultLine label="Digital Assets Tax" value={fmt(result.digitalTax)} />}
- <div className="mt-2 pt-2 border-t-2 border-orange-200">
+ <div className="mt-2 pt-2 border-t-2 border-[#C15F3C]/20">
  <div className="flex justify-between items-center">
  <span className="font-bold text-black text-sm">Total Tax</span>
- <span className={`font-extrabold text-xl ${result.recommendation === "old" ? "text-orange-500" : "text-black"}`}>{fmt(result.oldTotalTax)}</span>
+ <span className={`font-extrabold text-xl ${result.recommendation === "old" ? "text-[#C15F3C]" : "text-black"}`}>{fmt(result.oldTotalTax)}</span>
  </div>
  </div>
  </div>
 
  {/* NEW REGIME */}
- <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "new" ? "border-orange-500 bg-orange-50/50" : "border-gray-200 bg-white"}`}>
+ <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "new" ? "border-[#C15F3C] bg-[#F4F3EE]/50" : "border-gray-200 bg-white"}`}>
  <div className="flex items-center justify-between mb-3">
  <h4 className="font-display font-bold text-black text-sm">✨ New Tax Regime</h4>
  {result.recommendation === "new" && (
- <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">BETTER</span>
+ <span className="bg-[#C15F3C] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">BETTER</span>
  )}
  </div>
  <ResultLine label="Gross Salary" value={fmt(result.newGrossSalary)} />
@@ -649,19 +655,19 @@ export default function TaxCalculatorPage() {
  {result.ltcgTax > 0 && <ResultLine label="LTCG Tax" value={fmt(result.ltcgTax)} />}
  {result.stcgTax > 0 && <ResultLine label="STCG Tax" value={fmt(result.stcgTax)} />}
  {result.digitalTax > 0 && <ResultLine label="Digital Assets Tax" value={fmt(result.digitalTax)} />}
- <div className="mt-2 pt-2 border-t-2 border-orange-200">
+ <div className="mt-2 pt-2 border-t-2 border-[#C15F3C]/20">
  <div className="flex justify-between items-center">
  <span className="font-bold text-black text-sm">Total Tax</span>
- <span className={`font-extrabold text-xl ${result.recommendation === "new" ? "text-orange-500" : "text-black"}`}>{fmt(result.newTotalTax)}</span>
+ <span className={`font-extrabold text-xl ${result.recommendation === "new" ? "text-[#C15F3C]" : "text-black"}`}>{fmt(result.newTotalTax)}</span>
  </div>
  </div>
  </div>
  </div>
 
  {/* Tax Slabs breakdown */}
- <div className="bg-gray-50 rounded-2xl p-4 mb-5">
+ <div className="bg-[#F4F3EE] rounded-2xl p-4 mb-5">
  <h4 className="font-bold text-black text-sm mb-3 flex items-center gap-2">
- <BarChart3 size={15} className="text-orange-500" /> New Regime Tax Slab Breakdown
+ <BarChart3 size={15} className="text-[#C15F3C]" /> New Regime Tax Slab Breakdown
  </h4>
  {[
  { range: "Up to ₹3,00,000", rate: "0%", tax: 0 },
@@ -673,18 +679,18 @@ export default function TaxCalculatorPage() {
  ].filter((r) => r.range === "Up to ₹3,00,000" || r.tax > 0).map((s) => (<div key={s.range} className="flex justify-between items-center py-1.5 border-b border-gray-100 last:border-0 text-xs">
  <span className="text-gray-600">{s.range}</span>
  <span className="text-gray-400">{s.rate}</span>
- <span className={`font-bold ${s.tax > 0 ? "text-orange-500" : "text-gray-300"}`}>{fmt(s.tax)}</span>
+ <span className={`font-bold ${s.tax > 0 ? "text-[#C15F3C]" : "text-gray-300"}`}>{fmt(s.tax)}</span>
  </div>
  ))}
  </div>
 
  {/* CTA */}
  <Link href="/itr-1-return-filing"
- className="block bg-orange-500 hover:bg-orange-600 text-white font-bold text-base text-center py-4 rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5 mb-3">
+ className="block bg-[#C15F3C] hover:bg-[#C15F3C]/90 text-white font-bold text-base text-center py-4 rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5 mb-3">
  🚀 File Your ITR Now — Use This Tax Data
  </Link>
  <button onClick={() => setStep(1)}
- className="w-full border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold py-3 rounded-xl transition-all text-sm">
+ className="w-full border-2 border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white font-semibold py-3 rounded-xl transition-all text-sm">
  <RefreshCw size={14} className="inline mr-2" />Calculate Again
  </button>
  </div>
@@ -811,7 +817,9 @@ export default function TaxCalculatorPage() {
  </div>
  </div>
  </div>
- </main>
- </>
- );
+    
+    </main>
+    <Footer />
+  </>
+);
 }

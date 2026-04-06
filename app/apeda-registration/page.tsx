@@ -15,7 +15,7 @@ export default function Home() {
  imageUrl="/images/apeda-registration.png" // use your local image or CDN image
  title="APEDA Registration"
  rating={4.5}
- description="APEDA Registration is essential for exporters of agricultural and processed food products. Simplify the registration process and receive your RCMC certificate quickly with IndiaFilings expert assistance."
+ description="APEDA Registration is essential for exporters of agricultural and processed food products. Simplify the registration process and receive your RCMC certificate quickly with DoStartup expert assistance."
  exclusiveOffersCount={2}
  features={[
  "Application Preparation",

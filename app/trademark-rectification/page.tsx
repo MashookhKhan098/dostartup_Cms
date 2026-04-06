@@ -14,7 +14,7 @@ export default function Home() {
  trademarkService={{
  serviceName: "Rectification",
  serviceDescription:
- "Drafting and filing of rectification for applications marked “Formalities Check Fail” by the Trademark Examiner. Exclusive pricing for applications filed through IndiaFilings. Inclusive of government fees and taxes.",
+ "Drafting and filing of rectification for applications marked “Formalities Check Fail” by the Trademark Examiner. Exclusive pricing for applications filed through DoStartup. Inclusive of government fees and taxes.",
  formFields: [
  {
  type: "input",

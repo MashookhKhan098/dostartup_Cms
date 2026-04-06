@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Search, Check, Plus, ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DoStartupPricing from "../components/DoStartupPricing";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -252,136 +253,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
 
  <main className="max-w-[1180px] mx-auto px-6 py-4 space-y-8">
- <section>
- <h2 className="text-2xl md:text-3xl font-semibold text-center">
- Simple, Transparent TDS Return Filing Pricing
- </h2>
- <p className="text-sm text-gray-600 mt-2 text-center max-w-[880px] mx-auto">
- File your TDS returns online with expert assistance, error-free
- filing, and timely submission tracking.
- </p>
 
- <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
- <div className="bg-white rounded-xl border p-6 shadow-sm hover:border-amber-200 transition-colors">
- <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
- LEDGERS
- </div>
- <h3 className="font-semibold text-lg">Software Only</h3>
- <p className="text-sm text-gray-600 mt-2">
- LEDGERS Software Access - 1 Year
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹5,899 <span className="text-sm font-normal">/ yr + GST</span>
- </div>
- <button className="mt-4 w-full bg-amber-600 text-white py-3 rounded-full hover:bg-amber-700 transition-colors">
- Start Filing Now
- </button>
- <ul className="mt-5 space-y-3 text-sm text-gray-700">
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>LEDGERS Software Access - 1 Year</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>TDS Compliance Dashboard & Alerts</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Deductor–Deductee Reconciliation & PAN Validation</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Automated TDS calculations (section-wise)</span>
- </li>
- </ul>
- </div>
-
- <div className="bg-white rounded-xl border p-6 shadow-sm ring-2 ring-amber-600/20 hover:border-amber-200 transition-colors">
- <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
- Accounting Software + Service
- </div>
- <h3 className="font-semibold text-lg">Accountant</h3>
- <p className="text-sm text-gray-600 mt-2">
- Dedicated Accountant Support - 1 Assigned Accountant
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹15,899 <span className="text-sm font-normal">/ FY + GST</span>
- </div>
- <button className="mt-4 w-full bg-amber-600 text-white py-3 rounded-full hover:bg-amber-700 transition-colors">
- Start Filing Now
- </button>
- <ul className="mt-5 space-y-3 text-sm text-gray-700">
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Dedicated Accountant Support - 1 Assigned Accountant</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Quarterly TDS Return Filing (24Q, 26Q, 27Q, 27EQ) - 1 Year</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>TRACES Validation Before Filing</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>TDS Certificate Generation</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Correction Statement Filing</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Deductor–Deductee Reconciliation</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Ledgers Accounting Software - 1 Year</span>
- </li>
- </ul>
- </div>
-
- <div className="bg-white rounded-xl border p-6 shadow-sm hover:border-amber-200 transition-colors">
- <div className="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs mb-3">
- Most popular
- </div>
- <h3 className="font-semibold text-lg">TDS Filing – 2 Years</h3>
- <p className="text-sm text-gray-600 mt-2">
- Dedicated Accountant Support with 2 Year coverage
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹25,899{" "}
- <span className="text-sm font-normal">/ 2 FY + GST</span>
- </div>
- <button className="mt-4 w-full bg-amber-600 text-white py-3 rounded-full hover:bg-amber-700 transition-colors">
- Start Filing Now
- </button>
- <ul className="mt-5 space-y-3 text-sm text-gray-700">
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Quarterly TDS Return Filing - 2 Years</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>TRACES Validation Before Filing</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>TDS Certificate Generation</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Deductor–Deductee Reconciliation</span>
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-amber-600 flex-shrink-0 mt-0.5" /> 
- <span>Ledgers Accounting Software - 2 Years</span>
- </li>
- </ul>
- </div>
- </div>
- </section>
 
  <section className="bg-white rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold text-center">
@@ -485,7 +357,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
 
  <section className="bg-white rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
- Why IndiaFilings for TDS Compliance
+ Why DoStartup for TDS Compliance
  </h3>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  <div className="p-4 rounded-lg border hover:border-amber-200 transition-colors">
@@ -526,7 +398,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  payee (deducted). Entities and individuals who engage in tax
  deductions at the source are legally required to file TDS returns
  quarterly before the TDS due date, detailing the specifics of these
- deductions. IndiaFilings provides expert assistance to streamline
+ deductions. DoStartup provides expert assistance to streamline
  the process, ensuring accurate filing, timely payment, and
  reconciliation so that TDS credits reflect correctly in Form 26AS
  and Form 16/16A.
@@ -607,6 +479,56 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </section>
 
+ <DoStartupPricing 
+   title="Simple, Transparent PF & TDS Return Filing Pricing"
+   plans={[
+     {
+       title: "Software Only",
+       price: "5,899",
+       subtitle: "yr + GST",
+       description: "LEDGERS Software Access - 1 Year",
+       features: [
+         "LEDGERS Software Access - 1 Year",
+         "TDS/PF Compliance Dashboard & Alerts",
+         "Deductor–Deductee Reconciliation & PAN Validation",
+         "Automated TDS calculations (section-wise)"
+       ],
+       buttonText: "Start Filing Now"
+     },
+     {
+       title: "Accountant",
+       price: "15,899",
+       subtitle: "FY + GST",
+       description: "Dedicated Accountant Support - 1 Assigned Accountant",
+       features: [
+         "Dedicated Accountant Support - 1 Assigned Accountant",
+         "Quarterly TDS/PF Return Filing - 1 Year",
+         "TRACES Validation Before Filing",
+         "Certificate Generation",
+         "Correction Statement Filing",
+         "Deductor–Deductee Reconciliation",
+         "Ledgers Accounting Software - 1 Year"
+       ],
+       buttonText: "Start Filing Now"
+     },
+     {
+       title: "TDS Filing – 2 Years",
+       price: "25,899",
+       subtitle: "2 FY + GST",
+       description: "Dedicated Accountant Support with 2 Year coverage",
+       isPopular: true,
+       features: [
+         "Quarterly TDS/PF Return Filing - 2 Years",
+         "TRACES Validation Before Filing",
+         "Certificate Generation",
+         "Deductor–Deductee Reconciliation",
+         "Ledgers Accounting Software - 2 Years"
+       ],
+       buttonText: "Start Filing Now"
+     }
+   ]}
+ />
+
  <section className="bg-white rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">FAQs</h3>
  <div className="space-y-0">
@@ -650,8 +572,8 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>
- <h5 className="font-semibold text-gray-800 mb-2">IndiaFilings</h5>
- <a className="block hover:text-amber-600">About IndiaFilings</a>
+ <h5 className="font-semibold text-gray-800 mb-2">DoStartup</h5>
+ <a className="block hover:text-amber-600">About DoStartup</a>
  <a className="block hover:text-amber-600">Careers</a>
  <a className="block hover:text-amber-600">Contact Us</a>
  </div>
@@ -671,11 +593,11 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
  <a className="block hover:text-amber-600">Confidentiality Policy</a>
  <a className="block hover:text-amber-600">Disclaimer Policy</a>
- <a className="block hover:text-amber-600">IndiaFilings Review</a>
+ <a className="block hover:text-amber-600">DoStartup Review</a>
  </div>
  </div>
  <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} IndiaFilings - TDS Return Filing
+ © {new Date().getFullYear()} DoStartup - TDS Return Filing
  </div>
  </div>
  </footer>

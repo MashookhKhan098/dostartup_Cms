@@ -80,7 +80,7 @@ export default function Home() {
 
  // ================= FOOTER TEXT =================
  footerText:
- "By submitting this form, you agree to the Terms of Service. Service powered by IndiaFilings.",
+ "By submitting this form, you agree to the Terms of Service. Service powered by DoStartup.",
 };
 
 

@@ -1,769 +1,372 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
-import React, { useEffect, useRef, useState } from "react";
-import { ChevronDown, CheckCircle, ShoppingBag, Plus } from "lucide-react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-
-const ASSETS = {
- logo: "/images/india-logo.jpg",
- hero: "/images/professional-tax-hero.png",
- whatsapp: "/images/whatsapp.svg",
- footerBg: "/images/footer-bg.png",
- cartIcon: "/images/cart-icon.svg",
- indiaFlag: "/images/india-flag.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- adRight1: "/images/company-compliance-ad.png",
- dinEkyc: "/images/din-ekyc-ad.png",
-};
-
-const STATES_UTS = [
- "Andhra Pradesh",
- "Assam",
- "Bihar",
- "Chhattisgarh",
- "Gujarat",
- "Karnataka",
- "Kerala",
- "Madhya Pradesh",
- "Maharashtra",
- "Manipur",
- "Meghalaya",
- "Mizoram",
- "Nagaland",
- "Odisha",
- "Punjab",
- "Rajasthan",
- "Tamil Nadu",
- "Telangana",
- "Tripura",
- "Uttar Pradesh",
- "West Bengal",
- "Delhi",
- "Puducherry",
- "Chandigarh",
- "Andaman and Nicobar Islands",
- "Dadra and Nagar Haveli and Daman and Diu",
- "Lakshadweep",
- "Ladakh",
- "Jammu & Kashmir",
-];
-
-function useOnClickOutside<T extends HTMLElement = HTMLElement>(
- ref: React.RefObject<T | null>,
- handler: () => void
-) {
- useEffect(() => {
- const listener = (event: MouseEvent | TouchEvent) => {
- const el = ref?.current;
- if (!el || el.contains(event.target as Node)) return;
- handler();
- };
- document.addEventListener("mousedown", listener);
- document.addEventListener("touchstart", listener);
- return () => {
- document.removeEventListener("mousedown", listener);
- document.removeEventListener("touchstart", listener);
- };
- }, [handler, ref]);
-}
-
-const StateDropdown: React.FC<{
- value: string | null;
- onChange: (v: string) => void;
-}> = ({ value, onChange }) => {
- const ref = useRef<HTMLDivElement | null>(null);
- const [open, setOpen] = useState(false);
- const [query, setQuery] = useState("");
- const [filtered, setFiltered] = useState<string[]>(STATES_UTS);
-
- useOnClickOutside(ref, () => {
- setOpen(false);
- setQuery("");
- setFiltered(STATES_UTS);
- });
-
- useEffect(() => {
- setFiltered(
- STATES_UTS.filter((s) =>
- s.toLowerCase().includes(query.trim().toLowerCase())
- )
- );
- }, [query]);
-
- return (
- <div ref={ref} className="relative">
- <label className="block text-sm font-medium text-slate-700 mb-2">
- State
- </label>
- <div>
- <button
- onClick={() => setOpen((s) => !s)}
- className="w-full text-left px-4 py-2 border border-gray-200 rounded bg-white flex items-center justify-between focus:outline-none focus:ring-1 focus:ring-amber-600"
- aria-haspopup
- aria-expanded={open}
- >
- <span className="truncate text-slate-600">
- {value ?? "Select State/UT"}
- </span>
- <ChevronDown className="w-4 h-4 text-slate-400" />
- </button>
- </div>
-
- {open && (
- <div className="absolute mt-2 w-full bg-white border border-gray-200 rounded shadow-lg z-40">
- <div className="p-3">
- <input
- value={query}
- onChange={(e) => setQuery(e.target.value)}
- className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Search State/UT..."
- />
- </div>
- <div className="max-h-40 overflow-auto divide-y divide-gray-200">
- {filtered.map((s) => (
- <button
- key={s}
- onClick={() => {
- onChange(s);
- setOpen(false);
- setQuery("");
- }}
- className="w-full text-left px-4 py-2 hover:bg-amber-50 hover:text-amber-700 text-sm text-slate-700 transition-colors"
- role="option"
- aria-selected={value === s}
- >
- {s}
- </button>
- ))}
- {filtered.length === 0 && (
- <div className="px-4 py-3 text-sm text-slate-500">No results</div>
- )}
- </div>
- </div>
- )}
- </div>
- );
-};
-
-const ProfessionalTaxDropdown: React.FC<{
- value: string | null;
- onChange: (v: string) => void;
-}> = ({ value, onChange }) => {
- const ref = useRef<HTMLDivElement | null>(null);
- const [open, setOpen] = useState(false);
- const OPTIONS = [
- "Professional Tax Registration Certificate",
- "Professional Tax Registration Return Filing",
- "Professional Tax Registration Cancellation",
- ];
- useOnClickOutside(ref, () => setOpen(false));
- return (
- <div ref={ref} className="relative">
- <label className="block text-sm font-medium text-slate-700 mb-2">
- Professional Tax
- </label>
- <button
- onClick={() => setOpen((s) => !s)}
- className="w-full text-left px-4 py-2 border border-gray-200 rounded bg-white flex items-center justify-between focus:outline-none focus:ring-1 focus:ring-amber-600"
- aria-haspopup
- aria-expanded={open}
- >
- <span className="truncate text-slate-600">
- {value ?? "Select Professional Tax..."}
- </span>
- <ChevronDown className="w-4 h-4 text-slate-400" />
- </button>
- {open && (
- <div className="absolute z-40 mt-2 w-full bg-white border border-gray-200 rounded shadow-lg">
- <div className="px-3 py-2 text-xs text-slate-400 border-b border-gray-200">
- Select Professional Tax...
- </div>
- <div className="py-1 max-h-48 overflow-auto">
- {OPTIONS.map((opt) => (
- <button
- key={opt}
- onClick={() => {
- onChange(opt);
- setOpen(false);
- }}
- className={`w-full text-left px-4 py-3 hover:bg-amber-50 hover:text-amber-700 text-sm flex items-center justify-between transition-colors ${
- value === opt
- ? "font-medium text-amber-700 bg-amber-50"
- : "text-slate-700"
- }`}
- role="option"
- aria-selected={value === opt}
- >
- <span>{opt}</span>
- {value === opt && (
- <svg
- width="16"
- height="16"
- viewBox="0 0 24 24"
- fill="none"
- aria-hidden
- className="text-amber-600"
- >
- <path
- d="M20 6L9 17l-5-5"
- stroke="currentColor"
- strokeWidth="2"
- strokeLinecap="round"
- strokeLinejoin="round"
- />
- </svg>
- )}
- </button>
- ))}
- </div>
- </div>
- )}
- </div>
- );
-};
+import Footer from "../components/Footer";
+import Popularsearches from '../components/PopularSearches';
+import Faq from '../components/Faq';
+import SidebarCart from "../components/SidebarCart";
+import { CheckCircle, Clock, Shield, FileText, AlertCircle, Info, ChevronRight, Check, ChevronDown } from "lucide-react";
 
 export default function ProfessionalTaxReturnPage() {
- const [state, setState] = useState<string | null>(null);
- const [panOrGstin, setPanOrGstin] = useState("");
- const [ptNumber, setPtNumber] = useState("");
- const [activeFaq, setActiveFaq] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
- const [professionalTaxOption, setProfessionalTaxOption] = useState<
- string | null
- >("Professional Tax Registration Return Filing");
 
- function handleApplyNow() {
- if (!state) {
- alert("Please select State/UT");
- return;
- }
- if (!panOrGstin.trim()) {
- alert("Please enter PAN / GSTIN");
- return;
- }
- alert(
- `Apply Now submitted\nType: ${professionalTaxOption}\nState: ${state}\nPAN/GSTIN: ${panOrGstin}\nPT No: ${ptNumber}`
- );
- }
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Submitted successfully. Our experts will contact you soon.');
+  };
 
- const faqList = [
- "What is a professional tax return?",
- "How often do I need to file professional tax returns?",
- "When is the professional tax return due date?",
- "What happens if I fail to file professional tax returns on time?",
- "Can I file professional tax returns online?",
- "What documents are required for filing professional tax returns?",
- "How do I calculate the professional tax payable for a particular period?",
- "Is there any penalty for the late filing of professional tax returns?",
- "Can I revise my professional tax returns?",
- "What happens if I overpay professional tax?",
- ];
+  return (
+    <div className="bg-white min-h-screen font-sans">
+      <Navbar />
+      
+      {/* PERFECT HERO MATCH SECTION */}
+      <section className="bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch">
+          
+          {/* LEFT SIDE: CONTENT */}
+          <div className="flex-1 py-16 px-6 lg:px-12 flex flex-col justify-center">
+             <div className="mb-6">
+                <span className="inline-flex items-center gap-1.5 bg-[#FDF1EC] text-[#C15F3C] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-[#FAE5DC]">
+                  <div className="w-1 h-1 bg-[#C15F3C] rounded-full" />
+                  Professional Tax
+                </span>
+             </div>
+             
+             <h1 className="text-4xl lg:text-6xl font-extrabold text-[#2F2E2B] leading-[1.1] mb-6">
+               File Your <span className="text-[#C15F3C]">Professional Tax Return On Time</span>
+             </h1>
+             
+             <p className="text-[#6F6B63] text-lg mb-10 max-w-xl leading-relaxed">
+               Stay compliant with expert-assisted PT Return Filing. Ensure timely submission, avoid penalties, and keep your business compliant with state PT regulations.
+             </p>
+             
+             <ul className="space-y-4 mb-8">
+               {[
+                 "Accurate & On-Time Filing",
+                 "PTEC & PTRC Return Assistance",
+                 "Simplified Filing with Expert Support",
+                 "Ensure Error-Free Government Submissions",
+                 "Trusted by 1 Lakh+ Businesses"
+               ].map((feature, i) => (
+                 <li key={i} className="flex items-center gap-4 text-[#2F2E2B] font-medium text-base">
+                   <div className="w-6 h-6 rounded-full border border-[#FAE5DC] bg-[#FFF8F6] flex items-center justify-center flex-shrink-0 text-[#C15F3C]">
+                     <Check className="w-3.5 h-3.5" strokeWidth={3} />
+                   </div>
+                   {feature}
+                 </li>
+               ))}
+             </ul>
+          </div>
+          
+          {/* RIGHT SIDE: THE FORM */}
+          <div className="w-full lg:w-[500px] bg-[#FFF9F1] py-16 px-6 lg:px-12 flex flex-col justify-center border-l border-gray-100">
+             <div className="bg-white rounded-2xl shadow-xl shadow-orange-900/5 relative overflow-hidden flex flex-col">
+                <div className="h-2 bg-[#C15F3C] w-full" />
+                <div className="p-8 space-y-6">
+                   <div className="space-y-1">
+                      <h3 className="text-sm font-bold text-[#2F2E2B]">Professional Tax</h3>
+                      <div className="relative">
+                         <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#6F6B63] bg-white appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
+                            <option>Professional Tax Registration Return Filing</option>
+                            <option>Professional Tax Registration</option>
+                         </select>
+                         <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                            <ChevronDown className="w-4 h-4 text-[#6F6B63]" />
+                         </div>
+                      </div>
+                      <p className="text-[10px] text-[#B1ADA1] mt-1 italic">
+                        File your Professional Tax Return on time by reporting employee deductions or nil returns. Submit payment details for the selected period to stay compliant.
+                      </p>
+                   </div>
 
- const faqAnswers: Record<number, string> = {
- 0: "A professional tax return is a document filed with the state government containing details of the tax paid by individuals or businesses liable to pay professional tax.",
- 1: "The frequency varies by state - monthly, quarterly, or annually. Check your state's specific requirements for PT return filing.",
- 2: "Due dates vary by state. Generally, returns must be filed within the time specified by the respective state government, often by the end of the month following the reporting period.",
- 3: "Penalties vary by state but may include daily penalties for late filing, interest on late payments, and potential legal consequences.",
- 4: "Yes, most states now offer online filing facilities through their respective professional tax portals.",
- 5: "Documents include PAN Card, Aadhaar Card, bank details, salary details, registration certificate, challans for tax payment, and TDS details if applicable.",
- 6: "Professional tax is calculated based on slab rates prescribed by each state, typically based on monthly income brackets.",
- 7: "Yes, late filing penalties vary by state but may include daily penalties, flat fees, and interest on delayed payments.",
- 8: "Revision rules vary by state. Some states allow revisions within a specified timeframe with additional fees.",
- 9: "Overpaid tax can typically be adjusted against future liability or claimed as a refund, subject to state rules.",
- };
+                   <div className="space-y-1">
+                      <label className="text-xs font-bold text-[#2F2E2B]">State</label>
+                      <div className="relative">
+                         <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#6F6B63] bg-white appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
+                            <option>Select State/UT</option>
+                            <option>Gujarat</option>
+                            <option>Karnataka</option>
+                            <option>Maharashtra</option>
+                            <option>Tamil Nadu</option>
+                            <option>Telangana</option>
+                            <option>West Bengal</option>
+                         </select>
+                         <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                            <ChevronDown className="w-4 h-4 text-[#6F6B63]" />
+                         </div>
+                      </div>
+                   </div>
 
- return (
- <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
- {/* Navbar - Imported */}
- <Navbar />
+                   <div className="space-y-1">
+                      <label className="text-xs font-bold text-[#2F2E2B]">PAN or GSTIN</label>
+                      <input 
+                        type="text" 
+                        placeholder="PAN or GSTIN"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] focus:outline-none"
+                      />
+                   </div>
 
- {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
- Home / Compliance Services /{" "}
- <span className="text-amber-700 font-medium">
- Professional Tax Return Filing
- </span>
- </div>
- </div>
+                   <div className="space-y-1">
+                      <label className="text-xs font-bold text-[#2F2E2B]">PT Number (optional)</label>
+                      <input 
+                        type="text" 
+                        placeholder="PT Number (optional)"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] focus:outline-none"
+                      />
+                   </div>
 
- {/* Main Content */}
- <main className="max-w-[1180px] mx-auto px-6 py-3">
- {/* Hero Section */}
- <section className="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
- <div className="flex flex-col lg:flex-row">
- {/* Left Content */}
- <div className="lg:w-1/2 p-8 lg:p-10">
- <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-4">
- <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
- <span className="text-xs font-medium text-amber-700">
- PROFESSIONAL TAX
- </span>
- </div>
+                   <button 
+                     onClick={handleFormSubmit}
+                     className="w-full bg-[#C15F3C] text-white font-bold py-4 rounded-xl text-lg hover:bg-[#A94E30] transition shadow-lg shadow-orange-900/10 mt-4"
+                   >
+                     Apply Now
+                   </button>
+                </div>
+             </div>
+          </div>
+          
+        </div>
+      </section>
 
- <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
- File Your{" "}
- <span className="text-amber-600 underline decoration-4 decoration-amber-300">
- Professional
- </span>
- <br />
- Tax Return On Time
- </h1>
+      {/* Main Content Area */}
+      <section className="py-16 bg-white min-h-[500px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col lg:flex-row gap-12">
+            
+            {/* Left Column: Educational Content */}
+            <div className="flex-1 space-y-10">
+              
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-[#202939]">Professional Tax Return Filing</h2>
+                <div className="space-y-4 text-[#4F4C45] text-lg leading-relaxed">
+                  <p>
+                    Professional Tax Return Filing is mandatory for individuals and businesses liable to pay Professional Tax. Professional Tax is a tax levied by the State Government on salaried individuals, professionals, or persons engaged in any trade, calling, or employment. In contrast, Professional Tax Return is a document filed with the state government containing details of the Tax paid by the individual or business.
+                  </p>
+                  <p>
+                    Filing Professional Tax Returns can be a complex and time-consuming process. <strong>DoStartup</strong> provides Professional Tax Return Filing services to assist clients in fulfilling their tax obligations. Our team of experts ensures that the entire process of PT return filing is completed promptly and hassle-free. We provide end-to-end assistance for PT annual return, from the collection of documents to the submission of the tax return and payment of Professional Tax. Contact us today to avail of our PT return filing service and ensure compliance with the rules and regulations of the state government.
+                  </p>
+                </div>
+              </div>
 
- <p className="text-gray-600 mb-6 max-w-xl">
- Stay compliant with expert-assisted PT Return Filing. Ensure
- timely submission, avoid penalties, and keep your business
- compliant with state PT regulations.
- </p>
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#202939]">Professional Tax</h3>
+                <p className="text-[#4F4C45] leading-relaxed">
+                  Professional Tax is a form of direct taxation imposed on individuals who earn an income through employment, profession, calling, or trade. Unlike the income tax levied by the Central Government, Professional Tax is imposed by the government of a particular state or union territory in India.
+                </p>
+              </div>
 
- <div className="space-y-4">
- <div className="flex items-center gap-4">
- <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
- <CheckCircle className="w-4 h-4 text-amber-600" />
- </div>
- <span className="font-medium text-slate-900">
- Accurate &amp; On-Time Filing
- </span>
- </div>
- <div className="flex items-center gap-4">
- <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
- <CheckCircle className="w-4 h-4 text-amber-600" />
- </div>
- <span className="font-medium text-slate-900">
- PTEC &amp; PTRC Return Assistance
- </span>
- </div>
- <div className="flex items-center gap-4">
- <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
- <CheckCircle className="w-4 h-4 text-amber-600" />
- </div>
- <span className="font-medium text-slate-900">
- Simplified Filing with Expert Support
- </span>
- </div>
- <div className="flex items-center gap-4">
- <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
- <CheckCircle className="w-4 h-4 text-amber-600" />
- </div>
- <span className="font-medium text-slate-900">
- Ensure Error-Free Government Submissions
- </span>
- </div>
- <div className="flex items-center gap-4">
- <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
- <CheckCircle className="w-4 h-4 text-amber-600" />
- </div>
- <span className="font-medium text-slate-900">
- Trusted by 1 Lakh+ Businesses
- </span>
- </div>
- </div>
- </div>
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#202939]">Professional Tax Return Applicability</h3>
+                <p className="text-[#4F4C45] leading-relaxed">
+                  PT return filing is mandatory for all individuals and businesses liable to pay Professional Tax as per the rules and regulations of the state government. The tax liability and filing frequency may vary from state to state.
+                </p>
+              </div>
 
- {/* Right Form Card */}
- <div className="lg:w-1/2 p-8 lg:p-10 bg-gradient-to-br from-amber-50 to-amber-100">
- <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
- <div
- className="h-1.5 w-full rounded-t-xl mb-4"
- style={{
- background: "linear-gradient(90deg, #b45309, #d97706)",
- }}
- />
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#202939]">Professional Tax slab rate</h3>
+                <p className="text-[#4F4C45] leading-relaxed">
+                  The Professional Tax slab rate varies from state to state in India. Each state has its slab and rate for Professional Tax based on the taxpayer&apos;s income. Generally, slabs are split across income bands such as monthly income less than Rs. 15,000, between Rs. 15,001 to Rs. 25,000 and above Rs. 25,000. Taxpayers must comply with their respective state&apos;s regulations.
+                </p>
+              </div>
 
- <div className="space-y-4 mt-3">
- <ProfessionalTaxDropdown
- value={professionalTaxOption}
- onChange={(v) => setProfessionalTaxOption(v)}
- />
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#202939]">PTRC Return Filing: Employer&apos;s Obligations</h3>
+                <p className="text-[#4F4C45] leading-relaxed">
+                  Employers must deduct professional tax from employees&apos; salaries, remit the collected amount to the relevant government department and file the prescribed Professional Tax Return within stipulated timeframes, enclosing proof of payment.
+                </p>
+              </div>
 
- <div>
- <p className="text-xs text-slate-500">
- File your Professional Tax Return on time by reporting
- employee deductions or nil returns. Submit payment details
- for the selected period to stay compliant.
- </p>
- </div>
+              <div className="space-y-4">
+                <h4 className="text-xl font-bold text-[#202939]">Benefits of PT Return Filing</h4>
+                <ul className="space-y-3">
+                  {[
+                    "Avoidance of penalties and legal consequences",
+                    "Compliance with applicable laws",
+                    "Improved creditworthiness",
+                    "Access to social security benefits",
+                    "Easy and convenient online filing",
+                    "Increased government revenue and accurate records"
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 items-start text-[#4F4C45]">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#C15F3C] mt-2.5 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
- <StateDropdown value={state} onChange={(v) => setState(v)} />
+              <div className="space-y-4">
+                <h4 className="text-xl font-bold text-[#202939]">Documents required for Professional Tax Return filing</h4>
+                <ul className="space-y-3">
+                  {[
+                    "PAN Card", "Aadhaar Card", "Voter ID or Passport", "Bank account details",
+                    "Salary details or income proof", "Registration Certificate or Shop & Establishment Certificate",
+                    "Challans or payment receipts for Professional Tax payment", "Details of TDS from salary (if any)"
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 items-start text-[#4F4C45]">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#C15F3C] mt-2.5 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
- <div>
- <label className="block text-sm font-medium text-slate-700 mb-2">
- PAN or GSTIN
- </label>
- <input
- type="text"
- value={panOrGstin}
- onChange={(e) => setPanOrGstin(e.target.value)}
- placeholder="PAN or GSTIN"
- className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600"
- />
- </div>
+              <div className="space-y-4">
+                <h4 className="text-xl font-bold text-[#202939]">Procedure for Professional Tax Return Filing</h4>
+                <ol className="space-y-4">
+                  {[
+                    "Obtain the Professional Tax Registration Certificate from the state authority.",
+                    "Determine the applicable slab and rate for the taxpayer.",
+                    "Collect necessary documents such as salary slips and payment receipts.",
+                    "Prepare the return in the prescribed format.",
+                    "Submit the return along with supporting documents and pay any tax due.",
+                    "Obtain acknowledgment for filing and payment."
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-4 items-start text-[#4F4C45]">
+                      <span className="font-bold text-[#C15F3C]">{i + 1}.</span>
+                      {item}
+                    </li>
+                  ))}
+                </ol>
+              </div>
 
- <div>
- <label className="block text-sm font-medium text-slate-700 mb-2">
- PT Number (optional)
- </label>
- <input
- type="text"
- value={ptNumber}
- onChange={(e) => setPtNumber(e.target.value)}
- placeholder="PT Number (optional)"
- className="w-full px-4 py-2 border border-gray-200 rounded bg-white text-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-600"
- />
- </div>
+              <div className="bg-orange-50 border-l-4 border-[#C15F3C] p-6 rounded-r-2xl">
+                <h4 className="text-lg font-bold text-[#202939] mb-2 font-bold">Penalties for failing to File Professional Tax Return</h4>
+                <p className="text-[#4F4C45]">
+                  Penalties vary by state. For example, some states impose daily penalties for not registering, flat penalties for late filing and interest + penalties on late payments. (State rules vary; consult state authority for specifics.)
+                </p>
+              </div>
 
- <div className="flex justify-end">
- <button
- onClick={handleApplyNow}
- className="px-6 py-3 rounded bg-gradient-to-r from-amber-700 to-amber-800 text-white font-semibold shadow hover:from-amber-800 hover:to-amber-900 transition-all"
- >
- Apply Now
- </button>
- </div>
- </div>
- </div>
- </div>
- </div>
- </section>
+              <div className="space-y-4">
+                <h4 className="text-xl font-bold text-[#202939]">Why Choose DoStartup for Professional Tax Return Filing Service?</h4>
+                <p className="text-[#4F4C45] leading-relaxed">
+                  DoStartup provides end-to-end assistance, timely filing to avoid penalties, affordable pricing, and expert support to ensure compliance with state regulations.
+                </p>
+              </div>
 
- {/* Main content with left column & right sidebar */}
- <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
- {/* content column (span 2 on large) */}
- <div className="lg:col-span-2 space-y-6">
- {/* Article */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
- <h2 className="text-2xl font-bold mb-3 text-slate-900">
- Professional Tax Return Filing
- </h2>
+            </div>
 
- <p className="text-gray-600 mb-4">
- Professional Tax Return Filing is mandatory for individuals
- and businesses liable to pay Professional Tax. Professional
- Tax is a tax levied by the State Government on salaried
- individuals, professionals, or persons engaged in any trade,
- calling, or employment. In contrast, Professional Tax Return
- is a document filed with the state government containing
- details of the Tax paid by the individual or business.
- </p>
+            {/* Right Column: Sidebar */}
+            <div className="lg:w-[400px] space-y-8">
+              <SidebarCart />
+              
+              <div className="bg-white rounded-2xl border border-[#E5E2DA] p-8 shadow-sm">
+                <h4 className="text-lg font-bold text-[#202939] mb-6">Related Guides</h4>
+                <ul className="space-y-4">
+                  {[
+                    "Gujarat Professional Tax", "Telangana Professional Tax", "Professional Tax in Andhra Pradesh", "Kerala Professional Tax"
+                  ].map((guide, i) => (
+                    <li key={i}>
+                      <a href="#" className="flex items-center justify-between group">
+                        <span className="text-[#C15F3C] font-medium group-hover:underline">{guide}</span>
+                        <ChevronRight className="w-4 h-4 text-[#C15F3C]" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
- <p className="text-gray-600 mb-4">
- Filing Professional Tax Returns can be a complex and
- time-consuming process. IndiaFilings provides Professional Tax
- Return Filing services to assist clients in fulfilling their
- tax obligations. Our team of experts at IndiaFilings ensures
- that the entire process of PT return filing is completed
- promptly and hassle-free. We provide end-to-end assistance for
- PT annual return, from the collection of documents to the
- submission of the tax return and payment of Professional Tax.
- Contact us today to avail of our PT return filing service and
- ensure compliance with the rules and regulations of the state
- government.
- </p>
+          </div>
+        </div>
+      </section>
 
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Professional Tax
- </h3>
- <p className="text-gray-600 mb-4">
- Professional Tax is a form of direct taxation imposed on
- individuals who earn an income through employment, profession,
- calling, or trade. Unlike the income tax levied by the Central
- Government, Professional Tax is imposed by the government of a
- particular state or union territory in India.
- </p>
+      {/* PERFECT PRICING MATCH SECTION (Matching latest screenshot) */}
+      <section className="bg-white py-16 px-4 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          
+          <div className="text-center mb-10">
+             <h2 className="text-3xl font-medium text-[#2F2E2B] mb-4">
+               Simple packages. Transparent <span className="text-[#896BAE] relative pb-1">pricing<span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#896BAE]"></span></span>.
+             </h2>
+             <p className="text-sm text-[#6F6B63] max-w-2xl mx-auto">
+               Transparent pricing for Professional Tax return filing. Choose a plan that fits your business—from single return filing to annual compliance packages.
+             </p>
+          </div>
 
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Professional Tax Return Applicability
- </h3>
- <p className="text-gray-600 mb-4">
- PT return filing is mandatory for all individuals and
- businesses liable to pay Professional Tax as per the rules and
- regulations of the state government. The tax liability and
- filing frequency may vary from state to state.
- </p>
+          {/* Package Dropdown */}
+          <div className="flex justify-center mb-12">
+             <div className="relative w-full max-w-sm">
+                <label className="absolute -top-2 left-4 bg-white px-2 text-[10px] font-bold text-[#008C44] uppercase tracking-wider z-10">Package</label>
+                <div className="relative">
+                   <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] bg-white appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
+                      <option>Telangana - (PTRC)</option>
+                      <option>Maharashtra - (PTRC)</option>
+                      <option>Karnataka - (PTEC)</option>
+                   </select>
+                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <ChevronDown className="w-4 h-4 text-[#6F6B63]" />
+                   </div>
+                </div>
+             </div>
+          </div>
 
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Professional Tax slab rate
- </h3>
- <p className="text-gray-600 mb-4">
- The Professional Tax slab rate varies from state to state in
- India. Each state has its slab and rate for Professional Tax
- based on the taxpayer's income. Generally, slabs are split
- across income bands such as monthly income less than Rs.
- 15,000, between Rs. 15,001 to Rs. 25,000 and above Rs. 25,000.
- Taxpayers must comply with their respective state's
- regulations.
- </p>
+          {/* Cards Grid (Matching IndiaFilings style from latest screenshot) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Manipur - (PTEC)",
+                desc: "Professional Tax Return Filing is mandatory for individuals and businesses registered under the...",
+                features: [
+                  "Filing of PT Return for up to 2 individuals (Proprietor / Partners / Directors)",
+                  "Filing of PT Return for 1 Year"
+                ]
+              },
+              {
+                title: "Tamil Nadu - (Within Chennai City)",
+                desc: "Professional Tax Return Filing is mandatory for individuals and businesses registered under the...",
+                features: [
+                  "Filing of PT Return for 2 directors",
+                  "Filing of PT Return for 1 year"
+                ]
+              },
+              {
+                title: "Andhra Pradesh - (PTRC)",
+                desc: "Professional Tax Return Filing is mandatory for individuals and businesses registered under the...",
+                features: [
+                  "Professional Tax return filing for all employees",
+                  "Filing of PT Return for 1 year",
+                  "Professional Tax Annual Return Filing"
+                ]
+              }
+            ].map((card, i) => (
+              <div 
+                key={i} 
+                className="bg-white border border-[#E5E2DA] rounded-3xl p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow min-h-[450px]"
+              >
+                <h3 className="text-2xl font-bold text-[#2F2E2B] mb-3">{card.title}</h3>
+                <p className="text-sm text-[#6F6B63] mb-8 leading-relaxed">
+                  {card.desc}
+                </p>
+                
+                <h4 className="text-sm font-bold text-[#2F2E2B] mb-5 uppercase tracking-tight">What&apos;s included:</h4>
+                <ul className="space-y-4 mb-10 flex-grow">
+                   {card.features.map((feat, fi) => (
+                     <li key={fi} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full border border-green-100 bg-green-50 flex items-center justify-center flex-shrink-0 text-green-600 mt-0.5">
+                          <Check className="w-3.5 h-3.5" strokeWidth={3} />
+                        </div>
+                        <span className="text-[13px] text-[#4F4C45] leading-relaxed">{feat}</span>
+                     </li>
+                   ))}
+                </ul>
 
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- PTRC Return Filing: Employer's Obligations
- </h3>
- <p className="text-gray-600 mb-4">
- Employers must deduct professional tax from employees'
- salaries, remit the collected amount to the relevant
- government department and file the prescribed Professional Tax
- Return within stipulated timeframes, enclosing proof of
- payment.
- </p>
+                <button className="w-full border border-[#E5E2DA] text-[#2F2E2B] font-bold py-3.5 rounded-2xl hover:border-[#C15F3C] hover:text-[#C15F3C] transition-all">
+                  Start Filing Now
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Benefits of PT Return Filing
- </h3>
- <ul className="list-disc pl-5 text-gray-600 space-y-2 mb-4">
- <li>Avoidance of penalties and legal consequences</li>
- <li>Compliance with applicable laws</li>
- <li>Improved creditworthiness</li>
- <li>Access to social security benefits</li>
- <li>Easy and convenient online filing</li>
- <li>Increased government revenue and accurate records</li>
- </ul>
+      {/* FAQ Section */}
+      <Faq category="Professional Tax Return Filing" />
 
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Documents required for Professional Tax Return filing
- </h3>
- <ul className="list-disc pl-5 text-gray-600 space-y-2 mb-4">
- <li>PAN Card</li>
- <li>Aadhaar Card</li>
- <li>Voter ID or Passport</li>
- <li>Bank account details</li>
- <li>Salary details or income proof</li>
- <li>
- Registration Certificate or Shop &amp; Establishment
- Certificate
- </li>
- <li>
- Challans or payment receipts for Professional Tax payment
- </li>
- <li>Details of TDS from salary (if any)</li>
- </ul>
+      {/* Popular Searches */}
+      <Popularsearches />
 
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Procedure for Professional Tax Return Filing
- </h3>
- <ol className="list-decimal pl-5 text-gray-600 space-y-2 mb-4">
- <li>
- Obtain the Professional Tax Registration Certificate from
- the state authority.
- </li>
- <li>
- Determine the applicable slab and rate for the taxpayer.
- </li>
- <li>
- Collect necessary documents such as salary slips and payment
- receipts.
- </li>
- <li>Prepare the return in the prescribed format.</li>
- <li>
- Submit the return along with supporting documents and pay
- any tax due.
- </li>
- <li>Obtain acknowledgment for filing and payment.</li>
- </ol>
-
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Penalties for failing to File Professional Tax Return
- </h3>
- <p className="text-gray-600 mb-4">
- Penalties vary by state. For example, some states impose daily
- penalties for not registering, flat penalties for late filing
- and interest + penalties on late payments. (State rules vary;
- consult state authority for specifics.)
- </p>
-
- <h3 className="text-lg font-semibold mt-4 mb-2 text-slate-900">
- Why Choose IndiaFilings for Professional Tax Return Filing
- Service?
- </h3>
- <p className="text-gray-600 mb-4">
- IndiaFilings provides end-to-end assistance, timely filing to
- avoid penalties, affordable pricing, and expert support to
- ensure compliance with state regulations.
- </p>
- </div>
-
- {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
- <h3 className="text-2xl font-bold mb-4 text-slate-900">
- FAQ's on Professional Tax Return Filing
- </h3>
- <div className="divide-y divide-gray-200">
- {faqList.map((q, i) => (
- <div key={i} className="py-3">
- <button
- onClick={() => setActiveFaq(activeFaq === i ? null : i)}
- className="w-full text-left flex justify-between items-center py-3"
- >
- <span className="font-medium text-slate-800">{q}</span>
- <span className="text-amber-600">
- {activeFaq === i ? "−" : "+"}
- </span>
- </button>
- {activeFaq === i && (
- <div className="mt-2 text-gray-600 pl-2">
- <p>{faqAnswers[i]}</p>
- </div>
- )}
- </div>
- ))}
- <div className="py-4">
- <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded text-sm hover:bg-amber-50 transition-colors font-medium">
- Load More
- </button>
- </div>
- </div>
- </div>
- </div>
-
- {/* Right sidebar */}
- <aside className="space-y-6">
- {/* Cart Widget */}
- <div className="bg-white rounded-lg shadow-md p-6 sticky top-28 border border-gray-200">
- <div className="text-center text-gray-600">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-slate-900">
- Your cart is empty
- </h3>
- <p className="text-sm mt-2 text-gray-600">
- Browse our services and add some services in cart!
- </p>
- </div>
-
- <div className="mt-6 text-center">
- <div className="text-sm text-gray-500">
- Existing User?{" "}
- <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">
- Login
- </a>
- </div>
- </div>
-
- <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4 accent-amber-600"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- <ShoppingBag size={16} /> Get Started
- </button>
-
- <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
- <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- <span>Secure · No spam · Instant confirmation</span>
- </div>
- </form>
- </div>
-
- <div className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
- <h4 className="font-semibold mb-3 text-slate-900">
- Related Guides
- </h4>
- <ul className="text-sm space-y-2">
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline cursor-pointer">
- Gujarat Professional Tax
- </a>
- </li>
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline cursor-pointer">
- Telangana Professional Tax
- </a>
- </li>
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline cursor-pointer">
- Professional Tax in Andhra Pradesh
- </a>
- </li>
- <li>
- <a className="text-amber-700 hover:text-amber-800 hover:underline cursor-pointer">
- Kerala Professional Tax
- </a>
- </li>
- </ul>
- </div>
-
- <div className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-200">
- <img
- src={ASSETS.adRight1}
- alt="Company Compliance"
- className="rounded w-full"
- />
- <div className="mt-3 font-medium text-slate-900">
- Company Compliance
- </div>
- </div>
-
- <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
- <h4 className="font-semibold mb-3 text-slate-900">
- Popular Searches
- </h4>
- <div className="flex flex-wrap gap-2">
- {[
- "Partnership",
- "LLP",
- "Digital Signature",
- "PAN Card Download",
- "MSME Registration",
- "Trademark Status",
- ].map((t) => (
- <span
- key={t}
- className="text-xs px-2 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
- >
- {t}
- </span>
- ))}
- </div>
- </div>
- </aside>
- </div>
- </main>
-
- {/* WhatsApp CTA */}
- <div
- className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer"
- onClick={() => alert("Open WhatsApp chat")}
- >
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
- </div>
- );
+      <Footer />
+    </div>
+  );
 }

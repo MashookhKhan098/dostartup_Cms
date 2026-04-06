@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import {
@@ -9,6 +8,8 @@ import {
  Plus,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import SidebarCart from "../components/SidebarCart";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -277,9 +278,8 @@ export default function FlaReturnFilingPage() {
  </div>
  </article>
 
- {/* Related Guides and FAQ */}
- <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
- <div className="lg:col-span-7 bg-white rounded-lg shadow-sm p-6">
+ {/* Related Guides */}
+ <div className="bg-white rounded-lg shadow-sm p-6 mt-8">
  <h3 className="text-lg font-semibold mb-4 text-slate-900">Related Guides</h3>
  <ul className="space-y-3 text-sm text-amber-700">
  <li className="hover:text-amber-800 cursor-pointer hover:underline">FLA Return Filing</li>
@@ -290,37 +290,32 @@ export default function FlaReturnFilingPage() {
  </ul>
  </div>
 
- <aside className="lg:col-span-5 bg-white rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-semibold mb-4 text-slate-900">
+ {/* FAQ's */}
+ <div className="bg-white rounded-lg shadow-sm p-6 mt-6 border border-gray-200">
+ <h3 className="text-lg font-semibold mb-6 text-slate-900 border-b pb-3">
  FAQ's on FLA Return Filing
  </h3>
- <div className="space-y-2 text-sm max-h-[56vh] overflow-y-auto pr-2">
+ <div className="space-y-3 text-sm max-h-[500px] overflow-y-auto pr-2">
  {faqItems.map((q, i) => (
- <div key={q} className="border-b border-gray-200 pb-2">
+ <div key={q} className="border border-slate-100 rounded-lg overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white pb-0">
  <button
- className="w-full text-left py-2 flex justify-between items-center text-sm"
+ className="w-full text-left p-4 flex justify-between items-center text-sm hover:bg-amber-50/20 group"
  onClick={() => setOpenFaq(openFaq === i ? null : i)}
  aria-expanded={openFaq === i}
  >
- <span className="text-slate-800 font-medium">{q}</span>
- <span className="text-amber-700 flex items-center gap-2">
- {openFaq === i ? "−" : <Plus size={14} />}
+ <span className="text-slate-800 font-medium group-hover:text-amber-700">{q}</span>
+ <span className={`p-1.5 rounded-full bg-amber-50 shrink-0 transition-transform ${openFaq === i ? 'rotate-45' : ''}`}>
+ <Plus size={14} className="text-amber-600" />
  </span>
  </button>
  {openFaq === i && (
- <div className="px-2 pb-2 text-sm text-gray-600">
+ <div className="px-4 pb-4 text-sm text-gray-600 border-t border-slate-50 pt-3">
  {faqAnswers[i]}
  </div>
  )}
  </div>
  ))}
- <div className="mt-3">
- <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
- Load More
- </button>
  </div>
- </div>
- </aside>
  </div>
  </section>
 
@@ -328,80 +323,7 @@ export default function FlaReturnFilingPage() {
  <aside className="lg:col-span-4 hidden lg:block">
  <div className="space-y-6">
  {/* Cart Widget */}
- <div className="bg-white rounded-lg shadow-md p-6 sticky top-28 border border-gray-200">
- <div className="text-center text-gray-600">
- <img
- src={ASSETS.cartIcon}
- alt="cart"
- className="mx-auto h-12 w-auto mb-3"
- />
- <h3 className="font-semibold text-slate-900">Your cart is empty</h3>
- <p className="text-sm mt-2 text-gray-600">
- Browse our services and add some services in cart!
- </p>
- </div>
-
- <div className="mt-6 text-center">
- <div className="text-sm text-gray-500">
- Existing User?{" "}
- <a className="text-amber-700 underline hover:text-amber-800 font-medium cursor-pointer">
- Login
- </a>
- </div>
- </div>
-
- <form
- className="mt-4 space-y-3"
- onSubmit={(e) => e.preventDefault()}
- >
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Name"
- />
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Email"
- />
- <div className="flex gap-2">
- <div className="flex items-center gap-2 border border-gray-200 rounded-md px-2">
- <img src={ASSETS.indiaFlag} alt="flag" className="h-4" />
- <span className="text-sm">+91</span>
- </div>
- <input
- className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="Phone"
- />
- </div>
-
- <label className="flex items-center gap-2 text-sm">
- <input
- type="checkbox"
- checked={gstChecked}
- onChange={() => setGstChecked((s) => !s)}
- className="w-4 h-4 accent-amber-600"
- />
- <span>Enter GSTIN to get 18% GST Credit</span>
- </label>
-
- {gstChecked && (
- <input
- className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-amber-600"
- placeholder="GSTIN"
- />
- )}
-
- <button className="w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-2 rounded-md font-medium flex items-center justify-center gap-2 hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- <ShoppingBag size={16} /> Get Started
- </button>
-
- <div className="flex items-center justify-center gap-1.5 text-xs text-gray-400 pt-1">
- <svg className="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
- <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
- </svg>
- <span>Secure · No spam · Instant confirmation</span>
- </div>
- </form>
- </div>
+ <SidebarCart />
 
  {/* Income Tax E-Filing */}
  <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">

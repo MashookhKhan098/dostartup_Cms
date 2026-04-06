@@ -9,7 +9,7 @@ import Price from '../components/Price';
 export default function Home() {
  const pricingData = {
  heading: "Simple, Transparent Patent Registration Pricing",
- subheading: "File your patent easily with IndiaFilings — guided by experts, transparent pricing, and complete support for provisional and complete patent filings.",
+ subheading: "File your patent easily with DoStartup — guided by experts, transparent pricing, and complete support for provisional and complete patent filings.",
  note: "",
  showStateSelector: false, // Image does not show state selection
  cards: [
@@ -63,7 +63,7 @@ export default function Home() {
  heading: "Create a Logo Instantly",
  headingHighlight: "Logo",
  description:
- "Make your brand stand out with IndiaFilings. Our streamlined Logo Design & Trademark service helps you craft distinctive, high-impact logos that reflect your brand vision and ensure complete trademark readiness—merging creativity with legal precision.",
+ "Make your brand stand out with DoStartup. Our streamlined Logo Design & Trademark service helps you craft distinctive, high-impact logos that reflect your brand vision and ensure complete trademark readiness—merging creativity with legal precision.",
 
  features: [
  {

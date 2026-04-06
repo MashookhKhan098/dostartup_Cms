@@ -14,6 +14,7 @@ import {
  File,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DoStartupPricing from "../components/DoStartupPricing";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -160,7 +161,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  "What happens if ESI returns are not filed?",
  "What documents are required for ESI return filing?",
  "What are the consequences of non-payment or late payment of employee's ESI contribution?",
- "How can IndiaFilings assist with ESI return filing?",
+ "How can DoStartup assist with ESI return filing?",
  ];
  const faqAnswers: Record<number, string> = {
  0: "ESI registration is the process by which an employer enrolls their establishment under the Employees' State Insurance Scheme to provide statutory social security benefits to eligible employees.",
@@ -361,139 +362,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
  {/* Main Content */}
  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-8">
- {/* Pricing Section */}
- <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
- <h2 className="text-2xl md:text-3xl font-semibold text-center text-[#C15F3C]">
- Simple, Transparent HR & Payroll Management Pricing
- </h2>
- <p className="text-sm text-gray-600 mt-2 text-center max-w-[880px] mx-auto">
- Manage your HR and payroll online with guided onboarding,
- automated salary processing, and expert compliance support.
- </p>
 
- <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
- <div
- className={`bg-white rounded-xl border p-6 shadow-lg hover:border-[#C15F3C]/30 transition-colors ${
- selectedPlan === "payroll" ? "ring-2 ring-[#C15F3C]/20" : ""
- }`}
- >
- <div className="inline-block bg-orange-100 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
- Payroll
- </div>
- <h3 className="font-semibold text-lg">Payroll Management</h3>
- <p className="text-sm text-gray-600 mt-2">
- LEDGERS HR Software (1 Year Subscription)
- </p>
- <div className="mt-4 text-2xl font-bold text-[#C15F3C]">
- ₹12,899 <span className="text-sm font-normal text-gray-600">/yr + GST</span>
- </div>
- <button
- onClick={() => setSelectedPlan("payroll")}
- className="mt-4 w-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white py-3 rounded-full hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg"
- >
- Start Now
- </button>
- <ul className="mt-5 space-y-3 text-sm text-gray-700">
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> LEDGERS HR Software (1 Year Subscription)
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> Attendance Platform
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> Employee Self-Serve
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> 12 Months Managed Payroll Service
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> 12 Months HR Support & Assistance
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> Upto 20 Employees
- </li>
- </ul>
- </div>
-
- <div
- className={`bg-white rounded-xl border p-6 shadow-lg hover:border-[#C15F3C]/30 transition-colors ${
- selectedPlan === "fractional-hr" ? "ring-2 ring-[#C15F3C]/20" : ""
- }`}
- >
- <div className="inline-block bg-[#C15F3C] text-white px-3 py-1 rounded-full text-xs mb-3">
- Most popular
- </div>
- <h3 className="font-semibold text-lg">Fractional HR</h3>
- <p className="text-sm text-gray-600 mt-2">
- LEDGERS HR Platform setup & migration with a dedicated
- accountant for 1 year.
- </p>
- <div className="mt-4 text-2xl font-bold text-[#C15F3C]">
- ₹42,899 <span className="text-sm font-normal text-gray-600">/yr + GST</span>
- </div>
- <button
- onClick={() => setSelectedPlan("fractional-hr")}
- className="mt-4 w-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white py-3 rounded-full hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg"
- >
- Start Now
- </button>
- <ul className="mt-5 space-y-3 text-sm text-gray-700">
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> LEDGERS HR Platform setup & migration
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> 1 Year Monthly Payroll Service
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> Dedicated Accountant
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> Attendance Platform
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> 1 Year PF & ESI Filing
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> Upto 20 Employees
- </li>
- </ul>
- </div>
-
- <div
- className={`bg-white rounded-xl border p-6 shadow-lg hover:border-[#C15F3C]/30 transition-colors ${
- selectedPlan === "compliance" ? "ring-2 ring-[#C15F3C]/20" : ""
- }`}
- >
- <div className="inline-block bg-orange-100 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
- Compliance
- </div>
- <h3 className="font-semibold text-lg">PF & ESI Compliance</h3>
- <p className="text-sm text-gray-600 mt-2">
- Managed PF and ESI return filing for your establishment.
- </p>
- <div className="mt-4 text-2xl font-bold text-[#C15F3C]">
- ₹17,899 <span className="text-sm font-normal text-gray-600">/yr + GST</span>
- </div>
- <button
- onClick={() => setSelectedPlan("compliance")}
- className="mt-4 w-full bg-gradient-to-r from-[#C15F3C] to-[#A74A2F] text-white py-3 rounded-full hover:from-[#A74A2F] hover:to-[#8F3F27] transition-all shadow-md hover:shadow-lg"
- >
- Start Now
- </button>
- <ul className="mt-5 space-y-3 text-sm text-gray-700">
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> 12 Months Managed PF Return Filing
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> 12 Months Managed ESI Return Filing
- </li>
- <li className="flex items-start gap-2">
- <Check size={16} className="text-[#C15F3C]" /> Up to 20 Employees
- </li>
- </ul>
- </div>
- </div>
- </div>
 
  {/* HR Compliance Made Easy */}
  <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
@@ -885,6 +754,58 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
  </a>
  </div>
+ </div>
+
+ {/* Pricing Section with DoStartupPricing */}
+ <div className="-mx-4 sm:-mx-6 lg:-mx-8">
+   <DoStartupPricing 
+     title="Simple, Transparent HR & Payroll Management Pricing"
+     plans={[
+       {
+         title: "Payroll Management",
+         price: "12,899",
+         subtitle: "yr + GST",
+         description: "LEDGERS HR Software (1 Year Subscription)",
+         features: [
+           "LEDGERS HR Software (1 Year Subscription)",
+           "Attendance Platform",
+           "Employee Self-Serve",
+           "12 Months Managed Payroll Service",
+           "12 Months HR Support & Assistance",
+           "Upto 20 Employees"
+         ],
+         buttonText: "Start Now"
+       },
+       {
+         title: "Fractional HR",
+         price: "42,899",
+         subtitle: "yr + GST",
+         description: "LEDGERS HR Platform setup & migration with a dedicated accountant for 1 year.",
+         isPopular: true,
+         features: [
+           "LEDGERS HR Platform setup & migration",
+           "1 Year Monthly Payroll Service",
+           "Dedicated Accountant",
+           "Attendance Platform",
+           "1 Year PF & ESI Filing",
+           "Upto 20 Employees"
+         ],
+         buttonText: "Start Now"
+       },
+       {
+         title: "PF & ESI Compliance",
+         price: "17,899",
+         subtitle: "yr + GST",
+         description: "Managed PF and ESI return filing for your establishment.",
+         features: [
+           "12 Months Managed PF Return Filing",
+           "12 Months Managed ESI Return Filing",
+           "Up to 20 Employees"
+         ],
+         buttonText: "Start Now"
+       }
+     ]}
+   />
  </div>
 
  {/* FAQ Section */}

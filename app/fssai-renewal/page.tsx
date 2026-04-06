@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, CheckCircle } from "lucide-react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import SidebarCart from "../components/SidebarCart";
 
 const POPULAR_SEARCHES = [
  "Partnership", "Limited Liability Partnership", "Digital Signature",
@@ -220,8 +221,8 @@ export default function FSSAIRenewal(): React.ReactElement {
  "What is the late fee for delayed FSSAI license renewal?",
  "Can I renew my FSSAI license after the expiry date?",
  "What documents are needed for FSSAI license renewal?",
- "How can IndiaFilings assist with FSSAI renewal?",
- "Where can I get started with FSSAI renewal through IndiaFilings?",
+ "How can DoStartup assist with FSSAI renewal?",
+ "Where can I get started with FSSAI renewal through DoStartup?",
  ];
 
  function handleApplyNow() {
@@ -567,45 +568,9 @@ export default function FSSAIRenewal(): React.ReactElement {
  </div>
 
  {/* ── Right Sidebar ── */}
- <aside className="lg:w-80 space-y-6 shrink-0">
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-5">
- <h4 className="text-sm font-semibold text-[#2F2E2B] mb-3">Related Guides</h4>
- <ul className="space-y-2.5">
- {[
- "FSSAI License Renewal in India",
- "Renewal of the FSSAI License after the Expiry Date",
- "Who are exempted from FSSAI registration?",
- "Who needs FSSAI registration?",
- ].map((guide) => (
- <li key={guide}>
- <a href="#" className="text-sm text-[#C15F3C] hover:underline">{guide}</a>
- </li>
- ))}
- </ul>
- </div>
-
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-5">
- <h4 className="text-sm font-semibold text-[#2F2E2B] mb-3">Need Help?</h4>
- <p className="text-xs text-[#6F6B63] mb-4">Our FSSAI experts are available to guide you through the entire renewal process.</p>
- <button
- className="w-full py-2.5 bg-[#C15F3C] hover:bg-[#A94E30] text-white text-sm font-semibold rounded-lg transition-colors duration-200"
- onClick={() => alert("Open WhatsApp chat")}
- >
- Chat with Expert
- </button>
- </div>
-
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-5">
- <h4 className="text-sm font-semibold text-[#2F2E2B] mb-3">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 18).map((t) => (
- <span key={t} className="text-xs border border-[#E5E2DA] rounded-full px-2.5 py-1 bg-[#F4F3EE] text-[#6F6B63] hover:text-[#C15F3C] hover:border-[#C15F3C] cursor-pointer transition-colors">
- {t}
- </span>
- ))}
- </div>
- </div>
- </aside>
+         <aside className="lg:col-span-4 hidden lg:block">
+          <SidebarCart />
+        </aside>
  </div>
  </div>
  </section>

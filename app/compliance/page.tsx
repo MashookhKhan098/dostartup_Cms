@@ -164,13 +164,13 @@ function Header() {
  <div className="max-w-[1200px] mx-auto px-4 relative">
  <div className="h-16 flex items-center justify-between">
  <div className="flex items-center gap-6">
- <a href="/" aria-label="IndiaFilings" className="flex items-center">
+ <a href="/" aria-label="DoStartup" className="flex items-center">
  <div
  className="h-9 w-40 flex items-center justify-center rounded-full border shadow-sm"
  style={{ borderColor: "#E5E7EB" }}
  >
  <img
- alt="IndiaFilings"
+ alt="DoStartup"
  src="/images/india-logo.jpg"
  className="h-6 object-contain"
  />
@@ -512,7 +512,7 @@ function Hero() {
  style={{ backgroundColor: "#000000" }}
  >
  <img
- src="https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp"
+ src="/images/mca-compliance-simplified-india.webp"
  alt="MCA Compliance Image"
  loading="eager"
  fetchPriority="high"
@@ -890,7 +890,7 @@ function PlatformBand() {
 
  <div className="max-w-[1200px] mx-auto px-4 text-[13px] text-slate-500 mt-4">
  <a className="hover:underline" href="#">
- IndiaFilings
+ DoStartup
  </a>{" "}
  /{" "}
  <a className="hover:underline" href="#">
@@ -933,7 +933,7 @@ function ArticleAndSidebar() {
  >
  <div className="flex items-center gap-3">
  <img
- src="https://img.indiafilings.com/catalog/team-member.jpg"
+ src="/images/team-member.jpg"
  alt="advisor"
  className="w-10 h-10 rounded-full object-cover border"
  style={{ borderColor: "#E5E7EB" }}
@@ -958,7 +958,7 @@ function ArticleAndSidebar() {
  requirements of the Companies Act 2013, including director
  appointments, shareholder meetings, and other regulatory
  obligations, is crucial but can often seem overwhelming. That’s
- where IndiaFilings steps in. We provide expert guidance and
+ where DoStartup steps in. We provide expert guidance and
  comprehensive solutions tailored to your company’s needs,
  simplifying the compliance process from registration to ongoing
  obligations.
@@ -1203,59 +1203,9 @@ function ArticleAndSidebar() {
  </div>
  </article>
 
- <aside className="lg:col-span-4 space-y-6">
- <div
- className="bg-white rounded-2xl border shadow-sm p-4"
- style={{ borderColor: "#E5E7EB" }}
- >
- <div className="font-semibold mb-2">Related Guides</div>
- <ul className="text-[14px] space-y-2">
- {[
- "Private Limited Company Registration in India",
- "Companies Act, 2013",
- "Form ADT-1",
- "Form MGT-7 – Annual Return",
- ].map((t) => (
- <li key={t}>
- <a className="text-[#0B5CF0] hover:underline" href="#">
- {t}
- </a>
- </li>
- ))}
- </ul>
- </div>
-
- <div
- className="bg-white rounded-2xl border shadow-sm overflow-hidden"
- style={{ borderColor: "#E5E7EB" }}
- >
- <img
- src="https://img.indiafilings.com/catalog/company-compliance-india.png"
- alt="DIN eKYC Filing"
- className="w-full h-40 object-cover"
- />
- <div className="p-4">
- <div className="font-semibold">DIN eKYC Filing</div>
- <div className="text-[13px] text-slate-600">
- Quick & easy DIN eKYC filing
- </div>
- </div>
- </div>
-
- <div
- className="bg-white rounded-2xl border shadow-sm overflow-hidden"
- style={{ borderColor: "#E5E7EB" }}
- >
- <img
- src="https://img.indiafilings.com/catalog/director-change.png"
- alt="Director Change"
- className="w-full h-40 object-cover"
- />
- <div className="p-4">
- <div className="font-semibold">Director Change</div>
- </div>
- </div>
- </aside>
+         <aside className="lg:col-span-4 hidden lg:block">
+          <SidebarCart />
+        </aside>
  </div>
  </div>
  </section>
@@ -1340,9 +1290,9 @@ function Footer() {
  <div className="bg-[#EEF3F9] rounded-2xl p-8">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  <div>
- <div className="font-semibold mb-3">IndiaFilings</div>
+ <div className="font-semibold mb-3">DoStartup</div>
  <ul className="text-[14px] text-slate-700 space-y-2">
- <li>About IndiaFilings</li>
+ <li>About DoStartup</li>
  <li>Careers</li>
  <li>Contact Us</li>
  </ul>
@@ -1366,7 +1316,7 @@ function Footer() {
  </div>
 
  <div className="text-[12px] text-slate-500 mt-6">
- Copyright © {new Date().getFullYear()} IndiaFilings Private Limited.
+ Copyright © {new Date().getFullYear()} DoStartup Private Limited.
  All rights reserved.
  </div>
  </div>

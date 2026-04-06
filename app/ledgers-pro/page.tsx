@@ -29,9 +29,9 @@
 
 // const heroProps = {
 // // Left side content
-// heading: "Partner with IndiaFilings",
-// headingHighlight: "IndiaFilings",
-// description: "Grow your business with IndiaFilings' AI-powered partner ecosystem - simplify compliance, automate workflows, and serve more clients with speed, precision, and confidence.",
+// heading: "Partner with DoStartup",
+// headingHighlight: "DoStartup",
+// description: "Grow your business with DoStartup' AI-powered partner ecosystem - simplify compliance, automate workflows, and serve more clients with speed, precision, and confidence.",
 // features: [
 // {
 // icon: "users",
@@ -144,9 +144,9 @@ export default function Home() {
 
  const heroProps = {
  // Left side content
- heading: "Partner with IndiaFilings",
- headingHighlight: "IndiaFilings",
- description: "Grow your business with IndiaFilings' AI-powered partner ecosystem - simplify compliance, automate workflows, and serve more clients with speed, precision, and confidence.",
+ heading: "Partner with DoStartup",
+ headingHighlight: "DoStartup",
+ description: "Grow your business with DoStartup' AI-powered partner ecosystem - simplify compliance, automate workflows, and serve more clients with speed, precision, and confidence.",
  features: [
  {
  icon: "users",

@@ -9,7 +9,7 @@ import Price from '../components/Price';
 export default function Home() {
  const pricingData = {
  heading: "Simple, Transparent Patent Registration Pricing",
- subheading: "File your patent easily with IndiaFilings — guided by experts, transparent pricing, and complete support for provisional and complete patent filings.",
+ subheading: "File your patent easily with DoStartup — guided by experts, transparent pricing, and complete support for provisional and complete patent filings.",
  note: "",
  showStateSelector: false, // Image does not show state selection
  cards: [
@@ -63,7 +63,7 @@ export default function Home() {
  heading: "Simplify",
  headingHighlight: "Copyright Registration",
  description:
- "Secure your creative works with IndiaFilings. Our expert-guided online Copyright Registration process protects your artistic, literary, and digital creations—ensuring your ownership and peace of mind.",
+ "Secure your creative works with DoStartup. Our expert-guided online Copyright Registration process protects your artistic, literary, and digital creations—ensuring your ownership and peace of mind.",
 
  features: [
  {
