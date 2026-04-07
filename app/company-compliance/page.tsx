@@ -7,6 +7,7 @@ import { Star, ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
 import LiveChatCard from "../components/LiveChatCard";
 import SidebarCart from "../components/SidebarCart";
+import Faq from "../components/Faq";
 
 /* ------------------------------
  Assets & Data (unchanged)
@@ -1074,15 +1075,8 @@ export default function CompanyCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- {/* Minimal content placeholder */}
- <section className="content-section">
- <div className="content-inner">
- <div style={{ minHeight: 120 }} />
-         <aside className="sidebar-col" aria-label="Sidebar">
-          <LiveChatCard />
-        </aside>
- </div>
- </section>
+ {/* FAQ SECTION */}
+ <Faq category="MCA" />
  </main>
 
  <Footer />

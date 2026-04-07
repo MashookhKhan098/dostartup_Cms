@@ -86,7 +86,7 @@ const heroProps = {
 };
 
 
-const pricingData = {
+ const pricingData = {
  heading: "Simple, Transparent Professional Tax Pricing",
  subheading:
  "Get expert assistance for Professional Tax Registration, Return Filing, and Cancellation — with accurate state-wise pricing, quick processing, and complete compliance support.",

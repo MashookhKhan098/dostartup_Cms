@@ -55,8 +55,8 @@ export default function Home() {
  <Navbar />
  <Hero defaultEntity = "Partnership"/>
  <DynamicTabContent category="Partnership" />
- <PricingCards plans={partnershipPlans} />
-      <Faq category="Partnership" />
+  <PricingCards plans={partnershipPlans} />
+  <Faq category="Partnership" blogCategory="partnership" />
  <Popularsearches />
  <Footer />
  </>

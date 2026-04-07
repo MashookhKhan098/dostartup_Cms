@@ -17,16 +17,18 @@ interface DoStartupPricingProps {
   plans: PricingPlan[];
   title?: string;
   subtitle?: string;
+  containerClassName?: string;
 }
 
 const DoStartupPricing: React.FC<DoStartupPricingProps> = ({ 
   plans, 
   title = "Simple packages. Transparent pricing.",
-  subtitle = "Transparent pricing and full support from incorporation to compliance."
+  subtitle = "Transparent pricing and full support from incorporation to compliance.",
+  containerClassName = "py-16 bg-[#F4F3EE] font-sans"
 }) => {
   return (
-    <section className="py-16 px-4 bg-[#F4F3EE] font-sans">
-      <div className="max-w-7xl mx-auto">
+    <section className={containerClassName}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {title.toLowerCase().includes('pricing') ? (
@@ -44,11 +46,11 @@ const DoStartupPricing: React.FC<DoStartupPricingProps> = ({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
+        <div className={`grid grid-cols-1 ${plans.length === 2 ? 'md:grid-cols-2 max-w-4xl mx-auto' : 'md:grid-cols-3'} gap-8 items-stretch w-full`}>
           {plans.map((plan, index) => (
             <div 
               key={index} 
-              className={`relative bg-white rounded-[32px] border ${plan.isPopular ? 'border-[#C15F3C] shadow-xl' : 'border-gray-200 shadow-sm hover:shadow-md'} p-8 flex flex-col transition-all duration-300 min-h-[500px] h-auto lg:min-h-[850px]`}
+              className={`relative bg-white rounded-[32px] border ${plan.isPopular ? 'border-[#C15F3C] shadow-xl' : 'border-gray-200 shadow-sm hover:shadow-md'} p-8 flex flex-col h-full transition-all duration-300`}
             >
               {plan.isPopular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-1 rounded-full text-xs font-bold flex items-center gap-1">

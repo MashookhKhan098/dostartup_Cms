@@ -356,7 +356,7 @@ export default function TaxCalculatorPage() {
 
         {/* ── PAGE HEADER ── */}
         <div className="bg-[#F4F3EE] border-b border-[#C15F3C]/10 py-3 px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="flex items-start justify-between flex-wrap gap-4">
               <div>
                 <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#C15F3C]/20 text-[#C15F3C] text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase ">
@@ -393,7 +393,7 @@ export default function TaxCalculatorPage() {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
 
           {/* ── STEP INDICATOR ── */}
           <StepIndicator current={step} total={4} />
@@ -741,39 +741,43 @@ export default function TaxCalculatorPage() {
                 ))}
               </div>
 
-              {/* File Now CTA */}
-              <div className="bg-[#C15F3C] rounded-2xl p-5 text-center">
-                <div className="flex justify-center gap-0.5 mb-2">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={13} className="fill-white text-white" />)}
-                </div>
-                <h3 className="font-display font-bold text-white text-base mb-1">Ready to File?</h3>
-                <p className="text-orange-100 text-xs mb-3">Use this calculation to file your ITR in 5 minutes</p>
-                <Link href="/itr-1-return-filing"
-                  className="block bg-white text-[#C15F3C] font-bold text-sm py-2.5 rounded-xl hover:bg-orange-50 transition-colors">
-                  File ITR Now →
-                </Link>
-              </div>
+            </div>
+          </div>
 
-              {/* Why DoStartup */}
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
-                <h3 className="font-display font-bold text-black text-sm mb-3">Why DoStartup.in?</h3>
-                {[
-                  { icon: "🤖", text: "AI reads Form-16 automatically" },
-                  { icon: "⚡", text: "File in under 5 minutes" },
-                  { icon: "🔒", text: "Bank-grade 256-bit SSL" },
-                  { icon: "📱", text: "Works on mobile & desktop" },
-                ].map((f) => (
-                  <div key={f.text} className="flex items-center gap-2.5 py-1.5 border-b border-gray-50 last:border-0">
-                    <span className="text-base">{f.icon}</span>
-                    <span className="text-xs text-gray-600">{f.text}</span>
-                  </div>
-                ))}
+          {/* Why DoStartup + Ready to File — full-width 2-column row */}
+          <div className="mt-4 grid md:grid-cols-2 gap-5">
+            {/* Why DoStartup — LEFT */}
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+              <h3 className="font-display font-bold text-black text-sm mb-3">Why DoStartup.in?</h3>
+              {[
+                { icon: "🤖", text: "AI reads Form-16 automatically" },
+                { icon: "⚡", text: "File in under 5 minutes" },
+                { icon: "🔒", text: "Bank-grade 256-bit SSL" },
+                { icon: "📱", text: "Works on mobile & desktop" },
+              ].map((f) => (
+                <div key={f.text} className="flex items-center gap-2.5 py-1.5 border-b border-gray-50 last:border-0">
+                  <span className="text-base">{f.icon}</span>
+                  <span className="text-xs text-gray-600">{f.text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Ready to File — RIGHT */}
+            <div className="bg-[#C15F3C] rounded-2xl p-5 text-center">
+              <div className="flex justify-center gap-0.5 mb-2">
+                {[...Array(5)].map((_, i) => <Star key={i} size={13} className="fill-white text-white" />)}
               </div>
+              <h3 className="font-display font-bold text-white text-base mb-1">Ready to File?</h3>
+              <p className="text-orange-100 text-xs mb-3">Use this calculation to file your ITR in 5 minutes</p>
+              <Link href="/itr-1-return-filing"
+                className="block bg-white text-[#C15F3C] font-bold text-sm py-2.5 rounded-xl hover:bg-orange-50 transition-colors">
+                File ITR Now →
+              </Link>
             </div>
           </div>
 
           {/* ── TAX SLABS REFERENCE ── */}
-          <div className="mt-8 grid md:grid-cols-2 gap-5">
+          <div className="mt-4 grid md:grid-cols-2 gap-5">
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
               <h3 className="font-display font-bold text-black text-base mb-4 flex items-center gap-2">
                 <TrendingUp size={16} className="text-[#C15F3C]" /> New Regime Tax Slabs FY 2025-26

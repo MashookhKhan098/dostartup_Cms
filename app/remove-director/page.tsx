@@ -37,16 +37,16 @@ export default function RemoveDirectorPage() {
  9: "The Board Meeting is required to acknowledge resignation, pass necessary resolutions and initiate filings to the ROC.",
  };
 
- const ASSETS = {
- logo: "/images/india-logo.jpg",
- hero: "/images/hero.png",
- remove: "/images/remove.png",
- ad: "/images/Screenshot (489).png",
- whatsapp: "/images/whatsapp.png",
- cartIcon: "/images/cart-icon.svg",
- indiaFlag: "/images/india-flag.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- };
+  const ASSETS = {
+  logo: "/images/india-logo.jpg",
+  hero: "/images/remove-director.jpg",
+  remove: "/images/remove.png",
+  ad: "/images/more2.png",
+  whatsapp: "/images/whatsapp.png",
+  cartIcon: "/images/cart.png",
+  indiaFlag: "/images/india-flag.png",
+  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+  };
 
  return (
  <div className="min-h-screen bg-white font-sans text-gray-800">

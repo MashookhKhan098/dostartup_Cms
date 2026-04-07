@@ -14,12 +14,12 @@ export default function Page() {
       price: "1,499",
       description: "Get complete GST registration and monthly filing services, ensuring compliance and smooth processing.",
       features: [
-        "GST Registration Support",
-        "GST Certificate",
-        "Dedicated Accountant",
-        "GSTR-1 Monthly Filing",
-        "GSTR-3B Monthly Filing",
-        "Business Service Personal Assistant"
+        { text: "GST Registration Support" },
+        { text: "GST Certificate" },
+        { text: "Dedicated Accountant" },
+        { text: "GSTR-1 Monthly Filing" },
+        { text: "GSTR-3B Monthly Filing" },
+        { text: "Business Service Personal Assistant" }
       ]
     },
     {
@@ -28,11 +28,11 @@ export default function Page() {
       isPopular: true,
       description: "For proprietorship businesses looking for complete GST compliance, get GST registration, UDYAM registration.",
       features: [
-        "GST Registration for Proprietorship",
-        "UDYAM Registration",
-        "GSTR-1 Filing – 12 Months",
-        "GSTR-3B Filing – 12 Months",
-        "LEDGERS GST Software Access – 12 Months"
+        { text: "GST Registration for Proprietorship" },
+        { text: "UDYAM Registration" },
+        { text: "GSTR-1 Filing – 12 Months" },
+        { text: "GSTR-3B Filing – 12 Months" },
+        { text: "LEDGERS GST Software Access – 12 Months" }
       ]
     },
     {
@@ -40,12 +40,12 @@ export default function Page() {
       price: "19,899",
       description: "DoStartup seamlessly provides customized accounting services for businesses with turnover up to 40 lakhs.",
       features: [
-        "Dedicated Accountant",
-        "GSTR-1 Filing – 12 Months",
-        "GSTR-3B Filing – 12 Months",
-        "Income Tax Filing",
-        "Financial Statements",
-        "LEDGERS Software Access – 12 Months"
+        { text: "Dedicated Accountant" },
+        { text: "GSTR-1 Filing – 12 Months" },
+        { text: "GSTR-3B Filing – 12 Months" },
+        { text: "Income Tax Filing" },
+        { text: "Financial Statements" },
+        { text: "LEDGERS Software Access – 12 Months" }
       ]
     }
   ];
@@ -57,7 +57,7 @@ export default function Page() {
 
       <DynamicTabContent category={serviceCategory} />
       <PricingCards plans={proprietorshipPlans} />
-      <Faq category={serviceCategory} />
+      <Faq category={serviceCategory} blogCategory="proprietorship" />
       
       <Footer />
     </main>

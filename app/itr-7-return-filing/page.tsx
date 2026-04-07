@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DoStartupPricing from "../components/DoStartupPricing";
 import { Plus, ShoppingBag, CheckCircle, Shield, FileText, Zap, Star, Brain, AlertTriangle, ArrowRight, Target, Building2 } from "lucide-react";
+import Faq from "../components/Faq";
 
 // ─────────────────────────────────────────────
 // DATA
@@ -404,38 +405,7 @@ export default function ITR7Page() {
           />
         </div>
 
-        {/* ═══════════ FAQ ═══════════ */}
-        <section className="bg-[#F4F3EE] py-16 px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-3">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-gray-500 text-sm">Everything about ITR-7 filing for trusts &amp; institutions</p>
-            </div>
-            <div className="space-y-3">
-              {FAQS.map((faq, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-[#C15F3C]/10 overflow-hidden hover:border-[#C15F3C]/30 transition-colors">
-                  <button
-                    className="w-full text-left px-6 py-4 flex justify-between items-center"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    aria-expanded={openFaq === i}
-                  >
-                    <span className="font-semibold text-black text-sm pr-4">{faq.q}</span>
-                    <span className="text-[#C15F3C] flex-shrink-0">
-                      {openFaq === i ? "−" : <Plus size={16} />}
-                    </span>
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-6 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Faq category="Income Tax" />
 
         {/* ═══════════ CTA STRIP ═══════════ */}
         <section className="bg-[#C15F3C] py-12 px-4 sm:px-6 text-center">

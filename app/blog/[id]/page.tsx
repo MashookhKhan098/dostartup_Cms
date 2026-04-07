@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Clock, User, Calendar, ArrowLeft } from "lucide-react";
+import { User, Clock, Mail } from "lucide-react";
 import Link from "next/link";
 
 interface Blog {
@@ -29,9 +29,19 @@ export default function BlogDetails() {
 
   const getImageUrl = (image: any) => {
     if (!image) return null;
-    const path = typeof image === "string" ? image : image.path;
+    let path = "";
+    if (typeof image === "string") {
+      path = image;
+    } else if (image && typeof image === "object" && image.path) {
+      path = image.path;
+    } else {
+      return null;
+    }
     if (!path) return null;
-    return path.startsWith("http") ? path : `${CMS_URL}/storage/uploads${path.startsWith("/") ? path : `/${path}`}`;
+    if (path.startsWith("http")) return path;
+    const base = CMS_URL.endsWith("/") ? CMS_URL.slice(0, -1) : CMS_URL;
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    return `${base}/storage/uploads${cleanPath}`;
   };
 
   useEffect(() => {
@@ -55,16 +65,17 @@ export default function BlogDetails() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-[#C15F3C]/20 border-t-[#C15F3C] rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-[#C15F3C]/20 border-t-[#C15F3C] rounded-full animate-spin"></div>
       </div>
     );
   }
 
   if (!blog) {
     return (
-      <div className="min-h-screen bg-[#F4F3EE] flex flex-col items-center justify-center">
-        <h2 className="text-2xl font-bold text-[#2F2E2B]">Article Not Found</h2>
-        <Link href="/" className="mt-4 text-[#C15F3C] hover:underline underline-offset-4">Return to Home</Link>
+      <div className="min-h-screen bg-[#F4F3EE] flex flex-col items-center justify-center p-6 text-center">
+        <h2 className="text-3xl font-bold text-[#201F1D]" style={{ fontFamily: "'Sora', sans-serif" }}>Article Not Found</h2>
+        <p className="text-[#6F6B63] mt-2 mb-8">The requested insights could not be retrieved.</p>
+        <Link href="/" className="px-8 py-3 bg-[#C15F3C] text-white rounded-2xl font-bold uppercase tracking-widest text-[11px] shadow-xl shadow-[#C15F3C]/20">Return Home</Link>
       </div>
     );
   }
@@ -76,115 +87,90 @@ export default function BlogDetails() {
     <>
       <Navbar />
       
-      <main className="bg-white min-h-screen">
-        {/* Banner Section */}
-        <div className="relative w-full h-[30vh] sm:h-[40vh] md:h-[50vh] bg-[#1a1714] overflow-hidden">
-          {mainImageUrl ? (
-            <img 
-              src={mainImageUrl} 
-              alt={blog.title} 
-              className="w-full h-full object-cover opacity-60"
-            />
-          ) : (
-            <div className="w-full h-full bg-[#1a1714]" />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
+      <main className="bg-[#F4F3EE] min-h-screen pb-24">
+        <div className="max-w-4xl mx-auto px-6 pt-12 md:pt-20">
           
-          <div className="absolute inset-0 flex items-end">
-            <div className="max-w-4xl mx-auto px-6 pb-8 md:pb-12 w-full">
-              <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#C15F3C] mb-6 hover:translate-x-[-4px] transition-transform">
-                <ArrowLeft size={16} />
-                Back to Resources
-              </Link>
-              <span className="inline-block px-3 py-1 bg-[#F4F3EE] text-[#C15F3C] text-xs font-bold rounded-full border border-[#E5E2DA] uppercase tracking-widest mb-4">
-                {blog.category}
-              </span>
-              <h1 className="text-3xl md:text-5xl font-bold text-[#2F2E2B] leading-tight" style={{ fontFamily: "'Sora', sans-serif" }}>
-                {blog.title}
-              </h1>
+          {/* Header Segment */}
+          <div className="mb-10 text-left">
+            <h1 className="text-3xl md:text-6xl font-bold text-[#C15F3C] leading-[1.1] tracking-tight mb-8" style={{ fontFamily: "'Sora', sans-serif" }}>
+              {blog.title}
+            </h1>
+
+            {/* Meta Segment: Author Image & Date */}
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-14 h-14 rounded-full overflow-hidden bg-gray-100 border-2 border-white shadow-sm flex-shrink-0">
+                {authorImageUrl ? (
+                  <img src={authorImageUrl} alt={blog.writer_name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-200"><User size={24} className="text-[#B1ADA1]" /></div>
+                )}
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-[#201F1D]">
+                  {blog.writer_name || blog.author_name || "Startup Team"}
+                </span>
+                <span className="text-xs text-[#6F6B63] font-medium tracking-wide">
+                  {blog.upload_date}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Content Layout */}
-        <div className="max-w-4xl mx-auto px-6 py-12 md:py-16">
-          <div className="flex flex-col md:flex-row gap-12">
-            
-            {/* Sidebar Content (Author) */}
-            <div className="md:w-1/4">
-              <div className="sticky top-24 p-6 bg-[#F4F3EE] rounded-3xl border border-[#E5E2DA]">
-                <div className="text-center mb-6">
-                  <div className="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 border-2 border-white shadow-sm">
-                    {authorImageUrl ? (
-                      <img src={authorImageUrl} alt={blog.writer_name} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full bg-white flex items-center justify-center"><User size={32} className="text-[#B1ADA1]" /></div>
-                    )}
-                  </div>
-                  <p className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-[2px] mb-1">Author</p>
-                  <h3 className="font-bold text-[#2F2E2B] text-sm" style={{ fontFamily: "'Sora', sans-serif" }}>
-                    {blog.writer_name || blog.author_name || "Startup Desk"}
-                  </h3>
-                </div>
-                
-                <div className="space-y-4 pt-6 border-t border-[#E5E2DA]">
-                  <div className="flex items-center gap-3 text-[#6F6B63]">
-                    <Calendar size={14} />
-                    <span className="text-[11px] font-medium">{blog.upload_date || "Date Unspecified"}</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-[#6F6B63]">
-                    <Clock size={14} />
-                    <span className="text-[11px] font-medium">5 Min Read</span>
-                  </div>
-                </div>
+          {/* Main Hero Image */}
+          <div className="relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/5 mb-16 bg-white border border-[#E5E2DA]">
+            {mainImageUrl ? (
+              <img 
+                src={mainImageUrl} 
+                alt={blog.title} 
+                className="w-full h-auto object-cover max-h-[700px]"
+              />
+            ) : (
+              <div className="w-full h-96 flex items-center justify-center text-[#B1ADA1] font-bold uppercase tracking-widest bg-white">Visual Information Pending</div>
+            )}
+          </div>
 
-                <div className="mt-8">
-                  <p className="text-[11px] text-[#6F6B63] italic leading-relaxed text-center">
-                    Providing expert guidance for startups and established businesses across India.
-                  </p>
+          {/* Detailed Article Content */}
+          <div className="max-w-2xl mx-auto">
+            <article className="prose prose-stone prose-lg max-w-none text-[#2F2E2B] leading-[1.85]">
+              {typeof blog.content === "string" ? (
+                <div 
+                  dangerouslySetInnerHTML={{ __html: blog.content }} 
+                  className="blog-inner-html-render"
+                />
+              ) : (
+                <div className="space-y-8">
+                  {Array.isArray(blog.content) ? (
+                    blog.content.map((block: any, idx: number) => (
+                      <div key={idx} className="text-[#4A463F] text-lg leading-relaxed font-medium">
+                        {typeof block === "string" ? block : JSON.stringify(block)}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="p-12 text-center rounded-3xl bg-white border border-[#E5E2DA]">
+                       <p className="text-[#6F6B63] font-medium italic">Article body is being finalized.</p>
+                    </div>
+                  )}
                 </div>
-              </div>
+              )}
+            </article>
+
+            {/* Newsletter Integration */}
+            <div className="mt-24 p-12 bg-[#1a1714] rounded-[3rem] text-white relative overflow-hidden group shadow-2xl shadow-black/10">
+               <div className="relative z-10 flex flex-col items-center text-center">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4" style={{ fontFamily: "'Sora', sans-serif" }}>Dostartup Weekly Brief</h3>
+                  <p className="text-white/60 text-base max-w-md mb-8">Join 15k+ business leaders getting expert legal insights to their inbox every Tuesday.</p>
+                  <form className="flex flex-col sm:flex-row w-full gap-4 max-w-md" onSubmit={(e) => e.preventDefault()}>
+                     <input 
+                      type="email" 
+                      placeholder="founder@company.com" 
+                      className="flex-1 bg-white/10 border border-white/20 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-[#C15F3C] transition-all text-sm"
+                     />
+                     <button className="px-8 py-4 bg-[#C15F3C] text-white rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-[#A94E30] transition-all shadow-xl shadow-[#C15F3C]/40">
+                        Join Briefing
+                     </button>
+                  </form>
+               </div>
             </div>
-
-            {/* Main Content Article */}
-            <div className="md:w-3/4">
-              <article className="prose prose-lg max-w-none text-[#2F2E2B] leading-relaxed">
-                {typeof blog.content === "string" ? (
-                  <div 
-                    dangerouslySetInnerHTML={{ __html: blog.content }} 
-                    className="blog-content-area"
-                  />
-                ) : (
-                  <div className="space-y-6">
-                    {Array.isArray(blog.content) ? (
-                      blog.content.map((block: any, idx: number) => (
-                        <div key={idx}>{typeof block === "string" ? block : JSON.stringify(block)}</div>
-                      ))
-                    ) : (
-                      <p>Article content format is currently unsupported.</p>
-                    )}
-                  </div>
-                )}
-              </article>
-
-              <div className="mt-16 pt-8 border-t border-[#E5E2DA]">
-                <div className="bg-[#1a1714] rounded-3xl p-8 text-white relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-8 opacity-10 scale-150 rotate-12 group-hover:rotate-0 transition-all">
-                    <Clock size={120} />
-                  </div>
-                  <div className="relative z-10 max-w-md">
-                    <h2 className="text-xl font-bold mb-3" style={{ fontFamily: "'Sora', sans-serif" }}>Need more clarity?</h2>
-                    <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                      Our legal and compliance experts are ready to help you navigate through complex business requirements.
-                    </p>
-                    <button className="px-6 py-3 bg-[#C15F3C] text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#A94E30] transition-all shadow-lg shadow-[#C15F3C]/20">
-                      Speak to Consultant
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </main>
@@ -192,29 +178,50 @@ export default function BlogDetails() {
       <Footer />
 
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap');
         
-        .blog-content-area h2 {
+        .blog-inner-html-render h2 {
           font-family: 'Sora', sans-serif;
-          font-size: 1.5rem;
+          font-size: 2.25rem;
           font-weight: 700;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-          color: #2F2E2B;
-        }
-        .blog-content-area p {
+          margin-top: 4rem;
           margin-bottom: 1.5rem;
-          line-height: 1.8;
-          color: #6F6B63;
+          color: #201F1D;
+          letter-spacing: -1px;
+          line-height: 1.2;
         }
-        .blog-content-area ul {
-          list-style-type: disc;
+        .blog-inner-html-render p {
+          margin-bottom: 2rem;
+          font-size: 1.15rem;
+          color: #4A463F;
+          line-height: 1.9;
+        }
+        .blog-inner-html-render blockquote {
+          border-left: 4px solid #C15F3C;
+          padding-left: 2rem;
+          margin: 3rem 0;
+          font-style: italic;
+          font-size: 1.25rem;
+          color: #201F1D;
+        }
+        .blog-inner-html-render ul {
+          margin-bottom: 2.5rem;
           padding-left: 1.5rem;
-          margin-bottom: 1.5rem;
-          color: #6F6B63;
+          list-style-type: none;
         }
-        .blog-content-area li {
-          margin-bottom: 0.5rem;
+        .blog-inner-html-render li {
+          margin-bottom: 1.2rem;
+          color: #4A463F;
+          font-size: 1.15rem;
+          position: relative;
+          padding-left: 1.5rem;
+        }
+        .blog-inner-html-render li::before {
+          content: "•";
+          color: #C15F3C;
+          font-weight: bold;
+          position: absolute;
+          left: 0;
         }
       `}</style>
     </>

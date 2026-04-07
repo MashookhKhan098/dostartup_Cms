@@ -24,7 +24,7 @@ export default function Home() {
  ]}
 />
  <DynamicTabContent category="GST" />
- <Faq />
+ <Faq category="gst-lut" />
  <Popularsearches />
  <Footer />
  </>

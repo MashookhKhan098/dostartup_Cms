@@ -7,6 +7,7 @@ import { ChevronDown, CheckCircle } from "lucide-react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import SidebarCart from "../components/SidebarCart";
+import DoStartupPricing from "../components/DoStartupPricing";
 
 const POPULAR_SEARCHES = [
  "Partnership", "Limited Liability Partnership", "Digital Signature",
@@ -523,8 +524,46 @@ export default function FSSAIRenewal(): React.ReactElement {
  </div>
  </div>
 
- {/* FAQ Card */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+          {/* Pricing Component */}
+          <DoStartupPricing 
+            title="Simple packages. Transparent pricing." 
+            subtitle="Registration fees are charged at cost. Upgrade or add services anytime."
+            containerClassName="font-sans mb-6"
+            plans={[
+              {
+                title: "State",
+                price: "",
+                description: "Renewal of Existing FSSAI Registration and Licenses.",
+                features: [
+                  "Document Collection & Verification",
+                  "Application Preparation & Form Submission",
+                  "FSSAI Portal Filing Assistance",
+                  "Government Fee Payment Coordination",
+                  "License Certificate Delivery",
+                  "100% Refund Guarantee",
+                ],
+                buttonText: "Start Filing Now",
+              },
+              {
+                title: "Central",
+                price: "",
+                description: "Renewal of Existing FSSAI Registration and Licenses.",
+                isPopular: true,
+                features: [
+                  "Document Collection & Verification",
+                  "Application Preparation & Form Submission",
+                  "FSSAI Portal Filing Assistance",
+                  "Government Fee Payment Coordination",
+                  "License Certificate Delivery",
+                  "100% Refund Guarantee",
+                ],
+                buttonText: "Start Filing Now",
+              },
+            ]}
+          />
+
+          {/* FAQ Card */}
+          <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
  <h3 className="text-lg font-semibold text-[#2F2E2B] mb-4">FAQ's on FSSAI Renewal</h3>
  <div className="divide-y divide-[#E5E2DA]">
  {faqItems.map((q, idx) => (

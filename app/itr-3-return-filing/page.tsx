@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DoStartupPricing from "../components/DoStartupPricing";
+import DoStartupFAQ from "../components/DoStartupFAQ";
 import {
  CheckCircle,
  XCircle,
@@ -343,7 +344,6 @@ export default function ITR3Page() {
  );
 
  const result = runCalc(calc);
- const [openFaq, setOpenFaq] = useState<number | null>(null);
 
  const resetCalc = () =>
  setCalc({
@@ -1009,40 +1009,12 @@ export default function ITR3Page() {
  {/* ════════════════════════════════════
  FAQ
  ════════════════════════════════════ */}
- <section className="bg-white py-6 px-4 sm:px-6" id="faq">
- <div className="max-w-4xl mx-auto">
- <div className="text-center mb-10">
- <p className="text-orange-500 text-xs font-bold uppercase mb-2">FAQ</p>
- <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black">ITR-3 Questions Answered</h2>
- <p className="text-gray-500 text-sm mt-2">Everything about business income, F&O trading & tax audit.</p>
- </div>
- <div className="space-y-3">
- {FAQS.map((faq, i) => (
- <div key={i} className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-500 shadow-lg shadow-orange-100" : "border-gray-100 hover:border-orange-300"}`}>
- <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
- className="w-full flex justify-between items-start gap-4 px-5 py-4 text-left group">
- <span className="font-semibold text-sm text-black leading-snug group-hover:text-orange-500 transition-colors">{faq.q}</span>
- {openFaq === i
- ? <ChevronUp size={17} className="text-orange-500 flex-shrink-0 mt-0.5" />
- : <ChevronDown size={17} className="text-orange-500 flex-shrink-0 mt-0.5 group-hover:translate-y-0.5 transition-transform" />}
- </button>
- {openFaq === i && (
- <div className="px-5 pb-4 border-t border-orange-100 pt-3 bg-orange-50/30">
- <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
- </div>
- )}
- </div>
- ))}
- </div>
- <div className="mt-8 text-center">
- <p className="text-sm text-gray-500 mb-4">Still have questions about ITR-3?</p>
- <Link href="/support"
- className="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm hover:text-orange-600 border border-orange-300 px-6 py-3 rounded-full hover:bg-orange-50 transition-all">
- <MessageCircle size={16} />Chat with our AI Tax Support (24/7)
- </Link>
- </div>
- </div>
- </section>
+  <DoStartupFAQ 
+    faqs={FAQS} 
+    category="Income Tax"
+    title="ITR-3 Questions Answered" 
+    subtitle="Everything about business income, F&O trading & tax audit."
+  />
 
  {/* ════════════════════════════════════
  FINAL CTA

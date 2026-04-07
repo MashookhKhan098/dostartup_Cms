@@ -1,9 +1,12 @@
 "use client";
 import AddQuestionModal from "../components/AddQuestionModal";
+import SidebarCart from "../components/SidebarCart";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Inter } from "next/font/google";
 import { Search, ChevronDown } from "lucide-react";
+import Faq from "../components/Faq";
+
 
 const inter = Inter({
  subsets: ["latin"],
@@ -1157,55 +1160,11 @@ function ArticleAndSidebar() {
  assessments and reporting as per other laws
  </li>
  </ul>
-
- <div className="mt-10">
- <h4 className="text-[20px] font-semibold">
- FAQ's on Company Compliance
- </h4>
- <div
- className="mt-3 bg-white rounded-xl border"
- style={{ borderColor: "#E5E7EB" }}
- >
- {faq.map((q, i) => (
- <div
- key={q}
- className="border-b last:border-b-0"
- style={{ borderColor: "#E5E7EB" }}
- >
- <button
- className="w-full flex items-center justify-between text-left px-4 py-3"
- onClick={() => setOpen(open === i ? null : i)}
- >
- <span className="text-[14px]">{q}</span>
- <span className="text-slate-400">
- {open === i ? "−" : "+"}
- </span>
- </button>
- {open === i && (
- <div className="px-4 pb-3 text-[14px] text-slate-600">
- This is a placeholder answer. Replace with your exact
- FAQ content.
- </div>
- )}
- </div>
- ))}
- </div>
- <div className="mt-3 flex gap-3 items-center flex-wrap">
-    <button
-      className="border rounded px-4 py-2 text-[13px]"
-      style={{ borderColor: "#E5E7EB" }}
-    >
-      Load More
-    </button>
-    <AddQuestionModal />
-  </div>
- </div>
  </div>
  </article>
 
-         <aside className="lg:col-span-4 hidden lg:block">
-          <SidebarCart />
-        </aside>
+ <Faq category="Compliance" />
+
  </div>
  </div>
  </section>

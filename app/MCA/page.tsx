@@ -13,6 +13,7 @@ import {
   Star,
   ChevronDown,
 } from "lucide-react";
+import Faq from "../components/Faq";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -106,6 +107,7 @@ const services = [
   { id: 22, title: "Professional Tax Return Filing", desc: "Mandatory for individuals…", image: ASSETS.cards.professionalTax },
 ];
 
+
 export default function MCA() {
   return (
     <div className="min-h-screen bg-white text-slate-800">
@@ -176,6 +178,9 @@ export default function MCA() {
           </div>
         </div>
       </section>
+
+      {/* FAQ SECTION */}
+      <Faq category="MCA" />
 
       <Footer />
     </div>

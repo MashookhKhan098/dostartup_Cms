@@ -18,6 +18,7 @@ import {
  Star,
  StarHalf,
 } from "lucide-react";
+import Faq from "../components/Faq";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -73,19 +74,6 @@ const states = [
  "Uttar Pradesh",
  "Uttarakhand",
  "West Bengal",
-];
-
-const faqList = [
- "What does e-Filing an Income Tax Return (ITR) mean?",
- "Why is it important to e-file your ITR?",
- "What are the Advantages of Income Tax e Filing?",
- "Who is eligible to file an Income Tax Return in India?",
- "If my employer deducts TDS, do I still need to file an ITR?",
- "What is a Nil ITR (Income Tax return), and Who Needs to File It?",
- "How do I choose the correct ITR form for e-Filing?",
- "Which documents are needed for filing an Income Tax Return?",
- "Can I use ITR-1 if I have income from agriculture that is tax-exempt?",
- "What is the process to file an Income Tax Return in India?",
 ];
 
 const popularSearches = [
@@ -203,7 +191,6 @@ const NavItem: React.FC<NavItemProps> = ({
 
 export default function IncomeTaxPage() {
  const [activeTab, setActiveTab] = useState("ITR 1");
- const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
  const offersLeft = useMemo(
  () => [
@@ -618,46 +605,6 @@ export default function IncomeTaxPage() {
  className="mt-3 rounded-xl border border-slate-200"
  />
 
- <div className="mt-8">
- <h4 className="text-xl font-bold">
- FAQ&apos;s on Income Tax E-Filing
- </h4>
- <div className="mt-3 bg-white rounded-xl border border-slate-200">
- {faqList.map((q, i) => {
- const open = expandedFaq === i;
- return (
- <div
- key={q}
- className="border-b last:border-b-0 border-slate-200"
- >
- <button
- className="w-full flex items-center justify-between text-left px-4 py-3"
- onClick={() => setExpandedFaq(open ? null : i)}
- >
- <span className="text-[14px]">{q}</span>
- <ChevronRight
- className={`w-5 h-5 text-slate-400 transition-transform ${
- open ? "rotate-90" : ""
- }`}
- />
- </button>
- {open && (
- <div className="px-4 pb-3 text-[14px] text-slate-600">
- Replace with the exact answer text as per your
- source content.
- </div>
- )}
- </div>
- );
- })}
- </div>
- <div className="flex gap-3 items-center flex-wrap mt-4">
-  <button className="mt-3 border border-slate-200 rounded px-4 py-2 text-[13px]">
- Load More
- </button>
-  <AddQuestionModal />
-</div>
-</div>
  </div>
 
  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 my-8">
@@ -698,6 +645,8 @@ export default function IncomeTaxPage() {
  </div>
  </div>
  </section>
+
+ <Faq category="Income Tax" blogCategory="income-tax" />
 
  <Footer />
 

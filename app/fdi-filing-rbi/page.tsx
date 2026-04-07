@@ -110,46 +110,50 @@ export default function FdiFilingRbiPage(): React.ReactElement {
         }
       `}</style>
 
-      {/* Full-Width Slider Section - Improved spacing and fit */}
-      <div className="relative w-full bg-gray-900 h-[750px] overflow-hidden group border-b border-gray-200 shadow-inner">
-        {/* Slider Container */}
-        <div 
-          className="flex h-full transition-transform ease-in-out"
-          style={{ 
-            transform: `translateX(-${(currentSlide * 100) / SLIDER_IMAGES.length}%)`,
-            width: `${SLIDER_IMAGES.length * 100}%`,
-            transitionDuration: '2000ms'
-          }}
-        >
-          {SLIDER_IMAGES.map((image, index) => (
-            <div
-              key={index}
-              className="h-full flex-shrink-0 bg-black overflow-hidden"
-              style={{ width: `${100 / SLIDER_IMAGES.length}%` }}
+      {/* FDI Slider Section - Standardized container width */}
+      <section className="bg-gray-50 py-4 lg:py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="relative rounded-2xl bg-gray-900 h-[400px] lg:h-[480px] overflow-hidden group shadow-xl">
+            {/* Slider Container */}
+            <div 
+              className="flex h-full transition-transform ease-in-out"
+              style={{ 
+                transform: `translateX(-${(currentSlide * 100) / SLIDER_IMAGES.length}%)`,
+                width: `${SLIDER_IMAGES.length * 100}%`,
+                transitionDuration: '2000ms'
+              }}
             >
-              <img
-                src={image}
-                alt={`Slide ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              {SLIDER_IMAGES.map((image, index) => (
+                <div
+                  key={index}
+                  className="h-full flex-shrink-0 bg-black overflow-hidden"
+                  style={{ width: `${100 / SLIDER_IMAGES.length}%` }}
+                >
+                  <img
+                    src={image}
+                    alt={`Slide ${index + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Slide Indicators - Modern minimalist style on dark background */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-10 bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/10 shadow-2xl">
-          {SLIDER_IMAGES.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all ${
-                index === currentSlide ? "bg-white w-10 shadow-[0_0_10px_rgba(255,255,255,0.4)]" : "bg-white/30 hover:bg-white/60 w-2"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+            {/* Slide Indicators - Modern minimalist style on dark background */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
+              {SLIDER_IMAGES.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    index === currentSlide ? "bg-white w-8 shadow-[0_0_8px_rgba(255,255,255,0.4)]" : "bg-white/30 hover:bg-white/60 w-1.5"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Main Content Section */}
       <div className="max-w-7xl mx-auto px-6 py-8">

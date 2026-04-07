@@ -49,9 +49,9 @@ export default function Home() {
     <>
       <Navbar />
       <Hero defaultEntity="Company" />
-      <DynamicTabContent category="Proprietorship" />
       <PricingCards plans={companyRegistrationPlans} />
-      <Faq category="Proprietorship" />
+      <DynamicTabContent category="Company Registration" />
+      <Faq category="Company Registration" blogCategory="company-registration" />
       <Popularsearches />
       <Footer />
     </>

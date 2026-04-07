@@ -89,7 +89,7 @@ export default function Home() {
  <Navbar />
  <Hero {...heroProps}/>
  <DynamicTabContent category="Proprietorship" />
- <Faq />
+ <Faq category="Proprietorship" blogCategory="start-up-india" />
  <Popularsearches />
  <Footer />
  </>
