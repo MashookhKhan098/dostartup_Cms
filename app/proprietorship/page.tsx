@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import Hero from '../components/Startup/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
-import DoStartupPricing from '../components/DoStartupPricing';
+import PricingCards, { PricingPlan } from '../components/PricingCards';
 
 export default function Page() {
   const serviceCategory = "proprietorship"; 
@@ -54,10 +54,9 @@ export default function Page() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero defaultEntity="Proprietorship"/>
-      
-      <DoStartupPricing plans={proprietorshipPlans} />
 
       <DynamicTabContent category={serviceCategory} />
+      <PricingCards plans={proprietorshipPlans} />
       <Faq category={serviceCategory} />
       
       <Footer />

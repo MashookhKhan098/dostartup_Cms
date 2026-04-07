@@ -112,7 +112,7 @@ export default function MCA() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="bg-slate-50 py-16">
+      <section className="bg-white py-16">
         <div className="max-w-[1200px] mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
@@ -123,7 +123,7 @@ export default function MCA() {
             </p>
             <div className="mt-8 flex gap-4">
               <button className="bg-[#C15F3C] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#A94E30] transition-all">Get Started</button>
-              <button className="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-slate-50 transition-all">View Services</button>
+              <button className="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-white transition-all">View Services</button>
             </div>
           </div>
           <div className="relative">
@@ -142,7 +142,7 @@ export default function MCA() {
               <ul className="space-y-1">
                 {categories.map((c) => (
                   <li key={c.name}>
-                    <button className="w-full flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-slate-50 text-slate-700 text-sm font-medium transition-all group">
+                    <button className="w-full flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-white text-slate-700 text-sm font-medium transition-all group">
                       <span className="flex items-center gap-3">
                         <img src={c.icon} alt="" className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
                         {c.name}

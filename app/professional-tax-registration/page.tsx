@@ -147,9 +147,9 @@ const pricingData = {
  <>
  <Navbar />
  <Hero {...heroProps}/>
- <Price />
  <DynamicTabContent category="Proprietorship" />
- <Faq />
+ <Price />
+      <Faq />
  <Popularsearches />
  <Footer />
  </>

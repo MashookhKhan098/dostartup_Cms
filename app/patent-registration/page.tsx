@@ -113,9 +113,9 @@ export default function Home() {
  <>
  <Navbar />
  <Hero {...heroProps} />
- <Price/>
  <DynamicTabContent category="E-Invoice" />
- <Faq />
+ <Price/>
+      <Faq />
  <Popularsearches />
  <Footer />
  </>

@@ -109,7 +109,7 @@ export default function BookkeepingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
+ <div className="min-h-screen bg-white text-gray-800 font-sans antialiased">
  {/* Imported Navbar */}
  <Navbar />
 

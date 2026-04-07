@@ -177,7 +177,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  <div className="max-w-[1180px] mx-auto px-6 py-6">
  <div className="bg-white rounded-xl shadow-md overflow-hidden grid grid-cols-1 lg:grid-cols-12">
  {/* Left image */}
- <div className="lg:col-span-7 relative bg-gray-100">
+ <div className="lg:col-span-7 relative bg-white">
  <div className="h-[420px] lg:h-full w-full relative">
  <Image
  src={ASSETS.taxHero}
@@ -210,7 +210,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
 
  <button
  type="button"
- className="ml-4 px-3 py-1 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-slate-50"
+ className="ml-4 px-3 py-1 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-white"
  >
  Consult Advisor
  </button>
@@ -268,7 +268,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </div>
 
  {tnFileName && (
- <div className="absolute bottom-3 left-6 right-6 bg-slate-50 border border-slate-100 rounded-md px-3 py-2 text-sm text-slate-700 shadow-sm">
+ <div className="absolute bottom-3 left-6 right-6 bg-white border border-slate-100 rounded-md px-3 py-2 text-sm text-slate-700 shadow-sm">
  Uploaded: <span className="font-medium">{tnFileName}</span>
  </div>
  )}
@@ -293,7 +293,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </button>
  <button
  type="button"
- className="px-4 py-2 border border-slate-200 rounded-md text-sm text-slate-700 hover:bg-slate-50"
+ className="px-4 py-2 border border-slate-200 rounded-md text-sm text-slate-700 hover:bg-white"
  >
  Live Chat
  </button>
@@ -308,7 +308,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  {/* END HERO */}
 
  {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
+ <div className="bg-white py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  DoStartup / Income Tax /{" "}
  <span className="text-[#C15F3C] font-medium">

@@ -174,7 +174,7 @@ export default function PesoPage(): React.ReactElement {
           
           {/* Left Sidebar - Public Notices */}
           <div className="lg:col-span-1 border border-gray-200 rounded-xl overflow-hidden shadow-sm h-fit">
-            <div className="bg-gray-50 border-b border-gray-200 p-4 flex items-center justify-between">
+            <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
               <h3 className="text-lg font-bold text-gray-800">Public Notices</h3>
               <button
                 onClick={() => setIsPaused(!isPaused)}
@@ -208,7 +208,7 @@ export default function PesoPage(): React.ReactElement {
               </div>
             </div>
             
-            <div className="bg-gray-50 p-3 border-t border-gray-200 text-center">
+            <div className="bg-white p-3 border-t border-gray-200 text-center">
               <a href="#" className="text-sm text-blue-600 font-medium hover:underline">View All Notices</a>
             </div>
           </div>
@@ -233,7 +233,7 @@ export default function PesoPage(): React.ReactElement {
                   <button className="bg-[#C15F3C] text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-[#A84F2E] transition-colors shadow-sm">
                     Apply for License
                   </button>
-                  <button className="bg-white text-[#1e2a38] border border-[#1e2a38] px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-gray-50 transition-colors">
+                  <button className="bg-white text-[#1e2a38] border border-[#1e2a38] px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-white transition-colors">
                     Track Status
                   </button>
                 </div>

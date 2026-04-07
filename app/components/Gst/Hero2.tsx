@@ -181,7 +181,7 @@ export default function DynamicHeroSection({
                   disabled={fieldVerificationState === 'loading'}
                   className={`absolute right-2 top-1.5 bottom-1.5 px-3 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${
                     fieldVerificationState === 'loading'
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    ? 'bg-white text-gray-400 cursor-not-allowed'
                     : fieldVerificationState === 'verified'
                     ? 'bg-green-600 text-white shadow-sm'
                     : fieldVerificationState === 'error'

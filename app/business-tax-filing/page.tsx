@@ -69,7 +69,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
+    <div className="min-h-screen bg-[#F4F3EE] text-gray-800">
       <Navbar />
 
       {/* Hero Section */}
@@ -83,7 +83,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                   <Shield size={14} /> Professional Tax Services
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                  Business Tax Filing <span className="text-[#C15F3C] italic text-3xl md:text-5xl">Made Simple</span>
+                  Business Tax Filing <span className="text-[#C15F3C] text-3xl md:text-5xl">Made Simple</span>
                 </h1>
                 <p className="text-[#B1ADA1] text-lg mb-8 max-w-xl leading-relaxed">
                   For individuals/HUFs whose income includes business or professional profits (e.g., shop owners, freelancers, firm partners); covers all other income too.
@@ -116,7 +116,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                       ].map((item, idx) => (
                         <div key={idx} className="bg-white/5 rounded-2xl p-4 border border-white/10 flex flex-col items-center text-center gap-2">
                           <div className="text-[#C15F3C] w-6 h-6">{item.icon}</div>
-                          <span className="text-white text-[10px] font-bold uppercase tracking-tighter">{item.label}</span>
+                          <span className="text-white text-[10px] font-bold uppercase">{item.label}</span>
                         </div>
                       ))}
                     </div>
@@ -157,19 +157,19 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
               <h3 className="text-xl font-bold text-[#2F2E2B]">Who should file a Business Income Tax Return?</h3>
               <p>Filing a business income tax return is mandatory for:</p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0">
-                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Sole Proprietorships</span>
                 </li>
-                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Partnership Firms</span>
                 </li>
-                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Limited Liability Partnerships (LLPs)</span>
                 </li>
-                <li className="flex gap-3 items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Companies (Private/Public/OPC)</span>
                 </li>
@@ -187,12 +187,12 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
               <div className="grid grid-cols-1 gap-6 my-8">
                 <div className="border-l-4 border-[#C15F3C] pl-6 py-2">
                   <h4 className="font-bold text-[#2F2E2B] mb-2">Proprietorship Tax Return Filing</h4>
-                  <p className="text-sm italic text-gray-400 mb-2">Government fee is ₹4,500 for Individuals and valid UDYAM-registered MSMEs.</p>
+                  <p className="text-sm text-gray-400 mb-2">Government fee is ₹4,500 for Individuals and valid UDYAM-registered MSMEs.</p>
                   <p className="text-sm">Proprietorship income is taxed in the hands of the proprietor. Thresholds and slab rates are the same as individual tax rules. Proprietors may file ITR-3 or ITR-4 depending on whether they opt for presumptive taxation.</p>
                 </div>
                 <div className="border-l-4 border-[#C15F3C] pl-6 py-2">
                   <h4 className="font-bold text-[#2F2E2B] mb-2">Partnership Firm Tax Return Filing</h4>
-                  <p className="text-sm italic text-gray-400 mb-2">Applicable for companies, LLPs, foreign entities, and others. Government fees differ as per entity type.</p>
+                  <p className="text-sm text-gray-400 mb-2">Applicable for companies, LLPs, foreign entities, and others. Government fees differ as per entity type.</p>
                   <p className="text-sm">Partnership firms are taxed as separate entities and must file an income tax return every year irrespective of profit or loss. Partnership firms typically file ITR-5.</p>
                 </div>
                 <div className="border-l-4 border-[#C15F3C] pl-6 py-2">
@@ -201,7 +201,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold text-[#2F2E2B] mt-12 pb-4 border-b border-gray-100 italic">How DoStartup helps</h3>
+              <h3 className="text-xl font-bold text-[#2F2E2B] mt-12 pb-4 border-b border-gray-100">How DoStartup helps</h3>
               <p>We provide end-to-end support for your business calculations, documents verification, and seamless e-filing through our dedicated experts and tax technology.</p>
 
               <div className="my-10 bg-[#2F2E2B] p-1 rounded-3xl overflow-hidden">
@@ -245,7 +245,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                 </ol>
               </div>
 
-              <div className="mt-12 bg-gray-50 rounded-3xl p-8 border border-gray-100">
+              <div className="mt-12 bg-white rounded-3xl p-8 border border-gray-100">
                 <h3 className="text-xl font-bold text-[#2F2E2B] mb-6">Documents Required</h3>
                 <div className="rounded-2xl overflow-hidden border border-gray-100 mb-8">
                   <img src="/images/docrequired.png" alt="Documents Needed" className="w-full h-auto" />
@@ -316,7 +316,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
             <div className="mt-10 pt-10 border-t border-gray-100 flex items-center justify-between flex-wrap gap-6">
               <p className="text-sm text-[#6F6B63]">Still have questions? Our tax experts are here to help.</p>
               <div className="flex gap-4">
-                <button className="px-6 py-3 rounded-xl border border-[#E5E2DA] font-semibold text-[#2F2E2B] hover:bg-gray-50 transition-all text-sm">
+                <button className="px-6 py-3 rounded-xl border border-[#E5E2DA] font-semibold text-[#2F2E2B] hover:bg-white transition-all text-sm">
                   Read Guides
                 </button>
                 <AddQuestionModal category="Business Tax" />

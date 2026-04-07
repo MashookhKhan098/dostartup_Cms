@@ -546,11 +546,12 @@ export default function FSSAIRenewal(): React.ReactElement {
  )}
  </div>
  ))}
- <div className="pt-4">
- <button className="px-4 py-2 border border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white text-sm rounded-lg transition-colors duration-200">
+ <div className="pt-4 flex gap-3 items-center flex-wrap">
+  <button className="px-4 py-2 border border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white text-sm rounded-lg transition-colors duration-200">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
  </div>
  </div>
 

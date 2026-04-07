@@ -1,4 +1,6 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
+
 import Navbar from "../components/Navbar";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
@@ -151,7 +153,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
+ <div className="bg-white py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  DoStartup / Income Tax /{" "}
  <span className="text-[#C15F3C] font-medium">
@@ -656,11 +658,12 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  )}
  </div>
  ))}
- <div className="mt-3">
- <button className="px-4 py-2 border rounded-md text-sm text-[#C15F3C]">
+ <div className="mt-3 flex gap-3 items-center flex-wrap">
+  <button className="px-4 py-2 border rounded-md text-sm text-[#C15F3C]">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
  </div>
  
   </div>

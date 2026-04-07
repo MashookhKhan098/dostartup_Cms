@@ -83,7 +83,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
 
       {/* Red Public Notice Banner - Scrolling */}
       <div 
-        className="w-full bg-gray-100 border-b border-gray-300 px-6 py-1.5 overflow-hidden"
+        className="w-full bg-white border-b border-gray-300 px-6 py-1.5 overflow-hidden"
       >
         <div className={`text-red-600 font-semibold text-sm whitespace-nowrap transition-transform duration-1000 ${
           !isPaused ? "animate-marquee" : ""

@@ -142,7 +142,7 @@ export default function BlogSidebar({ category }: BlogSidebarProps) {
             >
               <div className="flex gap-4 p-4">
                 {/* Image Thumbnail */}
-                <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100">
+                <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-white">
                   {mainImageUrl ? (
                     <img
                       src={mainImageUrl}

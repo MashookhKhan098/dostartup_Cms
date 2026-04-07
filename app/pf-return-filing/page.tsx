@@ -110,7 +110,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 text-gray-800 font-sans antialiased">
+ <div className="min-h-screen bg-white text-gray-800 font-sans antialiased">
  {/* Navbar - Imported */}
  <Navbar />
 

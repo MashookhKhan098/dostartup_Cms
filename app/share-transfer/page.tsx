@@ -1,4 +1,6 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
+
 
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
@@ -123,7 +125,7 @@ export default function ShareTransferPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
+ <div className="min-h-screen bg-white font-sans text-gray-800">
  {/* Imported Navbar */}
  <Navbar />
 
@@ -401,11 +403,12 @@ export default function ShareTransferPage(): React.ReactElement {
  ))}
  </div>
 
- <div className="mt-4">
- <button className="px-4 py-2 border-2 border-amber-600 rounded-md text-xs sm:text-sm text-amber-700 hover:bg-amber-50 transition-colors font-medium">
+ <div className="mt-4 flex gap-3 items-center flex-wrap">
+  <button className="px-4 py-2 border-2 border-amber-600 rounded-md text-xs sm:text-sm text-amber-700 hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
  </div>
  </section>
 

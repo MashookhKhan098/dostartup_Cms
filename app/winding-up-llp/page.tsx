@@ -1,4 +1,6 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
+
 
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle } from "lucide-react";
@@ -46,12 +48,12 @@ export default function WindingUpLLPPage() {
  };
 
  return (
- <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+ <div className="min-h-screen bg-white font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
+ <div className="bg-white py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / Windup Business /{" "}
  <span className="text-amber-700 font-medium">Winding Up - LLP</span>
@@ -253,7 +255,7 @@ export default function WindingUpLLPPage() {
  </tr>
  </thead>
  <tbody>
- <tr className="odd:bg-white even:bg-gray-50">
+ <tr className="odd:bg-white even:bg-white">
  <td className="p-3 border border-gray-200 align-top">Meaning</td>
  <td className="p-3 border border-gray-200">
  Preparing to close by selling assets and paying
@@ -264,7 +266,7 @@ export default function WindingUpLLPPage() {
  complete.
  </td>
  </tr>
- <tr className="odd:bg-white even:bg-gray-50">
+ <tr className="odd:bg-white even:bg-white">
  <td className="p-3 border border-gray-200 align-top">Legal Entity</td>
  <td className="p-3 border border-gray-200">
  LLP remains a legal entity during winding up.
@@ -450,11 +452,12 @@ export default function WindingUpLLPPage() {
  ))}
  </div>
 
- <div className="mt-4">
- <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
+ <div className="mt-4 flex gap-3 items-center flex-wrap">
+  <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
  </div>
  </section>
 

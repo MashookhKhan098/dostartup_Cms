@@ -29,9 +29,9 @@ export default function Home() {
  "Bank Account Assistance"
  ]}
 />
- <Price />
  <DynamicTabContent category="Proprietorship" />
- <Faq />
+ <Price />
+      <Faq />
  <Popularsearches />
  <Footer />
  </>

@@ -92,12 +92,12 @@ export default function IncomeTaxHubPage() {
             </div>
             
             <div className="mt-12 grid sm:grid-cols-2 gap-6">
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+              <div className="bg-white p-6 rounded-2xl border border-slate-100">
                 <h4 className="font-bold text-slate-900 mb-2">Salaried Individuals</h4>
                 <p className="text-sm text-slate-600">Perfect for resident individuals with salary, pension, or interest income.</p>
                 <button className="mt-4 text-[#C15F3C] font-bold text-sm">Add to Cart</button>
               </div>
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+              <div className="bg-white p-6 rounded-2xl border border-slate-100">
                 <h4 className="font-bold text-slate-900 mb-2">Business & Professionals</h4>
                 <p className="text-sm text-slate-600">For shop owners, freelancers, and small business partners.</p>
                 <button className="mt-4 text-[#C15F3C] font-bold text-sm">Add to Cart</button>

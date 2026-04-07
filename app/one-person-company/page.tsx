@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import DoStartupPricing from '../components/DoStartupPricing';
+import PricingCards, { PricingPlan } from '../components/PricingCards';
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Startup/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
@@ -53,8 +53,8 @@ export default function Home() {
     <>
       <Navbar />
       <Hero defaultEntity="OPC" />
-      <DoStartupPricing plans={opcPlans} />
       <DynamicTabContent category="Proprietorship" />
+      <PricingCards plans={opcPlans} />
       <Faq />
       <Popularsearches />
       <Footer />

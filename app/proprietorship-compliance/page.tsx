@@ -116,7 +116,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50">
+ <div className="min-h-screen bg-white">
  <Navbar />
 
  {/* Breadcrumb */}
@@ -167,7 +167,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  onChange={(e) => setGstin(e.target.value)}
  className="w-full sm:w-[360px] bg-white/10 border border-white/20 rounded-md px-4 py-3 placeholder:text-white/60 text-white outline-none focus:ring-2 focus:ring-white"
  />
- <button className="px-6 py-3 bg-white text-[#C15F3C] rounded-md font-medium hover:bg-gray-100 transition-colors shadow-lg">
+ <button className="px-6 py-3 bg-white text-[#C15F3C] rounded-md font-medium hover:bg-white transition-colors shadow-lg">
  Get Accountant
  </button>
  </form>
@@ -654,7 +654,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  <div className="bg-white rounded-xl max-w-md w-full p-6">
  <div className="flex justify-between items-center mb-4">
  <h3 className="text-xl font-bold text-gray-900">Complete Payment</h3>
- <button onClick={() => setShowPaymentModal(false)} className="hover:bg-gray-100 p-1 rounded-full transition-colors">
+ <button onClick={() => setShowPaymentModal(false)} className="hover:bg-white p-1 rounded-full transition-colors">
  <X className="w-6 h-6 text-gray-500" />
  </button>
  </div>

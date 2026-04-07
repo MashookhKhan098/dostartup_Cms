@@ -89,12 +89,12 @@ export default function DoStartupCA() {
  };
 
  return (
- <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+ <div className="min-h-screen bg-white font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
+ <div className="bg-white py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / Compliance Services /{" "}
  <span className="text-amber-700 font-medium">DoStartup CA</span>

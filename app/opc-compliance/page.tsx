@@ -109,7 +109,7 @@ const Footer: React.FC = () => {
  <div
  className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
  style={{
- backgroundColor: "#f1f5f9",
+ backgroundColor: "#ffffff",
  backgroundImage:
  "radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%), radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%)",
  backgroundSize: "cover, cover",
@@ -641,7 +641,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Overview Section */}
- <section className="py-6 bg-[#f8fafc]">
+ <section className="py-6 bg-white">
  <div className="max-w-[1200px] mx-auto px-4">
  <h2 className="text-3xl font-bold text-amber-800 mb-6">
  One Person Company (OPC) Compliance Overview
@@ -766,7 +766,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Documents Required */}
- <section className="py-6 bg-[#f8fafc]">
+ <section className="py-6 bg-white">
  <div className="max-w-[1200px] mx-auto px-4 grid md:grid-cols-2 gap-10">
  <div>
  <h3 className="text-2xl font-bold text-amber-800 mb-4">
@@ -868,7 +868,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  ].map((step, i) => (
  <div
  key={i}
- className="bg-[#f8fafc] border border-slate-200 rounded-xl p-6 text-center shadow hover:border-amber-200 transition-colors"
+ className="bg-white border border-slate-200 rounded-xl p-6 text-center shadow hover:border-amber-200 transition-colors"
  >
  <h4 className="font-semibold text-amber-800 mb-2">
  Step {i + 1}
@@ -881,7 +881,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Why Choose Us */}
- <section className="py-6 bg-[#f8fafc]">
+ <section className="py-6 bg-white">
  <div className="max-w-[1200px] mx-auto px-4 text-center">
  <h2 className="text-3xl font-bold text-amber-800 mb-6">
  Why 3,50,000+ Businesses Choose Us
@@ -1027,7 +1027,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Popular Searches */}
- <section className="py-5 bg-[#f8fafc]">
+ <section className="py-5 bg-white">
  <div className="max-w-[1200px] mx-auto px-4">
  <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
  <h3 className="text-lg font-bold text-amber-800 mb-4">
@@ -1074,7 +1074,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  "Helvetica Neue", Arial;
  background: linear-gradient(
  135deg,
- #f5f7ff 0%,
+ #ffffff 0%,
  #fdf6ff 40%,
  #f3fbff 100%
  );

@@ -1,4 +1,6 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
+
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -150,7 +152,7 @@ const Footer: React.FC = () => {
  <div
  className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
  style={{
- backgroundColor: "#f1f5f9",
+ backgroundColor: "#ffffff",
  backgroundImage: `radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%),
  radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%),
  url("${bgImagePath}")`,
@@ -954,11 +956,12 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </div>
  ))}
 
- <div className="mt-4 pt-4">
- <button className="text-xs px-3 py-2 border-2 border-amber-600 rounded bg-white text-amber-700 hover:bg-amber-50 transition-colors font-medium">
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+  <button className="text-xs px-3 py-2 border-2 border-amber-600 rounded bg-white text-amber-700 hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
  </div>
  </section>
  </section>
@@ -1110,7 +1113,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
             "Helvetica Neue", Arial;
           background: linear-gradient(
             135deg,
-            #f5f7ff 0%,
+            #ffffff 0%,
             #fdf6ff 40%,
             #f3fbff 100%
           );

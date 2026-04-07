@@ -6,9 +6,40 @@ import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
-import DoStartupPricing from '../components/DoStartupPricing';
+import PricingCards, { PricingPlan } from '../components/PricingCards';
 import { supabase } from '../../lib/supabase';
 import { useRouter } from 'next/navigation';
+
+const gstPlans: PricingPlan[] = [
+  {
+    title: "GST Registration + Monthly Filing", price: "1,499",
+    description: "Get complete GST registration and monthly filing services, ensuring compliance and smooth processing of GSTR-1 and GSTR-3B.",
+    features: [
+      { text: "GST Registration Support" },
+      { text: "GST Certificate" },
+      { text: "Dedicated Accountant" },
+      { text: "GSTR-1 Monthly Filing" },
+      { text: "GSTR-3B Monthly Filing" },
+      { text: "Invoicing Software Access" },
+      { text: "Payment Gateway Setup" },
+      { text: "Priority Phone Support" }
+    ]
+  },
+  {
+    title: "1 Year GST Filing + ITR", price: "19,899", isPopular: true,
+    description: "IndiaFilings seamlessly provides customized accounting services for businesses ensuring compliance and tax filing.",
+    features: [
+      { text: "Dedicated Accountant" },
+      { text: "GSTR-1 Filing - 12 Months" },
+      { text: "GSTR-3B Filing - 12 Months" },
+      { text: "Income Tax Filing" },
+      { text: "Financial Statements" },
+      { text: "Balance Sheet Preparation" },
+      { text: "LEDGERS GST Software Access - 12 Months" },
+      { text: "Audit Support (Basic)" }
+    ]
+  }
+];
 
 export default function Home() {
   const router = useRouter();
@@ -179,8 +210,8 @@ export default function Home() {
     <>
       <Navbar />
       <Hero {...heroProps} />
-      <DoStartupPricing plans={gstPlans} />
       <DynamicTabContent category="GST" />
+      <PricingCards plans={gstPlans} />
       <Faq category="GST" />
       <Popularsearches />
       <Footer />

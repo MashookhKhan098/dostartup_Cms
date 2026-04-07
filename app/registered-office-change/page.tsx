@@ -1,4 +1,6 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
+
 
 import React, { useState } from "react";
 import {
@@ -110,12 +112,12 @@ export default function RegisteredOfficeChange() {
  };
 
  return (
- <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+ <div className="min-h-screen bg-white font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-gray-50 py-5">
+ <div className="bg-white py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / MCA Services /{" "}
  <span className="text-amber-700 font-medium">
@@ -238,7 +240,7 @@ export default function RegisteredOfficeChange() {
  <input
  type="text"
  placeholder="Filled Automatically"
- className="w-full px-4 py-2 border border-gray-200 rounded bg-gray-50 text-gray-600"
+ className="w-full px-4 py-2 border border-gray-200 rounded bg-white text-gray-600"
  />
  <p className="text-xs text-gray-400 mt-1">
  This field will auto-populate after entering company
@@ -252,7 +254,7 @@ export default function RegisteredOfficeChange() {
  </label>
  <textarea
  rows={3}
- className="w-full px-4 py-2 border border-gray-200 rounded resize-none bg-gray-50 text-gray-600"
+ className="w-full px-4 py-2 border border-gray-200 rounded resize-none bg-white text-gray-600"
  placeholder="Filled Automatically"
  />
  </div>
@@ -441,11 +443,12 @@ export default function RegisteredOfficeChange() {
  )}
  </div>
  ))}
- <div className="py-4">
- <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded text-sm hover:bg-amber-50 transition-colors font-medium">
+ <div className="py-4 flex gap-3 items-center flex-wrap">
+  <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
  </div>
  </div>
  </div>

@@ -104,7 +104,7 @@ export default function ComplianceHRPayrollPage() {
                      { title: "Dedicated support, flexible cost", desc: "Get an experienced accountant to manage your ledgers, vendor & customer reconciliations, bank reconciliations, and monthly close with precision and reliability.", icon: Briefcase },
                      { title: "Accurate & timely compliance", desc: "End-to-end Director Management for Pvt Ltd Companies & LLPs including filings and DIN allotment.", icon: UserCheck }
                    ].map((feature, i) => (
-                     <div key={i} className="p-8 border border-gray-100 rounded-3xl bg-gray-50/50 hover:bg-white hover:shadow-xl hover:shadow-orange-900/5 transition-all">
+                     <div key={i} className="p-8 border border-gray-100 rounded-3xl bg-white/50 hover:bg-white hover:shadow-xl hover:shadow-orange-900/5 transition-all">
                         <feature.icon className="w-8 h-8 text-[#C15F3C] mb-4" />
                         <h3 className="text-xl font-bold text-[#2F2E2B] mb-3">{feature.title}</h3>
                         <p className="text-[#6F6B63] text-[15px] leading-relaxed">{feature.desc}</p>
@@ -192,7 +192,7 @@ export default function ComplianceHRPayrollPage() {
       </section>
 
       {/* PRICING SECTION - MATCHING PREVIOUS STANDARDS */}
-      <section className="bg-gray-50 py-24 px-6 border-t border-gray-100">
+      <section className="bg-white py-24 px-6 border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[#2F2E2B] mb-4">Simple, Transparent <span className="text-[#896BAE] relative pb-1">Pricing<span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#896BAE]"></span></span></h2>

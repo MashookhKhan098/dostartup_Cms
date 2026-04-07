@@ -783,7 +783,7 @@ export default function TaxCalculatorPage() {
  <thead><tr className="bg-orange-500 text-white"><th className="px-3 py-2 text-left rounded-tl-lg">Income Range</th><th className="px-3 py-2 text-right rounded-tr-lg">Rate</th></tr></thead>
  <tbody>
  {[["Up to ₹3,00,000", "NIL", true], ["₹3L – ₹7L", "5%", false], ["₹7L – ₹10L", "10%", false], ["₹10L – ₹12L", "15%", false], ["₹12L – ₹15L", "20%", false], ["Above ₹15L", "30%", false]].map(([r, t, nil], i) => (
- <tr key={String(r)} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+ <tr key={String(r)} className={i % 2 === 0 ? "bg-white" : "bg-white"}>
  <td className="px-3 py-2 text-gray-700">{r}</td>
  <td className={`px-3 py-2 text-right font-bold ${nil ? "text-green-600" : "text-black"}`}>{t}</td>
  </tr>
@@ -803,7 +803,7 @@ export default function TaxCalculatorPage() {
  <thead><tr className="bg-gray-700 text-white"><th className="px-3 py-2 text-left rounded-tl-lg">Income Range</th><th className="px-3 py-2 text-center">Below 60</th><th className="px-3 py-2 text-right rounded-tr-lg">Senior</th></tr></thead>
  <tbody>
  {[["Up to ₹2.5L", "NIL", "NIL", true], ["₹2.5L – ₹5L", "5%", "5%", false], ["₹5L – ₹10L", "20%", "20%", false], ["Above ₹10L", "30%", "30%", false]].map(([r, b, s, nil], i) => (
- <tr key={String(r)} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+ <tr key={String(r)} className={i % 2 === 0 ? "bg-white" : "bg-white"}>
  <td className="px-3 py-2 text-gray-700">{r}</td>
  <td className={`px-3 py-2 text-center font-bold ${nil ? "text-green-600" : "text-black"}`}>{b}</td>
  <td className={`px-3 py-2 text-right font-bold ${nil ? "text-green-600" : "text-black"}`}>{s}</td>

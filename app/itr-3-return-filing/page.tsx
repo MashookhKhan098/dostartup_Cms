@@ -455,7 +455,7 @@ export default function ITR3Page() {
  </span>
  <span className="font-bold text-orange-500">78% Complete</span>
  </div>
- <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+ <div className="h-2 bg-white rounded-full overflow-hidden">
  <div className="h-full w-[78%] bg-orange-500 rounded-full" />
  </div>
  <p className="text-[10px] text-gray-400 mt-2">Verifying expenses & depreciation • 2 steps remaining</p>
@@ -573,7 +573,7 @@ export default function ITR3Page() {
  </thead>
  <tbody>
  {INCOME_TYPES_TABLE.map((row, i) => (
- <tr key={row.type} className={`border-b border-gray-100 hover:bg-orange-50 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+ <tr key={row.type} className={`border-b border-gray-100 hover:bg-orange-50 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}>
  <td className="px-3 py-2.5 font-semibold text-black">{row.type}</td>
  <td className="px-3 py-2.5 text-center font-bold text-orange-500">{row.itr}</td>
  <td className="px-3 py-2.5 text-center text-gray-600">{row.turnoverLimit}</td>
@@ -637,7 +637,7 @@ export default function ITR3Page() {
  </div>
  <table className="w-full text-sm">
  <thead>
- <tr className="bg-gray-50">
+ <tr className="bg-white">
  <th className="px-3 py-3 text-left font-bold text-xs text-black w-[28%]">Feature</th>
  <th className="px-2 py-3 text-center font-bold text-xs text-orange-500">DoStartup</th>
  <th className="px-2 py-3 text-center font-bold text-xs text-gray-500">ClearTax</th>
@@ -656,7 +656,7 @@ export default function ITR3Page() {
  { feature: "Tax Audit (3CA/3CD)", d: true, c: true, t: true, q: "~", h: true, ts: true },
  { feature: "Price (ITR-3)", d: "₹1,499", c: "₹1,999", t: "₹1,799", q: "₹1,499", h: "₹2,499", ts: "₹1,299" },
  ].map((row, i) => (
- <tr key={row.feature} className={`border-b border-gray-100 hover:bg-orange-50 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+ <tr key={row.feature} className={`border-b border-gray-100 hover:bg-orange-50 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}>
  <td className="px-3 py-3 font-medium text-black text-xs">{row.feature}</td>
  <td className="px-2 py-3 text-center"><StatusCell val={row.d} /></td>
  <td className="px-2 py-3 text-center"><StatusCell val={row.c} /></td>
@@ -835,7 +835,7 @@ export default function ITR3Page() {
  </div>
 
  {/* RESULTS */}
- <div className="p-6 bg-gray-50">
+ <div className="p-6 bg-white">
  <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
  <BarChart3 size={16} className="text-orange-500" />
  Your Tax Breakdown

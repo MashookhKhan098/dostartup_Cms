@@ -72,7 +72,7 @@ export default function AddQuestionModal({ category = "general" }: { category?: 
       {isOpen && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
               <h3 className="text-lg font-bold text-slate-900">
                 Submit a Question
               </h3>

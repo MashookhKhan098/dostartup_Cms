@@ -66,11 +66,11 @@ export default function LLPCompliancePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f4f6fa] text-slate-800 font-sans">
+    <div className="min-h-screen bg-[#ffffff] text-slate-800">
       <Navbar />
 
       {/* Breadcrumb */}
-      <div className="bg-gradient-to-r from-white to-slate-50 py-3 text-slate-800 border-b border-slate-100 font-bold italic">
+      <div className="bg-gradient-to-r from-white to-slate-50 py-3 text-slate-800 border-b border-slate-100 font-bold">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 text-sm text-gray-500">
           Home / MCA Services / <span className="text-amber-700 font-medium">LLP Compliance</span>
         </div>
@@ -88,8 +88,8 @@ export default function LLPCompliancePage() {
              <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
                <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
                 <div className="bg-[#9e4a2d] p-6 text-center">
-                  <h2 className="text-white text-xl font-bold uppercase tracking-tight">LLP COMPLIANCE</h2>
-                  <div className="mt-2 text-sm text-amber-100 uppercase font-bold italic">Dedicated compliance team</div>
+                  <h2 className="text-white text-xl font-bold uppercase">LLP COMPLIANCE</h2>
+                  <div className="mt-2 text-sm text-amber-100 uppercase font-bold">Dedicated compliance team</div>
                 </div>
                 <div className="bg-[rgb(243,246,249)] p-8 flex justify-center items-center flex-1">
                    <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10 scale-110">
@@ -98,7 +98,7 @@ export default function LLPCompliancePage() {
                    </div>
                 </div>
               </div>
-              <ul className="mt-4 text-[13px] space-y-2 text-gray-600 font-bold italic px-2 pb-2">
+              <ul className="mt-4 text-[13px] space-y-2 text-gray-600 font-bold px-2 pb-2">
                 {["Form 8 & 11 Filings", "Income Tax Filing", "Accounting & Bookkeeping"].map(s => (
                   <li key={s} className="hover:text-amber-700 transition-colors flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-amber-600/30 rounded-full" /> {s}
@@ -114,17 +114,17 @@ export default function LLPCompliancePage() {
                     <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA & TAX</span>
                </div>
                <h1 className="text-2xl font-bold text-slate-900 mb-1 leading-tight">Simple, end-to-end LLP bookkeeping and compliance</h1>
-               <p className="text-[14px] text-slate-500 leading-relaxed mb-6 font-bold italic">
+               <p className="text-[14px] text-slate-500 leading-relaxed mb-6 font-bold">
                  Stay on top of all ROC and Income Tax deadlines for your Limited Liability Partnership with LEDGERS platform and a dedicated compliance team.
                </p>
 
                <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto">
                   <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Help</div>
                   <ul className="space-y-3 mt-1">
-                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold">
                       <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Pick the right plan for your LLP
                     </li>
-                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold italic">
+                    <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold">
                       <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Avoid penalties, delays and strike-off risk
                     </li>
                   </ul>
@@ -140,15 +140,15 @@ export default function LLPCompliancePage() {
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="group">
                    <h3 className="text-sm font-bold text-[#9e4a2d] mb-3 uppercase tracking-widest border-b border-amber-100 pb-2">Dedicated team</h3>
-                   <p className="text-[13px] text-slate-500 font-bold italic leading-relaxed">Work with professionals who understand LLP structures, partner obligations and ROC rules so that nothing is missed and partners can focus on running the business.</p>
+                   <p className="text-[13px] text-slate-500 font-bold leading-relaxed">Work with professionals who understand LLP structures, partner obligations and ROC rules so that nothing is missed and partners can focus on running the business.</p>
                 </div>
                 <div className="group">
                    <h3 className="text-sm font-bold text-[#9e4a2d] mb-3 uppercase tracking-widest border-b border-amber-100 pb-2">On-time Filings</h3>
-                   <p className="text-[13px] text-slate-500 font-bold italic leading-relaxed">Automated reminders and a clear compliance calendar keep Form 8, Form 11 and Income Tax filings on schedule, avoiding penalties and late fees.</p>
+                   <p className="text-[13px] text-slate-500 font-bold leading-relaxed">Automated reminders and a clear compliance calendar keep Form 8, Form 11 and Income Tax filings on schedule, avoiding penalties and late fees.</p>
                 </div>
                 <div className="group">
                    <h3 className="text-sm font-bold text-[#9e4a2d] mb-3 uppercase tracking-widest border-b border-amber-100 pb-2">Powered by LEDGERS</h3>
-                   <p className="text-[13px] text-slate-500 font-bold italic leading-relaxed">Use LEDGERS for real-time bookkeeping, reconciliations, document storage and partner reports, giving complete visibility into your LLP finances.</p>
+                   <p className="text-[13px] text-slate-500 font-bold leading-relaxed">Use LEDGERS for real-time bookkeeping, reconciliations, document storage and partner reports, giving complete visibility into your LLP finances.</p>
                 </div>
              </div>
 
@@ -163,7 +163,7 @@ export default function LLPCompliancePage() {
            <div className="sticky top-28 space-y-6">
               <SidebarCart />
               
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold italic">
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
                 <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
                 <ul className="text-[13px] space-y-4 text-amber-700">
                   {["LLP Form 11 Guide", "LLP Form 8 Guide", "Drafting LLP Agreement", "Adding Partner in LLP"].map((item) => (
@@ -175,7 +175,7 @@ export default function LLPCompliancePage() {
                 </ul>
               </div>
 
-              <div className="bg-[#9e4a2d] p-6 rounded-2xl text-white shadow-xl text-center font-bold italic">
+              <div className="bg-[#9e4a2d] p-6 rounded-2xl text-white shadow-xl text-center font-bold">
                  <div className="text-sm font-bold uppercase tracking-widest mb-2">Need Help?</div>
                  <p className="text-xs opacity-90 leading-tight">Our experts are here to help you stay compliant.</p>
               </div>
@@ -242,7 +242,7 @@ export default function LLPCompliancePage() {
         {/* FAQ Section */}
         <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
            <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's on LLP Compliance</h3>
-           <div className="space-y-4 font-bold italic">
+           <div className="space-y-4 font-bold">
              {[
                { q: "What are the common compliance requirements for LLPs?", a: "Minimum compliance includes filing Form 8 (Statement of Accounts) and Form 11 (Annual Return) with the ROC, along with filing Income Tax Returns." },
                { q: "What is Form 11?", a: "Form 11 is an Annual Return of an LLP containing partner details and contributions. It must be filed by 30th May every year." },

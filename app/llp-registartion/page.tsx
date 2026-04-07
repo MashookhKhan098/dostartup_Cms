@@ -53,8 +53,8 @@ export default function Page() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero defaultEntity="LLP" />
-      <DoStartupPricing plans={llpPlans} />
       <DynamicTabContent category="proprietorship" />
+      <DoStartupPricing plans={llpPlans} />
       <Faq category="proprietorship" />
       <Popularsearches />
       <Footer />

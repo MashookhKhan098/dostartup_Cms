@@ -34,7 +34,7 @@ export default function WriterDashboard() {
         <button 
           onClick={() => setActiveTab('create')}
           className={`px-6 py-2 rounded-lg font-bold transition-all ${
-            activeTab === 'create' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            activeTab === 'create' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-white text-gray-600 hover:bg-gray-200'
           }`}
         >
           Create Post
@@ -42,7 +42,7 @@ export default function WriterDashboard() {
         <button 
           onClick={() => setActiveTab('posts')}
           className={`px-6 py-2 rounded-lg font-bold transition-all ${
-            activeTab === 'posts' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            activeTab === 'posts' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-white text-gray-600 hover:bg-gray-200'
           }`}
         >
           My Posts
@@ -88,9 +88,9 @@ export default function WriterDashboard() {
               <div className="border border-gray-300 rounded-lg overflow-hidden">
                 {/* Toolbar */}
                 <div className="bg-white border-b border-gray-200 p-2 flex flex-wrap items-center gap-3">
-                  <button className="px-3 py-1 bg-gray-50 border border-gray-200 rounded hover:bg-gray-100 font-medium text-gray-700">Bold</button>
-                  <button className="px-3 py-1 bg-gray-50 border border-gray-200 rounded hover:bg-gray-100 font-medium text-gray-700">Italic</button>
-                  <button className="px-3 py-1 bg-gray-50 border border-gray-200 rounded hover:bg-gray-100 font-medium text-gray-700">Underline</button>
+                  <button className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-white font-medium text-gray-700">Bold</button>
+                  <button className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-white font-medium text-gray-700">Italic</button>
+                  <button className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-white font-medium text-gray-700">Underline</button>
                   <select className="border border-gray-200 rounded px-2 py-1 bg-white text-sm text-gray-700 outline-none">
                     <option>Default Font</option>
                     <option>Arial</option>

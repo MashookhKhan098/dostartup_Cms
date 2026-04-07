@@ -60,11 +60,11 @@ export default function BusinessPlanPage() {
   useOutsideClick(offerRef, () => setShowOfferDropdown(false));
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 antialiased">
+    <div className="min-h-screen bg-white text-gray-800 antialiased">
       <Navbar />
 
       {/* Breadcrumb */}
-      <div className="bg-gray-50 py-5">
+      <div className="bg-white py-5">
         <div className="max-w-7xl mx-auto px-6 text-sm text-gray-500">
           Home / MCA Services / <span className="text-[#C15F3C] font-medium">Business Plan</span>
         </div>
@@ -117,7 +117,7 @@ export default function BusinessPlanPage() {
                   <button
                     type="button"
                     onClick={() => setShowOfferDropdown(!showOfferDropdown)}
-                    className="w-full sm:w-80 flex items-center justify-between border-2 border-gray-100 rounded-xl px-5 py-3.5 bg-gray-50 text-left hover:border-[#C15F3C] transition-all focus:outline-none"
+                    className="w-full sm:w-80 flex items-center justify-between border-2 border-gray-100 rounded-xl px-5 py-3.5 bg-white text-left hover:border-[#C15F3C] transition-all focus:outline-none"
                   >
                     <span className="text-sm font-semibold text-slate-700">{selectedOffer}</span>
                     <ChevronDown className={`w-4 h-4 transition-transform ${showOfferDropdown ? 'rotate-180' : ''}`} />
@@ -182,7 +182,7 @@ export default function BusinessPlanPage() {
                         "Business Plan Template",
                         "Checklist for Starting a Business"
                       ].map((guide, i) => (
-                        <div key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl border border-gray-100 group cursor-pointer hover:border-[#C15F3C] transition-all">
+                        <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100 group cursor-pointer hover:border-[#C15F3C] transition-all">
                            <div className="w-2 h-2 rounded-full bg-[#C15F3C]/40 group-hover:bg-[#C15F3C]" />
                            <span className="text-sm font-bold text-slate-700 group-hover:text-[#C15F3C]">{guide}</span>
                         </div>
@@ -229,7 +229,7 @@ export default function BusinessPlanPage() {
               <h4 className="text-lg font-bold text-slate-900 mb-6">Popular Searches</h4>
               <div className="flex flex-wrap gap-2">
                 {POPULAR_SEARCHES.map((t) => (
-                  <span key={t} className="text-[10px] px-3 py-1.5 border border-gray-200 rounded-lg bg-gray-50 text-slate-600 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-all">
+                  <span key={t} className="text-[10px] px-3 py-1.5 border border-gray-200 rounded-lg bg-white text-slate-600 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-all">
                     {t}
                   </span>
                 ))}

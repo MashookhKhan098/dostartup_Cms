@@ -362,7 +362,7 @@ const Footer: React.FC = () => {
  <div
  className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
  style={{
- backgroundColor: "#f1f5f9",
+ backgroundColor: "#ffffff",
  backgroundImage: `radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%),
  radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%),
  url("${bgImagePath}")`,

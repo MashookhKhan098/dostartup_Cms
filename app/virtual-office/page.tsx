@@ -174,7 +174,7 @@ export default function Home() {
  </div>
  
  {/* Feature Cards Section */}
- <div className="py-6 px-4 bg-gray-50">
+ <div className="py-6 px-4 bg-white">
  <div className="max-w-7xl mx-auto">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  {features.map((feature, index) => (

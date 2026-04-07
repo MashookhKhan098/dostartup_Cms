@@ -670,7 +670,7 @@ export default function ITR5Page() {
                       75% Complete
                     </span>
                   </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-white rounded-full overflow-hidden">
                     <div className="h-full w-[75%] bg-[#C15F3C] rounded-full" />
                   </div>
                   <p className="text-[10px] text-gray-400 mt-2">
@@ -848,7 +848,7 @@ export default function ITR5Page() {
                     {ENTITY_TABLE.map((row, i) => (
                       <tr
                         key={row.entity}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
                       >
                         <td className="px-3 py-2.5 font-semibold text-black">
                           {row.entity}
@@ -943,7 +943,7 @@ export default function ITR5Page() {
                 </div>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-gray-50">
+                    <tr className="bg-white">
                       <th className="px-3 py-3 text-left font-bold text-xs text-black w-[28%]">
                         Feature
                       </th>
@@ -1026,7 +1026,7 @@ export default function ITR5Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
                       >
                         <td className="px-3 py-3 font-medium text-black text-xs">
                           {row.feature}
@@ -1328,7 +1328,7 @@ export default function ITR5Page() {
                 </div>
 
                 {/* RESULTS */}
-                <div className="p-6 bg-gray-50">
+                <div className="p-6 bg-white">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
                     <BarChart3 size={16} className="text-orange-500" />
                     Firm Tax Breakdown

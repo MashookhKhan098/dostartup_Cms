@@ -110,7 +110,7 @@ export default function DIR3KycPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-gray-50 text-gray-800 font-sans">
+ <div className="min-h-screen bg-white text-gray-800 font-sans">
  {/* Imported Navbar */}
  <Navbar />
 

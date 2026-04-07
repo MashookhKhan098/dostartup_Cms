@@ -754,7 +754,7 @@ export default function ITR4Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                        className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
                       >
                         <td className="px-3 py-3 text-xs">{row.feature}</td>
                         <td className="px-2 py-3 text-center">

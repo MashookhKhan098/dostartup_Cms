@@ -409,7 +409,7 @@ export default function CommencementInc20aPage() {
  {popularSearches.map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-2 border border-slate-200 rounded-full bg-slate-50 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-2 border border-slate-200 rounded-full bg-white hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -419,7 +419,7 @@ export default function CommencementInc20aPage() {
  </main>
 
  {/* Footer */}
- <footer className="bg-slate-100 mt-12">
+ <footer className="bg-white mt-12">
  <div className="max-w-7xl mx-auto px-6 py-5 grid grid-cols-1 md:grid-cols-3 gap-6">
  <div>
  <h5 className="font-semibold mb-4">Company</h5>

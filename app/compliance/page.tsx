@@ -12,11 +12,11 @@ const inter = Inter({
 });
 
 const COLORS = {
- bg: "#F4F6FA",
+ bg: "#ffffff",
  text: "#0F172A",
  border: "#DBDFE9",
- slate50: "#F8FAFC",
- slate100: "#F1F5F9",
+ slate50: "#ffffff",
+ slate100: "#ffffff",
  slate200: "#E2E8F0",
  slate300: "#CBD5E1",
  green: "#22C55E",
@@ -1053,7 +1053,7 @@ function ArticleAndSidebar() {
  <div className="mt-6 overflow-x-auto">
  <table className="w-full text-[14px] border-collapse">
  <thead>
- <tr className="bg-slate-50 text-slate-700">
+ <tr className="bg-white text-slate-700">
  <th
  className="text-left p-3 border-b"
  style={{ borderColor: "#E2E8F0" }}
@@ -1105,16 +1105,16 @@ function ArticleAndSidebar() {
  ],
  ["DPT-3: Return of Deposits", "By June 30th each year"],
  ].map(([a, b]) => (
- <tr key={a} className="odd:bg-white even:bg-slate-50">
+ <tr key={a} className="odd:bg-white even:bg-white">
  <td
  className="p-3 border-b"
- style={{ borderColor: "#F1F5F9" }}
+ style={{ borderColor: "#ffffff" }}
  >
  {a}
  </td>
  <td
  className="p-3 border-b"
- style={{ borderColor: "#F1F5F9" }}
+ style={{ borderColor: "#ffffff" }}
  >
  {b}
  </td>
@@ -1270,7 +1270,7 @@ function PopularSearches() {
  {tags.map((t) => (
  <span
  key={t}
- className="text-[12px] px-3 py-1 rounded-full border bg-slate-50"
+ className="text-[12px] px-3 py-1 rounded-full border bg-white"
  style={{ borderColor: "#E5E7EB" }}
  >
  {t}

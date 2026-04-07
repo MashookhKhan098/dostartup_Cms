@@ -11,7 +11,8 @@
 // <Navbar />
 // <Hero/>
 // <DynamicTabContent tabName="GST Registration" />
-// <Faq />
+// <Price/>
+      <Faq />
 // <Popularsearches />
 // <Footer />
 // </>
@@ -181,9 +182,9 @@ export default function Home() {
  <>
  <Navbar />
  <Hero {...heroProps} />
- <Price/>
  <DynamicTabContent category="GST" />
- <Faq />
+ <Price/>
+      <Faq />
  <Popularsearches />
  <Footer />
  </>

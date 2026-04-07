@@ -1,4 +1,6 @@
 "use client";
+import AddQuestionModal from "../components/AddQuestionModal";
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SidebarCart from "../components/SidebarCart";
@@ -253,7 +255,7 @@ export default function IncomeTaxPage() {
  className={`px-5 py-2 rounded-full text-sm font-semibold transition ${
  activeTab === t
  ? "bg-white text-[#C15F3C]"
- : "text-slate-700 hover:bg-slate-50"
+ : "text-slate-700 hover:bg-white"
  }`}
  >
  {t}
@@ -649,10 +651,13 @@ export default function IncomeTaxPage() {
  );
  })}
  </div>
- <button className="mt-3 border border-slate-200 rounded px-4 py-2 text-[13px]">
+ <div className="flex gap-3 items-center flex-wrap mt-4">
+  <button className="mt-3 border border-slate-200 rounded px-4 py-2 text-[13px]">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
+</div>
  </div>
 
  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 my-8">

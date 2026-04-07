@@ -43,7 +43,7 @@ export default function WindupCompanyPage() {
                 value={llpName}
                 onChange={(e) => setLlpName(e.target.value)}
               />
-              <button className="bg-white text-gray-900 px-8 py-3 rounded-full text-sm font-bold hover:bg-gray-100 transition-colors">
+              <button className="bg-white text-gray-900 px-8 py-3 rounded-full text-sm font-bold hover:bg-white transition-colors">
                 Windup
               </button>
             </div>

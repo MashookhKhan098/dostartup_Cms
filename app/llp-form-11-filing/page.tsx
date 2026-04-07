@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
  <div
  className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
  style={{
- backgroundColor: "#f1f5f9",
+ backgroundColor: "#ffffff",
  backgroundImage: `radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%), radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%), url("${bgImagePath}")`,
  backgroundSize: "cover, cover, 220%",
  backgroundRepeat: "no-repeat",
@@ -362,7 +362,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </label>
  <input
  type="text"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-gray-50 text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-white text-sm"
  placeholder="Enter LLPIN"
  />
  </div>
@@ -374,7 +374,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  <input
  type="text"
  placeholder="Filled Automatically"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded bg-gray-100 text-slate-500 text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded bg-white text-slate-500 text-sm"
  readOnly
  />
  <p className="text-xs text-slate-400 mt-1">
@@ -388,7 +388,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </label>
  <input
  type="text"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-gray-50 text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-white text-sm"
  placeholder="e.g. 2024-2025"
  />
  </div>
@@ -399,7 +399,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </label>
  <input
  type="email"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-gray-50 text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-white text-sm"
  placeholder="Enter email for contact"
  />
  </div>
@@ -537,11 +537,12 @@ export default function LLPForm11Filing(): React.ReactElement {
  )}
  </div>
  ))}
- <div className="py-4">
- <button className="px-4 py-2 border-2 border-amber-600 rounded text-sm text-amber-700 hover:bg-amber-50 transition-colors font-medium">
+ <div className="py-4 flex gap-3 items-center flex-wrap">
+  <button className="px-4 py-2 border-2 border-amber-600 rounded text-sm text-amber-700 hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
- </div>
+  <AddQuestionModal />
+</div>
  </div>
  </div>
  </div>
