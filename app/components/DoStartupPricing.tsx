@@ -96,7 +96,7 @@ const DoStartupPricing: React.FC<DoStartupPricingProps> = ({
                 className={`w-full py-4 rounded-xl font-bold transition-all ${
                   index === 0 
                   ? 'bg-[#C15F3C] text-white hover:bg-[#C15F3C]/90 shadow-lg shadow-[#C15F3C]/20' 
-                  : 'bg-white text-[#C15F3C] hover:bg-orange-50 border border-[#C15F3C]/20'
+                  : 'bg-[#F4F3EE] text-[#C15F3C] hover:bg-orange-50 border border-[#C15F3C]/20'
                 }`}
               >
                 {plan.buttonText || "Register Now"}

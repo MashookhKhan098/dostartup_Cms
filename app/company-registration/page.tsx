@@ -1,45 +1,49 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PricingCards, { PricingPlan } from '../components/PricingCards';
+import DoStartupPricing from '../components/DoStartupPricing';
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Startup/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
-const companyRegistrationPlans: PricingPlan[] = [
+const companyRegistrationPlans = [
   {
-    title: "Incorporation", price: "2,899",
-    description: "Register Your Company in Just 7-10 Days - Online & Hassle-Free! Fully managed incorporation with complete documentation support.",
+    title: "Basic",
+    price: "1,999",
+    description: "Ideal for first-time founders looking to register a Private Limited Company quickly.",
     features: [
-      { text: "Unlimited Name Approval Attempts" },
-      { text: "Company Incorporation" },
-      { text: "MOA & AOA Drafting" },
-      { text: "2 DINs for Directors" },
-      { text: "Authorized Capital with No Limit" },
-      { text: "Digital Signature Certificate" },
-      { text: "PAN & TAN Registration" },
-      { text: "Bank Account Opening Assistance" },
-      { text: "Custom Document Drafting" }
+      "MCA Name Approval",
+      "Company Incorporation (SPICe+)",
+      "MOA & AOA Drafting",
+      "PAN & TAN Registration",
+      "Certificate of Incorporation"
     ]
   },
   {
-    title: "Incorporation and Compliance", price: "19,899", isPopular: true,
-    description: "Register your company in just 7-10 days with complete incorporation, compliance & accounting support.",
+    title: "Standard",
+    price: "3,999",
+    isPopular: true,
+    description: "Most popular — includes GST registration, Udyam, and bank account opening assistance.",
     features: [
-      { text: "Unlimited Name Approval Attempts" },
-      { text: "Company Incorporation" },
-      { text: "MOA & AOA Drafting" },
-      { text: "2 DINs for Directors" },
-      { text: "Authorized Capital with No Limit" },
-      { text: "Digital Signature Certificate" },
-      { text: "PAN & TAN Registration" },
-      { text: "Bank Account Opening Assistance" },
-      { text: "Accounting & Bookkeeping" },
-      { text: "Annual ROC Filing" },
-      { text: "Income Tax Return Filing" },
-      { text: "GST Registration" },
-      { text: "Dedicated Compliance Manager" },
-      { text: "Year-long Support" }
+      "Everything in Basic",
+      "GST Registration",
+      "Udyam / MSME Registration",
+      "Bank Account Assistance",
+      "Digital Signature (2 Directors)",
+      "Commencement of Business (INC-20A)"
+    ]
+  },
+  {
+    title: "Premium",
+    price: "6,999",
+    description: "Full launch package with first-year compliance, CA support, and secretarial services.",
+    features: [
+      "Everything in Standard",
+      "First Year MCA Compliance",
+      "Director KYC (DIN eKYC)",
+      "Share Certificate Preparation",
+      "Compliance Calendar",
+      "Dedicated CA & CS Support"
     ]
   }
 ];
@@ -49,7 +53,7 @@ export default function Home() {
     <>
       <Navbar />
       <Hero defaultEntity="Company" />
-      <PricingCards plans={companyRegistrationPlans} />
+      <DoStartupPricing plans={companyRegistrationPlans} />
       <DynamicTabContent category="Company Registration" />
       <Faq category="Company Registration" blogCategory="company-registration" />
       <Popularsearches />

@@ -22,18 +22,6 @@ const PUBLIC_NOTICES = [
   "All FDI proposals must be submitted through the online portal only.",
 ];
 
-const MENU_ITEMS = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#" },
-  { label: "Comprehensive Corner", href: "#" },
-  { label: "Publications", href: "#" },
-  { label: "Related Link", href: "#" },
-  { label: "Statistics Corner", href: "#" },
-  { label: "Notice", href: "#" },
-  { label: "FAQ", href: "#" },
-  { label: "Services", href: "#" },
-];
-
 export default function FdiFilingRbiPage(): React.ReactElement {
   const [isPaused, setIsPaused] = React.useState(false);
   const [currentSlide, setCurrentSlide] = React.useState(0);
@@ -47,12 +35,8 @@ export default function FdiFilingRbiPage(): React.ReactElement {
     return () => clearInterval(interval);
   }, [currentSlide]);
 
-  // Public notices are now handled via CSS animation for continuous movement
-  // but we still keep isPaused logic for the animation-play-state
-
-
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-800">
+    <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
       {/* Navbar - Imported */}
       <Navbar />
 
@@ -63,27 +47,9 @@ export default function FdiFilingRbiPage(): React.ReactElement {
         </div>
       </div>
 
-      {/* Orange Menu Bar */}
-      <div className="w-full bg-orange-500">
-        <div className="max-w-7xl mx-auto px-6">
-          <ul className="flex flex-wrap items-center list-none m-0 p-0">
-            {MENU_ITEMS.map((item, index) => (
-              <li key={index} className="border-r border-orange-400 last:border-r-0">
-                <a 
-                  href={item.href}
-                  className="block px-4 py-2.5 text-xs font-medium text-gray-800 hover:bg-orange-600 hover:text-white transition-all"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
       {/* Red Public Notice Banner - Scrolling */}
       <div 
-        className="w-full bg-white border-b border-gray-300 px-6 py-1.5 overflow-hidden"
+        className="w-full bg-[#F4F3EE] border-b border-gray-300 px-6 py-1.5 overflow-hidden"
       >
         <div className={`text-red-600 font-semibold text-sm whitespace-nowrap transition-transform duration-1000 ${
           !isPaused ? "animate-marquee" : ""
@@ -111,7 +77,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
       `}</style>
 
       {/* FDI Slider Section - Standardized container width */}
-      <section className="bg-gray-50 py-4 lg:py-6">
+      <section className="bg-[#F4F3EE] py-4 lg:py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="relative rounded-2xl bg-gray-900 h-[400px] lg:h-[480px] overflow-hidden group shadow-xl">
             {/* Slider Container */}
@@ -145,7 +111,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className={`h-1.5 rounded-full transition-all ${
-                    index === currentSlide ? "bg-white w-8 shadow-[0_0_8px_rgba(255,255,255,0.4)]" : "bg-white/30 hover:bg-white/60 w-1.5"
+                    index === currentSlide ? "bg-[#F4F3EE] w-8 shadow-[0_0_8px_rgba(255,255,255,0.4)]" : "bg-[#F4F3EE]/30 hover:bg-[#F4F3EE]/60 w-1.5"
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -162,7 +128,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
           {/* Public Notice - Left Column */}
           <div className="lg:col-span-1">
             <div
-              className="bg-white border border-gray-200 rounded-lg p-6 h-full"
+              className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 h-full"
               onMouseEnter={() => setIsHoveringNotice(true)}
               onMouseLeave={() => setIsHoveringNotice(false)}
             >
@@ -209,7 +175,7 @@ export default function FdiFilingRbiPage(): React.ReactElement {
 
           {/* Welcome Content - Right Column (2 cols) */}
           <div className="lg:col-span-2">
-            <div className="bg-white border border-gray-200 rounded-lg p-8">
+            <div className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 Welcome to Foreign Investment Facilitation Portal (FIFP), INDIA
               </h2>

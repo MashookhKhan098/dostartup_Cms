@@ -32,7 +32,7 @@ export default function DoStartupFAQ({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <section className="bg-white py-12 px-4 sm:px-6 border-t border-gray-100" id="faq">
+    <section className="bg-[#F4F3EE] py-12 px-4 sm:px-6 border-t border-gray-100" id="faq">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
         
         {/* Left: FAQ (Main Content) */}
@@ -47,7 +47,7 @@ export default function DoStartupFAQ({
             {faqs.map((faq, i) => (
               <div 
                 key={i} 
-                className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-200 ${
+                className={`bg-[#F4F3EE] border-2 rounded-2xl overflow-hidden transition-all duration-200 ${
                   openFaq === i 
                     ? "border-[#C15F3C] shadow-lg shadow-orange-100/50" 
                     : "border-gray-100 hover:border-[#C15F3C]/50"

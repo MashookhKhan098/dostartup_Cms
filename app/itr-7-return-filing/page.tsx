@@ -110,7 +110,7 @@ export default function ITR7Page() {
       <main className="min-h-screen bg-[#F4F3EE] font-sans">
 
         {/* ═══════════ HERO ═══════════ */}
-        <section className="bg-white relative overflow-hidden pt-10 pb-20">
+        <section className="bg-[#F4F3EE] relative overflow-hidden pt-10 pb-20">
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -176,7 +176,7 @@ export default function ITR7Page() {
 
             {/* Right — Quick Info Card */}
             <div className="lg:pl-4">
-              <div className="bg-white border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 transition-all duration-300">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-[#C15F3C]" />
@@ -210,7 +210,7 @@ export default function ITR7Page() {
         </section>
 
         {/* ═══════════ ELIGIBILITY ═══════════ */}
-        <section className="bg-white py-16 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-16 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -225,7 +225,7 @@ export default function ITR7Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-[#C15F3C]" /> File ITR-7 If You Are:
                 </div>
@@ -238,7 +238,7 @@ export default function ITR7Page() {
                   ))}
                 </ul>
               </div>
-              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT ITR-7 — Use Other Forms:
                 </div>
@@ -270,7 +270,7 @@ export default function ITR7Page() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {WHY_FEATURES.map((f, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-[#C15F3C]/10 p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all">
+                <div key={i} className="bg-[#F4F3EE] rounded-2xl border border-[#C15F3C]/10 p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all">
                   <div className="w-12 h-12 rounded-xl bg-[#F4F3EE] flex items-center justify-center mb-4">
                     {f.icon}
                   </div>
@@ -283,7 +283,7 @@ export default function ITR7Page() {
         </section>
 
         {/* ═══════════ PROCESS ═══════════ */}
-        <section className="bg-white py-16 px-4 sm:px-6">
+        <section className="bg-[#F4F3EE] py-16 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-3">
@@ -307,7 +307,7 @@ export default function ITR7Page() {
         {/* ═══════════ INFORMATIONAL CONTENT ═══════════ */}
         <section className="bg-[#F4F3EE] py-12 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-white rounded-2xl border border-[#C15F3C]/10 p-8 mb-8">
+            <div className="bg-[#F4F3EE] rounded-2xl border border-[#C15F3C]/10 p-8 mb-8">
               <h2 className="text-2xl font-extrabold text-black mb-4">
                 ITR-7 Return Filing — Complete Guide
               </h2>
@@ -423,7 +423,7 @@ export default function ITR7Page() {
             </p>
             <Link
               href="#pricing"
-              className="inline-flex items-center gap-2 bg-white text-[#C15F3C] font-bold px-8 py-4 rounded-full text-base hover:bg-orange-50 transition-colors shadow-xl"
+              className="inline-flex items-center gap-2 bg-[#F4F3EE] text-[#C15F3C] font-bold px-8 py-4 rounded-full text-base hover:bg-orange-50 transition-colors shadow-xl"
             >
               <ShoppingBag size={18} />
               Start Filing ITR-7 Now

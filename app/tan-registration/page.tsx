@@ -167,7 +167,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  DoStartup / Business Registration /{" "}
  <span className="text-[#C15F3C] font-medium">TAN Registration</span>
@@ -179,7 +179,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  {/* Left column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top card */}
- <div className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card (square hero image) */}
  <div className="md:w-1/3 flex-shrink-0">
  <div className="rounded-lg overflow-hidden">
@@ -192,9 +192,9 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white px-4 py-6 flex justify-center">
+ <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
  {/* square image — remove rounded-full to keep square */}
- <div className="w-44 h-44 rounded-md overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4">
+ <div className="w-44 h-44 rounded-md overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
  <img
  src={ASSETS.hero}
  alt="tan registration hero"
@@ -239,10 +239,10 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  {/* Offer box */}
  <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-[#C15F3C] border border-[#eff8f0]">
+ <div className="absolute -top-3 left-6 bg-[#F4F3EE] px-2 rounded-md text-xs text-[#C15F3C] border border-[#eff8f0]">
  1 Exclusive Offers
  </div>
- <div className="border-2 border-dashed rounded-md border-[#f0dcd0] p-4 bg-white">
+ <div className="border-2 border-dashed rounded-md border-[#f0dcd0] p-4 bg-[#F4F3EE]">
  <div className="font-semibold text-slate-900">Basic</div>
  <ul className="mt-2 text-sm text-gray-600">
  <li className="flex items-center gap-2">
@@ -253,7 +253,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </li>
  </ul>
  <div className="mt-3">
- <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-1 rounded">
+ <button className="bg-[#F4F3EE] border border-[#C15F3C] text-[#C15F3C] px-3 py-1 rounded">
  ADD
  </button>
  </div>
@@ -291,7 +291,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
 
  {/* Article */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  TAN Registration
  </h1>
@@ -476,7 +476,7 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  {/* Documents + other registrations */}
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
- <div className="lg:col-span-7 bg-white rounded-lg shadow-sm p-6">
+ <div className="lg:col-span-7 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold mb-4">
  Key Documents for TAN Application
  </h3>
@@ -497,7 +497,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </ul>
  </div>
 
- <aside className="lg:col-span-5 bg-white rounded-lg shadow-sm p-6">
+ <aside className="lg:col-span-5 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold mb-4">Related Guides</h3>
  <ul className="space-y-3 text-sm text-[#C15F3C]">
  <li>
@@ -517,7 +517,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  FAQ's on TAN Registration
  </h3>
@@ -555,7 +555,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
 
  {/* Extra long content block — to expand file length and provide more reference text */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold">
  Compliance Calendar & Notes
  </h3>
@@ -610,7 +610,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  <aside className="lg:col-span-4 hidden lg:block">
  <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Offers and discounts</h4>
  <div className="p-3 border rounded-md flex items-center gap-3">
  <img
@@ -645,13 +645,13 @@ export default function TanRegistrationPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-white rounded-lg p-4">
+ <div className="bg-[#F4F3EE] rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 20).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+ className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
  >
  {t}
  </span>
@@ -660,7 +660,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
 
  {/* small content block to make sidebar informative */}
- <div className="bg-white rounded-lg shadow-sm p-4 mt-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mt-4">
  <h4 className="font-semibold mb-3">Contact Advisor</h4>
  <p className="text-sm text-gray-600">
  Need help with TAN? Our advisors can assist with end-to-end filing

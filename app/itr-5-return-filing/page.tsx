@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DoStartupPricing from "../components/DoStartupPricing";
+import AddQuestionModal from "../components/AddQuestionModal";
 import {
   CheckCircle,
   XCircle,
@@ -531,7 +532,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  HERO
  ════════════════════════════════════ */}
-        <section className="bg-white relative overflow-hidden pt-8 pb-20">
+        <section className="bg-[#F4F3EE] relative overflow-hidden pt-8 pb-20">
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -629,14 +630,14 @@ export default function ITR5Page() {
 
             {/* Right — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-white border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 hover:shadow-[#C15F3C]/20 transition-all duration-300">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 hover:shadow-[#C15F3C]/20 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-[#C15F3C]" />
                     🤖 AI ITR-5 Assistant — Live
                   </span>
                   <span className="bg-[#C15F3C] text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                    <span className="w-1.5 h-1.5 bg-[#F4F3EE] rounded-full animate-pulse" />
                     ACTIVE
                   </span>
                 </div>
@@ -670,7 +671,7 @@ export default function ITR5Page() {
                       75% Complete
                     </span>
                   </div>
-                  <div className="h-2 bg-white rounded-full overflow-hidden">
+                  <div className="h-2 bg-[#F4F3EE] rounded-full overflow-hidden">
                     <div className="h-full w-[75%] bg-[#C15F3C] rounded-full" />
                   </div>
                   <p className="text-[10px] text-gray-400 mt-2">
@@ -710,7 +711,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  TRUST BADGES
  ════════════════════════════════════ */}
-        <section className="bg-white border-y border-gray-100 py-6">
+        <section className="bg-[#F4F3EE] border-y border-gray-100 py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
               <span className="text-xs text-gray-400 font-semibold uppercase ">
@@ -734,7 +735,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  ELIGIBILITY
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -751,7 +752,7 @@ export default function ITR5Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-[#C15F3C]" /> File
                   ITR-5 If You Are:
@@ -777,7 +778,7 @@ export default function ITR5Page() {
                 </ul>
               </div>
 
-              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT
                   ITR-5 — Use Other Forms:
@@ -818,7 +819,7 @@ export default function ITR5Page() {
             </div>
 
             {/* Entity Tax Table */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div className="bg-[#F4F3EE] border border-gray-200 rounded-2xl p-6 shadow-sm">
               <h3 className="font-display font-bold text-black text-lg mb-4 flex items-center gap-2">
                 <BarChart3 size={20} className="text-[#C15F3C]" />
                 📊 ITR-5 Tax Rates by Entity Type — FY 2025-26
@@ -848,7 +849,7 @@ export default function ITR5Page() {
                     {ENTITY_TABLE.map((row, i) => (
                       <tr
                         key={row.entity}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
+                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
                       >
                         <td className="px-3 py-2.5 font-semibold text-black">
                           {row.entity}
@@ -891,7 +892,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  WHY DOSTARTUP + COMPARE
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="compare">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="compare">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -914,7 +915,7 @@ export default function ITR5Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-white border border-gray-200 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-gray-200 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
                   >
                     <div className="w-10 h-10 bg-[#F4F3EE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 group-hover:scale-110 transition-all">
                       {f.icon}
@@ -934,7 +935,7 @@ export default function ITR5Page() {
                 ))}
               </div>
 
-              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
+              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-[#F4F3EE]">
                 <div className="bg-[#C15F3C] px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">
                     <TrendingUp size={16} className="text-white" />
@@ -943,7 +944,7 @@ export default function ITR5Page() {
                 </div>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-white">
+                    <tr className="bg-[#F4F3EE]">
                       <th className="px-3 py-3 text-left font-bold text-xs text-black w-[28%]">
                         Feature
                       </th>
@@ -1026,7 +1027,7 @@ export default function ITR5Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
+                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
                       >
                         <td className="px-3 py-3 font-medium text-black text-xs">
                           {row.feature}
@@ -1065,7 +1066,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  AI FEATURES
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="features">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="features">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -1086,7 +1087,7 @@ export default function ITR5Page() {
               {AI_FEATURES.map((f) => (
                 <div
                   key={f.title}
-                  className="bg-white border-2 border-gray-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all duration-200 group"
+                  className="bg-[#F4F3EE] border-2 border-gray-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all duration-200 group"
                 >
                   <div className="text-[#C15F3C] mb-3 group-hover:scale-110 transform inline-block transition-transform">
                     {f.icon}
@@ -1109,7 +1110,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  PROCESS
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="process">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="process">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -1128,7 +1129,7 @@ export default function ITR5Page() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
                 {PROCESS_STEPS.map((s) => (
                   <div key={s.num} className="text-center group cursor-pointer">
-                    <div className="w-14 h-14 rounded-full bg-white border-2 border-[#C15F3C] flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-[#C15F3C] group-hover:scale-110 transition-all duration-200">
+                    <div className="w-14 h-14 rounded-full bg-[#F4F3EE] border-2 border-[#C15F3C] flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-[#C15F3C] group-hover:scale-110 transition-all duration-200">
                       {s.icon}
                     </div>
                     <div className="text-[#C15F3C] text-xs font-bold mb-1">
@@ -1155,7 +1156,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  CALCULATOR
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="calculator">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="calculator">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -1173,16 +1174,16 @@ export default function ITR5Page() {
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
+            <div className="bg-[#F4F3EE] rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
               <div className="bg-orange-500 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-[#F4F3EE]/20 rounded-xl flex items-center justify-center">
                     <Building2 size={20} className="text-white" />
                   </div>
                   <div>
                     <h3 className="font-display font-extrabold text-white text-lg flex items-center gap-2">
                       ITR-5 Firm Tax Calculator
-                      <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] bg-[#F4F3EE]/20 text-white px-2 py-0.5 rounded-full">
                         Live
                       </span>
                     </h3>
@@ -1194,11 +1195,11 @@ export default function ITR5Page() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={resetCalc}
-                    className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
+                    className="bg-[#F4F3EE]/20 hover:bg-[#F4F3EE]/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
                   >
                     <RefreshCw size={12} /> Reset
                   </button>
-                  <span className="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                  <span className="bg-[#F4F3EE]/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
                     <Zap size={12} /> AI Powered
                   </span>
                 </div>
@@ -1221,7 +1222,7 @@ export default function ITR5Page() {
                       onChange={(e) =>
                         upd("entityType", e.target.value as EntityType)
                       }
-                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-white"
+                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-[#F4F3EE]"
                     >
                       <option value="partnership">
                         Partnership Firm (30% flat tax)
@@ -1328,7 +1329,7 @@ export default function ITR5Page() {
                 </div>
 
                 {/* RESULTS */}
-                <div className="p-6 bg-white">
+                <div className="p-6 bg-[#F4F3EE]">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
                     <BarChart3 size={16} className="text-orange-500" />
                     Firm Tax Breakdown
@@ -1355,7 +1356,7 @@ export default function ITR5Page() {
                   </div>
 
                   {/* Income Breakdown */}
-                  <div className="bg-white rounded-2xl border-2 border-orange-500 p-4 mb-4">
+                  <div className="bg-[#F4F3EE] rounded-2xl border-2 border-orange-500 p-4 mb-4">
                     <p className="text-xs font-bold text-orange-500 mb-2 uppercase ">
                       🏢 Income Computation
                     </p>
@@ -1393,7 +1394,7 @@ export default function ITR5Page() {
                   </div>
 
                   {/* Tax Computation */}
-                  <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-4 shadow-sm">
+                  <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 mb-4 shadow-sm">
                     <ResultRow
                       label={
                         result.flatTaxRate > 0
@@ -1460,7 +1461,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  TESTIMONIALS
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -1477,7 +1478,7 @@ export default function ITR5Page() {
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={i}
-                  className="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="bg-[#F4F3EE] border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="flex gap-1 mb-3">
                     {[...Array(5)].map((_, j) => (
@@ -1565,7 +1566,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  FAQ
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="faq">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="faq">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -1578,11 +1579,11 @@ export default function ITR5Page() {
                 Everything about firm taxation, partner deductions, LLPs & AOPs.
               </p>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-3 mb-10">
               {FAQS.map((faq, i) => (
                 <div
                   key={i}
-                  className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-500 shadow-lg shadow-orange-100" : "border-gray-100 hover:border-orange-300"}`}
+                  className={`bg-[#F4F3EE] border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-500 shadow-lg shadow-orange-100" : "border-gray-100 hover:border-orange-300"}`}
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -1613,6 +1614,10 @@ export default function ITR5Page() {
                 </div>
               ))}
             </div>
+            <div className="flex justify-center mb-10">
+              <AddQuestionModal category="itr-5-return-filing" />
+            </div>
+
             <div className="mt-8 text-center">
               <p className="text-sm text-gray-500 mb-4">
                 Still have questions about ITR-5?
@@ -1631,7 +1636,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  FINAL CTA
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6 border-t border-gray-100">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6 border-t border-gray-100">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center gap-0.5 mb-4">
               {[...Array(5)].map((_, i) => (

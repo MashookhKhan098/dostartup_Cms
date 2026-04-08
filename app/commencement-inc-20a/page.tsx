@@ -65,7 +65,7 @@ export default function CommencementInc20aPage() {
  ];
 
  return (
- <div className="min-h-screen bg-white text-slate-800 antialiased">
+ <div className="min-h-screen bg-[#F4F3EE] text-slate-800 antialiased">
  {/* Imported Navbar */}
  <Navbar />
 
@@ -144,7 +144,7 @@ export default function CommencementInc20aPage() {
 
  {/* Features Cards */}
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-700">
  👥
@@ -163,7 +163,7 @@ export default function CommencementInc20aPage() {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-700">
  ✔
@@ -183,7 +183,7 @@ export default function CommencementInc20aPage() {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-700">
  ⚡
@@ -206,7 +206,7 @@ export default function CommencementInc20aPage() {
  {/* Main Content with Sidebar */}
  <div className="flex flex-col lg:flex-row gap-8 mt-10">
  {/* Left Content */}
- <article className="flex-1 bg-white p-8 rounded-xl border border-slate-100">
+ <article className="flex-1 bg-[#F4F3EE] p-8 rounded-xl border border-slate-100">
  <div className="mb-6">
  <div className="text-sm text-gray-500 mb-2">
  Home / MCA Services /{" "}
@@ -337,7 +337,7 @@ export default function CommencementInc20aPage() {
 
  {/* Right Sidebar */}
  <aside className="w-full lg:w-80">
- <div className="bg-white p-6 rounded-xl border border-slate-100 mb-6">
+ <div className="bg-[#F4F3EE] p-6 rounded-xl border border-slate-100 mb-6">
  <h4 className="font-semibold mb-3">Related Guides</h4>
  <ul className="text-sm space-y-2">
  <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
@@ -352,7 +352,7 @@ export default function CommencementInc20aPage() {
  </ul>
  </div>
 
- <div className="sticky top-28 bg-white p-4 rounded-xl border border-slate-100">
+ <div className="sticky top-28 bg-[#F4F3EE] p-4 rounded-xl border border-slate-100">
  <img
  src="/images/Screenshot (489).png"
  alt="ad"
@@ -363,7 +363,7 @@ export default function CommencementInc20aPage() {
  </div>
 
  {/* FAQ Section */}
- <section className="mt-10 bg-white p-6 rounded-xl border border-slate-100">
+ <section className="mt-10 bg-[#F4F3EE] p-6 rounded-xl border border-slate-100">
  <h3 className="text-xl font-semibold mb-4">
  FAQ's on Commencement of Business (COB)
  </h3>
@@ -394,7 +394,7 @@ export default function CommencementInc20aPage() {
 
  <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
 
- <button className="px-4 py-2 bg-white border-2 border-amber-600 text-amber-700 rounded-md hover:bg-amber-50 transition-colors font-medium">
+ <button className="px-4 py-2 bg-[#F4F3EE] border-2 border-amber-600 text-amber-700 rounded-md hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
  
@@ -403,13 +403,13 @@ export default function CommencementInc20aPage() {
  </section>
 
  {/* Popular Searches */}
- <section className="mt-10 bg-white p-6 rounded-xl border border-slate-100">
+ <section className="mt-10 bg-[#F4F3EE] p-6 rounded-xl border border-slate-100">
  <h4 className="font-semibold mb-4">Popular Searches</h4>
  <div className="flex flex-wrap gap-3">
  {popularSearches.map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-2 border border-slate-200 rounded-full bg-white hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-2 border border-slate-200 rounded-full bg-[#F4F3EE] hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -419,7 +419,7 @@ export default function CommencementInc20aPage() {
  </main>
 
  {/* Footer */}
- <footer className="bg-white mt-12">
+ <footer className="bg-[#F4F3EE] mt-12">
  <div className="max-w-7xl mx-auto px-6 py-5 grid grid-cols-1 md:grid-cols-3 gap-6">
  <div>
  <h5 className="font-semibold mb-4">Company</h5>
@@ -446,7 +446,7 @@ export default function CommencementInc20aPage() {
  </ul>
  </div>
  </div>
- <div className="bg-white border-t border-slate-200 py-6">
+ <div className="bg-[#F4F3EE] border-t border-slate-200 py-6">
  <div className="max-w-7xl mx-auto px-6 text-sm text-slate-500">
  Copyright © {new Date().getFullYear()} All rights reserved.
  </div>

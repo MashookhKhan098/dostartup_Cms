@@ -15,7 +15,7 @@
 // ];
 
 // return (
-// <section className="bg-white">
+// <section className="bg-[#F4F3EE]">
 // <div className="max-w-7xl mx-auto px-6 py-5">
 // {/* Heading */}
 // <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
@@ -28,7 +28,7 @@
 // </p>
 
 // {/* Partnership Banner */}
-// <div className="bg-white border rounded-xl shadow-sm p-4 flex justify-center">
+// <div className="bg-[#F4F3EE] border rounded-xl shadow-sm p-4 flex justify-center">
 // {/* Fixed‑size banner: 1220 × 277 px */}
 // <img
 // src="/images/dostartup-partnershiops.webp"

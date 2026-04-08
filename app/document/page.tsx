@@ -135,7 +135,7 @@ export default function DocumentsPage() {
   if (done) {
     return (
       <div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-10 text-center max-w-md">
+        <div className="bg-[#F4F3EE] rounded-2xl shadow-sm border border-[#E5E2DA] p-10 text-center max-w-md">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
@@ -171,7 +171,7 @@ export default function DocumentsPage() {
           {DOCUMENTS.map((doc) => (
             <div
               key={doc.key}
-              className="bg-white rounded-xl border border-[#E5E2DA] p-5"
+              className="bg-[#F4F3EE] rounded-xl border border-[#E5E2DA] p-5"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">

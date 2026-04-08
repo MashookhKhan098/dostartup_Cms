@@ -53,14 +53,14 @@ export default function ServicesSection() {
 
  if (loading) {
  return (
- <section style={{ background: "#F4F3EE" }} className="py-5">
+ <section style={{ background: "#ffffff" }} className="py-5">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
  {[...Array(6)].map((_, i) => (
  <div
  key={i}
  className="rounded-2xl animate-pulse"
- style={{ background: "#E5E2DA", height: "120px" }}
+ style={{ background: "#EBEBEB", height: "120px" }}
  />
  ))}
  </div>
@@ -160,7 +160,7 @@ export default function ServicesSection() {
  key={service._id || idx}
  className="service-card group flex flex-col items-center text-center cursor-pointer rounded-xl py-5 px-3 transition-all duration-200"
  style={{
- background: isHovered ? "#F4F3EE" : "transparent",
+ background: isHovered ? "#F5F5F5" : "transparent",
  border: isHovered ? "1px solid #E5E2DA" : "1px solid transparent",
  }}
  onMouseEnter={() => setHoveredIdx(idx)}
@@ -171,7 +171,7 @@ export default function ServicesSection() {
  <div
  className="service-icon-wrap w-12 h-12 rounded-full flex items-center justify-center mb-3"
  style={{
- background: isHovered ? "#fff" : "#F4F3EE",
+ background: isHovered ? "#F5F5F5" : "#F5F5F5",
  border: "1px solid #E5E2DA",
  color: "#C15F3C",
  }}

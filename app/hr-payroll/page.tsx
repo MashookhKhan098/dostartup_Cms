@@ -17,11 +17,11 @@ export default function ComplianceHRPayrollPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen font-sans">
+    <div className="bg-[#F4F3EE] min-h-screen font-sans">
       <Navbar />
 
       {/* Hero Section - Matching Live Site Wording */}
-      <section className="bg-white border-b border-gray-100 overflow-hidden relative">
+      <section className="bg-[#F4F3EE] border-b border-gray-100 overflow-hidden relative">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch min-h-[600px]">
            <div className="flex-1 py-16 px-6 lg:px-12 flex flex-col justify-center">
               <div className="mb-6">
@@ -58,7 +58,7 @@ export default function ComplianceHRPayrollPage() {
 
            {/* Form Side */}
            <div className="w-full lg:w-[480px] bg-[#FFF9F1] py-16 px-6 lg:px-12 flex flex-col justify-center border-l border-gray-100">
-             <div className="bg-white rounded-3xl shadow-2xl shadow-orange-900/5 relative overflow-hidden">
+             <div className="bg-[#F4F3EE] rounded-3xl shadow-2xl shadow-orange-900/5 relative overflow-hidden">
                 <div className="h-2 bg-[#C15F3C] w-full" />
                 <form className="p-8 space-y-6" onSubmit={handleApply}>
                    <div className="space-y-1">
@@ -67,7 +67,7 @@ export default function ComplianceHRPayrollPage() {
                          <select 
                            value={selectedPackage}
                            onChange={(e) => setSelectedPackage(e.target.value)}
-                           className="w-full border border-[#E5E2DA] rounded-xl px-4 py-3.5 text-sm text-[#2F2E2B] bg-white appearance-none focus:ring-2 focus:ring-[#C15F3C]/20 outline-none"
+                           className="w-full border border-[#E5E2DA] rounded-xl px-4 py-3.5 text-sm text-[#2F2E2B] bg-[#F4F3EE] appearance-none focus:ring-2 focus:ring-[#C15F3C]/20 outline-none"
                          >
                             <option>Payroll Management</option>
                             <option>Fractional HR</option>
@@ -90,7 +90,7 @@ export default function ComplianceHRPayrollPage() {
       </section>
 
       {/* Main Content Area - EXACT CONTENT FROM LIVE SITE */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[#F4F3EE]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16">
             
@@ -104,7 +104,7 @@ export default function ComplianceHRPayrollPage() {
                      { title: "Dedicated support, flexible cost", desc: "Get an experienced accountant to manage your ledgers, vendor & customer reconciliations, bank reconciliations, and monthly close with precision and reliability.", icon: Briefcase },
                      { title: "Accurate & timely compliance", desc: "End-to-end Director Management for Pvt Ltd Companies & LLPs including filings and DIN allotment.", icon: UserCheck }
                    ].map((feature, i) => (
-                     <div key={i} className="p-8 border border-gray-100 rounded-3xl bg-white/50 hover:bg-white hover:shadow-xl hover:shadow-orange-900/5 transition-all">
+                     <div key={i} className="p-8 border border-gray-100 rounded-3xl bg-[#F4F3EE]/50 hover:bg-[#F4F3EE] hover:shadow-xl hover:shadow-orange-900/5 transition-all">
                         <feature.icon className="w-8 h-8 text-[#C15F3C] mb-4" />
                         <h3 className="text-xl font-bold text-[#2F2E2B] mb-3">{feature.title}</h3>
                         <p className="text-[#6F6B63] text-[15px] leading-relaxed">{feature.desc}</p>
@@ -167,7 +167,7 @@ export default function ComplianceHRPayrollPage() {
             <div className="lg:w-[400px] flex flex-col gap-10">
               <SidebarCart />
               
-              <div className="bg-white rounded-3xl border border-[#E5E2DA] p-10 shadow-sm relative overflow-hidden group">
+              <div className="bg-[#F4F3EE] rounded-3xl border border-[#E5E2DA] p-10 shadow-sm relative overflow-hidden group">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
                  <div className="relative">
                     <h4 className="text-lg font-bold text-[#2F2E2B] mb-8">HR Compliance Guides</h4>
@@ -192,7 +192,7 @@ export default function ComplianceHRPayrollPage() {
       </section>
 
       {/* PRICING SECTION - MATCHING PREVIOUS STANDARDS */}
-      <section className="bg-white py-24 px-6 border-t border-gray-100">
+      <section className="bg-[#F4F3EE] py-24 px-6 border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[#2F2E2B] mb-4">Simple, Transparent <span className="text-[#896BAE] relative pb-1">Pricing<span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#896BAE]"></span></span></h2>
@@ -238,7 +238,7 @@ export default function ComplianceHRPayrollPage() {
                 ]
               }
             ].map((card, i) => (
-              <div key={i} className="bg-white border border-[#E5E2DA] rounded-[40px] p-10 flex flex-col shadow-lg shadow-orange-900/5 hover:-translate-y-2 transition-all">
+              <div key={i} className="bg-[#F4F3EE] border border-[#E5E2DA] rounded-[40px] p-10 flex flex-col shadow-lg shadow-orange-900/5 hover:-translate-y-2 transition-all">
                 <h3 className="text-2xl font-bold text-[#2F2E2B] mb-4 leading-tight">{card.title}</h3>
                 <p className="text-sm text-[#6F6B63] mb-10 leading-relaxed">{card.desc}</p>
                 <div className="space-y-4 mb-12 flex-grow">

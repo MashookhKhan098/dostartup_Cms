@@ -101,7 +101,7 @@ export default function PopularSearches() {
  <div className="flex flex-wrap gap-2.5">
  {searches.slice(0, 24).map((item, index) => (
  <Link key={index} href={item.link}>
- <span className="group relative inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F4F3EE] hover:bg-white text-[#C15F3C] text-xs font-medium rounded-xl cursor-pointer transition-all duration-200 border border-[#E5E2DA] hover:border-[#C15F3C] hover:shadow-sm hover:-translate-y-0.5">
+ <span className="group relative inline-flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-white text-[#C15F3C] text-xs font-medium rounded-xl cursor-pointer transition-all duration-200 border border-[#E5E2DA] hover:border-[#C15F3C] hover:shadow-sm hover:-translate-y-0.5">
  <span className="w-1 h-1 rounded-full bg-[#C15F3C] opacity-60 group-hover:opacity-100"></span>
  {item.name}
  </span>
@@ -133,7 +133,7 @@ export default function PopularSearches() {
  <div className="flex flex-wrap gap-2.5">
  {searches.slice(24).map((item, index) => (
  <Link key={index} href={item.link}>
- <span className="group relative inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F4F3EE] hover:bg-white text-[#C15F3C] text-xs font-medium rounded-xl cursor-pointer transition-all duration-200 border border-[#E5E2DA] hover:border-[#C15F3C] hover:shadow-sm hover:-translate-y-0.5">
+ <span className="group relative inline-flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-white text-[#C15F3C] text-xs font-medium rounded-xl cursor-pointer transition-all duration-200 border border-[#E5E2DA] hover:border-[#C15F3C] hover:shadow-sm hover:-translate-y-0.5">
  <span className="w-1 h-1 rounded-full bg-[#C15F3C] opacity-60 group-hover:opacity-100"></span>
  {item.name}
  </span>
@@ -145,7 +145,7 @@ export default function PopularSearches() {
  </div>
 
  {/* Footer - Removed View All Button */}
- <div className="px-6 py-4 bg-gradient-to-r from-[#F4F3EE] to-white border-t border-[#E5E2DA]">
+ <div className="px-6 py-4 bg-white border-t border-[#E5E2DA]">
  <div className="flex items-center justify-center gap-2 text-xs text-[#6F6B63]">
  <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

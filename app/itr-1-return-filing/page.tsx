@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DoStartupPricing from "../components/DoStartupPricing";
+import AddQuestionModal from "../components/AddQuestionModal";
 import {
   CheckCircle,
   XCircle,
@@ -351,7 +352,7 @@ function NumInput({
           min={0}
           value={value}
           onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
-          className="w-full pl-7 pr-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-white"
+          className="w-full pl-7 pr-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-[#F4F3EE]"
         />
       </div>
     </div>
@@ -491,7 +492,7 @@ export default function ITR1Page() {
                 </a>
                 <a
                   href="#calculator"
-                  className="border border-white/20 hover:border-white/50 text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-white/5"
+                  className="border border-white/20 hover:border-white/50 text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-[#F4F3EE]/5"
                 >
                   Try Tax Calculator →
                 </a>
@@ -514,7 +515,7 @@ export default function ITR1Page() {
 
             {/* Right — AI card */}
             <div className="lg:pl-4">
-              <div className="bg-white/6 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
+              <div className="bg-[#F4F3EE]/6 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-white text-sm">
                     🤖 AI Tax Assistant — Live
@@ -543,12 +544,12 @@ export default function ITR1Page() {
                     </div>
                   </div>
                 ))}
-                <div className="mt-4 bg-white/8 rounded-xl p-4">
+                <div className="mt-4 bg-[#F4F3EE]/8 rounded-xl p-4">
                   <div className="flex justify-between text-xs text-slate-400 mb-2">
                     <span>Filing Progress</span>
                     <span className="font-bold text-[#C15F3C]">73%</span>
                   </div>
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-2 bg-[#F4F3EE]/10 rounded-full overflow-hidden">
                     <div className="h-full w-[73%] bg-gradient-to-r from-[#C15F3C] to-[#C15F3C]/60 rounded-full" />
                   </div>
                 </div>
@@ -560,7 +561,7 @@ export default function ITR1Page() {
         {/* ══════════════════════════════════════
         WHO CAN FILE + ELIGIBILITY
         ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -647,7 +648,7 @@ export default function ITR1Page() {
                     {TAX_SLABS.map((s, i) => (
                       <tr
                         key={s.slab}
-                        className={i % 2 === 0 ? "bg-white" : "bg-[#F4F3EE]/60"}
+                        className={i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]/60"}
                       >
                         <td className="px-4 py-2.5 text-slate-700">{s.slab}</td>
                         <td
@@ -692,7 +693,7 @@ export default function ITR1Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-white border border-slate-100 rounded-2xl hover:border-[#C15F3C] hover:translate-x-1 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-slate-100 rounded-2xl hover:border-[#C15F3C] hover:translate-x-1 transition-all duration-200 group"
                   >
                     <div className="w-10 h-10 bg-[#F4F3EE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 transition-colors">
                       {f.icon}
@@ -710,7 +711,7 @@ export default function ITR1Page() {
               </div>
             </div>
             {/* Compare table */}
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-white">
+            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-[#F4F3EE]">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-slate-900">
@@ -732,7 +733,7 @@ export default function ITR1Page() {
                   {COMPARE.map((row, i) => (
                     <tr
                       key={row.feature}
-                      className={`border-b border-slate-100 ${i % 2 === 0 ? "bg-[#F4F3EE]/30" : "bg-white"}`}
+                      className={`border-b border-slate-100 ${i % 2 === 0 ? "bg-[#F4F3EE]/30" : "bg-[#F4F3EE]"}`}
                     >
                       <td className="px-4 py-3 font-medium text-slate-700 text-xs">
                         {row.feature}
@@ -779,7 +780,7 @@ export default function ITR1Page() {
               {AI_FEATURES.map((f) => (
                 <div
                   key={f.title}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C]/40 transition-all duration-200 group"
+                  className="bg-[#F4F3EE]/5 border border-white/10 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C]/40 transition-all duration-200 group"
                 >
                   <div className="text-[#C15F3C] mb-3 group-hover:text-[#C15F3C]/80 transition-colors">
                     {f.icon}
@@ -799,7 +800,7 @@ export default function ITR1Page() {
         {/* ══════════════════════════════════════
         PROCESS STEPS
         ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="process">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="process">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -848,7 +849,7 @@ export default function ITR1Page() {
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+            <div className="bg-[#F4F3EE] rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#C15F3C]/90 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div>
                   <h3 className="font-display font-extrabold text-white text-lg">
@@ -858,7 +859,7 @@ export default function ITR1Page() {
                     AY 2026-27 | Updated for Budget 2025
                   </p>
                 </div>
-                <span className="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase ">
+                <span className="bg-[#F4F3EE]/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase ">
                   AI Powered
                 </span>
               </div>
@@ -914,7 +915,7 @@ export default function ITR1Page() {
                     <select
                       value={calc.age}
                       onChange={(e) => upd("age", e.target.value as AgeGroup)}
-                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-white"
+                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-[#F4F3EE]"
                     >
                       <option value="below60">Below 60 years</option>
                       <option value="60to80">
@@ -931,7 +932,7 @@ export default function ITR1Page() {
                   <h4 className="font-display font-bold text-slate-900 text-base mb-5">
                     📊 Your Tax Summary
                   </h4>
-                  <div className="bg-white rounded-2xl border border-slate-200 p-4 mb-4 shadow-sm">
+                  <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 p-4 mb-4 shadow-sm">
                     <ResultRow
                       label="Gross Total Income"
                       value={fmt(result.grossTotal)}
@@ -1031,7 +1032,7 @@ export default function ITR1Page() {
               {FAQS.map((faq, i) => (
                 <div
                   key={i}
-                  className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-400" : "border-slate-100"}`}
+                  className={`bg-[#F4F3EE] border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-400" : "border-slate-100"}`}
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -1062,6 +1063,9 @@ export default function ITR1Page() {
                 </div>
               ))}
             </div>
+            <div className="flex justify-center mt-8">
+              <AddQuestionModal category="itr-1-return-filing" />
+            </div>
           </div>
         </section>
 
@@ -1082,7 +1086,7 @@ export default function ITR1Page() {
             <div className="flex flex-wrap gap-4 justify-center">
               <a
                 href="#pricing"
-                className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold text-base px-8 py-4 rounded-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-150"
+                className="inline-flex items-center gap-2 bg-[#F4F3EE] text-orange-600 font-bold text-base px-8 py-4 rounded-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-150"
               >
                 🚀 File ITR-1 Free Today <ArrowRight size={18} />
               </a>

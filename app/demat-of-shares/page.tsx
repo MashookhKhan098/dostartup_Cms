@@ -35,7 +35,7 @@ export default function DematerialisationPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#ffffff] text-slate-800">
+    <div className="min-h-screen bg-[#F4F3EE] text-slate-800">
       <Navbar />
 
       {/* Breadcrumb */}
@@ -54,7 +54,7 @@ export default function DematerialisationPage() {
           {/* Header Block: 2-Col Hero Area */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
              {/* Col 1: Hero Image Card */}
-             <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
+             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
                <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
                 <div className="bg-[#9e4a2d] p-6 text-center">
                   <h2 className="text-white text-xl font-bold uppercase">DEMATERIALISATION</h2>
@@ -78,7 +78,7 @@ export default function DematerialisationPage() {
             </div>
 
             {/* Col 2: Info Card */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
+            <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
                <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2 w-fit">
                     <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
                     <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA COMPLIANCE</span>
@@ -94,7 +94,7 @@ export default function DematerialisationPage() {
                </p>
 
                <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto">
-                  <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Compliance</div>
+                  <div className="absolute -top-3 left-4 bg-[#F4F3EE] px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Compliance</div>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold">
                       <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> ISIN Setup & Depository Agreement
@@ -109,7 +109,7 @@ export default function DematerialisationPage() {
           </div>
 
           <div className="space-y-12">
-             <article className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+             <article className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
                 <h1 className="text-2xl font-bold text-[#9e4a2d] mb-8 border-b-2 border-amber-600/10 pb-4 text-center uppercase">
                    Dematerialisation of Shares Guide
                 </h1>
@@ -145,7 +145,7 @@ export default function DematerialisationPage() {
              </article>
 
              {/* Documents Section */}
-             <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
                 <h3 className="text-xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-3 uppercase text-[16px]">Documents Required For Dematerialisation</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
                   {[
@@ -155,7 +155,7 @@ export default function DematerialisationPage() {
                     "Company PAN & Address Proof",
                     "ISIN Activation Forms"
                   ].map((doc, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 bg-white/50 rounded-xl border border-gray-100 group hover:border-amber-200 transition-colors">
+                    <div key={idx} className="flex items-center justify-between p-4 bg-[#F4F3EE]/50 rounded-xl border border-gray-100 group hover:border-amber-200 transition-colors">
                        <span className="text-sm text-slate-700 group-hover:text-amber-800">{doc}</span>
                     </div>
                   ))}
@@ -163,11 +163,11 @@ export default function DematerialisationPage() {
              </div>
 
              {/* FAQ Section */}
-             <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
                 <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's</h3>
                 <div className="space-y-4 font-bold">
                   {faqItems.map((faq, idx) => (
-                    <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white">
+                    <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-[#F4F3EE]">
                       <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50/10 transition-colors group">
                         <span className="text-sm font-bold text-slate-800 group-hover:text-amber-700">{faq.q}</span>
                         <div className={`p-1.5 rounded-full bg-amber-50 transition-all shrink-0 ${openFaq === idx ? 'rotate-45' : ''}`}>
@@ -193,7 +193,7 @@ export default function DematerialisationPage() {
            <div className="sticky top-28 space-y-6">
               <SidebarCart />
               
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
+              <div className="bg-[#F4F3EE] p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
                 <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
                 <ul className="text-[13px] space-y-4 text-amber-700">
                   {["Rule 9B Detailed Overview", "NSDL vs CDSL Comparison", "Appointing an RTA Guide", "Share Transfer in Demat"].map((item) => (
@@ -207,7 +207,7 @@ export default function DematerialisationPage() {
 
               <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:scale-[1.02] transition-transform font-bold">
                 <img src={ASSETS.companyCompliance} alt="compliance" className="w-full h-auto object-cover" />
-                <div className="p-5 bg-white">
+                <div className="p-5 bg-[#F4F3EE]">
                     <div className="text-[14px] text-slate-800 uppercase">Corporate Compliance</div>
                     <div className="text-[11px] text-slate-400 mt-1 font-bold">Stay ahead of ROC deadlines</div>
                 </div>

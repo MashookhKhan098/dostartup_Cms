@@ -110,7 +110,7 @@ export default function DIR3KycPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-white text-gray-800 font-sans">
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
  {/* Imported Navbar */}
  <Navbar />
 
@@ -230,10 +230,11 @@ export default function DIR3KycPage(): React.ReactElement {
  }}
  aria-hidden
  />
- </section>
+ </section>
+
 
  {/* Article content */}
- <article className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 sm:p-6">
  <h1 className="text-xl sm:text-2xl font-semibold text-center">
  DIR 3 KYC — Application for KYC of Directors
  </h1>
@@ -325,7 +326,7 @@ export default function DIR3KycPage(): React.ReactElement {
  </p>
 
  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="bg-white rounded-xl border-2 border-amber-200 p-6 shadow-sm hover:border-amber-300 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-xl border-2 border-amber-200 p-6 shadow-sm hover:border-amber-300 transition-colors">
  <div className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-3 py-1 rounded-full text-xs mb-3">
  Most popular
  </div>
@@ -348,7 +349,7 @@ export default function DIR3KycPage(): React.ReactElement {
  </ul>
  </div>
 
- <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-xl border border-gray-200 p-6 shadow-sm hover:border-amber-200 transition-colors">
  <h3 className="font-semibold text-lg">Dual DIN eKYC Filing</h3>
  <div className="mt-3 text-3xl font-bold">₹2,899</div>
  <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
@@ -373,7 +374,7 @@ export default function DIR3KycPage(): React.ReactElement {
 
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 sm:p-6">
  <h3 className="text-lg sm:text-xl font-semibold mb-4">FAQ's on DIR-3 KYC</h3>
  <div className="space-y-0">
  {faqQuestions.map((q, i) => (
@@ -407,7 +408,7 @@ export default function DIR3KycPage(): React.ReactElement {
  <aside className="lg:col-span-4 hidden lg:block">
           <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Related Guides</h4>
  <ul className="text-sm space-y-2">
  <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">A Complete Guide on Director Identification Number (DIN)</li>
@@ -433,13 +434,13 @@ export default function DIR3KycPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-white rounded-lg p-4">
+ <div className="bg-[#F4F3EE] rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 14).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -450,7 +451,7 @@ export default function DIR3KycPage(): React.ReactElement {
  </main>
 
  {/* Footer */}
- <footer className="bg-white mt-12 py-3 border-t">
+ <footer className="bg-[#F4F3EE] mt-12 py-3 border-t">
  <div className="max-w-[1180px] mx-auto px-4 sm:px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>

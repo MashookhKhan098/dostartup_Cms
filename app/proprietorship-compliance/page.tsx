@@ -116,11 +116,11 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-white">
+ <div className="min-h-screen bg-[#F4F3EE]">
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white border-b border-gray-200 py-3">
+ <div className="bg-[#F4F3EE] border-b border-gray-200 py-3">
  <div className="max-w-[1180px] mx-auto px-6">
  <div className="flex items-center text-sm text-gray-500">
  <span>Home</span>
@@ -141,8 +141,8 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  <div className="relative z-10">
  <div className="mx-auto max-w-[1180px] px-6 py-5 flex flex-col md:flex-row items-center gap-8">
  <div className="flex-1 max-w-2xl">
- <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-10">
- <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 mb-4">
+ <div className="bg-[#F4F3EE]/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-10">
+ <div className="inline-flex items-center gap-2 bg-[#F4F3EE]/20 rounded-full px-4 py-2 mb-4">
  <Star className="w-4 h-4 text-white fill-current" />
  <span className="text-xs font-medium text-white">PARTNERSHIP COMPLIANCE</span>
  </div>
@@ -165,9 +165,9 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  placeholder="ENTER GSTIN"
  value={gstin}
  onChange={(e) => setGstin(e.target.value)}
- className="w-full sm:w-[360px] bg-white/10 border border-white/20 rounded-md px-4 py-3 placeholder:text-white/60 text-white outline-none focus:ring-2 focus:ring-white"
+ className="w-full sm:w-[360px] bg-[#F4F3EE]/10 border border-white/20 rounded-md px-4 py-3 placeholder:text-white/60 text-white outline-none focus:ring-2 focus:ring-white"
  />
- <button className="px-6 py-3 bg-white text-[#C15F3C] rounded-md font-medium hover:bg-white transition-colors shadow-lg">
+ <button className="px-6 py-3 bg-[#F4F3EE] text-[#C15F3C] rounded-md font-medium hover:bg-[#F4F3EE] transition-colors shadow-lg">
  Get Accountant
  </button>
  </form>
@@ -197,7 +197,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </div>
 
  {/* Stats Section */}
- <div className="bg-white border-b border-gray-200">
+ <div className="bg-[#F4F3EE] border-b border-gray-200">
  <div className="max-w-[1180px] mx-auto px-6 py-5">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
  <div>
@@ -223,7 +223,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  {/* Feature Cards */}
  <div className="max-w-[1180px] mx-auto px-6 -mt-4">
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
  <div className="w-12 h-12 bg-[#C15F3C]/10 rounded-lg flex items-center justify-center mb-4">
  <Users className="w-6 h-6 text-[#C15F3C]" />
  </div>
@@ -236,7 +236,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
  <div className="w-12 h-12 bg-[#C15F3C]/10 rounded-lg flex items-center justify-center mb-4">
  <Clock className="w-6 h-6 text-[#C15F3C]" />
  </div>
@@ -249,7 +249,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C] transition-colors">
  <div className="w-12 h-12 bg-[#C15F3C]/10 rounded-lg flex items-center justify-center mb-4">
  <Shield className="w-6 h-6 text-[#C15F3C]" />
  </div>
@@ -264,10 +264,11 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </section>
  </div>
 
- <main className="max-w-[1180px] mx-auto px-6 py-4 space-y-8">
+ <main className="max-w-[1180px] mx-auto px-6 py-4 space-y-8">
+
 
  {/* Services Offered */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <section className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-8">
  <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">
  Services Offered
  </h3>
@@ -295,7 +296,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </section>
 
  {/* How It Works */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <section className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-8">
  <h3 className="text-2xl font-bold text-center text-[#C15F3C] mb-2">How It Works</h3>
  <p className="text-gray-600 text-center mb-8">
  A guided onboarding process with consistent monthly accounting and
@@ -319,7 +320,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </section>
 
  {/* Why DoStartup */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <section className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-8">
  <h3 className="text-2xl font-bold text-[#C15F3C] mb-6">
  Why DoStartup for Fractional Accountant
  </h3>
@@ -346,7 +347,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </section>
 
  {/* Partnership Tax Return Filing Info */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <section className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-8">
  <h3 className="text-2xl font-bold text-[#C15F3C] mb-4">
  Partnership Tax Return Filing
  </h3>
@@ -385,7 +386,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </section>
 
  {/* Related Guides */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <section className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-8">
  <h3 className="text-xl font-semibold text-[#C15F3C] mb-4">Related Guides</h3>
  <div className="flex flex-wrap gap-3">
  {["ITR 5 Form", "What is a partnership firm?", "How to file GST returns for Partnership firm", "FAQ's on Partnership Compliance"].map((guide, index) => (
@@ -407,7 +408,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
 
  <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Software Only Plan */}
- <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-lg hover:shadow-xl transition-shadow">
+ <div className="bg-[#F4F3EE] rounded-xl border border-gray-200 p-6 shadow-lg hover:shadow-xl transition-shadow">
  <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs font-medium mb-3">
  LEDGERS
  </div>
@@ -455,7 +456,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </div>
 
  {/* Accountant Quarterly Plan - Recommended */}
- <div className="bg-white rounded-xl border-2 border-[#C15F3C] p-6 shadow-xl relative transform md:scale-105">
+ <div className="bg-[#F4F3EE] rounded-xl border-2 border-[#C15F3C] p-6 shadow-xl relative transform md:scale-105">
  <div className="absolute top-0 right-0 bg-[#C15F3C] text-white px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
  RECOMMENDED
  </div>
@@ -505,7 +506,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  </div>
 
  {/* Annual Plan */}
- <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-lg hover:shadow-xl transition-shadow">
+ <div className="bg-[#F4F3EE] rounded-xl border border-gray-200 p-6 shadow-lg hover:shadow-xl transition-shadow">
  <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs font-medium mb-3">
  Most Popular
  </div>
@@ -556,7 +557,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
 
 
  {/* FAQ Section */}
- <section className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+ <section className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-8">
  <h3 className="text-xl font-semibold text-[#C15F3C] mb-4">FAQ's</h3>
  <div className="space-y-0">
  {faqQuestions.map((q, i) => (
@@ -586,7 +587,7 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  {POPULAR_SEARCHES.slice(0, 20).map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1 border border-gray-200 rounded-full bg-white text-gray-700 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded-full bg-[#F4F3EE] text-gray-700 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-colors"
  >
  {s}
  </span>
@@ -651,10 +652,10 @@ export default function PartnershipCompliancePage(): React.ReactElement {
  {/* Payment Modal */}
  {showPaymentModal && (
  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
- <div className="bg-white rounded-xl max-w-md w-full p-6">
+ <div className="bg-[#F4F3EE] rounded-xl max-w-md w-full p-6">
  <div className="flex justify-between items-center mb-4">
  <h3 className="text-xl font-bold text-gray-900">Complete Payment</h3>
- <button onClick={() => setShowPaymentModal(false)} className="hover:bg-white p-1 rounded-full transition-colors">
+ <button onClick={() => setShowPaymentModal(false)} className="hover:bg-[#F4F3EE] p-1 rounded-full transition-colors">
  <X className="w-6 h-6 text-gray-500" />
  </button>
  </div>

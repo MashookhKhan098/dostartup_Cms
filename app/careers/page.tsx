@@ -18,7 +18,7 @@ export default function CareersPage() {
  <section className="bg-[#F4F3EE] pt-12 pb-16">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="text-center max-w-4xl mx-auto">
- <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-6">
+ <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-6">
  <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
  <span className="text-xs font-medium text-[#C15F3C]">JOIN OUR TEAM</span>
  </div>
@@ -31,15 +31,15 @@ export default function CareersPage() {
  and meet our Recruiters. Same-day offer letters available!
  </p>
  <div className="flex flex-wrap justify-center gap-4 mt-8">
- <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 shadow-sm">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-lg px-4 py-2 shadow-sm">
  <Calendar className="w-4 h-4 text-[#C15F3C]" />
  <span className="text-sm text-[#2F2E2B]">Daily Walk-in Interviews</span>
  </div>
- <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 shadow-sm">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-lg px-4 py-2 shadow-sm">
  <Clock className="w-4 h-4 text-[#C15F3C]" />
  <span className="text-sm text-[#2F2E2B]">Same-day Offer Letters</span>
  </div>
- <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 shadow-sm">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-lg px-4 py-2 shadow-sm">
  <Users className="w-4 h-4 text-[#C15F3C]" />
  <span className="text-sm text-[#2F2E2B]">600+ Team Members</span>
  </div>
@@ -49,14 +49,14 @@ export default function CareersPage() {
  </section>
 
  {/* Main Content */}
- <section className="bg-white py-5">
+ <section className="bg-[#F4F3EE] py-5">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
  {/* AI Assessment Banner */}
  <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] rounded-2xl p-6 md:p-8 mb-12 text-white">
  <div className="flex flex-col md:flex-row items-center justify-between gap-6">
  <div className="flex items-center gap-4">
- <div className="bg-white/20 rounded-full p-3">
+ <div className="bg-[#F4F3EE]/20 rounded-full p-3">
  <Sparkles className="w-8 h-8" />
  </div>
  <div>
@@ -64,7 +64,7 @@ export default function CareersPage() {
  <p className="text-white/90">Complete your assessment online using our AI platform</p>
  </div>
  </div>
- <button className="bg-white text-[#C15F3C] hover:bg-[#F4F3EE] px-6 py-2 rounded-lg font-medium transition">
+ <button className="bg-[#F4F3EE] text-[#C15F3C] hover:bg-[#F4F3EE] px-6 py-2 rounded-lg font-medium transition">
  Start Assessment
  </button>
  </div>
@@ -112,7 +112,7 @@ export default function CareersPage() {
  </div>
 
  {/* Job Application Form */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6 md:p-8 mb-16 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 md:p-8 mb-16 shadow-sm">
  <div className="text-center mb-8">
  <h2 className="text-2xl font-bold text-[#2F2E2B] mb-2">Job Application</h2>
  <p className="text-[#6F6B63]">Fill out the form below to apply for your desired role</p>
@@ -224,7 +224,7 @@ export default function CareersPage() {
  { title: "Business Consultant", type: "Full Time", location: "Multiple Locations", experience: "2-6 years" },
  { title: "Customer Support Executive", type: "Full Time", location: "Remote", experience: "0-2 years" }
  ].map((job, idx) => (
- <div key={idx} className="bg-white rounded-xl p-5 border border-[#E5E2DA] hover:border-[#C15F3C] transition-all hover:shadow-md">
+ <div key={idx} className="bg-[#F4F3EE] rounded-xl p-5 border border-[#E5E2DA] hover:border-[#C15F3C] transition-all hover:shadow-md">
  <div className="flex justify-between items-start mb-3">
  <h4 className="text-lg font-semibold text-[#2F2E2B]">{job.title}</h4>
  <span className="text-xs bg-[#F4F3EE] text-[#C15F3C] px-2 py-1 rounded-full">{job.type}</span>
@@ -305,7 +305,7 @@ export default function CareersPage() {
  </p>
  </div>
  <div className="grid md:grid-cols-3 gap-6">
- <div className="bg-white rounded-2xl p-6 border border-[#E5E2DA]">
+ <div className="bg-[#F4F3EE] rounded-2xl p-6 border border-[#E5E2DA]">
  <div className="w-12 h-12 bg-[#F4F3EE] rounded-lg flex items-center justify-center mb-4">
  <Building className="w-6 h-6 text-[#C15F3C]" />
  </div>
@@ -320,7 +320,7 @@ export default function CareersPage() {
  </div>
  </div>
 
- <div className="bg-white rounded-2xl p-6 border border-[#E5E2DA]">
+ <div className="bg-[#F4F3EE] rounded-2xl p-6 border border-[#E5E2DA]">
  <div className="w-12 h-12 bg-[#F4F3EE] rounded-lg flex items-center justify-center mb-4">
  <Building className="w-6 h-6 text-[#C15F3C]" />
  </div>
@@ -335,7 +335,7 @@ export default function CareersPage() {
  </div>
  </div>
 
- <div className="bg-white rounded-2xl p-6 border border-[#E5E2DA]">
+ <div className="bg-[#F4F3EE] rounded-2xl p-6 border border-[#E5E2DA]">
  <div className="w-12 h-12 bg-[#F4F3EE] rounded-lg flex items-center justify-center mb-4">
  <Building className="w-6 h-6 text-[#C15F3C]" />
  </div>
@@ -413,7 +413,7 @@ export default function CareersPage() {
  { icon: Lock, title: "Confidentiality", desc: "No information shared without consent" },
  { icon: Users, title: "Trusted Relationship", desc: "Delivering value to customers" }
  ].map((value, idx) => (
- <div key={idx} className="bg-white rounded-xl p-4 border border-[#E5E2DA] text-center">
+ <div key={idx} className="bg-[#F4F3EE] rounded-xl p-4 border border-[#E5E2DA] text-center">
  <value.icon className="w-8 h-8 text-[#C15F3C] mx-auto mb-2" />
  <h4 className="font-semibold text-[#2F2E2B] mb-1">{value.title}</h4>
  <p className="text-xs text-[#6F6B63]">{value.desc}</p>
@@ -423,7 +423,7 @@ export default function CareersPage() {
  </div>
 
  {/* Customer First Philosophy */}
- <div className="bg-white rounded-2xl p-8 border border-[#E5E2DA] mb-16">
+ <div className="bg-[#F4F3EE] rounded-2xl p-8 border border-[#E5E2DA] mb-16">
  <div className="text-center mb-6">
  <h2 className="text-2xl font-bold text-[#2F2E2B] mb-2">Customer First Philosophy</h2>
  <p className="text-[#6F6B63]">
@@ -456,11 +456,11 @@ export default function CareersPage() {
  Visit our office for a walk-in interview or apply online today!
  </p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
- <button className="bg-white text-[#C15F3C] hover:bg-[#F4F3EE] px-8 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 group">
+ <button className="bg-[#F4F3EE] text-[#C15F3C] hover:bg-[#F4F3EE] px-8 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2 group">
  Apply Now
  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
  </button>
- <button className="border-2 border-white text-white hover:bg-white hover:text-[#C15F3C] px-8 py-3 rounded-lg font-medium transition">
+ <button className="border-2 border-white text-white hover:bg-[#F4F3EE] hover:text-[#C15F3C] px-8 py-3 rounded-lg font-medium transition">
  Chat with HR
  </button>
  </div>
@@ -469,7 +469,7 @@ export default function CareersPage() {
  <Phone className="w-4 h-4" />
  <span className="text-sm">+91 89398 50314</span>
  </div>
- <div className="w-px h-4 bg-white/30" />
+ <div className="w-px h-4 bg-[#F4F3EE]/30" />
  <div className="flex items-center gap-2">
  <Mail className="w-4 h-4" />
  <span className="text-sm">careers@dostartup.com</span>

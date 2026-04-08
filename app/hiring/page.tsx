@@ -84,7 +84,7 @@ export default function HiringPage() {
  <section className="relative overflow-hidden bg-gradient-to-br from-[#F4F3EE] to-[#E5E2DA] border-b border-[#E5E2DA]">
  <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 lg:py-24">
  <div className="text-center max-w-3xl mx-auto">
- <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-4 py-2 mb-6">
+ <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-4 py-2 mb-6">
  <span className="relative flex h-2 w-2">
  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C15F3C] opacity-75"></span>
  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C15F3C]"></span>
@@ -98,15 +98,15 @@ export default function HiringPage() {
  Start your career with doStartup! Walk-in to any of our offices Monday–Saturday, 9AM–7PM to explore opportunities and meet our Recruiters.
  </p>
  <div className="flex flex-wrap gap-4 justify-center">
- <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-[#E5E2DA]">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-lg px-4 py-2 border border-[#E5E2DA]">
  <FiUsers className="w-4 h-4 text-[#C15F3C]" />
  <span className="text-sm text-[#2F2E2B]">600+ team members</span>
  </div>
- <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-[#E5E2DA]">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-lg px-4 py-2 border border-[#E5E2DA]">
  <FiCalendar className="w-4 h-4 text-[#C15F3C]" />
  <span className="text-sm text-[#2F2E2B]">Daily walk-in interviews</span>
  </div>
- <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-[#E5E2DA]">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-lg px-4 py-2 border border-[#E5E2DA]">
  <FiBriefcase className="w-4 h-4 text-[#C15F3C]" />
  <span className="text-sm text-[#2F2E2B]">Same-day offer letters</span>
  </div>
@@ -120,7 +120,7 @@ export default function HiringPage() {
  <div className="flex flex-col lg:flex-row gap-8">
  {/* Left Column - Form */}
  <div className="lg:w-2/3">
- <div className="bg-white rounded-2xl border border-[#E5E2DA] overflow-hidden shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] overflow-hidden shadow-sm">
  <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
  <h2 className="text-xl font-semibold text-white">AI Assisted Assessment</h2>
  <p className="text-sm text-white/90 mt-1">Job Application</p>
@@ -270,7 +270,7 @@ export default function HiringPage() {
  {openPositions.map((position, idx) => {
  const Icon = position.icon;
  return (
- <div key={idx} className="bg-white rounded-2xl border border-[#E5E2DA] p-6 hover:shadow-md transition-all duration-200">
+ <div key={idx} className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 hover:shadow-md transition-all duration-200">
  <div className="flex items-start justify-between mb-4">
  <div className="w-12 h-12 bg-[#F4F3EE] rounded-xl flex items-center justify-center border border-[#E5E2DA]">
  <Icon className="w-6 h-6 text-[#C15F3C]" />
@@ -297,7 +297,7 @@ export default function HiringPage() {
  {/* Right Column - Sidebar */}
  <div className="lg:w-1/3 space-y-6">
  {/* Chat with HR Card */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6 text-center">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 text-center">
  <div className="w-16 h-16 bg-[#F4F3EE] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#E5E2DA]">
  <FiMail className="w-8 h-8 text-[#C15F3C]" />
  </div>
@@ -316,7 +316,7 @@ export default function HiringPage() {
  </div>
 
  {/* Interview Process */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h3 className="text-lg font-semibold text-[#2F2E2B] mb-4">Interview Process</h3>
  <div className="space-y-4">
  <div className="flex gap-3">
@@ -344,7 +344,7 @@ export default function HiringPage() {
  </div>
 
  {/* Requirements */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h3 className="text-lg font-semibold text-[#2F2E2B] mb-4">Mandatory Requirements</h3>
  <div className="space-y-3">
  <div className="flex items-center gap-2 text-sm text-[#6F6B63]">
@@ -371,7 +371,7 @@ export default function HiringPage() {
  </div>
 
  {/* Documents */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h3 className="text-lg font-semibold text-[#2F2E2B] mb-4">Interview Preparation</h3>
  <p className="text-xs text-[#6F6B63] mb-3">Walk-in prepared with the following documents. Expect to spend 2–4 hours at our office for the interview process.</p>
  <div className="space-y-2">
@@ -398,7 +398,7 @@ export default function HiringPage() {
  </div>
 
  {/* Office Locations */}
- <section className="bg-white border-t border-[#E5E2DA] py-5">
+ <section className="bg-[#F4F3EE] border-t border-[#E5E2DA] py-5">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="text-center mb-8">
  <h2 className="text-2xl font-semibold text-[#2F2E2B] mb-2">Daily Walk-In Interview</h2>
@@ -446,7 +446,7 @@ export default function HiringPage() {
  const Icon = value.icon;
  return (
  <div key={idx} className="bg-[#F4F3EE] border border-[#E5E2DA] rounded-xl p-5 hover:shadow-md transition-all">
- <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-[#E5E2DA] mb-4">
+ <div className="w-12 h-12 bg-[#F4F3EE] rounded-full flex items-center justify-center border border-[#E5E2DA] mb-4">
  <Icon className="w-6 h-6 text-[#C15F3C]" />
  </div>
  <h3 className="font-semibold text-[#2F2E2B] mb-2">{value.title}</h3>

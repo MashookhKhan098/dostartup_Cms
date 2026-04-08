@@ -88,7 +88,7 @@ const FssaiServiceDropdown: React.FC<{
  <ChevronDown className="w-4 h-4 text-[#B1ADA1]" />
  </button>
  {open && (
- <div className="absolute z-50 mt-1 w-full bg-white border border-[#E5E2DA] rounded-xl shadow-xl">
+ <div className="absolute z-50 mt-1 w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-xl shadow-xl">
  <div className="p-3 border-b border-[#E5E2DA]">
  <div className="relative">
  <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#B1ADA1]" />
@@ -142,7 +142,7 @@ const YearsDropdown: React.FC<{
  <ChevronDown className="w-4 h-4 text-[#B1ADA1]" />
  </button>
  {open && (
- <div className="absolute z-40 mt-1 w-full bg-white border border-[#E5E2DA] rounded-xl shadow-xl">
+ <div className="absolute z-40 mt-1 w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-xl shadow-xl">
  <div className="py-2 max-h-44 overflow-auto">
  {YEARS_OPTIONS.map((y) => (
  <button
@@ -197,7 +197,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
  <Navbar />
 
  {/* ── Hero Section ── */}
- <section className="bg-white border-b border-[#E5E2DA] pt-10 pb-12">
+ <section className="bg-[#F4F3EE] border-b border-[#E5E2DA] pt-10 pb-12">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
@@ -227,7 +227,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
  "Fast, effortless, and transparent",
  ].map((feat) => (
  <div key={feat} className="flex items-center gap-3">
- <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center border border-[#E5E2DA] shrink-0">
+ <div className="w-8 h-8 bg-[#F4F3EE] rounded-full flex items-center justify-center border border-[#E5E2DA] shrink-0">
  <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
  </svg>
@@ -240,7 +240,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
 
  {/* Right: Form Card */}
  <div>
- <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
  <div className="h-1.5 w-full bg-[#C15F3C]" />
  <div className="p-6 space-y-4">
  <h2 className="text-base font-semibold text-[#2F2E2B]">Start Your Filing</h2>
@@ -330,7 +330,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
  <div className="flex-1 space-y-6">
 
  {/* Article Card */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6 space-y-5">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 space-y-5">
  <div className="text-xs text-[#B1ADA1]">
  DoStartup / Registrations / <span className="text-[#C15F3C]">FSSAI Return Filing</span>
  </div>
@@ -477,7 +477,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
  { title: "Timely Submission", body: "We inform you about the FSSAI annual return last date to ensure you file on time, avoiding penalties." },
  ].map(({ title, body }) => (
  <div key={title} className="flex items-start gap-3">
- <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center border border-[#E5E2DA] shrink-0 mt-0.5">
+ <div className="w-8 h-8 bg-[#F4F3EE] rounded-full flex items-center justify-center border border-[#E5E2DA] shrink-0 mt-0.5">
  <CheckCircle className="w-4 h-4 text-[#C15F3C]" />
  </div>
  <div>
@@ -494,7 +494,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
  </div>
 
  {/* FAQ Card */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h3 className="text-lg font-semibold text-[#2F2E2B] mb-4">FAQ's on FSSAI Return Filing</h3>
  <div className="divide-y divide-[#E5E2DA]">
  {faqItems.map((q, idx) => (
@@ -526,7 +526,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
  </div>
 
  {/* Popular Searches (full) */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h4 className="text-sm font-semibold text-[#2F2E2B] mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.map((t, i) => (

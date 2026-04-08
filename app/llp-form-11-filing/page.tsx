@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
  <div
  className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
  style={{
- backgroundColor: "#ffffff",
+ backgroundColor: "#F4F3EE",
  backgroundImage: `radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%), radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%), url("${bgImagePath}")`,
  backgroundSize: "cover, cover, 220%",
  backgroundRepeat: "no-repeat",
@@ -260,7 +260,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  <Navbar />
 
  {/* Hero Section */}
- <section className="bg-white pt-10 pb-12">
+ <section className="bg-[#F4F3EE] pt-10 pb-12">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
  {/* Left Column */}
@@ -347,7 +347,7 @@ export default function LLPForm11Filing(): React.ReactElement {
 
  {/* Right Column - Form */}
  <div className="relative">
- <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-6">
  <div
  className="absolute -top-4 left-6 right-6 h-4 rounded-t-xl"
  style={{
@@ -362,7 +362,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </label>
  <input
  type="text"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-white text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-[#F4F3EE] text-sm"
  placeholder="Enter LLPIN"
  />
  </div>
@@ -374,7 +374,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  <input
  type="text"
  placeholder="Filled Automatically"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded bg-white text-slate-500 text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded bg-[#F4F3EE] text-slate-500 text-sm"
  readOnly
  />
  <p className="text-xs text-slate-400 mt-1">
@@ -388,7 +388,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </label>
  <input
  type="text"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-white text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-[#F4F3EE] text-sm"
  placeholder="e.g. 2024-2025"
  />
  </div>
@@ -399,7 +399,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </label>
  <input
  type="email"
- className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-white text-sm"
+ className="w-full px-3 sm:px-4 py-2 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-amber-600 bg-[#F4F3EE] text-sm"
  placeholder="Enter email for contact"
  />
  </div>
@@ -430,7 +430,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
  {/* Left Main Content */}
  <div className="lg:col-span-3 space-y-6">
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h2 className="text-xl sm:text-2xl font-bold mb-3">
  LLP Annual Return (Form 11)
  </h2>
@@ -488,7 +488,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h3 className="text-xl sm:text-2xl font-bold mb-4">
  Documents Required for Form 11
  </h3>
@@ -508,7 +508,7 @@ export default function LLPForm11Filing(): React.ReactElement {
  </ul>
  </div>
 
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h3 className="text-xl sm:text-2xl font-bold mb-4">
  FAQ's on LLP Form 11
  </h3>

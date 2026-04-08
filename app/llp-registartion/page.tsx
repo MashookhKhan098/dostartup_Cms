@@ -50,7 +50,7 @@ const llpPlans = [
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#F4F3EE]">
       <Navbar />
       <Hero defaultEntity="LLP" />
       <DynamicTabContent category="proprietorship" />

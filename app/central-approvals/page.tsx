@@ -176,7 +176,7 @@ export default function CentralApprovals() {
       </section>
 
       {/* Search Bar */}
-      <section className="bg-white border-b border-[#E5E2DA] py-8 px-4">
+      <section className="bg-[#F4F3EE] border-b border-[#E5E2DA] py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="relative">
             <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#B1ADA1] w-5 h-5" />
@@ -200,7 +200,7 @@ export default function CentralApprovals() {
           <div className="flex gap-8">
             {/* Sidebar Filters */}
             <div className="w-64 flex-shrink-0">
-              <div className="bg-white rounded-xl border border-[#E5E2DA] p-6 sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
+              <div className="bg-[#F4F3EE] rounded-xl border border-[#E5E2DA] p-6 sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto"
                 style={{
                   scrollbarWidth: "none",
                   msOverflowStyle: "none"
@@ -293,7 +293,7 @@ export default function CentralApprovals() {
                 {paginatedApprovals.map((approval, idx) => (
                   <div
                     key={idx}
-                    className="bg-white rounded-xl border border-[#E5E2DA] p-6 hover:shadow-lg hover:border-[#C15F3C] transition-all duration-300 group cursor-pointer"
+                    className="bg-[#F4F3EE] rounded-xl border border-[#E5E2DA] p-6 hover:shadow-lg hover:border-[#C15F3C] transition-all duration-300 group cursor-pointer"
                   >
                     <p className="text-[#C15F3C] text-xs font-bold uppercase tracking-wide mb-2">
                       {approval.ministry}

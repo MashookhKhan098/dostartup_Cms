@@ -106,7 +106,7 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
 
 const Footer: React.FC = () => {
  return (
- <footer className="bg-white mt-12 py-5 border-t">
+ <footer className="bg-[#F4F3EE] mt-12 py-5 border-t">
  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>
@@ -184,7 +184,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  }, [demoRequested]);
 
  return (
- <div className="min-h-screen bg-white text-gray-800 font-sans antialiased">
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans antialiased">
  {/* Imported Navbar */}
  <Navbar />
 
@@ -304,7 +304,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
  {/* 3 Feature Cards */}
  <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-15 h-10 rounded-full bg-orange-50 grid place-items-center">
  <img src={ASSETS.pfIcon} alt="pf" className="w-8 h-6" />
@@ -321,7 +321,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-16 h-10 rounded-full bg-orange-50 grid place-items-center">
  <img src={ASSETS.esiIcon} alt="esi" className="w-8 h-6" />
@@ -338,7 +338,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-16 h-10 rounded-full bg-orange-50 grid place-items-center">
  <img
@@ -365,7 +365,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
 
  {/* HR Compliance Made Easy */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  HR Compliance Made Easy
  </h3>
@@ -400,7 +400,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Expert Guidance */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Expert Guidance on ESI Return Filing
  </h3>
@@ -489,7 +489,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Who should Register */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Who should Register for the ESI scheme?
  </h3>
@@ -520,7 +520,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* ESI Return Filing Deadlines */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  ESI Return Filing Deadlines
  </h3>
@@ -631,7 +631,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Procedure to File ESI Returns */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Procedure to File ESI Returns for Employers
  </h3>
@@ -667,7 +667,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* How We Support ESI Return Filing */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  How We Support ESI Return Filing
  </h3>
@@ -699,7 +699,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Benefits of Timely ESI Return Filing */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Benefits of Timely ESI Return Filing
  </h3>
@@ -737,7 +737,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Related Guides */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">Related Guides</h3>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
  <a className="p-4 border border-gray-200 rounded hover:border-[#C15F3C]/30 hover:shadow-lg transition-all">
@@ -809,7 +809,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* FAQ Section */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  FAQ's on ESI Return Filing
  </h3>
@@ -837,7 +837,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* What is ESI registration? (Quick section) */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  What is ESI registration?
  </h3>
@@ -878,7 +878,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Procedure Checklist */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Procedure to File ESI Returns for Employers - Quick Checklist
  </h3>
@@ -892,7 +892,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Consequences of Delayed Payment */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Consequences of Delayed Payment
  </h3>
@@ -906,7 +906,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* How We Make ESI Return Filing Easy */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  How We Make ESI Return Filing Easy
  </h3>
@@ -936,13 +936,13 @@ export default function EsiReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Popular Searches */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h4 className="font-semibold mb-3 text-[#C15F3C]">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 20).map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-[#C15F3C]/30 hover:text-[#C15F3C] cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-[#C15F3C]/30 hover:text-[#C15F3C] cursor-pointer transition-colors"
  >
  {s}
  </span>

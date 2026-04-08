@@ -51,14 +51,14 @@ const partnershipPlans: PricingPlan[] = [
 
 export default function Home() {
  return (
- <>
- <Navbar />
- <Hero defaultEntity = "Partnership"/>
- <DynamicTabContent category="Partnership" />
-  <PricingCards plans={partnershipPlans} />
-  <Faq category="Partnership" blogCategory="partnership" />
- <Popularsearches />
- <Footer />
- </>
+  <div className="min-h-screen bg-[#F4F3EE]">
+  <Navbar />
+  <Hero defaultEntity = "Partnership"/>
+  <DynamicTabContent category="Partnership" />
+   <PricingCards plans={partnershipPlans} />
+   <Faq category="Partnership" blogCategory="partnership" />
+  <Popularsearches />
+  <Footer />
+  </div>
  );
 }

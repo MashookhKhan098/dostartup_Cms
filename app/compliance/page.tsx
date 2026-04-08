@@ -1,6 +1,8 @@
 "use client";
 import AddQuestionModal from "../components/AddQuestionModal";
 import SidebarCart from "../components/SidebarCart";
+import Navbar from "../components/Navbar";
+import FooterShared from "../components/Footer";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Inter } from "next/font/google";
@@ -15,11 +17,11 @@ const inter = Inter({
 });
 
 const COLORS = {
- bg: "#ffffff",
+ bg: "#F4F3EE",
  text: "#0F172A",
  border: "#DBDFE9",
- slate50: "#ffffff",
- slate100: "#ffffff",
+ slate50: "#F4F3EE",
+ slate100: "#F4F3EE",
  slate200: "#E2E8F0",
  slate300: "#CBD5E1",
  green: "#22C55E",
@@ -161,7 +163,7 @@ function Header() {
 
  return (
  <header
- className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b"
+ className="sticky top-0 z-40 bg-[#F4F3EE]/95 backdrop-blur-sm border-b"
  style={{ borderColor: "#E5E7EB" }}
  >
  <div className="max-w-[1200px] mx-auto px-4 relative">
@@ -206,7 +208,7 @@ function Header() {
  role="menu"
  aria-label="Compliance menu"
  >
- <div className="bg-white rounded-lg shadow-xl border border-slate-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-xl border border-slate-200 p-6">
  <div className="grid grid-cols-3 gap-x-6 gap-y-2">
  {Compliance_DROPDOWN_LINKS.map((link) => (
  <a
@@ -244,7 +246,7 @@ function Header() {
  </button>
  {showIncomeDropdown && (
  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[480px] z-50">
- <div className="bg-white rounded-lg shadow-lg border p-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border p-4">
  <div className="grid grid-cols-2 gap-3">
  {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
  <a
@@ -281,7 +283,7 @@ function Header() {
  </button>
  {showMcaDropdown && (
  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[640px] z-50">
- <div className="bg-white rounded-lg shadow-lg border p-5">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border p-5">
  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
  {MCA_DROPDOWN_LINKS.map((link) => (
  <a
@@ -359,7 +361,7 @@ function Header() {
  </div>
 
  {mobileMenuOpen && (
- <div ref={mobileNavRef} className="xl:hidden bg-white border-t">
+ <div ref={mobileNavRef} className="xl:hidden bg-[#F4F3EE] border-t">
  <div className="px-4 py-4 space-y-3">
  {[
  "Startup",
@@ -506,7 +508,7 @@ function Hero() {
  return (
  <div className="company-banner-search mb-5 container-fixed">
  <section
- className="w-full bg-gradient-to-r from-white to-gray-100 flex flex-col md:flex-row items-center justify-center min-h-[520px]"
+ className="w-full bg-[#F4F3EE] flex flex-col md:flex-row items-center justify-center min-h-[520px]"
  style={{ borderTop: `1px solid ${COLORS.border}` }}
  >
  <div className="w-full flex flex-row md:flex-row items-stretch justify-between p-0 parent-container max-w-[1200px] mx-auto">
@@ -525,7 +527,7 @@ function Hero() {
 
  <div className="w-full md:w-1/2 flex flex-col items-center wd-form-parent justify-start">
  <div
- className="max-w-[560px] w-full pr-10 md:py-3 bg-white rounded-xl shadow-lg space-y-6"
+ className="max-w-[560px] w-full pr-10 md:py-3 bg-[#F4F3EE] rounded-xl shadow-lg space-y-6"
  style={{ paddingTop: 30 }}
  >
  <div className="flex flex-row items-center justify-between mb-4">
@@ -727,7 +729,7 @@ function PlatformBand() {
  <section className="mt-6">
  <div className="max-w-[1200px] mx-auto px-4">
  <div
- className="bg-white rounded-2xl border shadow-sm p-6 md:p-8"
+ className="bg-[#F4F3EE] rounded-2xl border shadow-sm p-6 md:p-8"
  style={{ borderColor: "#E5E7EB" }}
  >
  <h2 className="text-center font-bold text-[22px] text-[#0B5CF0]">
@@ -750,7 +752,7 @@ function PlatformBand() {
  >
  <div className="text-[22px] font-semibold">Software</div>
  <div className="mt-1 opacity-90">Unlimited Users</div>
- <button className="mt-6 px-4 py-2 rounded border border-white hover:bg-white hover:text-[#0B1CA6] transition">
+ <button className="mt-6 px-4 py-2 rounded border border-white hover:bg-[#F4F3EE] hover:text-[#0B1CA6] transition">
  Get pricing
  </button>
  <div className="mt-6 text-[14px] space-y-2">
@@ -765,7 +767,7 @@ function PlatformBand() {
  ].map((t) => (
  <div key={t} className="flex items-center justify-between">
  <span>{t}</span>
- <span className="text-xs bg-white/15 px-2 py-0.5 rounded">
+ <span className="text-xs bg-[#F4F3EE]/15 px-2 py-0.5 rounded">
  Unlimited
  </span>
  </div>
@@ -775,7 +777,7 @@ function PlatformBand() {
  </div>
 
  <div
- className="bg-white rounded-xl border shadow-sm p-6"
+ className="bg-[#F4F3EE] rounded-xl border shadow-sm p-6"
  style={{ borderColor: "#E5E7EB" }}
  >
  <div className="flex items-center justify-between">
@@ -833,7 +835,7 @@ function PlatformBand() {
  </div>
 
  <div
- className="bg-white rounded-xl border shadow-sm p-6"
+ className="bg-[#F4F3EE] rounded-xl border shadow-sm p-6"
  style={{ borderColor: "#E5E7EB" }}
  >
  <div className="flex items-center justify-between">
@@ -931,7 +933,7 @@ function ArticleAndSidebar() {
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
  <article className="lg:col-span-8">
  <div
- className="bg-white rounded-2xl border shadow-sm p-6 md:p-8"
+ className="bg-[#F4F3EE] rounded-2xl border shadow-sm p-6 md:p-8"
  style={{ borderColor: "#E5E7EB" }}
  >
  <div className="flex items-center gap-3">
@@ -1056,7 +1058,7 @@ function ArticleAndSidebar() {
  <div className="mt-6 overflow-x-auto">
  <table className="w-full text-[14px] border-collapse">
  <thead>
- <tr className="bg-white text-slate-700">
+ <tr className="bg-[#F4F3EE] text-slate-700">
  <th
  className="text-left p-3 border-b"
  style={{ borderColor: "#E2E8F0" }}
@@ -1108,16 +1110,16 @@ function ArticleAndSidebar() {
  ],
  ["DPT-3: Return of Deposits", "By June 30th each year"],
  ].map(([a, b]) => (
- <tr key={a} className="odd:bg-white even:bg-white">
+ <tr key={a} className="odd:bg-[#F4F3EE] even:bg-[#F4F3EE]">
  <td
  className="p-3 border-b"
- style={{ borderColor: "#ffffff" }}
+ style={{ borderColor: "#F4F3EE" }}
  >
  {a}
  </td>
  <td
  className="p-3 border-b"
- style={{ borderColor: "#ffffff" }}
+ style={{ borderColor: "#F4F3EE" }}
  >
  {b}
  </td>
@@ -1221,7 +1223,7 @@ function PopularSearches() {
  <section className="mt-8">
  <div className="max-w-[1200px] mx-auto px-4">
  <div
- className="bg-white rounded-2xl border shadow-sm p-6"
+ className="bg-[#F4F3EE] rounded-2xl border shadow-sm p-6"
  style={{ borderColor: "#E5E7EB" }}
  >
  <div className="font-semibold mb-3">Popular Searches</div>
@@ -1229,7 +1231,7 @@ function PopularSearches() {
  {tags.map((t) => (
  <span
  key={t}
- className="text-[12px] px-3 py-1 rounded-full border bg-white"
+ className="text-[12px] px-3 py-1 rounded-full border bg-[#F4F3EE]"
  style={{ borderColor: "#E5E7EB" }}
  >
  {t}
@@ -1239,71 +1241,6 @@ function PopularSearches() {
  </div>
  </div>
  </section>
- );
-}
-
-function Footer() {
- return (
- <footer className="mt-10 pb-24">
- <div className="max-w-[1200px] mx-auto px-4">
- <div className="bg-[#EEF3F9] rounded-2xl p-8">
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
- <div>
- <div className="font-semibold mb-3">DoStartup</div>
- <ul className="text-[14px] text-slate-700 space-y-2">
- <li>About DoStartup</li>
- <li>Careers</li>
- <li>Contact Us</li>
- </ul>
- </div>
- <div>
- <div className="font-semibold mb-3">Platforms</div>
- <ul className="text-[14px] text-slate-700 space-y-2">
- <li>Business Search</li>
- <li>Trademark Search</li>
- <li>Filings.AE for UAE</li>
- </ul>
- </div>
- <div>
- <div className="font-semibold mb-3">Usage</div>
- <ul className="text-[14px] text-slate-700 space-y-2">
- <li>Terms &amp; Conditions</li>
- <li>Privacy Policy</li>
- <li>Refund Policy</li>
- </ul>
- </div>
- </div>
-
- <div className="text-[12px] text-slate-500 mt-6">
- Copyright © {new Date().getFullYear()} DoStartup Private Limited.
- All rights reserved.
- </div>
- </div>
- </div>
-
- <a
- href="https://wa.me/911234567890"
- target="_blank"
- rel="noreferrer"
- className="fixed right-6 bottom-6 z-50 bg-[#25D366] hover:brightness-95 text-white rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3"
- aria-label="Live Chat with Experts"
- >
- <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
- <path
- d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.473-.148-.673.15-.198.297-.767.966-.941 1.164-.173.198-.347.223-.644.074-1.758-.868-2.903-1.543-4.073-3.13-.31-.42.31-.39.899-1.29.099-.198.05-.371-.025-.52-.074-.148-.673-1.62-.923-2.222-.243-.587-.49-.508-.673-.517l-.573-.01c-.198 0-.52.074-.792.37-.273.297-1.04 1.016-1.04 2.478 0 1.462 1.06 2.878 1.207 3.078.148.198 2.09 3.19 5.065 4.47 2.975 1.281 2.975.854 3.51.8.536-.055 1.758-.718 2.007-1.412.248-.694.248-1.289.173-1.412-.074-.123-.273-.198-.57-.347z"
- fill="white"
- />
- <path
- d="M21.062 12.004c0 4.97-4.05 9.02-9.02 9.02-1.585 0-3.08-.425-4.406-1.163l-4.938 1.29 1.32-4.79a8.922 8.922 0 01-1.38-4.386C1.957 7.037 6.06 3 11.013 3c4.97 0 9.039 4.05 9.039 9.004z"
- fill="white"
- opacity="0.06"
- />
- </svg>
- <span className="hidden sm:inline-block text-sm font-medium">
- Live Chat with Experts
- </span>
- </a>
- </footer>
  );
 }
 
@@ -1318,12 +1255,12 @@ export default function Page() {
  "var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial",
  }}
  >
- <Header />
+ <Navbar />
  <Hero />
  <PlatformBand />
  <ArticleAndSidebar />
  <PopularSearches />
- <Footer />
+ <FooterShared />
  </div>
  );
 }

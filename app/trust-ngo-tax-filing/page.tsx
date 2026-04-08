@@ -226,7 +226,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  />
  </div>
 
- <button className="whitespace-nowrap px-5 py-3 bg-white text-slate-900 rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)]">
+ <button className="whitespace-nowrap px-5 py-3 bg-[#F4F3EE] text-slate-900 rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)]">
  File ITR
  </button>
  </form>
@@ -274,7 +274,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
 
  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Personal */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Personal
  </div>
@@ -303,7 +303,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  </div>
 
  {/* Business */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Business
  </div>
@@ -336,7 +336,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  </div>
 
  {/* Not for Profit */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Not for Profit
  </div>
@@ -381,7 +381,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  </section>
 
  {/* Long ITR-5 content */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  ITR-5 Return Filing
  </h1>
@@ -534,7 +534,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  </article>
 
  {/* Documents required card */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  Documents Required For ITR-5 Return Filing
  </h3>
@@ -558,7 +558,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  </article>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  FAQ's on ITR-5 Return Filing
  </h3>

@@ -54,7 +54,7 @@ export default async function PricingSection({ category }: PricingProps) {
 
  {/* Header */}
  <div className="text-center mb-12">
- <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-4">
+ <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-4">
  <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
  <span className="text-xs font-medium text-[#C15F3C]">PRICING</span>
  </div>
@@ -115,7 +115,7 @@ export default async function PricingSection({ category }: PricingProps) {
  return (
  <div
  key={card._id}
- className="group bg-white rounded-2xl border border-[#E5E2DA] hover:border-[#C15F3C] hover:shadow-lg transition-all duration-300 w-full max-w-[280px] flex flex-col h-full overflow-hidden"
+ className="group bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] hover:border-[#C15F3C] hover:shadow-lg transition-all duration-300 w-full max-w-[280px] flex flex-col h-full overflow-hidden"
  >
  <div className="p-6 flex flex-col h-full">
 
@@ -163,7 +163,7 @@ export default async function PricingSection({ category }: PricingProps) {
  href={`/register?plan=${encodeURIComponent(card.title)}`} 
  className="mt-auto"
  >
- <button className="w-full py-3 px-4 rounded-lg text-xs font-medium transition-all border border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white bg-white">
+ <button className="w-full py-3 px-4 rounded-lg text-xs font-medium transition-all border border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white bg-[#F4F3EE]">
  Get Started Now
  </button>
  </Link>

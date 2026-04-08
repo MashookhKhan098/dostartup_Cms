@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import BlogSidebar from "./BlogSidebar";
+import AddQuestionModal from "./AddQuestionModal";
 
 interface FAQ {
   _id?: string;
@@ -96,7 +97,7 @@ export default function FAQAccordion({ category: propCategory, blogCategory }: F
         
         {/* Full-Width Header Segment */}
         <div className="mb-12">
-           <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-4 shadow-sm">
+           <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-4 shadow-sm">
             <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
             <span className="text-[10px] font-bold text-[#C15F3C] uppercase tracking-wider">
               Expert Guidance
@@ -125,7 +126,7 @@ export default function FAQAccordion({ category: propCategory, blogCategory }: F
                     <div key={index} className="group">
                       <button
                         onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                        className="w-full px-6 py-5 flex items-start justify-between text-left hover:bg-[#F4F3EE]/30 transition-colors"
+                        className="w-full px-6 py-5 flex items-start justify-between text-left hover:bg-white/30 transition-colors"
                       >
                         <span className={`text-sm font-bold leading-snug ${openIndex === index ? "text-[#C15F3C]" : "text-[#2F2E2B]"}`} style={{ fontFamily: "'Sora', sans-serif" }}>
                           {faq.question || faq.QUESTION}
@@ -157,6 +158,10 @@ export default function FAQAccordion({ category: propCategory, blogCategory }: F
                   View More Questions
                </button>
              )}
+
+             <div className="mt-6">
+                <AddQuestionModal category={finalFaqCategory} />
+             </div>
           </div>
 
           {/* Blog Column (60%) */}

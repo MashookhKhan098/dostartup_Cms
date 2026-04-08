@@ -13,7 +13,7 @@ export default function AboutPage() {
  <section className="bg-[#F4F3EE] pt-12 pb-16">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="text-center max-w-4xl mx-auto">
- <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-6">
+ <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-4 py-1.5 mb-6">
  <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
  <span className="text-xs font-medium text-[#C15F3C]">OUR STORY</span>
  </div>
@@ -31,7 +31,7 @@ export default function AboutPage() {
  </section>
 
  {/* Main Content */}
- <section className="bg-white py-5">
+ <section className="bg-[#F4F3EE] py-5">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
  {/* Intro Card */}
@@ -49,7 +49,7 @@ export default function AboutPage() {
 
  {/* Mission / Vision / Values - Enhanced */}
  <div className="grid md:grid-cols-3 gap-8 mb-16">
- <div className="bg-white rounded-2xl p-8 shadow-sm border border-[#E5E2DA] hover:shadow-md transition-shadow group">
+ <div className="bg-[#F4F3EE] rounded-2xl p-8 shadow-sm border border-[#E5E2DA] hover:shadow-md transition-shadow group">
  <div className="w-14 h-14 bg-[#F4F3EE] rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#C15F3C] transition-colors">
  <Award className="w-7 h-7 text-[#C15F3C] group-hover:text-white transition-colors" />
  </div>
@@ -63,7 +63,7 @@ export default function AboutPage() {
  </p>
  </div>
 
- <div className="bg-white rounded-2xl p-8 shadow-sm border border-[#E5E2DA] hover:shadow-md transition-shadow group">
+ <div className="bg-[#F4F3EE] rounded-2xl p-8 shadow-sm border border-[#E5E2DA] hover:shadow-md transition-shadow group">
  <div className="w-14 h-14 bg-[#F4F3EE] rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#C15F3C] transition-colors">
  <Users className="w-7 h-7 text-[#C15F3C] group-hover:text-white transition-colors" />
  </div>
@@ -77,7 +77,7 @@ export default function AboutPage() {
  </p>
  </div>
 
- <div className="bg-white rounded-2xl p-8 shadow-sm border border-[#E5E2DA] hover:shadow-md transition-shadow group">
+ <div className="bg-[#F4F3EE] rounded-2xl p-8 shadow-sm border border-[#E5E2DA] hover:shadow-md transition-shadow group">
  <div className="w-14 h-14 bg-[#F4F3EE] rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#C15F3C] transition-colors">
  <Shield className="w-7 h-7 text-[#C15F3C] group-hover:text-white transition-colors" />
  </div>
@@ -134,7 +134,7 @@ export default function AboutPage() {
  </div>
 
  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
- <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
+ <div className="bg-[#F4F3EE] rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
  <div className="w-16 h-16 bg-[#F4F3EE] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#C15F3C] transition-colors">
  <Users className="w-8 h-8 text-[#C15F3C] group-hover:text-white transition-colors" />
  </div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
  </p>
  </div>
 
- <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
+ <div className="bg-[#F4F3EE] rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
  <div className="w-16 h-16 bg-[#F4F3EE] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#C15F3C] transition-colors">
  <Clock className="w-8 h-8 text-[#C15F3C] group-hover:text-white transition-colors" />
  </div>
@@ -158,7 +158,7 @@ export default function AboutPage() {
  </p>
  </div>
 
- <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
+ <div className="bg-[#F4F3EE] rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
  <div className="w-16 h-16 bg-[#F4F3EE] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#C15F3C] transition-colors">
  <ThumbsUp className="w-8 h-8 text-[#C15F3C] group-hover:text-white transition-colors" />
  </div>
@@ -170,7 +170,7 @@ export default function AboutPage() {
  </p>
  </div>
 
- <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
+ <div className="bg-[#F4F3EE] rounded-2xl p-6 shadow-sm border border-[#E5E2DA] text-center hover:border-[#C15F3C] transition-all group">
  <div className="w-16 h-16 bg-[#F4F3EE] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#C15F3C] transition-colors">
  <CheckCircle className="w-8 h-8 text-[#C15F3C] group-hover:text-white transition-colors" />
  </div>
@@ -200,7 +200,7 @@ export default function AboutPage() {
  { name: "Priya Sharma", role: "Head of Compliance", experience: "12+ years in Tax & GST" },
  { name: "Amit Patel", role: "Technical Director", experience: "10+ years in Tech Solutions" }
  ].map((member, idx) => (
- <div key={idx} className="bg-white rounded-2xl p-6 text-center border border-[#E5E2DA] hover:shadow-md transition-shadow">
+ <div key={idx} className="bg-[#F4F3EE] rounded-2xl p-6 text-center border border-[#E5E2DA] hover:shadow-md transition-shadow">
  <div className="w-24 h-24 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-full mx-auto mb-4 flex items-center justify-center">
  <Users className="w-12 h-12 text-white" />
  </div>
@@ -223,7 +223,7 @@ export default function AboutPage() {
  </p>
  </div>
  <div className="grid md:grid-cols-2 gap-6">
- <div className="bg-white rounded-xl p-6 border border-[#E5E2DA]">
+ <div className="bg-[#F4F3EE] rounded-xl p-6 border border-[#E5E2DA]">
  <div className="flex items-center gap-1 mb-3">
  {[...Array(5)].map((_, i) => (
  <Star key={i} className="w-4 h-4 fill-[#C15F3C] text-[#C15F3C]" />
@@ -237,7 +237,7 @@ export default function AboutPage() {
  <p className="text-xs text-[#B1ADA1]">Founder, TechInnovate Solutions</p>
  </div>
  </div>
- <div className="bg-white rounded-xl p-6 border border-[#E5E2DA]">
+ <div className="bg-[#F4F3EE] rounded-xl p-6 border border-[#E5E2DA]">
  <div className="flex items-center gap-1 mb-3">
  {[...Array(5)].map((_, i) => (
  <Star key={i} className="w-4 h-4 fill-[#C15F3C] text-[#C15F3C]" />
@@ -264,11 +264,11 @@ export default function AboutPage() {
  for their business compliance needs
  </p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
- <button className="bg-white text-[#C15F3C] hover:bg-[#F4F3EE] text-sm font-medium px-8 py-3 rounded-lg transition shadow-md flex items-center justify-center gap-2 group">
+ <button className="bg-[#F4F3EE] text-[#C15F3C] hover:bg-[#F4F3EE] text-sm font-medium px-8 py-3 rounded-lg transition shadow-md flex items-center justify-center gap-2 group">
  Get Started Today
  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
  </button>
- <button className="border-2 border-white text-white hover:bg-white hover:text-[#C15F3C] text-sm font-medium px-8 py-3 rounded-lg transition">
+ <button className="border-2 border-white text-white hover:bg-[#F4F3EE] hover:text-[#C15F3C] text-sm font-medium px-8 py-3 rounded-lg transition">
  Contact Our Team
  </button>
  </div>

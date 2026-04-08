@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
  </div>
 
  {/* Content */}
- <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 space-y-6 text-sm text-gray-700 leading-relaxed">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-md p-6 sm:p-8 space-y-6 text-sm text-gray-700 leading-relaxed">
 
  <div>
  <h2 className="text-lg font-semibold text-[#C15F3C] mb-2">

@@ -71,7 +71,7 @@ export default function IncomeTaxHubPage() {
       </section>
 
       {/* Trust Badges */}
-      <div className="bg-white border-b border-slate-200 py-4">
+      <div className="bg-[#F4F3EE] border-b border-slate-200 py-4">
         <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-between gap-4 text-sm font-medium text-slate-500">
           <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-[#C15F3C]" /> Assisted Filing</div>
           <div className="flex items-center gap-2"><Shield className="w-5 h-5 text-[#C15F3C]" /> CA Support</div>
@@ -84,7 +84,7 @@ export default function IncomeTaxHubPage() {
       <main className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 space-y-12">
           {/* Main Article Card */}
-          <article className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+          <article className="bg-[#F4F3EE] rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
             <h2 className="text-3xl font-bold text-slate-900">E-File Your Income Tax Return online</h2>
             <div className="mt-8 space-y-6 text-slate-600 leading-relaxed">
               <p>Income tax filing is a crucial annual responsibility for every earning citizen. Whether you are a salaried individual, a professional, or a business owner, filing your ITR correctly and on time is essential to avoid penalties and legal notices.</p>
@@ -93,12 +93,12 @@ export default function IncomeTaxHubPage() {
             </div>
             
             <div className="mt-12 grid sm:grid-cols-2 gap-6">
-              <div className="bg-white p-6 rounded-2xl border border-slate-100">
+              <div className="bg-[#F4F3EE] p-6 rounded-2xl border border-slate-100">
                 <h4 className="font-bold text-slate-900 mb-2">Salaried Individuals</h4>
                 <p className="text-sm text-slate-600">Perfect for resident individuals with salary, pension, or interest income.</p>
                 <button className="mt-4 text-[#C15F3C] font-bold text-sm">Add to Cart</button>
               </div>
-              <div className="bg-white p-6 rounded-2xl border border-slate-100">
+              <div className="bg-[#F4F3EE] p-6 rounded-2xl border border-slate-100">
                 <h4 className="font-bold text-slate-900 mb-2">Business & Professionals</h4>
                 <p className="text-sm text-slate-600">For shop owners, freelancers, and small business partners.</p>
                 <button className="mt-4 text-[#C15F3C] font-bold text-sm">Add to Cart</button>
@@ -111,7 +111,7 @@ export default function IncomeTaxHubPage() {
         <aside className="lg:col-span-4 space-y-8">
           <SidebarCart />
           
-          <div className="bg-white rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
+          <div className="bg-[#F4F3EE] rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
             <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">States in Focus</h4>
             <div className="max-h-[300px] overflow-y-auto pr-2 space-y-2">
               {states.map((s) => (

@@ -47,15 +47,15 @@ export default function Home() {
 
  {/* Feature Pills */}
  <div className="flex flex-wrap justify-center gap-4 mb-16">
- <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] px-6 py-3 rounded-full shadow-sm border border-gray-200">
  <CheckCircle2 className="w-5 h-5 text-green-500" />
  <span className="text-gray-700 font-medium">Assured Virtual Office Setup</span>
  </div>
- <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] px-6 py-3 rounded-full shadow-sm border border-gray-200">
  <CheckCircle2 className="w-5 h-5 text-green-500" />
  <span className="text-gray-700 font-medium">11-Month Agreement with Stamp Paper</span>
  </div>
- <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] px-6 py-3 rounded-full shadow-sm border border-gray-200">
  <CheckCircle2 className="w-5 h-5 text-green-500" />
  <span className="text-gray-700 font-medium">100% Refund Guarantee</span>
  </div>
@@ -64,7 +64,7 @@ export default function Home() {
  {/* Main Content Grid */}
  <div className="grid md:grid-cols-2 gap-8 items-start">
  {/* Left Side - Form */}
- <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-lg p-8 border border-gray-100">
  <h2 className="text-2xl font-bold text-gray-900 mb-6">
  Start Your Virtual Office
  </h2>
@@ -93,7 +93,7 @@ export default function Home() {
  
  <div className="relative">
  <select
- className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none appearance-none bg-white"
+ className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none appearance-none bg-[#F4F3EE]"
  >
  <option>Virtual Office Location</option>
  <option>Delhi</option>
@@ -110,7 +110,7 @@ export default function Home() {
  className="w-full bg-black text-white py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
  >
  Buy Virtual Office + GSTIN
- <span className="bg-white text-black rounded-full w-6 h-6 flex items-center justify-center text-sm">→</span>
+ <span className="bg-[#F4F3EE] text-black rounded-full w-6 h-6 flex items-center justify-center text-sm">→</span>
  </button>
 
  <p className="text-xs text-gray-500 text-center">
@@ -125,7 +125,7 @@ export default function Home() {
  {/* Right Side - Benefits */}
  <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-orange-100 rounded-2xl p-8 space-y-6">
  <div className="flex items-start gap-4">
- <div className="bg-white rounded-full p-2 mt-1">
+ <div className="bg-[#F4F3EE] rounded-full p-2 mt-1">
  <CheckCircle2 className="w-6 h-6 text-green-500" />
  </div>
  <div>
@@ -140,7 +140,7 @@ export default function Home() {
  </div>
 
  <div className="flex items-start gap-4">
- <div className="bg-white rounded-full p-2 mt-1">
+ <div className="bg-[#F4F3EE] rounded-full p-2 mt-1">
  <CheckCircle2 className="w-6 h-6 text-green-500" />
  </div>
  <div>
@@ -155,7 +155,7 @@ export default function Home() {
  </div>
 
  <div className="flex items-start gap-4">
- <div className="bg-white rounded-full p-2 mt-1">
+ <div className="bg-[#F4F3EE] rounded-full p-2 mt-1">
  <CheckCircle2 className="w-6 h-6 text-green-500" />
  </div>
  <div>
@@ -174,13 +174,13 @@ export default function Home() {
  </div>
  
  {/* Feature Cards Section */}
- <div className="py-6 px-4 bg-white">
+ <div className="py-6 px-4 bg-[#F4F3EE]">
  <div className="max-w-7xl mx-auto">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  {features.map((feature, index) => (
  <div 
  key={index}
- className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+ className="bg-[#F4F3EE] rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
  >
  <div className="flex justify-center mb-4">
  <div className="p-3 bg-blue-50 rounded-full">

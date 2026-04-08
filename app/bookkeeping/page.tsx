@@ -109,7 +109,7 @@ export default function BookkeepingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-white text-gray-800 font-sans antialiased">
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans antialiased">
  {/* Imported Navbar */}
  <Navbar />
 
@@ -220,7 +220,7 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* 3 Card Section */}
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <h3 className="font-semibold text-[#C15F3C] mb-2">
  Dedicated support, flexible cost
  </h3>
@@ -230,7 +230,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <h3 className="font-semibold text-[#C15F3C] mb-2">
  Accurate & timely compliance
  </h3>
@@ -240,7 +240,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <h3 className="font-semibold text-[#C15F3C] mb-2">
  Powered by LEDGERS
  </h3>
@@ -256,7 +256,7 @@ export default function BookkeepingPage(): React.ReactElement {
  {/* MAIN CONTENT */}
  <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-8">
  {/* SERVICES OFFERED */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold text-center text-[#C15F3C]">
  Services Offered
  </h3>
@@ -324,7 +324,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* HOW IT WORKS */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold text-center text-[#C15F3C]">How It Works</h3>
  <p className="text-gray-600 mt-3 text-center">
  A guided onboarding process with consistent monthly accounting and
@@ -366,7 +366,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* WHY INDIAFILINGS */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Why DoStartup for Fractional Accountant
  </h3>
@@ -403,7 +403,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* FAQ */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">FAQs</h3>
 
  <div className="space-y-0">
@@ -435,7 +435,7 @@ export default function BookkeepingPage(): React.ReactElement {
  {POPULAR_SEARCHES.slice(0, 20).map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-[#C15F3C]/30 hover:text-[#C15F3C] cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-[#C15F3C]/30 hover:text-[#C15F3C] cursor-pointer transition-colors"
  >
  {s}
  </span>
@@ -446,7 +446,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </main>
 
  {/* FOOTER */}
- <footer className="bg-white mt-12 py-5 border-t">
+ <footer className="bg-[#F4F3EE] mt-12 py-5 border-t">
  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>

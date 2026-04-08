@@ -61,7 +61,7 @@ export default function AddQuestionModal({ category = "general" }: { category?: 
           setSubmitSuccess(false);
           setSubmitError("");
         }}
-        className="px-4 py-2 border-2 border-slate-200 rounded-md text-sm text-slate-600 hover:border-amber-600 hover:text-amber-700 bg-white transition-colors font-medium flex items-center justify-center gap-2"
+        className="px-4 py-2 border-2 border-slate-200 rounded-md text-sm text-slate-600 hover:border-amber-600 hover:text-amber-700 bg-[#F4F3EE] transition-colors font-medium flex items-center justify-center gap-2"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
@@ -71,14 +71,14 @@ export default function AddQuestionModal({ category = "general" }: { category?: 
 
       {isOpen && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
+          <div className="bg-[#F4F3EE] rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-[#F4F3EE]">
               <h3 className="text-lg font-bold text-slate-900">
                 Submit a Question
               </h3>
               <button 
                 onClick={closeModal} 
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:text-amber-700 hover:border-amber-700 transition-all shadow-sm"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F4F3EE] border border-gray-200 text-gray-500 hover:text-amber-700 hover:border-amber-700 transition-all shadow-sm"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -123,7 +123,7 @@ export default function AddQuestionModal({ category = "general" }: { category?: 
                     <button 
                       type="button" 
                       onClick={closeModal}
-                      className="px-5 py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:border-gray-400 hover:text-gray-900 transition-colors"
+                      className="px-5 py-2.5 text-sm font-medium text-gray-600 bg-[#F4F3EE] border border-gray-200 rounded-xl hover:border-gray-400 hover:text-gray-900 transition-colors"
                     >
                       Cancel
                     </button>

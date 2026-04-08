@@ -175,9 +175,9 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
 
  {/* TAX NOTICE HERO */}
  <div className="max-w-[1180px] mx-auto px-6 py-6">
- <div className="bg-white rounded-xl shadow-md overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+ <div className="bg-[#F4F3EE] rounded-xl shadow-md overflow-hidden grid grid-cols-1 lg:grid-cols-12">
  {/* Left image */}
- <div className="lg:col-span-7 relative bg-white">
+ <div className="lg:col-span-7 relative bg-[#F4F3EE]">
  <div className="h-[420px] lg:h-full w-full relative">
  <Image
  src={ASSETS.taxHero}
@@ -210,7 +210,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
 
  <button
  type="button"
- className="ml-4 px-3 py-1 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-white"
+ className="ml-4 px-3 py-1 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-[#F4F3EE]"
  >
  Consult Advisor
  </button>
@@ -238,7 +238,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  className={`relative rounded-lg ${
  tnDragActive
  ? "border-2 border-[#C15F3C] bg-[#C15F3C]/10"
- : "border-2 border-dashed border-slate-300 bg-white"
+ : "border-2 border-dashed border-slate-300 bg-[#F4F3EE]"
  } p-6 flex flex-col items-center justify-center text-center transition`}
  style={{ minHeight: 120 }}
  >
@@ -268,14 +268,14 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </div>
 
  {tnFileName && (
- <div className="absolute bottom-3 left-6 right-6 bg-white border border-slate-100 rounded-md px-3 py-2 text-sm text-slate-700 shadow-sm">
+ <div className="absolute bottom-3 left-6 right-6 bg-[#F4F3EE] border border-slate-100 rounded-md px-3 py-2 text-sm text-slate-700 shadow-sm">
  Uploaded: <span className="font-medium">{tnFileName}</span>
  </div>
  )}
  </div>
  </div>
 
- <div className="mt-6 border rounded-lg p-4 bg-white shadow-sm">
+ <div className="mt-6 border rounded-lg p-4 bg-[#F4F3EE] shadow-sm">
  <p className="text-sm text-slate-700">
  Upload your income tax notice and our experts will review it.
  You’ll receive clear insights and next steps, along with a
@@ -293,7 +293,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </button>
  <button
  type="button"
- className="px-4 py-2 border border-slate-200 rounded-md text-sm text-slate-700 hover:bg-white"
+ className="px-4 py-2 border border-slate-200 rounded-md text-sm text-slate-700 hover:bg-[#F4F3EE]"
  >
  Live Chat
  </button>
@@ -308,7 +308,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  {/* END HERO */}
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  DoStartup / Income Tax /{" "}
  <span className="text-[#C15F3C] font-medium">
@@ -323,7 +323,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  <section className="lg:col-span-8 space-y-6">
  {/* Top cards */}
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold">
  30 Minutes - Tax Consultation
  </h3>
@@ -338,13 +338,13 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </ul>
  <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
 
- <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded">
+ <button className="bg-[#F4F3EE] border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded">
  ADD
  </button>
  </div>
  </div>
 
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold">Professional Services</h3>
  <p className="text-sm text-gray-600 mt-2">
  Section 139 • Professional Consultation • Reply Drafting • Reply
@@ -359,7 +359,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </li>
  </ul>
  <div className="mt-4">
- <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded">
+ <button className="bg-[#F4F3EE] border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded">
  ADD
  </button>
  </div>
@@ -367,7 +367,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </div>
 
  {/* Article */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  Income Tax Notice: Check & Authenticate ITR Notices Online
  </h1>
@@ -437,7 +437,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </article>
 
  {/* Documents required */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  Documents Required For Income Tax Notice Response
  </h3>
@@ -449,7 +449,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </article>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  FAQ's on Income Tax Notice Response
  </h3>
@@ -494,7 +494,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  <aside className="lg:col-span-4 hidden lg:block">
  <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Offers and discounts</h4>
  <div className="p-3 border rounded-md flex items-center gap-3">
  <img
@@ -529,13 +529,13 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-white rounded-lg p-4">
+ <div className="bg-[#F4F3EE] rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 14).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+ className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
  >
  {t}
  </span>

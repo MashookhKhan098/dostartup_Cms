@@ -153,7 +153,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  DoStartup / Income Tax /{" "}
  <span className="text-[#C15F3C] font-medium">
@@ -167,7 +167,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  {/* Left column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top card */}
- <div className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card (square hero image) */}
  <div className="md:w-1/3 flex-shrink-0">
  <div className="rounded-lg overflow-hidden">
@@ -180,9 +180,9 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white px-4 py-6 flex justify-center">
+ <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
  {/* square image — keep square */}
- <div className="w-44 h-44 rounded-md overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4">
+ <div className="w-44 h-44 rounded-md overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
  <img
  src={ASSETS.hero}
  alt="15ca 15cb hero"
@@ -269,7 +269,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </div>
 
  {/* Article */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  15CA-15CB Filing - Compliance for Foreign Remittances
  </h1>
@@ -515,7 +515,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  <aside className="lg:col-span-4 hidden lg:block">
  <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Offers and discounts</h4>
  <div className="p-3 border rounded-md flex items-center gap-3">
  <img
@@ -550,13 +550,13 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-white rounded-lg p-4">
+ <div className="bg-[#F4F3EE] rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 20).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+ className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
  >
  {t}
  </span>
@@ -565,7 +565,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </div>
 
  {/* small content block to make sidebar informative */}
- <div className="bg-white rounded-lg shadow-sm p-4 mt-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mt-4">
  <h4 className="font-semibold mb-3">Contact Advisor</h4>
  <p className="text-sm text-gray-600">
  Need help with 15CA / 15CB? Our advisors can assist with
@@ -632,7 +632,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
 />
 
 <section className="max-w-[1180px] mx-auto px-6 py-8">
-  <div className="bg-white rounded-lg shadow-sm p-6">
+  <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
     
  <h3 className="text-lg font-semibold mb-4">
  FAQ's on 15CA - 15CB Filing
