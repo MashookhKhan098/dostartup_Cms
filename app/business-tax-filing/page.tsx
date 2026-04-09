@@ -1,8 +1,8 @@
 "use client";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
-import AddQuestionModal from "../components/AddQuestionModal";
 import SidebarCart from "../components/SidebarCart";
 
 import React, { useState } from "react";
@@ -319,7 +319,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                 <button className="px-6 py-3 rounded-xl border border-[#E5E2DA] font-semibold text-[#2F2E2B] hover:bg-[#F4F3EE] transition-all text-sm">
                   Read Guides
                 </button>
-                <AddQuestionModal category="Business Tax" />
+                
               </div>
             </div>
           </div>
@@ -371,54 +371,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
 
       {/* Standardized Pricing Section */}
       <section className="bg-[#F4F3EE]">
-        <DoStartupPricing
-          title="Transparent Business Tax Filing Pricing"
-          subtitle="Expert-assisted ITR filing for proprietorships, partnerships, LLPs and companies."
-          plans={[
-            {
-              title: "Personal Tax Filing",
-              price: "1,499",
-              subtitle: "yr + GST",
-              description: "For resident salaried/pension earners with total income up to ₹50 lakh and simple income sources.",
-              features: [
-                "Income Tax computation",
-                "Tax Consultation",
-                "E-Filing on Portal",
-                "Email Support"
-              ],
-              buttonText: "Register Now"
-            },
-            {
-              title: "Business Tax Filing",
-              price: "4,899",
-              subtitle: "yr + GST",
-              description: "For individuals/HUFs with business income, freelancers, and small firm partners.",
-              isPopular: true,
-              features: [
-                "Expert Tax Consultation",
-                "Business Income Audit Review",
-                "Standard Deduction optimization",
-                "GST Reconcilliation help",
-                "Priority Support"
-              ],
-              buttonText: "Register Now"
-            },
-            {
-              title: "Multi-State Business",
-              price: "19,899",
-              subtitle: "yr + GST",
-              description: "For companies and large entities with multi-state operations and complex filing needs.",
-              features: [
-                "Dedicated Account Manager",
-                "Corporate Tax Planning",
-                "Audit Support Docs",
-                "Compliance Dashboard",
-                "Unlimited Consultations"
-              ],
-              buttonText: "Register Now"
-            }
-          ]}
-        />
+        <DynamicPricingSection />
       </section>
 
       <Footer />

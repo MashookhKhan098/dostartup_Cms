@@ -1,10 +1,11 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, CheckCircle, Search } from "lucide-react";
 import Footer from "../components/Footer";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Navbar from "../components/Navbar";
 import SidebarCart from "../components/SidebarCart";
 
@@ -520,7 +521,7 @@ export default function FSSAIReturnFiling(): React.ReactElement {
   <button className="px-4 py-2 border border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white text-sm rounded-lg transition-colors duration-200">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </div>

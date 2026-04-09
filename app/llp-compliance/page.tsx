@@ -5,8 +5,9 @@
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import PopularSearches from "../components/PopularSearches";
 import SidebarCart from "../components/SidebarCart";
 
@@ -184,58 +185,7 @@ export default function LLPCompliancePage() {
       </main>
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-12">
-        <DoStartupPricing 
-          title="Simple packages. Transparent pricing."
-          plans={[
-            {
-              title: "LLP Compliance - 1 Year",
-              price: "",
-              description: "Basic annual compliance for Limited Liability Partnerships",
-              features: [
-                "LEDGERS Accounting Software - 1 Year",
-                "LLP Annual Filing (Form 8 & 11)",
-                "Dedicated Accountant",
-                "Dedicated Compliance Advisor",
-                "Annual Bookkeeping",
-                "Financial Statement Preparation",
-                "Partner Capital Account Statement",
-                "Income Tax Return Filing for LLP",
-                "DIN KYC for 2 Designated Partners"
-              ],
-              buttonText: "Select Plan"
-            },
-            {
-              title: "LLP Compliance - 2 Year",
-              price: "",
-              description: "Extended LLP compliance support & better value",
-              isPopular: true,
-              features: [
-                "Everything in 1-Year LLP plan",
-                "Priority support",
-                "Quarterly compliance review meetings",
-                "Proactive ROC and tax filing alerts",
-                "ROC filing support for event based changes",
-                "Tax planning review for partners",
-                "Digital document vault for LLP records"
-              ],
-              buttonText: "Select Plan"
-            },
-            {
-              title: "LLP Compliance - 3 Year",
-              price: "",
-              description: "Long-term LLP compliance management",
-              features: [
-                "Everything in 2-Year LLP plan",
-                "Dedicated compliance manager",
-                "On-demand advisory calls for partners",
-                "Custom LLP compliance calendar",
-                "Secretarial support for partner meetings",
-                "Detailed annual compliance report"
-              ],
-              buttonText: "Select Plan"
-            }
-          ]}
-        />
+        <DynamicPricingSection />
       </div>
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-12">

@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Search, Check, Plus, ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
-import DoStartupPricing from "../components/DoStartupPricing";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -479,55 +480,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </section>
 
- <DoStartupPricing 
-   title="Simple, Transparent PF & TDS Return Filing Pricing"
-   plans={[
-     {
-       title: "Software Only",
-       price: "5,899",
-       subtitle: "yr + GST",
-       description: "LEDGERS Software Access - 1 Year",
-       features: [
-         "LEDGERS Software Access - 1 Year",
-         "TDS/PF Compliance Dashboard & Alerts",
-         "Deductor–Deductee Reconciliation & PAN Validation",
-         "Automated TDS calculations (section-wise)"
-       ],
-       buttonText: "Start Filing Now"
-     },
-     {
-       title: "Accountant",
-       price: "15,899",
-       subtitle: "FY + GST",
-       description: "Dedicated Accountant Support - 1 Assigned Accountant",
-       features: [
-         "Dedicated Accountant Support - 1 Assigned Accountant",
-         "Quarterly TDS/PF Return Filing - 1 Year",
-         "TRACES Validation Before Filing",
-         "Certificate Generation",
-         "Correction Statement Filing",
-         "Deductor–Deductee Reconciliation",
-         "Ledgers Accounting Software - 1 Year"
-       ],
-       buttonText: "Start Filing Now"
-     },
-     {
-       title: "TDS Filing – 2 Years",
-       price: "25,899",
-       subtitle: "2 FY + GST",
-       description: "Dedicated Accountant Support with 2 Year coverage",
-       isPopular: true,
-       features: [
-         "Quarterly TDS/PF Return Filing - 2 Years",
-         "TRACES Validation Before Filing",
-         "Certificate Generation",
-         "Deductor–Deductee Reconciliation",
-         "Ledgers Accounting Software - 2 Years"
-       ],
-       buttonText: "Start Filing Now"
-     }
-   ]}
- />
+ <DynamicPricingSection />
 
  <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">FAQs</h3>

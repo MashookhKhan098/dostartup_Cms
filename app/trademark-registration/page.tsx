@@ -1,6 +1,7 @@
 
-import PricingCards, { PricingPlan } from '../components/PricingCards';
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Trademark/Hero2';
@@ -8,34 +9,7 @@ import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
 
-const trademarkPlans: PricingPlan[] = [
-  {
-    title: "Trademark Registration", price: "1,999",
-    description: "Secure your brand identity in just 3 days! Complete end-to-end trademark registration service with expert attorney support.",
-    features: [
-      { text: "Comprehensive Trademark Search" },
-      { text: "Class Classification Consultation" },
-      { text: "TM Application Drafting" },
-      { text: "Filing of TM Application" },
-      { text: "Application Status Tracking" },
-      { text: "Support for TM Objections" }
-    ]
-  },
-  {
-    title: "Trademark + Logo Design", price: "5,899", isPopular: true,
-    description: "Professional logo design coupled with trademark registration to completely safeguard your intellectual property.",
-    features: [
-      { text: "Professional Logo Design Options" },
-      { text: "Comprehensive Trademark Search" },
-      { text: "Class Classification Consultation" },
-      { text: "TM Application Drafting" },
-      { text: "Filing of TM Application" },
-      { text: "Application Status Tracking" },
-      { text: "Support for TM Objections" },
-      { text: "Copyright Advisory" }
-    ]
-  }
-];
+
 
 export default function Home() {
  const heroProps = {
@@ -117,7 +91,7 @@ export default function Home() {
  <Navbar />
  <Hero {...heroProps} />
  <DynamicTabContent category="Trademark" />
- <Faq category="Trademark" />
+ <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

@@ -1,9 +1,10 @@
 
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Trademark/Hero';
-import Faq from '../components/Faq';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
@@ -37,7 +38,7 @@ export default function Home() {
  }}
  />
   <DynamicTabContent category="Trademark" />
-  <Faq category="Trademark" />
+  <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

@@ -1,7 +1,8 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import SidebarCart from "../components/SidebarCart";
 import React, { useMemo, useState } from "react";
@@ -646,7 +647,7 @@ export default function IncomeTaxPage() {
  </div>
  </section>
 
- <Faq category="Income Tax" blogCategory="income-tax" />
+ <FAQAccordion />
 
  <Footer />
 

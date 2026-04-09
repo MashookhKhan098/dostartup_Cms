@@ -1,9 +1,10 @@
 
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
 import { Rocket, Zap, Users, CheckCircle2, MapPin, FileText, Zap as ZapIcon } from 'lucide-react';
 
 export default function Home() {
@@ -200,7 +201,7 @@ export default function Home() {
  </div>
 
  <DynamicTabContent category="Trademark" />
- <Faq />
+ <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

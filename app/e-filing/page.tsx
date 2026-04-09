@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import SidebarCart from "../components/SidebarCart";
@@ -960,7 +959,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  Load More
  </button>
  
-<AddQuestionModal />
+
 </div>
  </div>
  </section>

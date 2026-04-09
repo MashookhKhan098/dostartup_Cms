@@ -1,6 +1,7 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -486,7 +487,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  Load More
  </button>
  
-<AddQuestionModal />
+
 </div>
  </div>
  <div className="bg-[#F4F3EE] rounded-lg p-4">

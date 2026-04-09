@@ -1,6 +1,7 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -485,7 +486,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  Load More
  </button>
  
-<AddQuestionModal />
+
 </div>
  </div>
  </section>

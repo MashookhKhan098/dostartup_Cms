@@ -1,13 +1,13 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, CheckCircle } from "lucide-react";
 import Footer from "../components/Footer";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Navbar from "../components/Navbar";
 import SidebarCart from "../components/SidebarCart";
-import DoStartupPricing from "../components/DoStartupPricing";
 
 const POPULAR_SEARCHES = [
  "Partnership", "Limited Liability Partnership", "Digital Signature",
@@ -525,42 +525,7 @@ export default function FSSAIRenewal(): React.ReactElement {
  </div>
 
           {/* Pricing Component */}
-          <DoStartupPricing 
-            title="Simple packages. Transparent pricing." 
-            subtitle="Registration fees are charged at cost. Upgrade or add services anytime."
-            containerClassName="font-sans mb-6"
-            plans={[
-              {
-                title: "State",
-                price: "",
-                description: "Renewal of Existing FSSAI Registration and Licenses.",
-                features: [
-                  "Document Collection & Verification",
-                  "Application Preparation & Form Submission",
-                  "FSSAI Portal Filing Assistance",
-                  "Government Fee Payment Coordination",
-                  "License Certificate Delivery",
-                  "100% Refund Guarantee",
-                ],
-                buttonText: "Start Filing Now",
-              },
-              {
-                title: "Central",
-                price: "",
-                description: "Renewal of Existing FSSAI Registration and Licenses.",
-                isPopular: true,
-                features: [
-                  "Document Collection & Verification",
-                  "Application Preparation & Form Submission",
-                  "FSSAI Portal Filing Assistance",
-                  "Government Fee Payment Coordination",
-                  "License Certificate Delivery",
-                  "100% Refund Guarantee",
-                ],
-                buttonText: "Start Filing Now",
-              },
-            ]}
-          />
+          <DynamicPricingSection />
 
           {/* FAQ Card */}
           <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
@@ -589,7 +554,7 @@ export default function FSSAIRenewal(): React.ReactElement {
   <button className="px-4 py-2 border border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white text-sm rounded-lg transition-colors duration-200">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </div>

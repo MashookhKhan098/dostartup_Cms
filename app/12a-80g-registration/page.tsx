@@ -1,13 +1,13 @@
 
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Registration/Hero';
 import type { DynamicHeroSectionProps } from '../components/Registration/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
-// import Price from '../components/Price';
-
+// 
 export default function Home() {
 
  const heroProps: DynamicHeroSectionProps = {
@@ -87,61 +87,7 @@ export default function Home() {
  };
 
 
- const pricingData = {
- heading: "Simple, Transparent Professional Tax Pricing",
- subheading:
- "Get expert assistance for Professional Tax Registration, Return Filing, and Cancellation — with accurate state-wise pricing, quick processing, and complete compliance support.",
- note: "",
- showStateSelector: true,
- cards: [
- {
- id: 1,
- title: "Professional Tax Registration Certificate",
- price: "7,899",
- priceNote: "+ GST | Govt. fee included",
- buttonText: "Start Filing Now",
- stateLabel: "Select Your State for Accurate Pricing",
- defaultState: "Telangana",
- features: [
- "Application Preparation",
- "Application Submission",
- "PTRC & PTEC Number",
- "Professional Tax Registration Certificate",
- "All-inclusive pricing"
- ]
- },
- {
- id: 2,
- title: "Professional Tax Return Filing",
- price: "5,899",
- priceNote: "+ GST",
- buttonText: "Start Filing Now",
- stateLabel: "Select Your State for Accurate Pricing",
- defaultState: "Karnataka (Without Employees)",
- features: [
- "Filing of PT Return for 2 Directors",
- "Filing of Professional Tax Return for 1 Year",
- "Compliance Review & Expert Support",
- "All-inclusive pricing"
- ]
- },
- {
- id: 3,
- title: "Professional Tax Cancellation",
- price: "12,899",
- priceNote: "+ GST",
- buttonText: "Start Cancellation",
- stateLabel: "Select Your State for Accurate Pricing",
- defaultState: "Karnataka",
- features: [
- "Cancellation of PTEC",
- "Cancellation of PTRC",
- "Application Filing & Follow-up",
- "All-inclusive pricing"
- ]
- }
- ]
- };
+ 
 
 
  return (
@@ -149,7 +95,7 @@ export default function Home() {
  <Navbar />
  <Hero {...heroProps} />
  <DynamicTabContent category="Startup" />
- <Faq />
+ <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

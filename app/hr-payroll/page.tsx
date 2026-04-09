@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import Faq from "../components/Faq";
 import PopularSearches from "../components/PopularSearches";
 import SidebarCart from "../components/SidebarCart";
 import { Check, ChevronRight, ChevronDown, Monitor, Users, Shield, Clock, FileText, BarChart, Lock, UserCheck, Briefcase, Calendar, Globe } from "lucide-react";
@@ -260,7 +261,7 @@ export default function ComplianceHRPayrollPage() {
         </div>
       </section>
 
-      <Faq category="HR Payroll" />
+      <FAQAccordion />
       <PopularSearches />
       <Footer />
     </div>

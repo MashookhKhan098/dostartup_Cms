@@ -1,8 +1,9 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 
 export default function CommencementInc20aPage() {
  const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -398,7 +399,7 @@ export default function CommencementInc20aPage() {
  Load More
  </button>
  
-<AddQuestionModal />
+
 </div>
  </section>
 

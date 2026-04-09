@@ -3,9 +3,9 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
-import AddQuestionModal from "../components/AddQuestionModal";
 import {
   CheckCircle,
   XCircle,
@@ -276,89 +276,9 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "File & Track Refund" },
 ];
 
-const PLANS = [
-  {
-    name: "Self File",
-    price: "₹499",
-    period: "/ filing",
-    desc: "For investors with simple equity and MF gains",
-    features: [
-      { text: "Auto broker P&L import", ok: true },
-      { text: "LTCG & STCG calculation", ok: true },
-      { text: "One house property", ok: true },
-      { text: "e-File to IT Dept", ok: true },
-      { text: "CA review", ok: false },
-    ],
-    cta: "Start Filing",
-    featured: false,
-  },
-  {
-    name: "AI Pro",
-    price: "₹799",
-    period: "/ filing",
-    desc: "Best for active investors, multiple brokers & properties",
-    features: [
-      { text: "Everything in Self File", ok: true },
-      { text: "AI loss harvesting engine", ok: true },
-      { text: "Multiple house properties", ok: true },
-      { text: "AIS deep reconciliation", ok: true },
-      { text: "F&O & crypto income", ok: true },
-    ],
-    cta: "Get AI Pro",
-    featured: true,
-    badge: "POPULAR",
-  },
-  {
-    name: "CA Expert",
-    price: "₹1,999",
-    period: "/ filing",
-    desc: "Dedicated CA for complex portfolios & NRI filing",
-    features: [
-      { text: "Everything in AI Pro", ok: true },
-      { text: "Dedicated CA assigned", ok: true },
-      { text: "Foreign income & DTAA", ok: true },
-      { text: "Notice response support", ok: true },
-      { text: "Tax planning consultation", ok: true },
-    ],
-    cta: "Hire a CA",
-    featured: false,
-  },
-];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-2?",
-    a: "ITR-2 is for resident individuals and HUFs who have income from salary, capital gains (stocks, MFs, property), multiple house properties, foreign income, or are directors/shareholders in unlisted companies. Anyone who cannot file ITR-1 but has no business income should file ITR-2.",
-  },
-  {
-    q: "What is the LTCG tax rate on equity for FY 2025-26?",
-    a: "Post Budget 2024, Long-Term Capital Gains on equity shares and equity MFs (held > 12 months) are taxed at 12.5% on gains exceeding ₹1.25 lakh per year. Gains up to ₹1.25 lakh remain exempt under Section 112A.",
-  },
-  {
-    q: "What is the STCG tax rate after Budget 2024?",
-    a: "Short-Term Capital Gains on equity and equity MFs (held ≤ 12 months) are taxed at 20% under Section 111A (increased from 15% in Budget 2024). This applies only to STT-paid transactions on recognized exchanges.",
-  },
-  {
-    q: "Can I carry forward capital losses in ITR-2?",
-    a: "Yes. Short-term capital losses can be set off against both STCG and LTCG. Long-term capital losses can only offset LTCG. Unabsorbed losses can be carried forward for 8 assessment years, but only if you file before the due date.",
-  },
-  {
-    q: "Can NRIs file ITR-2?",
-    a: "Yes. NRIs with capital gains, multiple properties, or other Indian income should file ITR-2. DoStartup supports full NRI filing with DTAA benefit application for USA, UK, UAE, Canada, Singapore, Australia and more.",
-  },
-  {
-    q: "What is the last date to file ITR-2 for AY 2026-27?",
-    a: "The due date for ITR-2 filing for FY 2025-26 (AY 2026-27) is July 31, 2026. Belated returns can be filed till December 31, 2026 with a late fee of ₹1,000–₹5,000 under Section 234F.",
-  },
-  {
-    q: "How does DoStartup import capital gains automatically?",
-    a: "DoStartup connects with 20+ brokers including Zerodha, Groww, Angel One, ICICI Direct, and Upstox. It imports your P&L statement, computes LTCG/STCG with correct scrip-wise cost basis, and populates Schedule CG in ITR-2 automatically.",
-  },
-  {
-    q: "Is Form 67 needed for foreign tax credit?",
-    a: "Yes. If you paid tax abroad on income also taxable in India, you must file Form 67 (before or along with ITR-2) to claim Foreign Tax Credit under Section 90/91. DoStartup's CA Expert plan handles this end-to-end.",
-  },
-];
+
+
 
 const CAPITAL_GAINS_TABLE = [
   {
@@ -1702,78 +1622,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  FAQ SECTION
  ══════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">
-                ITR-2 Questions Answered
-              </h2>
-              <p className="text-[#C15F3C] text-sm mt-2">
-                Everything about capital gains, NRI filing & more.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {FAQS.map((faq, i) => (
-                <div
-                  key={i}
-                  className={`bg-[#F4F3EE] border-2 rounded-2xl overflow-hidden transition-all duration-200 ${
-                    openFaq === i
-                      ? "border-[#C15F3C] shadow-lg shadow-[#C15F3C]/5"
-                      : "border-slate-100 hover:border-[#C15F3C]/30"
-                  }`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between items-start gap-4 px-5 py-4 text-left group"
-                  >
-                    <span className="font-semibold text-sm text-slate-800 leading-snug group-hover:text-[#C15F3C] transition-colors">
-                      {faq.q}
-                    </span>
-                    {openFaq === i ? (
-                      <ChevronUp
-                        size={17}
-                        className="text-[#C15F3C] flex-shrink-0 mt-0.5"
-                      />
-                    ) : (
-                      <ChevronDown
-                        size={17}
-                        className="text-[#C15F3C] flex-shrink-0 mt-0.5 group-hover:translate-y-0.5 transition-transform"
-                      />
-                    )}
-                  </button>
-
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t border-[#F4F3EE] pt-3 bg-[#F4F3EE]/30">
-                      <p className="text-slate-600 text-sm leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-center mt-8">
-              <AddQuestionModal category="itr-2-return-filing" />
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-sm text-orange-500 mb-4">
-                Still have questions about ITR-2?
-              </p>
-              <Link
-                href="/support"
-                className="inline-flex items-center gap-2 text-orange-600 font-semibold text-sm hover:text-orange-700 border border-orange-300 px-6 py-3 rounded-full hover:bg-orange-50 transition-all"
-              >
-                <MessageCircle size={16} />
-                Chat with our AI Tax Support (24/7)
-              </Link>
-            </div>
-          </div>
-        </section>
+        <FAQAccordion />
 
         {/* ══════════════════════════════════════
  FINAL CTA BANNER

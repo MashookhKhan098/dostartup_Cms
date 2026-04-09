@@ -5,9 +5,10 @@
 import React, { useMemo, useState } from "react";
 import { Star, ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import LiveChatCard from "../components/LiveChatCard";
 import SidebarCart from "../components/SidebarCart";
-import Faq from "../components/Faq";
 import Footer from "../components/Footer";
 import PopularSearches from "../components/PopularSearches";
 
@@ -247,52 +248,7 @@ const services = [
  },
 ];
 
-const pricingPlans = [
- {
- name: "MCA Compliance - 1 Year",
- subtitle: "Basic annual compliance for private limited companies",
- price: "₹19,899",
- popular: true,
- features: [
- "LEDGERS Accounting Software - 1 Year",
- "LEDGERS Compliance Platform",
- "Dedicated Accountant",
- "Dedicated Compliance Advisor",
- "MCA Annual Filing",
- "Annual Bookkeeping",
- "Financial Statement Preparation",
- "ITR-6 Return Filing",
- "DIN KYC for 2 Directors",
- ],
- },
- {
- name: "MCA Compliance - 2 Year",
- subtitle: "Extended support & better value",
- price: "₹29,899",
- features: [
- "Everything in 1-Year plan",
- "Priority support",
- "Quarterly review meetings",
- "Proactive compliance alerts",
- "ROC filing support for event based changes",
- "Tax planning review",
- "Digital document vault",
- ],
- },
- {
- name: "MCA Compliance - 3 Year",
- subtitle: "Long-term compliance management",
- price: "₹45,899",
- features: [
- "Everything in 2-Year plan",
- "Dedicated compliance manager",
- "On-demand advisory calls",
- "Custom compliance calendar",
- "Secretarial support for board meetings",
- "Detailed annual compliance report",
- ],
- },
-];
+
 
 const faqs = [
  {
@@ -630,7 +586,7 @@ export default function CompanyCompliancePage(): React.ReactElement {
  </section>
 
  {/* FAQ SECTION */}
- <Faq category="MCA" />
+ <FAQAccordion />
  </main>
 
  <Footer />

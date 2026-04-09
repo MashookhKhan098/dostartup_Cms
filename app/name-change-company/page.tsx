@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 import React, { useState } from "react";
@@ -15,6 +14,8 @@ import {
  Zap,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -396,7 +397,7 @@ export default function CompanyNameChange() {
   <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </section>

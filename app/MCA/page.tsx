@@ -5,6 +5,8 @@
 import React, { useMemo, useState } from "react";
 import SidebarCart from "../components/SidebarCart";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import {
   ChevronRight,
@@ -13,7 +15,6 @@ import {
   Star,
   ChevronDown,
 } from "lucide-react";
-import Faq from "../components/Faq";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -180,7 +181,7 @@ export default function MCA() {
       </section>
 
       {/* FAQ SECTION */}
-      <Faq category="MCA" />
+      <FAQAccordion />
 
       <Footer />
     </div>

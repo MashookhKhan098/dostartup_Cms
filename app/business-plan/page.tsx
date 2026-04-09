@@ -8,9 +8,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -240,42 +241,7 @@ export default function BusinessPlanPage() {
         </div>
       </main>
 
-      <DoStartupPricing 
-        plans={[
-          {
-            title: "Pitch Deck",
-            price: "",
-            description: "A business plan with pitch deck and financial model is essential for business owners to raise loan or equity...",
-            features: [
-              "PPT Presentation",
-              "Market Research"
-            ],
-            buttonText: "Start Filing Now"
-          },
-          {
-            title: "Financial Model",
-            price: "",
-            description: "A business plan with pitch deck and financial model is essential for business owners to raise loan or equity...",
-            features: [
-              "Business Analysis",
-              "Excel Model",
-              "Financial Projections"
-            ],
-            buttonText: "Start Filing Now"
-          },
-          {
-            title: "Loan Syndication",
-            price: "",
-            description: "A business plan with pitch deck and financial model is essential for business owners to raise loan or equity...",
-            features: [
-              "Pitch Deck",
-              "Financial Model",
-              "Loan Syndication"
-            ],
-            buttonText: "Start Filing Now"
-          }
-        ]}
-      />
+      <DynamicPricingSection />
 
       <Footer />
 

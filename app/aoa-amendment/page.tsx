@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 /* eslint-disable @next/next/no-img-element */
@@ -7,6 +6,8 @@ import AddQuestionModal from "../components/AddQuestionModal";
 import React, { useMemo, useState } from "react";
 import { Star, ChevronDown, Search, Menu, X } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 
 /* ------------------------------
@@ -960,7 +961,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
   <button className="text-xs px-3 py-2 border-2 border-amber-600 rounded bg-[#F4F3EE] text-amber-700 hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </section>

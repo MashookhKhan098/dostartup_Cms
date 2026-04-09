@@ -3,7 +3,8 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-import DoStartupPricing from "../components/DoStartupPricing";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import {
   ChevronRight,
@@ -819,67 +820,7 @@ export default function TaxCalculatorPage() {
         </div>
 
         {/* ── PRICING SECTION ── */}
-        <DoStartupPricing
-          title="Simple packages. Transparent pricing."
-          subtitle="Registration fees are charged at cost. Upgrade or add services anytime."
-          plans={[
-            {
-              title: "Assisted Tax Filing",
-              price: "1,499",
-              subtitle: "GST | Govt. fee extra",
-              description: "Our experienced accountants manage your end-to-end ITR filing from document review and form identification to tax computation and submission.",
-              features: [
-                "Document collection & review",
-                "ITR form identification",
-                "Income computation",
-                "Standard deduction & basic deductions (80C, 80D, 80TTA)",
-                "Tax liability computation & payable/refund summary",
-                "ITR preparation & filing",
-                "ITR acknowledgement copy",
-              ],
-              buttonText: "Start Filing Now",
-            },
-            {
-              title: "CA Assisted Tax Filing",
-              price: "2,999",
-              subtitle: "GST | Govt. fee extra",
-              description: "A qualified Chartered Accountant personally handles your tax return from document review and computation to filing.",
-              isPopular: true,
-              features: [
-                "Dedicated CA assigned to your return",
-                "Income from all heads (capital gains, business & profession, foreign income)",
-                "Capital gains computation — equity, mutual funds, debt, property",
-                "HRA, LTA, perquisites & Form 16 reconciliation",
-                "Tax optimisation: deductions, exemptions & regime selection (Old vs New)",
-                "Advance tax review & shortfall advisory",
-                "Form 26AS / AIS / TIS reconciliation",
-                "Priority CA support (chat/call)",
-                "Included all deliverables in Assisted Tax Filing",
-              ],
-              buttonText: "Start Filing Now",
-            },
-            {
-              title: "CA Managed Tax Compliance",
-              price: "5,999",
-              subtitle: "GST | Govt. fee extra",
-              description: "A dedicated Chartered Accountant manages your complete compliance lifecycle — annual tax planning, advance tax, TDS reconciliation, notices & more.",
-              features: [
-                "Dedicated CA assigned to your return",
-                "Annual tax planning session with your CA",
-                "Advance tax computation & reminders (all 4 quarters)",
-                "Form 16 / Form 16A / TDS reconciliation",
-                "DTAA & foreign asset reporting (Schedule FA / FSI)",
-                "Income Tax Notice handling & response drafting",
-                "Rectification filing (Section 154)",
-                "Refund follow-up & status tracking",
-                "Year-round CA availability (phone & email)",
-                "Compliance calendar with reminders",
-                "Included all deliverables in CA Assisted Tax Filing",
-              ],
-              buttonText: "Start Filing Now",
-            },
-          ]}
-        />
+        <DynamicPricingSection />
       </main>
       <Footer />
     </>

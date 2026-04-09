@@ -1,4 +1,6 @@
 // // import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 // // import Footer from "../components/Footer";
 // // import Popularsearches from '../components/PopularSearches';
 // // import Hero from '../components/Gst/Hero2';
@@ -11,7 +13,7 @@
 // // <Navbar />
 // // <Hero/>
 // // <DynamicTabContent tabName="GST Registration" />
-// // <Faq />
+// // <FAQAccordion />
 // // <Popularsearches />
 // // <Footer />
 // // </>
@@ -122,7 +124,7 @@
 // <Navbar />
 // <Hero {...heroProps} />
 // <DynamicTabContent tabName="GST Registration" />
-// <Faq />
+// <FAQAccordion />
 // <Popularsearches />
 // <Footer />
 // </>
@@ -137,7 +139,6 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
 import { Rocket, Zap, Users } from 'lucide-react';
 
 export default function Home() {
@@ -277,7 +278,7 @@ export default function Home() {
  </div>
 
  <DynamicTabContent category="GST" />
- <Faq />
+ <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

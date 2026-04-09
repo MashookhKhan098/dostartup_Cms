@@ -1,7 +1,8 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 import SidebarCart from "../components/SidebarCart";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import FooterShared from "../components/Footer";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -1165,7 +1166,7 @@ function ArticleAndSidebar() {
  </div>
  </article>
 
- <Faq category="Compliance" />
+ <FAQAccordion />
 
  </div>
  </div>

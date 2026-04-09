@@ -2,9 +2,9 @@
 
 import { useState, useCallback } from "react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
-import AddQuestionModal from "../components/AddQuestionModal";
 import {
   CheckCircle,
   XCircle,
@@ -237,32 +237,7 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "Filed! Track Refund" },
 ];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-1 (Sahaj)?",
-    a: "ITR-1 is for resident individuals with total income up to ₹50 lakh from salary/pension, one house property, and other sources like interest. It cannot be filed if you have capital gains, business income, or are a director in a company.",
-  },
-  {
-    q: "What is the last date for AY 2026-27?",
-    a: "The due date is July 31, 2026. Filing after the due date attracts a late fee of up to ₹5,000 under Section 234F. Belated returns can be filed till December 31, 2026.",
-  },
-  {
-    q: "Is DoStartup.in safe? How is data protected?",
-    a: "Yes. DoStartup.in uses 256-bit SSL encryption, is SOC2 compliant, and is a registered e-Return Intermediary (ERI) with the Income Tax Department. Your data is never sold to third parties.",
-  },
-  {
-    q: "What documents do I need to file ITR-1?",
-    a: "You primarily need your Form-16 (from employer), PAN card, Aadhaar, bank account details, and interest certificates. Our AI guides you if anything is missing.",
-  },
-  {
-    q: "Can I file ITR-1 without Form-16?",
-    a: "Yes! Our AI can help you file even without Form-16 using your salary slips, AIS data, and manually entered income details. We auto-fetch your 26AS for TDS verification.",
-  },
-  {
-    q: "How long does it take to get a tax refund?",
-    a: "Tax refunds are typically processed within 15–45 days of e-verification. DoStartup provides a real-time refund tracker inside your dashboard.",
-  },
-];
+
 
 const TAX_SLABS = [
   { slab: "Up to ₹3,00,000", rate: "NIL", nil: true },
@@ -401,47 +376,7 @@ export default function ITR1Page() {
   // FAQ open state
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const itrPlans = [
-    {
-      title: "Assisted Tax Filing",
-      price: "999",
-      description: "Standard ITR-1 preparation and filing for salaried individuals with one house property.",
-      features: [
-        "Income from Salary & Rent",
-        "Form 16/AIS Reconciliation",
-        "80C/80D Deduction Review",
-        "Expert Support for Salaried",
-        "e-Filing and Acknowledgement"
-      ]
-    },
-    {
-      title: "CA Assisted Tax Filing",
-      price: "1,999",
-      isPopular: true,
-      description: "Dedicated CA support for tax optimization, multiple sources, and complex AIS/26AS reconciliation.",
-      features: [
-        "All features of Assisted Filing",
-        "Tax Optimization & Review",
-        "Interest & Other Income Support",
-        "AIS/26AS Deep Reconciliation",
-        "Relief under Section 89(1)",
-        "Priority CA Support"
-      ]
-    },
-    {
-      title: "CA Managed Tax Compliance",
-      price: "3,999",
-      description: "Complete peace of mind with notice handling, rectification filing, and year-round CA support.",
-      features: [
-        "All features of CA Assisted Filing",
-        "IT Notice Handling & Response",
-        "Rectification Filing (Sec 154)",
-        "Year-round CA Availability",
-        "Refund Follow-up & Tracking",
-        "Expert Tax Planning Advice"
-      ]
-    },
-  ];
+  
 
   return (
     <>
@@ -1012,62 +947,13 @@ export default function ITR1Page() {
         PRICING
         ══════════════════════════════════════ */}
         <section id="pricing">
-          <DoStartupPricing plans={itrPlans} />
+          <DynamicPricingSection />
         </section>
 
         {/* ══════════════════════════════════════
         FAQ
         ══════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">
-                Frequently Asked Questions
-              </h2>
-            </div>
-            <div className="space-y-3">
-              {FAQS.map((faq, i) => (
-                <div
-                  key={i}
-                  className={`bg-[#F4F3EE] border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-400" : "border-slate-100"}`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between items-start gap-4 px-5 py-4 text-left"
-                  >
-                    <span className="font-semibold text-sm text-slate-800 leading-snug">
-                      {faq.q}
-                    </span>
-                    {openFaq === i ? (
-                      <ChevronUp
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5"
-                      />
-                    ) : (
-                      <ChevronDown
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5"
-                      />
-                    )}
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t border-orange-100 pt-3">
-                      <p className="text-slate-500 text-sm leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-center mt-8">
-              <AddQuestionModal category="itr-1-return-filing" />
-            </div>
-          </div>
-        </section>
+        <FAQAccordion />
 
         <section className="bg-gradient-to-br from-orange-500 to-orange-700 py-6 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">

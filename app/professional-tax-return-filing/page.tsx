@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Faq from '../components/Faq';
 import SidebarCart from "../components/SidebarCart";
 import { CheckCircle, Clock, Shield, FileText, AlertCircle, Info, ChevronRight, Check, ChevronDown } from "lucide-react";
 
@@ -361,7 +362,7 @@ export default function ProfessionalTaxReturnPage() {
       </section>
 
       {/* FAQ Section */}
-      <Faq category="Professional Tax Return Filing" />
+      <FAQAccordion />
 
       {/* Popular Searches */}
       <Popularsearches />

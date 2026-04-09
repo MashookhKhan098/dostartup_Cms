@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 /* eslint-disable @next/next/no-img-element */
@@ -7,6 +6,8 @@ import AddQuestionModal from "../components/AddQuestionModal";
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import PopularSearches from "../components/PopularSearches";
 import SidebarCart from "../components/SidebarCart";
@@ -182,7 +183,7 @@ export default function DematerialisationPage() {
                 </div>
                 <div className="flex gap-3 items-center flex-wrap mt-4">
   <button className="mt-10 px-10 py-2.5 border-2 border-amber-600 text-amber-700 rounded-lg text-sm font-bold hover:bg-amber-50 uppercase tracking-wide">Load More</button>
-  <AddQuestionModal />
+  
 </div>
 </div>
           </div>

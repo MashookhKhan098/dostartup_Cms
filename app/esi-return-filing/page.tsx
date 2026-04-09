@@ -14,7 +14,8 @@ import {
  File,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
-import DoStartupPricing from "../components/DoStartupPricing";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -758,54 +759,7 @@ export default function EsiReturnFilingPage(): React.ReactElement {
 
  {/* Pricing Section with DoStartupPricing */}
  <div className="-mx-4 sm:-mx-6 lg:-mx-8">
-   <DoStartupPricing 
-     title="Simple, Transparent HR & Payroll Management Pricing"
-     plans={[
-       {
-         title: "Payroll Management",
-         price: "12,899",
-         subtitle: "yr + GST",
-         description: "LEDGERS HR Software (1 Year Subscription)",
-         features: [
-           "LEDGERS HR Software (1 Year Subscription)",
-           "Attendance Platform",
-           "Employee Self-Serve",
-           "12 Months Managed Payroll Service",
-           "12 Months HR Support & Assistance",
-           "Upto 20 Employees"
-         ],
-         buttonText: "Start Now"
-       },
-       {
-         title: "Fractional HR",
-         price: "42,899",
-         subtitle: "yr + GST",
-         description: "LEDGERS HR Platform setup & migration with a dedicated accountant for 1 year.",
-         isPopular: true,
-         features: [
-           "LEDGERS HR Platform setup & migration",
-           "1 Year Monthly Payroll Service",
-           "Dedicated Accountant",
-           "Attendance Platform",
-           "1 Year PF & ESI Filing",
-           "Upto 20 Employees"
-         ],
-         buttonText: "Start Now"
-       },
-       {
-         title: "PF & ESI Compliance",
-         price: "17,899",
-         subtitle: "yr + GST",
-         description: "Managed PF and ESI return filing for your establishment.",
-         features: [
-           "12 Months Managed PF Return Filing",
-           "12 Months Managed ESI Return Filing",
-           "Up to 20 Employees"
-         ],
-         buttonText: "Start Now"
-       }
-     ]}
-   />
+   <DynamicPricingSection />
  </div>
 
  {/* FAQ Section */}

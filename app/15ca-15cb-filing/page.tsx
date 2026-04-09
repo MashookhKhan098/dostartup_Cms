@@ -1,10 +1,10 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import React, { useState } from "react";
 import {
  ChevronRight,
@@ -580,56 +580,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </aside>
  </main>
 
-<DoStartupPricing
-  title="Simple packages. Transparent pricing."
-  subtitle="Registration fees are charged at cost. Upgrade or add services anytime."
-  plans={[
-    {
-      title: "15CA",
-      price: "1,999",
-      subtitle: "",
-      description: "Filing of the income tax form 15 CA by an expert to ensure hassle-free foreign remittances and compliance.",
-      features: [
-        "Income tax form 15 CA preparation",
-        "Verification of remittance details",
-        "Expert assistance for online filing",
-        "Compliance with Rule 37BB",
-        "Electronic submission to IT Department"
-      ],
-      buttonText: "Start Filing Now"
-    },
-    {
-      title: "15CB",
-      price: "4,999",
-      subtitle: "",
-      description: "Expert Chartered Accountant certification for foreign remittances exceeding threshold limits as per Income Tax Act.",
-      isPopular: true,
-      features: [
-        "Form 15CB CA Certification",
-        "Taxability analysis of remittance",
-        "DTAA benefit verification",
-        "Verification of withholding tax (TDS)",
-        "Review of supporting documents"
-      ],
-      buttonText: "Start Filing Now"
-    },
-    {
-      title: "1 Year GST Filing + ITR",
-      price: "19,899",
-      subtitle: "",
-      description: "DoStartup seamlessly provides customized accounting services for businesses with turnover up to 40 lakhs, ensuring compliance, tax filing, and expert consultation. Access ledger software, Financial Statements, GST Return Filings, Income Tax Return Filing and more with dedicated consultation.",
-      features: [
-        "Dedicated Accountant",
-        "GSTR-1 Filing - 12 Months",
-        "GSTR-3B Filing - 12 Months",
-        "Income Tax Filing",
-        "Financial Statements",
-        "LEDGERS Software - 1 Year"
-      ],
-      buttonText: "Start Filing Now"
-    }
-  ]}
-/>
+<DynamicPricingSection />
 
 <section className="max-w-[1180px] mx-auto px-6 py-8">
   <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
@@ -662,7 +613,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
   <button className="px-4 py-2 border rounded-md text-sm text-[#C15F3C]">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  

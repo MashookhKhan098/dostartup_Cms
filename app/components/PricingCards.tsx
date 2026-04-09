@@ -94,8 +94,8 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
 
 export default function PricingCards({ plans, title, subtitle }: { plans: PricingPlan[], title?: string, subtitle?: string }) {
   return (
-    <section className="py-20 px-4 sm:px-6 bg-[#F5F3F1] font-sans">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 bg-[#F4F3EE] font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {(title || subtitle) && (
           <div className="text-center mb-14">
             {title && (

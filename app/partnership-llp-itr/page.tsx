@@ -1,8 +1,9 @@
 "use client";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import {
@@ -614,7 +615,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
  Load More
  </button>
  
-<AddQuestionModal />
+
 </div>
  </div>
  </section>

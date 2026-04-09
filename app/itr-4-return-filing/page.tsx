@@ -3,9 +3,9 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
-import AddQuestionModal from "../components/AddQuestionModal";
 import {
   CheckCircle,
   XCircle,
@@ -272,40 +272,7 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "File & Track Refund" },
 ];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-4 (Sugam)?",
-    a: "ITR-4 is for individuals, HUFs, and firms (other than LLP) opting for presumptive taxation under Section 44AD (business up to ₹2 crore), 44ADA (professionals up to ₹75 lakh), or 44AE (transport operators). Total income must be ≤ ₹50 lakh.",
-  },
-  {
-    q: "What is Section 44AD presumptive taxation?",
-    a: "Under Section 44AD, small businesses with turnover up to ₹2 crore can declare income at 8% of turnover (or 6% for digital receipts) without maintaining detailed books of accounts. No tax audit is required if you declare income at or above this rate.",
-  },
-  {
-    q: "What is Section 44ADA for professionals?",
-    a: "Section 44ADA applies to specified professionals (doctors, lawyers, CAs, engineers, architects, consultants) with gross receipts up to ₹75 lakh. They can declare 50% of gross receipts as income and skip maintaining books of accounts.",
-  },
-  {
-    q: "What is the difference between ITR-3 and ITR-4?",
-    a: "ITR-4 is for those opting for presumptive taxation (44AD/44ADA/44AE) — simpler filing without detailed books. ITR-3 is for those maintaining actual books of accounts and declaring actual profit/loss. F&O traders must always use ITR-3.",
-  },
-  {
-    q: "What is the turnover limit for ITR-4?",
-    a: "Section 44AD: ₹2 crore (or ₹3 crore if 95%+ receipts are digital). Section 44ADA: ₹75 lakh (or ₹75 lakh). Section 44AE: unlimited vehicles but ≤ 10 goods vehicles at any time. Total income must not exceed ₹50 lakh.",
-  },
-  {
-    q: "Can I claim deductions under 80C, 80D in ITR-4?",
-    a: "Yes. Under the Old Regime, you can claim all deductions (80C, 80D, 80CCD, home loan interest, HRA, etc.) in addition to declaring presumptive income. Our AI identifies every deduction you're eligible for.",
-  },
-  {
-    q: "What is the last date to file ITR-4 for AY 2026-27?",
-    a: "The due date for ITR-4 is July 31, 2026. Since presumptive taxation does not require a tax audit, there is no extended deadline. Belated returns can be filed till December 31, 2026 with a late fee under Section 234F.",
-  },
-  {
-    q: "Can I opt out of presumptive taxation scheme?",
-    a: "Yes, but if you opt out of 44AD, you cannot re-enter the scheme for 5 consecutive years. If you opt out of 44ADA, you can re-enter next year. DoStartup's AI advises whether presumptive taxation is beneficial for your specific situation.",
-  },
-];
+
 
 const SCHEME_TABLE = [
   {
@@ -478,47 +445,7 @@ export default function ITR4Page() {
   const result = runCalc(calc);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const itrPlans = [
-    {
-      title: "Assisted Tax Filing",
-      price: "1,499",
-      description: "Standard ITR-4 preparation and filing for small business owners and professionals under presumptive schemes.",
-      features: [
-        "44AD / 44ADA Scheme Filing",
-        "Business Income Computation",
-        "Check for Audit Requirement",
-        "Expert Support for Small Biz",
-        "e-Filing and Acknowledgement"
-      ]
-    },
-    {
-      title: "CA Assisted Tax Filing",
-      price: "2,999",
-      isPopular: true,
-      description: "Dedicated CA support for optimized presumptive taxation, multiple sources, and AIS/26AS reconciliation.",
-      features: [
-        "All features of Assisted Filing",
-        "AI Expense Maximizer (44AD)",
-        "Calculation of Capital Gains",
-        "AIS/26AS Deep Reconciliation",
-        "Dedicated CA Review",
-        "Priority Support"
-      ]
-    },
-    {
-      title: "CA Managed Tax Compliance",
-      price: "4,999",
-      description: "Full compliance management including advance tax computation, notice response, and dedicated CA advisor.",
-      features: [
-        "All features of CA Assisted Filing",
-        "IT Notice Handling & Response",
-        "Advance Tax Support (4 Quarters)",
-        "Year-round CA Availability",
-        "Refund follow-up & tracking",
-        "Compliance Calendar Reminders"
-      ]
-    },
-  ];
+  
 
   const resetCalc = () =>
     setCalc({
@@ -892,50 +819,13 @@ export default function ITR4Page() {
         PRICING
         ════════════════════════════════════ */}
         <section id="pricing">
-          <DoStartupPricing plans={itrPlans} />
+          <DynamicPricingSection />
         </section>
 
         {/* ════════════════════════════════════
         FAQ
         ════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black">
-                Questions Answered
-              </h2>
-            </div>
-            <div className="space-y-3 mb-10">
-              {FAQS.map((faq, i) => (
-                <div key={i} className="border-2 rounded-2xl overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between p-5 text-left"
-                  >
-                    <span className="font-semibold text-sm">{faq.q}</span>
-                    {openFaq === i ? (
-                      <ChevronUp size={17} />
-                    ) : (
-                      <ChevronDown size={17} />
-                    )}
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t pt-3 bg-orange-50/20 text-gray-600 text-sm">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-center">
-              <AddQuestionModal category="itr-4-return-filing" />
-            </div>
-
-          </div>
-        </section>
+        <FAQAccordion />
       </main>
       <Footer />
     </>

@@ -3,9 +3,9 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
-import AddQuestionModal from "../components/AddQuestionModal";
 import {
   CheckCircle,
   XCircle,
@@ -253,89 +253,9 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "File & Get Acknowledgment" },
 ];
 
-const PLANS = [
-  {
-    name: "Self File",
-    price: "₹1,999",
-    period: "/ filing",
-    desc: "For small partnership firms & LLPs with simple income",
-    features: [
-      { text: "P&L & Balance Sheet import", ok: true },
-      { text: "Partner salary/interest calc", ok: true },
-      { text: "Depreciation calculation", ok: true },
-      { text: "e-File to IT Dept", ok: true },
-      { text: "Tax audit support", ok: false },
-    ],
-    cta: "Start Filing",
-    featured: false,
-  },
-  {
-    name: "AI Pro",
-    price: "₹2,999",
-    period: "/ filing",
-    desc: "Best for active firms, LLPs & AOPs with multiple income sources",
-    features: [
-      { text: "Everything in Self File", ok: true },
-      { text: "AI partner salary optimizer", ok: true },
-      { text: "Capital gains computation", ok: true },
-      { text: "AIS deep reconciliation", ok: true },
-      { text: "Notice Shield pre-check", ok: true },
-    ],
-    cta: "Get AI Pro",
-    featured: true,
-    badge: "POPULAR",
-  },
-  {
-    name: "CA Expert",
-    price: "₹5,999",
-    period: "/ filing",
-    desc: "Full CA support + Tax Audit for complex entities",
-    features: [
-      { text: "Everything in AI Pro", ok: true },
-      { text: "Dedicated CA assigned", ok: true },
-      { text: "Tax audit (3CA/3CB/3CD)", ok: true },
-      { text: "Trust / AOP special handling", ok: true },
-      { text: "Notice response support", ok: true },
-    ],
-    cta: "Hire a CA",
-    featured: false,
-  },
-];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-5?",
-    a: "ITR-5 is filed by firms (partnership firms), LLPs (Limited Liability Partnerships), AOPs (Association of Persons), BOIs (Body of Individuals), artificial juridical persons, estates of deceased persons, and investment funds. Individual partners file their own ITR-2/3 for their share of profit.",
-  },
-  {
-    q: "What is the tax rate for a Partnership Firm / LLP in India?",
-    a: "Partnership firms and LLPs are taxed at a flat rate of 30% on their total income, plus 10% surcharge if income exceeds ₹1 crore, plus 4% health and education cess. There is no basic exemption limit or slab benefit for firms.",
-  },
-  {
-    q: "What is Section 40(b) — partner salary and interest?",
-    a: "Section 40(b) allows a partnership firm to deduct partner salary and interest as business expenses, subject to limits. Interest is capped at 12% per annum. Salary deduction: ₹3 lakh or 90% of book profit (whichever is higher) for first ₹3L profit, 60% for the balance. Our AI computes this automatically.",
-  },
-  {
-    q: "When is a tax audit mandatory for ITR-5?",
-    a: "Tax audit under Section 44AB is mandatory if: (1) Business turnover exceeds ₹1 crore (₹10 crore if 95% digital transactions), (2) Professional receipts exceed ₹50 lakh, or (3) Profit is declared below presumptive rate. Audit deadline is October 31, 2026 for AY 2026-27.",
-  },
-  {
-    q: "Can an LLP file ITR-5?",
-    a: "Yes. LLPs file ITR-5. The LLP pays tax at 30% flat rate on its income. Individual partners then include their share of LLP profit in their personal returns (ITR-2 or ITR-3) as income from partnership, which is exempt from tax in the partners' hands to avoid double taxation.",
-  },
-  {
-    q: "What is the last date to file ITR-5 for AY 2026-27?",
-    a: "Non-audit cases: July 31, 2026. Tax audit cases: October 31, 2026. Belated returns can be filed till December 31, 2026 with a late fee of ₹1,000–₹10,000 under Section 234F depending on income.",
-  },
-  {
-    q: "How is trust income taxed under ITR-5?",
-    a: "Trusts registered under Section 12A/12AB are exempt from tax on income applied to charitable purposes. Unregistered trusts or those with business income file ITR-5 and are taxed at maximum marginal rate (30%). Our CA Expert plan handles Section 12A/80G registrations separately.",
-  },
-  {
-    q: "Does DoStartup support filing for AOPs and BOIs?",
-    a: "Yes. AOPs (Association of Persons) and BOIs (Body of Individuals) file ITR-5. Tax is computed at either individual slab rates or maximum marginal rate depending on membership. DoStartup AI handles both scenarios and selects the most favorable tax computation automatically.",
-  },
-];
+
+
 
 const ENTITY_TABLE = [
   {
@@ -1513,125 +1433,13 @@ export default function ITR5Page() {
  PRICING
  ════════════════════════════════════ */}
         <div id="pricing">
-          <DoStartupPricing 
-            title="Simple Pricing for ITR-5"
-            subtitle="No hidden charges. Cheaper than every major competitor. All plans include free revisions. GST included in price."
-            plans={[
-              {
-                title: "Self File",
-                price: "1,999",
-                subtitle: "GST Included",
-                description: "For small partnership firms & LLPs with simple income",
-                features: [
-                  "P&L & Balance Sheet import",
-                  "Partner salary/interest calc",
-                  "Depreciation calculation",
-                  "e-File to IT Dept"
-                ],
-                buttonText: "Start Filing"
-              },
-              {
-                title: "AI Pro",
-                price: "2,999",
-                subtitle: "GST Included",
-                description: "Best for active firms, LLPs & AOPs with multiple income sources",
-                features: [
-                  "Everything in Self File",
-                  "AI partner salary optimizer",
-                  "Capital gains computation",
-                  "AIS deep reconciliation",
-                  "Notice Shield pre-check"
-                ],
-                isPopular: true,
-                buttonText: "Get AI Pro"
-              },
-              {
-                title: "CA Expert",
-                price: "5,999",
-                subtitle: "GST Included",
-                description: "Full CA support + Tax Audit for complex entities",
-                features: [
-                  "Everything in AI Pro",
-                  "Dedicated CA assigned",
-                  "Tax audit (3CA/3CB/3CD)",
-                  "Trust / AOP special handling",
-                  "Notice response support"
-                ],
-                buttonText: "Hire a CA"
-              }
-            ]}
-          />
+          <DynamicPricingSection />
         </div>
 
         {/* ════════════════════════════════════
  FAQ
  ════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black">
-                ITR-5 Questions Answered
-              </h2>
-              <p className="text-gray-500 text-sm mt-2">
-                Everything about firm taxation, partner deductions, LLPs & AOPs.
-              </p>
-            </div>
-            <div className="space-y-3 mb-10">
-              {FAQS.map((faq, i) => (
-                <div
-                  key={i}
-                  className={`bg-[#F4F3EE] border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-500 shadow-lg shadow-orange-100" : "border-gray-100 hover:border-orange-300"}`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between items-start gap-4 px-5 py-4 text-left group"
-                  >
-                    <span className="font-semibold text-sm text-black leading-snug group-hover:text-orange-500 transition-colors">
-                      {faq.q}
-                    </span>
-                    {openFaq === i ? (
-                      <ChevronUp
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5"
-                      />
-                    ) : (
-                      <ChevronDown
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5 group-hover:translate-y-0.5 transition-transform"
-                      />
-                    )}
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t border-orange-100 pt-3 bg-orange-50/30">
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-center mb-10">
-              <AddQuestionModal category="itr-5-return-filing" />
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500 mb-4">
-                Still have questions about ITR-5?
-              </p>
-              <Link
-                href="/support"
-                className="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm hover:text-orange-600 border border-orange-300 px-6 py-3 rounded-full hover:bg-orange-50 transition-all"
-              >
-                <MessageCircle size={16} />
-                Chat with our AI Tax Support (24/7)
-              </Link>
-            </div>
-          </div>
-        </section>
+        <FAQAccordion />
 
         {/* ════════════════════════════════════
  FINAL CTA
@@ -1692,54 +1500,7 @@ export default function ITR5Page() {
           </div>
         </section>
 
-        <DoStartupPricing
-          title="Simple Packages. Transparent Pricing."
-          subtitle="Expert-assisted ITR-5 filing for Partnership Firms, LLPs, AOPs and BOIs. Comprehensive compliance support included."
-          plans={[
-            {
-              title: "ITR-5 Assisted Filing",
-              price: "4,999",
-              description: "Full end-to-end ITR-5 filing for Partnership Firms or LLPs with expert assistance for accurate reporting.",
-              features: [
-                "Partnership / LLP ITR Preparation",
-                "Computation of 40(b) Partner Remuneration",
-                "Filing on Income Tax Portal",
-                "AIS/26AS Deep Data Sync",
-                "Checking for Audit Requirements"
-              ],
-              buttonText: "Start Filing"
-            },
-            {
-              title: "ITR-5 + Tax Audit Assistance",
-              price: "7,999",
-              isPopular: true,
-              description: "Dedicated CA support for firms requiring Tax Audit (Sec 44AB) and complex computations.",
-              features: [
-                "All features of ITR-5 Assisted Filing",
-                "Dedicated Chartered Accountant",
-                "Audit Report (Form 3CD) Drafting Assistance",
-                "Balance Sheet & P&L Review",
-                "Optimization of Tax Liability",
-                "Priority CA Support"
-              ],
-              buttonText: "Start Filing"
-            },
-            {
-              title: "Firm Annual Compliance",
-              price: "12,999",
-              description: "Year-round compliance support including quarterly advance tax, notice handling and annual tax planning for your firm.",
-              features: [
-                "Dedicated CA for your firm",
-                "IT Notice Handling & Responses",
-                "4-Quarter Advance Tax Computations",
-                "Year-round Tax Consultation",
-                "Rectification Filing (Sec 154)",
-                "Renewal Support for Firm/LLP"
-              ],
-              buttonText: "Start Filing"
-            }
-          ]}
-        />
+        <DynamicPricingSection />
         <Footer />
       </main>
     </>

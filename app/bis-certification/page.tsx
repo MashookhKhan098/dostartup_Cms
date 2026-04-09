@@ -1,11 +1,11 @@
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Registration/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
-// import Price from '../components/Price';
-
+// 
 export default function Home() {
 
  return (
@@ -30,7 +30,7 @@ export default function Home() {
 />
 
  <DynamicTabContent category="E-Invoice" />
- <Faq />
+ <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>
