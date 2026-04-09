@@ -154,7 +154,7 @@ const GSTInvoicingComponent = ({
           </div>
 
           {/* RIGHT SIDEBAR */}
-          <div className="lg:w-80 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6 space-y-6 h-fit">
+          <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6 space-y-6 h-fit">
 
             {/* CART */}
             <div className="flex justify-end">
@@ -185,25 +185,35 @@ const GSTInvoicingComponent = ({
             </p>
 
             {/* FORM */}
-            <div className="space-y-4">
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                // Add your submission logic here if needed
+                alert("Form submitted successfully!");
+              }}
+              className="space-y-4"
+            >
               <input
                 type="text"
                 placeholder="Name"
+                required
                 className="w-full px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white focus:ring-1 focus:ring-[#C15F3C] outline-none text-sm placeholder-[#B1ADA1]"
               />
               <input
                 type="email"
                 placeholder="Email"
+                required
                 className="w-full px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white focus:ring-1 focus:ring-[#C15F3C] outline-none text-sm placeholder-[#B1ADA1]"
               />
 
-              <div className="flex gap-3">
+              <div className="flex gap-3 w-full">
                 <select className="px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none cursor-pointer">
                   <option>🇮🇳 +91</option>
                 </select>
                 <input
                   type="tel"
                   placeholder="Phone"
+                  required
                   className="flex-1 px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm placeholder-[#B1ADA1] focus:ring-1 focus:ring-[#C15F3C] outline-none"
                 />
               </div>
@@ -213,10 +223,10 @@ const GSTInvoicingComponent = ({
                 Enter GSTN to get credit
               </label>
 
-              <button className="w-full bg-[#C15F3C] text-white py-3 rounded-lg hover:bg-[#A94E30] transition font-semibold text-sm shadow-sm">
+              <button type="submit" className="w-full bg-[#C15F3C] text-white py-3 rounded-lg hover:bg-[#A94E30] transition font-semibold text-sm shadow-sm">
                 Get Started
               </button>
-            </div>
+            </form>
 
             {/* SECURITY */}
             <p className="text-center text-xs text-[#B1ADA1]">

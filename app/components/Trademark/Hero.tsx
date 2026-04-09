@@ -143,7 +143,7 @@ export default function TrademarkHero({ trademarkService }: Props) {
           </div>
 
           {/* RIGHT SIDEBAR */}
-          <div className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+          <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
 
             {/* FORM HEADER */}
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
@@ -173,9 +173,11 @@ export default function TrademarkHero({ trademarkService }: Props) {
                   <div className="relative">
                     <select
                       name="service"
+                      required
                       className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
                     >
-                      <option>{serviceName}</option>
+                      <option value="">Select Service</option>
+                      <option value={serviceName}>{serviceName}</option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                       <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,6 +203,10 @@ export default function TrademarkHero({ trademarkService }: Props) {
                     name="applicationNumber"
                     type="text"
                     placeholder="Application Number"
+                    required
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+                    }}
                     className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                   />
                 </div>
@@ -214,6 +220,10 @@ export default function TrademarkHero({ trademarkService }: Props) {
                     name="brandName"
                     type="text"
                     placeholder="Brand Name"
+                    required
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9 ]/g, '');
+                    }}
                     className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                   />
                 </div>
@@ -226,6 +236,7 @@ export default function TrademarkHero({ trademarkService }: Props) {
                   <div className="relative">
                     <select
                       name="class"
+                      required
                       className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
                     >
                       <option value="">Select Class</option>

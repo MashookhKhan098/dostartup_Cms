@@ -200,7 +200,8 @@ export default function Home() {
  </div>
  </div>
 
- <DynamicTabContent category="Trademark" />
+ <DynamicTabContent category="virtual-office" />
+ <DynamicPricingSection category="virtual-office" />
  <FAQAccordion />
  <Popularsearches />
  <Footer />

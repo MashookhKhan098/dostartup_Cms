@@ -154,7 +154,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
           </div>
 
           {/* RIGHT SIDEBAR - CART FORM */}
-          <div className="lg:w-80 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6 space-y-6 h-fit">
+          <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6 space-y-6 h-fit">
 
             {/* CART ICON */}
             <div className="flex justify-end">
@@ -185,38 +185,52 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
             </p>
 
             {/* FORM */}
-            <div className="space-y-4">
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Registration started successfully!");
+              }}
+              className="space-y-3"
+            >
               <input
                 type="text"
                 placeholder="Name"
+                required
                 className="w-full px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white focus:ring-1 focus:ring-[#C15F3C] outline-none text-sm placeholder-[#B1ADA1]"
               />
               <input
                 type="email"
                 placeholder="Email"
+                required
                 className="w-full px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white focus:ring-1 focus:ring-[#C15F3C] outline-none text-sm placeholder-[#B1ADA1]"
               />
 
-              <div className="flex gap-3">
-                <select className="px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none">
+              <div className="flex gap-1 w-full">
+                <select className="px-0 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none">
                   <option>🇮🇳 +91</option>
                 </select>
                 <input
                   type="tel"
                   placeholder="Phone"
-                  className="flex-1 px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm placeholder-[#B1ADA1] focus:ring-1 focus:ring-[#C15F3C] outline-none"
+                  required
+                  maxLength={10}
+                  pattern="[0-9]{10}"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+                  }}
+                  className="flex-1 px-2 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm placeholder-[#B1ADA1] focus:ring-1 focus:ring-[#C15F3C] outline-none"
                 />
               </div>
 
               <label className="flex items-center gap-2 text-xs text-[#6F6B63] cursor-pointer">
                 <input type="checkbox" className="accent-[#C15F3C]" />
-                Enter GSTN to get credit
+                Enter GSTN to get 18% GST Credit
               </label>
 
-              <button className="w-full bg-[#C15F3C] text-white py-3 rounded-lg hover:bg-[#A94E30] transition font-semibold text-sm">
+              <button type="submit" className="w-full bg-[#C15F3C] text-white py-3 rounded-lg hover:bg-[#A94E30] transition font-semibold text-sm">
                 Get Started
               </button>
-            </div>
+            </form>
 
             {/* SECURITY BADGE */}
             <p className="text-center text-xs text-[#B1ADA1]">

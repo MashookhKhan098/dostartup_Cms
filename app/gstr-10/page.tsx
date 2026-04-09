@@ -24,6 +24,7 @@ export default function Home() {
 />
 
  <DynamicTabContent category="GST" />
+ <DynamicPricingSection category="gstr-10" />
  <FAQAccordion />
  <Popularsearches />
  <Footer />

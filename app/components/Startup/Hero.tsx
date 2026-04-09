@@ -152,7 +152,7 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
           </div>
 
           {/* RIGHT SIDEBAR */}
-          <div className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+          <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
 
             {/* FORM HEADER */}
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
@@ -201,6 +201,7 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
+                      required
                       className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
                     >
                       <option value="" className="text-[#B1ADA1]">Select your state</option>
@@ -233,6 +234,10 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="e.g., Tech Solutions Pvt Ltd"
+                    required
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9 ]/g, '');
+                    }}
                     className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                   />
                 </div>
@@ -249,6 +254,10 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                       value={formData.capital}
                       onChange={handleInputChange}
                       placeholder="Amount"
+                      required
+                      onInput={(e) => {
+                        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+                      }}
                       className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                     />
                   </div>
@@ -262,6 +271,10 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                       value={formData.members}
                       onChange={handleInputChange}
                       placeholder="No."
+                      required
+                      onInput={(e) => {
+                        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+                      }}
                       className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                     />
                   </div>

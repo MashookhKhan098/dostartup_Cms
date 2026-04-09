@@ -95,11 +95,22 @@ const PricingCardClient = ({ plan }: { plan: PricingPlan }) => {
         )}
       </div>
 
-      <Link href={`/register?plan=${encodeURIComponent(plan.title)}`} className="mt-auto pt-2">
-        <button className="w-full bg-[#C15A36] text-white py-4 rounded-full font-bold text-sm tracking-wide transition-all duration-250 ease-in-out hover:bg-[#A94A2C] shadow-sm hover:shadow-md">
+      <div className="mt-auto pt-2">
+        <button 
+          onClick={() => {
+            const element = document.getElementById('registration-form');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              // Fallback if the ID is missing on a specific page
+              window.location.href = `/register?plan=${encodeURIComponent(plan.title)}`;
+            }
+          }}
+          className="w-full bg-[#C15A36] text-white py-4 rounded-full font-bold text-sm tracking-wide transition-all duration-250 ease-in-out hover:bg-[#A94A2C] shadow-sm hover:shadow-md"
+        >
           Register Now
         </button>
-      </Link>
+      </div>
     </div>
   );
 };

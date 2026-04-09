@@ -73,6 +73,19 @@ export default function DocumentsPage() {
 
   const handleSubmit = async () => {
     setUploading(true)
+
+    // Check if required docs are present in state
+    const missingRequired = DOCUMENTS
+      .filter(d => d.required)
+      .filter(d => !files[d.key]);
+
+    if (missingRequired.length > 0) {
+      const names = missingRequired.map(d => d.label).join(', ');
+      alert(`Please upload the following required documents before proceeding:\n\n${names}`);
+      setUploading(false);
+      return;
+    }
+
     const uploadedUrls: Record<string, string> = {}
 
     // Upload each file to Supabase Storage

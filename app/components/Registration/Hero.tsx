@@ -168,7 +168,7 @@ export default function RegistrationHero({
           </div>
 
           {/* RIGHT SIDEBAR */}
-          <div className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+          <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
 
             {/* FORM HEADER */}
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
@@ -228,6 +228,11 @@ export default function RegistrationHero({
                     type="text"
                     name="pan"
                     placeholder="Enter PAN or GSTIN"
+                    required
+                    maxLength={15}
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                    }}
                     className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                   />
                 </div>
@@ -240,9 +245,10 @@ export default function RegistrationHero({
                   <div className="relative">
                     <select
                       name="state"
+                      required
                       className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
                     >
-                      <option>Select State</option>
+                      <option value="">Select State</option>
                       <option>Maharashtra</option>
                       <option>Delhi NCR</option>
                       <option>Karnataka</option>
@@ -269,6 +275,7 @@ export default function RegistrationHero({
                     type="text"
                     name="trade"
                     placeholder="Retail, Manufacturing, Services"
+                    required
                     className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                   />
                 </div>

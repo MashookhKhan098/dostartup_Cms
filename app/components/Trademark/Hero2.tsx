@@ -126,6 +126,7 @@ export default function DynamicHeroSection({
             <div className="relative">
               <select
                 name={field.name}
+                required
                 className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
               >
                 <option value="">Select {field.placeholder}</option>
@@ -149,9 +150,20 @@ export default function DynamicHeroSection({
               {field.placeholder}
             </label>
             <input
-              type={field.inputType || "text"}
+              type={(field.name === 'phone' || field.inputType === 'tel') ? 'tel' : (field.inputType || "text")}
               name={field.name}
               placeholder={field.placeholder}
+              required
+              maxLength={field.name === 'phone' ? 10 : field.name === 'pan' ? 10 : undefined}
+              pattern={field.name === 'pan' ? "[A-Z]{5}[0-9]{4}[A-Z]{1}" : field.name === 'phone' ? "[0-9]{10}" : undefined}
+              onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                const target = e.currentTarget;
+                if (field.name === 'phone') {
+                  target.value = target.value.replace(/[^0-9]/g, '');
+                } else if (field.name === 'pan') {
+                  target.value = target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                }
+              }}
               className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
             />
           </div>
@@ -347,7 +359,7 @@ export default function DynamicHeroSection({
           </div>
 
           {/* RIGHT SIDEBAR */}
-          <div className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+          <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
 
             {/* FORM HEADER */}
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">

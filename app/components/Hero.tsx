@@ -224,7 +224,7 @@ export default function HeroSection() {
  </div>
 
  {/* SIDE PANEL */}
- <div className="hidden md:flex flex-col gap-3.5">
+ <div id="registration-form" className="hidden md:flex flex-col gap-3.5">
  <div className="bg-white rounded-2xl p-5 border border-[#B1ADA1]/25 shadow-[0_2px_12px_rgba(0,0,0,0.04)] flex-1">
  <p className="font-['Sora'] text-[10px] font-semibold uppercase text-[#B1ADA1] mb-1.5">
  Most Popular

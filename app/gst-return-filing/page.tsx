@@ -1,3 +1,6 @@
+'use client'
+
+import { useRouter } from 'next/navigation';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
@@ -7,6 +10,33 @@ import FAQAccordion from '../components/Faq';
 import DynamicPricingSection from '../components/DynamicPricingSection';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {
+    try {
+      const response = await fetch('/api/gst-registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Server error occurred');
+      }
+
+      const registrationId = result.data[0].id;
+      const packageName = String(formData.package);
+      router.push(`/document?id=${registrationId}&package=${encodeURIComponent(packageName)}`);
+    } catch (error: any) {
+      console.error('Network Error:', error);
+      alert(`Submission failed: ${error.message}`);
+    }
+  };
+
   const heroProps = {
     // Left side content
     heading: "Accountant for GST Filings",
@@ -101,6 +131,7 @@ export default function Home() {
     ],
     
     buttonText: "Submit",
+    onSubmit: handleFormSubmit,
   };
 
   return (

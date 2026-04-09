@@ -14,28 +14,34 @@ export default function Home() {
   const router = useRouter();
 
   const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {
-    const { data, error } = await supabase
-      .from('gst_registrations')
-      .insert([{
-        state: formData.state,
-        pan: String(formData.pan).toUpperCase(),
-        nature_of_business: formData.nature_of_business,
-        package: formData.package,
-        phone: String(formData.phone),
-        registration_type: 'New Registration',
-        status: 'pending_payment'
-      }])
-      .select()
+    try {
+      const response = await fetch('/api/gst-registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (error) {
-      console.error('Error:', error.message);
-      alert('Something went wrong: ' + error.message);
-      return;
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Server error occurred');
+      }
+
+      if (result.error) {
+        console.error('Submission Error:', result.error);
+        alert(`Submission failed: ${result.error}\n\nThis usually happens if the database is unreachable or the table 'gst_registrations' doesn't exist.`);
+        return;
+      }
+
+      const registrationId = result.data[0].id;
+      const packageName = String(formData.package);
+      router.push(`/document?id=${registrationId}&package=${encodeURIComponent(packageName)}`);
+    } catch (error: any) {
+      console.error('Network Error:', error);
+      alert(`Network error during submission: ${error.message}`);
     }
-
-    const registrationId = data[0].id;
-    const packageName = String(formData.package);
-    router.push(`/document?id=${registrationId}&package=${encodeURIComponent(packageName)}`);
   };
 
   const heroProps = {

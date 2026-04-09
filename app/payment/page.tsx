@@ -50,7 +50,7 @@ export default function PaymentPage() {
         order_id: orderId,
         handler: async function (response: any) {
           // Record payment in Supabase
-          await supabase.from('payments').insert([{
+          const { error: paymentError } = await supabase.from('payments').insert([{
             registration_id: registrationId,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
@@ -59,11 +59,23 @@ export default function PaymentPage() {
             payment_status: 'paid',
           }])
 
+          if (paymentError) {
+            console.error('Payment Record Error:', paymentError);
+            alert(`Payment was successful but we couldn't record it: ${paymentError.message}\nPlease contact support with your Payment ID: ${response.razorpay_payment_id}`);
+            setLoading(false);
+            return;
+          }
+
           // Update registration status
-          await supabase
+          const { error: regError } = await supabase
             .from('gst_registrations')
             .update({ status: 'paid' })
             .eq('id', registrationId)
+
+          if (regError) {
+            console.error('Registration Update Error:', regError);
+            alert(`Payment recorded but registration status update failed: ${regError.message}`);
+          }
 
           setLoading(false)
           router.push(`/`)
