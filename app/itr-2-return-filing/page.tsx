@@ -443,7 +443,7 @@ function NumInput({
           min={0}
           value={value}
           onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
-          className="w-full pl-7 pr-10 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-[#F4F3EE]"
+          className="w-full pl-7 pr-10 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-white"
         />
       </div>
     </div>
@@ -527,7 +527,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  HERO SECTION
  ══════════════════════════════════════ */}
-        <section className="bg-gradient-to-br from-[#C15F3C] via-[#C15F3C]/90 to-[#C15F3C]/70 relative overflow-hidden pt-8 pb-20">
+        <section className="bg-[#F4F3EE] relative overflow-hidden pt-8 pb-20 border-b border-[#C15F3C]/10">
           {/* Grid pattern */}
           <div
             className="absolute inset-0 opacity-10"
@@ -538,37 +538,37 @@ export default function ITR2Page() {
             }}
           />
           {/* Glow blobs */}
-          <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-[#F4F3EE]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
-          <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-[#C15F3C]/20 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-[#C15F3C]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-[#C15F3C]/8 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute top-20 left-10 w-2 h-2 bg-[#F4F3EE] rounded-full opacity-30 animate-ping" />
           <div className="absolute bottom-20 right-20 w-3 h-3 bg-[#F4F3EE] rounded-full opacity-20 animate-pulse" />
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-[#F4F3EE]/20 border border-white/30 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase backdrop-blur-sm">
-                <span className="w-2 h-2 bg-[#F4F3EE] rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 bg-[#C15F3C]/15 border border-[#C15F3C]/30 text-[#C15F3C] text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase backdrop-blur-sm">
+                <span className="w-2 h-2 bg-[#C15F3C] rounded-full animate-pulse" />
                 AY 2026-27 · ITR-2 Filing Open · Last Date: July 31, 2026
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] mb-5">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.08] mb-5">
                 File{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#F4F3EE]">
+                <span className="text-[#C15F3C]">
                   ITR-2
                 </span>{" "}
                 Online
                 <br />
                 With{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#F4F3EE]">
+                <span className="text-[#C15F3C]">
                   AI Precision
                 </span>
               </h1>
 
-              <p className="text-white/80 text-lg leading-relaxed mb-8 max-w-lg">
+              <p className="text-slate-600 text-lg leading-relaxed mb-8 max-w-lg">
                 For investors, NRIs & multi-property owners. Our AI auto-imports
                 broker P&L, computes capital gains, optimizes loss set-off, and
                 files ITR-2 without errors.
-                <span className="block mt-2 text-white font-semibold">
+                <span className="block mt-2 text-slate-700 font-semibold">
                   Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner
                   — we're 40% cheaper & smarter!
                 </span>
@@ -577,7 +577,7 @@ export default function ITR2Page() {
               <div className="flex flex-wrap gap-3 mb-10">
                 <Link
                   href="#pricing"
-                  className="bg-[#F4F3EE] text-[#C15F3C] hover:bg-[#F4F3EE]/90 font-bold px-7 py-3.5 rounded-full text-base transition-all hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-0.5 inline-flex items-center gap-2 group"
+                  className="bg-[#C15F3C] hover:bg-[#C15F3C]/90 text-white font-bold px-7 py-3.5 rounded-full text-base transition-all hover:-translate-y-0.5 inline-flex items-center gap-2 group"
                 >
                   🚀 Start Filing ITR-2{" "}
                   <ArrowRight
@@ -587,7 +587,7 @@ export default function ITR2Page() {
                 </Link>
                 <Link
                   href="#calculator"
-                  className="border border-white/40 hover:border-white text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-[#F4F3EE]/10 backdrop-blur-sm"
+                  className="border border-slate-300 hover:border-[#C15F3C] text-slate-700 font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-white bg-white/60 shadow-sm"
                 >
                   <Calculator size={16} className="inline mr-2" />
                   Capital Gains Calculator →
@@ -600,12 +600,12 @@ export default function ITR2Page() {
                   [
                     "2L+",
                     "ITR-2 Filed",
-                    <FileText key="1" size={16} className="text-white" />,
+                    <FileText key="1" size={16} className="text-[#C15F3C]" />,
                   ],
                   [
                     "₹120Cr+",
                     "Gains Computed",
-                    <TrendingUp key="2" size={16} className="text-white" />,
+                    <TrendingUp key="2" size={16} className="text-[#C15F3C]" />,
                   ],
                   [
                     "4.9★",
@@ -613,19 +613,19 @@ export default function ITR2Page() {
                     <Star
                       key="3"
                       size={16}
-                      className="text-white fill-white"
+                      className="text-[#C15F3C] fill-[#C15F3C]"
                     />,
                   ],
                 ].map(([num, lbl, icon]) => (
                   <div key={String(lbl)} className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-[#F4F3EE]/20 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-white border border-[#E5E2DA] flex items-center justify-center shadow-sm">
                       {icon}
                     </div>
                     <div>
-                      <div className="font-display text-2xl font-extrabold text-white">
+                      <div className="font-display text-2xl font-extrabold text-slate-900">
                         {num}
                       </div>
-                      <div className="text-xs text-white/70 mt-0.5">{lbl}</div>
+                      <div className="text-xs text-slate-500 mt-0.5">{lbl}</div>
                     </div>
                   </div>
                 ))}
@@ -634,10 +634,10 @@ export default function ITR2Page() {
 
             {/* Right Column — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-[#F4F3EE]/15 backdrop-blur-xl border border-white/25 rounded-3xl p-6 shadow-2xl hover:border-white/40 transition-all duration-300">
+              <div className="bg-white border border-[#E5E2DA] rounded-3xl p-6 shadow-sm hover:border-[#C15F3C]/30 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
-                  <span className="font-display font-bold text-white text-sm flex items-center gap-2">
-                    <Brain size={18} className="text-white" />
+                  <span className="font-display font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <Brain size={18} className="text-[#C15F3C]" />
                     🤖 AI ITR-2 Assistant — Live
                   </span>
                   <span className="bg-[#F4F3EE] text-[#C15F3C] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
@@ -657,10 +657,10 @@ export default function ITR2Page() {
                       {s.icon}
                     </div>
                     <div>
-                      <div className="text-white font-semibold text-sm">
+                      <div className="text-slate-900 font-semibold text-sm">
                         {s.title}
                       </div>
-                      <div className="text-white/70 text-xs mt-0.5">
+                      <div className="text-[#C15F3C] text-xs mt-0.5">
                         {s.desc}
                       </div>
                     </div>
@@ -668,30 +668,30 @@ export default function ITR2Page() {
                 ))}
 
                 <div className="mt-4 bg-[#F4F3EE]/15 rounded-xl p-4">
-                  <div className="flex justify-between text-xs text-white/70 mb-2">
+                  <div className="flex justify-between text-xs text-[#C15F3C] mb-2">
                     <span className="flex items-center gap-1">
                       <Zap size={12} /> Processing Capital Gains
                     </span>
-                    <span className="font-bold text-white">82% Complete</span>
+                    <span className="font-bold text-[#C15F3C]">82% Complete</span>
                   </div>
                   <div className="h-2 bg-[#F4F3EE]/20 rounded-full overflow-hidden">
                     <div className="h-full w-[82%] bg-[#F4F3EE] rounded-full" />
                   </div>
-                  <p className="text-[10px] text-white/50 mt-2">
+                  <p className="text-[10px] text-slate-400 mt-2">
                     Importing from 6 brokers • 2 steps remaining
                   </p>
                 </div>
 
                 {/* Broker strip */}
-                <div className="mt-4 pt-4 border-t border-white/15">
-                  <p className="text-white/60 text-xs mb-2">
+                <div className="mt-4 pt-4 border-t border-[#E5E2DA]">
+                  <p className="text-slate-500 text-xs mb-2">
                     🔗 Connected Brokers
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {BROKERS.map((b) => (
                       <span
                         key={b}
-                        className="bg-[#F4F3EE]/15 text-white text-[10px] font-semibold px-2 py-1 rounded-md"
+                        className="bg-[#F4F3EE] text-slate-500 text-[10px] font-semibold px-2 py-1 rounded-md"
                       >
                         {b}
                       </span>
@@ -819,7 +819,7 @@ export default function ITR2Page() {
             </div>
 
             {/* Capital Gains Table */}
-            <div className="bg-[#F4F3EE] border border-[#C15F3C]/20 rounded-2xl p-6">
+            <div className="bg-white border border-[#E5E2DA] rounded-2xl p-6 shadow-sm">
               <h3 className="font-display font-bold text-slate-900 text-lg mb-4 flex items-center gap-2">
                 <BarChart3 size={20} className="text-[#C15F3C]" />
                 📊 Capital Gains Tax Rates FY 2025-26 (Post Budget 2024)
@@ -1310,7 +1310,7 @@ export default function ITR2Page() {
                     <select
                       value={calc.age}
                       onChange={(e) => upd("age", e.target.value as AgeGroup)}
-                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-[#F4F3EE]"
+                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-white"
                     >
                       <option value="below60">Below 60 years</option>
                       <option value="60to80">
@@ -1542,76 +1542,7 @@ export default function ITR2Page() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {PLANS.map((plan) => (
-                <div
-                  key={plan.name}
-                  className={`relative rounded-3xl p-7 border-2 transition-all duration-200 hover:-translate-y-2 ${plan.featured ? "bg-slate-900 border-[#C15F3C] shadow-2xl shadow-[#C15F3C]/10" : "border-slate-200 hover:border-[#C15F3C]/30"}`}
-                >
-                  {plan.badge && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C15F3C] text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
-                      {plan.badge}
-                    </span>
-                  )}
-
-                  <div
-                    className={`font-display font-bold text-lg mb-1 ${plan.featured ? "text-white" : "text-slate-900"}`}
-                  >
-                    {plan.name}
-                  </div>
-
-                  <div className="flex items-end gap-1 my-3">
-                    <span className="font-display text-4xl font-extrabold text-[#C15F3C]">
-                      {plan.price}
-                    </span>
-                    <span className="text-sm pb-1 text-slate-400">
-                      {plan.period}
-                    </span>
-                  </div>
-
-                  <p
-                    className={`text-sm mb-5 leading-relaxed ${plan.featured ? "text-slate-400" : "text-slate-500"}`}
-                  >
-                    {plan.desc}
-                  </p>
-
-                  <ul className="space-y-2.5 mb-6">
-                    {plan.features.map((f) => (
-                      <li
-                        key={f.text}
-                        className="flex items-center gap-2 text-sm"
-                      >
-                        {f.ok ? (
-                          <CheckCircle
-                            size={15}
-                            className="text-[#C15F3C] flex-shrink-0"
-                          />
-                        ) : (
-                          <XCircle
-                            size={15}
-                            className="text-slate-300 flex-shrink-0"
-                          />
-                        )}
-                        <span
-                          className={
-                            plan.featured ? "text-slate-300" : "text-slate-900"
-                          }
-                        >
-                          {f.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    href="/signup"
-                    className={`block w-full py-3 rounded-full font-bold text-sm text-center transition-all duration-150 ${plan.featured ? "bg-[#C15F3C] hover:bg-[#C15F3C]/90 text-white" : "border-2 border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white"}`}
-                  >
-                    {plan.cta}
-                  </Link>
-                </div>
-              ))}
-            </div>
+            <DynamicPricingSection />
 
             <p className="text-center text-xs text-slate-400 mt-6">
               * All plans include free updates and revisions. GST included.
@@ -1627,7 +1558,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  FINAL CTA BANNER
  ══════════════════════════════════════ */}
-        <section className="bg-gradient-to-br from-orange-500 via-orange-600 to-amber-500 py-6 px-4 sm:px-6 relative overflow-hidden">
+        <section className="bg-[#F4F3EE] border-t border-[#E5E2DA] py-6 px-4 sm:px-6 relative">
           <div className="absolute inset-0">
             <div className="absolute top-0 left-0 w-64 h-64 bg-[#F4F3EE]/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 right-0 w-80 h-80 bg-orange-900/20 rounded-full blur-3xl" />
@@ -1645,14 +1576,13 @@ export default function ITR2Page() {
               ))}
             </div>
 
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">
-              Complex Gains. Simple Filing.
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">`n              Complex Gains. Simple Filing.
             </h2>
 
             <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
               Join 2 lakh+ investors who trust DoStartup AI to file ITR-2
               accurately — in under 10 minutes.
-              <span className="block mt-2 text-white font-semibold">
+              <span className="block mt-2 text-slate-700 font-semibold">
                 Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner —
                 we're 40% cheaper!
               </span>
@@ -1695,105 +1625,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  FOOTER
  ══════════════════════════════════════ */}
-        <footer className="bg-orange-900 text-orange-300 py-5 px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-white font-bold text-lg mb-4">
-                DoStartup<span className="text-orange-400">.in</span>
-              </h3>
-              <p className="text-sm mb-4 text-orange-300">
-                India's most advanced AI-powered ITR-2 filing platform. Auto
-                capital gains import, loss harvesting & DTAA support.
-              </p>
-              <div className="flex gap-3">
-                {["f", "t", "in", "yt", "ig"].map((s) => (
-                  <a
-                    key={s}
-                    href="#"
-                    className="w-8 h-8 rounded-full bg-orange-800 hover:bg-orange-600 flex items-center justify-center text-xs font-bold text-orange-300 hover:text-white transition-colors"
-                  >
-                    {s}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold text-sm mb-4">
-                ITR Forms
-              </h4>
-              <ul className="space-y-2 text-sm">
-                {[
-                  "ITR-1 (Sahaj)",
-                  "ITR-2",
-                  "ITR-3",
-                  "ITR-4 (Sugam)",
-                  "ITR-5",
-                ].map((item) => (
-                  <li key={item}>
-                    <Link
-                      href="#"
-                      className="hover:text-orange-400 transition-colors"
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold text-sm mb-4">Company</h4>
-              <ul className="space-y-2 text-sm">
-                {["About Us", "Careers", "Blog", "Press", "Contact"].map(
-                  (item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-orange-400 transition-colors"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ),
-                )}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold text-sm mb-4">Support</h4>
-              <ul className="space-y-2 text-sm">
-                {[
-                  "Help Center",
-                  "FAQ",
-                  "Privacy Policy",
-                  "Terms of Use",
-                  "Refund Policy",
-                ].map((item) => (
-                  <li key={item}>
-                    <Link
-                      href="#"
-                      className="hover:text-orange-400 transition-colors"
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-orange-800 text-center text-xs text-orange-500">
-            <p>
-              © 2026 DoStartup.in — Compare with ClearTax, Tax2Win, Quicko, H&R
-              Block, TaxSpanner. All rights reserved.
-            </p>
-            <p className="mt-2 text-orange-600">
-              * Competitor prices based on publicly available information as of
-              March 2026.
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </main>
     </>
   );

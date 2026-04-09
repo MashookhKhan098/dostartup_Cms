@@ -24,7 +24,7 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
   const hiddenCount = plan.features.length - sliceCount;
 
   return (
-    <div className="relative bg-white rounded-[20px] border border-[#E5E2DF] p-6 sm:p-8 flex flex-col transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-[0_12px_32px_rgba(46,46,46,0.08)]">
+    <div className="relative bg-white rounded-[20px] border border-[#E5E2DF] p-6 sm:p-8 flex flex-col h-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-[0_12px_32px_rgba(46,46,46,0.08)]">
       {plan.isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C15A36] text-white px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase shadow-md">
           Recommended
@@ -32,8 +32,10 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
       )}
 
       <div className="mb-4">
-        <h3 className="text-2xl font-bold text-[#2E2E2E] mb-2">{plan.title}</h3>
-        <p className="text-sm text-[#2E2E2E]/70 leading-relaxed min-h-[2.5rem]">
+        <div className="min-h-[64px] flex items-start mb-2">
+          <h3 className="text-2xl font-bold text-[#2E2E2E] leading-tight">{plan.title}</h3>
+        </div>
+        <div className="text-sm text-[#2E2E2E]/70 leading-relaxed min-h-[72px]">
           {descExpanded || plan.description.length < 60
             ? plan.description
             : `${plan.description.substring(0, 60)}...`}
@@ -45,10 +47,10 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
               {descExpanded ? "Show less" : "Read more"}
             </button>
           )}
-        </p>
+        </div>
       </div>
 
-      <div className="mb-6 border-b border-[#E5E2DF] pb-6">
+      <div className="mb-6 border-b border-[#E5E2DF] pb-6 min-h-[110px] flex flex-col justify-center">
         <div className="flex items-start gap-1">
           <span className="text-xl font-bold text-[#2E2E2E] mt-1">₹</span>
           <span className="text-4xl lg:text-5xl font-bold text-[#2E2E2E] tracking-tight">
@@ -85,9 +87,11 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
         )}
       </div>
 
-      <button className="w-full bg-[#C15A36] text-white py-3.5 rounded-full font-bold transition-all duration-250 ease-in-out hover:bg-[#A94A2C] shadow-sm hover:shadow-md">
-        Register Now
-      </button>
+      <div className="mt-auto">
+        <button className="w-full bg-[#C15A36] text-white py-3.5 rounded-full font-bold transition-all duration-250 ease-in-out hover:bg-[#A94A2C] shadow-sm hover:shadow-md">
+          Register Now
+        </button>
+      </div>
     </div>
   );
 };
