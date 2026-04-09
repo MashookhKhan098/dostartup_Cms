@@ -6,6 +6,10 @@ import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
+import { supabase } from '../../lib/supabase'
+
+
+
 export default function LoginPage() {
  const [email, setEmail] = useState('')
  const [password, setPassword] = useState('')
@@ -16,6 +20,22 @@ export default function LoginPage() {
  alert("Please enter email and password")
  return
  }
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
+
+  if (error) {
+    alert(error.message)
+    return
+  }
+
+  const user = data.user
+
+  console.log("Logged in user:", user)
+
+  alert("Login successful!")
  // Authentication placeholder
  router.push('/')
  }

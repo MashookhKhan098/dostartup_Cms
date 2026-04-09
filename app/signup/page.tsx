@@ -6,6 +6,13 @@ import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+ process.env.NEXT_PUBLIC_SUPABASE_URL!,
+ process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
 export default function SignupPage() {
  const [email, setEmail] = useState('')
  const [password, setPassword] = useState('')
@@ -13,14 +20,45 @@ export default function SignupPage() {
  const router = useRouter()
 
  const handleSignup = async () => {
- if (!name || !email || !password) {
- alert("Please fill all fields")
- return
- }
- // Placeholder for authentication signup
- alert('Signup success! Proceeding to Login...')
- router.push('/login')
- }
+  if (!name || !email || !password) {
+    alert("Please fill all fields")
+    return
+  }
+
+  // Step 1: Create user in Supabase Auth
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  })
+
+  if (error) {
+    alert(error.message)
+    return
+  }
+
+  const user = data.user
+
+  // Step 2: Insert into profiles table
+  if (user) {
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .insert([
+        {
+          id: user.id,   // same as auth user id
+          name: name,
+          email: email,
+        },
+      ])
+
+    if (profileError) {
+      alert(profileError.message)
+      return
+    }
+  }
+
+  alert('Signup successful!')
+  router.push('/login')
+}
 
  return (
  <div className="min-h-screen bg-[#F4F3EE] flex flex-col">
