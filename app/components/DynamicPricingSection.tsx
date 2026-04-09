@@ -8,8 +8,8 @@ type PricingProps = {
   category?: string;
 };
 
-const COCKPIT_BASE = "https://cms.dostartup.in";
-const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 
 export default function DynamicPricingSection({ category: propCategory }: PricingProps) {
   const pathname = usePathname();
@@ -26,7 +26,7 @@ export default function DynamicPricingSection({ category: propCategory }: Pricin
       try {
         // Fetching pricing cards matching the category field in Cockpit
         const filter = JSON.stringify({
-          category: finalCategory
+          category: { "$regex": finalCategory, "$options": "i" }
         });
 
         const cardRes = await fetch(

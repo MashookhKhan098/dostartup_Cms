@@ -14,8 +14,8 @@ export default function Home() {
     <>
       <Navbar />
       <Hero defaultEntity="OPC" />
-      <DynamicTabContent category="Proprietorship" />
-      <DynamicPricingSection />
+      <DynamicTabContent category="one-person-company" />
+      <DynamicPricingSection category="one-person-company" />
       <FAQAccordion />
       <Popularsearches />
       <Footer />

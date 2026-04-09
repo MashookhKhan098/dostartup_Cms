@@ -4,6 +4,7 @@ import Services from "./components/Services";
 import UpdatesAndDueDates from "./components/Updates";
 import OurStory from "./components/Ourstory";
 import Partnerships from "./components/Partnerships";
+import DynamicPricingSection from "./components/DynamicPricingSection";
 import PopularSearches from "./components/PopularSearches";
 import Footer from "./components/Footer";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <UpdatesAndDueDates />
       <OurStory />
       <Partnerships />
+      <DynamicPricingSection category="General" />
       <PopularSearches />
       <Footer />
     </>

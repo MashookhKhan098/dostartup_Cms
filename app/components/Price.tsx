@@ -4,13 +4,13 @@ type PricingProps = {
   category?: string;
 };
 
-const COCKPIT_BASE = "https://cms.dostartup.in";
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
 const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 
 async function getPricing(category?: string) {
   try {
     const sectionRes = await fetch(
-      `${COCKPIT_BASE}/api/content/item/pricingSection?api-key=${TOKEN}`,
+      `${COCKPIT_BASE}/api/content/item/pricingSection?token=${TOKEN}`,
       { cache: "no-store" }
     );
     const section = await sectionRes.json();
@@ -22,7 +22,7 @@ async function getPricing(category?: string) {
       : "";
 
     const cardRes = await fetch(
-      `${COCKPIT_BASE}/api/content/items/pricingCard?api-key=${TOKEN}${filter}`,
+      `${COCKPIT_BASE}/api/content/items/pricingCard?token=${TOKEN}${filter}`,
       { cache: "no-store" }
     );
 

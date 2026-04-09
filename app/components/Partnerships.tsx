@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const COCKPIT_BASE = "https://cms.dostartup.in";
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
 const PARTNER_API = `${COCKPIT_BASE}/api/content/items/Partner`;
 
 export default function Partnerships() {

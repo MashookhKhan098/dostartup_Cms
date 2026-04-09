@@ -20,8 +20,8 @@ const ICON_MAP: any = {
  Wallet,
 };
 
-const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
-const API = `https://cms.dostartup.in/api/content/items/service?token=${TOKEN}`;
+const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+const API = `${process.env.NEXT_PUBLIC_COCKPIT_URL}/api/content/items/service?token=${TOKEN}`;
 
 export default function ServicesSection() {
  const [services, setServices] = useState<any[]>([]);

@@ -1,6 +1,7 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
@@ -91,6 +92,7 @@ export default function DynamicHeroSection({
 }: GstHero2Props) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleTabClick = (tabName: string, path?: string) => {
     setActiveTab(tabName);
@@ -247,9 +249,23 @@ export default function DynamicHeroSection({
                       {item}
                     </p>
                   ))}
-                  <button className="text-sm text-[#C15F3C] font-medium hover:underline">
-                    Learn More →
+                  <button 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="text-sm text-[#C15F3C] font-medium hover:underline flex items-center gap-1 group"
+                  >
+                    {isExpanded ? "Show Less ↑" : "Learn More →"}
                   </button>
+                  
+                  {isExpanded && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="text-xs text-[#6F6B63] leading-relaxed pt-2 bg-[#F4F3EE] p-3 rounded-lg border border-[#E5E2DA]"
+                    >
+                      Our comprehensive {headingHighlight} registration service handles everything from documentation to final government approval. 
+                      Stay compliant with expert CA support and 24/7 status tracking through our dedicated portal.
+                    </motion.div>
+                  )}
                 </div>
               </div>
 
@@ -308,13 +324,37 @@ export default function DynamicHeroSection({
                 </div>
 
                 {/* LINKS */}
-                <div className="flex justify-between text-sm">
-                  <button className="text-[#C15F3C] hover:underline">
+                <div className="flex justify-between items-center text-sm pt-4 border-t border-[#F4F3EE]">
+                  <button className="text-[#C15F3C] hover:underline font-medium">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline">
+                  <button className="text-[#C15F3C] hover:underline font-medium">
                     Refer a Friend
                   </button>
+                </div>
+
+                {/* HOW IT WORKS TIMELINE - ADDED TO FILL SPACE */}
+                <div className="mt-8 pt-6 border-t border-[#F4F3EE]">
+                  <h3 className="text-xs font-bold text-[#2F2E2B] uppercase tracking-widest mb-6 opacity-60">How it Works</h3>
+                  <div className="relative">
+                    <div className="absolute top-4 left-0 w-full h-0.5 bg-[#F4F3EE]"></div>
+                    <div className="flex justify-between relative text-center">
+                      {[
+                        { step: "01", label: "Consultation", sub: "Expert Guidance" },
+                        { step: "02", label: "Documentation", sub: "Paperless Upload" },
+                        { step: "03", label: "Submission", sub: "Fast Filing" },
+                        { step: "04", label: "Approval", sub: "Final Certificate" }
+                      ].map((s, idx) => (
+                        <div key={idx} className="flex flex-col items-center">
+                          <div className="w-8 h-8 rounded-full bg-white border-2 border-[#C15F3C] flex items-center justify-center text-[10px] font-bold text-[#C15F3C] z-10 mb-2 shadow-sm">
+                            {s.step}
+                          </div>
+                          <p className="text-[10px] font-bold text-[#2F2E2B]">{s.label}</p>
+                          <p className="text-[9px] text-[#B1ADA1]">{s.sub}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
               </div>
