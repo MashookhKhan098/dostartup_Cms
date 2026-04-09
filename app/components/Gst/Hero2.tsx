@@ -229,7 +229,7 @@ export default function DynamicHeroSection({
   return (
     <div className="bg-[#F4F3EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
 
           {/* LEFT SECTION */}
           <div className="flex-1 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6">

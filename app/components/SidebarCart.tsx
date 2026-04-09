@@ -6,7 +6,7 @@ const SidebarCart = () => {
   const [gstChecked, setGstChecked] = useState(false);
 
   return (
-    <div className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-8 sticky top-28 max-w-[400px] mx-auto lg:ml-auto">
+    <div className="bg-white rounded-xl shadow-lg border border-[#E5E2DA] p-8 sticky top-28 max-w-[400px] mx-auto lg:ml-auto">
       <div className="flex flex-col items-center text-center mb-8">
         <div className="mb-6">
           <img src="/images/cart.png" alt="empty cart" className="h-16 w-auto" />
@@ -18,22 +18,22 @@ const SidebarCart = () => {
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
         <div className="space-y-1">
           <input 
-            className="w-full bg-[#F4F3EE] border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all outline-none text-[#202939]" 
+            className="w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-[#C15F3C]/10 focus:border-[#C15F3C] transition-all outline-none text-[#202939]" 
             placeholder="Name" 
           />
         </div>
         <div className="space-y-1">
           <input 
-            className="w-full bg-[#F4F3EE] border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all outline-none text-[#202939]" 
+            className="w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-[#C15F3C]/10 focus:border-[#C15F3C] transition-all outline-none text-[#202939]" 
             placeholder="Email" 
           />
         </div>
         <div className="flex gap-2">
-          <div className="bg-[#F4F3EE] border border-[#E5E7EB] rounded-lg px-3 py-3.5 text-base font-medium text-[#202939] flex items-center gap-2 shrink-0">
+          <div className="bg-white border border-[#E5E7EB] rounded-lg px-3 py-3.5 text-base font-medium text-[#202939] flex items-center gap-2 shrink-0">
             <span className="opacity-70">🇮🇳</span> +91
           </div>
           <input 
-            className="flex-1 w-full bg-[#F4F3EE] border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all outline-none text-[#202939]" 
+            className="flex-1 w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-[#C15F3C]/10 focus:border-[#C15F3C] transition-all outline-none text-[#202939]" 
             placeholder="Phone number" 
           />
         </div>
@@ -45,7 +45,7 @@ const SidebarCart = () => {
                 type="checkbox"
                 checked={gstChecked}
                 onChange={() => setGstChecked((s) => !s)}
-                className="w-5 h-5 rounded border-[#D1D5DB] bg-[#F4F3EE] text-green-500 focus:ring-offset-0 focus:ring-0 cursor-pointer"
+                className="w-5 h-5 rounded border-[#D1D5DB] bg-white text-[#C15F3C] focus:ring-offset-0 focus:ring-0 cursor-pointer"
               />
             </div>
             <span className="text-[15px] font-medium text-[#4B5565] group-hover:text-[#202939] transition-colors">Enter GSTIN to get 18% GST Credit</span>
@@ -55,7 +55,7 @@ const SidebarCart = () => {
         {gstChecked && (
           <div className="animate-in fade-in slide-in-from-top-2 duration-300">
             <input 
-              className="w-full bg-[#F4F3EE] border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all outline-none text-[#202939]" 
+              className="w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-base placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-[#C15F3C]/10 focus:border-[#C15F3C] transition-all outline-none text-[#202939]" 
               placeholder="Enter GSTIN" 
             />
           </div>

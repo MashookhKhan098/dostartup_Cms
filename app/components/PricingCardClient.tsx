@@ -38,8 +38,10 @@ const PricingCardClient = ({ plan }: { plan: PricingPlan }) => {
       )}
 
       <div className="mb-5">
-        <h3 className="text-2xl font-bold text-[#2E2E2E] mb-3 leading-tight">{plan.title}</h3>
-        <div className="text-sm text-[#2E2E2E]/70 leading-relaxed min-h-[3rem]">
+        <div className="min-h-[64px] flex items-start mb-3">
+          <h3 className="text-2xl font-bold text-[#2E2E2E] leading-tight">{plan.title}</h3>
+        </div>
+        <div className="text-sm text-[#2E2E2E]/70 leading-relaxed min-h-[72px]">
           {descExpanded || plan.description.length < 80
             ? plan.description
             : `${plan.description.substring(0, 80)}...`}
@@ -54,7 +56,7 @@ const PricingCardClient = ({ plan }: { plan: PricingPlan }) => {
         </div>
       </div>
 
-      <div className="mb-6 pb-6 border-b border-[#E5E2DF]">
+      <div className="mb-6 pb-6 border-b border-[#E5E2DF] min-h-[110px] flex flex-col justify-center">
         <div className="flex items-start gap-1.5">
           <span className="text-2xl font-bold text-[#2E2E2E] mt-1">₹</span>
           <div className="flex flex-col">

@@ -59,24 +59,30 @@ const DoStartupPricing: React.FC<DoStartupPricingProps> = ({
               )}
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 h-14 flex items-center">
-                  {plan.title}
-                </h3>
-                <p className="text-sm text-gray-500 mb-4 min-h-[3rem]">
+                <div className="min-h-[64px] flex items-start mb-2">
+                  <h3 className="text-xl font-bold text-gray-900 leading-tight">
+                    {plan.title}
+                  </h3>
+                </div>
+                <div className="text-sm text-gray-500 min-h-[72px] leading-relaxed">
                   {plan.description}
-                </p>
+                </div>
               </div>
 
-              {plan.price !== "" && (
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-gray-900">₹{plan.price}</span>
-                  </div>
-                  <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">
-                    + {plan.subtitle || "GST | Govt. fee extra"}
-                  </p>
-                </div>
-              )}
+              <div className="mb-6 min-h-[80px] flex flex-col justify-center">
+                {plan.price !== "" ? (
+                  <>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-bold text-gray-900">₹{plan.price}</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1 uppercase tracking-wider font-semibold">
+                      + {plan.subtitle || "GST | Govt. fee extra"}
+                    </p>
+                  </>
+                ) : (
+                  <div className="h-[60px]" /> /* Spacer if no price */
+                )}
+              </div>
 
               <div className="mb-8 flex-grow">
                 <p className="text-sm font-bold text-gray-900 mb-4">What's included:</p>
