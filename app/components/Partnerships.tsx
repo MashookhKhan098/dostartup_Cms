@@ -53,7 +53,7 @@ export default function Partnerships() {
 
  {/* Header Section */}
  <div className="mb-8 space-y-3">
- <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1">
+ <div className="inline-flex items-center gap-2 bg-[#F5F5F5] border border-gray-200 rounded-full px-3 py-1">
  <span className="w-2 h-2 bg-[#C15F3C] rounded-full"></span>
  <span className="text-xs font-medium text-[#C15F3C]">Partners & Alliances</span>
  </div>
@@ -91,7 +91,7 @@ export default function Partnerships() {
  <div className="mt-8 bg-white rounded-2xl border border-[#E5E2DA] overflow-hidden">
  <div className="flex flex-col md:flex-row items-center gap-8 p-8 md:p-10">
  <div className="flex-1 text-center md:text-left">
- <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-3 py-1 mb-4">
+ <div className="inline-flex items-center gap-2 bg-[#F5F5F5] border border-gray-200 rounded-full px-3 py-1 mb-4">
  <span className="w-2 h-2 bg-[#C15F3C] rounded-full"></span>
  <span className="text-xs font-medium text-[#C15F3C]">Enterprise Partnership</span>
  </div>
@@ -108,7 +108,7 @@ export default function Partnerships() {
  </button>
  </div>
  <div className="flex-1 flex justify-center md:justify-end">
- <div className="w-full max-w-xs bg-[#F4F3EE] rounded-xl border border-[#E5E2DA] p-2">
+ <div className="w-full max-w-xs bg-[#F9F9F9] rounded-xl border border-[#E5E2DA] p-2">
  <img
  src="/images/hero.webp"
  alt="Enterprise Partnership"

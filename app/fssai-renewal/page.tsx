@@ -1,13 +1,13 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, CheckCircle } from "lucide-react";
 import Footer from "../components/Footer";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Navbar from "../components/Navbar";
 import SidebarCart from "../components/SidebarCart";
-import DoStartupPricing from "../components/DoStartupPricing";
 
 const POPULAR_SEARCHES = [
  "Partnership", "Limited Liability Partnership", "Digital Signature",
@@ -74,7 +74,7 @@ const RenewalTypeDropdown: React.FC<{
  <ChevronDown className="w-4 h-4 text-[#B1ADA1]" />
  </button>
  {open && (
- <div className="absolute z-40 mt-1 w-full bg-white border border-[#E5E2DA] rounded-xl shadow-xl" role="listbox">
+ <div className="absolute z-40 mt-1 w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-xl shadow-xl" role="listbox">
  <div className="py-2 max-h-56 overflow-auto">
  <div className="px-3 py-1 text-xs text-[#B1ADA1]">Select Renewal Type</div>
  {RENEWAL_OPTIONS.map((opt) => (
@@ -131,7 +131,7 @@ const StateDropdown: React.FC<{
  <ChevronDown className="w-4 h-4 text-[#B1ADA1]" />
  </button>
  {open && (
- <div className="absolute z-40 mt-1 w-full bg-white border border-[#E5E2DA] rounded-xl shadow-xl" role="listbox">
+ <div className="absolute z-40 mt-1 w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-xl shadow-xl" role="listbox">
  <div className="p-3">
  <input
  value={query}
@@ -184,7 +184,7 @@ const YearsDropdown: React.FC<{
  <ChevronDown className="w-4 h-4 text-[#B1ADA1]" />
  </button>
  {open && (
- <div className="absolute z-40 mt-1 w-full bg-white border border-[#E5E2DA] rounded-xl shadow-xl">
+ <div className="absolute z-40 mt-1 w-full bg-[#F4F3EE] border border-[#E5E2DA] rounded-xl shadow-xl">
  <div className="py-2 max-h-44 overflow-auto">
  {YEARS_OPTIONS.map((y) => (
  <button
@@ -242,7 +242,7 @@ export default function FSSAIRenewal(): React.ReactElement {
  <Navbar />
 
  {/* ── Hero Section ── */}
- <section className="bg-white border-b border-[#E5E2DA] pt-10 pb-12">
+ <section className="bg-[#F4F3EE] border-b border-[#E5E2DA] pt-10 pb-12">
  <div className="max-w-7xl mx-auto px-4 sm:px-6">
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
@@ -274,7 +274,7 @@ export default function FSSAIRenewal(): React.ReactElement {
  "Receive your FSSAI certificate without delay",
  ].map((feat) => (
  <div key={feat} className="flex items-center gap-3">
- <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center border border-[#E5E2DA] shrink-0">
+ <div className="w-8 h-8 bg-[#F4F3EE] rounded-full flex items-center justify-center border border-[#E5E2DA] shrink-0">
  <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
  </svg>
@@ -287,7 +287,7 @@ export default function FSSAIRenewal(): React.ReactElement {
 
  {/* Right: Form Card */}
  <div>
- <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
  {/* Colored top stripe */}
  <div className="h-1.5 w-full bg-[#C15F3C]" />
  <div className="p-6 space-y-4">
@@ -360,7 +360,7 @@ export default function FSSAIRenewal(): React.ReactElement {
  <div className="flex-1 space-y-6">
 
  {/* Article Card */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6 space-y-4">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6 space-y-4">
  <div className="text-xs text-[#B1ADA1]">
  DoStartup / Registrations / <span className="text-[#C15F3C]">FSSAI Renewal</span>
  </div>
@@ -433,7 +433,7 @@ export default function FSSAIRenewal(): React.ReactElement {
  ["FSSAI State License", "1 year"],
  ["FSSAI Central License", "1 year"],
  ].map(([name, dur], i) => (
- <tr key={name} className={i % 2 === 0 ? "bg-white" : "bg-[#F4F3EE]"}>
+ <tr key={name} className={i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}>
  <td className="px-4 py-3 text-[#6F6B63]">{name}</td>
  <td className="px-4 py-3 text-[#6F6B63]">{dur}</td>
  </tr>
@@ -508,7 +508,7 @@ export default function FSSAIRenewal(): React.ReactElement {
  </div>
 
  {/* Procedure Card */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h3 className="text-lg font-semibold text-[#2F2E2B] mb-4">Procedure & Documents Summary</h3>
  <div className="space-y-3">
  {[
@@ -525,45 +525,10 @@ export default function FSSAIRenewal(): React.ReactElement {
  </div>
 
           {/* Pricing Component */}
-          <DoStartupPricing 
-            title="Simple packages. Transparent pricing." 
-            subtitle="Registration fees are charged at cost. Upgrade or add services anytime."
-            containerClassName="font-sans mb-6"
-            plans={[
-              {
-                title: "State",
-                price: "",
-                description: "Renewal of Existing FSSAI Registration and Licenses.",
-                features: [
-                  "Document Collection & Verification",
-                  "Application Preparation & Form Submission",
-                  "FSSAI Portal Filing Assistance",
-                  "Government Fee Payment Coordination",
-                  "License Certificate Delivery",
-                  "100% Refund Guarantee",
-                ],
-                buttonText: "Start Filing Now",
-              },
-              {
-                title: "Central",
-                price: "",
-                description: "Renewal of Existing FSSAI Registration and Licenses.",
-                isPopular: true,
-                features: [
-                  "Document Collection & Verification",
-                  "Application Preparation & Form Submission",
-                  "FSSAI Portal Filing Assistance",
-                  "Government Fee Payment Coordination",
-                  "License Certificate Delivery",
-                  "100% Refund Guarantee",
-                ],
-                buttonText: "Start Filing Now",
-              },
-            ]}
-          />
+          <DynamicPricingSection />
 
           {/* FAQ Card */}
-          <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+          <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h3 className="text-lg font-semibold text-[#2F2E2B] mb-4">FAQ's on FSSAI Renewal</h3>
  <div className="divide-y divide-[#E5E2DA]">
  {faqItems.map((q, idx) => (
@@ -589,13 +554,13 @@ export default function FSSAIRenewal(): React.ReactElement {
   <button className="px-4 py-2 border border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white text-sm rounded-lg transition-colors duration-200">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </div>
 
  {/* Popular Searches (full) */}
- <div className="bg-white rounded-2xl border border-[#E5E2DA] p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-6">
  <h4 className="text-sm font-semibold text-[#2F2E2B] mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.map((t, i) => (

@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 import React, { useState } from "react";
@@ -11,6 +10,8 @@ import {
  CheckCircle,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -112,12 +113,12 @@ export default function RegisteredOfficeChange() {
  };
 
  return (
- <div className="min-h-screen bg-white font-sans text-gray-800">
+ <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / MCA Services /{" "}
  <span className="text-amber-700 font-medium">
@@ -129,7 +130,7 @@ export default function RegisteredOfficeChange() {
  {/* Main Content */}
  <main className="max-w-[1180px] mx-auto px-6 py-3">
  {/* Hero Section */}
- <section className="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm overflow-hidden mb-8">
  <div className="flex flex-col lg:flex-row">
  {/* Left Content */}
  <div className="lg:w-1/2 p-8 lg:p-10">
@@ -213,7 +214,7 @@ export default function RegisteredOfficeChange() {
 
  {/* Right Form Card */}
  <div className="lg:w-1/2 p-8 lg:p-10 bg-gradient-to-br from-amber-50 to-amber-100">
- <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-6">
  <div
  className="h-1.5 w-full rounded-t-xl mb-4"
  style={{
@@ -240,7 +241,7 @@ export default function RegisteredOfficeChange() {
  <input
  type="text"
  placeholder="Filled Automatically"
- className="w-full px-4 py-2 border border-gray-200 rounded bg-white text-gray-600"
+ className="w-full px-4 py-2 border border-gray-200 rounded bg-[#F4F3EE] text-gray-600"
  />
  <p className="text-xs text-gray-400 mt-1">
  This field will auto-populate after entering company
@@ -254,7 +255,7 @@ export default function RegisteredOfficeChange() {
  </label>
  <textarea
  rows={3}
- className="w-full px-4 py-2 border border-gray-200 rounded resize-none bg-white text-gray-600"
+ className="w-full px-4 py-2 border border-gray-200 rounded resize-none bg-[#F4F3EE] text-gray-600"
  placeholder="Filled Automatically"
  />
  </div>
@@ -286,7 +287,7 @@ export default function RegisteredOfficeChange() {
  {/* content column (span 2 on large) */}
  <div className="lg:col-span-2 space-y-6">
  {/* Article */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h2 className="text-2xl font-bold mb-3 text-slate-900">
  Company Registered Office Change
  </h2>
@@ -399,7 +400,7 @@ export default function RegisteredOfficeChange() {
  </div>
 
  {/* Documents / Steps section */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-2xl font-bold mb-4 text-slate-900">
  Documents Required for Changing Registered Office
  </h3>
@@ -420,7 +421,7 @@ export default function RegisteredOfficeChange() {
  </div>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-2xl font-bold mb-4 text-slate-900">
  FAQ's on Registered Office Change - Company
  </h3>
@@ -447,7 +448,7 @@ export default function RegisteredOfficeChange() {
   <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </div>
@@ -457,7 +458,7 @@ export default function RegisteredOfficeChange() {
  <aside className="space-y-6">
           <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-5 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">
  Related Guides
  </h4>
@@ -485,7 +486,7 @@ export default function RegisteredOfficeChange() {
  </ul>
  </div>
 
- <div className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 text-center border border-gray-200">
  <img
  src={ASSETS.cards.compliance}
  alt="Company Compliance"
@@ -496,7 +497,7 @@ export default function RegisteredOfficeChange() {
  </div>
  </div>
 
- <div className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 text-center border border-gray-200">
  <img
  src={ASSETS.cards.dinEKyc}
  alt="DIN eKYC"
@@ -507,7 +508,7 @@ export default function RegisteredOfficeChange() {
  </div>
  </div>
 
- <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">
  Popular Searches
  </h4>
@@ -515,7 +516,7 @@ export default function RegisteredOfficeChange() {
  {POPULAR_SEARCHES.slice(0, 18).map((t) => (
  <span
  key={t}
- className="text-xs px-2 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-2 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -526,7 +527,7 @@ export default function RegisteredOfficeChange() {
  </div>
 
  {/* Tag cloud at bottom */}
- <div className="mt-8 bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="mt-8 bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">
  Popular Searches
  </h4>
@@ -534,7 +535,7 @@ export default function RegisteredOfficeChange() {
  {POPULAR_SEARCHES.map((t, i) => (
  <span
  key={t + i}
- className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>

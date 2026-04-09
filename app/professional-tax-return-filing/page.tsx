@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Faq from '../components/Faq';
 import SidebarCart from "../components/SidebarCart";
 import { CheckCircle, Clock, Shield, FileText, AlertCircle, Info, ChevronRight, Check, ChevronDown } from "lucide-react";
 
@@ -16,11 +17,11 @@ export default function ProfessionalTaxReturnPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen font-sans">
+    <div className="bg-[#F4F3EE] min-h-screen font-sans">
       <Navbar />
       
       {/* PERFECT HERO MATCH SECTION */}
-      <section className="bg-white border-b border-gray-100">
+      <section className="bg-[#F4F3EE] border-b border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch">
           
           {/* LEFT SIDE: CONTENT */}
@@ -60,13 +61,13 @@ export default function ProfessionalTaxReturnPage() {
           
           {/* RIGHT SIDE: THE FORM */}
           <div className="w-full lg:w-[500px] bg-[#FFF9F1] py-16 px-6 lg:px-12 flex flex-col justify-center border-l border-gray-100">
-             <div className="bg-white rounded-2xl shadow-xl shadow-orange-900/5 relative overflow-hidden flex flex-col">
+             <div className="bg-[#F4F3EE] rounded-2xl shadow-xl shadow-orange-900/5 relative overflow-hidden flex flex-col">
                 <div className="h-2 bg-[#C15F3C] w-full" />
                 <div className="p-8 space-y-6">
                    <div className="space-y-1">
                       <h3 className="text-sm font-bold text-[#2F2E2B]">Professional Tax</h3>
                       <div className="relative">
-                         <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#6F6B63] bg-white appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
+                         <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#6F6B63] bg-[#F4F3EE] appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
                             <option>Professional Tax Registration Return Filing</option>
                             <option>Professional Tax Registration</option>
                          </select>
@@ -82,7 +83,7 @@ export default function ProfessionalTaxReturnPage() {
                    <div className="space-y-1">
                       <label className="text-xs font-bold text-[#2F2E2B]">State</label>
                       <div className="relative">
-                         <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#6F6B63] bg-white appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
+                         <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#6F6B63] bg-[#F4F3EE] appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
                             <option>Select State/UT</option>
                             <option>Gujarat</option>
                             <option>Karnataka</option>
@@ -129,7 +130,7 @@ export default function ProfessionalTaxReturnPage() {
       </section>
 
       {/* Main Content Area */}
-      <section className="py-16 bg-white min-h-[500px]">
+      <section className="py-16 bg-[#F4F3EE] min-h-[500px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col lg:flex-row gap-12">
             
@@ -250,7 +251,7 @@ export default function ProfessionalTaxReturnPage() {
             <div className="lg:w-[400px] space-y-8">
               <SidebarCart />
               
-              <div className="bg-white rounded-2xl border border-[#E5E2DA] p-8 shadow-sm">
+              <div className="bg-[#F4F3EE] rounded-2xl border border-[#E5E2DA] p-8 shadow-sm">
                 <h4 className="text-lg font-bold text-[#202939] mb-6">Related Guides</h4>
                 <ul className="space-y-4">
                   {[
@@ -272,7 +273,7 @@ export default function ProfessionalTaxReturnPage() {
       </section>
 
       {/* PERFECT PRICING MATCH SECTION (Matching latest screenshot) */}
-      <section className="bg-white py-16 px-4 border-t border-gray-100">
+      <section className="bg-[#F4F3EE] py-16 px-4 border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center mb-10">
@@ -287,9 +288,9 @@ export default function ProfessionalTaxReturnPage() {
           {/* Package Dropdown */}
           <div className="flex justify-center mb-12">
              <div className="relative w-full max-w-sm">
-                <label className="absolute -top-2 left-4 bg-white px-2 text-[10px] font-bold text-[#008C44] uppercase tracking-wider z-10">Package</label>
+                <label className="absolute -top-2 left-4 bg-[#F4F3EE] px-2 text-[10px] font-bold text-[#008C44] uppercase tracking-wider z-10">Package</label>
                 <div className="relative">
-                   <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] bg-white appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
+                   <select className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] bg-[#F4F3EE] appearance-none cursor-pointer focus:ring-1 focus:ring-[#C15F3C] focus:outline-none">
                       <option>Telangana - (PTRC)</option>
                       <option>Maharashtra - (PTRC)</option>
                       <option>Karnataka - (PTEC)</option>
@@ -332,7 +333,7 @@ export default function ProfessionalTaxReturnPage() {
             ].map((card, i) => (
               <div 
                 key={i} 
-                className="bg-white border border-[#E5E2DA] rounded-3xl p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow min-h-[450px]"
+                className="bg-[#F4F3EE] border border-[#E5E2DA] rounded-3xl p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow min-h-[450px]"
               >
                 <h3 className="text-2xl font-bold text-[#2F2E2B] mb-3">{card.title}</h3>
                 <p className="text-sm text-[#6F6B63] mb-8 leading-relaxed">
@@ -361,7 +362,7 @@ export default function ProfessionalTaxReturnPage() {
       </section>
 
       {/* FAQ Section */}
-      <Faq category="Professional Tax Return Filing" />
+      <FAQAccordion />
 
       {/* Popular Searches */}
       <Popularsearches />

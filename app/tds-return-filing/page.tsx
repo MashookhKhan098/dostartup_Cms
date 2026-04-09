@@ -1,6 +1,7 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -143,7 +144,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  onSubmit={(e) => e.preventDefault()}
  className="flex flex-col sm:flex-row gap-3 items-center"
  >
- <div className="flex items-center gap-2 bg-white rounded-full px-3 py-2 w-full sm:w-auto">
+ <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-full px-3 py-2 w-full sm:w-auto">
  <div className="text-sm text-slate-700 px-2">
  ENTER GSTIN
  </div>
@@ -206,7 +207,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
 
  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Software Only */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs mb-3">
  LEDGERS
  </div>
@@ -236,7 +237,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* Accountant */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs mb-3">
  Accountant
  </div>
@@ -269,7 +270,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </div>
 
  {/* 2 Year Package */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs mb-3">
  Accountant
  </div>
@@ -301,7 +302,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </section>
 
  {/* Services Offered */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h2 className="text-2xl font-semibold mb-3">Services Offered</h2>
  <p className="text-sm text-gray-700 mb-4">
  We provide comprehensive accounting support tailored to meet the
@@ -349,7 +350,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </article>
 
  {/* How it Works */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h2 className="text-2xl font-semibold mb-3">How It Works</h2>
  <p className="text-sm text-gray-700 mb-4">
  A guided onboarding process with consistent monthly accounting and
@@ -376,7 +377,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </article>
 
  {/* Article / Detailed Content */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center mb-4">
  TDS Return Filing
  </h1>
@@ -429,7 +430,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </article>
 
  {/* Documents required */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  Documents Required For TDS Return Filing
  </h3>
@@ -449,7 +450,7 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  </article>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  FAQ's on TDS Return Filing
  </h3>
@@ -486,16 +487,16 @@ export default function TdsReturnFilingPage(): React.ReactElement {
  Load More
  </button>
  
-<AddQuestionModal />
+
 </div>
  </div>
- <div className="bg-white rounded-lg p-4">
+ <div className="bg-[#F4F3EE] rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+ className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
  >
  {s}
  </span>

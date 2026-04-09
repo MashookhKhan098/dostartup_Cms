@@ -23,9 +23,9 @@ export default function NewArticlePage() {
   const [content, setContent] = useState('');
 
   return (
-    <div className="min-h-screen bg-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F4F3EE] flex flex-col font-sans">
       {/* Top Navigation */}
-      <header className="border-b border-[#E5E2DA] px-6 py-4 flex items-center justify-between sticky top-0 bg-white z-50">
+      <header className="border-b border-[#E5E2DA] px-6 py-4 flex items-center justify-between sticky top-0 bg-[#F4F3EE] z-50">
         <div className="flex items-center space-x-4">
           <Link href="/writer/dashboard" className="p-2 hover:bg-[#F4F3EE] rounded-full transition-colors text-[#6F6B63] hover:text-[#C15F3C]">
             <ChevronLeft size={24} />
@@ -51,7 +51,7 @@ export default function NewArticlePage() {
         <main className="flex-1 overflow-y-auto bg-[#F4F3EE]/30 p-8 md:p-16">
           <div className="max-w-4xl mx-auto space-y-8">
             {/* Featured Image Placeholder */}
-            <div className="w-full aspect-[21/9] bg-white rounded-[2rem] border-2 border-dashed border-[#E5E2DA] flex flex-col items-center justify-center group hover:border-[#C15F3C] transition-colors cursor-pointer overflow-hidden shadow-sm">
+            <div className="w-full aspect-[21/9] bg-[#F4F3EE] rounded-[2rem] border-2 border-dashed border-[#E5E2DA] flex flex-col items-center justify-center group hover:border-[#C15F3C] transition-colors cursor-pointer overflow-hidden shadow-sm">
               <div className="flex flex-col items-center space-y-2 group-hover:scale-105 transition-transform duration-500">
                 <div className="p-4 bg-[#FDF1EC] rounded-2xl text-[#C15F3C]">
                   <ImageIcon size={32} />
@@ -70,7 +70,7 @@ export default function NewArticlePage() {
             />
 
             {/* Toolbar (Simplified) */}
-            <div className="sticky top-4 bg-white/90 backdrop-blur-md rounded-2xl p-2 flex items-center space-x-2 shadow-2xl border border-[#E5E2DA] w-fit mx-auto mb-10 translate-y-[-20px] opacity-0 animate-fade-in hover:opacity-100 transition-opacity">
+            <div className="sticky top-4 bg-[#F4F3EE]/90 backdrop-blur-md rounded-2xl p-2 flex items-center space-x-2 shadow-2xl border border-[#E5E2DA] w-fit mx-auto mb-10 translate-y-[-20px] opacity-0 animate-fade-in hover:opacity-100 transition-opacity">
               <button className="p-3 hover:bg-[#FDF1EC] hover:text-[#C15F3C] rounded-xl transition-colors"><Bold size={20} /></button>
               <button className="p-3 hover:bg-[#FDF1EC] hover:text-[#C15F3C] rounded-xl transition-colors"><Italic size={20} /></button>
               <div className="h-6 w-[1px] bg-[#E5E2DA] mx-2"></div>
@@ -92,7 +92,7 @@ export default function NewArticlePage() {
         </main>
 
         {/* Settings Sidebar */}
-        <aside className="hidden lg:flex w-[350px] bg-white border-l border-[#E5E2DA] flex-col p-8 overflow-y-auto space-y-10 shadow-2xl">
+        <aside className="hidden lg:flex w-[350px] bg-[#F4F3EE] border-l border-[#E5E2DA] flex-col p-8 overflow-y-auto space-y-10 shadow-2xl">
           <div className="flex items-center space-x-2 text-[#C15F3C] font-black uppercase tracking-widest text-xs">
             <Settings size={16} />
             <span>Article Settings</span>

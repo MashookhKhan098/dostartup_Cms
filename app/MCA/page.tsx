@@ -5,6 +5,8 @@
 import React, { useMemo, useState } from "react";
 import SidebarCart from "../components/SidebarCart";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import {
   ChevronRight,
@@ -13,7 +15,6 @@ import {
   Star,
   ChevronDown,
 } from "lucide-react";
-import Faq from "../components/Faq";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -110,11 +111,11 @@ const services = [
 
 export default function MCA() {
   return (
-    <div className="min-h-screen bg-white text-slate-800">
+    <div className="min-h-screen bg-[#F4F3EE] text-slate-800">
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="bg-white py-16">
+      <section className="bg-[#F4F3EE] py-16">
         <div className="max-w-[1200px] mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
@@ -125,7 +126,7 @@ export default function MCA() {
             </p>
             <div className="mt-8 flex gap-4">
               <button className="bg-[#C15F3C] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#A94E30] transition-all">Get Started</button>
-              <button className="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-white transition-all">View Services</button>
+              <button className="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-[#F4F3EE] transition-all">View Services</button>
             </div>
           </div>
           <div className="relative">
@@ -139,12 +140,12 @@ export default function MCA() {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar Filter */}
           <aside className="lg:col-span-1">
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-3 sticky top-24">
+            <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-3 sticky top-24">
               <h3 className="font-bold text-slate-900 px-3 py-2 mb-2 uppercase text-xs tracking-widest">Categories</h3>
               <ul className="space-y-1">
                 {categories.map((c) => (
                   <li key={c.name}>
-                    <button className="w-full flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-white text-slate-700 text-sm font-medium transition-all group">
+                    <button className="w-full flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-[#F4F3EE] text-slate-700 text-sm font-medium transition-all group">
                       <span className="flex items-center gap-3">
                         <img src={c.icon} alt="" className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
                         {c.name}
@@ -161,7 +162,7 @@ export default function MCA() {
           <div className="lg:col-span-3">
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
               {services.map((s) => (
-                <div key={s.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-all group border-b-4 border-b-transparent hover:border-b-[#C15F3C]">
+                <div key={s.id} className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-all group border-b-4 border-b-transparent hover:border-b-[#C15F3C]">
                   <div className="h-44 overflow-hidden">
                     <img src={s.image} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
@@ -180,7 +181,7 @@ export default function MCA() {
       </section>
 
       {/* FAQ SECTION */}
-      <Faq category="MCA" />
+      <FAQAccordion />
 
       <Footer />
     </div>

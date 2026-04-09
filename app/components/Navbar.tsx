@@ -206,7 +206,7 @@ const NSWS = [
 ];
 
 const linkCls =
- "text-xs text-[#6F6B63] px-3 py-1.5 rounded-xl hover:bg-[#F4F3EE] hover:text-[#C15F3C] whitespace-normal transition-all duration-150 block";
+ "text-xs text-[#6F6B63] px-3 py-1.5 rounded-xl hover:bg-[#F5F5F5] hover:text-[#C15F3C] whitespace-normal transition-all duration-150 block";
 
 /* ─── NavItem: single desktop menu item with hover-safe dropdown ─── */
 function NavItem({
@@ -255,7 +255,7 @@ function NavItem({
 
  {open && (
  <div
- className="absolute top-[calc(100%+8px)] bg-white rounded-2xl shadow-xl border border-[#E5E2DA] z-[9999] p-5"
+ className="absolute top-[calc(100%+8px)] bg-white rounded-2xl shadow-xl border border-gray-200 z-[9999] p-5"
  style={panelStyle}
  >
  {children}
@@ -471,10 +471,10 @@ export default function Navbar() {
  onMouseLeave={handleMouseLeave}
  >
  <button
- className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-[#F4F3EE] transition-all duration-200 text-left"
+ className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-[#F5F5F5] transition-all duration-200 text-left"
  style={{ 
  color: submenuOpen ? "#C15F3C" : "#2F2E2B",
- backgroundColor: submenuOpen ? "#F4F3EE" : "transparent"
+ backgroundColor: submenuOpen ? "#F5F5F5" : "transparent"
  }}
  >
  <div className="flex-1">
@@ -498,7 +498,7 @@ export default function Navbar() {
  {/* Submenu that appears on hover */}
  {submenuOpen && item.submenu && (
  <div 
- className="absolute left-full top-0 bg-white rounded-lg shadow-lg border border-[#E5E2DA] ml-2 z-[9999] min-w-max"
+ className="absolute left-full top-0 bg-white rounded-lg shadow-lg border border-gray-200 ml-2 z-[9999] min-w-max"
  style={{
  maxHeight: item.label === "State Approvals" ? "300px" : "auto",
  overflowY: item.label === "State Approvals" ? "auto" : "visible",
@@ -515,7 +515,7 @@ export default function Navbar() {
  <Link
  key={subitem.url}
  href={subitem.url}
- className="text-xs text-[#6F6B63] px-3 py-1.5 rounded-xl hover:bg-[#F4F3EE] hover:text-[#C15F3C] whitespace-normal transition-all duration-150 block"
+ className="text-xs text-[#6F6B63] px-3 py-1.5 rounded-xl hover:bg-[#F5F5F5] hover:text-[#C15F3C] whitespace-normal transition-all duration-150 block"
  >
  {subitem.label}
  </Link>
@@ -562,7 +562,7 @@ export default function Navbar() {
  <div className="flex items-center gap-1 shrink-0 ml-auto">
  {searchOpen ? (
  <div className="relative">
- <div className="flex items-center bg-white rounded-lg border border-[#E5E2DA] overflow-hidden shadow-md focus-within:ring-1 focus-within:ring-[#C15F3C] w-48 sm:w-64">
+ <div className="flex items-center bg-[#F5F5F5] rounded-lg border border-gray-200 overflow-hidden shadow-md focus-within:ring-1 focus-within:ring-[#C15F3C] w-48 sm:w-64">
  <input
  autoFocus
  type="text"
@@ -585,13 +585,13 @@ export default function Navbar() {
  
  {/* Search Results Dropdown */}
  {searchResults.length > 0 && (
- <div className="absolute top-full mt-2 w-full bg-white rounded-xl shadow-2xl border border-[#E5E2DA] overflow-hidden z-[9999]">
+ <div className="absolute top-full mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-[9999]">
  <div className="p-2 space-y-0.5">
  {searchResults.map((result, idx) => (
  <Link 
  key={idx} 
  href={result.url}
- className="block px-3 py-2 text-xs text-[#2F2E2B] hover:bg-[#F4F3EE] hover:text-[#C15F3C] rounded-lg transition-colors"
+ className="block px-3 py-2 text-xs text-[#2F2E2B] hover:bg-[#F5F5F5] hover:text-[#C15F3C] rounded-lg transition-colors"
  onClick={() => {
  setSearchOpen(false);
  setSearchResults([]);
@@ -607,14 +607,14 @@ export default function Navbar() {
  </div>
  ) : (
  <button
- className="p-2 rounded-lg text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F4F3EE] transition-all duration-200"
+ className="p-2 rounded-lg text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200"
  onClick={() => setSearchOpen(true)}
  >
  <FiSearch size={17} />
  </button>
  )}
 
- <Link href="/login" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F4F3EE] transition-all duration-200 whitespace-nowrap">
+ <Link href="/login" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
  <FiUser size={15} /> Login
  </Link>
 
@@ -628,7 +628,7 @@ export default function Navbar() {
  </Link>
 
  <button
- className="lg:hidden p-2 rounded-lg text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F4F3EE] transition-all duration-200"
+ className="lg:hidden p-2 rounded-lg text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200"
  onClick={() => setMobileOpen(!mobileOpen)}
  >
  {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
@@ -638,7 +638,7 @@ export default function Navbar() {
 
  {/* ── Mobile Drawer ── */}
  <div
- className={`lg:hidden fixed inset-x-0 top-16 bottom-0 bg-[#F4F3EE] border-t border-[#E5E2DA] overflow-y-auto overflow-x-hidden transform transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "translate-x-full"
+ className={`lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white border-t border-gray-200 overflow-y-auto overflow-x-hidden transform transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "translate-x-full"
  }`}
  >
  <div className="p-4 space-y-4">
@@ -662,7 +662,7 @@ export default function Navbar() {
  <input
  type="text"
  placeholder="Search services..."
- className="w-full pl-10 pr-4 py-3 bg-white border border-[#E5E2DA] rounded-lg text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
+ className="w-full pl-10 pr-4 py-3 bg-[#F5F5F5] border border-gray-200 rounded-lg text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
  />
  </div>
 
@@ -721,7 +721,7 @@ export default function Navbar() {
  <Link
  key={idx}
  href={item.url}
- className="px-3 py-2 text-xs text-[#6F6B63] rounded-lg hover:bg-white hover:text-[#C15F3C] transition-all duration-150 break-words"
+ className="px-3 py-2 text-xs text-[#6F6B63] rounded-lg hover:bg-[#F5F5F5] hover:text-[#C15F3C] transition-all duration-150 break-words"
  onClick={() => setMobileOpen(false)}
  >
  {item.label}

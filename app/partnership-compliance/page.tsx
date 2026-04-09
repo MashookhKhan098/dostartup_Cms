@@ -89,7 +89,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-white text-gray-800 font-sans antialiased">
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans antialiased">
  <Navbar />
 
  {/* Breadcrumb */}
@@ -197,7 +197,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
 
  <div className="max-w-[1180px] mx-auto px-6 -mt-4">
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-[#C15F3C]/10 grid place-items-center text-[#C15F3C]">
  ✔
@@ -215,7 +215,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-[#C15F3C]/10 grid place-items-center text-[#C15F3C]">
  ⚡
@@ -233,7 +233,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-[#C15F3C]/10 grid place-items-center text-[#C15F3C]">
  👥
@@ -265,7 +265,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </p>
 
  <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
- <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-xl border border-gray-200 p-6 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
  <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  LEDGERS
  </div>
@@ -304,7 +304,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </ul>
  </div>
 
- <div className="bg-white rounded-xl border-2 border-[#C15F3C]/30 p-6 shadow-sm hover:shadow-md transition-all">
+ <div className="bg-[#F4F3EE] rounded-xl border-2 border-[#C15F3C]/30 p-6 shadow-sm hover:shadow-md transition-all">
  <div className="inline-block bg-[#C15F3C] text-white px-3 py-1 rounded-full text-xs mb-3">
  Accounting Software + Service
  </div>
@@ -350,7 +350,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </ul>
  </div>
 
- <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-xl border border-gray-200 p-6 shadow-sm hover:border-[#C15F3C]/30 transition-colors">
  <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Most popular
  </div>
@@ -396,7 +396,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold text-center text-[#C15F3C]">
  Services Offered
  </h3>
@@ -458,7 +458,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold text-center text-[#C15F3C]">How It Works</h3>
  <p className="text-gray-600 mt-3 text-center">
  A guided onboarding process with consistent monthly accounting and
@@ -498,7 +498,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Why DoStartup for Fractional Accountant
  </h3>
@@ -531,7 +531,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Proprietorship Compliance — What you need to know
  </h3>
@@ -598,7 +598,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">Related Guides</h3>
  <div className="flex flex-wrap gap-3 text-sm">
  <a className="px-3 py-2 border border-gray-200 rounded hover:border-[#C15F3C] hover:text-[#C15F3C] transition-colors cursor-pointer">
@@ -616,7 +616,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">FAQ's</h3>
  <div className="space-y-0">
  {faqQuestions.map((q, i) => (
@@ -646,7 +646,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  {POPULAR_SEARCHES.map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-colors"
  >
  {s}
  </span>
@@ -656,7 +656,7 @@ export default function ProprietorshipCompliancePage(): React.ReactElement {
  </section>
  </main>
 
- <footer className="bg-white mt-12 py-5 border-t border-gray-200">
+ <footer className="bg-[#F4F3EE] mt-12 py-5 border-t border-gray-200">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>

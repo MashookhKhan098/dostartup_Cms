@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 import React, { useState } from "react";
@@ -11,8 +10,11 @@ import {
  CheckCircle,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
+import PopularSearches from "../components/PopularSearches";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -111,13 +113,12 @@ export default function AuthorizedCapitalIncrease() {
  7: "Form MGT-14 is filed for special resolutions, while Form SH-7 is specifically for notifying the ROC about changes in authorized capital. Both must be filed within 30 days of the resolution.",
  };
 
- return (
- <div className="min-h-screen bg-white font-sans text-gray-800">
- {/* Navbar - Imported */}
- <Navbar />
+  return (
+    <>
+      <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / MCA Services /{" "}
  <span className="text-amber-700 font-medium">
@@ -129,7 +130,7 @@ export default function AuthorizedCapitalIncrease() {
  {/* Main Content */}
  <main className="max-w-[1180px] mx-auto px-6 py-3">
  {/* Hero Section */}
- <section className="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm overflow-hidden mb-8">
  <div className="flex flex-col lg:flex-row">
  {/* Left Content */}
  <div className="lg:w-1/2 p-8 lg:p-10">
@@ -202,7 +203,7 @@ export default function AuthorizedCapitalIncrease() {
 
  {/* Right Form Card */}
  <div className="lg:w-1/2 p-8 lg:p-10 bg-gradient-to-br from-amber-50 to-amber-100">
- <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+ <div className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-6">
  <div
  className="h-1.5 w-full rounded-t-xl mb-4"
  style={{
@@ -229,7 +230,7 @@ export default function AuthorizedCapitalIncrease() {
  <input
  type="text"
  placeholder="Company Name"
- className="w-full px-4 py-2 border border-gray-200 rounded bg-white text-gray-600"
+ className="w-full px-4 py-2 border border-gray-200 rounded bg-[#F4F3EE] text-gray-600"
  />
  <p className="text-xs text-gray-400 mt-1">
  This field will be automatically populated after you enter
@@ -244,7 +245,7 @@ export default function AuthorizedCapitalIncrease() {
  <input
  type="text"
  placeholder="Filled automatically"
- className="w-full px-4 py-2 border border-gray-200 rounded bg-white text-gray-600"
+ className="w-full px-4 py-2 border border-gray-200 rounded bg-[#F4F3EE] text-gray-600"
  />
  <p className="text-xs text-gray-400 mt-1">
  This field will be automatically populated after you enter
@@ -279,7 +280,7 @@ export default function AuthorizedCapitalIncrease() {
  {/* content column (span 2 on large) */}
  <div className="lg:col-span-2 space-y-6">
  {/* Article */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h2 className="text-2xl font-bold mb-3 text-slate-900">
  Company Authorized Capital Increase
  </h2>
@@ -411,7 +412,7 @@ export default function AuthorizedCapitalIncrease() {
  </div>
 
  {/* Documents / Steps section */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-2xl font-bold mb-4 text-slate-900">
  Procedure & Documents Summary
  </h3>
@@ -431,8 +432,8 @@ export default function AuthorizedCapitalIncrease() {
  </ul>
  </div>
 
- {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+  {/* FAQ */}
+  <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 mt-8">
  <h3 className="text-2xl font-bold mb-4 text-slate-900">
  FAQ's on Authorized Capital Increase
  </h3>
@@ -459,7 +460,7 @@ export default function AuthorizedCapitalIncrease() {
   <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </div>
@@ -469,7 +470,7 @@ export default function AuthorizedCapitalIncrease() {
  <aside className="space-y-6">
           <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-5 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">
  Related Guides
  </h4>
@@ -497,7 +498,7 @@ export default function AuthorizedCapitalIncrease() {
  </ul>
  </div>
 
- <div className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 text-center border border-gray-200">
  <img
  src={ASSETS.cards.compliance}
  alt="Company Compliance"
@@ -508,7 +509,7 @@ export default function AuthorizedCapitalIncrease() {
  </div>
  </div>
 
- <div className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 text-center border border-gray-200">
  <img
  src={ASSETS.cards.dinEKyc}
  alt="DIN eKYC"
@@ -519,7 +520,7 @@ export default function AuthorizedCapitalIncrease() {
  </div>
  </div>
 
- <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">
  Popular Searches
  </h4>
@@ -527,7 +528,7 @@ export default function AuthorizedCapitalIncrease() {
  {POPULAR_SEARCHES.slice(0, 18).map((t) => (
  <span
  key={t}
- className="text-xs px-2 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-2 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -536,30 +537,10 @@ export default function AuthorizedCapitalIncrease() {
  </div>
  </aside>
  </div>
-
- {/* Tag cloud at bottom */}
- <div className="mt-8 bg-white rounded-lg shadow-sm p-6 border border-gray-200">
- <h4 className="font-semibold mb-3 text-slate-900">
- Popular Searches
- </h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.map((t, i) => (
- <span
- key={t + i}
- className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
- >
- {t}
- </span>
- ))}
- </div>
- </div>
  </main>
 
- {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
- </div>
- </div>
- );
+  <PopularSearches />
+  <Footer />
+    </>
+  );
 }

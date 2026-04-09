@@ -84,7 +84,7 @@ export default function PaymentPage() {
 
   return (
     <div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">
-      <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-8 max-w-md w-full">
+      <div className="bg-[#F4F3EE] rounded-2xl shadow-sm border border-[#E5E2DA] p-8 max-w-md w-full">
 
         <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] rounded-xl p-6 text-white mb-6">
           <h2 className="text-xl font-semibold">Complete Payment</h2>

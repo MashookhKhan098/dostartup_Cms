@@ -67,7 +67,7 @@ export default function PesoPage(): React.ReactElement {
   }, [currentSlide]);
 
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-800">
+    <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
       <Navbar />
 
       {/* Main Header / Banner */}
@@ -160,7 +160,7 @@ export default function PesoPage(): React.ReactElement {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`h-2 rounded-full transition-all ${
-                index === currentSlide ? "bg-[#C15F3C] w-8" : "bg-white/50 hover:bg-white w-2"
+                index === currentSlide ? "bg-[#C15F3C] w-8" : "bg-[#F4F3EE]/50 hover:bg-[#F4F3EE] w-2"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -174,7 +174,7 @@ export default function PesoPage(): React.ReactElement {
           
           {/* Left Sidebar - Public Notices */}
           <div className="lg:col-span-1 border border-gray-200 rounded-xl overflow-hidden shadow-sm h-fit">
-            <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+            <div className="bg-[#F4F3EE] border-b border-gray-200 p-4 flex items-center justify-between">
               <h3 className="text-lg font-bold text-gray-800">Public Notices</h3>
               <button
                 onClick={() => setIsPaused(!isPaused)}
@@ -186,7 +186,7 @@ export default function PesoPage(): React.ReactElement {
             </div>
             
             <div 
-              className="h-80 overflow-hidden relative p-4 bg-white"
+              className="h-80 overflow-hidden relative p-4 bg-[#F4F3EE]"
               onMouseEnter={() => setIsHoveringNotice(true)}
               onMouseLeave={() => setIsHoveringNotice(false)}
             >
@@ -208,7 +208,7 @@ export default function PesoPage(): React.ReactElement {
               </div>
             </div>
             
-            <div className="bg-white p-3 border-t border-gray-200 text-center">
+            <div className="bg-[#F4F3EE] p-3 border-t border-gray-200 text-center">
               <a href="#" className="text-sm text-blue-600 font-medium hover:underline">View All Notices</a>
             </div>
           </div>
@@ -217,7 +217,7 @@ export default function PesoPage(): React.ReactElement {
           <div className="lg:col-span-3 space-y-10">
             
             {/* About PESO */}
-            <div className="bg-white rounded-xl">
+            <div className="bg-[#F4F3EE] rounded-xl">
               <h2 className="text-2xl font-bold text-[#1e2a38] mb-4 flex items-center gap-3">
                 <span className="w-8 h-1 bg-[#C15F3C] rounded-full inline-block"></span>
                 Welcome to PESO Online Portal
@@ -233,7 +233,7 @@ export default function PesoPage(): React.ReactElement {
                   <button className="bg-[#C15F3C] text-white px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-[#A84F2E] transition-colors shadow-sm">
                     Apply for License
                   </button>
-                  <button className="bg-white text-[#1e2a38] border border-[#1e2a38] px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-white transition-colors">
+                  <button className="bg-[#F4F3EE] text-[#1e2a38] border border-[#1e2a38] px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-[#F4F3EE] transition-colors">
                     Track Status
                   </button>
                 </div>
@@ -249,7 +249,7 @@ export default function PesoPage(): React.ReactElement {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {SERVICES.map((service, index) => (
-                  <div key={index} className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow group bg-white">
+                  <div key={index} className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow group bg-[#F4F3EE]">
                     <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       {service.icon}
                     </div>

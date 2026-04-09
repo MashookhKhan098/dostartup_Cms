@@ -24,7 +24,7 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
   const hiddenCount = plan.features.length - sliceCount;
 
   return (
-    <div className="relative bg-[#FFFFFF] rounded-[20px] border border-[#E5E2DF] p-6 sm:p-8 flex flex-col transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-[0_12px_32px_rgba(46,46,46,0.08)]">
+    <div className="relative bg-white rounded-[20px] border border-[#E5E2DF] p-6 sm:p-8 flex flex-col transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-[0_12px_32px_rgba(46,46,46,0.08)]">
       {plan.isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C15A36] text-white px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase shadow-md">
           Recommended
@@ -94,8 +94,8 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
 
 export default function PricingCards({ plans, title, subtitle }: { plans: PricingPlan[], title?: string, subtitle?: string }) {
   return (
-    <section className="py-20 px-4 sm:px-6 bg-[#F5F3F1] font-sans">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 bg-[#F4F3EE] font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {(title || subtitle) && (
           <div className="text-center mb-14">
             {title && (

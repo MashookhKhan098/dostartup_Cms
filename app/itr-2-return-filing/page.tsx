@@ -3,8 +3,9 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import {
   CheckCircle,
   XCircle,
@@ -275,89 +276,9 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "File & Track Refund" },
 ];
 
-const PLANS = [
-  {
-    name: "Self File",
-    price: "₹499",
-    period: "/ filing",
-    desc: "For investors with simple equity and MF gains",
-    features: [
-      { text: "Auto broker P&L import", ok: true },
-      { text: "LTCG & STCG calculation", ok: true },
-      { text: "One house property", ok: true },
-      { text: "e-File to IT Dept", ok: true },
-      { text: "CA review", ok: false },
-    ],
-    cta: "Start Filing",
-    featured: false,
-  },
-  {
-    name: "AI Pro",
-    price: "₹799",
-    period: "/ filing",
-    desc: "Best for active investors, multiple brokers & properties",
-    features: [
-      { text: "Everything in Self File", ok: true },
-      { text: "AI loss harvesting engine", ok: true },
-      { text: "Multiple house properties", ok: true },
-      { text: "AIS deep reconciliation", ok: true },
-      { text: "F&O & crypto income", ok: true },
-    ],
-    cta: "Get AI Pro",
-    featured: true,
-    badge: "POPULAR",
-  },
-  {
-    name: "CA Expert",
-    price: "₹1,999",
-    period: "/ filing",
-    desc: "Dedicated CA for complex portfolios & NRI filing",
-    features: [
-      { text: "Everything in AI Pro", ok: true },
-      { text: "Dedicated CA assigned", ok: true },
-      { text: "Foreign income & DTAA", ok: true },
-      { text: "Notice response support", ok: true },
-      { text: "Tax planning consultation", ok: true },
-    ],
-    cta: "Hire a CA",
-    featured: false,
-  },
-];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-2?",
-    a: "ITR-2 is for resident individuals and HUFs who have income from salary, capital gains (stocks, MFs, property), multiple house properties, foreign income, or are directors/shareholders in unlisted companies. Anyone who cannot file ITR-1 but has no business income should file ITR-2.",
-  },
-  {
-    q: "What is the LTCG tax rate on equity for FY 2025-26?",
-    a: "Post Budget 2024, Long-Term Capital Gains on equity shares and equity MFs (held > 12 months) are taxed at 12.5% on gains exceeding ₹1.25 lakh per year. Gains up to ₹1.25 lakh remain exempt under Section 112A.",
-  },
-  {
-    q: "What is the STCG tax rate after Budget 2024?",
-    a: "Short-Term Capital Gains on equity and equity MFs (held ≤ 12 months) are taxed at 20% under Section 111A (increased from 15% in Budget 2024). This applies only to STT-paid transactions on recognized exchanges.",
-  },
-  {
-    q: "Can I carry forward capital losses in ITR-2?",
-    a: "Yes. Short-term capital losses can be set off against both STCG and LTCG. Long-term capital losses can only offset LTCG. Unabsorbed losses can be carried forward for 8 assessment years, but only if you file before the due date.",
-  },
-  {
-    q: "Can NRIs file ITR-2?",
-    a: "Yes. NRIs with capital gains, multiple properties, or other Indian income should file ITR-2. DoStartup supports full NRI filing with DTAA benefit application for USA, UK, UAE, Canada, Singapore, Australia and more.",
-  },
-  {
-    q: "What is the last date to file ITR-2 for AY 2026-27?",
-    a: "The due date for ITR-2 filing for FY 2025-26 (AY 2026-27) is July 31, 2026. Belated returns can be filed till December 31, 2026 with a late fee of ₹1,000–₹5,000 under Section 234F.",
-  },
-  {
-    q: "How does DoStartup import capital gains automatically?",
-    a: "DoStartup connects with 20+ brokers including Zerodha, Groww, Angel One, ICICI Direct, and Upstox. It imports your P&L statement, computes LTCG/STCG with correct scrip-wise cost basis, and populates Schedule CG in ITR-2 automatically.",
-  },
-  {
-    q: "Is Form 67 needed for foreign tax credit?",
-    a: "Yes. If you paid tax abroad on income also taxable in India, you must file Form 67 (before or along with ITR-2) to claim Foreign Tax Credit under Section 90/91. DoStartup's CA Expert plan handles this end-to-end.",
-  },
-];
+
+
 
 const CAPITAL_GAINS_TABLE = [
   {
@@ -522,7 +443,7 @@ function NumInput({
           min={0}
           value={value}
           onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
-          className="w-full pl-7 pr-10 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-white"
+          className="w-full pl-7 pr-10 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-[#F4F3EE]"
         />
       </div>
     </div>
@@ -617,16 +538,16 @@ export default function ITR2Page() {
             }}
           />
           {/* Glow blobs */}
-          <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
+          <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-[#F4F3EE]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
           <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-[#C15F3C]/20 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute top-20 left-10 w-2 h-2 bg-white rounded-full opacity-30 animate-ping" />
-          <div className="absolute bottom-20 right-20 w-3 h-3 bg-white rounded-full opacity-20 animate-pulse" />
+          <div className="absolute top-20 left-10 w-2 h-2 bg-[#F4F3EE] rounded-full opacity-30 animate-ping" />
+          <div className="absolute bottom-20 right-20 w-3 h-3 bg-[#F4F3EE] rounded-full opacity-20 animate-pulse" />
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-white/20 border border-white/30 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase backdrop-blur-sm">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 bg-[#F4F3EE]/20 border border-white/30 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase backdrop-blur-sm">
+                <span className="w-2 h-2 bg-[#F4F3EE] rounded-full animate-pulse" />
                 AY 2026-27 · ITR-2 Filing Open · Last Date: July 31, 2026
               </div>
 
@@ -656,7 +577,7 @@ export default function ITR2Page() {
               <div className="flex flex-wrap gap-3 mb-10">
                 <Link
                   href="#pricing"
-                  className="bg-white text-[#C15F3C] hover:bg-white/90 font-bold px-7 py-3.5 rounded-full text-base transition-all hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-0.5 inline-flex items-center gap-2 group"
+                  className="bg-[#F4F3EE] text-[#C15F3C] hover:bg-[#F4F3EE]/90 font-bold px-7 py-3.5 rounded-full text-base transition-all hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-0.5 inline-flex items-center gap-2 group"
                 >
                   🚀 Start Filing ITR-2{" "}
                   <ArrowRight
@@ -666,7 +587,7 @@ export default function ITR2Page() {
                 </Link>
                 <Link
                   href="#calculator"
-                  className="border border-white/40 hover:border-white text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-white/10 backdrop-blur-sm"
+                  className="border border-white/40 hover:border-white text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-[#F4F3EE]/10 backdrop-blur-sm"
                 >
                   <Calculator size={16} className="inline mr-2" />
                   Capital Gains Calculator →
@@ -697,7 +618,7 @@ export default function ITR2Page() {
                   ],
                 ].map(([num, lbl, icon]) => (
                   <div key={String(lbl)} className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-[#F4F3EE]/20 flex items-center justify-center">
                       {icon}
                     </div>
                     <div>
@@ -713,13 +634,13 @@ export default function ITR2Page() {
 
             {/* Right Column — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-white/15 backdrop-blur-xl border border-white/25 rounded-3xl p-6 shadow-2xl hover:border-white/40 transition-all duration-300">
+              <div className="bg-[#F4F3EE]/15 backdrop-blur-xl border border-white/25 rounded-3xl p-6 shadow-2xl hover:border-white/40 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-white text-sm flex items-center gap-2">
                     <Brain size={18} className="text-white" />
                     🤖 AI ITR-2 Assistant — Live
                   </span>
-                  <span className="bg-white text-[#C15F3C] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                  <span className="bg-[#F4F3EE] text-[#C15F3C] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-[#C15F3C] rounded-full animate-pulse" />
                     ACTIVE
                   </span>
@@ -728,7 +649,7 @@ export default function ITR2Page() {
                 {AI_STEPS.map((s, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 py-3 border-b border-white/10 last:border-0 hover:bg-white/5 rounded-lg px-2 transition-colors"
+                    className="flex items-start gap-3 py-3 border-b border-white/10 last:border-0 hover:bg-[#F4F3EE]/5 rounded-lg px-2 transition-colors"
                   >
                     <div
                       className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center text-xl flex-shrink-0`}
@@ -746,15 +667,15 @@ export default function ITR2Page() {
                   </div>
                 ))}
 
-                <div className="mt-4 bg-white/15 rounded-xl p-4">
+                <div className="mt-4 bg-[#F4F3EE]/15 rounded-xl p-4">
                   <div className="flex justify-between text-xs text-white/70 mb-2">
                     <span className="flex items-center gap-1">
                       <Zap size={12} /> Processing Capital Gains
                     </span>
                     <span className="font-bold text-white">82% Complete</span>
                   </div>
-                  <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-                    <div className="h-full w-[82%] bg-white rounded-full" />
+                  <div className="h-2 bg-[#F4F3EE]/20 rounded-full overflow-hidden">
+                    <div className="h-full w-[82%] bg-[#F4F3EE] rounded-full" />
                   </div>
                   <p className="text-[10px] text-white/50 mt-2">
                     Importing from 6 brokers • 2 steps remaining
@@ -770,7 +691,7 @@ export default function ITR2Page() {
                     {BROKERS.map((b) => (
                       <span
                         key={b}
-                        className="bg-white/15 text-white text-[10px] font-semibold px-2 py-1 rounded-md"
+                        className="bg-[#F4F3EE]/15 text-white text-[10px] font-semibold px-2 py-1 rounded-md"
                       >
                         {b}
                       </span>
@@ -785,7 +706,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  TRUST BADGES
  ══════════════════════════════════════ */}
-        <section className="bg-white border-y border-[#C15F3C]/10 py-6">
+        <section className="bg-[#F4F3EE] border-y border-[#C15F3C]/10 py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
               <span className="text-xs text-[#C15F3C]/40 font-semibold uppercase ">
@@ -811,7 +732,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  ELIGIBILITY + CAPITAL GAINS TABLE
  ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -928,7 +849,7 @@ export default function ITR2Page() {
                     {CAPITAL_GAINS_TABLE.map((row, i) => (
                       <tr
                         key={row.asset}
-                        className={`border-b border-[#C15F3C]/10 hover:bg-[#C15F3C]/5 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-[#F4F3EE]/40"}`}
+                        className={`border-b border-[#C15F3C]/10 hover:bg-[#C15F3C]/5 transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]/40"}`}
                       >
                         <td className="px-3 py-2.5 font-semibold text-slate-900">
                           {row.asset}
@@ -951,12 +872,12 @@ export default function ITR2Page() {
                 </table>
               </div>
               <div className="mt-3 grid sm:grid-cols-2 gap-2">
-                <p className="text-xs text-slate-600 bg-white rounded-xl px-3 py-2 border border-[#C15F3C]/10">
+                <p className="text-xs text-slate-600 bg-[#F4F3EE] rounded-xl px-3 py-2 border border-[#C15F3C]/10">
                   💡 <strong>LTCG Exemption:</strong> Equity LTCG up to{" "}
                   <strong>₹1.25 lakh/year is exempt</strong> — only gains above
                   this are taxed at 12.5%.
                 </p>
-                <p className="text-xs text-slate-600 bg-white rounded-xl px-3 py-2 border border-[#C15F3C]/10">
+                <p className="text-xs text-slate-600 bg-[#F4F3EE] rounded-xl px-3 py-2 border border-[#C15F3C]/10">
                   💡 <strong>Loss Set-off:</strong> STCL offsets STCG + LTCG.
                   LTCL only offsets LTCG. Carry forward for 8 years (file on
                   time!).
@@ -993,7 +914,7 @@ export default function ITR2Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-white border border-[#C15F3C]/10 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-[#C15F3C]/10 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
                   >
                     <div className="w-10 h-10 bg-[#F4F3EE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 group-hover:scale-110 transition-all">
                       {f.icon}
@@ -1014,7 +935,7 @@ export default function ITR2Page() {
               </div>
 
               {/* Comparison Table */}
-              <div className="rounded-2xl overflow-hidden border border-[#C15F3C]/20 shadow-xl bg-white hover:shadow-[#C15F3C]/10 transition-shadow">
+              <div className="rounded-2xl overflow-hidden border border-[#C15F3C]/20 shadow-xl bg-[#F4F3EE] hover:shadow-[#C15F3C]/10 transition-shadow">
                 <div className="bg-gradient-to-r from-[#C15F3C] to-[#C15F3C]/90 px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">
                     <TrendingUp size={16} className="text-white" />
@@ -1106,7 +1027,7 @@ export default function ITR2Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-[#C15F3C]/5 hover:bg-[#C15F3C]/5 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-[#F4F3EE]/20"}`}
+                        className={`border-b border-[#C15F3C]/5 hover:bg-[#C15F3C]/5 transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]/20"}`}
                       >
                         <td className="px-3 py-3 font-medium text-slate-800 text-xs">
                           {row.feature}
@@ -1146,7 +1067,7 @@ export default function ITR2Page() {
  AI FEATURES
  ══════════════════════════════════════ */}
         <section
-          className="bg-white py-6 px-4 sm:px-6 relative overflow-hidden"
+          className="bg-[#F4F3EE] py-6 px-4 sm:px-6 relative overflow-hidden"
           id="features"
         >
           <div className="relative z-10 max-w-7xl mx-auto">
@@ -1170,7 +1091,7 @@ export default function ITR2Page() {
               {AI_FEATURES.map((f) => (
                 <div
                   key={f.title}
-                  className="bg-white border-2 border-slate-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/5 transition-all duration-200 group"
+                  className="bg-[#F4F3EE] border-2 border-slate-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/5 transition-all duration-200 group"
                 >
                   <div className="text-[#C15F3C] mb-3 group-hover:scale-110 transform inline-block transition-transform">
                     {f.icon}
@@ -1193,7 +1114,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  PROCESS STEPS
  ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="process">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="process">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -1258,17 +1179,17 @@ export default function ITR2Page() {
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden hover:shadow-[#C15F3C]/20 transition-shadow">
+            <div className="bg-[#F4F3EE] rounded-3xl border border-slate-200 shadow-2xl overflow-hidden hover:shadow-[#C15F3C]/20 transition-shadow">
               {/* Header Bar */}
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#C15F3C]/90 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-[#F4F3EE]/20 rounded-xl flex items-center justify-center">
                     <TrendingUp size={20} className="text-white" />
                   </div>
                   <div>
                     <h3 className="font-display font-extrabold text-white text-lg flex items-center gap-2">
                       ITR-2 Capital Gains Calculator
-                      <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] bg-[#F4F3EE]/20 text-white px-2 py-0.5 rounded-full">
                         Live
                       </span>
                     </h3>
@@ -1280,11 +1201,11 @@ export default function ITR2Page() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={resetCalculator}
-                    className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
+                    className="bg-[#F4F3EE]/20 hover:bg-[#F4F3EE]/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
                   >
                     <RefreshCw size={12} /> Reset
                   </button>
-                  <span className="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase flex items-center gap-1">
+                  <span className="bg-[#F4F3EE]/20 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase flex items-center gap-1">
                     <Zap size={12} /> AI Powered
                   </span>
                 </div>
@@ -1389,7 +1310,7 @@ export default function ITR2Page() {
                     <select
                       value={calc.age}
                       onChange={(e) => upd("age", e.target.value as AgeGroup)}
-                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-white"
+                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-[#F4F3EE]"
                     >
                       <option value="below60">Below 60 years</option>
                       <option value="60to80">
@@ -1427,7 +1348,7 @@ export default function ITR2Page() {
                   </div>
 
                   {/* Summary */}
-                  <div className="bg-white rounded-2xl border-2 border-[#C15F3C]/10 p-4 mb-4 shadow-sm">
+                  <div className="bg-[#F4F3EE] rounded-2xl border-2 border-[#C15F3C]/10 p-4 mb-4 shadow-sm">
                     <ResultRow
                       label="Gross Total Income"
                       value={fmt(result.grossTotal)}
@@ -1514,7 +1435,7 @@ export default function ITR2Page() {
                         className={`rounded-xl p-3 border-2 text-center transition-all ${
                           r.win
                             ? "bg-[#C15F3C] border-[#C15F3C] shadow-lg shadow-[#C15F3C]/20"
-                            : "bg-white border-slate-200 hover:border-[#C15F3C]"
+                            : "bg-[#F4F3EE] border-slate-200 hover:border-[#C15F3C]"
                         }`}
                       >
                         <div
@@ -1555,7 +1476,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  TESTIMONIALS
  ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -1573,7 +1494,7 @@ export default function ITR2Page() {
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={i}
-                  className="bg-white border-2 border-[#C15F3C]/10 rounded-2xl p-6 hover:border-[#C15F3C] hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="bg-[#F4F3EE] border-2 border-[#C15F3C]/10 rounded-2xl p-6 hover:border-[#C15F3C] hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="flex gap-1 mb-3">
                     {[...Array(5)].map((_, j) => (
@@ -1607,7 +1528,7 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  PRICING PLANS
  ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="pricing">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="pricing">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -1701,82 +1622,14 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  FAQ SECTION
  ══════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">
-                ITR-2 Questions Answered
-              </h2>
-              <p className="text-[#C15F3C] text-sm mt-2">
-                Everything about capital gains, NRI filing & more.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {FAQS.map((faq, i) => (
-                <div
-                  key={i}
-                  className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-200 ${
-                    openFaq === i
-                      ? "border-[#C15F3C] shadow-lg shadow-[#C15F3C]/5"
-                      : "border-slate-100 hover:border-[#C15F3C]/30"
-                  }`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between items-start gap-4 px-5 py-4 text-left group"
-                  >
-                    <span className="font-semibold text-sm text-slate-800 leading-snug group-hover:text-[#C15F3C] transition-colors">
-                      {faq.q}
-                    </span>
-                    {openFaq === i ? (
-                      <ChevronUp
-                        size={17}
-                        className="text-[#C15F3C] flex-shrink-0 mt-0.5"
-                      />
-                    ) : (
-                      <ChevronDown
-                        size={17}
-                        className="text-[#C15F3C] flex-shrink-0 mt-0.5 group-hover:translate-y-0.5 transition-transform"
-                      />
-                    )}
-                  </button>
-
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t border-[#F4F3EE] pt-3 bg-[#F4F3EE]/30">
-                      <p className="text-slate-600 text-sm leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-sm text-orange-500 mb-4">
-                Still have questions about ITR-2?
-              </p>
-              <Link
-                href="/support"
-                className="inline-flex items-center gap-2 text-orange-600 font-semibold text-sm hover:text-orange-700 border border-orange-300 px-6 py-3 rounded-full hover:bg-orange-50 transition-all"
-              >
-                <MessageCircle size={16} />
-                Chat with our AI Tax Support (24/7)
-              </Link>
-            </div>
-          </div>
-        </section>
+        <FAQAccordion />
 
         {/* ══════════════════════════════════════
  FINAL CTA BANNER
  ══════════════════════════════════════ */}
         <section className="bg-gradient-to-br from-orange-500 via-orange-600 to-amber-500 py-6 px-4 sm:px-6 relative overflow-hidden">
           <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            <div className="absolute top-0 left-0 w-64 h-64 bg-[#F4F3EE]/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 right-0 w-80 h-80 bg-orange-900/20 rounded-full blur-3xl" />
           </div>
 
@@ -1808,7 +1661,7 @@ export default function ITR2Page() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="#pricing"
-                className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold text-base px-8 py-4 rounded-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-150 group"
+                className="inline-flex items-center gap-2 bg-[#F4F3EE] text-orange-600 font-bold text-base px-8 py-4 rounded-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-150 group"
               >
                 🚀 File ITR-2 Free Today
                 <ArrowRight
@@ -1818,7 +1671,7 @@ export default function ITR2Page() {
               </Link>
               <Link
                 href="#calculator"
-                className="inline-flex items-center gap-2 border-2 border-white/40 text-white font-semibold text-base px-8 py-4 rounded-full hover:bg-white/10 hover:border-white/60 transition-all"
+                className="inline-flex items-center gap-2 border-2 border-white/40 text-white font-semibold text-base px-8 py-4 rounded-full hover:bg-[#F4F3EE]/10 hover:border-white/60 transition-all"
               >
                 <Calculator size={18} />
                 Try Calculator First →

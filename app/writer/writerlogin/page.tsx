@@ -25,7 +25,7 @@ export default function WriterLoginPage() {
   return (
     <div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center p-4 font-sans">
       {/* Container Card */}
-      <div className="bg-white rounded-[2rem] shadow-2xl flex flex-col md:flex-row w-full max-w-[1000px] overflow-hidden min-h-[600px]">
+      <div className="bg-[#F4F3EE] rounded-[2rem] shadow-2xl flex flex-col md:flex-row w-full max-w-[1000px] overflow-hidden min-h-[600px]">
         
         {/* Left Side: Form */}
         <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center">

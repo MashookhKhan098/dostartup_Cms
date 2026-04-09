@@ -1,7 +1,8 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import SidebarCart from "../components/SidebarCart";
 import React, { useMemo, useState } from "react";
@@ -234,15 +235,15 @@ export default function IncomeTaxPage() {
  ITR-1 Return Filing
  </h1>
 
- <div className="mt-5 inline-flex bg-white rounded-full shadow-lg px-1 py-1">
+ <div className="mt-5 inline-flex bg-[#F4F3EE] rounded-full shadow-lg px-1 py-1">
  {tabs.map((t) => (
  <button
  key={t}
  onClick={() => setActiveTab(t)}
  className={`px-5 py-2 rounded-full text-sm font-semibold transition ${
  activeTab === t
- ? "bg-white text-[#C15F3C]"
- : "text-slate-700 hover:bg-white"
+ ? "bg-[#F4F3EE] text-[#C15F3C]"
+ : "text-slate-700 hover:bg-[#F4F3EE]"
  }`}
  >
  {t}
@@ -258,7 +259,7 @@ export default function IncomeTaxPage() {
  </p>
 
  <div className="mt-6 max-w-[560px]">
- <div className="flex items-center bg-white rounded-2xl border-2 border-slate-200 overflow-hidden">
+ <div className="flex items-center bg-[#F4F3EE] rounded-2xl border-2 border-slate-200 overflow-hidden">
  <input
  type="text"
  placeholder="ENTER PAN"
@@ -278,14 +279,14 @@ export default function IncomeTaxPage() {
  className="w-full h-[360px] md:h-[420px] object-cover rounded-lg shadow-2xl"
  />
 
- <div className="absolute left-4 md:left-8 top-6 bg-white rounded-lg px-3 py-2 shadow flex items-center gap-2">
+ <div className="absolute left-4 md:left-8 top-6 bg-[#F4F3EE] rounded-lg px-3 py-2 shadow flex items-center gap-2">
  <CheckCircle className="w-4.5 h-4.5 text-[#C15F3C]" />
  <span className="text-xs md:text-sm font-medium text-slate-700">
  Assisted Tax Filing
  </span>
  </div>
 
- <div className="absolute right-4 md:right-6 top-6 bg-white rounded-lg px-3 py-2 shadow flex items-center gap-2">
+ <div className="absolute right-4 md:right-6 top-6 bg-[#F4F3EE] rounded-lg px-3 py-2 shadow flex items-center gap-2">
  <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-yellow-50">
  <Star className="w-3.5 h-3.5 text-yellow-500" />
  </span>
@@ -294,7 +295,7 @@ export default function IncomeTaxPage() {
  </span>
  </div>
 
- <div className="absolute left-4 md:left-8 bottom-6 bg-white rounded-lg px-3 py-2 shadow w-[220px]">
+ <div className="absolute left-4 md:left-8 bottom-6 bg-[#F4F3EE] rounded-lg px-3 py-2 shadow w-[220px]">
  <div className="text-xs text-slate-600 mb-1">
  Just Upload Documents
  </div>
@@ -306,7 +307,7 @@ export default function IncomeTaxPage() {
  </div>
  </div>
 
- <div className="bg-white border-b border-slate-200">
+ <div className="bg-[#F4F3EE] border-b border-slate-200">
  <div className="max-w-[1200px] mx-auto px-4">
  <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 py-3 md:py-4">
  <div className="flex items-center gap-2">
@@ -349,7 +350,7 @@ export default function IncomeTaxPage() {
 
  <section className="max-w-[1200px] mx-auto px-4 pb-10">
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
- <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-4">
  <img
  src={ASSETS.promoBlue}
  alt="INCOME TAX e-FILING"
@@ -369,7 +370,7 @@ export default function IncomeTaxPage() {
  Offers and discounts
  </div>
  <div className="space-y-3">
- <div className="flex items-center gap-3 bg-white rounded-lg border border-slate-200 p-3">
+ <div className="flex items-center gap-3 bg-[#F4F3EE] rounded-lg border border-slate-200 p-3">
  <img
  src="/images/ledgers.png"
  alt="LEDGERS"
@@ -384,7 +385,7 @@ export default function IncomeTaxPage() {
  </div>
  </div>
  </div>
- <div className="flex items-center gap-3 bg-white rounded-lg border border-slate-200 p-3">
+ <div className="flex items-center gap-3 bg-[#F4F3EE] rounded-lg border border-slate-200 p-3">
  <img
  src="/images/gstin.png"
  alt="Save GST"
@@ -403,7 +404,7 @@ export default function IncomeTaxPage() {
  </div>
  </div>
 
- <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 md:p-6">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-4 md:p-6">
  <div className="flex items-center justify-between">
  <div className="text-[18px] font-semibold text-slate-900">
  Income Tax E-Filing
@@ -477,7 +478,7 @@ export default function IncomeTaxPage() {
  <aside className="h-fit space-y-4">
   <SidebarCart />
   
-  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+  <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-6">
   <div className="font-semibold text-slate-900 mb-2 uppercase tracking-wider text-xs">Related Guides</div>
   <div className="space-y-2">
   {[
@@ -494,7 +495,7 @@ export default function IncomeTaxPage() {
   </div>
   </div>
 
-  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+  <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-6">
   <div className="font-semibold text-slate-900 mb-2 uppercase tracking-wider text-xs">Income Tax E-Filing</div>
   <div className="max-h-[320px] overflow-y-auto pr-1 space-y-1">
   {states.map((s) => (
@@ -512,7 +513,7 @@ export default function IncomeTaxPage() {
  <section className="max-w-[1200px] mx-auto px-4">
  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
  <div className="lg:col-span-2">
- <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
  <p className="text-sm text-slate-600 italic">
  Experience a seamless ITR filing process online with
  DoStartup and say goodbye to tax season stress!
@@ -607,7 +608,7 @@ export default function IncomeTaxPage() {
 
  </div>
 
- <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 my-8">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 my-8">
  <h2 className="text-xl font-bold text-slate-900 mb-4">
  Popular Searches
  </h2>
@@ -626,7 +627,7 @@ export default function IncomeTaxPage() {
  </div>
 
  <div className="space-y-6">
- <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
  <img
  src={ASSETS.cardPartnership}
  alt="Partnership Compliance"
@@ -634,7 +635,7 @@ export default function IncomeTaxPage() {
  />
  <div className="p-4 font-semibold">Partnership Compliance</div>
  </div>
- <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
  <img
  src={ASSETS.cardBusinessTax}
  alt="Business Tax Filing"
@@ -646,7 +647,7 @@ export default function IncomeTaxPage() {
  </div>
  </section>
 
- <Faq category="Income Tax" blogCategory="income-tax" />
+ <FAQAccordion />
 
  <Footer />
 

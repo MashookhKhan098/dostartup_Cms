@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react";
 
 const LiveChatCard = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 sticky top-28 max-w-[400px] mx-auto lg:ml-auto">
+    <div className="bg-[#F4F3EE] rounded-2xl shadow-lg border border-gray-100 p-8 sticky top-28 max-w-[400px] mx-auto lg:ml-auto">
       <div className="flex flex-col gap-4">
         <h3 className="text-2xl font-bold text-[#8B4513] leading-tight">
           Live chat with experts

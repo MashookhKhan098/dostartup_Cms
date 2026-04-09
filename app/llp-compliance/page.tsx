@@ -5,8 +5,9 @@
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import PopularSearches from "../components/PopularSearches";
 import SidebarCart from "../components/SidebarCart";
 
@@ -66,7 +67,7 @@ export default function LLPCompliancePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#ffffff] text-slate-800">
+    <div className="min-h-screen bg-[#F4F3EE] text-slate-800">
       <Navbar />
 
       {/* Breadcrumb */}
@@ -85,7 +86,7 @@ export default function LLPCompliancePage() {
           {/* Header Block: 2-Col Hero Area */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
              {/* Col 1: Hero Image Card */}
-             <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
+             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
                <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
                 <div className="bg-[#9e4a2d] p-6 text-center">
                   <h2 className="text-white text-xl font-bold uppercase">LLP COMPLIANCE</h2>
@@ -108,7 +109,7 @@ export default function LLPCompliancePage() {
             </div>
 
             {/* Col 2: Info Card */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
+            <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
                <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2 w-fit">
                     <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
                     <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA & TAX</span>
@@ -119,7 +120,7 @@ export default function LLPCompliancePage() {
                </p>
 
                <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto">
-                  <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Help</div>
+                  <div className="absolute -top-3 left-4 bg-[#F4F3EE] px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Help</div>
                   <ul className="space-y-3 mt-1">
                     <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold">
                       <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Pick the right plan for your LLP
@@ -163,7 +164,7 @@ export default function LLPCompliancePage() {
            <div className="sticky top-28 space-y-6">
               <SidebarCart />
               
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
+              <div className="bg-[#F4F3EE] p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
                 <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
                 <ul className="text-[13px] space-y-4 text-amber-700">
                   {["LLP Form 11 Guide", "LLP Form 8 Guide", "Drafting LLP Agreement", "Adding Partner in LLP"].map((item) => (
@@ -184,63 +185,12 @@ export default function LLPCompliancePage() {
       </main>
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-12">
-        <DoStartupPricing 
-          title="Simple packages. Transparent pricing."
-          plans={[
-            {
-              title: "LLP Compliance - 1 Year",
-              price: "",
-              description: "Basic annual compliance for Limited Liability Partnerships",
-              features: [
-                "LEDGERS Accounting Software - 1 Year",
-                "LLP Annual Filing (Form 8 & 11)",
-                "Dedicated Accountant",
-                "Dedicated Compliance Advisor",
-                "Annual Bookkeeping",
-                "Financial Statement Preparation",
-                "Partner Capital Account Statement",
-                "Income Tax Return Filing for LLP",
-                "DIN KYC for 2 Designated Partners"
-              ],
-              buttonText: "Select Plan"
-            },
-            {
-              title: "LLP Compliance - 2 Year",
-              price: "",
-              description: "Extended LLP compliance support & better value",
-              isPopular: true,
-              features: [
-                "Everything in 1-Year LLP plan",
-                "Priority support",
-                "Quarterly compliance review meetings",
-                "Proactive ROC and tax filing alerts",
-                "ROC filing support for event based changes",
-                "Tax planning review for partners",
-                "Digital document vault for LLP records"
-              ],
-              buttonText: "Select Plan"
-            },
-            {
-              title: "LLP Compliance - 3 Year",
-              price: "",
-              description: "Long-term LLP compliance management",
-              features: [
-                "Everything in 2-Year LLP plan",
-                "Dedicated compliance manager",
-                "On-demand advisory calls for partners",
-                "Custom LLP compliance calendar",
-                "Secretarial support for partner meetings",
-                "Detailed annual compliance report"
-              ],
-              buttonText: "Select Plan"
-            }
-          ]}
-        />
+        <DynamicPricingSection />
       </div>
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-12">
         {/* FAQ Section */}
-        <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+        <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
            <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's on LLP Compliance</h3>
            <div className="space-y-4 font-bold">
              {[
@@ -248,7 +198,7 @@ export default function LLPCompliancePage() {
                { q: "What is Form 11?", a: "Form 11 is an Annual Return of an LLP containing partner details and contributions. It must be filed by 30th May every year." },
                { q: "What is Form 8?", a: "Form 8 is a Statement of Accounts and Solvency, disclosing the financial state of the LLP. It must be filed by 30th October every year." }
              ].map((faq, idx) => (
-               <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white">
+               <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-[#F4F3EE]">
                  <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50/10 transition-colors group">
                    <span className="text-sm font-bold text-slate-800 group-hover:text-amber-700">{faq.q}</span>
                    <div className={`p-1.5 rounded-full bg-amber-50 transition-all shrink-0 ${openFaq === idx ? 'rotate-45' : ''}`}>

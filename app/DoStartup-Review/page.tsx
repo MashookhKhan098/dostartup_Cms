@@ -54,7 +54,7 @@ export default function ReviewsPage() {
  {reviews.map((review, index) => (
  <div
  key={index}
- className="bg-white rounded-2xl shadow-md p-6 border border-[#B1ADA1]/40"
+ className="bg-[#F4F3EE] rounded-2xl shadow-md p-6 border border-[#B1ADA1]/40"
  >
  {/* Rating */}
  <div className="flex mb-3">

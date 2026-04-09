@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 /* eslint-disable @next/next/no-img-element */
@@ -7,6 +6,8 @@ import AddQuestionModal from "../components/AddQuestionModal";
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import PopularSearches from "../components/PopularSearches";
 import SidebarCart from "../components/SidebarCart";
@@ -34,7 +35,7 @@ export default function DPT3FilingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#ffffff] text-slate-800">
+    <div className="min-h-screen bg-[#F4F3EE] text-slate-800">
       <Navbar />
 
       {/* Breadcrumb */}
@@ -53,7 +54,7 @@ export default function DPT3FilingPage() {
           {/* Header Block: 2-Col Hero Area */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
              {/* Col 1: Hero Image Card */}
-             <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
+             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
                <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
                 <div className="bg-[#9e4a2d] p-6 text-center">
                   <h2 className="text-white text-xl font-bold uppercase">DPT-3 FILING</h2>
@@ -76,7 +77,7 @@ export default function DPT3FilingPage() {
             </div>
 
             {/* Col 2: Info Card */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
+            <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
                <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2 w-fit">
                     <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
                     <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA COMPLIANCE</span>
@@ -92,7 +93,7 @@ export default function DPT3FilingPage() {
                </p>
 
                <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto font-bold">
-                  <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">DPT-3 Support</div>
+                  <div className="absolute -top-3 left-4 bg-[#F4F3EE] px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">DPT-3 Support</div>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-2 text-[13px] text-slate-600">
                       <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> Preparation of Auditor-Certified DPT-3 Return
@@ -107,7 +108,7 @@ export default function DPT3FilingPage() {
           </div>
 
           <div className="space-y-12">
-             <article className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+             <article className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
                 <h1 className="text-2xl font-bold text-[#9e4a2d] mb-8 border-b-2 border-amber-600/10 pb-4 text-center uppercase">
                    Guide to Form DPT-3 Filing (Return of Deposits)
                 </h1>
@@ -139,7 +140,7 @@ export default function DPT3FilingPage() {
              </article>
 
              {/* Documents Section */}
-             <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm font-bold">
+             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm font-bold">
                 <h3 className="text-xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-3 uppercase text-[16px]">Documents Required For DPT-3 Filing</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
@@ -149,7 +150,7 @@ export default function DPT3FilingPage() {
                     "Copy of Loan Agreements (Optional/Recommended)",
                     "Provisional or Audited Balance Sheet Statement"
                   ].map((doc, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 bg-white/50 rounded-xl border border-gray-100 group hover:border-amber-200 transition-colors">
+                    <div key={idx} className="flex items-center justify-between p-4 bg-[#F4F3EE]/50 rounded-xl border border-gray-100 group hover:border-amber-200 transition-colors">
                        <span className="text-sm text-slate-700 group-hover:text-amber-800 leading-tight">{doc}</span>
                     </div>
                   ))}
@@ -157,11 +158,11 @@ export default function DPT3FilingPage() {
              </div>
 
              {/* FAQ Section */}
-             <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
                 <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's</h3>
                 <div className="space-y-4 font-bold">
                   {faqItems.map((faq, idx) => (
-                    <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white">
+                    <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-[#F4F3EE]">
                       <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50/10 transition-colors group">
                         <span className="text-sm font-bold text-slate-800 group-hover:text-amber-700">{faq.q}</span>
                         <div className={`p-1.5 rounded-full bg-amber-50 transition-all shrink-0 ${openFaq === idx ? 'rotate-45' : ''}`}>
@@ -176,7 +177,7 @@ export default function DPT3FilingPage() {
                 </div>
                 <div className="flex gap-3 items-center flex-wrap mt-4">
   <button className="mt-10 px-10 py-2.5 border-2 border-amber-600 text-amber-700 rounded-lg text-sm font-bold hover:bg-amber-50 uppercase tracking-wide">Load More</button>
-  <AddQuestionModal />
+  
 </div>
 </div>
           </div>
@@ -187,7 +188,7 @@ export default function DPT3FilingPage() {
            <div className="sticky top-28 space-y-6 font-bold">
               <SidebarCart />
               
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
+              <div className="bg-[#F4F3EE] p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
                 <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
                 <ul className="text-[13px] space-y-4 text-amber-700">
                   {["Is DPT-3 Mandatory for OPC?", "What counts as a Deposit?", "Auditor Certificate for DPT-3", "Exempt Transactions List"].map((item) => (
@@ -201,7 +202,7 @@ export default function DPT3FilingPage() {
 
               <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:scale-[1.02] transition-transform">
                 <img src={ASSETS.companyCompliance} alt="compliance" className="w-full h-auto object-cover" />
-                <div className="p-5 bg-white">
+                <div className="p-5 bg-[#F4F3EE]">
                   <div className="text-[13px] text-slate-800 uppercase font-bold">Annual Compliance</div>
                   <div className="text-[11px] text-slate-400 mt-1 font-bold">Comprehensive Protection</div>
                 </div>

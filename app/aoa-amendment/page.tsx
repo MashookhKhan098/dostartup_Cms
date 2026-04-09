@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 /* eslint-disable @next/next/no-img-element */
@@ -7,6 +6,8 @@ import AddQuestionModal from "../components/AddQuestionModal";
 import React, { useMemo, useState } from "react";
 import { Star, ChevronDown, Search, Menu, X } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 
 /* ------------------------------
@@ -152,7 +153,7 @@ const Footer: React.FC = () => {
  <div
  className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
  style={{
- backgroundColor: "#ffffff",
+ backgroundColor: "#F4F3EE",
  backgroundImage: `radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%),
  radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%),
  url("${bgImagePath}")`,
@@ -648,7 +649,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  <section className="col-span-12 lg:col-span-8">
  <div className="flex flex-col lg:flex-row gap-6 items-start">
  {/* Left box - image */}
- <div className="w-full lg:w-1/2 bg-white rounded-lg border border-gray-200 overflow-hidden shadow-lg">
+ <div className="w-full lg:w-1/2 bg-[#F4F3EE] rounded-lg border border-gray-200 overflow-hidden shadow-lg">
  <img
  src={ASSETS.heroTile}
  alt="hero"
@@ -657,7 +658,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </div>
 
  {/* Right box - small product card */}
- <div className="w-full lg:w-1/2 bg-white rounded-lg border border-gray-200 p-6 shadow-lg flex flex-col justify-between hover:border-amber-200 transition-colors">
+ <div className="w-full lg:w-1/2 bg-[#F4F3EE] rounded-lg border border-gray-200 p-6 shadow-lg flex flex-col justify-between hover:border-amber-200 transition-colors">
  <div>
  <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2">
  <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
@@ -676,7 +677,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </p>
 
  <div className="mt-5 border-2 border-dashed rounded-md border-amber-200 p-4 bg-amber-50/30">
- <div className="text-xs text-amber-700 font-semibold bg-white inline-flex px-2 py-1 rounded border border-amber-200">
+ <div className="text-xs text-amber-700 font-semibold bg-[#F4F3EE] inline-flex px-2 py-1 rounded border border-amber-200">
  1 Exclusive Offers
  </div>
  <h4 className="font-semibold mt-3">Basic</h4>
@@ -685,7 +686,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  <li className="hover:text-amber-700 transition-colors">Provide Updated AOA</li>
  </ul>
  <div className="mt-4">
- <button className="bg-white border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
+ <button className="bg-[#F4F3EE] border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
  ADD TO CART
  </button>
  </div>
@@ -727,7 +728,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
  {/* Main article */}
  <article className="mt-10 space-y-6">
- <div className="bg-white border border-gray-200 rounded-lg p-6 sm:p-8 shadow-lg">
+ <div className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 sm:p-8 shadow-lg">
  <h1 className="text-xl sm:text-2xl font-bold mb-4">
  Articles of Association (AOA) Amendment
  </h1>
@@ -741,7 +742,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+ <div className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 shadow-lg">
  <h2 className="text-lg sm:text-xl font-semibold mb-3 text-amber-800">
  Article of Association
  </h2>
@@ -764,7 +765,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </ul>
  </div>
 
- <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+ <div className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 shadow-lg">
  <h2 className="text-lg sm:text-xl font-semibold mb-3 text-amber-800">
  AOA Amendment
  </h2>
@@ -834,7 +835,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+ <div className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 shadow-lg">
  <h2 className="text-lg sm:text-xl font-semibold text-amber-800">
  Key Requirements for Changing a Company's AoA
  </h2>
@@ -860,7 +861,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </ul>
  </div>
 
- <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+ <div className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 shadow-lg">
  <h2 className="text-lg sm:text-xl font-semibold mb-3 text-amber-800">
  Procedure for AOA Amendment
  </h2>
@@ -915,7 +916,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+ <div className="bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 shadow-lg">
  <h3 className="font-semibold text-amber-800">
  Streamlining AOA Amendments with Us
  </h3>
@@ -931,7 +932,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </article>
 
  {/* FAQ section */}
- <section className="mt-8 bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+ <section className="mt-8 bg-[#F4F3EE] border border-gray-200 rounded-lg p-6 shadow-lg">
  <h3 className="text-lg sm:text-xl font-semibold mb-4">
  FAQ's on AOA Amendment
  </h3>
@@ -957,10 +958,10 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  ))}
 
  <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-  <button className="text-xs px-3 py-2 border-2 border-amber-600 rounded bg-white text-amber-700 hover:bg-amber-50 transition-colors font-medium">
+  <button className="text-xs px-3 py-2 border-2 border-amber-600 rounded bg-[#F4F3EE] text-amber-700 hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </section>
@@ -968,7 +969,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
 
  {/* Right sidebar */}
  <aside className="col-span-12 lg:col-span-4">
- <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-lg sticky top-24">
+ <div className="bg-[#F4F3EE] rounded-lg border border-gray-200 p-6 shadow-lg sticky top-24">
  <div className="text-center py-6">
  <div className="text-slate-700 text-lg font-semibold">
  Your cart is empty
@@ -1032,7 +1033,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </div>
 
  <div className="mt-6 space-y-6">
- <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-lg hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-lg border border-gray-200 p-4 shadow-lg hover:border-amber-200 transition-colors">
  <img
  src={ASSETS.cards.companyCompliance}
  alt="comp"
@@ -1041,7 +1042,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  <div className="mt-3 font-semibold text-amber-800">Company Compliance</div>
  </div>
 
- <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-lg hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-lg border border-gray-200 p-4 shadow-lg hover:border-amber-200 transition-colors">
  <img
  src={ASSETS.cards.dinEKyc}
  alt="ekyc"
@@ -1051,7 +1052,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="mt-8 bg-white rounded-lg border border-gray-200 p-4 shadow-lg">
+ <div className="mt-8 bg-[#F4F3EE] rounded-lg border border-gray-200 p-4 shadow-lg">
  <h4 className="font-semibold text-amber-800">Related Guides</h4>
  <ul className="mt-3 space-y-2 text-sm">
  <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">
@@ -1069,13 +1070,13 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
  </div>
 
  {/* Popular searches */}
- <section className="mt-10 bg-white rounded-lg p-6 shadow-lg border border-gray-200">
+ <section className="mt-10 bg-[#F4F3EE] rounded-lg p-6 shadow-lg border border-gray-200">
  <h4 className="font-semibold mb-4 text-amber-800">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {popularTags.slice(0, 20).map((t) => (
  <span
  key={t}
- className="text-xs border border-gray-200 px-3 py-1.5 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs border border-gray-200 px-3 py-1.5 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -1113,7 +1114,7 @@ export default function AOAAmendmentMergedPage(): React.ReactElement {
             "Helvetica Neue", Arial;
           background: linear-gradient(
             135deg,
-            #ffffff 0%,
+            #F4F3EE 0%,
             #fdf6ff 40%,
             #f3fbff 100%
           );

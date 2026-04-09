@@ -86,7 +86,7 @@ export default async function DynamicTabContent({
  {/* Right Side - Visual */}
  <div className="relative">
  <div className="absolute inset-0 bg-gradient-to-r from-[#C15F3C]/20 to-transparent rounded-full blur-3xl"></div>
- <div className="relative bg-white rounded-2xl shadow-xl border border-[#E5E2DA] p-6 backdrop-blur-sm">
+ <div className="relative bg-[#F4F3EE] rounded-2xl shadow-xl border border-[#E5E2DA] p-6 backdrop-blur-sm">
  <div className="flex items-center gap-3 mb-4">
  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C15F3C] to-[#A94E30] flex items-center justify-center">
  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -203,7 +203,7 @@ export default async function DynamicTabContent({
  {/* Sections with Timeline Style */}
  {(data.sections || []).map((section: any, index: number) => (
  <div key={index} className="relative mb-12 last:mb-0 pl-8 border-l-2 border-[#E5E2DA] group">
- <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-white border-2 border-[#C15F3C] flex items-center justify-center group-hover:scale-110 transition-transform">
+ <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#F4F3EE] border-2 border-[#C15F3C] flex items-center justify-center group-hover:scale-110 transition-transform">
  <div className="w-2 h-2 rounded-full bg-[#C15F3C]"></div>
  </div>
 
@@ -239,13 +239,13 @@ export default async function DynamicTabContent({
  <div className="px-6 md:px-8 py-5 bg-[#F4F3EE] border-t border-[#E5E2DA]">
  <div className="flex flex-wrap items-center justify-between gap-3">
  <div className="flex items-center gap-3">
- <button className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg text-sm text-[#6F6B63] hover:text-[#C15F3C] hover:shadow-sm transition-all">
+ <button className="flex items-center gap-2 px-4 py-2 bg-[#F4F3EE] rounded-lg text-sm text-[#6F6B63] hover:text-[#C15F3C] hover:shadow-sm transition-all">
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
  </svg>
  <span>Helpful (245)</span>
  </button>
- <button className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg text-sm text-[#6F6B63] hover:text-[#C15F3C] transition-all">
+ <button className="flex items-center gap-2 px-4 py-2 bg-[#F4F3EE] rounded-lg text-sm text-[#6F6B63] hover:text-[#C15F3C] transition-all">
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
  </svg>
@@ -266,12 +266,12 @@ export default async function DynamicTabContent({
 
  {/* Support Card */}
  <div className="bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-2xl p-5 text-white text-center">
- <div className="w-16 h-16 mx-auto bg-white/20 rounded-2xl flex items-center justify-center text-3xl mb-4">
+ <div className="w-16 h-16 mx-auto bg-[#F4F3EE]/20 rounded-2xl flex items-center justify-center text-3xl mb-4">
  💬
  </div>
  <h3 className="font-bold text-lg mb-2">Need Help?</h3>
  <p className="text-white/90 text-sm mb-4">Chat with our experts for personalized guidance</p>
- <button className="w-full bg-white text-[#C15F3C] font-semibold py-2.5 rounded-xl hover:shadow-lg transition-all">
+ <button className="w-full bg-[#F4F3EE] text-[#C15F3C] font-semibold py-2.5 rounded-xl hover:shadow-lg transition-all">
  Start Conversation →
  </button>
  </div>

@@ -108,12 +108,12 @@ export default function FlaReturnFilingPage() {
  };
 
  return (
- <div className="min-h-screen bg-white font-sans text-gray-800">
+ <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / Compliance Services /{" "}
  <span className="text-amber-700 font-medium">
@@ -128,7 +128,7 @@ export default function FlaReturnFilingPage() {
  {/* Left Column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top Card */}
- <div className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card */}
  <div className="md:w-1/3 flex-shrink-0">
  <div className="rounded-lg overflow-hidden">
@@ -141,8 +141,8 @@ export default function FlaReturnFilingPage() {
  </div>
  </div>
 
- <div className="bg-white px-4 py-6 flex justify-center">
- <div className="w-44 h-44 rounded-full overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4">
+ <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
+ <div className="w-44 h-44 rounded-full overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
  <img
  src={ASSETS.hero}
  alt="FLA hero"
@@ -190,7 +190,7 @@ export default function FlaReturnFilingPage() {
 
  {/* Offer box */}
  <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-amber-700 border border-amber-200">
+ <div className="absolute -top-3 left-6 bg-[#F4F3EE] px-2 rounded-md text-xs text-amber-700 border border-amber-200">
  2 Exclusive Offers
  </div>
  <div className="border-2 border-dashed rounded-md border-amber-200 p-4 bg-amber-50/30">
@@ -200,7 +200,7 @@ export default function FlaReturnFilingPage() {
  <div>RBI Compliance Support</div>
  </div>
  <div className="mt-3">
- <button className="bg-white border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
+ <button className="bg-[#F4F3EE] border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
  ADD TO CART
  </button>
  </div>
@@ -238,7 +238,7 @@ export default function FlaReturnFilingPage() {
  </div>
 
  {/* Article */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center text-slate-900">
  FLA Return Filing
  </h1>
@@ -279,7 +279,7 @@ export default function FlaReturnFilingPage() {
  </article>
 
  {/* Related Guides */}
- <div className="bg-white rounded-lg shadow-sm p-6 mt-8">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 mt-8">
  <h3 className="text-lg font-semibold mb-4 text-slate-900">Related Guides</h3>
  <ul className="space-y-3 text-sm text-amber-700">
  <li className="hover:text-amber-800 cursor-pointer hover:underline">FLA Return Filing</li>
@@ -291,13 +291,13 @@ export default function FlaReturnFilingPage() {
  </div>
 
  {/* FAQ's */}
- <div className="bg-white rounded-lg shadow-sm p-6 mt-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 mt-6 border border-gray-200">
  <h3 className="text-lg font-semibold mb-6 text-slate-900 border-b pb-3">
  FAQ's on FLA Return Filing
  </h3>
  <div className="space-y-3 text-sm max-h-[500px] overflow-y-auto pr-2">
  {faqItems.map((q, i) => (
- <div key={q} className="border border-slate-100 rounded-lg overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-white pb-0">
+ <div key={q} className="border border-slate-100 rounded-lg overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-[#F4F3EE] pb-0">
  <button
  className="w-full text-left p-4 flex justify-between items-center text-sm hover:bg-amber-50/20 group"
  onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -326,7 +326,7 @@ export default function FlaReturnFilingPage() {
  <SidebarCart />
 
  {/* Income Tax E-Filing */}
- <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">Income Tax E-Filing</h4>
  <div className="p-3 border border-gray-200 rounded-md flex items-center gap-3 hover:border-amber-200 transition-colors">
  <img
@@ -367,13 +367,13 @@ export default function FlaReturnFilingPage() {
  </div>
 
  {/* Popular Searches */}
- <div className="bg-white rounded-lg p-4 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg p-4 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 20).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -382,7 +382,7 @@ export default function FlaReturnFilingPage() {
  </div>
 
  {/* Contact Advisor */}
- <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">Contact Advisor</h4>
  <p className="text-sm text-gray-600">
  Need help with FLA filings? Our advisors can assist with

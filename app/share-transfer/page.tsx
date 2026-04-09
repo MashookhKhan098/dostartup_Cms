@@ -1,10 +1,11 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -125,7 +126,7 @@ export default function ShareTransferPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-white font-sans text-gray-800">
+ <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
  {/* Imported Navbar */}
  <Navbar />
 
@@ -142,7 +143,7 @@ export default function ShareTransferPage(): React.ReactElement {
  {/* Left column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top card */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card */}
  <div className="md:w-1/3 flex-shrink-0">
  <div className="rounded-lg overflow-hidden">
@@ -155,8 +156,8 @@ export default function ShareTransferPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white px-4 py-6 flex justify-center">
- <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden bg-white shadow-md flex items-center justify-center -mt-4">
+ <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
+ <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden bg-[#F4F3EE] shadow-md flex items-center justify-center -mt-4">
  <img
  src={ASSETS.man}
  alt="share transfer"
@@ -204,7 +205,7 @@ export default function ShareTransferPage(): React.ReactElement {
 
  {/* Offer box */}
  <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-amber-700 border border-amber-200">
+ <div className="absolute -top-3 left-6 bg-[#F4F3EE] px-2 rounded-md text-xs text-amber-700 border border-amber-200">
  2 Exclusive Offers
  </div>
  <div className="border-2 border-dashed rounded-md border-amber-200 p-4 bg-amber-50/30">
@@ -218,7 +219,7 @@ export default function ShareTransferPage(): React.ReactElement {
  </li>
  </ul>
  <div className="mt-3">
- <button className="bg-white border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-xs sm:text-sm font-medium">
+ <button className="bg-[#F4F3EE] border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-xs sm:text-sm font-medium">
  ADD TO CART
  </button>
  </div>
@@ -256,7 +257,7 @@ export default function ShareTransferPage(): React.ReactElement {
  </div>
 
  {/* Article */}
- <article className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h1 className="text-xl sm:text-2xl font-semibold text-center">
  Private Limited Company Share Transfer
  </h1>
@@ -335,7 +336,7 @@ export default function ShareTransferPage(): React.ReactElement {
 
  {/* Documents + other registrations */}
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
- <div className="lg:col-span-7 bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+ <div className="lg:col-span-7 bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h3 className="text-base sm:text-lg font-semibold mb-4">
  Key Documents for Share Transfer
  </h3>
@@ -351,7 +352,7 @@ export default function ShareTransferPage(): React.ReactElement {
  </ul>
  </div>
 
- <aside className="lg:col-span-5 bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+ <aside className="lg:col-span-5 bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h3 className="text-base sm:text-lg font-semibold mb-4">
  Documents Required for Other Registrations
  </h3>
@@ -378,7 +379,7 @@ export default function ShareTransferPage(): React.ReactElement {
  </div>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 sm:p-6">
  <h3 className="text-lg sm:text-xl font-semibold mb-4">
  FAQ's on Share Transfer
  </h3>
@@ -407,7 +408,7 @@ export default function ShareTransferPage(): React.ReactElement {
   <button className="px-4 py-2 border-2 border-amber-600 rounded-md text-xs sm:text-sm text-amber-700 hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </section>
@@ -416,7 +417,7 @@ export default function ShareTransferPage(): React.ReactElement {
  <aside className="lg:col-span-4 hidden lg:block">
           <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 mb-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4 mb-4">
  <h4 className="font-semibold mb-3">Related Guides</h4>
  <ul className="text-sm space-y-2">
  <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">How to Transfer Shares of Private Limited Company</li>
@@ -441,13 +442,13 @@ export default function ShareTransferPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 14).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>
@@ -458,7 +459,7 @@ export default function ShareTransferPage(): React.ReactElement {
  </main>
 
  {/* Footer */}
- <footer className="bg-white mt-12 py-3 border-t">
+ <footer className="bg-[#F4F3EE] mt-12 py-3 border-t">
  <div className="max-w-[1180px] mx-auto px-4 sm:px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>

@@ -109,7 +109,7 @@ const Footer: React.FC = () => {
  <div
  className="max-w-screen-2xl mx-auto p-5 lg:p-8 rounded-xl overflow-hidden"
  style={{
- backgroundColor: "#ffffff",
+ backgroundColor: "#F4F3EE",
  backgroundImage:
  "radial-gradient(closest-side at 10% 80%, rgba(236, 213, 230, 0.25), transparent 30%), radial-gradient(closest-side at 90% 30%, rgba(226, 235, 247, 0.45), transparent 30%)",
  backgroundSize: "cover, cover",
@@ -641,7 +641,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Overview Section */}
- <section className="py-6 bg-white">
+ <section className="py-6 bg-[#F4F3EE]">
  <div className="max-w-[1200px] mx-auto px-4">
  <h2 className="text-3xl font-bold text-amber-800 mb-6">
  One Person Company (OPC) Compliance Overview
@@ -653,7 +653,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
 
  <div className="grid md:grid-cols-3 gap-6">
- <div className="bg-white rounded-xl border border-slate-200 shadow p-6 hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-xl border border-slate-200 shadow p-6 hover:border-amber-200 transition-colors">
  <img
  src="https://img.indiafilings.com/catalog/opc-compliance.png"
  className="w-full h-40 object-contain mb-4"
@@ -666,7 +666,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white rounded-xl border border-slate-200 shadow p-6 hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-xl border border-slate-200 shadow p-6 hover:border-amber-200 transition-colors">
  <img
  src="https://img.indiafilings.com/catalog/din-ekyc.png"
  className="w-full h-40 object-contain mb-4"
@@ -679,7 +679,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white rounded-xl border border-slate-200 shadow p-6 hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] rounded-xl border border-slate-200 shadow p-6 hover:border-amber-200 transition-colors">
  <img
  src="https://img.indiafilings.com/catalog/itr-filing.png"
  className="w-full h-40 object-contain mb-4"
@@ -696,14 +696,14 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Compliance Table */}
- <section className="py-6 bg-white">
+ <section className="py-6 bg-[#F4F3EE]">
  <div className="max-w-[1200px] mx-auto px-4">
  <h2 className="text-3xl font-bold text-amber-800 mb-6">
  Mandatory OPC Annual Compliance Requirements
  </h2>
 
  <div className="overflow-x-auto rounded-xl border border-slate-200">
- <table className="min-w-full bg-white text-sm">
+ <table className="min-w-full bg-[#F4F3EE] text-sm">
  <thead className="bg-amber-50">
  <tr>
  {["Compliance", "Form", "Due Date", "Applicability"].map(
@@ -766,7 +766,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Documents Required */}
- <section className="py-6 bg-white">
+ <section className="py-6 bg-[#F4F3EE]">
  <div className="max-w-[1200px] mx-auto px-4 grid md:grid-cols-2 gap-10">
  <div>
  <h3 className="text-2xl font-bold text-amber-800 mb-4">
@@ -820,14 +820,14 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Exemptions */}
- <section className="py-6 bg-white">
+ <section className="py-6 bg-[#F4F3EE]">
  <div className="max-w-[1200px] mx-auto px-4">
  <h3 className="text-3xl font-bold text-amber-800 mb-6">
  OPC Compliance Exemptions
  </h3>
 
  <div className="grid md:grid-cols-3 gap-6 mb-14">
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow hover:border-amber-200 transition-colors">
  <h4 className="font-bold text-amber-800 mb-2">
  No AGM Required
  </h4>
@@ -836,7 +836,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow hover:border-amber-200 transition-colors">
  <h4 className="font-bold text-amber-800 mb-2">
  Reduced Filings
  </h4>
@@ -845,7 +845,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow hover:border-amber-200 transition-colors">
  <h4 className="font-bold text-amber-800 mb-2">
  No Cash Flow Statement
  </h4>
@@ -868,7 +868,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  ].map((step, i) => (
  <div
  key={i}
- className="bg-white border border-slate-200 rounded-xl p-6 text-center shadow hover:border-amber-200 transition-colors"
+ className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 text-center shadow hover:border-amber-200 transition-colors"
  >
  <h4 className="font-semibold text-amber-800 mb-2">
  Step {i + 1}
@@ -881,7 +881,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Why Choose Us */}
- <section className="py-6 bg-white">
+ <section className="py-6 bg-[#F4F3EE]">
  <div className="max-w-[1200px] mx-auto px-4 text-center">
  <h2 className="text-3xl font-bold text-amber-800 mb-6">
  Why 3,50,000+ Businesses Choose Us
@@ -892,7 +892,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
 
  <div className="grid md:grid-cols-3 gap-8">
- <div className="bg-white p-8 rounded-xl shadow border border-slate-200 hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl shadow border border-slate-200 hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-bold text-amber-800 mb-2">
  Dedicated Compliance Manager
  </h3>
@@ -901,7 +901,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl shadow border border-slate-200 hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl shadow border border-slate-200 hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-bold text-amber-800 mb-2">
  Timely Reminders
  </h3>
@@ -910,7 +910,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl shadow border border-slate-200 hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl shadow border border-slate-200 hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-bold text-amber-800 mb-2">
  LEDGERS Accounting Platform
  </h3>
@@ -923,7 +923,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* FAQ Section */}
- <section className="py-6 bg-white">
+ <section className="py-6 bg-[#F4F3EE]">
  <div className="max-w-[1200px] mx-auto px-4 grid md:grid-cols-3 gap-10">
  <div className="md:col-span-2">
  <h2 className="text-3xl font-bold text-amber-800 mb-8">
@@ -931,7 +931,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </h2>
 
  <div className="space-y-6">
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-semibold text-amber-800 mb-2">
  What is OPC annual compliance?
  </h3>
@@ -941,7 +941,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-semibold text-amber-800 mb-2">
  Is AGM required for OPC?
  </h3>
@@ -951,7 +951,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-semibold text-amber-800 mb-2">
  What happens if OPC filings are delayed?
  </h3>
@@ -960,7 +960,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-semibold text-amber-800 mb-2">
  Is DIR-3 KYC mandatory?
  </h3>
@@ -970,7 +970,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow-sm hover:border-amber-200 transition-colors">
  <h3 className="text-lg font-semibold text-amber-800 mb-2">
  Does IndiaFilings help with bookkeeping?
  </h3>
@@ -998,7 +998,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  <div className="mt-6 space-y-4">
  <a
  href="/MCA/company-compliance"
- className="block bg-white border border-slate-200 rounded-xl shadow p-4 hover:border-amber-200 transition-all"
+ className="block bg-[#F4F3EE] border border-slate-200 rounded-xl shadow p-4 hover:border-amber-200 transition-all"
  >
  <img
  src="/images/company-card.png"
@@ -1011,7 +1011,7 @@ export default function OPCCompliancePage(): React.ReactElement {
 
  <a
  href="/din-ekyc-filing"
- className="block bg-white border border-slate-200 rounded-xl shadow p-4 hover:border-amber-200 transition-all"
+ className="block bg-[#F4F3EE] border border-slate-200 rounded-xl shadow p-4 hover:border-amber-200 transition-all"
  >
  <img
  src="/images/din-kyc-card.png"
@@ -1027,9 +1027,9 @@ export default function OPCCompliancePage(): React.ReactElement {
  </section>
 
  {/* Popular Searches */}
- <section className="py-5 bg-white">
+ <section className="py-5 bg-[#F4F3EE]">
  <div className="max-w-[1200px] mx-auto px-4">
- <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] border border-slate-200 rounded-xl p-6 shadow-sm">
  <h3 className="text-lg font-bold text-amber-800 mb-4">
  Popular Searches
  </h3>
@@ -1074,7 +1074,7 @@ export default function OPCCompliancePage(): React.ReactElement {
  "Helvetica Neue", Arial;
  background: linear-gradient(
  135deg,
- #ffffff 0%,
+ #F4F3EE 0%,
  #fdf6ff 40%,
  #f3fbff 100%
  );

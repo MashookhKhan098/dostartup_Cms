@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Search, Check, Plus, ChevronDown } from "lucide-react";
 import Navbar from "../components/Navbar";
-import DoStartupPricing from "../components/DoStartupPricing";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
@@ -110,7 +111,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-white text-gray-800 font-sans antialiased">
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans antialiased">
  {/* Navbar - Imported */}
  <Navbar />
 
@@ -195,7 +196,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
 
  <div className="max-w-[1180px] mx-auto px-6 -mt-4">
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  👥
@@ -213,7 +214,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  ✔
@@ -232,7 +233,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-slate-100 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  ⚡
@@ -255,7 +256,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  <main className="max-w-[1180px] mx-auto px-6 py-4 space-y-8">
 
 
- <section className="bg-white rounded-lg shadow-sm p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold text-center">
  Services Offered
  </h3>
@@ -315,7 +316,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold text-center">How It Works</h3>
  <p className="text-gray-600 mt-3 text-center">
  A guided onboarding process with consistent monthly accounting and
@@ -355,7 +356,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  Why DoStartup for TDS Compliance
  </h3>
@@ -388,7 +389,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  TDS - Tax Deducted at Source
  </h3>
@@ -405,7 +406,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </p>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  TDS Return Forms & Due Dates
  </h3>
@@ -450,7 +451,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </section>
 
- <section className="bg-white rounded-lg shadow-sm p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  Documents Required For TDS Return Filing
  </h3>
@@ -479,57 +480,9 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </div>
  </section>
 
- <DoStartupPricing 
-   title="Simple, Transparent PF & TDS Return Filing Pricing"
-   plans={[
-     {
-       title: "Software Only",
-       price: "5,899",
-       subtitle: "yr + GST",
-       description: "LEDGERS Software Access - 1 Year",
-       features: [
-         "LEDGERS Software Access - 1 Year",
-         "TDS/PF Compliance Dashboard & Alerts",
-         "Deductor–Deductee Reconciliation & PAN Validation",
-         "Automated TDS calculations (section-wise)"
-       ],
-       buttonText: "Start Filing Now"
-     },
-     {
-       title: "Accountant",
-       price: "15,899",
-       subtitle: "FY + GST",
-       description: "Dedicated Accountant Support - 1 Assigned Accountant",
-       features: [
-         "Dedicated Accountant Support - 1 Assigned Accountant",
-         "Quarterly TDS/PF Return Filing - 1 Year",
-         "TRACES Validation Before Filing",
-         "Certificate Generation",
-         "Correction Statement Filing",
-         "Deductor–Deductee Reconciliation",
-         "Ledgers Accounting Software - 1 Year"
-       ],
-       buttonText: "Start Filing Now"
-     },
-     {
-       title: "TDS Filing – 2 Years",
-       price: "25,899",
-       subtitle: "2 FY + GST",
-       description: "Dedicated Accountant Support with 2 Year coverage",
-       isPopular: true,
-       features: [
-         "Quarterly TDS/PF Return Filing - 2 Years",
-         "TRACES Validation Before Filing",
-         "Certificate Generation",
-         "Deductor–Deductee Reconciliation",
-         "Ledgers Accounting Software - 2 Years"
-       ],
-       buttonText: "Start Filing Now"
-     }
-   ]}
- />
+ <DynamicPricingSection />
 
- <section className="bg-white rounded-lg shadow-sm p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">FAQs</h3>
  <div className="space-y-0">
  {faqQuestions.map((q, i) => (
@@ -558,7 +511,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  {POPULAR_SEARCHES.map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {s}
  </span>
@@ -568,7 +521,7 @@ export default function TDSReturnFilingPage(): React.ReactElement {
  </section>
  </main>
 
- <footer className="bg-white mt-12 py-5 border-t">
+ <footer className="bg-[#F4F3EE] mt-12 py-5 border-t">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>

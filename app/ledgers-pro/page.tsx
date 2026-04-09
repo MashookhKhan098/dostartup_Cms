@@ -1,4 +1,6 @@
 // // import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 // // import Footer from "../components/Footer";
 // // import Popularsearches from '../components/PopularSearches';
 // // import Hero from '../components/Gst/Hero2';
@@ -11,7 +13,7 @@
 // // <Navbar />
 // // <Hero/>
 // // <DynamicTabContent tabName="GST Registration" />
-// // <Faq />
+// // <FAQAccordion />
 // // <Popularsearches />
 // // <Footer />
 // // </>
@@ -122,7 +124,7 @@
 // <Navbar />
 // <Hero {...heroProps} />
 // <DynamicTabContent tabName="GST Registration" />
-// <Faq />
+// <FAQAccordion />
 // <Popularsearches />
 // <Footer />
 // </>
@@ -137,7 +139,6 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
 import { Rocket, Zap, Users } from 'lucide-react';
 
 export default function Home() {
@@ -251,13 +252,13 @@ export default function Home() {
  <Hero {...heroProps} />
  
  {/* Feature Cards Section */}
- <div className="py-6 px-4 bg-white">
+ <div className="py-6 px-4 bg-[#F4F3EE]">
  <div className="max-w-7xl mx-auto">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
  {features.map((feature, index) => (
  <div 
  key={index}
- className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+ className="bg-[#F4F3EE] rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
  >
  <div className="flex justify-center mb-4">
  <div className="p-3 bg-blue-50 rounded-full">
@@ -277,7 +278,7 @@ export default function Home() {
  </div>
 
  <DynamicTabContent category="GST" />
- <Faq />
+ <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

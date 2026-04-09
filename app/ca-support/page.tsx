@@ -89,12 +89,12 @@ export default function DoStartupCA() {
  };
 
  return (
- <div className="min-h-screen bg-white font-sans text-gray-800">
+ <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / Compliance Services /{" "}
  <span className="text-amber-700 font-medium">DoStartup CA</span>
@@ -147,7 +147,7 @@ export default function DoStartupCA() {
  onChange={(e) => setGstin(e.target.value)}
  className="w-full sm:w-[360px] bg-transparent border border-[rgba(255,255,255,0.12)] rounded-md px-4 py-3 placeholder:text-slate-300 text-white outline-none focus:ring-1 focus:ring-amber-600"
  />
- <button className="px-6 py-3 bg-white text-slate-900 rounded-md font-medium hover:bg-amber-50 transition-colors">
+ <button className="px-6 py-3 bg-[#F4F3EE] text-slate-900 rounded-md font-medium hover:bg-amber-50 transition-colors">
  Request Demo
  </button>
  </form>
@@ -186,7 +186,7 @@ export default function DoStartupCA() {
 
  {/* Features Grid */}
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  👥
@@ -203,7 +203,7 @@ export default function DoStartupCA() {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  ✔
@@ -220,7 +220,7 @@ export default function DoStartupCA() {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  ⚡
@@ -243,7 +243,7 @@ export default function DoStartupCA() {
  {/* MAIN CONTENT */}
  <main className="max-w-[1180px] mx-auto px-6 py-4 space-y-8">
  {/* Services Offered */}
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold text-center text-slate-900">
  Services Offered
  </h3>
@@ -359,7 +359,7 @@ export default function DoStartupCA() {
  </section>
 
  {/* How It Works */}
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold text-center text-slate-900">How It Works</h3>
  <p className="text-gray-600 mt-3 text-center">
  A simple, guided onboarding process followed by consistent monthly
@@ -401,7 +401,7 @@ export default function DoStartupCA() {
  </section>
 
  {/* Why DoStartup */}
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-slate-900">
  Why DoStartup for Fractional CA
  </h3>
@@ -446,7 +446,7 @@ export default function DoStartupCA() {
  </section>
 
  {/* FAQs */}
- <section className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-slate-900">FAQs</h3>
  <div className="space-y-0">
  {faqQuestions.map((q, i) => (
@@ -472,7 +472,7 @@ export default function DoStartupCA() {
  </section>
 
  {/* Cart Widget */}
- <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-md p-6 border border-gray-200">
  <div className="text-center text-gray-600">
  <img
  src={ASSETS.cartIcon}
@@ -545,13 +545,13 @@ export default function DoStartupCA() {
  </div>
 
  {/* Popular Searches */}
- <div className="bg-white rounded-lg p-6 border border-gray-200">
+ <div className="bg-[#F4F3EE] rounded-lg p-6 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 30).map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {s}
  </span>

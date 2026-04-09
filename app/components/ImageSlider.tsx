@@ -80,14 +80,14 @@ export default function ImageSlider({
         <>
           <button
             onClick={goToPrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-[#F4F3EE]/30 hover:bg-[#F4F3EE]/50 text-white p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
             aria-label="Previous slide"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-[#F4F3EE]/30 hover:bg-[#F4F3EE]/50 text-white p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
             aria-label="Next slide"
           >
             <ChevronRight size={24} />
@@ -104,8 +104,8 @@ export default function ImageSlider({
               onClick={() => goToSlide(index)}
               className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? "bg-white w-8"
-                  : "bg-white/50 hover:bg-white/75"
+                  ? "bg-[#F4F3EE] w-8"
+                  : "bg-[#F4F3EE]/50 hover:bg-[#F4F3EE]/75"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

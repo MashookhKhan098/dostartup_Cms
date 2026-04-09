@@ -3,8 +3,9 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import {
   CheckCircle,
   XCircle,
@@ -271,40 +272,7 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "File & Track Refund" },
 ];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-4 (Sugam)?",
-    a: "ITR-4 is for individuals, HUFs, and firms (other than LLP) opting for presumptive taxation under Section 44AD (business up to ₹2 crore), 44ADA (professionals up to ₹75 lakh), or 44AE (transport operators). Total income must be ≤ ₹50 lakh.",
-  },
-  {
-    q: "What is Section 44AD presumptive taxation?",
-    a: "Under Section 44AD, small businesses with turnover up to ₹2 crore can declare income at 8% of turnover (or 6% for digital receipts) without maintaining detailed books of accounts. No tax audit is required if you declare income at or above this rate.",
-  },
-  {
-    q: "What is Section 44ADA for professionals?",
-    a: "Section 44ADA applies to specified professionals (doctors, lawyers, CAs, engineers, architects, consultants) with gross receipts up to ₹75 lakh. They can declare 50% of gross receipts as income and skip maintaining books of accounts.",
-  },
-  {
-    q: "What is the difference between ITR-3 and ITR-4?",
-    a: "ITR-4 is for those opting for presumptive taxation (44AD/44ADA/44AE) — simpler filing without detailed books. ITR-3 is for those maintaining actual books of accounts and declaring actual profit/loss. F&O traders must always use ITR-3.",
-  },
-  {
-    q: "What is the turnover limit for ITR-4?",
-    a: "Section 44AD: ₹2 crore (or ₹3 crore if 95%+ receipts are digital). Section 44ADA: ₹75 lakh (or ₹75 lakh). Section 44AE: unlimited vehicles but ≤ 10 goods vehicles at any time. Total income must not exceed ₹50 lakh.",
-  },
-  {
-    q: "Can I claim deductions under 80C, 80D in ITR-4?",
-    a: "Yes. Under the Old Regime, you can claim all deductions (80C, 80D, 80CCD, home loan interest, HRA, etc.) in addition to declaring presumptive income. Our AI identifies every deduction you're eligible for.",
-  },
-  {
-    q: "What is the last date to file ITR-4 for AY 2026-27?",
-    a: "The due date for ITR-4 is July 31, 2026. Since presumptive taxation does not require a tax audit, there is no extended deadline. Belated returns can be filed till December 31, 2026 with a late fee under Section 234F.",
-  },
-  {
-    q: "Can I opt out of presumptive taxation scheme?",
-    a: "Yes, but if you opt out of 44AD, you cannot re-enter the scheme for 5 consecutive years. If you opt out of 44ADA, you can re-enter next year. DoStartup's AI advises whether presumptive taxation is beneficial for your specific situation.",
-  },
-];
+
 
 const SCHEME_TABLE = [
   {
@@ -477,47 +445,7 @@ export default function ITR4Page() {
   const result = runCalc(calc);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const itrPlans = [
-    {
-      title: "Assisted Tax Filing",
-      price: "1,499",
-      description: "Standard ITR-4 preparation and filing for small business owners and professionals under presumptive schemes.",
-      features: [
-        "44AD / 44ADA Scheme Filing",
-        "Business Income Computation",
-        "Check for Audit Requirement",
-        "Expert Support for Small Biz",
-        "e-Filing and Acknowledgement"
-      ]
-    },
-    {
-      title: "CA Assisted Tax Filing",
-      price: "2,999",
-      isPopular: true,
-      description: "Dedicated CA support for optimized presumptive taxation, multiple sources, and AIS/26AS reconciliation.",
-      features: [
-        "All features of Assisted Filing",
-        "AI Expense Maximizer (44AD)",
-        "Calculation of Capital Gains",
-        "AIS/26AS Deep Reconciliation",
-        "Dedicated CA Review",
-        "Priority Support"
-      ]
-    },
-    {
-      title: "CA Managed Tax Compliance",
-      price: "4,999",
-      description: "Full compliance management including advance tax computation, notice response, and dedicated CA advisor.",
-      features: [
-        "All features of CA Assisted Filing",
-        "IT Notice Handling & Response",
-        "Advance Tax Support (4 Quarters)",
-        "Year-round CA Availability",
-        "Refund follow-up & tracking",
-        "Compliance Calendar Reminders"
-      ]
-    },
-  ];
+  
 
   const resetCalc = () =>
     setCalc({
@@ -538,7 +466,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         HERO
         ════════════════════════════════════ */}
-        <section className="bg-white relative overflow-hidden pt-8 pb-20">
+        <section className="bg-[#F4F3EE] relative overflow-hidden pt-8 pb-20">
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -593,7 +521,7 @@ export default function ITR4Page() {
 
             {/* Right — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-white border-2 border-orange-100 rounded-3xl p-6 shadow-2xl">
+              <div className="bg-[#F4F3EE] border-2 border-orange-100 rounded-3xl p-6 shadow-2xl">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-orange-500" />
@@ -630,7 +558,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         ELIGIBILITY
         ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -646,7 +574,7 @@ export default function ITR4Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border-2 border-orange-500 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-orange-500 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-orange-500" /> File
                   ITR-4 If You Are:
@@ -669,7 +597,7 @@ export default function ITR4Page() {
                 </ul>
               </div>
 
-              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-orange-500" /> NOT
                   ITR-4 If:
@@ -697,7 +625,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         WHY DOSTARTUP
         ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="compare">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="compare">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -713,7 +641,7 @@ export default function ITR4Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-gray-200 rounded-2xl hover:border-orange-500 transition-all duration-200 group"
                   >
                     <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
                       {f.icon}
@@ -730,7 +658,7 @@ export default function ITR4Page() {
                 ))}
               </div>
 
-              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
+              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-[#F4F3EE]">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-orange-500">
@@ -754,7 +682,7 @@ export default function ITR4Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
+                        className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
                       >
                         <td className="px-3 py-3 text-xs">{row.feature}</td>
                         <td className="px-2 py-3 text-center">
@@ -775,7 +703,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         CALCULATOR
         ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="calculator">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="calculator">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -786,14 +714,14 @@ export default function ITR4Page() {
               </h2>
             </div>
 
-            <div className="bg-white rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
+            <div className="bg-[#F4F3EE] rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
               <div className="bg-orange-500 px-6 py-4 flex items-center justify-between">
                 <h3 className="font-display font-extrabold text-white text-lg">
                   ITR-4 Calculator
                 </h3>
                 <button
                   onClick={resetCalc}
-                  className="text-white bg-white/20 px-3 py-1 rounded-full text-xs font-bold"
+                  className="text-white bg-[#F4F3EE]/20 px-3 py-1 rounded-full text-xs font-bold"
                 >
                   Reset
                 </button>
@@ -847,7 +775,7 @@ export default function ITR4Page() {
                   <h4 className="font-display font-bold text-base mb-5">
                     Your Tax Summary
                   </h4>
-                  <div className="bg-white rounded-2xl border p-4 mb-4">
+                  <div className="bg-[#F4F3EE] rounded-2xl border p-4 mb-4">
                     <ResultRow
                       label="Gross Total Income"
                       value={fmt(result.grossTotal)}
@@ -891,46 +819,13 @@ export default function ITR4Page() {
         PRICING
         ════════════════════════════════════ */}
         <section id="pricing">
-          <DoStartupPricing plans={itrPlans} />
+          <DynamicPricingSection />
         </section>
 
         {/* ════════════════════════════════════
         FAQ
         ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black">
-                Questions Answered
-              </h2>
-            </div>
-            <div className="space-y-3">
-              {FAQS.map((faq, i) => (
-                <div key={i} className="border-2 rounded-2xl overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between p-5 text-left"
-                  >
-                    <span className="font-semibold text-sm">{faq.q}</span>
-                    {openFaq === i ? (
-                      <ChevronUp size={17} />
-                    ) : (
-                      <ChevronDown size={17} />
-                    )}
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t pt-3 bg-orange-50/20 text-gray-600 text-sm">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FAQAccordion />
       </main>
       <Footer />
     </>

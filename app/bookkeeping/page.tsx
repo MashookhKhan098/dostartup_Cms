@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Search, Plus } from "lucide-react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import PopularSearches from "../components/PopularSearches";
 
 // Assets used (same as CA page, as requested)
 const ASSETS = {
@@ -32,61 +34,6 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
  }, [handler, ref]);
 }
 
-// Popular searches
-const POPULAR_SEARCHES = [
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Nadakacheri",
- "Flipkart Seller",
- "Caste Certificate",
- "IAY",
- "EPFO Passbook",
- "Domicile Certificate",
- "Udyog Aadhaar",
- "PF Withdrawal",
- "Karnataka One",
- "Encumbrance Certificate",
- "Bonafide Certificate",
- "Instant PAN Card",
- "E PAN Card",
- "Income Certificate",
- "Marriage Certificate",
- "Passport Renewal",
- "Nivesh Mitra",
- "MSME Registration",
- "Experience Certificate",
- "Trademark Status",
- "Trade License",
- "Domicile",
- "eMitra",
- "UAN",
- "PICME",
- "Resignation Letter Format",
- "Ration Card",
- "TNREGINET",
- "RAJSSP",
- "LLP Compliance",
- "Form 16",
- "Police Clearance Certificate",
- "OBC Certificate",
- "Jamabandi",
- "Mee Bhoomi",
- "SC Certificate",
- "UAN Login",
- "eAadhaar Download",
- "Linking Aadhaar To Bank Accounts",
- "mAadhaar",
- "Aadhaar Enrollment Centre",
- "UAN Passbook",
- "Amazon How to Sell",
- "PAN Card Apply",
- "EPFO Unified Portal",
-];
-
 // ------------------- MAIN PAGE -------------------
 
 export default function BookkeepingPage(): React.ReactElement {
@@ -109,7 +56,7 @@ export default function BookkeepingPage(): React.ReactElement {
  };
 
  return (
- <div className="min-h-screen bg-white text-gray-800 font-sans antialiased">
+ <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans antialiased">
  {/* Imported Navbar */}
  <Navbar />
 
@@ -220,7 +167,7 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* 3 Card Section */}
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <h3 className="font-semibold text-[#C15F3C] mb-2">
  Dedicated support, flexible cost
  </h3>
@@ -230,7 +177,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <h3 className="font-semibold text-[#C15F3C] mb-2">
  Accurate & timely compliance
  </h3>
@@ -240,7 +187,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
  <h3 className="font-semibold text-[#C15F3C] mb-2">
  Powered by LEDGERS
  </h3>
@@ -256,7 +203,7 @@ export default function BookkeepingPage(): React.ReactElement {
  {/* MAIN CONTENT */}
  <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-8">
  {/* SERVICES OFFERED */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold text-center text-[#C15F3C]">
  Services Offered
  </h3>
@@ -324,7 +271,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* HOW IT WORKS */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold text-center text-[#C15F3C]">How It Works</h3>
  <p className="text-gray-600 mt-3 text-center">
  A guided onboarding process with consistent monthly accounting and
@@ -366,7 +313,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* WHY INDIAFILINGS */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
  Why DoStartup for Fractional Accountant
  </h3>
@@ -403,7 +350,7 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* FAQ */}
- <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
  <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">FAQs</h3>
 
  <div className="space-y-0">
@@ -427,62 +374,11 @@ export default function BookkeepingPage(): React.ReactElement {
  </div>
  ))}
  </div>
-
- {/* Popular Searches */}
- <div className="mt-6">
- <h4 className="font-semibold mb-3 text-[#C15F3C]">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 20).map((s) => (
- <span
- key={s}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-[#C15F3C]/30 hover:text-[#C15F3C] cursor-pointer transition-colors"
- >
- {s}
- </span>
- ))}
- </div>
- </div>
  </section>
  </main>
 
- {/* FOOTER */}
- <footer className="bg-white mt-12 py-5 border-t">
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-gray-600">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold text-[#C15F3C] mb-2">Company</h5>
- <a className="block hover:text-[#C15F3C] transition-colors">About Us</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Careers</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Contact Us</a>
- </div>
-
- <div>
- <h5 className="font-semibold text-[#C15F3C] mb-2">Platforms</h5>
- <a className="block hover:text-[#C15F3C] transition-colors">Business Search</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Trademark Search</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Filings.AE for UAE</a>
- </div>
-
- <div>
- <h5 className="font-semibold text-[#C15F3C] mb-2">Usage</h5>
- <a className="block hover:text-[#C15F3C] transition-colors">Terms & Conditions</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Privacy Policy</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Refund Policy</a>
- </div>
-
- <div>
- <h5 className="font-semibold text-[#C15F3C] mb-2">Policies</h5>
- <a className="block hover:text-[#C15F3C] transition-colors">Confidentiality Policy</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Disclaimer Policy</a>
- <a className="block hover:text-[#C15F3C] transition-colors">Reviews</a>
- </div>
- </div>
-
- <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} All rights reserved.
- </div>
- </div>
- </footer>
+ <PopularSearches />
+ <Footer />
 
  {/* WhatsApp CTA */}
  <div className="fixed bottom-6 right-6 z-50">

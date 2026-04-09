@@ -5,86 +5,13 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
-import PricingCards, { PricingPlan } from '../components/PricingCards';
+import FAQAccordion from '../components/Faq';
+import DynamicPricingSection from "../components/DynamicPricingSection";
 import { supabase } from '../../lib/supabase';
 import { useRouter } from 'next/navigation';
 
-const gstPlans: PricingPlan[] = [
-  {
-    title: "GST Registration + Monthly Filing", price: "1,499",
-    description: "Get complete GST registration and monthly filing services, ensuring compliance and smooth processing of GSTR-1 and GSTR-3B.",
-    features: [
-      { text: "GST Registration Support" },
-      { text: "GST Certificate" },
-      { text: "Dedicated Accountant" },
-      { text: "GSTR-1 Monthly Filing" },
-      { text: "GSTR-3B Monthly Filing" },
-      { text: "Invoicing Software Access" },
-      { text: "Payment Gateway Setup" },
-      { text: "Priority Phone Support" }
-    ]
-  },
-  {
-    title: "1 Year GST Filing + ITR", price: "19,899", isPopular: true,
-    description: "IndiaFilings seamlessly provides customized accounting services for businesses ensuring compliance and tax filing.",
-    features: [
-      { text: "Dedicated Accountant" },
-      { text: "GSTR-1 Filing - 12 Months" },
-      { text: "GSTR-3B Filing - 12 Months" },
-      { text: "Income Tax Filing" },
-      { text: "Financial Statements" },
-      { text: "Balance Sheet Preparation" },
-      { text: "LEDGERS GST Software Access - 12 Months" },
-      { text: "Audit Support (Basic)" }
-    ]
-  }
-];
-
 export default function Home() {
   const router = useRouter();
-
-  const gstPlans = [
-    {
-      title: "GST Registration + Monthly Filing",
-      price: "1,499",
-      description: "Get complete GST registration and monthly filing services, ensuring compliance and smooth processing of GSTR-1 and GSTR-3B.",
-      features: [
-        "GST Registration Support",
-        "GST Certificate",
-        "Dedicated Accountant",
-        "GSTR-1 Monthly Filing",
-        "GSTR-3B Monthly Filing",
-        "Monthly Profit & Loss Report"
-      ]
-    },
-    {
-      title: "1 Year GST Filing",
-      price: "12,899",
-      isPopular: true,
-      description: "Comprehensive GST compliance for businesses, including 12 months of GSTR-1 and GSTR-3B filing and LEDGERS software.",
-      features: [
-        "Dedicated Accountant",
-        "GSTR-1 Filing – 12 Months",
-        "GSTR-3B Filing – 12 Months",
-        "Accountant (Assigned)",
-        "LEDGERS GST Software Access – 12 Months"
-      ]
-    },
-    {
-      title: "1 Year GST Filing + ITR",
-      price: "19,899",
-      description: "Complete tax compliance package for small businesses, including GST filings and annual Income Tax return filing.",
-      features: [
-        "Dedicated Accountant",
-        "GSTR-1 Filing – 12 Months",
-        "GSTR-3B Filing – 12 Months",
-        "Income Tax Filing",
-        "Financial Statements",
-        "LEDGERS Software Access – 12 Months"
-      ]
-    }
-  ];
 
   const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {
     const { data, error } = await supabase
@@ -211,8 +138,8 @@ export default function Home() {
       <Navbar />
       <Hero {...heroProps} />
       <DynamicTabContent category="GST" />
-      <PricingCards plans={gstPlans} />
-      <Faq category="GST" />
+      <DynamicPricingSection />
+      <FAQAccordion />
       <Popularsearches />
       <Footer />
     </>

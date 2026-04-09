@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 import React, { useState } from "react";
@@ -15,6 +14,8 @@ import {
  Zap,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -56,12 +57,12 @@ export default function CompanyNameChange() {
  };
 
  return (
- <div className="min-h-screen bg-white font-sans text-gray-800">
+ <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / MCA Services /{" "}
  <span className="text-amber-700 font-medium">Company Name Change</span>
@@ -73,7 +74,7 @@ export default function CompanyNameChange() {
  {/* Left Column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top Card */}
- <div className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card */}
  <div className="md:w-1/3 flex-shrink-0">
  <div className="rounded-lg overflow-hidden">
@@ -86,8 +87,8 @@ export default function CompanyNameChange() {
  </div>
  </div>
 
- <div className="bg-white px-4 py-6 flex justify-center">
- <div className="w-44 h-44 rounded-full overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4">
+ <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
+ <div className="w-44 h-44 rounded-full overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
  <img
  src={ASSETS.hero}
  alt="Name Change"
@@ -165,7 +166,7 @@ export default function CompanyNameChange() {
 
  {/* Offer box */}
  <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-amber-700 border border-amber-200">
+ <div className="absolute -top-3 left-6 bg-[#F4F3EE] px-2 rounded-md text-xs text-amber-700 border border-amber-200">
  2 Exclusive Offers
  </div>
  <div className="border-2 border-dashed rounded-md border-amber-200 p-4 bg-amber-50/30">
@@ -182,7 +183,7 @@ export default function CompanyNameChange() {
  </li>
  </ul>
  <div className="mt-3">
- <button className="bg-white border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
+ <button className="bg-[#F4F3EE] border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
  ADD TO CART
  </button>
  </div>
@@ -220,7 +221,7 @@ export default function CompanyNameChange() {
  </div>
 
  {/* Article */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center text-slate-900">
  Company Name Change Process Under Companies Act, 2013
  </h1>
@@ -314,7 +315,7 @@ export default function CompanyNameChange() {
 
  {/* Documents + other registrations */}
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
- <div className="lg:col-span-7 bg-white rounded-lg shadow-sm p-6">
+ <div className="lg:col-span-7 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold mb-4 text-slate-900">
  Documents Required For Name Change
  </h3>
@@ -340,7 +341,7 @@ export default function CompanyNameChange() {
  </ul>
  </div>
 
- <aside className="lg:col-span-5 bg-white rounded-lg shadow-sm p-6">
+ <aside className="lg:col-span-5 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold mb-4 text-slate-900">
  Documents Required for Other Registrations
  </h3>
@@ -367,7 +368,7 @@ export default function CompanyNameChange() {
  </div>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4 text-slate-900">
  FAQ's on Company Name Change
  </h3>
@@ -396,7 +397,7 @@ export default function CompanyNameChange() {
   <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </div>
  </section>
@@ -405,7 +406,7 @@ export default function CompanyNameChange() {
  <aside className="lg:col-span-4 hidden lg:block">
           <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3 text-slate-900">Related Guides</h4>
  <ul className="text-sm space-y-2">
  <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Company Name Change Process</li>
@@ -431,7 +432,7 @@ export default function CompanyNameChange() {
  />
  </div>
 
- <div className="bg-white rounded-lg p-4">
+ <div className="bg-[#F4F3EE] rounded-lg p-4">
  <h4 className="font-semibold mb-3 text-slate-900">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {[
@@ -467,7 +468,7 @@ export default function CompanyNameChange() {
  ].slice(0, 14).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>

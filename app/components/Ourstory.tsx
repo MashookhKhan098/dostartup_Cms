@@ -43,7 +43,7 @@ export default async function OurStory() {
 
  {/* Right Text */}
  <div className="w-full md:w-1/2 space-y-4">
- <div className="inline-flex items-center gap-2 bg-[#F4F3EE] border border-[#E5E2DA] rounded-full px-3 py-1 mb-2">
+ <div className="inline-flex items-center gap-2 bg-[#F5F5F5] border border-[#E5E2DA] rounded-full px-3 py-1 mb-2">
  <span className="w-2 h-2 bg-[#C15F3C] rounded-full"></span>
  <span className="text-xs font-medium text-[#C15F3C]">Our Story</span>
  </div>

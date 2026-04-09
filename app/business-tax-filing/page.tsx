@@ -1,8 +1,8 @@
 "use client";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
-import AddQuestionModal from "../components/AddQuestionModal";
 import SidebarCart from "../components/SidebarCart";
 
 import React, { useState } from "react";
@@ -90,7 +90,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-5 py-4 w-full sm:w-auto backdrop-blur-md">
+                  <div className="flex items-center gap-3 bg-[#F4F3EE]/5 border border-white/10 rounded-2xl px-5 py-4 w-full sm:w-auto backdrop-blur-md">
                     <span className="text-[#C15F3C] font-bold text-sm">ITR-3</span>
                     <input
                       className="bg-transparent outline-none placeholder:text-gray-500 text-white text-sm w-40"
@@ -106,7 +106,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
               <div className="flex-1 flex justify-center md:justify-end">
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-[#C15F3C]/20 rounded-full blur-3xl group-hover:bg-[#C15F3C]/30 transition-all duration-500" />
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 relative">
+                  <div className="bg-[#F4F3EE]/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 relative">
                     <div className="grid grid-cols-2 gap-4">
                       {[
                         { icon: <Briefcase />, label: "Business ITR" },
@@ -114,7 +114,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                         { icon: <Clock />, label: "Timely Filing" },
                         { icon: <FileCheck />, label: "Verified data" },
                       ].map((item, idx) => (
-                        <div key={idx} className="bg-white/5 rounded-2xl p-4 border border-white/10 flex flex-col items-center text-center gap-2">
+                        <div key={idx} className="bg-[#F4F3EE]/5 rounded-2xl p-4 border border-white/10 flex flex-col items-center text-center gap-2">
                           <div className="text-[#C15F3C] w-6 h-6">{item.icon}</div>
                           <span className="text-white text-[10px] font-bold uppercase">{item.label}</span>
                         </div>
@@ -133,7 +133,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
         {/* Left column */}
         <section className="lg:col-span-8 space-y-12">
           {/* Content article */}
-          <article className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+          <article className="bg-[#F4F3EE] rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
             <h2 className="text-3xl font-bold text-[#2F2E2B] mb-8">
               Business Income Tax Return (ITR) Filing Online
             </h2>
@@ -157,19 +157,19 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
               <h3 className="text-xl font-bold text-[#2F2E2B]">Who should file a Business Income Tax Return?</h3>
               <p>Filing a business income tax return is mandatory for:</p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0">
-                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-[#F4F3EE] p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Sole Proprietorships</span>
                 </li>
-                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-[#F4F3EE] p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Partnership Firms</span>
                 </li>
-                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-[#F4F3EE] p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Limited Liability Partnerships (LLPs)</span>
                 </li>
-                <li className="flex gap-3 items-center bg-white p-4 rounded-2xl border border-gray-100">
+                <li className="flex gap-3 items-center bg-[#F4F3EE] p-4 rounded-2xl border border-gray-100">
                   <div className="w-6 h-6 rounded-full bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C] flex-shrink-0"><Check size={14} /></div>
                   <span>Companies (Private/Public/OPC)</span>
                 </li>
@@ -245,7 +245,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
                 </ol>
               </div>
 
-              <div className="mt-12 bg-white rounded-3xl p-8 border border-gray-100">
+              <div className="mt-12 bg-[#F4F3EE] rounded-3xl p-8 border border-gray-100">
                 <h3 className="text-xl font-bold text-[#2F2E2B] mb-6">Documents Required</h3>
                 <div className="rounded-2xl overflow-hidden border border-gray-100 mb-8">
                   <img src="/images/docrequired.png" alt="Documents Needed" className="w-full h-auto" />
@@ -281,7 +281,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
           </article>
 
           {/* FAQ */}
-          <div className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+          <div className="bg-[#F4F3EE] rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
             <h3 className="text-2xl font-bold text-[#2F2E2B] mb-8 flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#C15F3C]/10 flex items-center justify-center text-[#C15F3C]">
                 <Plus size={20} />
@@ -316,10 +316,10 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
             <div className="mt-10 pt-10 border-t border-gray-100 flex items-center justify-between flex-wrap gap-6">
               <p className="text-sm text-[#6F6B63]">Still have questions? Our tax experts are here to help.</p>
               <div className="flex gap-4">
-                <button className="px-6 py-3 rounded-xl border border-[#E5E2DA] font-semibold text-[#2F2E2B] hover:bg-white transition-all text-sm">
+                <button className="px-6 py-3 rounded-xl border border-[#E5E2DA] font-semibold text-[#2F2E2B] hover:bg-[#F4F3EE] transition-all text-sm">
                   Read Guides
                 </button>
-                <AddQuestionModal category="Business Tax" />
+                
               </div>
             </div>
           </div>
@@ -329,7 +329,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
         <aside className="lg:col-span-4 space-y-8">
           <SidebarCart />
 
-          <div className="bg-white rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
+          <div className="bg-[#F4F3EE] rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
             <h4 className="font-bold text-[#2F2E2B] mb-6 flex items-center gap-2 uppercase tracking-wider text-xs">
               <div className="w-2 h-2 rounded-full bg-[#C15F3C]" />
               Related Guides
@@ -350,7 +350,7 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
             </ul>
           </div>
 
-          <div className="bg-white rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
+          <div className="bg-[#F4F3EE] rounded-[32px] shadow-sm p-8 border border-[#E5E2DA]">
             <h4 className="font-bold text-[#2F2E2B] mb-6 flex items-center gap-2 uppercase tracking-wider text-xs">
               <div className="w-2 h-2 rounded-full bg-[#C15F3C]" />
               Popular Searches
@@ -370,55 +370,8 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
       </main>
 
       {/* Standardized Pricing Section */}
-      <section className="bg-white">
-        <DoStartupPricing
-          title="Transparent Business Tax Filing Pricing"
-          subtitle="Expert-assisted ITR filing for proprietorships, partnerships, LLPs and companies."
-          plans={[
-            {
-              title: "Personal Tax Filing",
-              price: "1,499",
-              subtitle: "yr + GST",
-              description: "For resident salaried/pension earners with total income up to ₹50 lakh and simple income sources.",
-              features: [
-                "Income Tax computation",
-                "Tax Consultation",
-                "E-Filing on Portal",
-                "Email Support"
-              ],
-              buttonText: "Register Now"
-            },
-            {
-              title: "Business Tax Filing",
-              price: "4,899",
-              subtitle: "yr + GST",
-              description: "For individuals/HUFs with business income, freelancers, and small firm partners.",
-              isPopular: true,
-              features: [
-                "Expert Tax Consultation",
-                "Business Income Audit Review",
-                "Standard Deduction optimization",
-                "GST Reconcilliation help",
-                "Priority Support"
-              ],
-              buttonText: "Register Now"
-            },
-            {
-              title: "Multi-State Business",
-              price: "19,899",
-              subtitle: "yr + GST",
-              description: "For companies and large entities with multi-state operations and complex filing needs.",
-              features: [
-                "Dedicated Account Manager",
-                "Corporate Tax Planning",
-                "Audit Support Docs",
-                "Compliance Dashboard",
-                "Unlimited Consultations"
-              ],
-              buttonText: "Register Now"
-            }
-          ]}
-        />
+      <section className="bg-[#F4F3EE]">
+        <DynamicPricingSection />
       </section>
 
       <Footer />

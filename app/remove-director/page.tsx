@@ -1,10 +1,11 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 
 import React, { useState } from "react";
 import { ChevronRight, ShoppingBag, Star, Plus } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 
@@ -49,12 +50,12 @@ export default function RemoveDirectorPage() {
   };
 
  return (
- <div className="min-h-screen bg-white font-sans text-gray-800">
+ <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
  {/* Navbar - Imported */}
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-white py-5">
+ <div className="bg-[#F4F3EE] py-5">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
  Home / MCA Services /{" "}
  <span className="text-amber-700 font-medium">Remove Director</span>
@@ -101,7 +102,7 @@ export default function RemoveDirectorPage() {
  className="w-full max-w-[640px] px-6 py-4 rounded-full bg-transparent text-white placeholder:text-slate-300 border border-[rgba(255,255,255,0.12)] focus:outline-none focus:ring-1 focus:ring-amber-600"
  />
  <div className="absolute right-2 top-1/2 -translate-y-1/2">
- <button className="px-5 py-[10px] bg-white rounded-full text-sm font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)] hover:bg-amber-50 transition-colors text-amber-700">
+ <button className="px-5 py-[10px] bg-[#F4F3EE] rounded-full text-sm font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)] hover:bg-amber-50 transition-colors text-amber-700">
  Remove Director
  </button>
  </div>
@@ -126,7 +127,7 @@ export default function RemoveDirectorPage() {
 
  {/* Features Grid */}
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  👥
@@ -145,7 +146,7 @@ export default function RemoveDirectorPage() {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  ✔
@@ -167,7 +168,7 @@ export default function RemoveDirectorPage() {
  </div>
  </div>
 
- <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
+ <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-sm hover:border-amber-200 transition-colors">
  <div className="flex items-start gap-4 mb-4">
  <div className="w-10 h-10 rounded-full bg-amber-50 grid place-items-center text-amber-600">
  ⚡
@@ -190,7 +191,7 @@ export default function RemoveDirectorPage() {
  {/* Main Content with Sidebar */}
  <div className="flex flex-col lg:flex-row gap-8 mt-10">
  {/* Left Column - Article */}
- <article className="flex-1 bg-white p-8 rounded-xl border border-gray-200">
+ <article className="flex-1 bg-[#F4F3EE] p-8 rounded-xl border border-gray-200">
  <div className="mb-6">
  <h2 className="text-2xl font-semibold mb-4 text-slate-900">
  Removal of Director from a Company
@@ -448,7 +449,7 @@ export default function RemoveDirectorPage() {
           <SidebarCart />
 
  {/* Related Guides */}
- <div className="bg-white p-6 rounded-xl border border-gray-200 mb-6">
+ <div className="bg-[#F4F3EE] p-6 rounded-xl border border-gray-200 mb-6">
  <h4 className="font-semibold mb-3 text-slate-900">Related Guides</h4>
  <ul className="text-sm text-gray-600 space-y-2">
  <li className="hover:text-amber-700 cursor-pointer hover:underline">
@@ -470,7 +471,7 @@ export default function RemoveDirectorPage() {
  </div>
 
  {/* Ad */}
- <div className="sticky top-28 bg-white p-4 rounded-xl border border-gray-200">
+ <div className="sticky top-28 bg-[#F4F3EE] p-4 rounded-xl border border-gray-200">
  <img
  src={ASSETS.ad}
  alt="ad"
@@ -481,7 +482,7 @@ export default function RemoveDirectorPage() {
  </div>
 
  {/* FAQ Section */}
- <section className="mt-10 bg-white p-6 rounded-xl border border-gray-200">
+ <section className="mt-10 bg-[#F4F3EE] p-6 rounded-xl border border-gray-200">
  <h3 className="text-xl font-semibold mb-4 text-slate-900">
  FAQ's on Remove Director
  </h3>
@@ -510,12 +511,12 @@ export default function RemoveDirectorPage() {
   <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
  Load More
  </button>
-  <AddQuestionModal />
+  
 </div>
  </section>
 
  {/* Popular Searches */}
- <section className="mt-10 bg-white p-6 rounded-xl border border-gray-200">
+ <section className="mt-10 bg-[#F4F3EE] p-6 rounded-xl border border-gray-200">
  <h4 className="font-semibold mb-4 text-slate-900">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {[
@@ -551,7 +552,7 @@ export default function RemoveDirectorPage() {
  ].map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-white text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1.5 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
  >
  {t}
  </span>

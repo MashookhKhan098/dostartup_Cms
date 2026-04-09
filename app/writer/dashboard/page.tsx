@@ -15,7 +15,7 @@ export default function WriterDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-white p-8 font-sans">
+    <div className="min-h-screen bg-[#F4F3EE] p-8 font-sans">
       {/* Top Header */}
       <div className="max-w-6xl mx-auto flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-gray-800">
@@ -34,7 +34,7 @@ export default function WriterDashboard() {
         <button 
           onClick={() => setActiveTab('create')}
           className={`px-6 py-2 rounded-lg font-bold transition-all ${
-            activeTab === 'create' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-white text-gray-600 hover:bg-gray-200'
+            activeTab === 'create' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-[#F4F3EE] text-gray-600 hover:bg-gray-200'
           }`}
         >
           Create Post
@@ -42,7 +42,7 @@ export default function WriterDashboard() {
         <button 
           onClick={() => setActiveTab('posts')}
           className={`px-6 py-2 rounded-lg font-bold transition-all ${
-            activeTab === 'posts' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-white text-gray-600 hover:bg-gray-200'
+            activeTab === 'posts' ? 'bg-[#3b82f6] text-white shadow-md' : 'bg-[#F4F3EE] text-gray-600 hover:bg-gray-200'
           }`}
         >
           My Posts
@@ -50,7 +50,7 @@ export default function WriterDashboard() {
       </div>
 
       {/* Main Content Area */}
-      <div className="max-w-6xl mx-auto bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+      <div className="max-w-6xl mx-auto bg-[#F4F3EE] border border-gray-200 rounded-xl p-8 shadow-sm">
         {activeTab === 'create' ? (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Create a New Post</h2>
@@ -59,7 +59,7 @@ export default function WriterDashboard() {
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Category</label>
               <select 
-                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white appearance-none cursor-pointer"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none bg-[#F4F3EE] appearance-none cursor-pointer"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
@@ -87,11 +87,11 @@ export default function WriterDashboard() {
               <label className="block text-sm font-medium text-gray-700">Content</label>
               <div className="border border-gray-300 rounded-lg overflow-hidden">
                 {/* Toolbar */}
-                <div className="bg-white border-b border-gray-200 p-2 flex flex-wrap items-center gap-3">
-                  <button className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-white font-medium text-gray-700">Bold</button>
-                  <button className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-white font-medium text-gray-700">Italic</button>
-                  <button className="px-3 py-1 bg-white border border-gray-200 rounded hover:bg-white font-medium text-gray-700">Underline</button>
-                  <select className="border border-gray-200 rounded px-2 py-1 bg-white text-sm text-gray-700 outline-none">
+                <div className="bg-[#F4F3EE] border-b border-gray-200 p-2 flex flex-wrap items-center gap-3">
+                  <button className="px-3 py-1 bg-[#F4F3EE] border border-gray-200 rounded hover:bg-[#F4F3EE] font-medium text-gray-700">Bold</button>
+                  <button className="px-3 py-1 bg-[#F4F3EE] border border-gray-200 rounded hover:bg-[#F4F3EE] font-medium text-gray-700">Italic</button>
+                  <button className="px-3 py-1 bg-[#F4F3EE] border border-gray-200 rounded hover:bg-[#F4F3EE] font-medium text-gray-700">Underline</button>
+                  <select className="border border-gray-200 rounded px-2 py-1 bg-[#F4F3EE] text-sm text-gray-700 outline-none">
                     <option>Default Font</option>
                     <option>Arial</option>
                     <option>Times New Roman</option>

@@ -1,4 +1,6 @@
 // import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 // import Footer from "../components/Footer";
 // import Popularsearches from '../components/PopularSearches';
 // import Hero from '../components/Gst/Hero2';
@@ -11,8 +13,8 @@
 // <Navbar />
 // <Hero/>
 // <DynamicTabContent tabName="GST Registration" />
-// <Price/>
-      <Faq />
+// <DynamicPricingSection />
+      <FAQAccordion />
 // <Popularsearches />
 // <Footer />
 // </>
@@ -24,52 +26,9 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Gst/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
-import Faq from '../components/Faq';
-import Price from '../components/Price';
 
 export default function Home() {
- const pricingData = {
- heading: "GST Registration Packages",
- subheading: "Choose the perfect plan for your business needs",
- note: "Note: Prices are inclusive of professional fees and government filing charges.",
- selectLabel: "Select your State for pricing",
- showStateSelector: true,
- states: ["Delhi", "Maharashtra", "Karnataka", "Gujarat"],
- cards: [
- {
- id: 1,
- badge: "LEDGERS", // optional
- title: "GST Registration & Software",
- description: "Complete GST registration with software access",
- price: "5,899",
- priceNote: "/yr + GST",
- buttonText: "Start Registration",
- // onButtonClick: () => console.log("Card 1 clicked"),
- features: [
- "GST Registration Support",
- "GST Certificate",
- "Compliance Dashboard & Tracker",
- "LEDGERS GST Software Access",
- "GST Invoicing & e-invoicing"
- ]
- },
- {
- id: 2,
- badge: "Accountant", // optional
- title: "GST Registration & 3-Month Accountant",
- price: "7,899",
- priceNote: "/quarter + GST",
- buttonText: "Start Registration",
- features: [
- "GST Registration Support",
- "GST Certificate",
- "Dedicated Accountant Support",
- "GST Return Filing (GSTR-1, 3B)",
- "Invoice Management System"
- ]
- }
- ]
- };
+ 
 
  const heroProps = {
  // Left side content
@@ -136,8 +95,8 @@ export default function Home() {
  <Navbar />
  <Hero {...heroProps} />
  <DynamicTabContent category="GST" />
- <Price/>
-      <Faq />
+ <DynamicPricingSection />
+      <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

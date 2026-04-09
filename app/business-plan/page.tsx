@@ -8,9 +8,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
@@ -60,11 +61,11 @@ export default function BusinessPlanPage() {
   useOutsideClick(offerRef, () => setShowOfferDropdown(false));
 
   return (
-    <div className="min-h-screen bg-white text-gray-800 antialiased">
+    <div className="min-h-screen bg-[#F4F3EE] text-gray-800 antialiased">
       <Navbar />
 
       {/* Breadcrumb */}
-      <div className="bg-white py-5">
+      <div className="bg-[#F4F3EE] py-5">
         <div className="max-w-7xl mx-auto px-6 text-sm text-gray-500">
           Home / MCA Services / <span className="text-[#C15F3C] font-medium">Business Plan</span>
         </div>
@@ -77,7 +78,7 @@ export default function BusinessPlanPage() {
           <section className="lg:col-span-8 space-y-12">
             
             {/* Top Product Card */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col md:flex-row gap-10">
+            <div className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col md:flex-row gap-10">
               <div className="md:w-1/3 flex-shrink-0">
                 <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
                   <div className="bg-gradient-to-br from-[#C15F3C] to-[#8E442B] p-5 text-white text-center">
@@ -117,14 +118,14 @@ export default function BusinessPlanPage() {
                   <button
                     type="button"
                     onClick={() => setShowOfferDropdown(!showOfferDropdown)}
-                    className="w-full sm:w-80 flex items-center justify-between border-2 border-gray-100 rounded-xl px-5 py-3.5 bg-white text-left hover:border-[#C15F3C] transition-all focus:outline-none"
+                    className="w-full sm:w-80 flex items-center justify-between border-2 border-gray-100 rounded-xl px-5 py-3.5 bg-[#F4F3EE] text-left hover:border-[#C15F3C] transition-all focus:outline-none"
                   >
                     <span className="text-sm font-semibold text-slate-700">{selectedOffer}</span>
                     <ChevronDown className={`w-4 h-4 transition-transform ${showOfferDropdown ? 'rotate-180' : ''}`} />
                   </button>
 
                   {showOfferDropdown && (
-                    <div className="absolute top-full left-0 mt-2 w-full sm:w-80 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 overflow-hidden py-1">
+                    <div className="absolute top-full left-0 mt-2 w-full sm:w-80 bg-[#F4F3EE] border border-gray-100 rounded-xl shadow-2xl z-50 overflow-hidden py-1">
                       {OFFER_OPTIONS.map((opt) => (
                         <button
                           key={opt}
@@ -149,7 +150,7 @@ export default function BusinessPlanPage() {
             </div>
 
             {/* EXACT CONTENT SECTION */}
-            <article className="bg-white rounded-3xl shadow-sm border border-gray-100 p-10">
+            <article className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-10">
               <h2 className="text-3xl font-bold text-slate-900 mb-8 border-b border-gray-50 pb-4 text-center">Business Plan</h2>
               
               <div className="space-y-8 text-[#4F4C45] text-[16px] leading-[1.8]">
@@ -182,7 +183,7 @@ export default function BusinessPlanPage() {
                         "Business Plan Template",
                         "Checklist for Starting a Business"
                       ].map((guide, i) => (
-                        <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100 group cursor-pointer hover:border-[#C15F3C] transition-all">
+                        <div key={i} className="flex items-center gap-3 p-4 bg-[#F4F3EE] rounded-2xl border border-gray-100 group cursor-pointer hover:border-[#C15F3C] transition-all">
                            <div className="w-2 h-2 rounded-full bg-[#C15F3C]/40 group-hover:bg-[#C15F3C]" />
                            <span className="text-sm font-bold text-slate-700 group-hover:text-[#C15F3C]">{guide}</span>
                         </div>
@@ -198,7 +199,7 @@ export default function BusinessPlanPage() {
           <aside className="lg:col-span-4 space-y-10">
             <SidebarCart />
             
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 space-y-6">
+            <div className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-8 space-y-6">
               <h4 className="text-lg font-bold text-slate-900 border-b border-gray-50 pb-4">Related Guides</h4>
               <ul className="space-y-5">
                 {[
@@ -225,11 +226,11 @@ export default function BusinessPlanPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+            <div className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-8">
               <h4 className="text-lg font-bold text-slate-900 mb-6">Popular Searches</h4>
               <div className="flex flex-wrap gap-2">
                 {POPULAR_SEARCHES.map((t) => (
-                  <span key={t} className="text-[10px] px-3 py-1.5 border border-gray-200 rounded-lg bg-white text-slate-600 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-all">
+                  <span key={t} className="text-[10px] px-3 py-1.5 border border-gray-200 rounded-lg bg-[#F4F3EE] text-slate-600 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-all">
                     {t}
                   </span>
                 ))}
@@ -240,42 +241,7 @@ export default function BusinessPlanPage() {
         </div>
       </main>
 
-      <DoStartupPricing 
-        plans={[
-          {
-            title: "Pitch Deck",
-            price: "",
-            description: "A business plan with pitch deck and financial model is essential for business owners to raise loan or equity...",
-            features: [
-              "PPT Presentation",
-              "Market Research"
-            ],
-            buttonText: "Start Filing Now"
-          },
-          {
-            title: "Financial Model",
-            price: "",
-            description: "A business plan with pitch deck and financial model is essential for business owners to raise loan or equity...",
-            features: [
-              "Business Analysis",
-              "Excel Model",
-              "Financial Projections"
-            ],
-            buttonText: "Start Filing Now"
-          },
-          {
-            title: "Loan Syndication",
-            price: "",
-            description: "A business plan with pitch deck and financial model is essential for business owners to raise loan or equity...",
-            features: [
-              "Pitch Deck",
-              "Financial Model",
-              "Loan Syndication"
-            ],
-            buttonText: "Start Filing Now"
-          }
-        ]}
-      />
+      <DynamicPricingSection />
 
       <Footer />
 

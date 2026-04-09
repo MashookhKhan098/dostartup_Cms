@@ -32,7 +32,7 @@ export default function TrademarkSearchPage() {
  </div>
 
  {/* Search Box */}
- <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 mb-8">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-md p-6 sm:p-8 mb-8">
 
  <form
  onSubmit={handleSearch}
@@ -57,7 +57,7 @@ export default function TrademarkSearchPage() {
  </div>
 
  {/* Results */}
- <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-md p-6 sm:p-8">
 
  {query ? (
  <div>

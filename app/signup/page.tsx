@@ -66,7 +66,7 @@ export default function SignupPage() {
  <div className="flex-grow flex items-center justify-center p-4">
  <div className="max-w-md w-full my-8">
  {/* Main Card */}
- <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6 md:p-8">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-sm border border-[#E5E2DA] p-6 md:p-8">
  {/* Header Section */}
  <div className="text-center mb-8">
  <h1 className="text-2xl md:text-3xl font-semibold text-[#2F2E2B] mb-2">

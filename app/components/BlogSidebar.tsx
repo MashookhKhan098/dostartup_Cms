@@ -103,7 +103,7 @@ export default function BlogSidebar({ category, isMainFeed = false, maxItems, co
     const displayCategory = category?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || "General";
     return (
       <div className="bg-white rounded-[32px] border border-[#E5E2DA] p-16 text-center w-full flex flex-col items-center justify-center min-h-[400px]">
-        <div className="w-16 h-16 rounded-3xl bg-[#F4F3EE] flex items-center justify-center mb-6 text-[#C15F3C]">
+        <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center mb-6 text-[#C15F3C]">
            <Clock size={32} />
         </div>
         <h4 className="text-[#201F1D] text-lg font-bold mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>No Articles Available</h4>
@@ -146,11 +146,11 @@ export default function BlogSidebar({ category, isMainFeed = false, maxItems, co
                 href={`/blog/${blog._id}`}
                 className="group flex flex-col bg-white rounded-2xl border border-[#E5E2DA] overflow-hidden hover:shadow-xl hover:shadow-[#C15F3C]/5 transition-all duration-500 no-underline h-full"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-white">
                   {mainImageUrl ? (
                     <img src={mainImageUrl} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   ) : (
-                    <div className="w-full h-full bg-[#F4F3EE] flex items-center justify-center text-[#C15F3C]"><Clock size={24} /></div>
+                    <div className="w-full h-full bg-white flex items-center justify-center text-[#C15F3C]"><Clock size={24} /></div>
                   )}
                 </div>
 
@@ -164,11 +164,11 @@ export default function BlogSidebar({ category, isMainFeed = false, maxItems, co
 
                   <div className="mt-auto pt-3 border-t border-[#F4F3EE] flex items-center justify-between">
                     <div className="flex items-center gap-1.5 min-w-0">
-                       <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 border border-[#E5E2DA]">
+                       <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 bg-white border border-[#E5E2DA]">
                         {authorImageUrl ? (
                           <img src={authorImageUrl} alt={blog.writer_name} className="w-full h-full object-cover" />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gray-100"><User size={10} className="text-[#B1ADA1]" /></div>
+                          <div className="w-full h-full flex items-center justify-center bg-white"><User size={10} className="text-[#B1ADA1]" /></div>
                         )}
                       </div>
                       <span className="text-[9px] font-bold text-[#201F1D] truncate">
@@ -189,11 +189,11 @@ export default function BlogSidebar({ category, isMainFeed = false, maxItems, co
               className="group block bg-white rounded-xl border border-[#E5E2DA] overflow-hidden hover:shadow-md transition-all duration-300 no-underline"
             >
               <div className="flex gap-3 p-3">
-                <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+                <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-white">
                   {mainImageUrl ? (
                     <img src={mainImageUrl} alt={blog.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
-                    <div className="w-full h-full bg-[#F4F3EE] flex items-center justify-center text-[#C15F3C]"><Clock size={14} /></div>
+                    <div className="w-full h-full bg-white flex items-center justify-center text-[#C15F3C]"><Clock size={14} /></div>
                   )}
                 </div>
                 <div className="flex-1 flex flex-col justify-center min-w-0">

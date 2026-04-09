@@ -3,8 +3,9 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import {
   CheckCircle,
   XCircle,
@@ -252,89 +253,9 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "File & Get Acknowledgment" },
 ];
 
-const PLANS = [
-  {
-    name: "Self File",
-    price: "₹1,999",
-    period: "/ filing",
-    desc: "For small partnership firms & LLPs with simple income",
-    features: [
-      { text: "P&L & Balance Sheet import", ok: true },
-      { text: "Partner salary/interest calc", ok: true },
-      { text: "Depreciation calculation", ok: true },
-      { text: "e-File to IT Dept", ok: true },
-      { text: "Tax audit support", ok: false },
-    ],
-    cta: "Start Filing",
-    featured: false,
-  },
-  {
-    name: "AI Pro",
-    price: "₹2,999",
-    period: "/ filing",
-    desc: "Best for active firms, LLPs & AOPs with multiple income sources",
-    features: [
-      { text: "Everything in Self File", ok: true },
-      { text: "AI partner salary optimizer", ok: true },
-      { text: "Capital gains computation", ok: true },
-      { text: "AIS deep reconciliation", ok: true },
-      { text: "Notice Shield pre-check", ok: true },
-    ],
-    cta: "Get AI Pro",
-    featured: true,
-    badge: "POPULAR",
-  },
-  {
-    name: "CA Expert",
-    price: "₹5,999",
-    period: "/ filing",
-    desc: "Full CA support + Tax Audit for complex entities",
-    features: [
-      { text: "Everything in AI Pro", ok: true },
-      { text: "Dedicated CA assigned", ok: true },
-      { text: "Tax audit (3CA/3CB/3CD)", ok: true },
-      { text: "Trust / AOP special handling", ok: true },
-      { text: "Notice response support", ok: true },
-    ],
-    cta: "Hire a CA",
-    featured: false,
-  },
-];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-5?",
-    a: "ITR-5 is filed by firms (partnership firms), LLPs (Limited Liability Partnerships), AOPs (Association of Persons), BOIs (Body of Individuals), artificial juridical persons, estates of deceased persons, and investment funds. Individual partners file their own ITR-2/3 for their share of profit.",
-  },
-  {
-    q: "What is the tax rate for a Partnership Firm / LLP in India?",
-    a: "Partnership firms and LLPs are taxed at a flat rate of 30% on their total income, plus 10% surcharge if income exceeds ₹1 crore, plus 4% health and education cess. There is no basic exemption limit or slab benefit for firms.",
-  },
-  {
-    q: "What is Section 40(b) — partner salary and interest?",
-    a: "Section 40(b) allows a partnership firm to deduct partner salary and interest as business expenses, subject to limits. Interest is capped at 12% per annum. Salary deduction: ₹3 lakh or 90% of book profit (whichever is higher) for first ₹3L profit, 60% for the balance. Our AI computes this automatically.",
-  },
-  {
-    q: "When is a tax audit mandatory for ITR-5?",
-    a: "Tax audit under Section 44AB is mandatory if: (1) Business turnover exceeds ₹1 crore (₹10 crore if 95% digital transactions), (2) Professional receipts exceed ₹50 lakh, or (3) Profit is declared below presumptive rate. Audit deadline is October 31, 2026 for AY 2026-27.",
-  },
-  {
-    q: "Can an LLP file ITR-5?",
-    a: "Yes. LLPs file ITR-5. The LLP pays tax at 30% flat rate on its income. Individual partners then include their share of LLP profit in their personal returns (ITR-2 or ITR-3) as income from partnership, which is exempt from tax in the partners' hands to avoid double taxation.",
-  },
-  {
-    q: "What is the last date to file ITR-5 for AY 2026-27?",
-    a: "Non-audit cases: July 31, 2026. Tax audit cases: October 31, 2026. Belated returns can be filed till December 31, 2026 with a late fee of ₹1,000–₹10,000 under Section 234F depending on income.",
-  },
-  {
-    q: "How is trust income taxed under ITR-5?",
-    a: "Trusts registered under Section 12A/12AB are exempt from tax on income applied to charitable purposes. Unregistered trusts or those with business income file ITR-5 and are taxed at maximum marginal rate (30%). Our CA Expert plan handles Section 12A/80G registrations separately.",
-  },
-  {
-    q: "Does DoStartup support filing for AOPs and BOIs?",
-    a: "Yes. AOPs (Association of Persons) and BOIs (Body of Individuals) file ITR-5. Tax is computed at either individual slab rates or maximum marginal rate depending on membership. DoStartup AI handles both scenarios and selects the most favorable tax computation automatically.",
-  },
-];
+
+
 
 const ENTITY_TABLE = [
   {
@@ -531,7 +452,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  HERO
  ════════════════════════════════════ */}
-        <section className="bg-white relative overflow-hidden pt-8 pb-20">
+        <section className="bg-[#F4F3EE] relative overflow-hidden pt-8 pb-20">
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -629,14 +550,14 @@ export default function ITR5Page() {
 
             {/* Right — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-white border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 hover:shadow-[#C15F3C]/20 transition-all duration-300">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 hover:shadow-[#C15F3C]/20 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-[#C15F3C]" />
                     🤖 AI ITR-5 Assistant — Live
                   </span>
                   <span className="bg-[#C15F3C] text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                    <span className="w-1.5 h-1.5 bg-[#F4F3EE] rounded-full animate-pulse" />
                     ACTIVE
                   </span>
                 </div>
@@ -670,7 +591,7 @@ export default function ITR5Page() {
                       75% Complete
                     </span>
                   </div>
-                  <div className="h-2 bg-white rounded-full overflow-hidden">
+                  <div className="h-2 bg-[#F4F3EE] rounded-full overflow-hidden">
                     <div className="h-full w-[75%] bg-[#C15F3C] rounded-full" />
                   </div>
                   <p className="text-[10px] text-gray-400 mt-2">
@@ -710,7 +631,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  TRUST BADGES
  ════════════════════════════════════ */}
-        <section className="bg-white border-y border-gray-100 py-6">
+        <section className="bg-[#F4F3EE] border-y border-gray-100 py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
               <span className="text-xs text-gray-400 font-semibold uppercase ">
@@ -734,7 +655,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  ELIGIBILITY
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -751,7 +672,7 @@ export default function ITR5Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-[#C15F3C]" /> File
                   ITR-5 If You Are:
@@ -777,7 +698,7 @@ export default function ITR5Page() {
                 </ul>
               </div>
 
-              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT
                   ITR-5 — Use Other Forms:
@@ -818,7 +739,7 @@ export default function ITR5Page() {
             </div>
 
             {/* Entity Tax Table */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div className="bg-[#F4F3EE] border border-gray-200 rounded-2xl p-6 shadow-sm">
               <h3 className="font-display font-bold text-black text-lg mb-4 flex items-center gap-2">
                 <BarChart3 size={20} className="text-[#C15F3C]" />
                 📊 ITR-5 Tax Rates by Entity Type — FY 2025-26
@@ -848,7 +769,7 @@ export default function ITR5Page() {
                     {ENTITY_TABLE.map((row, i) => (
                       <tr
                         key={row.entity}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
+                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
                       >
                         <td className="px-3 py-2.5 font-semibold text-black">
                           {row.entity}
@@ -891,7 +812,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  WHY DOSTARTUP + COMPARE
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="compare">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="compare">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -914,7 +835,7 @@ export default function ITR5Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-white border border-gray-200 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-gray-200 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
                   >
                     <div className="w-10 h-10 bg-[#F4F3EE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 group-hover:scale-110 transition-all">
                       {f.icon}
@@ -934,7 +855,7 @@ export default function ITR5Page() {
                 ))}
               </div>
 
-              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
+              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-[#F4F3EE]">
                 <div className="bg-[#C15F3C] px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">
                     <TrendingUp size={16} className="text-white" />
@@ -943,7 +864,7 @@ export default function ITR5Page() {
                 </div>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-white">
+                    <tr className="bg-[#F4F3EE]">
                       <th className="px-3 py-3 text-left font-bold text-xs text-black w-[28%]">
                         Feature
                       </th>
@@ -1026,7 +947,7 @@ export default function ITR5Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
+                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
                       >
                         <td className="px-3 py-3 font-medium text-black text-xs">
                           {row.feature}
@@ -1065,7 +986,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  AI FEATURES
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="features">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="features">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -1086,7 +1007,7 @@ export default function ITR5Page() {
               {AI_FEATURES.map((f) => (
                 <div
                   key={f.title}
-                  className="bg-white border-2 border-gray-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all duration-200 group"
+                  className="bg-[#F4F3EE] border-2 border-gray-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all duration-200 group"
                 >
                   <div className="text-[#C15F3C] mb-3 group-hover:scale-110 transform inline-block transition-transform">
                     {f.icon}
@@ -1109,7 +1030,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  PROCESS
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="process">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="process">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -1128,7 +1049,7 @@ export default function ITR5Page() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
                 {PROCESS_STEPS.map((s) => (
                   <div key={s.num} className="text-center group cursor-pointer">
-                    <div className="w-14 h-14 rounded-full bg-white border-2 border-[#C15F3C] flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-[#C15F3C] group-hover:scale-110 transition-all duration-200">
+                    <div className="w-14 h-14 rounded-full bg-[#F4F3EE] border-2 border-[#C15F3C] flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-[#C15F3C] group-hover:scale-110 transition-all duration-200">
                       {s.icon}
                     </div>
                     <div className="text-[#C15F3C] text-xs font-bold mb-1">
@@ -1155,7 +1076,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  CALCULATOR
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="calculator">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="calculator">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -1173,16 +1094,16 @@ export default function ITR5Page() {
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
+            <div className="bg-[#F4F3EE] rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
               <div className="bg-orange-500 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-[#F4F3EE]/20 rounded-xl flex items-center justify-center">
                     <Building2 size={20} className="text-white" />
                   </div>
                   <div>
                     <h3 className="font-display font-extrabold text-white text-lg flex items-center gap-2">
                       ITR-5 Firm Tax Calculator
-                      <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] bg-[#F4F3EE]/20 text-white px-2 py-0.5 rounded-full">
                         Live
                       </span>
                     </h3>
@@ -1194,11 +1115,11 @@ export default function ITR5Page() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={resetCalc}
-                    className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
+                    className="bg-[#F4F3EE]/20 hover:bg-[#F4F3EE]/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
                   >
                     <RefreshCw size={12} /> Reset
                   </button>
-                  <span className="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                  <span className="bg-[#F4F3EE]/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
                     <Zap size={12} /> AI Powered
                   </span>
                 </div>
@@ -1221,7 +1142,7 @@ export default function ITR5Page() {
                       onChange={(e) =>
                         upd("entityType", e.target.value as EntityType)
                       }
-                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-white"
+                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-[#F4F3EE]"
                     >
                       <option value="partnership">
                         Partnership Firm (30% flat tax)
@@ -1328,7 +1249,7 @@ export default function ITR5Page() {
                 </div>
 
                 {/* RESULTS */}
-                <div className="p-6 bg-white">
+                <div className="p-6 bg-[#F4F3EE]">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
                     <BarChart3 size={16} className="text-orange-500" />
                     Firm Tax Breakdown
@@ -1355,7 +1276,7 @@ export default function ITR5Page() {
                   </div>
 
                   {/* Income Breakdown */}
-                  <div className="bg-white rounded-2xl border-2 border-orange-500 p-4 mb-4">
+                  <div className="bg-[#F4F3EE] rounded-2xl border-2 border-orange-500 p-4 mb-4">
                     <p className="text-xs font-bold text-orange-500 mb-2 uppercase ">
                       🏢 Income Computation
                     </p>
@@ -1393,7 +1314,7 @@ export default function ITR5Page() {
                   </div>
 
                   {/* Tax Computation */}
-                  <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-4 shadow-sm">
+                  <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 mb-4 shadow-sm">
                     <ResultRow
                       label={
                         result.flatTaxRate > 0
@@ -1460,7 +1381,7 @@ export default function ITR5Page() {
         {/* ════════════════════════════════════
  TESTIMONIALS
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -1477,7 +1398,7 @@ export default function ITR5Page() {
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={i}
-                  className="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="bg-[#F4F3EE] border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="flex gap-1 mb-3">
                     {[...Array(5)].map((_, j) => (
@@ -1512,126 +1433,18 @@ export default function ITR5Page() {
  PRICING
  ════════════════════════════════════ */}
         <div id="pricing">
-          <DoStartupPricing 
-            title="Simple Pricing for ITR-5"
-            subtitle="No hidden charges. Cheaper than every major competitor. All plans include free revisions. GST included in price."
-            plans={[
-              {
-                title: "Self File",
-                price: "1,999",
-                subtitle: "GST Included",
-                description: "For small partnership firms & LLPs with simple income",
-                features: [
-                  "P&L & Balance Sheet import",
-                  "Partner salary/interest calc",
-                  "Depreciation calculation",
-                  "e-File to IT Dept"
-                ],
-                buttonText: "Start Filing"
-              },
-              {
-                title: "AI Pro",
-                price: "2,999",
-                subtitle: "GST Included",
-                description: "Best for active firms, LLPs & AOPs with multiple income sources",
-                features: [
-                  "Everything in Self File",
-                  "AI partner salary optimizer",
-                  "Capital gains computation",
-                  "AIS deep reconciliation",
-                  "Notice Shield pre-check"
-                ],
-                isPopular: true,
-                buttonText: "Get AI Pro"
-              },
-              {
-                title: "CA Expert",
-                price: "5,999",
-                subtitle: "GST Included",
-                description: "Full CA support + Tax Audit for complex entities",
-                features: [
-                  "Everything in AI Pro",
-                  "Dedicated CA assigned",
-                  "Tax audit (3CA/3CB/3CD)",
-                  "Trust / AOP special handling",
-                  "Notice response support"
-                ],
-                buttonText: "Hire a CA"
-              }
-            ]}
-          />
+          <DynamicPricingSection />
         </div>
 
         {/* ════════════════════════════════════
  FAQ
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black">
-                ITR-5 Questions Answered
-              </h2>
-              <p className="text-gray-500 text-sm mt-2">
-                Everything about firm taxation, partner deductions, LLPs & AOPs.
-              </p>
-            </div>
-            <div className="space-y-3">
-              {FAQS.map((faq, i) => (
-                <div
-                  key={i}
-                  className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-500 shadow-lg shadow-orange-100" : "border-gray-100 hover:border-orange-300"}`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between items-start gap-4 px-5 py-4 text-left group"
-                  >
-                    <span className="font-semibold text-sm text-black leading-snug group-hover:text-orange-500 transition-colors">
-                      {faq.q}
-                    </span>
-                    {openFaq === i ? (
-                      <ChevronUp
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5"
-                      />
-                    ) : (
-                      <ChevronDown
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5 group-hover:translate-y-0.5 transition-transform"
-                      />
-                    )}
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t border-orange-100 pt-3 bg-orange-50/30">
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500 mb-4">
-                Still have questions about ITR-5?
-              </p>
-              <Link
-                href="/support"
-                className="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm hover:text-orange-600 border border-orange-300 px-6 py-3 rounded-full hover:bg-orange-50 transition-all"
-              >
-                <MessageCircle size={16} />
-                Chat with our AI Tax Support (24/7)
-              </Link>
-            </div>
-          </div>
-        </section>
+        <FAQAccordion />
 
         {/* ════════════════════════════════════
  FINAL CTA
  ════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6 border-t border-gray-100">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6 border-t border-gray-100">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center gap-0.5 mb-4">
               {[...Array(5)].map((_, i) => (
@@ -1687,54 +1500,7 @@ export default function ITR5Page() {
           </div>
         </section>
 
-        <DoStartupPricing
-          title="Simple Packages. Transparent Pricing."
-          subtitle="Expert-assisted ITR-5 filing for Partnership Firms, LLPs, AOPs and BOIs. Comprehensive compliance support included."
-          plans={[
-            {
-              title: "ITR-5 Assisted Filing",
-              price: "4,999",
-              description: "Full end-to-end ITR-5 filing for Partnership Firms or LLPs with expert assistance for accurate reporting.",
-              features: [
-                "Partnership / LLP ITR Preparation",
-                "Computation of 40(b) Partner Remuneration",
-                "Filing on Income Tax Portal",
-                "AIS/26AS Deep Data Sync",
-                "Checking for Audit Requirements"
-              ],
-              buttonText: "Start Filing"
-            },
-            {
-              title: "ITR-5 + Tax Audit Assistance",
-              price: "7,999",
-              isPopular: true,
-              description: "Dedicated CA support for firms requiring Tax Audit (Sec 44AB) and complex computations.",
-              features: [
-                "All features of ITR-5 Assisted Filing",
-                "Dedicated Chartered Accountant",
-                "Audit Report (Form 3CD) Drafting Assistance",
-                "Balance Sheet & P&L Review",
-                "Optimization of Tax Liability",
-                "Priority CA Support"
-              ],
-              buttonText: "Start Filing"
-            },
-            {
-              title: "Firm Annual Compliance",
-              price: "12,999",
-              description: "Year-round compliance support including quarterly advance tax, notice handling and annual tax planning for your firm.",
-              features: [
-                "Dedicated CA for your firm",
-                "IT Notice Handling & Responses",
-                "4-Quarter Advance Tax Computations",
-                "Year-round Tax Consultation",
-                "Rectification Filing (Sec 154)",
-                "Renewal Support for Firm/LLP"
-              ],
-              buttonText: "Start Filing"
-            }
-          ]}
-        />
+        <DynamicPricingSection />
         <Footer />
       </main>
     </>

@@ -1,5 +1,4 @@
 "use client";
-import AddQuestionModal from "../components/AddQuestionModal";
 
 import React, { useState } from "react";
 import SidebarCart from "../components/SidebarCart";
@@ -114,7 +113,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  return (
  <div className="min-h-screen bg-[#F4F3EE] text-slate-800 font-sans">
  {/* Header */}
- <header className="bg-white border-b sticky top-0 z-50">
+ <header className="bg-[#F4F3EE] border-b sticky top-0 z-50">
  <div className="max-w-[1180px] mx-auto px-6 py-3 flex items-center gap-6">
  <img src={ASSETS.logo} alt="DoStartup" className="h-10 w-auto" />
 
@@ -134,7 +133,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
 
  {showIncomeDropdown && (
  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[520px] z-50">
- <div className="bg-white rounded-lg shadow-lg border p-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-lg border p-4">
  <div className="grid grid-cols-2 gap-3">
  {INCOME_TAX_DROPDOWN_LINKS.map((link) => (
  <a
@@ -246,7 +245,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  />
  </div>
 
- <button className="whitespace-nowrap px-5 py-3 bg-white text-slate-900 rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)]">
+ <button className="whitespace-nowrap px-5 py-3 bg-[#F4F3EE] text-slate-900 rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.25)]">
  File ITR
  </button>
  </form>
@@ -303,7 +302,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
 
  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
  {/* Personal */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-[#F4F3EE] text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Personal
  </div>
@@ -332,7 +331,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </div>
 
  {/* Business */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-[#F4F3EE] text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Business
  </div>
@@ -364,7 +363,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </div>
 
  {/* Not for Profit */}
- <div className="bg-white rounded-xl border p-6 shadow-sm">
+ <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
  <div className="inline-block bg-[#F4F3EE] text-[#C15F3C] px-3 py-1 rounded-full text-xs mb-3">
  Not for Profit
  </div>
@@ -405,7 +404,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </section>
 
  {/* long textual content */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  Income Tax Return (ITR)
  </h1>
@@ -909,7 +908,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </article>
 
  {/* Documents required card — screenshot501 already included */}
- <article className="bg-white rounded-lg shadow-sm p-6">
+ <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  Documents Required to File Your ITR
  </h3>
@@ -923,7 +922,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </article>
 
  {/* FAQ */}
- <div className="bg-white rounded-lg shadow-sm p-6">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  FAQ's on Income Tax E-Filing
  </h3>
@@ -960,7 +959,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  Load More
  </button>
  
-<AddQuestionModal />
+
 </div>
  </div>
  </section>
@@ -969,7 +968,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  <aside className="lg:col-span-4 hidden lg:block">
  <SidebarCart />
 
- <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Related Guides</h4>
  <ul className="text-sm text-indigo-600 space-y-2">
  <li>Tax Year in Income Tax: Meaning and Example</li>
@@ -997,13 +996,13 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-white rounded-lg p-4">
+ <div className="bg-[#F4F3EE] rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.map((s) => (
  <span
  key={s}
- className="text-xs px-3 py-1 border rounded bg-white text-gray-700"
+ className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
  >
  {s}
  </span>
@@ -1014,7 +1013,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </main>
 
  {/* Footer */}
- <footer className="bg-white mt-12 py-3 border-t">
+ <footer className="bg-[#F4F3EE] mt-12 py-3 border-t">
  <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
  <div>

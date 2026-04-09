@@ -1,8 +1,9 @@
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Startup/Hero2';
-import PricingCards, { PricingPlan } from '../components/PricingCards';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
@@ -53,8 +54,8 @@ export default function Home() {
  <Navbar />
  <Hero defaultEntity = "Section 8"/>
  <DynamicTabContent category="Proprietorship" />
- <PricingCards plans={section8Plans} />
-      <Faq />
+ <DynamicPricingSection />
+      <FAQAccordion />
  <Popularsearches />
  <Footer />
  </>

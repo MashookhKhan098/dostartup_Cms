@@ -31,7 +31,7 @@ export default function GovernmentSchemes() {
               </div>
             </div>
             <div className="flex-1 relative">
-              <div className="w-full h-[400px] bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#E5E2DA] flex items-center justify-center p-8">
+              <div className="w-full h-[400px] bg-[#F4F3EE] rounded-3xl shadow-2xl overflow-hidden border border-[#E5E2DA] flex items-center justify-center p-8">
                 <img 
                   src="https://www.nsws.gov.in/assets/images/logo.png" 
                   alt="Government Schemes"
@@ -44,7 +44,7 @@ export default function GovernmentSchemes() {
       </section>
 
       {/* Content Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#F4F3EE]">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-[#2F2E2B] mb-8">About Government Schemes</h2>
           <div className="space-y-6 text-[#6F6B63] leading-relaxed">

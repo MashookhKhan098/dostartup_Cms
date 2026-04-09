@@ -233,7 +233,7 @@ function InputField({ label, value, onChange, prefix = "₹", note, max }: {
  <input
  type="number" min={0} max={max} value={value}
  onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
- className="w-full pl-7 pr-3 py-3 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-white"
+ className="w-full pl-7 pr-3 py-3 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-[#F4F3EE]"
  />
  </div>
  </div>
@@ -274,7 +274,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
  return (
  <div key={label} className="flex items-center">
  <div className="flex flex-col items-center">
- <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${done ? "bg-orange-500 border-orange-500 text-white" : active ? "bg-white border-orange-500 text-orange-500" : "bg-white border-gray-200 text-gray-400"}`}>
+ <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all ${done ? "bg-orange-500 border-orange-500 text-white" : active ? "bg-[#F4F3EE] border-orange-500 text-orange-500" : "bg-[#F4F3EE] border-gray-200 text-gray-400"}`}>
  {done ? <CheckCircle size={16} /> : stepNum}
  </div>
  <span className={`text-[10px] font-semibold mt-1 hidden sm:block ${active ? "text-orange-500" : done ? "text-orange-400" : "text-gray-400"}`}>
@@ -355,7 +355,7 @@ export default function TaxCalculatorPage() {
  <main className="min-h-screen bg-[#F4F3EE] font-sans">
 
  {/* ── PAGE HEADER ── */}
- <div className="bg-white border-b border-gray-100 py-3 px-4 sm:px-6">
+ <div className="bg-[#F4F3EE] border-b border-gray-100 py-3 px-4 sm:px-6">
  <div className="max-w-5xl mx-auto">
  <div className="flex items-start justify-between flex-wrap gap-4">
  <div>
@@ -401,7 +401,7 @@ export default function TaxCalculatorPage() {
  <div className="grid lg:grid-cols-[1fr_380px] gap-6 items-start">
 
  {/* ══════════════════════════ MAIN FORM PANEL ══════════════════════════ */}
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
 
  {/* ── STEP 1: Personal Info ── */}
  {step === 1 && (
@@ -604,7 +604,7 @@ export default function TaxCalculatorPage() {
  {/* Side by side comparison */}
  <div className="grid sm:grid-cols-2 gap-4 mb-6">
  {/* OLD REGIME */}
- <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "old" ? "border-[#C15F3C] bg-[#F4F3EE]/50" : "border-gray-200 bg-white"}`}>
+ <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "old" ? "border-[#C15F3C] bg-[#F4F3EE]/50" : "border-gray-200 bg-[#F4F3EE]"}`}>
  <div className="flex items-center justify-between mb-3">
  <h4 className="font-display font-bold text-black text-sm">🏛️ Old Tax Regime</h4>
  {result.recommendation === "old" && (
@@ -635,7 +635,7 @@ export default function TaxCalculatorPage() {
  </div>
 
  {/* NEW REGIME */}
- <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "new" ? "border-[#C15F3C] bg-[#F4F3EE]/50" : "border-gray-200 bg-white"}`}>
+ <div className={`rounded-2xl border-2 p-4 ${result.recommendation === "new" ? "border-[#C15F3C] bg-[#F4F3EE]/50" : "border-gray-200 bg-[#F4F3EE]"}`}>
  <div className="flex items-center justify-between mb-3">
  <h4 className="font-display font-bold text-black text-sm">✨ New Tax Regime</h4>
  {result.recommendation === "new" && (
@@ -701,17 +701,17 @@ export default function TaxCalculatorPage() {
  <div className="space-y-4">
 
  {/* Live Summary Card */}
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 shadow-sm p-5">
  <h3 className="font-display font-bold text-black text-sm mb-4 flex items-center gap-2">
  <Brain size={15} className="text-orange-500" /> Live Tax Summary
  </h3>
  <div className="grid grid-cols-2 gap-3 mb-4">
- <div className={`rounded-xl p-3 text-center border-2 ${result.recommendation === "old" ? "border-orange-500 bg-orange-500" : "border-gray-200 bg-white"}`}>
+ <div className={`rounded-xl p-3 text-center border-2 ${result.recommendation === "old" ? "border-orange-500 bg-orange-500" : "border-gray-200 bg-[#F4F3EE]"}`}>
  <div className={`text-[10px] font-bold uppercase ${result.recommendation === "old" ? "text-orange-100" : "text-gray-400"}`}>Old Regime</div>
  <div className={`font-extrabold text-lg mt-0.5 ${result.recommendation === "old" ? "text-white" : "text-black"}`}>{fmtK(result.oldTotalTax)}</div>
  {result.recommendation === "old" && <div className="text-[10px] text-white font-bold">✓ BETTER</div>}
  </div>
- <div className={`rounded-xl p-3 text-center border-2 ${result.recommendation === "new" ? "border-orange-500 bg-orange-500" : "border-gray-200 bg-white"}`}>
+ <div className={`rounded-xl p-3 text-center border-2 ${result.recommendation === "new" ? "border-orange-500 bg-orange-500" : "border-gray-200 bg-[#F4F3EE]"}`}>
  <div className={`text-[10px] font-bold uppercase ${result.recommendation === "new" ? "text-orange-100" : "text-gray-400"}`}>New Regime</div>
  <div className={`font-extrabold text-lg mt-0.5 ${result.recommendation === "new" ? "text-white" : "text-black"}`}>{fmtK(result.newTotalTax)}</div>
  {result.recommendation === "new" && <div className="text-[10px] text-white font-bold">✓ BETTER</div>}
@@ -725,7 +725,7 @@ export default function TaxCalculatorPage() {
  </div>
 
  {/* Quick Stats */}
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 shadow-sm p-5">
  <h3 className="font-display font-bold text-black text-sm mb-3">📊 Quick Stats</h3>
  {[
  { label: "Gross Total Income", value: fmt(Math.max(result.oldGrossTotal, result.newGrossTotal)) },
@@ -749,13 +749,13 @@ export default function TaxCalculatorPage() {
  <h3 className="font-display font-bold text-white text-base mb-1">Ready to File?</h3>
  <p className="text-orange-100 text-xs mb-3">Use this calculation to file your ITR in 5 minutes</p>
  <Link href="/itr-1-return-filing"
- className="block bg-white text-orange-500 font-bold text-sm py-2.5 rounded-xl hover:bg-orange-50 transition-colors">
+ className="block bg-[#F4F3EE] text-orange-500 font-bold text-sm py-2.5 rounded-xl hover:bg-orange-50 transition-colors">
  File ITR Now →
  </Link>
  </div>
 
  {/* Why DoStartup */}
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 shadow-sm p-5">
  <h3 className="font-display font-bold text-black text-sm mb-3">Why DoStartup.in?</h3>
  {[
  { icon: "🤖", text: "AI reads Form-16 automatically" },
@@ -775,7 +775,7 @@ export default function TaxCalculatorPage() {
 
  {/* ── TAX SLABS REFERENCE ── */}
  <div className="mt-8 grid md:grid-cols-2 gap-5">
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 shadow-sm p-5">
  <h3 className="font-display font-bold text-black text-base mb-4 flex items-center gap-2">
  <TrendingUp size={16} className="text-orange-500" /> New Regime Tax Slabs FY 2025-26
  </h3>
@@ -783,7 +783,7 @@ export default function TaxCalculatorPage() {
  <thead><tr className="bg-orange-500 text-white"><th className="px-3 py-2 text-left rounded-tl-lg">Income Range</th><th className="px-3 py-2 text-right rounded-tr-lg">Rate</th></tr></thead>
  <tbody>
  {[["Up to ₹3,00,000", "NIL", true], ["₹3L – ₹7L", "5%", false], ["₹7L – ₹10L", "10%", false], ["₹10L – ₹12L", "15%", false], ["₹12L – ₹15L", "20%", false], ["Above ₹15L", "30%", false]].map(([r, t, nil], i) => (
- <tr key={String(r)} className={i % 2 === 0 ? "bg-white" : "bg-white"}>
+ <tr key={String(r)} className={i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}>
  <td className="px-3 py-2 text-gray-700">{r}</td>
  <td className={`px-3 py-2 text-right font-bold ${nil ? "text-green-600" : "text-black"}`}>{t}</td>
  </tr>
@@ -795,7 +795,7 @@ export default function TaxCalculatorPage() {
  </p>
  </div>
 
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+ <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 shadow-sm p-5">
  <h3 className="font-display font-bold text-black text-base mb-4 flex items-center gap-2">
  <Shield size={16} className="text-orange-500" /> Old Regime Tax Slabs FY 2025-26
  </h3>
@@ -803,7 +803,7 @@ export default function TaxCalculatorPage() {
  <thead><tr className="bg-gray-700 text-white"><th className="px-3 py-2 text-left rounded-tl-lg">Income Range</th><th className="px-3 py-2 text-center">Below 60</th><th className="px-3 py-2 text-right rounded-tr-lg">Senior</th></tr></thead>
  <tbody>
  {[["Up to ₹2.5L", "NIL", "NIL", true], ["₹2.5L – ₹5L", "5%", "5%", false], ["₹5L – ₹10L", "20%", "20%", false], ["Above ₹10L", "30%", "30%", false]].map(([r, b, s, nil], i) => (
- <tr key={String(r)} className={i % 2 === 0 ? "bg-white" : "bg-white"}>
+ <tr key={String(r)} className={i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}>
  <td className="px-3 py-2 text-gray-700">{r}</td>
  <td className={`px-3 py-2 text-center font-bold ${nil ? "text-green-600" : "text-black"}`}>{b}</td>
  <td className={`px-3 py-2 text-right font-bold ${nil ? "text-green-600" : "text-black"}`}>{s}</td>

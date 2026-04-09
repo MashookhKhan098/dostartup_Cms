@@ -24,7 +24,7 @@ export default function ContactPage() {
  <div className="grid md:grid-cols-2 gap-8">
 
  {/* Contact Info */}
- <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 space-y-6">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-md p-6 sm:p-8 space-y-6">
 
  <div>
  <h3 className="text-lg font-semibold text-[#C15F3C] mb-1">
@@ -65,7 +65,7 @@ export default function ContactPage() {
  </div>
 
  {/* Contact Form */}
- <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8">
+ <div className="bg-[#F4F3EE] rounded-2xl shadow-md p-6 sm:p-8">
 
  <h3 className="text-lg font-semibold text-gray-900 mb-4">
  Send a Message

@@ -2,8 +2,9 @@
 
 import { useState, useCallback } from "react";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import {
   CheckCircle,
   XCircle,
@@ -236,32 +237,7 @@ const PROCESS_STEPS = [
   { num: "05", icon: "🎉", label: "Filed! Track Refund" },
 ];
 
-const FAQS = [
-  {
-    q: "Who should file ITR-1 (Sahaj)?",
-    a: "ITR-1 is for resident individuals with total income up to ₹50 lakh from salary/pension, one house property, and other sources like interest. It cannot be filed if you have capital gains, business income, or are a director in a company.",
-  },
-  {
-    q: "What is the last date for AY 2026-27?",
-    a: "The due date is July 31, 2026. Filing after the due date attracts a late fee of up to ₹5,000 under Section 234F. Belated returns can be filed till December 31, 2026.",
-  },
-  {
-    q: "Is DoStartup.in safe? How is data protected?",
-    a: "Yes. DoStartup.in uses 256-bit SSL encryption, is SOC2 compliant, and is a registered e-Return Intermediary (ERI) with the Income Tax Department. Your data is never sold to third parties.",
-  },
-  {
-    q: "What documents do I need to file ITR-1?",
-    a: "You primarily need your Form-16 (from employer), PAN card, Aadhaar, bank account details, and interest certificates. Our AI guides you if anything is missing.",
-  },
-  {
-    q: "Can I file ITR-1 without Form-16?",
-    a: "Yes! Our AI can help you file even without Form-16 using your salary slips, AIS data, and manually entered income details. We auto-fetch your 26AS for TDS verification.",
-  },
-  {
-    q: "How long does it take to get a tax refund?",
-    a: "Tax refunds are typically processed within 15–45 days of e-verification. DoStartup provides a real-time refund tracker inside your dashboard.",
-  },
-];
+
 
 const TAX_SLABS = [
   { slab: "Up to ₹3,00,000", rate: "NIL", nil: true },
@@ -351,7 +327,7 @@ function NumInput({
           min={0}
           value={value}
           onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
-          className="w-full pl-7 pr-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-white"
+          className="w-full pl-7 pr-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-[#F4F3EE]"
         />
       </div>
     </div>
@@ -400,47 +376,7 @@ export default function ITR1Page() {
   // FAQ open state
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const itrPlans = [
-    {
-      title: "Assisted Tax Filing",
-      price: "999",
-      description: "Standard ITR-1 preparation and filing for salaried individuals with one house property.",
-      features: [
-        "Income from Salary & Rent",
-        "Form 16/AIS Reconciliation",
-        "80C/80D Deduction Review",
-        "Expert Support for Salaried",
-        "e-Filing and Acknowledgement"
-      ]
-    },
-    {
-      title: "CA Assisted Tax Filing",
-      price: "1,999",
-      isPopular: true,
-      description: "Dedicated CA support for tax optimization, multiple sources, and complex AIS/26AS reconciliation.",
-      features: [
-        "All features of Assisted Filing",
-        "Tax Optimization & Review",
-        "Interest & Other Income Support",
-        "AIS/26AS Deep Reconciliation",
-        "Relief under Section 89(1)",
-        "Priority CA Support"
-      ]
-    },
-    {
-      title: "CA Managed Tax Compliance",
-      price: "3,999",
-      description: "Complete peace of mind with notice handling, rectification filing, and year-round CA support.",
-      features: [
-        "All features of CA Assisted Filing",
-        "IT Notice Handling & Response",
-        "Rectification Filing (Sec 154)",
-        "Year-round CA Availability",
-        "Refund Follow-up & Tracking",
-        "Expert Tax Planning Advice"
-      ]
-    },
-  ];
+  
 
   return (
     <>
@@ -491,7 +427,7 @@ export default function ITR1Page() {
                 </a>
                 <a
                   href="#calculator"
-                  className="border border-white/20 hover:border-white/50 text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-white/5"
+                  className="border border-white/20 hover:border-white/50 text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all hover:bg-[#F4F3EE]/5"
                 >
                   Try Tax Calculator →
                 </a>
@@ -514,7 +450,7 @@ export default function ITR1Page() {
 
             {/* Right — AI card */}
             <div className="lg:pl-4">
-              <div className="bg-white/6 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
+              <div className="bg-[#F4F3EE]/6 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-white text-sm">
                     🤖 AI Tax Assistant — Live
@@ -543,12 +479,12 @@ export default function ITR1Page() {
                     </div>
                   </div>
                 ))}
-                <div className="mt-4 bg-white/8 rounded-xl p-4">
+                <div className="mt-4 bg-[#F4F3EE]/8 rounded-xl p-4">
                   <div className="flex justify-between text-xs text-slate-400 mb-2">
                     <span>Filing Progress</span>
                     <span className="font-bold text-[#C15F3C]">73%</span>
                   </div>
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-2 bg-[#F4F3EE]/10 rounded-full overflow-hidden">
                     <div className="h-full w-[73%] bg-gradient-to-r from-[#C15F3C] to-[#C15F3C]/60 rounded-full" />
                   </div>
                 </div>
@@ -560,7 +496,7 @@ export default function ITR1Page() {
         {/* ══════════════════════════════════════
         WHO CAN FILE + ELIGIBILITY
         ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -647,7 +583,7 @@ export default function ITR1Page() {
                     {TAX_SLABS.map((s, i) => (
                       <tr
                         key={s.slab}
-                        className={i % 2 === 0 ? "bg-white" : "bg-[#F4F3EE]/60"}
+                        className={i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]/60"}
                       >
                         <td className="px-4 py-2.5 text-slate-700">{s.slab}</td>
                         <td
@@ -692,7 +628,7 @@ export default function ITR1Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-white border border-slate-100 rounded-2xl hover:border-[#C15F3C] hover:translate-x-1 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-slate-100 rounded-2xl hover:border-[#C15F3C] hover:translate-x-1 transition-all duration-200 group"
                   >
                     <div className="w-10 h-10 bg-[#F4F3EE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 transition-colors">
                       {f.icon}
@@ -710,7 +646,7 @@ export default function ITR1Page() {
               </div>
             </div>
             {/* Compare table */}
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-white">
+            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-[#F4F3EE]">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-slate-900">
@@ -732,7 +668,7 @@ export default function ITR1Page() {
                   {COMPARE.map((row, i) => (
                     <tr
                       key={row.feature}
-                      className={`border-b border-slate-100 ${i % 2 === 0 ? "bg-[#F4F3EE]/30" : "bg-white"}`}
+                      className={`border-b border-slate-100 ${i % 2 === 0 ? "bg-[#F4F3EE]/30" : "bg-[#F4F3EE]"}`}
                     >
                       <td className="px-4 py-3 font-medium text-slate-700 text-xs">
                         {row.feature}
@@ -779,7 +715,7 @@ export default function ITR1Page() {
               {AI_FEATURES.map((f) => (
                 <div
                   key={f.title}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C]/40 transition-all duration-200 group"
+                  className="bg-[#F4F3EE]/5 border border-white/10 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C]/40 transition-all duration-200 group"
                 >
                   <div className="text-[#C15F3C] mb-3 group-hover:text-[#C15F3C]/80 transition-colors">
                     {f.icon}
@@ -799,7 +735,7 @@ export default function ITR1Page() {
         {/* ══════════════════════════════════════
         PROCESS STEPS
         ══════════════════════════════════════ */}
-        <section className="bg-white py-6 px-4 sm:px-6" id="process">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="process">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
@@ -848,7 +784,7 @@ export default function ITR1Page() {
               </p>
             </div>
 
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+            <div className="bg-[#F4F3EE] rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#C15F3C]/90 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div>
                   <h3 className="font-display font-extrabold text-white text-lg">
@@ -858,7 +794,7 @@ export default function ITR1Page() {
                     AY 2026-27 | Updated for Budget 2025
                   </p>
                 </div>
-                <span className="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase ">
+                <span className="bg-[#F4F3EE]/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase ">
                   AI Powered
                 </span>
               </div>
@@ -914,7 +850,7 @@ export default function ITR1Page() {
                     <select
                       value={calc.age}
                       onChange={(e) => upd("age", e.target.value as AgeGroup)}
-                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-white"
+                      className="w-full px-3 py-2.5 border-2 border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:border-[#C15F3C]/50 transition-colors bg-[#F4F3EE]"
                     >
                       <option value="below60">Below 60 years</option>
                       <option value="60to80">
@@ -931,7 +867,7 @@ export default function ITR1Page() {
                   <h4 className="font-display font-bold text-slate-900 text-base mb-5">
                     📊 Your Tax Summary
                   </h4>
-                  <div className="bg-white rounded-2xl border border-slate-200 p-4 mb-4 shadow-sm">
+                  <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 p-4 mb-4 shadow-sm">
                     <ResultRow
                       label="Gross Total Income"
                       value={fmt(result.grossTotal)}
@@ -1011,59 +947,13 @@ export default function ITR1Page() {
         PRICING
         ══════════════════════════════════════ */}
         <section id="pricing">
-          <DoStartupPricing plans={itrPlans} />
+          <DynamicPricingSection />
         </section>
 
         {/* ══════════════════════════════════════
         FAQ
         ══════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="faq">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
-                FAQ
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">
-                Frequently Asked Questions
-              </h2>
-            </div>
-            <div className="space-y-3">
-              {FAQS.map((faq, i) => (
-                <div
-                  key={i}
-                  className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-200 ${openFaq === i ? "border-orange-400" : "border-slate-100"}`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex justify-between items-start gap-4 px-5 py-4 text-left"
-                  >
-                    <span className="font-semibold text-sm text-slate-800 leading-snug">
-                      {faq.q}
-                    </span>
-                    {openFaq === i ? (
-                      <ChevronUp
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5"
-                      />
-                    ) : (
-                      <ChevronDown
-                        size={17}
-                        className="text-orange-500 flex-shrink-0 mt-0.5"
-                      />
-                    )}
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-5 pb-4 border-t border-orange-100 pt-3">
-                      <p className="text-slate-500 text-sm leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FAQAccordion />
 
         <section className="bg-gradient-to-br from-orange-500 to-orange-700 py-6 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
@@ -1082,7 +972,7 @@ export default function ITR1Page() {
             <div className="flex flex-wrap gap-4 justify-center">
               <a
                 href="#pricing"
-                className="inline-flex items-center gap-2 bg-white text-orange-600 font-bold text-base px-8 py-4 rounded-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-150"
+                className="inline-flex items-center gap-2 bg-[#F4F3EE] text-orange-600 font-bold text-base px-8 py-4 rounded-full hover:shadow-2xl hover:-translate-y-1 transition-all duration-150"
               >
                 🚀 File ITR-1 Free Today <ArrowRight size={18} />
               </a>

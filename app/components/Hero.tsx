@@ -38,7 +38,7 @@
 // }, []);
 
 // return (
-// <section className="relative bg-white">
+// <section className="relative bg-[#F4F3EE]">
 // <div className="max-w-7xl mx-auto px-6 py-3">
 // <div className="relative rounded-xl overflow-hidden">
 // {/* Slide */}
@@ -64,13 +64,13 @@
 // {/* Navigation */}
 // <button
 // onClick={prevSlide}
-// className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow hover:bg-white"
+// className="absolute left-3 top-1/2 -translate-y-1/2 bg-[#F4F3EE]/80 p-2 rounded-full shadow hover:bg-[#F4F3EE]"
 // >
 // <ChevronLeft className="h-5 w-5 text-gray-700" />
 // </button>
 // <button
 // onClick={nextSlide}
-// className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow hover:bg-white"
+// className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#F4F3EE]/80 p-2 rounded-full shadow hover:bg-[#F4F3EE]"
 // >
 // <ChevronRight className="h-5 w-5 text-gray-700" />
 // </button>
@@ -165,7 +165,7 @@ export default function HeroSection() {
  }
  `}</style>
 
- <section className="bg-[#EFEDE6] px-[20px] py-1 sm:px-[28px] sm:py-2 lg:px-[52px] lg:py-3">
+ <section className="bg-[#F4F3EE] px-[20px] py-1 sm:px-[28px] sm:py-2 lg:px-[52px] lg:py-3">
  <div className="max-w-[1224px] mx-auto flex flex-col md:grid md:grid-cols-[1fr_340px] lg:grid-cols-[1fr_380px] gap-5 md:gap-7 lg:gap-9">
 
  {/* SLIDER */}
@@ -214,7 +214,7 @@ export default function HeroSection() {
  {images.map((_, i) => (
  <button
  key={i}
- className={`h-1.5 rounded-full transition-all ${i === current ? "bg-[#C15F3C] w-5" : "bg-white/50 w-1.5"
+ className={`h-1.5 rounded-full transition-all ${i === current ? "bg-[#C15F3C] w-5" : "bg-[#F5F5F5]/50 w-1.5"
  }`}
  onClick={() => slideTo(i)}
  />
@@ -254,7 +254,7 @@ export default function HeroSection() {
 
  <div className="grid grid-cols-2 gap-2">
  {trustBadges.map((t) => (
- <div key={t} className="flex items-center gap-1.5 text-black bg-[#F4F3EE] rounded-lg py-2 px-3 text-[11px] font-semibold border border-[#B1ADA1]/20">
+ <div key={t} className="flex items-center gap-1.5 text-black bg-white rounded-lg py-2 px-3 text-[11px] font-semibold border border-[#B1ADA1]/20">
  <span className="w-2 h-2 rounded-full bg-[#C15F3C]" />
  {t}
  </div>

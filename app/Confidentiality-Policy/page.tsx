@@ -22,7 +22,7 @@ export default function ConfidentialityPolicyPage() {
  </div>
 
  {/* Highlight Box */}
- <div className="bg-white border border-[#B1ADA1]/40 rounded-2xl p-6 mb-10 text-center shadow-sm">
+ <div className="bg-[#F4F3EE] border border-[#B1ADA1]/40 rounded-2xl p-6 mb-10 text-center shadow-sm">
  <p className="text-sm text-gray-700">
  We handle personal documents like PAN, Aadhaar, GST, and business data. 
  Our systems are designed to keep your information secure and private at all times.
@@ -60,7 +60,7 @@ export default function ConfidentialityPolicyPage() {
  ].map((item, i) => (
  <div
  key={i}
- className="bg-white rounded-xl p-5 border border-[#B1ADA1]/40 shadow-sm hover:shadow-md transition"
+ className="bg-[#F4F3EE] rounded-xl p-5 border border-[#B1ADA1]/40 shadow-sm hover:shadow-md transition"
  >
  <h3 className="text-sm font-semibold text-[#C15F3C] mb-2">
  {item.title}
@@ -72,7 +72,7 @@ export default function ConfidentialityPolicyPage() {
  </div>
 
  {/* Bottom Section */}
- <div className="mt-12 bg-white rounded-2xl shadow-md p-6 text-center">
+ <div className="mt-12 bg-[#F4F3EE] rounded-2xl shadow-md p-6 text-center">
  <h3 className="text-lg font-semibold text-gray-900 mb-2">
  Questions about your data?
  </h3>

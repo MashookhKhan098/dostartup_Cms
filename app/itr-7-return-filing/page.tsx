@@ -3,48 +3,16 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import DoStartupPricing from "../components/DoStartupPricing";
 import { Plus, ShoppingBag, CheckCircle, Shield, FileText, Zap, Star, Brain, AlertTriangle, ArrowRight, Target, Building2 } from "lucide-react";
 import Faq from "../components/Faq";
 
 // ─────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────
-const FAQS = [
-  {
-    q: "Who should file ITR-7?",
-    a: "ITR-7 must be filed by persons including companies required to furnish returns under Sections 139(4A), 139(4B), 139(4C), 139(4D), 139(4E), or 139(4F) of the Income Tax Act. This covers charitable/religious trusts, political parties, research institutions, universities, hospitals, and mutual funds.",
-  },
-  {
-    q: "What is Section 139(4A)?",
-    a: "Section 139(4A) requires charitable or religious trusts and institutions claiming exemption under Sections 11 and 12 (or 10(23C)) to file ITR-7 if their income before exemption exceeds the basic exemption limit.",
-  },
-  {
-    q: "What is Section 139(4B)?",
-    a: "Section 139(4B) covers political parties. Every political party must file ITR-7 if its total income exceeds the maximum amount not chargeable to tax, before applying any exemption under Section 13A.",
-  },
-  {
-    q: "What is Section 139(4C)?",
-    a: "Section 139(4C) applies to scientific research associations, news agencies, hospitals, universities, educational institutions, and other entities claiming exemption under specified sections like 10(23A), 10(23B), 10(23C)(iii) to (vi), etc.",
-  },
-  {
-    q: "What is the due date for filing ITR-7?",
-    a: "For entities not requiring audit: July 31, 2026. For entities whose accounts must be audited: October 31, 2026. For entities with transfer pricing transactions: November 30, 2026. Belated returns can be filed till December 31, 2026 with applicable late fee.",
-  },
-  {
-    q: "Is 12A registration mandatory before filing ITR-7?",
-    a: "Yes — a charitable trust must have valid 12A/12AB registration to claim exemption under Section 11. Without it, income is taxed at maximum marginal rate. DoStartup can assist with 12A/80G registration before filing.",
-  },
-  {
-    q: "What happens if a trust doesn't file ITR-7?",
-    a: "Failure to file ITR-7 can result in: (1) Loss of tax exemption benefits, (2) Late fee of ₹1,000 to ₹10,000 under Section 234F, (3) Interest on unpaid tax, (4) Prosecution in extreme cases. Filing is mandatory regardless of whether income is taxable.",
-  },
-  {
-    q: "Can DoStartup help with Form 10B / 10BB audit?",
-    a: "Yes. Charitable trusts with income above ₹1 crore must get their accounts audited and file Form 10B (for trusts registered u/s 12A) or Form 10BB (for institutions u/s 10(23C)) along with ITR-7. Our CA Expert plan covers this end-to-end.",
-  },
-];
+
 
 const ELIGIBILITY_YES = [
   "Charitable and Religious Trusts (Sec 12A/12AB registered)",
@@ -110,7 +78,7 @@ export default function ITR7Page() {
       <main className="min-h-screen bg-[#F4F3EE] font-sans">
 
         {/* ═══════════ HERO ═══════════ */}
-        <section className="bg-white relative overflow-hidden pt-10 pb-20">
+        <section className="bg-[#F4F3EE] relative overflow-hidden pt-10 pb-20">
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
@@ -176,7 +144,7 @@ export default function ITR7Page() {
 
             {/* Right — Quick Info Card */}
             <div className="lg:pl-4">
-              <div className="bg-white border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 transition-all duration-300">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-[#C15F3C]" />
@@ -210,7 +178,7 @@ export default function ITR7Page() {
         </section>
 
         {/* ═══════════ ELIGIBILITY ═══════════ */}
-        <section className="bg-white py-16 px-4 sm:px-6" id="eligibility">
+        <section className="bg-[#F4F3EE] py-16 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
@@ -225,7 +193,7 @@ export default function ITR7Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-[#C15F3C]" /> File ITR-7 If You Are:
                 </div>
@@ -238,7 +206,7 @@ export default function ITR7Page() {
                   ))}
                 </ul>
               </div>
-              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT ITR-7 — Use Other Forms:
                 </div>
@@ -270,7 +238,7 @@ export default function ITR7Page() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {WHY_FEATURES.map((f, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-[#C15F3C]/10 p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all">
+                <div key={i} className="bg-[#F4F3EE] rounded-2xl border border-[#C15F3C]/10 p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all">
                   <div className="w-12 h-12 rounded-xl bg-[#F4F3EE] flex items-center justify-center mb-4">
                     {f.icon}
                   </div>
@@ -283,7 +251,7 @@ export default function ITR7Page() {
         </section>
 
         {/* ═══════════ PROCESS ═══════════ */}
-        <section className="bg-white py-16 px-4 sm:px-6">
+        <section className="bg-[#F4F3EE] py-16 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-3">
@@ -307,7 +275,7 @@ export default function ITR7Page() {
         {/* ═══════════ INFORMATIONAL CONTENT ═══════════ */}
         <section className="bg-[#F4F3EE] py-12 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-white rounded-2xl border border-[#C15F3C]/10 p-8 mb-8">
+            <div className="bg-[#F4F3EE] rounded-2xl border border-[#C15F3C]/10 p-8 mb-8">
               <h2 className="text-2xl font-extrabold text-black mb-4">
                 ITR-7 Return Filing — Complete Guide
               </h2>
@@ -350,62 +318,10 @@ export default function ITR7Page() {
 
         {/* ═══════════ PRICING ═══════════ */}
         <div id="pricing">
-          <DoStartupPricing
-            title="Simple, Transparent ITR-7 Filing Pricing"
-            subtitle="From basic trust returns to complex audit cases — expert-assisted filing at every tier."
-            plans={[
-              {
-                title: "Trust Basic Filing",
-                price: "2,999",
-                subtitle: "/ filing + GST",
-                description: "For small trusts and NGOs with simple receipts & payments and no audit requirement.",
-                features: [
-                  "Receipts & Payments import",
-                  "ITR-7 form preparation",
-                  "Basic exemption computation",
-                  "e-Filing to IT Department",
-                  "Acknowledgment copy",
-                ],
-                buttonText: "Start Filing",
-              },
-              {
-                title: "Trust AI Pro",
-                price: "5,999",
-                subtitle: "/ filing + GST",
-                description: "For active trusts & institutions with multiple income sources, FCRA funds, and complex exemption schedules.",
-                isPopular: true,
-                features: [
-                  "Everything in Basic",
-                  "AI-assisted schedule filling",
-                  "AIS/26AS reconciliation",
-                  "Anonymous donation handling (Sec 115BBC)",
-                  "Accumulation of income u/s 11(2)",
-                  "Notice Shield pre-check",
-                  "Priority CA support",
-                ],
-                buttonText: "Get AI Pro",
-              },
-              {
-                title: "CA Expert + Audit",
-                price: "12,999",
-                subtitle: "/ filing + GST",
-                description: "Full CA support including Form 10B/10BB audit for trusts with income above ₹1 crore.",
-                features: [
-                  "Everything in AI Pro",
-                  "Dedicated CA assigned",
-                  "Form 10B / 10BB audit",
-                  "Balance Sheet verification",
-                  "Trust deed review",
-                  "12A/80G compliance check",
-                  "Notice response support",
-                ],
-                buttonText: "Hire a CA",
-              },
-            ]}
-          />
+          <DynamicPricingSection />
         </div>
 
-        <Faq category="Income Tax" />
+        <FAQAccordion />
 
         {/* ═══════════ CTA STRIP ═══════════ */}
         <section className="bg-[#C15F3C] py-12 px-4 sm:px-6 text-center">
@@ -423,7 +339,7 @@ export default function ITR7Page() {
             </p>
             <Link
               href="#pricing"
-              className="inline-flex items-center gap-2 bg-white text-[#C15F3C] font-bold px-8 py-4 rounded-full text-base hover:bg-orange-50 transition-colors shadow-xl"
+              className="inline-flex items-center gap-2 bg-[#F4F3EE] text-[#C15F3C] font-bold px-8 py-4 rounded-full text-base hover:bg-orange-50 transition-colors shadow-xl"
             >
               <ShoppingBag size={18} />
               Start Filing ITR-7 Now

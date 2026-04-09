@@ -30,7 +30,7 @@ function DaysLeftBadge({ days }: { days: number | null }) {
  <span
  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold"
  style={{
- background: isUrgent ? "#FEE2E2" : isSoon ? "#FEF9C3" : "#F4F3EE",
+ background: isUrgent ? "#FEE2E2" : isSoon ? "#FEF9C3" : "#F5F5F5",
  color: isUrgent ? "#B91C1C" : isSoon ? "#92400E" : "#6F6B63",
  border: `1px solid ${isUrgent ? "#FECACA" : isSoon ? "#FDE68A" : "#E5E2DA"}`,
  }}
@@ -94,7 +94,7 @@ export default function UpdatesAndDueDates() {
  transition: background 0.18s ease;
  }
  .timeline-item:hover {
- background: #F4F3EE;
+    background: #F5F5F5;
  }
 
  .dot-pulse {
@@ -157,7 +157,7 @@ export default function UpdatesAndDueDates() {
  <div className="flex items-center gap-2.5">
  <div
  className="w-8 h-8 rounded-full flex items-center justify-center"
- style={{ background: "#F4F3EE", border: "1px solid #E5E2DA" }}
+ style={{ background: "#F5F5F5", border: "1px solid #E5E2DA" }}
  >
  <Bell size={15} style={{ color: "#C15F3C" }} />
  </div>
@@ -171,7 +171,7 @@ export default function UpdatesAndDueDates() {
  {updates.length > 0 && (
  <span
  className="text-xs font-semibold rounded-full px-2.5 py-1"
- style={{ background: "#F4F3EE", color: "#C15F3C", border: "1px solid #E5E2DA" }}
+ style={{ background: "#F5F5F5", color: "#C15F3C", border: "1px solid #E5E2DA" }}
  >
  {updates.length} new
  </span>
@@ -218,7 +218,7 @@ export default function UpdatesAndDueDates() {
  {item.tag && (
  <span
  className="inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold"
- style={{ background: "#F4F3EE", color: "#C15F3C", border: "1px solid #E5E2DA" }}
+ style={{ background: "#F5F5F5", color: "#C15F3C", border: "1px solid #E5E2DA" }}
  >
  {item.tag}
  </span>
@@ -256,7 +256,7 @@ export default function UpdatesAndDueDates() {
  <div className="flex items-center gap-2.5">
  <div
  className="w-8 h-8 rounded-full flex items-center justify-center"
- style={{ background: "#F4F3EE", border: "1px solid #E5E2DA" }}
+ style={{ background: "#F5F5F5", border: "1px solid #E5E2DA" }}
  >
  <CalendarDays size={15} style={{ color: "#C15F3C" }} />
  </div>
