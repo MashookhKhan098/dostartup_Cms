@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 
 export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
@@ -142,7 +143,10 @@ export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: s
                   <button className="text-[#C15F3C] hover:underline">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline">
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(activeEntity || "Business Registration")}
+                    className="text-[#C15F3C] hover:underline"
+                  >
                     Need Help?
                   </button>
                 </div>

@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 
 type Feature = {
   icon: string;
@@ -325,7 +326,10 @@ export default function DynamicHeroSection({
                   <button className="text-[#C15F3C] hover:underline font-medium">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline font-medium">
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Trademark")}
+                    className="text-[#C15F3C] hover:underline font-medium"
+                  >
                     Need Help?
                   </button>
                 </div>

@@ -36,8 +36,8 @@ export default function Home() {
         return;
       }
 
-      // 2. Also send enquiry to contact-form API to get WhatsApp URL
-      await handleWhatsAppSubmission(formData, 'GST Registration');
+      // 2. Also send enquiry to contact-form API for lead tracking
+      handleWhatsAppSubmission(formData, 'GST Registration');
 
       // 3. Proceed to document upload
       const registrationId = result.data[0].id;

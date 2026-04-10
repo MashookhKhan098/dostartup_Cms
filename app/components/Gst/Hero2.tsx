@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { supabase } from "../../../lib/supabase";
+import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
 type FormField = { type: string; name: string; [key: string]: any };
@@ -108,22 +109,18 @@ export default function DynamicHeroSection({
   const [verificationStates, setVerificationStates] = useState<Record<string, 'idle' | 'loading' | 'verified' | 'error'>>({});
 
   const handleVerify = async (fieldName: string) => {
-    setVerificationStates(prev => ({ ...prev, [fieldName]: 'loading' }));
+    setVerificationStates((p) => ({ ...p, [fieldName]: 'loading' }));
 
-    // Mocking API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((r) => setTimeout(r, 1000));
 
-    // Simple mock logic: check if PAN matches standard format
+    const input = document.querySelector<HTMLInputElement>(`input[name="${fieldName}"]`);
+    const value = input?.value?.toUpperCase().trim() || "";
     const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-    const form = document.querySelector('form');
-    const input = form?.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
-    const value = input?.value?.toUpperCase() || "";
 
-    if (input && panRegex.test(value)) {
-      setVerificationStates(prev => ({ ...prev, [fieldName]: 'verified' }));
-    } else {
-      setVerificationStates(prev => ({ ...prev, [fieldName]: 'error' }));
-    }
+    setVerificationStates((p) => ({
+      ...p,
+      [fieldName]: panRegex.test(value) ? 'verified' : 'error',
+    }));
   };
 
   const renderFormField = (field: FormField, index: number) => {
@@ -161,12 +158,17 @@ export default function DynamicHeroSection({
           <div key={index}>
             <label className="block text-xs text-[#6F6B63] mb-1 flex justify-between items-center">
               {field.placeholder}
-              {field.showVerify && fieldVerificationState === 'verified' && (
-                <span className="text-[10px] text-green-600 font-bold uppercase tracking-wider bg-green-50 px-2 py-0.5 rounded-full border border-green-100 flex items-center gap-1">
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                  </svg>
-                  Verified
+              {field.showVerify && (
+                <span className={`text-[10px] ${
+                  fieldVerificationState === 'verified'
+                    ? 'text-green-600'
+                    : fieldVerificationState === 'error'
+                    ? 'text-red-500'
+                    : fieldVerificationState === 'loading'
+                    ? 'text-gray-400'
+                    : 'text-gray-300'
+                }`}>
+                  {fieldVerificationState}
                 </span>
               )}
             </label>
@@ -342,6 +344,12 @@ export default function DynamicHeroSection({
                   </button>
                   <button className="text-[#C15F3C] hover:underline font-medium">
                     Refer a Friend
+                  </button>
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "GST Registration")}
+                    className="text-[#C15F3C] hover:underline font-medium"
+                  >
+                    Need Help?
                   </button>
                 </div>
 

@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
-import { handleWhatsAppSubmission } from '@/lib/form-utils';
+import { handleWhatsAppSubmission, handleNeedHelpWhatsApp } from '@/lib/form-utils';
 
 type GSTInvoicingProps = {
   imageUrl: string;
@@ -108,8 +108,11 @@ const GSTInvoicingComponent = ({
                   <button className="text-[#C15F3C] hover:underline">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline">
-                    Refer a Friend
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(title || "GST Invoicing")}
+                    className="text-[#C15F3C] hover:underline"
+                  >
+                    Need Help?
                   </button>
                 </div>
 
@@ -187,10 +190,11 @@ const GSTInvoicingComponent = ({
 
             {/* FORM */}
             <form 
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 const formData = new FormData(e.currentTarget as HTMLFormElement);
-                handleWhatsAppSubmission(Object.fromEntries(formData), title);
+                await handleWhatsAppSubmission(Object.fromEntries(formData), title);
+                (e.target as HTMLFormElement).reset();
               }}
               className="space-y-4"
             >

@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -118,8 +119,8 @@ const heroProps = {
  },
  ],
 
- buttonText: "Apply Now",
- onSubmit: (data: any) => handleWhatsAppSubmission(data, "Udyam Registration"),
+  buttonText: "Apply Now",
+  onSubmit: (data: any) => handleWhatsAppSubmission(data, "Udyam Registration"),
 };
 
 

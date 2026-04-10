@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { handleWhatsAppSubmission } from "@/lib/form-utils";
+import { handleWhatsAppSubmission, handleNeedHelpWhatsApp } from "@/lib/form-utils";
 
 export default function StartBusinessPage({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
@@ -48,7 +48,7 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
       return;
     }
 
-    // Trigger WhatsApp Redirection
+    // Trigger Lead Submission to DB
     await handleWhatsAppSubmission({
       ...formData,
       business_name: formData.businessName, // map for API clarity
@@ -154,7 +154,10 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                   <button className="text-[#C15F3C] hover:underline">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline">
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(activeEntity || "Business Registration")}
+                    className="text-[#C15F3C] hover:underline"
+                  >
                     Need Help?
                   </button>
                 </div>

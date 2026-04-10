@@ -3,6 +3,21 @@
  * using the /api/contact-form endpoint.
  */
 
+/**
+ * Shared utility for opening WhatsApp support chat for a specific service.
+ */
+export const handleNeedHelpWhatsApp = (serviceName: string) => {
+  const whatsappNumber = "919999644807";
+  const message = `Hi, I need help with ${serviceName}.`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, '_blank');
+};
+
+/**
+ * Shared utility for handling form submissions that need to redirect to WhatsApp
+ * using the /api/contact-form endpoint.
+ */
+
 export const handleWhatsAppSubmission = async (
   formData: Record<string, FormDataEntryValue>,
   serviceName: string,
@@ -19,11 +34,6 @@ export const handleWhatsAppSubmission = async (
         .map(([key, value]) => `\n${key}: ${value}`)
         .join('')}`
     };
-
-    if (!payload.phone) {
-      alert("Please provide a phone number for WhatsApp redirection.");
-      return;
-    }
 
     const response = await fetch('/api/contact-form', {
       method: 'POST',

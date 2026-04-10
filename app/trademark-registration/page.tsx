@@ -1,4 +1,6 @@
 
+"use client";
+
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -98,7 +100,10 @@ export default function Home() {
 
  buttonText: "Register TM",
 
-  onSubmit: (data: any) => handleWhatsAppSubmission(data, "Trademark Registration"),
+  onSubmit: (data: any) => {
+    handleWhatsAppSubmission(data, "Trademark Registration");
+    
+  },
 };
 
 

@@ -1,6 +1,7 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
@@ -158,7 +159,10 @@ export default function RegistrationHero({
                   <button className="text-[#C15F3C] hover:underline">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline">
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Registration")}
+                    className="text-[#C15F3C] hover:underline"
+                  >
                     Need Help?
                   </button>
                 </div>
