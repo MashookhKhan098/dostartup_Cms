@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Clock, User } from "lucide-react";
 import Link from "next/link";
+import NewsletterForm from "./NewsletterForm";
 
 interface Blog {
   _id: string;
@@ -216,9 +217,11 @@ export default function BlogSidebar({ category, isMainFeed = false, maxItems, co
           <div className="relative z-10">
             <h4 className="font-bold text-sm mb-1" style={{ fontFamily: "'Sora', sans-serif" }}>Expert Guidance</h4>
             <p className="text-white/60 text-[10px] mb-3">Insights for {category || "business"}.</p>
-            <button className="w-full bg-[#C15F3C] text-white font-bold py-2 rounded-lg text-[10px] hover:bg-[#A94E30] transition-all">
-              Subscribe
-            </button>
+            <NewsletterForm 
+              wrapperClassName="flex flex-col gap-2"
+              inputClassName="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-[10px] text-white placeholder-white/50 focus:outline-none focus:ring-1 focus:ring-[#C15F3C]"
+              buttonClassName="w-full bg-[#C15F3C] text-white font-bold py-2 rounded-lg text-[10px] hover:bg-[#A94E30] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+            />
           </div>
         </div>
       )}

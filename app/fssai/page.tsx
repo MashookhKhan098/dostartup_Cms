@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Registration/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
+import { handleWhatsAppSubmission } from "@/lib/form-utils";
 
 export default function Home() {
 
@@ -43,14 +44,32 @@ export default function Home() {
  defaultTab: null,
  tabDescriptions: null,
 
- // ================= FORM FIELDS =================
- formFields: [
- {
- type: "input",
- inputType: "text",
- name: "pan_gstin",
- placeholder: "PAN / GSTIN",
- },
+  // ================= FORM FIELDS =================
+  formFields: [
+    {
+      type: "input",
+      inputType: "text",
+      name: "name",
+      placeholder: "Your Name",
+    },
+    {
+      type: "input",
+      inputType: "email",
+      name: "email",
+      placeholder: "Your Email",
+    },
+    {
+      type: "input",
+      inputType: "tel",
+      name: "phone",
+      placeholder: "Phone Number",
+    },
+    {
+      type: "input",
+      inputType: "text",
+      name: "pan_gstin",
+      placeholder: "PAN / GSTIN",
+    },
  {
  type: "select",
  name: "state",
@@ -104,7 +123,8 @@ export default function Home() {
  },
  ],
 
- buttonText: "Start Service",
+  buttonText: "Start Service",
+  onSubmit: (data: any) => handleWhatsAppSubmission(data, "FSSAI Registration"),
 };
 
 

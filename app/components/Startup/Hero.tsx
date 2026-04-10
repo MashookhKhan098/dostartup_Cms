@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { handleWhatsAppSubmission } from "@/lib/form-utils";
 
 export default function StartBusinessPage({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
@@ -8,6 +9,9 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
   const [formData, setFormData] = useState({
     state: "",
     name: "",
+    businessName: "",
+    email: "",
+    phone: "",
     capital: "",
     members: ""
   });
@@ -37,13 +41,21 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.state || !formData.name) {
-      alert("Please fill in all required fields");
+    if (!formData.state || !formData.businessName || !formData.phone || !formData.name) {
+      alert("Please fill in all required fields (Name, Phone, State, Business Name)");
       return;
     }
-    router.push(`/register?type=${activeEntity}&state=${formData.state}&name=${formData.name}`);
+
+    // Trigger WhatsApp Redirection
+    await handleWhatsAppSubmission({
+      ...formData,
+      business_name: formData.businessName, // map for API clarity
+    }, `${activeEntity} Registration`);
+
+    // Optional: Proceed to registration page
+    router.push(`/register?type=${activeEntity}&state=${formData.state}&name=${formData.businessName}`);
   };
 
   return (
@@ -230,13 +242,65 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="businessName"
+                    value={formData.businessName}
                     onChange={handleInputChange}
                     placeholder="e.g., Tech Solutions Pvt Ltd"
                     required
                     onInput={(e) => {
                       e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9 ]/g, '');
+                    }}
+                    className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                  />
+                </div>
+
+                {/* NAME & EMAIL */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs text-[#6F6B63] mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Name"
+                      required
+                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-[#6F6B63] mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Email"
+                      required
+                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                    />
+                  </div>
+                </div>
+
+                {/* PHONE */}
+                <div>
+                  <label className="block text-xs text-[#6F6B63] mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="10-digit phone number"
+                    required
+                    maxLength={10}
+                    onInput={(e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
                     }}
                     className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
                   />

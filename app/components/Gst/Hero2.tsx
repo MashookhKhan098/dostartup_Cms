@@ -2,10 +2,10 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-
+import { supabase } from "../../../lib/supabase";
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
-type FormField = { type: string;[key: string]: any };
+type FormField = { type: string; name: string; [key: string]: any };
 
 export type GstHero2Props = {
   heading?: string;

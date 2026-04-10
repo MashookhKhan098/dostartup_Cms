@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Registration/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
-// 
+import { handleWhatsAppSubmission } from "@/lib/form-utils";
 export default function Home() {
 
 const heroProps = {
@@ -59,6 +59,24 @@ const heroProps = {
  {
  type: "input",
  inputType: "text",
+ name: "name",
+ placeholder: "Your Name",
+ },
+ {
+ type: "input",
+ inputType: "email",
+ name: "email",
+ placeholder: "Your Email",
+ },
+ {
+ type: "input",
+ inputType: "tel",
+ name: "phone",
+ placeholder: "Phone Number",
+ },
+ {
+ type: "input",
+ inputType: "text",
  name: "pan_gstin",
  placeholder: "PAN / GSTIN",
  },
@@ -101,6 +119,7 @@ const heroProps = {
  ],
 
  buttonText: "Apply Now",
+ onSubmit: (data: any) => handleWhatsAppSubmission(data, "Udyam Registration"),
 };
 
 

@@ -1,13 +1,13 @@
 'use client'
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Gst/Hero2';
-import DynamicTabContent from '../components/DynamicTabContent';
-import FAQAccordion from '../components/Faq';
-import DynamicPricingSection from "../components/DynamicPricingSection";
-import { supabase } from '../../lib/supabase';
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
+import Popularsearches from '@/app/components/PopularSearches';
+import Hero from '@/app/components/Gst/Hero2';
+import DynamicTabContent from '@/app/components/DynamicTabContent';
+import FAQAccordion from '@/app/components/Faq';
+import DynamicPricingSection from "@/app/components/DynamicPricingSection";
+import { handleWhatsAppSubmission } from "@/lib/form-utils";
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -15,6 +15,7 @@ export default function Home() {
 
   const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {
     try {
+      // 1. Submit to GST registration API (Supabase)
       const response = await fetch('/api/gst-registration', {
         method: 'POST',
         headers: {
@@ -31,10 +32,14 @@ export default function Home() {
 
       if (result.error) {
         console.error('Submission Error:', result.error);
-        alert(`Submission failed: ${result.error}\n\nThis usually happens if the database is unreachable or the table 'gst_registrations' doesn't exist.`);
+        alert(`Submission failed: ${result.error}`);
         return;
       }
 
+      // 2. Also send enquiry to contact-form API to get WhatsApp URL
+      await handleWhatsAppSubmission(formData, 'GST Registration');
+
+      // 3. Proceed to document upload
       const registrationId = result.data[0].id;
       const packageName = String(formData.package);
       router.push(`/document?id=${registrationId}&package=${encodeURIComponent(packageName)}`);
