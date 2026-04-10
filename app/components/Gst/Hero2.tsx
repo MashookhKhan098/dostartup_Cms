@@ -1,10 +1,12 @@
 "use client";
+
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "../../../lib/supabase";
 
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
-type FormField = { type: string;[key: string]: any };
+type FormField = { type: string; name: string; [key: string]: any };
 
 export type GstHero2Props = {
   heading?: string;
@@ -20,59 +22,9 @@ export type GstHero2Props = {
 };
 
 const ICONS: Record<string, JSX.Element> = {
-  plus: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path
-        fillRule="evenodd"
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-        clipRule="evenodd"
-      />
-    </svg>
-  ),
   document: (
     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path
-        fillRule="evenodd"
-        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-        clipRule="evenodd"
-      />
-    </svg>
-  ),
-  chart: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path
-        fillRule="evenodd"
-        d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
-        clipRule="evenodd"
-      />
-    </svg>
-  ),
-  education: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-    </svg>
-  ),
-  pause: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path
-        fillRule="evenodd"
-        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
-        clipRule="evenodd"
-      />
-    </svg>
-  ),
-  users: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-    </svg>
-  ),
-  wallet: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path
-        fillRule="evenodd"
-        d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-        clipRule="evenodd"
-      />
+      <path d="M4 4a2 2 0 012-2h4.586..." />
     </svg>
   ),
 };
@@ -87,18 +39,23 @@ export default function DynamicHeroSection({
   tabDescriptions,
   formFields,
   buttonText,
-  onSubmit
+  onSubmit,
 }: GstHero2Props) {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
+
+  const initialTab = defaultTab || tabs?.[0]?.name || "";
+  const [activeTab, setActiveTab] = useState<string>(initialTab);
+
+  const [verificationStates, setVerificationStates] = useState<
+    Record<string, "idle" | "loading" | "verified" | "error">
+  >({});
 
   const handleTabClick = (tabName: string, path?: string) => {
     setActiveTab(tabName);
-    if (path) {
-      router.push(path);
-    }
+    if (path) router.push(path);
   };
 
+<<<<<<< Updated upstream
   const renderIcon = (iconType: string) => {
     return ICONS[iconType] ?? ICONS.document;
   };
@@ -142,51 +99,150 @@ export default function DynamicHeroSection({
               placeholder={field.placeholder}
               className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-[#F4F3EE]"
             />
-          </div>
-        );
+=======
+  const handleVerify = async (fieldName: string) => {
+    setVerificationStates((p) => ({ ...p, [fieldName]: "loading" }));
 
-      case "checkbox":
-        return (
-          <label key={index} className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              name={field.name}
-              className="mt-1 w-4 h-4 accent-[#C15F3C] border-[#E5E2DA] rounded focus:ring-1 focus:ring-[#C15F3C]"
-            />
-            <span className="text-sm text-[#6F6B63]">{field.label}</span>
-          </label>
-        );
+    await new Promise((r) => setTimeout(r, 1200));
 
-      case "text":
-        return (
-          <p key={index} className="text-sm text-[#6F6B63]">
-            {field.content}
-          </p>
-        );
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
 
-      default:
-        return null;
-    }
+    const input = document.querySelector<HTMLInputElement>(
+      `input[name="${fieldName}"]`
+    );
+
+    const value = input?.value?.toUpperCase().trim() || "";
+
+    setVerificationStates((prev) => ({
+      ...prev,
+      [fieldName]: panRegex.test(value) ? "verified" : "error",
+    }));
   };
 
-  const headingParts =
-    heading && headingHighlight ? heading.split(headingHighlight) : [heading ?? "", ""];
+  const handleGstSubmit = async (formData: Record<string, any>) => {
+    const { error } = await supabase.from("gst_forms").insert([
+      {
+        form_type: activeTab,
+        gstin: formData.gstin || null,
+        state: formData.state || null,
+        pan: formData.pan || null,
+        nature_of_business: formData.nature_of_business || null,
+        package: formData.package || null,
+      },
+    ]);
+
+    if (error) {
+      console.error(error);
+      alert("Submission failed");
+      return;
+    }
+
+    alert("Submitted successfully 🚀");
+
+    // optional external handler
+    onSubmit?.(formData);
+  };
+
+  const renderFormField = (field: FormField, index: number) => {
+    const state = verificationStates[field.name] || "idle";
+
+    if (field.type === "input") {
+      return (
+        <div key={index}>
+          <label className="block text-xs mb-1 flex justify-between">
+            {field.placeholder}
+          </label>
+
+          <div className="relative">
+            <input
+              name={field.name}
+              type={field.inputType || "text"}
+              placeholder={field.placeholder}
+              className="w-full border rounded-lg px-4 py-3 text-sm"
+            />
+
+            {field.showVerify && (
+              <button
+                type="button"
+                onClick={() => handleVerify(field.name)}
+                className="absolute right-2 top-2 text-xs bg-[#C15F3C] text-white px-3 py-1 rounded"
+              >
+                {state === "loading"
+                  ? "..."
+                  : state === "verified"
+                  ? "Verified"
+                  : state === "error"
+                  ? "Retry"
+                  : "Verify"}
+              </button>
+            )}
+>>>>>>> Stashed changes
+          </div>
+        </div>
+      );
+    }
+
+    if (field.type === "select") {
+      return (
+        <div key={index}>
+          <label className="block text-xs mb-1">{field.placeholder}</label>
+          <select name={field.name} className="w-full border rounded-lg p-3">
+            <option value="">Select {field.placeholder}</option>
+            {field.options?.map((o: string, i: number) => (
+              <option key={i} value={o}>
+                {o}
+              </option>
+            ))}
+          </select>
+        </div>
+      );
+    }
+
+    if (field.type === "checkbox") {
+      return (
+        <label key={index} className="flex gap-2">
+          <input type="checkbox" name={field.name} />
+          {field.label}
+        </label>
+      );
+    }
+
+    return null;
+  };
 
   return (
+<<<<<<< Updated upstream
     <div className="min-h-screen bg-[#F4F3EE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
+=======
+    <div className="bg-[#F4F3EE]">
+      <div className="max-w-7xl mx-auto p-4 flex gap-8">
+        {/* LEFT */}
+        <div className="flex-1 bg-white p-6 rounded-xl">
+          <h1 className="text-2xl font-semibold">
+            {heading}
+            <span className="text-[#C15F3C]">{headingHighlight}</span>
+          </h1>
+          <p className="text-sm mt-2">{description}</p>
+        </div>
+>>>>>>> Stashed changes
 
-          {/* LEFT SECTION */}
-          <div className="flex-1 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6">
-            <div className="flex flex-col md:flex-row gap-8">
+        {/* RIGHT FORM */}
+        <div className="w-80 bg-white rounded-xl p-6">
+          <form
+            onSubmit={(e: FormEvent<HTMLFormElement>) => {
+              e.preventDefault();
+              const fd = new FormData(e.currentTarget);
+              const data = Object.fromEntries(fd);
 
-              {/* LEFT SIDEBAR WITH IMAGE PLACEHOLDER */}
-              <div className="w-full md:w-64 flex-shrink-0">
-                <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">GST</span>
-                </div>
+              handleGstSubmit(data);
+            }}
+          >
+            <div className="space-y-4">
+              {formFields?.map(renderFormField)}
 
+<<<<<<< Updated upstream
                 <div className="mt-4 space-y-2">
                   {["Why Choose Us", "Documentation", "Pricing"].map((item) => (
                     <p key={item} className="text-sm text-[#6F6B63] hover:text-[#C15F3C] cursor-pointer">
@@ -349,6 +405,13 @@ export default function DynamicHeroSection({
             </div>
 
           </div>
+=======
+              <button className="w-full bg-[#C15F3C] text-white py-3 rounded-lg">
+                {buttonText || "Submit"}
+              </button>
+            </div>
+          </form>
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>

@@ -2,6 +2,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""
+);
 export default function StartBusinessPage({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
   const [activeEntity, setActiveEntity] = useState(defaultEntity);
@@ -37,14 +43,40 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.state || !formData.name) {
-      alert("Please fill in all required fields");
-      return;
-    }
-    router.push(`/register?type=${activeEntity}&state=${formData.state}&name=${formData.name}`);
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!formData.state || !formData.name) {
+    alert("Please fill in all required fields");
+    return;
+  }
+
+  // 🔥 Insert into Supabase
+  const { data, error } = await supabase
+    .from("proprietorship_forms") // your table name
+    .insert([
+      {
+        state: formData.state,
+        business_name: formData.name,
+        capital: formData.capital ? Number(formData.capital) : null,
+        members: formData.members ? Number(formData.members) : null,
+        entity_type: activeEntity
+      }
+    ]);
+
+  if (error) {
+    console.error("Supabase Error:", error.message);
+    alert("Something went wrong!");
+    return;
+  }
+
+  console.log("Inserted:", data);
+
+  // ✅ Optional: redirect after success
+  router.push(
+    `/register?type=${activeEntity}&state=${formData.state}&name=${formData.name}`
+  );
+};
 
   return (
     <div className="min-h-screen bg-[#F4F3EE]">

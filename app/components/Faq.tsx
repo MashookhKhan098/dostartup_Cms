@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+
+
 interface FAQ {
   _id?: string;
   id?: number;
