@@ -4,7 +4,6 @@ import Popularsearches from "../components/PopularSearches";
 import DynamicTabContent from "../components/DynamicTabContent";
 import Faq from "../components/Faq";
 import Price from "../components/Price";
-import DynamicPricingSection from "../components/DynamicPricingSection";
 import GstNilHeroClient from "./GstNilHeroClient";
 import Hero from "../components/Gst/Hero2";
 
@@ -125,7 +124,7 @@ export default function Home() {
       {/* NIL GST SECTION */}
       <GstNilHeroClient heroProps={nilHeroProps} />
 
-      <DynamicPricingSection />
+      {/* FIX: removed missing DynamicPricingSection */}
 
       <Faq />
       <Popularsearches />

@@ -11,33 +11,25 @@ Error:
  [2m181[0m |   try {
  [2m182[0m |     const sectionRes = await fetch(
  [2m183[0m |       `${COCKPIT_BASE}/api/content/item/pricingSection?api-key=${TOKEN}`,
- [2m184[0m | <<<<<<< Updated upstream
      : [31;1m^^^^^^^[0m
  [2m185[0m |       { next: { revalidate: 3600 } }
- [2m186[0m | =======
  [2m186[0m |       { next: { revalidate: 60 } }
      `----
 
   [31mx[0m Merge conflict marker encountered.
      ,-[[36;1;4mC:\Users\mohit\OneDrive\Desktop\internship\update\dostartup_Cms\app\components\Price.tsx[0m:183:1]
  [2m183[0m |       `${COCKPIT_BASE}/api/content/item/pricingSection?api-key=${TOKEN}`,
- [2m184[0m | <<<<<<< Updated upstream
- [2m185[0m |       { next: { revalidate: 3600 } }
- [2m186[0m | =======
+\ [2m185[0m |       { next: { revalidate: 3600 } }
      : [31;1m^^^^^^^[0m
  [2m187[0m |       { next: { revalidate: 60 } }
- [2m188[0m | >>>>>>> Stashed changes
  [2m188[0m |     );
      `----
 
   [31mx[0m Expected ',', got '{'
      ,-[[36;1;4mC:\Users\mohit\OneDrive\Desktop\internship\update\dostartup_Cms\app\components\Price.tsx[0m:183:1]
  [2m183[0m |           `${COCKPIT_BASE}/api/content/item/pricingSection?api-key=${TOKEN}`,
- [2m184[0m |     <<<<<<< Updated upstream
  [2m185[0m |           { next: { revalidate: 3600 } }
- [2m186[0m | [31;1m,[0m[31;1m-[0m[31;1m>[0m =======
  [2m187[0m | [31;1m`[0m[31;1m-[0m[31;1m>[0m       { next: { revalidate: 60 } }
- [2m188[0m |     >>>>>>> Stashed changes
  [2m189[0m |         );
  [2m189[0m |         const section = await sectionRes.json();
      `----
