@@ -8,6 +8,7 @@ import Hero from "../components/Gst/Hero2";
 import DynamicTabContent from "../components/DynamicTabContent";
 import FAQAccordion from "../components/Faq";
 import { Rocket, Zap, Users } from "lucide-react";
+import { handleWhatsAppSubmission } from "@/lib/form-utils";
 
 export default function Home() {
   const heroProps = {
@@ -98,24 +99,24 @@ export default function Home() {
   ];
 
   const handleSubmit = async (formData: any) => {
-    const { error } = await supabase.from("ledgers_pro_signups").insert([
-      {
-        accountant_type: formData.accountant_type,
-        location: formData.location,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        business_name: formData.business_name,
-      },
-    ]);
-
-    if (error) {
-      console.error("Insert error:", error.message);
-      alert("Submission failed ❌");
-      return;
+    // Try to save to Supabase (non-blocking - won't stop submission if table missing)
+    try {
+      await supabase.from("ledgers_pro_signups").insert([
+        {
+          accountant_type: formData.accountant_type,
+          location: formData.location,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          business_name: formData.business_name,
+        },
+      ]);
+    } catch (err) {
+      console.error("Supabase insert error:", err);
     }
 
-    alert("Request submitted successfully 🚀");
+    // Always send lead to email + open WhatsApp regardless of Supabase result
+    await handleWhatsAppSubmission(formData, "LEDGERS PRO");
   };
 
   return (

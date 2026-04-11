@@ -50,6 +50,7 @@ export default function PaymentPage() {
         order_id: orderId,
         handler: async function (response: any) {
           // Record payment in Supabase
+          const { data: { user } } = await supabase.auth.getUser();
           const { error: paymentError } = await supabase.from('payments').insert([{
             registration_id: registrationId,
             razorpay_payment_id: response.razorpay_payment_id,
@@ -69,7 +70,7 @@ export default function PaymentPage() {
           // Update registration status
           const { error: regError } = await supabase
             .from('gst_registrations')
-            .update({ status: 'paid' })
+            .update({ status: 'paid', user_id: user?.id })
             .eq('id', registrationId)
 
           if (regError) {

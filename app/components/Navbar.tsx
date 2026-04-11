@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { FiSearch, FiMenu, FiX, FiChevronDown, FiUser, FiLogIn } from "react-icons/fi";
+import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
 
 /* ─── dropdown data ─── */
 const STARTUP_COLS = [
@@ -270,6 +272,25 @@ export default function Navbar() {
  const [searchOpen, setSearchOpen] = useState(false);
  const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
  const [scrolled, setScrolled] = useState(false);
+ const [user, setUser] = useState<any>(null);
+ const router = useRouter();
+
+ useEffect(() => {
+   supabase.auth.getSession().then(({ data: { session } }) => {
+     setUser(session?.user ?? null);
+   });
+
+   const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+     setUser(session?.user ?? null);
+   });
+
+   return () => subscription.unsubscribe();
+ }, []);
+
+ const handleLogout = async () => {
+   await supabase.auth.signOut();
+   router.refresh();
+ };
 
  useEffect(() => {
  const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -614,18 +635,31 @@ export default function Navbar() {
  </button>
  )}
 
- <Link href="/login" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
- <FiUser size={15} /> Login
- </Link>
+ {user ? (
+   <>
+    <Link href="/profile" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
+     <FiUser size={15} /> Profile
+    </Link>
+    <button onClick={handleLogout} className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-[#6F6B63] border border-[#E5E2DA] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200 shadow-sm whitespace-nowrap">
+     Logout
+    </button>
+   </>
+ ) : (
+   <>
+    <Link href="/login" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
+     <FiUser size={15} /> Login
+    </Link>
 
- <Link href="/signup"
- className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-white transition-all duration-200 shadow-sm whitespace-nowrap"
- style={{ background: "#C15F3C" }}
- onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
- onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
- >
- Sign up
- </Link>
+    <Link href="/signup"
+     className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-white transition-all duration-200 shadow-sm whitespace-nowrap"
+     style={{ background: "#C15F3C" }}
+     onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
+     onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
+    >
+     Sign up
+    </Link>
+   </>
+ )}
 
  <button
  className="lg:hidden p-2 rounded-lg text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200"
@@ -642,18 +676,35 @@ export default function Navbar() {
  }`}
  >
  <div className="p-4 space-y-4">
- {/* Login / Signup */}
+ {/* Login / Signup / Profile / Logout */}
  <div className="flex gap-3">
- <Link href="/login" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#E5E2DA] text-[#6F6B63] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200">
- <FiLogIn size={16} /> Login
- </Link>
- <Link href="/signup" className="flex-1 px-4 py-3 rounded-lg font-semibold text-white shadow-sm transition-all duration-200"
- style={{ background: "#C15F3C" }}
- onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
- onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
- >
- Sign up
- </Link>
+   {user ? (
+     <>
+       <Link href="/profile" onClick={() => setMobileOpen(false)} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#E5E2DA] text-[#6F6B63] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200">
+         <FiUser size={16} /> Profile
+       </Link>
+       <button onClick={() => { handleLogout(); setMobileOpen(false); }} className="flex-1 px-4 py-3 rounded-lg font-semibold text-white shadow-sm transition-all duration-200"
+         style={{ background: "#C15F3C" }}
+         onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
+         onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
+       >
+         Logout
+       </button>
+     </>
+   ) : (
+     <>
+       <Link href="/login" onClick={() => setMobileOpen(false)} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-[#E5E2DA] text-[#6F6B63] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200">
+         <FiLogIn size={16} /> Login
+       </Link>
+       <Link href="/signup" onClick={() => setMobileOpen(false)} className="flex-1 flex items-center justify-center px-4 py-3 rounded-lg font-semibold text-white shadow-sm transition-all duration-200"
+         style={{ background: "#C15F3C" }}
+         onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
+         onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
+       >
+         Sign up
+       </Link>
+     </>
+   )}
  </div>
 
  {/* Search */}

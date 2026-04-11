@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 
@@ -59,6 +59,15 @@ export default function DocumentsPage() {
   const [previews, setPreviews] = useState<Record<string, string>>({})
   const [uploading, setUploading] = useState(false)
   const [done, setDone] = useState(false)
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true)
+  const [user, setUser] = useState<any>(null)
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user)
+      setIsLoadingAuth(false)
+    })
+  }, [])
 
   const handleFileChange = (key: string, file: File | null) => {
     if (!file) return
@@ -88,30 +97,29 @@ export default function DocumentsPage() {
 
     const uploadedUrls: Record<string, string> = {}
 
-    // Upload each file to Supabase Storage
-    for (const [key, file] of Object.entries(files)) {
-      if (!file) continue
-
-      const fileExt = file.name.split('.').pop()
-      const fileName = `${registrationId}/${key}-${Date.now()}.${fileExt}`
-
-      const { data, error } = await supabase.storage
-        .from('documents')
-        .upload(fileName, file, { upsert: true })
-
+    const uploadPromises = Object.entries(files).map(async ([key, file]) => {
+      if (!file) return null;
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${registrationId}/${key}-${Date.now()}.${fileExt}`;
+      const { data, error } = await supabase.storage.from('documents').upload(fileName, file, { upsert: true });
       if (error) {
-        console.error(`Error uploading ${key}:`, error.message)
-        alert(`Failed to upload ${key}: ${error.message}`)
-        setUploading(false)
-        return
+        console.error(`Error uploading ${key}:`, error.message);
+        return { error: error.message, key };
       }
+      const { data: urlData } = supabase.storage.from('documents').getPublicUrl(fileName);
+      return { key, url: urlData.publicUrl };
+    });
 
-      // Get public URL
-      const { data: urlData } = supabase.storage
-        .from('documents')
-        .getPublicUrl(fileName)
+    const uploadResults = await Promise.all(uploadPromises);
 
-      uploadedUrls[key] = urlData.publicUrl
+    for (const res of uploadResults) {
+      if (!res) continue;
+      if (res.error) {
+        alert(`Failed to upload ${res.key}: ${res.error}`);
+        setUploading(false);
+        return;
+      }
+      uploadedUrls[res.key] = res.url;
     }
 
     // Check if required docs are uploaded
@@ -143,6 +151,31 @@ export default function DocumentsPage() {
 
     setDone(true)
     setUploading(false)
+  }
+
+  if (isLoadingAuth) {
+    return (
+      <div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#C15F3C]"></div>
+      </div>
+    )
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">
+        <div className="bg-[#F4F3EE] rounded-2xl shadow-sm border border-[#E5E2DA] p-10 text-center max-w-md">
+          <h2 className="text-2xl font-semibold text-[#2F2E2B] mb-2">Authentication Required</h2>
+          <p className="text-[#6F6B63] mb-6">Please log in to upload your documents.</p>
+          <button
+            onClick={() => router.push(`/login?redirect=${encodeURIComponent(`/document?id=${registrationId}&package=${packageName}`)}`)}
+            className="bg-[#C15F3C] text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-[#A94E30] transition"
+          >
+            Log in to continue →
+          </button>
+        </div>
+      </div>
+    )
   }
 
   if (done) {

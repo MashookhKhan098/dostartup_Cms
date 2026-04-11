@@ -1,17 +1,39 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
+import { supabase } from "@/lib/supabase";
 
 export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
   const [activeEntity, setActiveEntity] = useState(defaultEntity);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [formData, setFormData] = useState({
     state: "",
     name: "",
     capital: "",
     members: ""
   });
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsLoggedIn(!!user);
+    };
+    checkUser();
+  }, []);
+
+  const handleTrackApplication = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      router.push('/profile');
+    } else {
+      const formElement = document.querySelector('[data-form-container]');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const entities = [
     { name: "Startup", path: "/startup-registration" },
@@ -307,7 +329,7 @@ export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: s
             <div className="bg-white px-6 py-3 border-t border-[#E5E2DA]">
               <p className="text-sm text-center text-[#6F6B63]">
                 Already started your registration?{' '}
-                <button className="text-[#C15F3C] hover:underline font-semibold">
+                <button onClick={handleTrackApplication} className="text-[#C15F3C] hover:underline font-semibold">
                   Track Application →
                 </button>
               </p>

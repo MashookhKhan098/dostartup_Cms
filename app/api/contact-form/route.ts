@@ -6,12 +6,11 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, email, phone, service, subject, message } = body;
 
-    if (!name || !phone) {
-      return NextResponse.json({ error: 'Name and phone are required' }, { status: 400 });
-    }
-
+    // Name and phone are optional - continue even if not provided
     const finalService = service || subject || 'General Enquiry';
     const finalMessage = message || 'Interested in your services.';
+    const finalName = name || email?.split('@')[0] || 'Anonymous';
+    const finalPhone = phone || 'Not provided';
 
     // --- Send Email via Gmail SMTP ---
     const transporter = nodemailer.createTransport({
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
     const mailOptions = {
       from: `"DoStartup Enquiry" <${process.env.SMTP_EMAIL}>`,
       to: process.env.NOTIFICATION_EMAIL,
-      subject: `New Lead: ${finalService} - ${name}`,
+      subject: `New Lead: ${finalService} - ${finalName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #E5E2DA; border-radius: 12px;">
           <div style="background: linear-gradient(135deg, #C15F3C, #A94E30); padding: 20px; border-radius: 8px; margin-bottom: 24px;">
@@ -36,7 +35,7 @@ export async function POST(request: Request) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #6F6B63; width: 140px;">👤 Name</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #2F2E2B; font-weight: 600;">${name}</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #2F2E2B; font-weight: 600;">${finalName}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #6F6B63;">📧 Email</td>
@@ -44,7 +43,7 @@ export async function POST(request: Request) {
             </tr>
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #6F6B63;">📞 Phone</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #2F2E2B; font-weight: 600;">${phone}</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #2F2E2B; font-weight: 600;">${finalPhone}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #F4F3EE; font-size: 14px; color: #6F6B63;">🎯 Service</td>

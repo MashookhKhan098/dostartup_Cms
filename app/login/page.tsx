@@ -27,7 +27,11 @@ export default function LoginPage() {
   })
 
   if (error) {
-    alert(error.message)
+    if (error.message === "Email not confirmed") {
+      alert("Please check your email and click the confirmation link to activate your account.")
+    } else {
+      alert(error.message)
+    }
     return
   }
 

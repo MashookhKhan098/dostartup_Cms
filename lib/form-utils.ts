@@ -21,7 +21,8 @@ export const handleNeedHelpWhatsApp = (serviceName: string) => {
 export const handleWhatsAppSubmission = async (
   formData: Record<string, FormDataEntryValue>,
   serviceName: string,
-  onComplete?: (result: any) => void
+  onComplete?: (result: any) => void,
+  shouldRedirect: boolean = true
 ) => {
   try {
     const payload = {
@@ -44,8 +45,10 @@ export const handleWhatsAppSubmission = async (
     const result = await response.json();
 
     if (response.ok && result.whatsappUrl) {
-      // Open WhatsApp in a new tab
-      window.open(result.whatsappUrl, '_blank');
+      // Open WhatsApp in a new tab ONLY if shouldRedirect is true
+      if (shouldRedirect) {
+        window.open(result.whatsappUrl, '_blank');
+      }
       if (onComplete) onComplete(result);
     } else {
       console.error('Submission failed:', result.error);
