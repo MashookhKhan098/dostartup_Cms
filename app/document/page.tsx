@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 
@@ -49,7 +49,7 @@ const DOCUMENTS = [
   },
 ]
 
-export default function DocumentsPage() {
+function DocumentsContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const registrationId = searchParams.get('id')
@@ -119,7 +119,9 @@ export default function DocumentsPage() {
         setUploading(false);
         return;
       }
-      uploadedUrls[res.key] = res.url;
+      if (res.url) {
+        uploadedUrls[res.key] = res.url;
+      }
     }
 
     // Check if required docs are uploaded
@@ -293,5 +295,13 @@ export default function DocumentsPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function DocumentsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">Loading...</div>}>
+      <DocumentsContent />
+    </Suspense>
   )
 }

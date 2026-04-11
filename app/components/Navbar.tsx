@@ -210,7 +210,76 @@ const NSWS = [
 const linkCls =
  "text-xs text-[#6F6B63] px-3 py-1.5 rounded-xl hover:bg-[#F5F5F5] hover:text-[#C15F3C] whitespace-normal transition-all duration-150 block";
 
-/* ─── NavItem: single desktop menu item with hover-safe dropdown ─── */
+/* ─── NswsItem: single NSWS menu item with hover-safe submenu ─── */
+function NswsItem({ item }: { item: { label: string; url: string; submenu?: { label: string; url: string }[] } }) {
+  const [submenuOpen, setSubmenuOpen] = useState(false);
+  const submenuTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleMouseEnter = () => {
+    if (submenuTimer.current) clearTimeout(submenuTimer.current);
+    setSubmenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    submenuTimer.current = setTimeout(() => setSubmenuOpen(false), 80);
+  };
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button
+        className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-[#F5F5F5] transition-all duration-200 text-left"
+        style={{
+          color: submenuOpen ? "#C15F3C" : "#2F2E2B",
+          backgroundColor: submenuOpen ? "#F5F5F5" : "transparent"
+        }}
+      >
+        <div className="flex-1">
+          <div className="text-[12px] font-semibold transition-colors uppercase tracking-tight">
+            {item.label}
+          </div>
+          {item.label !== "State Approvals" && (
+            <div className="text-[10px] text-[#9D9690] mt-0.5 leading-tight">
+              {item.label === "Central Approvals" && "Issued by Ministries of Govt. of India"}
+              {item.label === "Government Schemes" && "Avail the benefits by Govt. of India"}
+            </div>
+          )}
+        </div>
+      </button>
+
+      {/* Invisible bridge to keep hover alive */}
+      {submenuOpen && item.submenu && (
+        <div className="absolute top-full left-0 w-full h-2 z-[9998]" />
+      )}
+
+      {/* Submenu that appears on hover */}
+      {submenuOpen && item.submenu && (
+        <div
+          className="absolute left-full top-0 bg-white rounded-lg shadow-lg border border-gray-200 ml-2 z-[9999] min-w-max"
+          style={{
+            maxHeight: item.label === "State Approvals" ? "300px" : "auto",
+            overflowY: item.label === "State Approvals" ? "auto" : "visible",
+            scrollbarWidth: "none",
+          }}
+        >
+          {item.submenu.map((subitem) => (
+            <Link
+              key={subitem.url}
+              href={subitem.url}
+              className="text-xs text-[#6F6B63] px-3 py-1.5 rounded-xl hover:bg-[#F5F5F5] hover:text-[#C15F3C] whitespace-normal transition-all duration-150 block"
+            >
+              {subitem.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function NavItem({
  label,
  children,

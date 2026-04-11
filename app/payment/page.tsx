@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { supabase } from '../../lib/supabase'
 
 const PACKAGE_PRICES: Record<string, number> = {
@@ -14,7 +14,7 @@ declare global {
   interface Window { Razorpay: any }
 }
 
-export default function PaymentPage() {
+function PaymentContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const registrationId = searchParams.get('id')
@@ -133,5 +133,13 @@ export default function PaymentPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">Loading...</div>}>
+      <PaymentContent />
+    </Suspense>
   )
 }

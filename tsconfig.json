@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "Bundler",

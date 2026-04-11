@@ -456,54 +456,8 @@ export default function CompanyCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- {/* Pricing block */}
- <section id="pricing" className="pricing-section">
- <div className="pricing-inner">
- <div className="pricing-header">
- <h2>MCA Compliance Made Easy</h2>
- <p>
- Choose the right compliance path for your company and avoid
- penalties, delays & strike-off.
- </p>
- </div>
-
- <div className="pricing-cards">
- {pricingPlans.map((plan) => (
- <article
- key={plan.name}
- className={`pricing-card ${plan.popular ? "popular" : ""}`}
- >
- {plan.popular && (
- <div className="popular-chip bg-gradient-to-r from-amber-600 to-amber-700">Most popular</div>
- )}
-
- <div className="card-top">
- <div className="card-title text-amber-800">{plan.name}</div>
- <div className="card-price text-amber-700">{plan.price}</div>
- </div>
-
- <button
- type="button"
- suppressHydrationWarning
- className="select-btn bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 transition-all"
- onClick={() => alert(`Selected plan: ${plan.name}`)}
- >
- Select
- </button>
-
- <ul className="plan-features">
- {plan.features.map((f, idx) => (
- <li key={`${plan.name}-feat-${idx}`}>
- <span className="feat-check text-amber-600">✓</span>
- <span>{f}</span>
- </li>
- ))}
- </ul>
- </article>
- ))}
- </div>
- </div>
- </section>
+      {/* Pricing block */}
+      <DynamicPricingSection category="mca-services" />
 
  {/* Benefits boxed style matching screenshot */}
  <section className="benefits-section boxed" aria-label="Benefits">
