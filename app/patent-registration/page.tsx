@@ -1,10 +1,12 @@
+"use client";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Trademark/Hero2';
+import Hero from '../components/Registration/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
+import { handleWhatsAppSubmission } from "@/lib/form-utils";
 
 export default function Home() {
  
@@ -37,27 +39,45 @@ export default function Home() {
  defaultTab: null,
  tabDescriptions: null,
 
- // ================= FORM FIELDS =================
- formFields: [
- {
- type: "select",
- name: "patent_service_type",
- placeholder: "Select Patent Search Type",
- options: [
- "Patent Search",
- "Provisional Patent",
- "Complete Patent"
- ],
- },
- {
- type: "input",
- inputType: "text",
- name: "invention_name",
- placeholder: "Identify your invention",
- },
- ],
+  // ================= FORM FIELDS =================
+  formFields: [
+    {
+      type: "input",
+      inputType: "text",
+      name: "name",
+      placeholder: "Your Name",
+    },
+    {
+      type: "input",
+      inputType: "email",
+      name: "email",
+      placeholder: "Your Email",
+    },
+    {
+      type: "input",
+      inputType: "tel",
+      name: "phone",
+      placeholder: "Phone Number",
+    },
+    {
+      type: "select",
+      name: "patent_service_type",
+      placeholder: "Select Patent Search Type",
+      options: [
+        "Patent Search",
+        "Provisional Patent",
+        "Complete Patent"
+      ],
+    },
+    {
+      type: "input",
+      inputType: "text",
+      name: "invention_name",
+      placeholder: "Identify your invention",
+    },
+  ],
 
- buttonText: "Get Quote",
+  onSubmit: (data: any) => handleWhatsAppSubmission(data, "Patent Registration"),
 };
 
 

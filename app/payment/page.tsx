@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { supabase } from '../../lib/supabase'
 
 const PACKAGE_PRICES: Record<string, number> = {
@@ -14,7 +14,7 @@ declare global {
   interface Window { Razorpay: any }
 }
 
-export default function PaymentPage() {
+function PaymentContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const registrationId = searchParams.get('id')
@@ -50,6 +50,7 @@ export default function PaymentPage() {
         order_id: orderId,
         handler: async function (response: any) {
           // Record payment in Supabase
+          const { data: { user } } = await supabase.auth.getUser();
           const { error: paymentError } = await supabase.from('payments').insert([{
             registration_id: registrationId,
             razorpay_payment_id: response.razorpay_payment_id,
@@ -69,7 +70,7 @@ export default function PaymentPage() {
           // Update registration status
           const { error: regError } = await supabase
             .from('gst_registrations')
-            .update({ status: 'paid' })
+            .update({ status: 'paid', user_id: user?.id })
             .eq('id', registrationId)
 
           if (regError) {
@@ -132,5 +133,13 @@ export default function PaymentPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#F4F3EE] flex items-center justify-center">Loading...</div>}>
+      <PaymentContent />
+    </Suspense>
   )
 }

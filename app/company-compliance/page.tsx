@@ -456,19 +456,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
  </div>
  </section>
 
- {/* Pricing block */}
- <section id="pricing" className="pricing-section">
- <div className="pricing-inner">
- <div className="pricing-header">
- <h2>MCA Compliance Made Easy</h2>
- <p>
- Choose the right compliance path for your company and avoid
- penalties, delays & strike-off.
- </p>
- </div>
- </div>
- </section>
-
  {/* Benefits boxed style matching screenshot */}
  <section className="benefits-section boxed" aria-label="Benefits">
  <div className="benefits-inner">

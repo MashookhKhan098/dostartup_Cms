@@ -1,4 +1,5 @@
 "use client";
+
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -6,6 +7,8 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Trademark/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
+import { handleWhatsAppSubmission } from "@/lib/form-utils";
+
 
 export default function Home() {
  const heroProps = {
@@ -34,29 +37,50 @@ export default function Home() {
  },
  ],
 
- // FORM FIELDS
- formFields: [
- {
- type: "input",
- inputType: "text",
- name: "brand_name",
- placeholder: "Brand Name",
- },
- {
- type: "select",
- name: "trademark_class",
- placeholder: "Select Class",
- options: [
- "Class 1 – Chemicals",
- "Class 9 – Electronics & Software",
- "Class 25 – Clothing",
- "Class 35 – Advertising & Business",
- "Class 41 – Education & Entertainment",
- "Class 42 – IT & Software Services",
- ],
- },
- ],
+ // RIGHT SIDE TABS (Individuals/MSMEs & All Others)
+ 
 
+  // FORM FIELDS
+  formFields: [
+    {
+      type: "input",
+      inputType: "text",
+      name: "name",
+      placeholder: "Your Name",
+    },
+    {
+      type: "input",
+      inputType: "email",
+      name: "email",
+      placeholder: "Your Email",
+    },
+    {
+      type: "input",
+      inputType: "tel",
+      name: "phone",
+      placeholder: "Phone Number",
+    },
+    {
+      type: "input",
+      inputType: "text",
+      name: "brand_name",
+      placeholder: "Brand Name",
+    },
+    {
+      type: "select",
+      name: "trademark_class",
+      placeholder: "Select Class",
+      options: [
+        "Class 1 – Chemicals",
+        "Class 9 – Electronics & Software",
+        "Class 25 – Clothing",
+        "Class 35 – Advertising & Business",
+        "Class 41 – Education & Entertainment",
+        "Class 42 – IT & Software Services",
+      ],
+    },
+  ],
+ 
  tabs: [
  { name: "Individuals & MSMEs" },
  { name: "All Others" },
@@ -71,6 +95,10 @@ export default function Home() {
  },
 
  buttonText: "Register TM",
+
+  onSubmit: (data: any) => {
+    handleWhatsAppSubmission(data, "Trademark Registration");
+  },
 };
 
  return (

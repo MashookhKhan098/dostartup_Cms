@@ -7,7 +7,7 @@ import Hero from '../components/Startup/Hero2';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
-const section8Plans: PricingPlan[] = [
+const section8Plans = [
   {
     title: "Incorporation", price: "2,899",
     description: "Register Your Company in Just 7-10 Days - Online & Hassle-Free! Fully managed incorporation with complete documentation support. Go ...",

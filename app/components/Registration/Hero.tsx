@@ -1,6 +1,7 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
@@ -158,7 +159,10 @@ export default function RegistrationHero({
                   <button className="text-[#C15F3C] hover:underline">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline">
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Registration")}
+                    className="text-[#C15F3C] hover:underline"
+                  >
                     Need Help?
                   </button>
                 </div>
@@ -219,66 +223,63 @@ export default function RegistrationHero({
                 }}
                 className="space-y-4"
               >
-                {/* PAN / GSTIN FIELD */}
-                <div>
-                  <label className="block text-xs text-[#6F6B63] mb-1">
-                    PAN / GSTIN
-                  </label>
-                  <input
-                    type="text"
-                    name="pan"
-                    placeholder="Enter PAN or GSTIN"
-                    required
-                    maxLength={15}
-                    onInput={(e) => {
-                      e.currentTarget.value = e.currentTarget.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-                    }}
-                    className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                  />
-                </div>
-
-                {/* STATE FIELD */}
-                <div>
-                  <label className="block text-xs text-[#6F6B63] mb-1">
-                    State
-                  </label>
-                  <div className="relative">
-                    <select
-                      name="state"
-                      required
-                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
-                    >
-                      <option value="">Select State</option>
-                      <option>Maharashtra</option>
-                      <option>Delhi NCR</option>
-                      <option>Karnataka</option>
-                      <option>Tamil Nadu</option>
-                      <option>Gujarat</option>
-                      <option>Telangana</option>
-                      <option>Uttar Pradesh</option>
-                      <option>Rajasthan</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                {/* NATURE OF TRADE FIELD */}
-                <div>
-                  <label className="block text-xs text-[#6F6B63] mb-1">
-                    Nature of Trade
-                  </label>
-                  <input
-                    type="text"
-                    name="trade"
-                    placeholder="Retail, Manufacturing, Services"
-                    required
-                    className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                  />
-                </div>
+                {formFields?.map((field, index) => {
+                  switch (field.type) {
+                    case "input":
+                      return (
+                        <div key={index}>
+                          <label className="block text-xs text-[#6F6B63] mb-1">
+                            {field.placeholder}
+                          </label>
+                          <input
+                            type={field.inputType || "text"}
+                            name={field.name}
+                            placeholder={field.placeholder}
+                            required
+                            maxLength={field.name === 'phone' ? 10 : field.name === 'pan' ? 10 : undefined}
+                            onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                              const target = e.currentTarget;
+                              if (field.name === 'phone' || field.inputType === 'tel') {
+                                target.value = target.value.replace(/[^0-9]/g, '');
+                              }
+                            }}
+                            className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                          />
+                        </div>
+                      );
+                    case "select":
+                      return (
+                        <div key={index}>
+                          <label className="block text-xs text-[#6F6B63] mb-1">
+                            {field.placeholder}
+                          </label>
+                          <div className="relative">
+                            <select
+                              name={field.name}
+                              required
+                              className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
+                            >
+                              <option value="">Select {field.placeholder}</option>
+                              {field.options?.map((opt: string, i: number) => (
+                                <option key={i} value={opt}>{opt}</option>
+                              ))}
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                              <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    case "text":
+                      return (
+                        <p key={index} className="text-sm text-[#6F6B63]">{field.content}</p>
+                      );
+                    default:
+                      return null;
+                  }
+                })}
 
                 <button
                   type="submit"

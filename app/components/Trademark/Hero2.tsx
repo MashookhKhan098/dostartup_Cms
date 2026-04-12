@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
+import { supabase } from "@/lib/supabase";
 
 type Feature = {
   icon: string;
@@ -81,6 +83,27 @@ export default function DynamicHeroSection({
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsLoggedIn(!!user);
+    };
+    checkUser();
+  }, []);
+
+  const handleTrackApplication = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      router.push('/profile');
+    } else {
+      const formElement = document.querySelector('[data-form-container]');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const handleTabClick = (tabName: string, path?: string): void => {
     setActiveTab(tabName);
@@ -325,7 +348,10 @@ export default function DynamicHeroSection({
                   <button className="text-[#C15F3C] hover:underline font-medium">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline font-medium">
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Trademark")}
+                    className="text-[#C15F3C] hover:underline font-medium"
+                  >
                     Need Help?
                   </button>
                 </div>
@@ -433,7 +459,7 @@ export default function DynamicHeroSection({
             <div className="bg-white px-6 py-3 border-t border-[#E5E2DA]">
               <p className="text-sm text-center text-[#6F6B63]">
                 Already started?{' '}
-                <button className="text-[#C15F3C] hover:underline font-semibold">
+                <button onClick={handleTrackApplication} className="text-[#C15F3C] hover:underline font-semibold">
                   Track Application →
                 </button>
               </p>

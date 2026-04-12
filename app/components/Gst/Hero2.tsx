@@ -1,11 +1,12 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-
+import { supabase } from "../../../lib/supabase";
+import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
-type FormField = { type: string;[key: string]: any };
+type FormField = { type: string; name: string; [key: string]: any };
 
 export type GstHero2Props = {
   heading?: string;
@@ -93,6 +94,28 @@ export default function DynamicHeroSection({
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(defaultTab || tabs?.[0]?.name);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsLoggedIn(!!user);
+    };
+    checkUser();
+  }, []);
+
+  const handleTrackApplication = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      router.push('/profile');
+    } else {
+      // Scroll to form or show a login prompt - for now just scroll down
+      const formElement = document.querySelector('[data-form-container]');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const handleTabClick = (tabName: string, path?: string) => {
     setActiveTab(tabName);
@@ -108,22 +131,18 @@ export default function DynamicHeroSection({
   const [verificationStates, setVerificationStates] = useState<Record<string, 'idle' | 'loading' | 'verified' | 'error'>>({});
 
   const handleVerify = async (fieldName: string) => {
-    setVerificationStates(prev => ({ ...prev, [fieldName]: 'loading' }));
+    setVerificationStates((p) => ({ ...p, [fieldName]: 'loading' }));
 
-    // Mocking API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((r) => setTimeout(r, 1000));
 
-    // Simple mock logic: check if PAN matches standard format
+    const input = document.querySelector<HTMLInputElement>(`input[name="${fieldName}"]`);
+    const value = input?.value?.toUpperCase().trim() || "";
     const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-    const form = document.querySelector('form');
-    const input = form?.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
-    const value = input?.value?.toUpperCase() || "";
 
-    if (input && panRegex.test(value)) {
-      setVerificationStates(prev => ({ ...prev, [fieldName]: 'verified' }));
-    } else {
-      setVerificationStates(prev => ({ ...prev, [fieldName]: 'error' }));
-    }
+    setVerificationStates((p) => ({
+      ...p,
+      [fieldName]: panRegex.test(value) ? 'verified' : 'error',
+    }));
   };
 
   const renderFormField = (field: FormField, index: number) => {
@@ -139,7 +158,7 @@ export default function DynamicHeroSection({
             <div className="relative">
               <select
                 name={field.name}
-                required
+                required={(field as any).required !== false}
                 className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
               >
                 <option value="">Select {field.placeholder}</option>
@@ -159,14 +178,19 @@ export default function DynamicHeroSection({
       case "input":
         return (
           <div key={index}>
-            <label className="block text-xs text-[#6F6B63] mb-1 flex justify-between items-center">
+            <label className="text-xs text-[#6F6B63] mb-1 flex justify-between items-center">
               {field.placeholder}
-              {field.showVerify && fieldVerificationState === 'verified' && (
-                <span className="text-[10px] text-green-600 font-bold uppercase tracking-wider bg-green-50 px-2 py-0.5 rounded-full border border-green-100 flex items-center gap-1">
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                  </svg>
-                  Verified
+              {field.showVerify && (
+                <span className={`text-[10px] ${
+                  fieldVerificationState === 'verified'
+                    ? 'text-green-600'
+                    : fieldVerificationState === 'error'
+                    ? 'text-red-500'
+                    : fieldVerificationState === 'loading'
+                    ? 'text-gray-400'
+                    : 'text-gray-300'
+                }`}>
+                  {fieldVerificationState}
                 </span>
               )}
             </label>
@@ -175,7 +199,7 @@ export default function DynamicHeroSection({
                 type={(field.name === 'phone' || field.inputType === 'tel') ? 'tel' : (field.inputType || "text")}
                 name={field.name}
                 placeholder={field.placeholder}
-                required
+                required={(field as any).required !== false}
                 maxLength={field.name === 'phone' ? 10 : field.name === 'pan' ? 10 : undefined}
                 pattern={field.name === 'pan' ? "[A-Z]{5}[0-9]{4}[A-Z]{1}" : field.name === 'phone' ? "[0-9]{10}" : undefined}
                 onInput={(e: React.FormEvent<HTMLInputElement>) => {
@@ -343,6 +367,12 @@ export default function DynamicHeroSection({
                   <button className="text-[#C15F3C] hover:underline font-medium">
                     Refer a Friend
                   </button>
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "GST Registration")}
+                    className="text-[#C15F3C] hover:underline font-medium"
+                  >
+                    Need Help?
+                  </button>
                 </div>
 
                 {/* HOW IT WORKS TIMELINE - ADDED TO FILL SPACE */}
@@ -425,7 +455,14 @@ export default function DynamicHeroSection({
                 }}
                 className="space-y-4"
               >
-                {formFields?.map((field, index) => renderFormField(field, index))}
+                {formFields?.filter((field: FormField) => {
+                  // If field has showOnTab property, only render if it matches activeTab
+                  if ((field as any).showOnTab) {
+                    return (field as any).showOnTab === activeTab;
+                  }
+                  // If no showOnTab property, always render
+                  return true;
+                }).map((field, index) => renderFormField(field, index))}
 
                 <button
                   type="submit"
@@ -448,7 +485,7 @@ export default function DynamicHeroSection({
             <div className="bg-white px-6 py-3 border-t border-[#E5E2DA]">
               <p className="text-sm text-center text-[#6F6B63]">
                 Already started?{' '}
-                <button className="text-[#C15F3C] hover:underline font-semibold">
+                <button onClick={handleTrackApplication} className="text-[#C15F3C] hover:underline font-semibold">
                   Track Application →
                 </button>
               </p>

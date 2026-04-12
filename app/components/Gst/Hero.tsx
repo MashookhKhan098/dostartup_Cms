@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
+import { handleWhatsAppSubmission, handleNeedHelpWhatsApp } from '@/lib/form-utils';
 
 type GSTInvoicingProps = {
   imageUrl: string;
@@ -107,8 +108,11 @@ const GSTInvoicingComponent = ({
                   <button className="text-[#C15F3C] hover:underline">
                     Terms and conditions
                   </button>
-                  <button className="text-[#C15F3C] hover:underline">
-                    Refer a Friend
+                  <button 
+                    onClick={() => handleNeedHelpWhatsApp(title || "GST Invoicing")}
+                    className="text-[#C15F3C] hover:underline"
+                  >
+                    Need Help?
                   </button>
                 </div>
 
@@ -186,45 +190,50 @@ const GSTInvoicingComponent = ({
 
             {/* FORM */}
             <form 
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                // Add your submission logic here if needed
-                alert("Form submitted successfully!");
+                const formData = new FormData(e.currentTarget as HTMLFormElement);
+                await handleWhatsAppSubmission(Object.fromEntries(formData), title);
+                (e.target as HTMLFormElement).reset();
               }}
               className="space-y-4"
             >
               <input
                 type="text"
+                name="name"
                 placeholder="Name"
                 required
                 className="w-full px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white focus:ring-1 focus:ring-[#C15F3C] outline-none text-sm placeholder-[#B1ADA1]"
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Email"
                 required
                 className="w-full px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white focus:ring-1 focus:ring-[#C15F3C] outline-none text-sm placeholder-[#B1ADA1]"
               />
 
               <div className="flex gap-3 w-full">
-                <select className="px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none cursor-pointer">
-                  <option>🇮🇳 +91</option>
-                </select>
                 <input
                   type="tel"
-                  placeholder="Phone"
+                  name="phone"
+                  placeholder="Phone (10 digits)"
                   required
+                  maxLength={10}
                   className="flex-1 px-4 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm placeholder-[#B1ADA1] focus:ring-1 focus:ring-[#C15F3C] outline-none"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+                  }}
                 />
               </div>
 
               <label className="flex items-center gap-2 text-xs text-[#6F6B63] cursor-pointer">
-                <input type="checkbox" className="accent-[#C15F3C]" />
+                <input type="checkbox" name="has_gstin" className="accent-[#C15F3C]" />
                 Enter GSTN to get credit
               </label>
 
               <button type="submit" className="w-full bg-[#C15F3C] text-white py-3 rounded-lg hover:bg-[#A94E30] transition font-semibold text-sm shadow-sm">
-                Get Started
+                Get Started →
               </button>
             </form>
 
