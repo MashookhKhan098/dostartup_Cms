@@ -13,6 +13,7 @@ export interface PricingPlan {
   description: string;
   features: PlanFeature[];
   isPopular?: boolean;
+  image?: string;
 }
 
 const PricingCard = ({ plan }: { plan: PricingPlan }) => {
@@ -28,6 +29,16 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
       {plan.isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C15A36] text-white px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase shadow-md">
           Recommended
+        </div>
+      )}
+
+      {plan.image && (
+        <div className="mb-6 flex justify-center">
+          <img 
+            src={plan.image} 
+            alt={plan.title} 
+            className="w-16 h-16 object-contain"
+          />
         </div>
       )}
 

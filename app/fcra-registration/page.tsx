@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Registration/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
-// 
+
 export default function Home() {
 const heroProps = {
  // ================= LEFT SIDE =================
@@ -53,8 +53,6 @@ const heroProps = {
  content:
  "FCRA Registration\nMandatory for NGOs to receive foreign donations legally. Regulated under the Foreign Contribution (Regulation) Act.",
  },
-
- // 🔹 INPUT & SELECT FIELDS
  {
  type: "input",
  inputType: "text",
@@ -82,19 +80,19 @@ const heroProps = {
  buttonText: "Apply Now",
 };
 
-
-
-
-
-
  return (
- <>
+ <main className="min-h-screen bg-[#F4F3EE]">
  <Navbar />
  <Hero {...heroProps}/>
  <DynamicTabContent category="Trademark" />
- <FAQAccordion />
+
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="fcra-registration" />
+ </div>
+
+ <FAQAccordion category="fcra-registration" />
  <Popularsearches />
  <Footer />
- </>
+ </main>
  );
 }

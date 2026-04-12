@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   ChevronRight,
-  ShoppingBag,
   Star,
   Plus,
   ChevronDown,
@@ -20,7 +19,7 @@ const ASSETS = {
   whatsapp: "/images/whatsapp.png",
   adRight1: "/images/company-compliance.jpg",
   dinEkyc: "/images/din.jpg",
-  cartIcon: "/images/cart-icon.svg",
+  cartIcon: "/images/cart.png",
   indiaFlag: "/images/india-flag.png",
   assuredBadge: "/images/assured-ledgers.png",
 };
@@ -78,7 +77,7 @@ export default function BusinessPlanPage() {
           <section className="lg:col-span-8 space-y-12">
             
             {/* Top Product Card */}
-            <div className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col md:flex-row gap-10">
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col md:flex-row gap-10">
               <div className="md:w-1/3 flex-shrink-0">
                 <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
                   <div className="bg-gradient-to-br from-[#C15F3C] to-[#8E442B] p-5 text-white text-center">
@@ -88,9 +87,9 @@ export default function BusinessPlanPage() {
                 </div>
                 
                 <ul className="mt-6 text-xs space-y-3 text-slate-500 px-2 font-medium">
-                   <li className="flex gap-2 items-start"><ChevronRight className="w-3 h-3 text-[#C15F3C] mt-0.5" /> Business Plan</li>
-                   <li className="flex gap-2 items-start"><ChevronRight className="w-3 h-3 text-[#C15F3C] mt-0.5" /> A business plan with pitch deck and financial model is essential for business owners to raise loan or equity funding.</li>
-                   <li className="text-[#C15F3C] cursor-pointer hover:underline font-bold">Load More</li>
+                   <li className="flex gap-2 items-start"><ChevronRight className="w-3 h-3 text-[#C15F3C] mt-0.5" /> Pitch Deck Preparation</li>
+                   <li className="flex gap-2 items-start"><ChevronRight className="w-3 h-3 text-[#C15F3C] mt-0.5" /> Equity Fundraising Support</li>
+                   <li className="flex gap-2 items-start"><ChevronRight className="w-3 h-3 text-[#C15F3C] mt-0.5" /> Comprehensive Financial Models</li>
                 </ul>
               </div>
 
@@ -98,9 +97,9 @@ export default function BusinessPlanPage() {
                  <div className="space-y-4">
                     <div className="inline-flex items-center gap-2 bg-orange-100/50 border border-orange-100 rounded-full px-3 py-1">
                       <div className="w-1.5 h-1.5 bg-[#C15F3C] rounded-full" />
-                      <span className="text-[10px] font-bold text-[#C15F3C] uppercase tracking-wider">Compliance Service</span>
+                      <span className="text-[10px] font-bold text-[#C15F3C] uppercase tracking-wider">Strategic Advisory</span>
                     </div>
-                    <h1 className="text-3xl font-extrabold text-slate-900 leading-tight">Business Plan</h1>
+                    <h1 className="text-3xl font-extrabold text-[#0B2545] leading-tight">Business Plan & Pitch Deck</h1>
                     <div className="flex items-center gap-1.5">
                        {[...Array(5)].map((_, i) => (
                          <Star key={i} size={14} className="fill-yellow-500 text-yellow-500" />
@@ -110,7 +109,7 @@ export default function BusinessPlanPage() {
                  </div>
 
                  <p className="text-gray-600 leading-relaxed text-[15px]">
-                   A business plan with pitch deck and financial model is essential for business owners to raise loan or equity funding. Get a professional pitch deck and financial model prepared for your business through Experts.
+                   A professional business plan with pitch deck and financial model is essential for raising loan or equity funding. We help you create compelling documents that capture investor interest.
                  </p>
 
                  {/* Dropdown Selector */}
@@ -118,14 +117,14 @@ export default function BusinessPlanPage() {
                   <button
                     type="button"
                     onClick={() => setShowOfferDropdown(!showOfferDropdown)}
-                    className="w-full sm:w-80 flex items-center justify-between border-2 border-gray-100 rounded-xl px-5 py-3.5 bg-[#F4F3EE] text-left hover:border-[#C15F3C] transition-all focus:outline-none"
+                    className="w-full sm:w-80 flex items-center justify-between border-2 border-gray-100 rounded-xl px-5 py-3.5 bg-white text-left hover:border-[#C15F3C] transition-all focus:outline-none"
                   >
                     <span className="text-sm font-semibold text-slate-700">{selectedOffer}</span>
                     <ChevronDown className={`w-4 h-4 transition-transform ${showOfferDropdown ? 'rotate-180' : ''}`} />
                   </button>
 
                   {showOfferDropdown && (
-                    <div className="absolute top-full left-0 mt-2 w-full sm:w-80 bg-[#F4F3EE] border border-gray-100 rounded-xl shadow-2xl z-50 overflow-hidden py-1">
+                    <div className="absolute top-full left-0 mt-2 w-full sm:w-80 bg-white border border-gray-100 rounded-xl shadow-2xl z-50 overflow-hidden py-1">
                       {OFFER_OPTIONS.map((opt) => (
                         <button
                           key={opt}
@@ -150,8 +149,8 @@ export default function BusinessPlanPage() {
             </div>
 
             {/* EXACT CONTENT SECTION */}
-            <article className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-10">
-              <h2 className="text-3xl font-bold text-slate-900 mb-8 border-b border-gray-50 pb-4 text-center">Business Plan</h2>
+            <article className="bg-white rounded-3xl shadow-sm border border-gray-100 p-10">
+              <h2 className="text-3xl font-bold text-[#0B2545] mb-8 border-b border-gray-50 pb-4 text-center">Business Plan Strategy</h2>
               
               <div className="space-y-8 text-[#4F4C45] text-[16px] leading-[1.8]">
                 <p>
@@ -162,19 +161,19 @@ export default function BusinessPlanPage() {
                   At <strong>DoStartup</strong>, we specialise in helping businesses draft comprehensive and tailored business plans that align with industry standards and comply with regulatory requirements.
                 </p>
 
-                <p className="font-bold text-slate-900 italic border-l-4 border-[#C15F3C] pl-6 py-2 bg-orange-50/30 rounded-r-xl">
+                <p className="font-bold text-[#C15F3C] italic border-l-4 border-[#C15F3C] pl-6 py-2 bg-orange-50/30 rounded-r-xl">
                   Get Your Expert-Designed Business Plan with DoStartup. Start Your Success Story Today!
                 </p>
 
                 <div className="pt-4">
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">What is a Business Plan?</h3>
+                  <h3 className="text-xl font-bold text-[#0B2545] mb-4">What is a Business Plan?</h3>
                   <p>
                     A business plan is a formal document that defines your business objectives, strategies, market research, financial projections, and more. It serves as a guiding document for securing funding and setting internal goals and benchmarks.
                   </p>
                 </div>
 
                 <div className="pt-6">
-                   <h3 className="text-xl font-bold text-slate-900 mb-6">Related Guides</h3>
+                   <h3 className="text-xl font-bold text-[#0B2545] mb-6">Related Guides</h3>
                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {[
                         "Importance of Business Plan",
@@ -183,7 +182,7 @@ export default function BusinessPlanPage() {
                         "Business Plan Template",
                         "Checklist for Starting a Business"
                       ].map((guide, i) => (
-                        <div key={i} className="flex items-center gap-3 p-4 bg-[#F4F3EE] rounded-2xl border border-gray-100 group cursor-pointer hover:border-[#C15F3C] transition-all">
+                        <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100 group cursor-pointer hover:border-[#C15F3C] transition-all">
                            <div className="w-2 h-2 rounded-full bg-[#C15F3C]/40 group-hover:bg-[#C15F3C]" />
                            <span className="text-sm font-bold text-slate-700 group-hover:text-[#C15F3C]">{guide}</span>
                         </div>
@@ -199,13 +198,14 @@ export default function BusinessPlanPage() {
           <aside className="lg:col-span-4 space-y-10">
             <SidebarCart />
             
-            <div className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-8 space-y-6">
-              <h4 className="text-lg font-bold text-slate-900 border-b border-gray-50 pb-4">Related Guides</h4>
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 space-y-6">
+              <h4 className="text-lg font-bold text-[#0B2545] border-b border-gray-50 pb-4">Focus Areas</h4>
               <ul className="space-y-5">
                 {[
-                  "Business Plan Template",
-                  "How to Create a Pitch Deck for Investors",
-                  "Financial Model Best Practices"
+                  "Market Opportunity Analysis",
+                  "Competitive Landscape Study",
+                  "Financial Forecasting",
+                  "Go-to-Market Strategy"
                 ].map((guide, i) => (
                   <li key={i}>
                     <a href="#" className="flex items-center justify-between group">
@@ -220,20 +220,9 @@ export default function BusinessPlanPage() {
             <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-100 h-64 relative bg-slate-900 group">
               <img src={ASSETS.adRight1} alt="Compliance" className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 flex flex-col justify-center p-8 text-white space-y-2">
-                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#C15F3C]">Compliance</p>
-                 <h4 className="text-xl font-bold">Annual Filing & Audit</h4>
+                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#C15F3C]">Strategic Support</p>
+                 <h4 className="text-xl font-bold">Investor Readiness Audit</h4>
                  <button className="text-sm font-bold underline hover:text-[#C15F3C] text-left pt-4">Explore Services →</button>
-              </div>
-            </div>
-
-            <div className="bg-[#F4F3EE] rounded-3xl shadow-sm border border-gray-100 p-8">
-              <h4 className="text-lg font-bold text-slate-900 mb-6">Popular Searches</h4>
-              <div className="flex flex-wrap gap-2">
-                {POPULAR_SEARCHES.map((t) => (
-                  <span key={t} className="text-[10px] px-3 py-1.5 border border-gray-200 rounded-lg bg-[#F4F3EE] text-slate-600 hover:border-[#C15F3C] hover:text-[#C15F3C] cursor-pointer transition-all">
-                    {t}
-                  </span>
-                ))}
               </div>
             </div>
           </aside>
@@ -241,7 +230,9 @@ export default function BusinessPlanPage() {
         </div>
       </main>
 
-      <DynamicPricingSection />
+      <DynamicPricingSection category="business-plan" />
+
+      <FAQAccordion category="business-plan" />
 
       <Footer />
 

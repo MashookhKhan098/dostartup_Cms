@@ -1,4 +1,4 @@
-
+"use client";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -38,7 +38,10 @@ export default function Home() {
  }}
  />
  <DynamicTabContent category="Trademark" />
- <FAQAccordion />
+ <section className="bg-[#F4F3EE]">
+  <DynamicPricingSection category="trademark-protection" />
+ </section>
+ <FAQAccordion category="trademark-protection" />
  <Popularsearches />
  <Footer />
  </>

@@ -1,4 +1,4 @@
-
+﻿
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -95,9 +95,13 @@ export default function Home() {
  <Navbar />
  <Hero {...heroProps} />
  <DynamicTabContent category="Startup" />
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="12a-80g-registration" />
+ </div>
+ <FAQAccordion category="12a-80g-registration" />
  <Popularsearches />
  <Footer />
  </>
  );
 }
+

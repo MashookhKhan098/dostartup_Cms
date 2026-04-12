@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+﻿import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
@@ -27,9 +27,13 @@ export default function Home() {
 />
 
  <DynamicTabContent category="GST" />
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="gst-software" />
+ </div>
+ <FAQAccordion category="gst-software" />
  <Popularsearches />
  <Footer />
  </>
  );
 }
+

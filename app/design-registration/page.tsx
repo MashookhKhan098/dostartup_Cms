@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+﻿import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
@@ -8,7 +8,7 @@ import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
  return (
- <>
+ <main className="min-h-screen bg-[#F4F3EE]">
  <Navbar />
  <Hero
  imageUrl="/images/design-registration.png"
@@ -28,9 +28,10 @@ export default function Home() {
 
 
  <DynamicTabContent category="Trademark" />
- <FAQAccordion />
+ <DynamicPricingSection category="design-registration" />`n <FAQAccordion category="design-registration" />
  <Popularsearches />
  <Footer />
- </>
+ </main>
  );
 }
+

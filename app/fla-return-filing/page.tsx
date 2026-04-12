@@ -2,26 +2,28 @@
 
 import React, { useState } from "react";
 import {
- ChevronRight,
- ShoppingBag,
  Star,
- Plus,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SidebarCart from "../components/SidebarCart";
+import FAQAccordion from "../components/Faq";
+import PopularSearches from "../components/PopularSearches";
 
 const ASSETS = {
  logo: "/images/india-logo.jpg",
  hero: "/images/FDI-filing-RBI.jpg",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- whatsapp: "/images/whatsapp.svg",
- adRight1: "/images/company-compliance-ad.png",
- dinEkyc: "/images/din-ekyc-ad.png",
- cartIcon: "/images/cart-icon.svg",
+ ledgers: "/images/ledgers.jpg",
+ whatsapp: "/images/whatsapp.png",
+ adRight1: "/images/company-compliance.jpg",
+ dinEkyc: "/images/din.jpg",
+ cartIcon: "/images/cart.png",
  indiaFlag: "/images/india-flag.png",
- assuredBadge: "/images/assured-ledgers.png",
+ assuredBadge: "/images/Steps.png", // Changed from missing assured-ledgers.png to Steps.png or similar
 };
+
+const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY || "";
+const CMS_URL = process.env.NEXT_PUBLIC_COCKPIT_URL || "";
 
 const POPULAR_SEARCHES = [
  "Partnership",
@@ -77,35 +79,79 @@ const POPULAR_SEARCHES = [
  "EPFO Unified Portal",
 ];
 
-export default function FlaReturnFilingPage() {
- const [openFaq, setOpenFaq] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
+ export default function FlaReturnFilingPage() {
+  const [gstChecked, setGstChecked] = useState(false);
+  const [heroImage, setHeroImage] = useState<string>(ASSETS.hero);
+  const [incomeTaxImage, setIncomeTaxImage] = useState<string>(ASSETS.ledgers);
+  const [complianceImage, setComplianceImage] = useState<string>(ASSETS.adRight1);
+  const [dinEkycImage, setDinEkycImage] = useState<string>(ASSETS.dinEkyc);
 
- const faqItems = [
- "What is the FLA Return?",
- "Who needs to file the FLA Return?",
- "What is the due date for filing the FLA Return?",
- "What if my accounts are not audited by the due date?",
- "What is the penalty for late filing of FLA Return?",
- "What are the penalties for not filing the FLA Return?",
- "What information is required for the FLA Return?",
- "How is the FLA Return submitted?",
- "What is the FLAIR portal?",
- "How do I register on the FLAIR portal?",
- ];
+  const getImageUrl = (image: any) => {
+    if (!image) return null;
+    let path = "";
+    if (typeof image === "string") {
+      path = image;
+    } else if (image && typeof image === "object") {
+      path = image.path || image.url || "";
+    }
+    if (!path) return null;
+    if (path.startsWith("http")) return path;
+    
+    const baseUrl = CMS_URL.replace(/\/$/, "");
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    // Some Cockpit versions include storage/uploads in the path itself
+    if (cleanPath.includes("storage/uploads")) {
+      return `${baseUrl}${cleanPath}`;
+    }
+    return `${baseUrl}/storage/uploads${cleanPath}`;
+  };
 
- const faqAnswers: Record<number, string> = {
- 0: "The FLA Return is a mandatory annual filing for Indian companies, LLPs, and other entities engaged in receiving or making foreign direct investments, submitted to the Reserve Bank of India (RBI).",
- 1: "All Indian companies, LLPs, and entities that have received Foreign Direct Investment (FDI) or have made Overseas Direct Investment (ODI) in any financial year must file the FLA Return.",
- 2: "The FLA Return must be filed annually by July 15th for the preceding financial year.",
- 3: "Even if accounts are not audited, you must file the FLA Return based on provisional accounts and update later if necessary. Non-filing can attract penalties.",
- 4: "Late filing may attract penalties, including fines up to ₹50,000 or more, depending on the duration of delay and RBI discretion.",
- 5: "Penalties for not filing include monetary fines, restrictions on foreign transactions, and potential legal action under FEMA regulations.",
- 6: "Information required includes foreign liabilities and assets, shareholding pattern, financial details, and details of foreign investments received or made.",
- 7: "The FLA Return is submitted online through the RBI's FLAIR portal (https://flair.rbi.org.in) using digital signature or OTP-based authentication.",
- 8: "The FLAIR (Foreign Liabilities and Assets Information Reporting) portal is the RBI's online platform for filing FLA Returns and managing foreign investment reporting.",
- 9: "Registration on the FLAIR portal requires company details, PAN, and contact information. New users need to register before filing their first return.",
- };
+  React.useEffect(() => {
+    async function fetchData() {
+      try {
+        const baseUrl = CMS_URL.replace(/\/$/, "");
+        
+        // Fetch ALL services once to find matches efficiently
+        const res = await fetch(`${baseUrl}/api/content/items/service?token=${TOKEN}`);
+        const data = await res.json();
+        const services = Array.isArray(data) ? data : (data?.entries || []);
+        
+        if (services.length > 0) {
+          // Hero Image matching
+          const hero = services.find((s: any) => 
+            s.name?.toLowerCase().includes("fla") || 
+            s.title?.toLowerCase().includes("fla")
+          );
+          if (hero?.image) setHeroImage(getImageUrl(hero.image) || ASSETS.hero);
+
+          // Income Tax matching
+          const it = services.find((s: any) => 
+            s.name?.toLowerCase().includes("income tax") || 
+            s.title?.toLowerCase().includes("income tax")
+          );
+          if (it?.image) setIncomeTaxImage(getImageUrl(it.image) || ASSETS.ledgers);
+
+          // Compliance matching
+          const comp = services.find((s: any) => 
+            s.name?.toLowerCase().includes("compliance") && 
+            (s.name?.toLowerCase().includes("company") || s.title?.toLowerCase().includes("company"))
+          );
+          if (comp?.image) setComplianceImage(getImageUrl(comp.image) || ASSETS.adRight1);
+
+          // DIN matching
+          const din = services.find((s: any) => 
+            s.name?.toLowerCase().includes("din") || 
+            s.title?.toLowerCase().includes("din")
+          );
+          if (din?.image) setDinEkycImage(getImageUrl(din.image) || ASSETS.dinEkyc);
+        }
+
+      } catch (error) {
+        console.error("Data fetch error:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
  return (
  <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
@@ -128,7 +174,7 @@ export default function FlaReturnFilingPage() {
  {/* Left Column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top Card */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card */}
  <div className="md:w-1/3 flex-shrink-0">
  <div className="rounded-lg overflow-hidden">
@@ -141,10 +187,10 @@ export default function FlaReturnFilingPage() {
  </div>
  </div>
 
- <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
+ <div className="bg-white px-4 py-6 flex justify-center">
  <div className="w-44 h-44 rounded-full overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
  <img
- src={ASSETS.hero}
+ src={heroImage}
  alt="FLA hero"
  className="w-full h-full object-cover"
  />
@@ -238,7 +284,7 @@ export default function FlaReturnFilingPage() {
  </div>
 
  {/* Article */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <article className="bg-white rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center text-slate-900">
  FLA Return Filing
  </h1>
@@ -256,7 +302,7 @@ export default function FlaReturnFilingPage() {
  reflected in the financial statements of these entities.
  </p>
  <p>
- At IndiaFilings, we provide expert services to help Indian
+ At DoStartup, we provide expert services to help Indian
  Companies and LLPs efficiently handle their FLA Return
  filings.
  </p>
@@ -278,8 +324,56 @@ export default function FlaReturnFilingPage() {
  </div>
  </article>
 
- {/* Related Guides */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 mt-8">
+  {/* Quick Services Section - Moved from sidebar */}
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+    {/* Income Tax E-Filing */}
+    <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+      <h4 className="font-semibold mb-3 text-slate-900">Income Tax E-Filing</h4>
+      <div className="p-3 border border-gray-200 rounded-md flex items-center gap-3 hover:border-amber-200 transition-colors">
+        <img
+          src={incomeTaxImage}
+          alt="ledgers"
+          className="h-8 w-8 object-contain"
+        />
+        <div className="text-sm">
+          <div className="text-amber-700 font-medium">Income Tax E-Filing</div>
+          <div className="text-gray-500 text-xs">Income Tax E-Filing</div>
+        </div>
+      </div>
+      <div className="mt-3 text-sm">
+        <div className="font-medium text-slate-900">Partnership Compliance</div>
+        <div className="text-gray-500">Partnership Compliance</div>
+      </div>
+    </div>
+
+    {/* Company Compliance Ad */}
+    <div className="rounded-lg overflow-hidden shadow-sm border border-gray-200 bg-white">
+      <img
+        src={complianceImage}
+        alt="company compliance"
+        className="w-full h-40 object-cover"
+      />
+      <div className="p-3 text-center">
+        <span className="text-xs font-semibold text-slate-900 uppercase">Company Compliance</span>
+      </div>
+    </div>
+
+    {/* DIN eKYC Ad */}
+    <div className="rounded-lg overflow-hidden shadow-sm border border-gray-200 bg-white">
+      <img
+        src={dinEkycImage}
+        alt="din ekyc"
+        className="w-full h-40 object-cover"
+      />
+      <div className="p-3 text-center">
+        <span className="text-xs font-semibold text-slate-900 uppercase">DIN eKYC</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Related Guides */}
+
+ <div className="bg-white rounded-lg shadow-sm p-6 mt-8">
  <h3 className="text-lg font-semibold mb-4 text-slate-900">Related Guides</h3>
  <ul className="space-y-3 text-sm text-amber-700">
  <li className="hover:text-amber-800 cursor-pointer hover:underline">FLA Return Filing</li>
@@ -290,99 +384,17 @@ export default function FlaReturnFilingPage() {
  </ul>
  </div>
 
- {/* FAQ's */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 mt-6 border border-gray-200">
- <h3 className="text-lg font-semibold mb-6 text-slate-900 border-b pb-3">
- FAQ's on FLA Return Filing
- </h3>
- <div className="space-y-3 text-sm max-h-[500px] overflow-y-auto pr-2">
- {faqItems.map((q, i) => (
- <div key={q} className="border border-slate-100 rounded-lg overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-[#F4F3EE] pb-0">
- <button
- className="w-full text-left p-4 flex justify-between items-center text-sm hover:bg-amber-50/20 group"
- onClick={() => setOpenFaq(openFaq === i ? null : i)}
- aria-expanded={openFaq === i}
- >
- <span className="text-slate-800 font-medium group-hover:text-amber-700">{q}</span>
- <span className={`p-1.5 rounded-full bg-amber-50 shrink-0 transition-transform ${openFaq === i ? 'rotate-45' : ''}`}>
- <Plus size={14} className="text-amber-600" />
- </span>
- </button>
- {openFaq === i && (
- <div className="px-4 pb-4 text-sm text-gray-600 border-t border-slate-50 pt-3">
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
- </div>
  </section>
 
  {/* Right Sidebar */}
- <aside className="lg:col-span-4 hidden lg:block">
- <div className="space-y-6">
+  <aside className="lg:col-span-4 hidden lg:block space-y-8">
  {/* Cart Widget */}
  <SidebarCart />
 
- {/* Income Tax E-Filing */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 border border-gray-200">
- <h4 className="font-semibold mb-3 text-slate-900">Income Tax E-Filing</h4>
- <div className="p-3 border border-gray-200 rounded-md flex items-center gap-3 hover:border-amber-200 transition-colors">
- <img
- src={ASSETS.ledgers}
- alt="ledgers"
- className="h-8 w-8 object-contain"
- />
- <div className="text-sm">
- <div className="text-amber-700 font-medium">
- Income Tax E-Filing
- </div>
- <div className="text-gray-500 text-xs">
- Income Tax E-Filing
- </div>
- </div>
- </div>
- <div className="mt-3 text-sm">
- <div className="font-medium text-slate-900">Partnership Compliance</div>
- <div className="text-gray-500">Partnership Compliance</div>
- </div>
- </div>
 
- {/* Ads */}
- <div className="rounded-lg overflow-hidden shadow-sm border border-gray-200">
- <img
- src={ASSETS.adRight1}
- alt="company compliance"
- className="w-full h-48 object-cover"
- />
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm border border-gray-200">
- <img
- src={ASSETS.dinEkyc}
- alt="din ekyc"
- className="w-full h-48 object-cover"
- />
- </div>
-
- {/* Popular Searches */}
- <div className="bg-[#F4F3EE] rounded-lg p-4 border border-gray-200">
- <h4 className="font-semibold mb-3 text-slate-900">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 20).map((t) => (
- <span
- key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
- >
- {t}
- </span>
- ))}
- </div>
- </div>
 
  {/* Contact Advisor */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 border border-gray-200">
+ <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">Contact Advisor</h4>
  <p className="text-sm text-gray-600">
  Need help with FLA filings? Our advisors can assist with
@@ -393,17 +405,22 @@ export default function FlaReturnFilingPage() {
  Schedule a Call
  </button>
  </div>
- </div>
- </div>
- </aside>
+  </div>
+  </aside>
  </div>
  </main>
+
+ <FAQAccordion category="fla-return-filing" />
+
+ <PopularSearches />
 
  {/* WhatsApp CTA */}
  <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
  <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
  <span className="font-semibold text-sm">Live Chat with Experts</span>
  </div>
+
+ <Footer />
  </div>
  );
 }

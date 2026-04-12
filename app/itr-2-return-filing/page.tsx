@@ -565,13 +565,10 @@ export default function ITR2Page() {
               </h1>
 
               <p className="text-slate-600 text-lg leading-relaxed mb-8 max-w-lg">
-                For investors, NRIs & multi-property owners. Our AI auto-imports
-                broker P&L, computes capital gains, optimizes loss set-off, and
-                files ITR-2 without errors.
-                <span className="block mt-2 text-slate-700 font-semibold">
-                  Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner
-                  — we're 40% cheaper & smarter!
-                </span>
+                Complex Gains. Simple Filing.
+                <br />
+                Join 2 lakh+ investors who trust DoStartup AI to file ITR-2
+                accurately — in under 15 minutes.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-10">
@@ -649,7 +646,7 @@ export default function ITR2Page() {
                 {AI_STEPS.map((s, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 py-3 border-b border-white/10 last:border-0 hover:bg-[#F4F3EE]/5 rounded-lg px-2 transition-colors"
+                    className="flex items-start gap-3 py-3 border-b border-white/10 last:border-0 hover:bg-white/5 rounded-lg px-2 transition-colors"
                   >
                     <div
                       className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center text-xl flex-shrink-0`}
@@ -667,15 +664,15 @@ export default function ITR2Page() {
                   </div>
                 ))}
 
-                <div className="mt-4 bg-[#F4F3EE]/15 rounded-xl p-4">
+                <div className="mt-4 bg-white/15 rounded-xl p-4">
                   <div className="flex justify-between text-xs text-[#C15F3C] mb-2">
                     <span className="flex items-center gap-1">
                       <Zap size={12} /> Processing Capital Gains
                     </span>
                     <span className="font-bold text-[#C15F3C]">82% Complete</span>
                   </div>
-                  <div className="h-2 bg-[#F4F3EE]/20 rounded-full overflow-hidden">
-                    <div className="h-full w-[82%] bg-[#F4F3EE] rounded-full" />
+                  <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+                    <div className="h-full w-[82%] bg-white rounded-full" />
                   </div>
                   <p className="text-[10px] text-slate-400 mt-2">
                     Importing from 6 brokers • 2 steps remaining
@@ -691,7 +688,7 @@ export default function ITR2Page() {
                     {BROKERS.map((b) => (
                       <span
                         key={b}
-                        className="bg-[#F4F3EE] text-slate-500 text-[10px] font-semibold px-2 py-1 rounded-md"
+                        className="bg-white text-slate-500 text-[10px] font-semibold px-2 py-1 rounded-md"
                       >
                         {b}
                       </span>
@@ -749,7 +746,7 @@ export default function ITR2Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-[#F4F3EE]/50 border-2 border-[#C15F3C]/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
+              <div className="bg-white border-2 border-[#C15F3C]/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
                 <div className="flex items-center gap-2 font-bold text-slate-700 mb-4 text-base">
                   <CheckCircle size={20} className="text-[#C15F3C]" /> File
                   ITR-2 If You Have:
@@ -778,7 +775,7 @@ export default function ITR2Page() {
                 </ul>
               </div>
 
-              <div className="bg-[#F4F3EE]/50 border-2 border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:shadow-slate-100 transition-all opacity-80">
+              <div className="bg-white border-2 border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:shadow-slate-100 transition-all opacity-80">
                 <div className="flex items-center gap-2 font-bold text-slate-700 mb-4 text-base">
                   <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT
                   ITR-2 — Use Other Forms:
@@ -1625,6 +1622,10 @@ export default function ITR2Page() {
         {/* ══════════════════════════════════════
  FOOTER
  ══════════════════════════════════════ */}
+        <section className="bg-[#F4F3EE]">
+          <DynamicPricingSection category="itr-2-return-filing" />
+        </section>
+        <FAQAccordion category="itr-2-return-filing" />
         <Footer />
       </main>
     </>

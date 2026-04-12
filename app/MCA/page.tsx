@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -181,9 +181,13 @@ export default function MCA() {
       </section>
 
       {/* FAQ SECTION */}
-      <FAQAccordion />
+      <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="MCA" />
+ </div>
+ <FAQAccordion category="MCA" />
 
       <Footer />
     </div>
   );
 }
+

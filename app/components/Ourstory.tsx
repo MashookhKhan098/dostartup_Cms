@@ -1,6 +1,9 @@
+const COCKPIT_URL = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+
 async function getOurStory() {
  const res = await fetch(
- "https://cms.dostartup.in/api/content/item/ourstory",
+ `${COCKPIT_URL}/api/content/item/ourstory?token=${TOKEN}`,
  { cache: "no-store" }
  );
  const json = await res.json();
@@ -34,7 +37,7 @@ export default async function OurStory() {
  <div className="w-full md:w-1/2">
  {imageUrl && (
  <img
- src={`https://cms.dostartup.in/storage/uploads${imageUrl}`}
+ src={`${COCKPIT_URL}/storage/uploads${imageUrl}?token=${TOKEN}`}
  alt="Our Story"
  className="w-full h-auto rounded-xl shadow-sm object-cover border border-[#E5E2DA]"
  />

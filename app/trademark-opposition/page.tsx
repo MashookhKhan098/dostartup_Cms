@@ -1,4 +1,4 @@
-
+﻿
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -9,7 +9,7 @@ import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
  return (
- <>
+ <main className="min-h-screen bg-[#F4F3EE]">
  <Navbar />
  <Hero
  trademarkService={{
@@ -38,9 +38,13 @@ export default function Home() {
  }}
  />
  <DynamicTabContent category="Trademark" />
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="trademark-opposition" />
+ </div>
+ <FAQAccordion category="trademark-opposition" />
  <Popularsearches />
  <Footer />
- </>
+ </main>
  );
 }
+

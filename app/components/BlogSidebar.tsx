@@ -23,8 +23,8 @@ interface BlogSidebarProps {
   columns?: number;
 }
 
-const TOKEN = "API-d969d00908e5d49261dc97c71fdd75794712b377";
-const CMS_URL = "https://cms.dostartup.in";
+const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY || "";
+const CMS_URL = process.env.NEXT_PUBLIC_COCKPIT_URL || "https://cms.dostartup.in";
 const API = `${CMS_URL}/api/content/items/blogs?token=${TOKEN}`;
 
 export default function BlogSidebar({ category, isMainFeed = false, maxItems, columns = 2 }: BlogSidebarProps) {
@@ -125,7 +125,7 @@ export default function BlogSidebar({ category, isMainFeed = false, maxItems, co
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h3 className={`${columns === 3 ? 'text-lg md:text-xl' : 'text-2xl'} font-bold text-[#201F1D]`} style={{ fontFamily: "'Sora', sans-serif" }}>
+        <h3 className={`${columns === 3 ? 'text-lg md:text-xl' : 'text-2xl'} font-bold text-[#0B2545]`} style={{ fontFamily: "'Sora', sans-serif" }}>
           {isMainFeed ? "Business Updates" : "Related Updates"}
         </h3>
         <span className="text-[9px] uppercase tracking-widest font-bold text-[#C15F3C] px-2 py-0.5 bg-[#C15F3C]/5 rounded-full border border-[#C15F3C]/10">

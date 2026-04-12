@@ -130,7 +130,7 @@ export default function ITR7Page() {
                   ["4.9★", "Google Rating", <Star key="s" size={16} className="text-[#C15F3C] fill-[#C15F3C]" />],
                 ].map(([num, lbl, icon]) => (
                   <div key={String(lbl)} className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-[#F4F3EE] border border-[#C15F3C]/20 flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-full bg-white border border-[#C15F3C]/20 flex items-center justify-center">
                       {icon}
                     </div>
                     <div>
@@ -144,7 +144,7 @@ export default function ITR7Page() {
 
             {/* Right — Quick Info Card */}
             <div className="lg:pl-4">
-              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 transition-all duration-300">
+              <div className="bg-white border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-[#C15F3C]" />
@@ -162,8 +162,8 @@ export default function ITR7Page() {
                   { icon: "📚", title: "Universities & Colleges", desc: "Sec 139(4D) — Registered under Sec 10(23C)" },
                   { icon: "💰", title: "Mutual Funds & Trusts", desc: "Sec 139(4E)/(4F) — SEBI-registered funds" },
                 ].map((s, i) => (
-                  <div key={i} className="flex items-start gap-3 py-3 border-b border-gray-100 last:border-0 hover:bg-[#F4F3EE] rounded-lg px-2 transition-colors">
-                    <div className="w-10 h-10 rounded-xl bg-[#F4F3EE] border border-[#C15F3C]/10 flex items-center justify-center text-xl flex-shrink-0">
+                  <div key={i} className="flex items-start gap-3 py-3 border-b border-gray-100 last:border-0 hover:bg-white rounded-lg px-2 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-[#C15F3C]/10 flex items-center justify-center text-xl flex-shrink-0">
                       {s.icon}
                     </div>
                     <div>
@@ -193,7 +193,7 @@ export default function ITR7Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
+              <div className="bg-white border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-[#C15F3C]" /> File ITR-7 If You Are:
                 </div>
@@ -206,7 +206,7 @@ export default function ITR7Page() {
                   ))}
                 </ul>
               </div>
-              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT ITR-7 — Use Other Forms:
                 </div>
@@ -238,8 +238,8 @@ export default function ITR7Page() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {WHY_FEATURES.map((f, i) => (
-                <div key={i} className="bg-[#F4F3EE] rounded-2xl border border-[#C15F3C]/10 p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all">
-                  <div className="w-12 h-12 rounded-xl bg-[#F4F3EE] flex items-center justify-center mb-4">
+                <div key={i} className="bg-white rounded-2xl border border-[#C15F3C]/10 p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-4">
                     {f.icon}
                   </div>
                   <h3 className="font-bold text-black text-base mb-2">{f.title}</h3>
@@ -260,7 +260,7 @@ export default function ITR7Page() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {PROCESS_STEPS.map((s, i) => (
-                <div key={i} className="flex items-start gap-4 bg-[#F4F3EE] rounded-2xl p-5 border border-[#C15F3C]/10 hover:border-[#C15F3C]/30 hover:shadow-md transition-all">
+                <div key={i} className="flex items-start gap-4 bg-white rounded-2xl p-5 border border-[#C15F3C]/10 hover:border-[#C15F3C]/30 hover:shadow-md transition-all">
                   <span className="text-2xl flex-shrink-0">{s.icon}</span>
                   <div>
                     <span className="text-[#C15F3C] text-xs font-bold uppercase">{s.num}</span>
@@ -275,7 +275,7 @@ export default function ITR7Page() {
         {/* ═══════════ INFORMATIONAL CONTENT ═══════════ */}
         <section className="bg-[#F4F3EE] py-12 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-[#F4F3EE] rounded-2xl border border-[#C15F3C]/10 p-8 mb-8">
+            <div className="bg-white rounded-2xl border border-[#C15F3C]/10 p-8 mb-8">
               <h2 className="text-2xl font-extrabold text-black mb-4">
                 ITR-7 Return Filing — Complete Guide
               </h2>
@@ -318,7 +318,7 @@ export default function ITR7Page() {
 
         {/* ═══════════ PRICING ═══════════ */}
         <div id="pricing">
-          <DynamicPricingSection />
+          <DynamicPricingSection category="itr-7-return-filing" />
         </div>
 
         <FAQAccordion />
@@ -339,7 +339,7 @@ export default function ITR7Page() {
             </p>
             <Link
               href="#pricing"
-              className="inline-flex items-center gap-2 bg-[#F4F3EE] text-[#C15F3C] font-bold px-8 py-4 rounded-full text-base hover:bg-orange-50 transition-colors shadow-xl"
+              className="inline-flex items-center gap-2 bg-white text-[#C15F3C] font-bold px-8 py-4 rounded-full text-base hover:bg-orange-50 transition-colors shadow-xl"
             >
               <ShoppingBag size={18} />
               Start Filing ITR-7 Now

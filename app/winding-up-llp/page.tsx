@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 
 import React, { useState } from "react";
@@ -43,7 +43,7 @@ export default function WindingUpLLPPage() {
  whatsapp: "/images/whatsapp.png",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+ ledgers: "https://img.dostartup.com/catalog/ledgers.png",
  adRight1: "/images/company-compliance.jpg",
  dinEkyc: "/images/din.jpg",
  };
@@ -201,7 +201,7 @@ export default function WindingUpLLPPage() {
  management.
  </p>
  <p className="mt-4">
- IndiaFilings can provide expert guidance and support throughout
+ DoStartup can provide expert guidance and support throughout
  your winding up of LLP, ensuring compliance with all legal
  requirements and minimising potential complications. Contact us
  today to get started and ensure a seamless and compliant
@@ -364,10 +364,10 @@ export default function WindingUpLLPPage() {
  </p>
 
  <h3 className="mt-6 text-lg font-semibold text-slate-900">
- IndiaFilings: Your Partner in LLP Winding Up
+ DoStartup: Your Partner in LLP Winding Up
  </h3>
  <p className="text-sm text-gray-600">
- IndiaFilings offers specialised services to facilitate winding
+ DoStartup offers specialised services to facilitate winding
  up of LLPs — documentation, declaration of solvency, resolution
  passing, liquidator appointment, claim verification, asset
  realisation, and final dissolution filings. Contact our experts
@@ -546,3 +546,4 @@ export default function WindingUpLLPPage() {
  </div>
  );
 }
+

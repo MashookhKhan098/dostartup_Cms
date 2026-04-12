@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 
 import React, { useState } from "react";
@@ -46,7 +46,7 @@ export default function RemoveDirectorPage() {
   whatsapp: "/images/whatsapp.png",
   cartIcon: "/images/cart.png",
   indiaFlag: "/images/india-flag.png",
-  ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+  ledgers: "https://img.dostartup.com/catalog/ledgers.png",
   };
 
  return (
@@ -210,7 +210,7 @@ export default function RemoveDirectorPage() {
  best interest.
  </p>
  <p className="text-sm text-gray-600 mt-4">
- IndiaFilings specialises in navigating the intricacies of the
+ DoStartup specialises in navigating the intricacies of the
  director removal or resignation process, ensuring full
  compliance with legal standards and meticulous attention to
  detail. Let our experts assist you in navigating this critical
@@ -421,7 +421,7 @@ export default function RemoveDirectorPage() {
 
  <div className="mb-6">
  <h3 className="text-lg font-semibold mb-2 text-slate-900">
- Why choose IndiaFilings for Director removal?
+ Why choose DoStartup for Director removal?
  </h3>
  <ul className="list-disc pl-5 mt-3 text-sm text-gray-600 space-y-2">
  <li>
@@ -434,7 +434,7 @@ export default function RemoveDirectorPage() {
  </li>
  <li>
  End-to-End Support: From consultation to submission of DIR-12,
- IndiaFilings handles the full process.
+ DoStartup handles the full process.
  </li>
  <li>
  Customized Solutions: Tailored advice based on the company's
@@ -569,3 +569,4 @@ export default function RemoveDirectorPage() {
  </div>
  );
 }
+

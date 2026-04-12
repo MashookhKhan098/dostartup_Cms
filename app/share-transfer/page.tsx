@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 
 import React, { useState } from "react";
@@ -12,8 +12,8 @@ import Footer from "../components/Footer";
 const ASSETS = {
  logo: "/images/india-logo.jpg",
  hero: "/images/share-transfer-hero.jpg",
- man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+ man: "https://img.dostartup.com/catalog/mca-compliance-simplified-india.webp",
+ ledgers: "https://img.dostartup.com/catalog/ledgers.png",
  whatsapp: "/images/whatsapp.png",
  adRight1: "/images/company-compliance.jpg",
  dinEkyc: "/images/din.jpg",
@@ -502,3 +502,4 @@ export default function ShareTransferPage(): React.ReactElement {
  </div>
  );
 }
+

@@ -2,12 +2,7 @@ const https = require('https');
 const fs = require('fs');
 
 const urls = [
-  'https://www.indiafilings.com/company-registration',
-  'https://www.indiafilings.com/trademark-registration',
-  'https://www.indiafilings.com/gst-registration',
-  'https://www.indiafilings.com/startup',
-  'https://www.indiafilings.com/partnership',
-  'https://www.indiafilings.com/proprietorship'
+  // Add your target URLs here
 ];
 
 function fetchHTML(url) {

@@ -26,7 +26,7 @@ export default function DynamicPricingSection({ category: propCategory }: Pricin
       try {
         // Fetching pricing cards matching the category field in Cockpit
         const filter = JSON.stringify({
-          category: { "$regex": finalCategory, "$options": "i" }
+          category: { "$regex": `^${finalCategory}$`, "$options": "i" }
         });
 
         const cardRes = await fetch(
@@ -99,16 +99,27 @@ export default function DynamicPricingSection({ category: propCategory }: Pricin
               { text: 'Priority Email Support' }
             ];
 
+            let imageUrl = "";
+            if (card.image) {
+              if (typeof card.image === "string") {
+                imageUrl = card.image;
+              } else if (card.image.path) {
+                // If it's a Cockpit asset, construct the URL
+                imageUrl = `${COCKPIT_BASE}/storage/uploads${card.image.path}`;
+              }
+            }
+
             const plan = {
               title: card.title || "Standard Plan",
               price: card.price?.toString() || "0",
               description: card.description || "Comprehensive service package for your business needs.",
               features: features,
-              isPopular: card.isPopular || false
+              isPopular: card.isPopular || false,
+              image: imageUrl
             };
 
             return (
-              <div key={card._id} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] xl:w-[calc(25%-1.5rem)] min-w-[300px] max-w-[380px]">
+              <div key={card._id} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] min-w-[280px] max-w-[380px]">
                 <PricingCardClient plan={plan} />
               </div>
             );

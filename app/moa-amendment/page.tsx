@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 
 import React, { useState } from "react";
@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 const ASSETS = {
  logo: "/images/india-logo.jpg",
  hero: "/images/moa-hero.jpg",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+ ledgers: "https://img.dostartup.com/catalog/ledgers.png",
  whatsapp: "/images/whatsapp.png",
  adRight1: "/images/company-compliance.jpg",
  dinEkyc: "/images/din.jpg",
@@ -248,7 +248,7 @@ export default function MOAAmendmentPage() {
  Association (MOA) to reflect changes in their operational,
  structural, or strategic directives. The MOA is the foundational
  legal document defining a company's scope, objectives, and
- operational boundaries. At IndiaFilings, we understand the
+ operational boundaries. At DoStartup, we understand the
  significance of MOA amendments and offer expert guidance. From
  understanding the intricacies of MOA clauses to navigating the
  legal framework, our team ensures seamless compliance with
@@ -426,10 +426,10 @@ export default function MOAAmendmentPage() {
  </p>
 
  <h3 className="mt-6 text-lg font-semibold text-slate-900">
- Streamline Your MOA Amendment Process with IndiaFilings
+ Streamline Your MOA Amendment Process with DoStartup
  </h3>
  <p className="mt-2">
- Choosing IndiaFilings ensures a seamless process. Our experts
+ Choosing DoStartup ensures a seamless process. Our experts
  guide you through drafting resolutions, preparing explanatory
  statements, handling EGM formalities and filing documents with
  the Registrar of Companies. Contact our experts today to get
@@ -576,3 +576,4 @@ export default function MOAAmendmentPage() {
  </div>
  );
 }
+

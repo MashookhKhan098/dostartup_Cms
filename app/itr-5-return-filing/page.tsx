@@ -344,7 +344,7 @@ function SliderRow({
     <div className="mb-6">
       <div className="flex justify-between items-center mb-1">
         <label className="text-xs font-semibold text-black">{label}</label>
-        <span className="text-xs font-bold text-[#C15F3C] bg-[#F4F3EE] border border-[#C15F3C]/20 px-2 py-0.5 rounded-lg">
+        <span className="text-xs font-bold text-[#C15F3C] bg-white border border-[#C15F3C]/20 px-2 py-0.5 rounded-lg">
           {fmt(value)}
         </span>
       </div>
@@ -462,7 +462,7 @@ export default function ITR5Page() {
             }}
           />
           <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-[#C15F3C]/5 rounded-full blur-3xl pointer-events-none opacity-60" />
-          <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-[#F4F3EE] rounded-full blur-2xl pointer-events-none opacity-80" />
+          <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-white rounded-full blur-2xl pointer-events-none opacity-80" />
           <div className="absolute top-20 left-10 w-2 h-2 bg-[#C15F3C] rounded-full opacity-20 animate-ping" />
           <div className="absolute bottom-20 right-20 w-3 h-3 bg-[#C15F3C] rounded-full opacity-20 animate-pulse" />
 
@@ -534,7 +534,7 @@ export default function ITR5Page() {
                   ],
                 ].map(([num, lbl, icon]) => (
                   <div key={String(lbl)} className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-[#F4F3EE] border border-[#C15F3C]/20 flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-full bg-white border border-[#C15F3C]/20 flex items-center justify-center">
                       {icon}
                     </div>
                     <div>
@@ -550,14 +550,14 @@ export default function ITR5Page() {
 
             {/* Right — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 hover:shadow-[#C15F3C]/20 transition-all duration-300">
+              <div className="bg-white border-2 border-[#C15F3C]/20 rounded-3xl p-6 shadow-2xl shadow-[#C15F3C]/10 hover:border-[#C15F3C]/40 hover:shadow-[#C15F3C]/20 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-[#C15F3C]" />
                     🤖 AI ITR-5 Assistant — Live
                   </span>
                   <span className="bg-[#C15F3C] text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-[#F4F3EE] rounded-full animate-pulse" />
+                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
                     ACTIVE
                   </span>
                 </div>
@@ -565,9 +565,9 @@ export default function ITR5Page() {
                 {AI_STEPS.map((s, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 py-3 border-b border-gray-100 last:border-0 hover:bg-[#F4F3EE] rounded-lg px-2 transition-colors"
+                    className="flex items-start gap-3 py-3 border-b border-gray-100 last:border-0 hover:bg-white rounded-lg px-2 transition-colors"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#F4F3EE] border border-[#C15F3C]/10 flex items-center justify-center text-xl flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-[#C15F3C]/10 flex items-center justify-center text-xl flex-shrink-0">
                       {s.icon}
                     </div>
                     <div>
@@ -581,7 +581,7 @@ export default function ITR5Page() {
                   </div>
                 ))}
 
-                <div className="mt-4 bg-[#F4F3EE] border border-[#C15F3C]/10 rounded-xl p-4">
+                <div className="mt-4 bg-white border border-[#C15F3C]/10 rounded-xl p-4">
                   <div className="flex justify-between text-xs mb-2">
                     <span className="text-gray-500 flex items-center gap-1">
                       <Zap size={12} className="text-[#C15F3C]" /> Processing
@@ -591,7 +591,7 @@ export default function ITR5Page() {
                       75% Complete
                     </span>
                   </div>
-                  <div className="h-2 bg-[#F4F3EE] rounded-full overflow-hidden">
+                  <div className="h-2 bg-white rounded-full overflow-hidden">
                     <div className="h-full w-[75%] bg-[#C15F3C] rounded-full" />
                   </div>
                   <p className="text-[10px] text-gray-400 mt-2">
@@ -616,7 +616,7 @@ export default function ITR5Page() {
                     ].map((b) => (
                       <span
                         key={b}
-                        className="bg-[#F4F3EE] border border-[#C15F3C]/10 text-[#C15F3C] text-[10px] font-semibold px-2 py-1 rounded-md"
+                        className="bg-white border border-[#C15F3C]/10 text-[#C15F3C] text-[10px] font-semibold px-2 py-1 rounded-md"
                       >
                         {b}
                       </span>
@@ -672,7 +672,7 @@ export default function ITR5Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-[#F4F3EE] border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
+              <div className="bg-white border-2 border-[#C15F3C] rounded-2xl p-6 hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-[#C15F3C]" /> File
                   ITR-5 If You Are:
@@ -698,7 +698,7 @@ export default function ITR5Page() {
                 </ul>
               </div>
 
-              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT
                   ITR-5 — Use Other Forms:
@@ -739,7 +739,7 @@ export default function ITR5Page() {
             </div>
 
             {/* Entity Tax Table */}
-            <div className="bg-[#F4F3EE] border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
               <h3 className="font-display font-bold text-black text-lg mb-4 flex items-center gap-2">
                 <BarChart3 size={20} className="text-[#C15F3C]" />
                 📊 ITR-5 Tax Rates by Entity Type — FY 2025-26
@@ -769,7 +769,7 @@ export default function ITR5Page() {
                     {ENTITY_TABLE.map((row, i) => (
                       <tr
                         key={row.entity}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
+                        className={`border-b border-gray-100 hover:bg-white transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
                       >
                         <td className="px-3 py-2.5 font-semibold text-black">
                           {row.entity}
@@ -792,13 +792,13 @@ export default function ITR5Page() {
                 </table>
               </div>
               <div className="mt-3 grid sm:grid-cols-2 gap-2">
-                <p className="text-xs text-gray-600 bg-[#F4F3EE] rounded-xl px-3 py-2 border border-[#C15F3C]/10">
+                <p className="text-xs text-gray-600 bg-white rounded-xl px-3 py-2 border border-[#C15F3C]/10">
                   💡 <strong className="text-black">No Slab Benefits:</strong>{" "}
                   Partnership Firms & LLPs are taxed at{" "}
                   <strong className="text-[#C15F3C]">30% flat</strong> — there
                   is no basic exemption limit unlike individuals.
                 </p>
-                <p className="text-xs text-gray-600 bg-[#F4F3EE] rounded-xl px-3 py-2 border border-[#C15F3C]/10">
+                <p className="text-xs text-gray-600 bg-white rounded-xl px-3 py-2 border border-[#C15F3C]/10">
                   💡 <strong className="text-black">Partner's Share:</strong>{" "}
                   Individual partners' share of firm profit is{" "}
                   <strong className="text-[#C15F3C]">exempt</strong> in their
@@ -835,9 +835,9 @@ export default function ITR5Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-gray-200 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-white border border-gray-200 rounded-2xl hover:border-[#C15F3C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group"
                   >
-                    <div className="w-10 h-10 bg-[#F4F3EE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 group-hover:scale-110 transition-all">
+                    <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 group-hover:scale-110 transition-all">
                       {f.icon}
                     </div>
                     <div>
@@ -855,7 +855,7 @@ export default function ITR5Page() {
                 ))}
               </div>
 
-              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-[#F4F3EE]">
+              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
                 <div className="bg-[#C15F3C] px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">
                     <TrendingUp size={16} className="text-white" />
@@ -864,7 +864,7 @@ export default function ITR5Page() {
                 </div>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-[#F4F3EE]">
+                    <tr className="bg-white">
                       <th className="px-3 py-3 text-left font-bold text-xs text-black w-[28%]">
                         Feature
                       </th>
@@ -947,7 +947,7 @@ export default function ITR5Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-gray-100 hover:bg-[#F4F3EE] transition-colors ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
+                        className={`border-b border-gray-100 hover:bg-white transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
                       >
                         <td className="px-3 py-3 font-medium text-black text-xs">
                           {row.feature}
@@ -974,7 +974,7 @@ export default function ITR5Page() {
                     ))}
                   </tbody>
                 </table>
-                <div className="bg-[#F4F3EE] p-3 text-center text-xs text-black border-t border-[#C15F3C]/10">
+                <div className="bg-white p-3 text-center text-xs text-black border-t border-[#C15F3C]/10">
                   <ThumbsUp size={12} className="inline mr-1 text-[#C15F3C]" />
                   DoStartup.in — Best AI ITR-5 platform at the lowest price
                 </div>
@@ -1007,14 +1007,14 @@ export default function ITR5Page() {
               {AI_FEATURES.map((f) => (
                 <div
                   key={f.title}
-                  className="bg-[#F4F3EE] border-2 border-gray-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all duration-200 group"
+                  className="bg-white border-2 border-gray-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg hover:shadow-[#C15F3C]/10 transition-all duration-200 group"
                 >
                   <div className="text-[#C15F3C] mb-3 group-hover:scale-110 transform inline-block transition-transform">
                     {f.icon}
                   </div>
                   <div className="font-display font-bold text-black text-base mb-2 flex items-center gap-2">
                     {f.title}
-                    <span className="text-[10px] bg-[#F4F3EE] text-[#C15F3C] border border-[#C15F3C]/20 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] bg-white text-[#C15F3C] border border-[#C15F3C]/20 px-2 py-0.5 rounded-full">
                       AI
                     </span>
                   </div>
@@ -1049,7 +1049,7 @@ export default function ITR5Page() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
                 {PROCESS_STEPS.map((s) => (
                   <div key={s.num} className="text-center group cursor-pointer">
-                    <div className="w-14 h-14 rounded-full bg-[#F4F3EE] border-2 border-[#C15F3C] flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-[#C15F3C] group-hover:scale-110 transition-all duration-200">
+                    <div className="w-14 h-14 rounded-full bg-white border-2 border-[#C15F3C] flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-[#C15F3C] group-hover:scale-110 transition-all duration-200">
                       {s.icon}
                     </div>
                     <div className="text-[#C15F3C] text-xs font-bold mb-1">
@@ -1094,16 +1094,16 @@ export default function ITR5Page() {
               </p>
             </div>
 
-            <div className="bg-[#F4F3EE] rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
+            <div className="bg-white rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
               <div className="bg-orange-500 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#F4F3EE]/20 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                     <Building2 size={20} className="text-white" />
                   </div>
                   <div>
                     <h3 className="font-display font-extrabold text-white text-lg flex items-center gap-2">
                       ITR-5 Firm Tax Calculator
-                      <span className="text-[10px] bg-[#F4F3EE]/20 text-white px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full">
                         Live
                       </span>
                     </h3>
@@ -1115,11 +1115,11 @@ export default function ITR5Page() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={resetCalc}
-                    className="bg-[#F4F3EE]/20 hover:bg-[#F4F3EE]/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
+                    className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
                   >
                     <RefreshCw size={12} /> Reset
                   </button>
-                  <span className="bg-[#F4F3EE]/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                  <span className="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
                     <Zap size={12} /> AI Powered
                   </span>
                 </div>
@@ -1142,7 +1142,7 @@ export default function ITR5Page() {
                       onChange={(e) =>
                         upd("entityType", e.target.value as EntityType)
                       }
-                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-[#F4F3EE]"
+                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-white"
                     >
                       <option value="partnership">
                         Partnership Firm (30% flat tax)
@@ -1249,7 +1249,7 @@ export default function ITR5Page() {
                 </div>
 
                 {/* RESULTS */}
-                <div className="p-6 bg-[#F4F3EE]">
+                <div className="p-6 bg-white">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
                     <BarChart3 size={16} className="text-orange-500" />
                     Firm Tax Breakdown
@@ -1276,7 +1276,7 @@ export default function ITR5Page() {
                   </div>
 
                   {/* Income Breakdown */}
-                  <div className="bg-[#F4F3EE] rounded-2xl border-2 border-orange-500 p-4 mb-4">
+                  <div className="bg-white rounded-2xl border-2 border-orange-500 p-4 mb-4">
                     <p className="text-xs font-bold text-orange-500 mb-2 uppercase ">
                       🏢 Income Computation
                     </p>
@@ -1314,7 +1314,7 @@ export default function ITR5Page() {
                   </div>
 
                   {/* Tax Computation */}
-                  <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 mb-4 shadow-sm">
+                  <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-4 shadow-sm">
                     <ResultRow
                       label={
                         result.flatTaxRate > 0
@@ -1398,7 +1398,7 @@ export default function ITR5Page() {
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={i}
-                  className="bg-[#F4F3EE] border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="flex gap-1 mb-3">
                     {[...Array(5)].map((_, j) => (
@@ -1433,7 +1433,7 @@ export default function ITR5Page() {
  PRICING
  ════════════════════════════════════ */}
         <div id="pricing">
-          <DynamicPricingSection />
+          <DynamicPricingSection category="itr-5-return-filing" />
         </div>
 
         {/* ════════════════════════════════════
@@ -1500,7 +1500,7 @@ export default function ITR5Page() {
           </div>
         </section>
 
-        <DynamicPricingSection />
+        <DynamicPricingSection category="itr-5-return-filing" />
         <Footer />
       </main>
     </>

@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+﻿import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
@@ -92,9 +92,13 @@ const heroProps = {
  <Navbar />
  <Hero {...heroProps}/>
  <DynamicTabContent category="Trademark" />
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="darpan-registration" />
+ </div>
+ <FAQAccordion category="darpan-registration" />
  <Popularsearches />
  <Footer />
  </>
  );
 }
+

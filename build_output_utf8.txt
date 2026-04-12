@@ -1,0 +1,845 @@
+﻿
+> my-next-project@0.1.0 build
+> next build
+
+  Γû▓ Next.js 14.2.5
+  - Environments: .env
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+node.exe : 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Failed to compile.
+
+./app/15ca-15cb-filing/page.tsx
+186:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+236:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+253:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+333:47  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+355:25  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+521:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+538:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+546:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+589:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/about/page.tsx
+41:72  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+74:17  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+233:2  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+233:139  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+247:2  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+247:111  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/adt-1-filing/page.tsx
+155:218  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+165:394  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/authorized-capital-increase/page.tsx
+128:30  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+269:9  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+276:50  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+286:51  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+308:26  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+316:39  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+439:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+446:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+457:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/blog/[id]/page.tsx
+103:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+122:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/bookkeeping/page.tsx
+150:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+366:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+366:2  Warning: img elements must have an alt prop, either with meaningful text, or an empty string for decorative 
+images.  jsx-a11y/alt-text
+
+./app/business-plan/page.tsx
+86:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+221:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+241:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/Business-Search/page.tsx
+65:14  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+65:22  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/business-tax-filing/page.tsx
+72:285  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+82:91  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+113:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+150:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+157:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+180:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+203:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/ca-support/page.tsx
+118:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+164:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+510:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+541:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+593:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/careers/page.tsx
+367:17  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/central-approvals/page.tsx
+357:22  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/commencement-inc-20a/page.tsx
+80:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+134:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+289:81  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+357:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+369:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/company-itr-filing/page.tsx
+178:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+232:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+367:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+604:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+622:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+665:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+718:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+764:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+772:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/compliance/page.tsx
+178:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+520:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+941:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/BlogSidebar.tsx
+151:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+169:27  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+194:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/DoStartupPricing.tsx
+88:73  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/components/DynamicTabContent.tsx
+72:20  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+72:31  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/components/Gst/Hero.tsx
+33:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/Hero.tsx
+178:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/ImageSlider.tsx
+67:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/Navbar.tsx
+337:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+454:40  Error: React Hook "useState" cannot be called inside a callback. React Hooks must be called in a React 
+function component or a custom React Hook function.  react-hooks/rules-of-hooks
+455:23  Error: React Hook "useRef" cannot be called inside a callback. React Hooks must be called in a React function 
+component or a custom React Hook function.  react-hooks/rules-of-hooks
+
+./app/components/Ourstory.tsx
+39:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/Partnerships.tsx
+80:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+103:8  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+113:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/PricingCardClient.tsx
+43:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+85:91  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/components/PricingCards.tsx
+37:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+77:66  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/components/Registration/Hero2.tsx
+33:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/SidebarCart.tsx
+14:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+49:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/Startup/Hero3.tsx
+33:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/Trademark/Hero.tsx
+95:97  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/components/Trademark/Hero3.tsx
+33:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/demat-of-shares/page.tsx
+168:141  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/din-ekyc-filing/page.tsx
+137:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+174:21  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+213:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+290:10  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+326:59  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+370:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+378:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+439:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/din-reactivation/page.tsx
+156:122  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+156:131  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+168:76  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+168:119  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+203:141  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/director-change/page.tsx
+66:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+89:21  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+113:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+195:10  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+197:9  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+212:37  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+233:53  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+348:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+360:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+439:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/document/page.tsx
+207:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/dormant-status-filing/page.tsx
+152:483  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+152:744  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+161:192  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+164:26  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+164:43  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+167:329  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+184:404  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+190:59  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+237:141  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/DoStartup-Review/page.tsx
+71:2  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+71:16  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/dpt-3-filing/page.tsx
+162:141  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/e-filing/page.tsx
+118:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+202:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+267:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+398:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+415:53  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+425:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+436:61  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+513:47  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+532:41  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+680:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+718:4  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+766:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+795:40  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+795:46  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+803:2  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+803:9  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+803:16  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+803:39  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+841:35  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+853:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+871:2  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+871:26  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+871:29  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+871:39  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+871:42  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+871:59  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+916:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+927:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+984:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+992:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+1053:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/esi-return-filing/page.tsx
+287:61  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+289:12  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+319:44  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+319:103  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+319:225  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+324:400  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+338:89  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+338:162  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+389:67  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/fdi-filing-rbi/page.tsx
+122:20  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+285:25  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+294:25  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/Filings-AE-for-UAE/page.tsx
+65:14  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+65:22  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/fla-return-filing/page.tsx
+192:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+267:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+319:49  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+321:51  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+333:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+351:7  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+363:7  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+419:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/fssai-renewal/page.tsx
+105:6  Warning: React Hook useEffect has a missing dependency: 'STATES_UTS'. Either include it or remove the 
+dependency array.  react-hooks/exhaustive-deps
+
+./app/government-schemes/page.tsx
+35:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/hiring/page.tsx
+92:57  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+356:16  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/hr-payroll/page.tsx
+51:89  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+84:16  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/income-tax/page.tsx
+276:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+354:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+374:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+389:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+522:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+551:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+560:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+589:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+595:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+603:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+631:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+639:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/income-tax-notice/page.tsx
+455:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+501:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+518:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+526:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/incometax/page.tsx
+68:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/itr-1-return-filing/page.tsx
+410:22  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+704:26  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+962:73  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/itr-2-return-filing/page.tsx
+743:20  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+1079:26  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+1505:62  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+1505:71  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+1584:19  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/itr-3-return-filing/page.tsx
+880:58  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+880:67  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/itr-5-return-filing/page.tsx
+802:60  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+803:38  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+1089:32  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+1412:58  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+1412:67  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+1466:19  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/itr-7-return-filing/page.tsx
+236:79  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/llp-compliance/page.tsx
+194:136  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/login/page.tsx
+129:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/moa-amendment/page.tsx
+142:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+220:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+250:35  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+262:6  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+262:10  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+265:30  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+268:35  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+300:41  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+302:57  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+306:38  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+310:55  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+314:37  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+336:24  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+339:20  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+366:44  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+492:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+540:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+548:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+573:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/name-change-company/page.tsx
+92:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+204:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+231:20  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+298:20  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+373:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+420:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+428:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+483:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/opc-compliance/page.tsx
+71:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+131:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+131:17  Warning: img elements must have an alt prop, either with meaningful text, or an empty string for decorative 
+images.  jsx-a11y/alt-text
+137:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+137:17  Warning: img elements must have an alt prop, either with meaningful text, or an empty string for decorative 
+images.  jsx-a11y/alt-text
+143:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+143:17  Warning: img elements must have an alt prop, either with meaningful text, or an empty string for decorative 
+images.  jsx-a11y/alt-text
+
+./app/partnership-compliance/page.tsx
+63:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+113:20  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+228:77  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+240:27  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/partnership-llp-itr/page.tsx
+182:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+236:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+371:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+387:18  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+392:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+401:16  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+419:34  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+435:15  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+435:59  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+436:14  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+437:2  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+437:47  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+472:7  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+495:58  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+564:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+583:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/peso/page.tsx
+147:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/registered-office-change/page.tsx
+118:36  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+262:26  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+264:48  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+266:47  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+272:51  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+294:41  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+424:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+435:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+472:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/remove-director/page.tsx
+69:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+92:21  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+116:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+209:61  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+227:34  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+347:10  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+350:12  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+390:17  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+440:60  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+475:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+487:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+566:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/share-transfer/page.tsx
+161:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+240:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+271:40  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+282:13  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+292:13  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+384:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+430:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+438:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+499:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/state-approvals/page.tsx
+35:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/tan-registration/page.tsx
+199:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+275:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+326:16  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+335:45  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+523:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+617:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+634:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+642:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/tds-return-filing/page.tsx
+105:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+276:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/Trademark-Search/page.tsx
+65:14  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+65:22  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/trust-ngo-tax-filing/page.tsx
+185:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+240:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+376:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+441:52  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+543:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+553:13  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+564:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+614:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/winding-up-llp/page.tsx
+84:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+166:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+216:44  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+338:57  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+339:23  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+433:5  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+480:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+488:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+543:2  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/windup-company/page.tsx
+108:123  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+165:78  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+165:103  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+200:18  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+217:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from 
+`next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: 
+https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/writer/new-article/page.tsx
+34:72  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+34:86  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+./app/writer/writerlogin/page.tsx
+107:64  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+107:101  Warning: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+
+info  - Need to disable some ESLint rules? Learn more here: 
+https://nextjs.org/docs/basic-features/eslint#disabling-rules

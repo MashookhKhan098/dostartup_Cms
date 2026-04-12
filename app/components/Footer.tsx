@@ -82,7 +82,7 @@ export default function Footer() {
           </div>
 
           {/* Newsletter Section */}
-          <div className="mx-6 mb-6 p-5 bg-[#F4F3EE] rounded-xl border border-[#E5E2DA]">
+          <div className="mx-6 mb-6 p-5 bg-white rounded-xl border border-[#E5E2DA]">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#C15F3C]/10 flex items-center justify-center">

@@ -1,3 +1,4 @@
+﻿"use client";
 import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
 
@@ -43,7 +44,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
                     Fee Structure
                   </p>
                   <button className="text-sm text-[#C15F3C] font-medium hover:underline">
-                    Learn More →
+                    Learn More â†’
                   </button>
                 </div>
               </div>
@@ -87,7 +88,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
                   <div className="space-y-2 mt-2">
                     {features.map((feature, index) => (
                       <div key={index} className="flex gap-2">
-                        <span className="text-[#C15F3C] font-bold text-lg">›</span>
+                        <span className="text-[#C15F3C] font-bold text-lg">â€º</span>
                         <p className="text-sm text-[#4F4C45]">{feature}</p>
                       </div>
                     ))}
@@ -100,7 +101,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
 
                 {/* TRUST INFO */}
                 <div className="flex items-center gap-4 text-xs text-[#6F6B63]">
-                  <span>★★★★★ 4.9/5 TrustScore</span>
+                  <span>â˜…â˜…â˜…â˜…â˜… 4.9/5 TrustScore</span>
                   <span>Trusted by 50,000+ Enterprises</span>
                 </div>
 
@@ -164,7 +165,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
 
               <div className="flex gap-2 w-full">
                 <select className="px-2 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none cursor-pointer">
-                  <option>🇮🇳 +91</option>
+                  <option>ðŸ‡®ðŸ‡³ +91</option>
                 </select>
                 <input
                   type="tel"
@@ -191,7 +192,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
 
             {/* SECURITY */}
             <p className="text-center text-xs text-[#B1ADA1]">
-              Secure · Encrypted · No Spam
+              Secure Â· Encrypted Â· No Spam
             </p>
 
           </div>
@@ -216,3 +217,4 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
 };
 
 export default GSTInvoicingComponent;
+

@@ -12,7 +12,7 @@ import SidebarCart from "../components/SidebarCart";
 const ASSETS = {
   logo: "/images/india-logo.jpg",
   heroImage: "/images/din.jpg",
-  man: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
+  man: "https://img.dostartup.com/catalog/mca-compliance-simplified-india.webp",
   ledgers: "/images/ledgers.jpg",
   whatsapp: "/images/whatsapp.png",
   companyCompliance: "/images/company-compliance.jpg",

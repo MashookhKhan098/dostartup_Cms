@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 
 import React, { useState } from "react";
@@ -41,14 +41,14 @@ export default function CompanyNameChange() {
  3: "Form MGT-14 is filed for special resolutions, while Form INC-24 is specifically for name change approval from the ROC.",
  4: "Yes, any company can change its name by following the proper legal procedure under the Companies Act, 2013, provided the new name is available and complies with naming guidelines.",
  5: "Common reasons include similarity to existing company names, non-compliance with naming guidelines, incomplete documentation, or objections from the ROC.",
- 6: "The cost includes government fees, professional fees, and name availability search fees. Contact IndiaFilings for exact pricing based on your company type.",
+ 6: "The cost includes government fees, professional fees, and name availability search fees. Contact DoStartup for exact pricing based on your company type.",
  7: "Yes, a board resolution is the first step to initiate the name change process, followed by a special resolution passed by shareholders.",
  };
 
  const ASSETS = {
  logo: "/images/india-logo.jpg",
- hero: "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+ hero: "https://img.dostartup.com/catalog/mca-compliance-simplified-india.webp",
+ ledgers: "https://img.dostartup.com/catalog/ledgers.png",
  whatsapp: "/images/whatsapp.png",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
@@ -486,3 +486,4 @@ export default function CompanyNameChange() {
  </div>
  );
 }
+

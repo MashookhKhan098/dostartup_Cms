@@ -1,4 +1,3 @@
-
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -9,13 +8,13 @@ import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
  return (
- <>
+ <main className="min-h-screen bg-[#F4F3EE]">
  <Navbar />
  <Hero
  trademarkService={{
  serviceName: "Hearing",
  serviceDescription:
- "Hearings are scheduled only when the Registry issues a notice. Your trademark hasn’t reached that stage.",
+ "Hearings are scheduled only when the Registry issues a notice. Your trademark hasn't reached that stage.",
  formFields: [
  {
  type: "input",
@@ -38,9 +37,14 @@ export default function Home() {
  }}
  />
  <DynamicTabContent category="Trademark" />
- <FAQAccordion />
+ 
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="trademark-hearing" />
+ </div>
+ 
+ <FAQAccordion category="trademark-hearing" />
  <Popularsearches />
  <Footer />
- </>
+ </main>
  );
 }

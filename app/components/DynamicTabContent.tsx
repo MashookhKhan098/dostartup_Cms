@@ -2,24 +2,62 @@ interface DynamicTabContentProps {
  category: string;
 }
 
+const COCKPIT_URL = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+
+const FALLBACK_DATA: Record<string, any> = {
+  "one-person-company": {
+    title: "One Person Company Registration",
+    description: "The One Person Company (OPC) is a revolutionary business structure that allows a single entrepreneur to operate a corporate entity with limited liability.",
+    introduction: "Introduced in the Companies Act 2013, One Person Company is a hybrid of Sole Proprietorship and Private Limited Company models. It provides the legal protection of a company while offering the flexibility of a single owner.",
+    sections: [
+      {
+        heading: "Key Benefits of OPC",
+        content: "OPC offers several advantages including limited liability, continuous existence, and easy access to funding.",
+        points: ["Separate Legal Entity", "Limited Liability Protection", "Easy Transferability", "Minimal Compliance compared to Pvt Ltd"]
+      },
+      {
+        heading: "Registration Process",
+        content: "The process involves obtaining DSC, DIN, and filing for incorporation through the SPICe+ form.",
+        points: ["Step 1: Obtain Digital Signature (DSC)", "Step 2: Apply for Name Approval", "Step 3: Filing Incorporation Forms", "Step 4: Issue of Certificate of Incorporation"]
+      }
+    ],
+    author: { name: "Compliance Expert", role: "Chartered Accountant", updatedDate: "April 2024" }
+  },
+  "llp": {
+    title: "LLP Registration Services",
+    description: "Limited Liability Partnership (LLP) is one of the easiest ways to start a business in India with partners.",
+    introduction: "LLPs provide the benefits of limited liability to its partners and allow them to manage their internal affairs like a partnership firm.",
+    sections: [
+      {
+        heading: "Why Choose LLP?",
+        content: "LLPs are ideal for professional firms and small businesses that want low compliance and limited liability.",
+        points: ["No Minimum Capital", "Lower Compliance Cost", "No Dividend Distribution Tax", "Limited Liability for all Partners"]
+      }
+    ],
+    author: { name: "Legal Advisory", role: "Corporate Lawyer", updatedDate: "April 2024" }
+  }
+};
+
 async function getTabData(category: string) {
- const res = await fetch(
- "https://cms.dostartup.in/api/content/items/testing",
- { cache: "no-store" }
- );
+  try {
+    const url = `${COCKPIT_URL}/api/content/items/testing?token=${TOKEN}`;
+    const res = await fetch(url, { cache: "no-store" });
+    const json = await res.json();
 
- const json = await res.json();
+    if (Array.isArray(json) && json.length > 0) {
+      const item = json.find(
+        (entry: any) => entry.category?.toLowerCase() === category?.toLowerCase()
+      );
+      if (item?.description) return item.description;
+    }
+  } catch (error) {
+    console.error("DynamicTabContent fetch error:", error);
+  }
 
- if (!Array.isArray(json) || json.length === 0) {
- return null;
- }
-
- const item = json.find(
- (entry: any) =>
- entry.category?.toLowerCase() === category?.toLowerCase()
- );
-
- return item?.description || null;
+  // Fallback to hardcoded data if fetch fails or category not found
+  const lowerCat = category.toLowerCase();
+  return FALLBACK_DATA[lowerCat] || FALLBACK_DATA[category] || null;
 }
 
 export default async function DynamicTabContent({

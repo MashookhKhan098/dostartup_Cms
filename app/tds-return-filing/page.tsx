@@ -4,514 +4,298 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
+import PopularSearchesComponent from "../components/PopularSearches";
 
 import React, { useState } from "react";
 import {
- ChevronDown,
- Search,
- Check,
- Plus,
- ShoppingBag,
- ChevronRight,
+  ChevronDown,
+  Search,
+  Check,
+  Plus,
+  ShoppingBag,
+  ChevronRight,
 } from "lucide-react";
 
 const ASSETS = {
- logo: "/images/india-logo.jpg",
- heroTDS: "/images/hero.png",
- whatsapp: "/images/whatsapp.png",
- cartIcon: "/images/cart.png",
- tdsreturnIcon: "/images/tdsreturn.png",
- indiaFlag: "/images/india-flag.png",
- ledgersBadge: "/images/ledgers-badge.png",
- docsImg: "/images/tds-docs.png",
- pricingBadge: "/images/ledgers-badge.png",
+  logo: "/images/india-logo.jpg",
+  heroTDS: "/images/hero.png",
+  whatsapp: "/images/whatsapp.png",
+  cartIcon: "/images/cart.png",
+  tdsreturnIcon: "/images/tdsreturn.png",
+  indiaFlag: "/images/india-flag.png",
+  ledgersBadge: "/images/ledgers-badge.png",
+  docsImg: "/images/tds-docs.png",
+  pricingBadge: "/images/ledgers-badge.png",
 };
 
-const NAV_ITEMS = [
- "DoStartup",
- "Startup",
- "Registrations",
- "Trademark",
- "GST",
- "Income Tax",
- "MCA",
- "Compliance",
- "Personal",
- "Global",
- "Cities",
- "Guides",
- "Login",
-];
-
-const POPULAR_SEARCHES = [
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Flipkart Seller",
- "Caste Certificate",
- "EPFO Passbook",
- "Domicile Certificate",
- "MSME Registration",
- "Income Certificate",
- "Passport Renewal",
- "Form 16",
- "eAadhaar Download",
- "PAN Card Apply",
-];
-
 export default function TdsReturnFilingPage(): React.ReactElement {
- const [faqOpen, setFaqOpen] = useState<number | null>(null);
- const [gstChecked, setGstChecked] = useState(false);
- const [searchQuery, setSearchQuery] = useState("");
- const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
+  return (
+    <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
+      <Navbar />
 
- const faqQuestions = [
- "What is TDS?",
- "What is TAN?",
- "Which Form in IT Portal provides details of TDS?",
- "What is a TDS Return?",
- "What are the important TDS Returns to be filed by an Assessee?",
- "What is the Time Limit for remittance of TDS?",
- "What are the last TDS return filing dates for various quarters?",
- "What is the late fee payable for delay in filing TDS Return?",
- "What is the interest payable for delay in deduction of Tax?",
- "What is the penalty payable for delay in filing/incorrect filing of TDS Return?",
- ];
+      {/* Breadcrumb & Hero */}
+      <div className="bg-[#F4F3EE] py-6">
+        <div className="max-w-[1180px] mx-auto px-6">
+          <div className="text-sm text-gray-500 mb-4">
+            DoStartup / Income Tax /{" "}
+            <span className="text-[#C15F3C] font-medium">
+              TDS Return Filing
+            </span>
+          </div>
 
- const faqAnswers: Record<number, string> = {
- 0: "TDS (Tax Deducted at Source) is a mechanism where tax is deducted by the payer (deductor) at the time of making specified payments (salary, rent, professional fees, etc.). The deducted tax is deposited with the government and credited to the payee's account.",
- 1: "TAN (Tax Deduction and Collection Account Number) is a 10-character alphanumeric number required by entities that deduct or collect tax at source. TAN is mandatory for filing TDS returns.",
- 2: "Form 26AS and TRACES are the primary sources where TDS details and tax credits appear. The income tax e-filing portal and TRACES provide detailed statements and challan status.",
- 3: "A TDS return is a statement filed by the deductor containing details of TDS deducted and deposited for a particular period. Returns are filed quarterly in the specified formats (24Q, 26Q, 27Q, 27EQ, etc.).",
- 4: "Important TDS returns include Form 24Q (Salary), Form 26Q (Non-salary payments), Form 27Q (Payments to non-residents), and Form 27EQ (TCS). These are filed quarterly with the prescribed due dates.",
- 5: "TDS remittance must be made within the prescribed due date (usually by the 7th of the subsequent month) to avoid interest and penalties. Specific remittance due dates depend on the nature of the deduction and government rules.",
- 6: "TDS return quarterly due dates commonly are: Q1 (Apr-Jun) - 31st July, Q2 (Jul-Sep) - 31st Oct, Q3 (Oct-Dec) - 31st Jan, Q4 (Jan-Mar) - 31st May. Verify every year for official updates.",
- 7: "Late filing attracts a fee (commonly Rs. 200 per day subject to caps) and other penalties depending on the delay and the amount of TDS involved. Exact fees/limits may vary — always check the latest provisions.",
- 8: "Interest is levied for late deduction and late remittance of TDS (commonly 1% p.m. for late deduction and 1.5% p.m. for late remittance, calculated on the relevant outstanding amounts).",
- 9: "Penalties for non-compliance can range from monetary fines to penalties up to the amount of TDS, additional interest, and potential legal action depending on severity and intent.",
- };
+          <section
+            aria-label="Hero"
+            className="relative rounded-[32px] overflow-hidden shadow-2xl"
+            style={{ minHeight: 320 }}
+          >
+            <div
+              className="absolute inset-0 bg-center bg-no-repeat bg-cover"
+              style={{
+                backgroundImage: `url(${ASSETS.heroTDS})`,
+              }}
+            >
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(90deg, rgba(2,6,23,0.75) 0%, rgba(2,6,23,0.3) 60%)",
+                }}
+              />
+            </div>
 
- return (
- <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
- <Navbar />
+            <div className="relative z-10">
+              <div className="mx-auto max-w-[1180px] px-6 py-12 flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-1 max-w-2xl">
+                  <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-10 backdrop-blur-md">
+                    <h1 className="text-white text-3xl md:text-5xl leading-tight font-bold mb-4">
+                      Accountant for TDS Filings
+                    </h1>
+                    <p className="text-slate-200 text-base mb-6 max-w-prose leading-relaxed">
+                      File TDS returns, manage challans, and reconcile payments
+                      effortlessly using our Accountants & LEDGERS platform.
+                    </p>
 
- {/* Breadcrumb & Hero */}
- <div className="bg-gradient-to-r from-white to-slate-50 py-6">
- <div className="max-w-[1180px] mx-auto px-6">
- <div className="text-sm text-gray-500 mb-4">
- DoStartup / Income Tax /{" "}
- <span className="text-[#C15F3C] font-medium">
- TDS Return Filing
- </span>
- </div>
+                    <form
+                      onSubmit={(e) => e.preventDefault()}
+                      className="flex flex-col sm:flex-row gap-4 items-center"
+                    >
+                      <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-2xl px-5 py-3.5 w-full sm:w-auto backdrop-blur-md">
+                        <span className="text-white/50 text-xs font-bold whitespace-nowrap">ENTER GSTIN</span>
+                        <input
+                          className="bg-transparent outline-none placeholder:text-white/30 text-white text-sm w-full min-w-[160px]"
+                          placeholder="GSTIN"
+                        />
+                      </div>
 
- <section
- aria-label="Hero"
- className="relative rounded-2xl overflow-hidden shadow-sm"
- style={{ minHeight: 320 }}
- >
- <div
- className="absolute inset-0 bg-center bg-no-repeat bg-cover"
- style={{
- backgroundImage: `url(${ASSETS.heroTDS})`,
- }}
- >
- <div
- className="absolute inset-0"
- style={{
- background:
- "linear-gradient(90deg, rgba(2,6,23,0.65) 0%, rgba(2,6,23,0.15) 60%)",
- }}
- />
- </div>
+                      <button className="w-full sm:w-auto px-8 py-4 bg-[#C15F3C] text-white rounded-2xl font-bold hover:bg-[#A94E30] transition-all shadow-lg shadow-[#C15F3C]/20">
+                        Get Accountant
+                      </button>
+                    </form>
 
- <div className="relative z-10">
- <div className="mx-auto max-w-[1180px] px-6 py-5 flex flex-col md:flex-row items-center gap-8">
- <div className="flex-1 max-w-2xl">
- <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)] rounded-2xl p-8 md:p-10 backdrop-blur-sm">
- <h1 className="text-white text-3xl md:text-[34px] leading-tight font-semibold mb-4">
- Accountant for TDS Filings
- </h1>
- <p className="text-slate-200 text-sm md:text-base mb-6 max-w-prose">
- File TDS returns, manage challans, and reconcile payments
- effortlessly using our Accountants & LEDGERS platform.
- </p>
+                    <p className="text-slate-300 mt-6 text-sm leading-relaxed italic">
+                      Dedicated TDS specialist to manage monthly TDS workings,
+                      challans, payment tracking, and return preparation across
+                      sections—at a fraction of the cost of a full-time hire.
+                    </p>
+                  </div>
+                </div>
 
- <form
- onSubmit={(e) => e.preventDefault()}
- className="flex flex-col sm:flex-row gap-3 items-center"
- >
- <div className="flex items-center gap-2 bg-[#F4F3EE] rounded-full px-3 py-2 w-full sm:w-auto">
- <div className="text-sm text-slate-700 px-2">
- ENTER GSTIN
- </div>
- <input
- className="bg-transparent outline-none placeholder:text-slate-400 text-slate-800 text-sm w-full"
- placeholder="GSTIN"
- />
- </div>
+                <div className="hidden md:flex w-full md:w-auto justify-end">
+                  <div className="relative w-80">
+                    <img
+                      src={ASSETS.tdsreturnIcon}
+                      alt="TDS illustration"
+                      className="w-full h-auto rounded-3xl shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
 
- <button className="whitespace-nowrap px-5 py-3 bg-[#C15F3C] text-white rounded-full font-medium shadow-[0_6px_20px_rgba(0,0,0,0.12)]">
- Get Accountant
- </button>
- </form>
+      {/* Pricing cards - Moved above FAQs as requested */}
+      <section className="bg-[#F4F3EE]">
+        <DynamicPricingSection category="TDS Return Filing" />
+      </section>
 
- <p className="text-slate-200 mt-4 text-sm">
- Dedicated TDS specialist to manage monthly TDS workings,
- challans, payment tracking, and return preparation across
- sections—at a fraction of the cost of a full-time hire.
- </p>
- </div>
- </div>
+      {/* Main content */}
+      <main className="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Left column */}
+        <section className="lg:col-span-8 space-y-12">
+          {/* Services Offered */}
+          <article className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Services Offered</h2>
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              We provide comprehensive accounting support tailored to meet the
+              day-to-day financial needs of your business.
+            </p>
 
- <div className="w-full md:w-96 flex justify-end">
- <div className="relative w-[520px]">
- <img
- src={ASSETS.tdsreturnIcon}
- alt="TDS illustration"
- className="w-full h-auto rounded-2xl shadow-2xl"
- />
- </div>
- </div>
- </div>
- </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-6 bg-[#F4F3EE]/30 rounded-2xl border border-[#E5E2DA] hover:border-[#C15F3C] transition-colors">
+                <h4 className="font-bold text-gray-900 mb-3">Access to LEDGERS</h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Record and review TDS deductions, challans, and payments in
+                  real time with automated calculation, PAN validation, and a
+                  clear audit trail—inside one shared workspace.
+                </p>
+              </div>
+              <div className="p-6 bg-[#F4F3EE]/30 rounded-2xl border border-[#E5E2DA] hover:border-[#C15F3C] transition-colors">
+                <h4 className="font-bold text-gray-900 mb-3">TDS Return Filing</h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Preparation and filing of all TDS returns (Form 24Q, 26Q,
+                  27Q), reconciliation with challans, automated due-date
+                  tracking, and timely submission to avoid penalties.
+                </p>
+              </div>
+              <div className="p-6 bg-[#F4F3EE]/30 rounded-2xl border border-[#E5E2DA] hover:border-[#C15F3C] transition-colors">
+                <h4 className="font-bold text-gray-900 mb-3">
+                  Preparation of TDS Summary & Reports
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Monthly and quarterly TDS summaries, deduction statements,
+                  mismatch reports, and year-end Form 16/16A generation—ensuring
+                  full visibility and compliance readiness.
+                </p>
+              </div>
+              <div className="p-6 bg-[#F4F3EE]/30 rounded-2xl border border-[#E5E2DA] hover:border-[#C15F3C] transition-colors">
+                <h4 className="font-bold text-gray-900 mb-3">
+                  Deductor–Deductee Reconciliation
+                </h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Matching TDS deducted and deposited by the deductor with TDS
+                  credit appearing for the deductee in Form 26AS/AIS to avoid
+                  mismatches and notices.
+                </p>
+              </div>
+            </div>
+          </article>
 
- <div
- className="absolute inset-0 pointer-events-none"
- style={{
- background:
- "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 100%)",
- borderRadius: "1rem",
- }}
- />
- </section>
- </div>
- </div>
+          {/* How it Works */}
+          <article className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">How It Works</h2>
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              A guided onboarding process with consistent monthly accounting and
+              reporting.
+            </p>
 
- {/* Main content */}
- <main className="max-w-[1180px] mx-auto px-6 py-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
- {/* Left column */}
- <section className="lg:col-span-8 space-y-6">
- {/* Pricing cards */}
- <section>
- <h2 className="text-2xl font-semibold text-center lg:text-left">
- Simple, Transparent TDS Return Filing Pricing
- </h2>
- <p className="text-sm text-gray-600 mt-2 max-w-prose">
- File your TDS returns online with expert assistance, error-free
- filing, and timely submission tracking.
- </p>
+            <ol className="space-y-6">
+              {[
+                { title: "Assign your accountant", desc: "You get a named accountant familiar with your industry and a clear kickoff checklist." },
+                { title: "System Setup", desc: "Connect bank feeds, import masters & opening balances, map ledgers/tax series, and configure LEDGERS." },
+                { title: "Monthly close & compliance", desc: "Reconciliations, TDS tracking, challan mapping, quarterly returns, timely filing, and MIS reports for compliance." }
+              ].map((step, i) => (
+                <li key={i} className="flex gap-6 items-start">
+                  <div className="w-8 h-8 rounded-xl bg-[#C15F3C] text-white flex-shrink-0 flex items-center justify-center text-sm font-bold shadow-lg shadow-[#C15F3C]/20">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 mb-1">{step.title}</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">{step.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </article>
 
- <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
- {/* Software Only */}
- <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs mb-3">
- LEDGERS
- </div>
- <h3 className="font-semibold text-lg">Software Only</h3>
- <p className="text-sm text-gray-600 mt-2">
- LEDGERS Software Access - 1 Year. TDS Compliance Dashboard &
- Alerts, automated TDS calculations, PAN validation.
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹5,899 <span className="text-sm font-normal">/ yr + GST</span>
- </div>
- <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
- Start Filing Now
- </button>
- <ul className="mt-5 space-y-2 text-sm text-gray-700">
- <li className="flex items-center gap-2">
- <Check size={16} /> LEDGERS Software Access - 1 Year
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> TDS Compliance Dashboard & Alerts
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> Automated TDS calculations
- (section-wise)
- </li>
- </ul>
- </div>
+          {/* Article / Detailed Content */}
+          <article className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+            <h1 className="text-3xl font-bold text-gray-900 mb-8">
+              TDS Return Filing Online
+            </h1>
+            <div className="space-y-8 text-gray-600 leading-[1.8]">
+              <p>
+                Tax Deduction at Source refers to deducting tax from income at
+                the point of payment. Entities and individuals who engage in tax
+                deductions at the source are legally required to file TDS
+                returns quarterly before the TDS due date, detailing the
+                specifics of these deductions.
+              </p>
 
- {/* Accountant */}
- <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs mb-3">
- Accountant
- </div>
- <h3 className="font-semibold text-lg">Accountant</h3>
- <p className="text-sm text-gray-600 mt-2">
- Dedicated Accountant Support - 1 Assigned Accountant.
- Quarterly TDS returns, TRACES validation, Form 16A generation.
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹15,899{" "}
- <span className="text-sm font-normal">/ FY + GST</span>
- </div>
- <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
- Start Filing Now
- </button>
- <ul className="mt-5 space-y-2 text-sm text-gray-700">
- <li className="flex items-center gap-2">
- <Check size={16} /> Dedicated Accountant Support - 1
- Assigned Accountant
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> Quarterly TDS Return Filing (24Q, 26Q,
- 27Q, 27EQ) - 1 Year
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> TRACES Validation Before Filing
- </li>
- </ul>
- <div className="mt-3 text-xs text-gray-500">Most popular</div>
- </div>
+              <p>
+                <strong className="text-[#C15F3C]">DoStartup</strong> provides expert assistance to streamline the
+                process — from deposit of TDS online to filing TDS returns and
+                reconciling them with TRACES and Form 26AS.
+              </p>
 
- {/* 2 Year Package */}
- <div className="bg-[#F4F3EE] rounded-xl border p-6 shadow-sm">
- <div className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs mb-3">
- Accountant
- </div>
- <h3 className="font-semibold text-lg">TDS Filing – 2 Years</h3>
- <p className="text-sm text-gray-600 mt-2">
- Dedicated support with Ledgers Accounting Software for 2
- fiscal years.
- </p>
- <div className="mt-4 text-2xl font-bold">
- ₹25,899{" "}
- <span className="text-sm font-normal">/ 2 FY + GST</span>
- </div>
- <button className="mt-4 w-full bg-slate-900 text-white py-3 rounded-full">
- Start Filing Now
- </button>
- <ul className="mt-5 space-y-2 text-sm text-gray-700">
- <li className="flex items-center gap-2">
- <Check size={16} /> Quarterly TDS Return Filing - 2 Years
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} /> Deductor–Deductee Reconciliation
- </li>
- <li className="flex items-center gap-2">
- <Check size={16} className="text-[#C15F3C]" /> TDS Certificate Generation
- </li>
- </ul>
- </div>
- </div>
- </section>
+              <div className="grid gap-8">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Who should deduct TDS?</h3>
+                  <p className="text-sm leading-relaxed">
+                    Individuals, HUFs, firms, companies, and other entities required
+                    to deduct TDS under the Income Tax Act, 1961 depending on
+                    turnover and specific conditions.
+                  </p>
+                </div>
 
- {/* Services Offered */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h2 className="text-2xl font-semibold mb-3">Services Offered</h2>
- <p className="text-sm text-gray-700 mb-4">
- We provide comprehensive accounting support tailored to meet the
- day-to-day financial needs of your business.
- </p>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Deposit of TDS</h3>
+                  <p className="text-sm leading-relaxed">
+                    The deposit of TDS refers to the process of remitting the
+                    deducted TDS to the government within the prescribed TDS due
+                    date. Timely deposits are essential to avoid interest and
+                    penalties.
+                  </p>
+                </div>
 
- <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
- <div className="p-4 border rounded">
- <h4 className="font-semibold">Access to LEDGERS</h4>
- <p className="text-sm text-gray-600 mt-2">
- Record and review TDS deductions, challans, and payments in
- real time with automated calculation, PAN validation, and a
- clear audit trail—inside one shared workspace.
- </p>
- </div>
- <div className="p-4 border rounded">
- <h4 className="font-semibold">TDS Return Filing</h4>
- <p className="text-sm text-gray-600 mt-2">
- Preparation and filing of all TDS returns (Form 24Q, 26Q,
- 27Q), reconciliation with challans, automated due-date
- tracking, and timely submission to avoid penalties.
- </p>
- </div>
- <div className="p-4 border rounded">
- <h4 className="font-semibold">
- Preparation of TDS Summary & Reports
- </h4>
- <p className="text-sm text-gray-600 mt-2">
- Monthly and quarterly TDS summaries, deduction statements,
- mismatch reports, and year-end Form 16/16A generation—ensuring
- full visibility and compliance readiness.
- </p>
- </div>
- <div className="p-4 border rounded">
- <h4 className="font-semibold">
- Deductor–Deductee Reconciliation
- </h4>
- <p className="text-sm text-gray-600 mt-2">
- Matching TDS deducted and deposited by the deductor with TDS
- credit appearing for the deductee in Form 26AS/AIS to avoid
- mismatches and notices.
- </p>
- </div>
- </div>
- </article>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">TDS Due Date</h3>
+                  <p className="text-sm leading-relaxed">
+                    Usually by the 7th of the subsequent month. For TDS deducted in
+                    March the deposit rules may have special provisions for some
+                    government deductors — always verify the applicable schedule.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
 
- {/* How it Works */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h2 className="text-2xl font-semibold mb-3">How It Works</h2>
- <p className="text-sm text-gray-700 mb-4">
- A guided onboarding process with consistent monthly accounting and
- reporting.
- </p>
+          {/* Documents required */}
+          <article className="bg-white rounded-[32px] shadow-sm p-8 md:p-12 border border-[#E5E2DA]">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8">
+              Documents Required For TDS Return Filing
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <ul className="space-y-4">
+                  {[
+                    "TDS Acknowledgement",
+                    "PAN Card",
+                    "Bank Statement / Challan details",
+                    "Previous TDS Filing Records (if any)"
+                  ].map((doc, i) => (
+                    <li key={i} className="flex items-center gap-3 text-gray-700">
+                      <div className="w-2 h-2 rounded-full bg-[#C15F3C]" />
+                      <span className="font-medium">{doc}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="relative">
+                <img
+                  src={ASSETS.docsImg}
+                  alt="tds documents"
+                  className="w-full rounded-2xl shadow-lg border border-[#E5E2DA]"
+                />
+              </div>
+            </div>
+          </article>
 
- <ol className="list-decimal list-inside space-y-3 text-sm text-gray-700">
- <li>
- <strong>Assign your accountant</strong> — You get a named
- accountant familiar with your industry and a clear kickoff
- checklist.
- </li>
- <li>
- <strong>System Setup</strong> — Connect bank feeds, import
- masters & opening balances, map ledgers/tax series, and
- configure LEDGERS.
- </li>
- <li>
- <strong>Monthly close & compliance</strong> — Reconciliations,
- TDS tracking, challan mapping, quarterly returns, timely filing,
- and MIS reports for compliance.
- </li>
- </ol>
- </article>
+          {/* FAQ */}
+          <FAQAccordion category="TDS Return Filing" />
 
- {/* Article / Detailed Content */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h1 className="text-2xl font-semibold text-center mb-4">
- TDS Return Filing
- </h1>
- <div className="text-[15px] leading-7 text-gray-700 space-y-4">
- <p>
- Tax Deduction at Source refers to deducting tax from income at
- the point of payment. Entities and individuals who engage in tax
- deductions at the source are legally required to file TDS
- returns quarterly before the TDS due date, detailing the
- specifics of these deductions.
- </p>
+          {/* Popular Searches */}
+          <PopularSearchesComponent />
+        </section>
 
- <p>
- DoStartup provides expert assistance to streamline the
- process — from deposit of TDS online to filing TDS returns and
- reconciling them with TRACES and Form 26AS.
- </p>
-
- <h3 className="text-lg font-semibold">Who should deduct TDS?</h3>
- <p>
- Individuals, HUFs, firms, companies, and other entities required
- to deduct TDS under the Income Tax Act, 1961 depending on
- turnover and specific conditions.
- </p>
-
- <h3 className="text-lg font-semibold">Deposit of TDS</h3>
- <p>
- The deposit of TDS refers to the process of remitting the
- deducted TDS to the government within the prescribed TDS due
- date. Timely deposits are essential to avoid interest and
- penalties.
- </p>
-
- <h3 className="text-lg font-semibold">TDS Due Date</h3>
- <p>
- Usually by the 7th of the subsequent month. For TDS deducted in
- March the deposit rules may have special provisions for some
- government deductors — always verify the applicable schedule.
- </p>
-
- <h3 className="text-lg font-semibold">
- Penalty for Non-Compliance
- </h3>
- <p>
- Interest and penalties apply for late deduction, late
- remittance, and late filing or incorrect filing. Fees for late
- filing and penalties may be imposed by the assessing officer.
- </p>
- </div>
- </article>
-
- {/* Documents required */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- Documents Required For TDS Return Filing
- </h3>
- <div className="mt-2 text-gray-700">
- <img
- src={ASSETS.docsImg}
- alt="tds documents"
- className="w-full rounded shadow-sm mb-4"
- />
- <ul className="list-disc list-inside mt-4 space-y-2">
- <li>TDS Acknowledgement</li>
- <li>PAN Card</li>
- <li>Bank Statement / Challan details</li>
- <li>Previous TDS Filing Records (if any)</li>
- </ul>
- </div>
- </article>
-
- {/* FAQ */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- FAQ's on TDS Return Filing
- </h3>
- <div className="space-y-0">
- {faqQuestions.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setFaqOpen(faqOpen === i ? null : i)}
- aria-expanded={faqOpen === i}
- aria-controls={`faq-${i}`}
- >
- <span className="text-slate-800">{q}</span>
- <span className="text-[#C15F3C] flex items-center gap-2">
- {faqOpen === i ? "-" : <Plus size={14} />}
- </span>
- </button>
-
- {faqOpen === i && (
- <div
- id={`faq-${i}`}
- className="px-2 pb-4 text-sm text-gray-600"
- >
- {faqAnswers[i] ?? "Content coming soon."}
- </div>
- )}
- </div>
- ))}
- </div>
-
- <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-
- <button className="px-4 py-2 border rounded text-sm">
- Load More
- </button>
- 
-
-</div>
- </div>
- <div className="bg-[#F4F3EE] rounded-lg p-4">
- <h4 className="font-semibold mb-3">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.map((s) => (
- <span
- key={s}
- className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
- >
- {s}
- </span>
- ))}
- </div>
- </div>
- </section>
-
- {/* Sidebar */}
-         <aside className="lg:col-span-4 hidden lg:block">
+        {/* Sidebar */}
+        <aside className="lg:col-span-4 sticky top-28">
           <SidebarCart />
         </aside>
- </main>
+      </main>
 
- <Footer />
- </div>
- );
+      <Footer />
+    </div>
+  );
 }

@@ -1,3 +1,4 @@
+﻿"use client";
 import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
 
@@ -43,7 +44,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
                     HSN Code
                   </p>
                   <button className="text-sm text-[#C15F3C] font-medium hover:underline">
-                    Load More →
+                    Load More â†’
                   </button>
                 </div>
               </div>
@@ -91,7 +92,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
                   <div className="space-y-2">
                     {features.map((feature, index) => (
                       <div key={index} className="flex gap-2">
-                        <span className="text-[#C15F3C] font-bold text-lg">›</span>
+                        <span className="text-[#C15F3C] font-bold text-lg">â€º</span>
                         <p className="text-sm text-[#4F4C45]">{feature}</p>
                       </div>
                     ))}
@@ -207,7 +208,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
 
               <div className="flex gap-1 w-full">
                 <select className="px-0 py-3 border border-[#E5E2DA] rounded-lg bg-white text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none">
-                  <option>🇮🇳 +91</option>
+                  <option>ðŸ‡®ðŸ‡³ +91</option>
                 </select>
                 <input
                   type="tel"
@@ -234,7 +235,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
 
             {/* SECURITY BADGE */}
             <p className="text-center text-xs text-[#B1ADA1]">
-              Secure · No spam · Instant confirmation
+              Secure Â· No spam Â· Instant confirmation
             </p>
 
           </div>
@@ -259,3 +260,4 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
 };
 
 export default GSTInvoicingComponent;
+

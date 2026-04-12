@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+﻿import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
@@ -26,9 +26,13 @@ export default function Home() {
 />
 
  <DynamicTabContent category="E-Invoice" />
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="apeda-registration" />
+ </div>
+ <FAQAccordion category="apeda-registration" />
  <Popularsearches />
  <Footer />
  </>
  );
 }
+

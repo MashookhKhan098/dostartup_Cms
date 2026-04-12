@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
@@ -647,7 +647,10 @@ export default function IncomeTaxPage() {
  </div>
  </section>
 
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="income-tax" />
+ </div>
+ <FAQAccordion category="income-tax" />
 
  <Footer />
 
@@ -663,3 +666,4 @@ export default function IncomeTaxPage() {
  </div>
  );
 }
+

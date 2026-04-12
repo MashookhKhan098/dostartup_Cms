@@ -1,3 +1,4 @@
+﻿"use client";
 // import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -107,9 +108,9 @@ export default function Home() {
  name: "package",
  placeholder: "Select Package",
  options: [
- "Basic Package - ₹999",
- "Standard Package - ₹1,999",
- "Premium Package - ₹2,999"
+ "Basic Package - â‚¹999",
+ "Standard Package - â‚¹1,999",
+ "Premium Package - â‚¹2,999"
  ]
  }
  ],
@@ -134,3 +135,4 @@ export default function Home() {
  </>
  );
 }
+

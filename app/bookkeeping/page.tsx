@@ -5,6 +5,8 @@ import { Search, Plus } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PopularSearches from "../components/PopularSearches";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
 
 // Assets used (same as CA page, as requested)
 const ASSETS = {
@@ -167,8 +169,8 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* 3 Card Section */}
  <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
- <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
- <h3 className="font-semibold text-[#C15F3C] mb-2">
+ <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <h3 className="font-bold text-[#C15F3C] mb-2">
  Dedicated support, flexible cost
  </h3>
  <p className="text-sm text-slate-600">
@@ -177,8 +179,8 @@ export default function BookkeepingPage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
- <h3 className="font-semibold text-[#C15F3C] mb-2">
+ <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <h3 className="font-bold text-[#C15F3C] mb-2">
  Accurate & timely compliance
  </h3>
  <p className="text-sm text-slate-600">
@@ -187,8 +189,8 @@ export default function BookkeepingPage(): React.ReactElement {
  </p>
  </div>
 
- <div className="bg-[#F4F3EE] p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
- <h3 className="font-semibold text-[#C15F3C] mb-2">
+ <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-lg hover:border-[#C15F3C]/30 transition-colors">
+ <h3 className="font-bold text-[#C15F3C] mb-2">
  Powered by LEDGERS
  </h3>
  <p className="text-sm text-slate-600">
@@ -201,21 +203,21 @@ export default function BookkeepingPage(): React.ReactElement {
  </div>
 
  {/* MAIN CONTENT */}
- <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-8">
+ <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-8 bg-[#F4F3EE]">
  {/* SERVICES OFFERED */}
- <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
- <h3 className="text-xl font-semibold text-center text-[#C15F3C]">
+ <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <h3 className="text-xl font-bold text-center text-[#0B2545]">
  Services Offered
  </h3>
- <p className="text-gray-600 mt-3 text-center">
+ <p className="text-gray-600 mt-3 text-center text-sm">
  We provide comprehensive accounting support tailored to meet the
  day-to-day financial needs of your business.
  </p>
 
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm text-gray-700">
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-sm text-[#4B5565]">
  {/* LEDGERS Access */}
  <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">Access to LEDGERS</h4>
+ <h4 className="font-bold text-[#C15F3C]">Access to LEDGERS</h4>
  <p className="mt-2">
  Record and review transactions in real time—clean books, clear
  audit trail, single workspace.
@@ -224,7 +226,7 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* GST */}
  <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">GST Return Filing</h4>
+ <h4 className="font-bold text-[#C15F3C]">GST Return Filing</h4>
  <p className="mt-2">
  Monthly/Quarterly GSTR-1, GSTR-3B and other filings prepared,
  reconciled, and filed on schedule.
@@ -233,7 +235,7 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* Financial Statements */}
  <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">
+ <h4 className="font-bold text-[#C15F3C]">
  Preparation of Financial Statements
  </h4>
  <p className="mt-2">
@@ -243,7 +245,7 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* Income Tax */}
  <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">Income Tax Return Filing</h4>
+ <h4 className="font-bold text-[#C15F3C]">Income Tax Return Filing</h4>
  <p className="mt-2">
  Business/individual ITRs prepared with correct income,
  deductions, disclosures—legally optimized.
@@ -252,7 +254,7 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* ROC */}
  <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">ROC Compliance</h4>
+ <h4 className="font-bold text-[#C15F3C]">ROC Compliance</h4>
  <p className="mt-2">
  DIN e-KYC, AOC-4, MGT-7 and other Companies Act filings handled
  end-to-end.
@@ -261,7 +263,7 @@ export default function BookkeepingPage(): React.ReactElement {
 
  {/* CA Assistance */}
  <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">CA Assistance</h4>
+ <h4 className="font-bold text-[#C15F3C]">CA Assistance</h4>
  <p className="mt-2">
  4 consultations/year with Chartered Accountants for taxation and
  compliance clarity.
@@ -271,9 +273,9 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* HOW IT WORKS */}
- <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
- <h3 className="text-xl font-semibold text-center text-[#C15F3C]">How It Works</h3>
- <p className="text-gray-600 mt-3 text-center">
+ <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <h3 className="text-xl font-bold text-center text-[#0B2545]">How It Works</h3>
+ <p className="text-gray-600 mt-3 text-center text-sm">
  A guided onboarding process with consistent monthly accounting and
  reporting.
  </p>
@@ -283,7 +285,7 @@ export default function BookkeepingPage(): React.ReactElement {
  <div className="mx-auto w-12 h-12 rounded-full border-2 border-[#C15F3C] flex items-center justify-center text-[#C15F3C] font-bold">
  1
  </div>
- <h4 className="font-semibold mt-4 text-[#C15F3C]">Assign your accountant</h4>
+ <h4 className="font-bold mt-4 text-[#C15F3C]">Assign your accountant</h4>
  <p className="text-sm mt-2 text-gray-600">
  A dedicated accountant familiar with your business and industry
  is assigned.
@@ -293,7 +295,7 @@ export default function BookkeepingPage(): React.ReactElement {
  <div className="mx-auto w-12 h-12 rounded-full border-2 border-[#C15F3C] flex items-center justify-center text-[#C15F3C] font-bold">
  2
  </div>
- <h4 className="font-semibold mt-4 text-[#C15F3C]">System Setup</h4>
+ <h4 className="font-bold mt-4 text-[#C15F3C]">System Setup</h4>
  <p className="text-sm mt-2 text-gray-600">
  Connect bank feeds, import masters & opening balances, map
  ledgers and configure LEDGERS.
@@ -303,7 +305,7 @@ export default function BookkeepingPage(): React.ReactElement {
  <div className="mx-auto w-12 h-12 rounded-full border-2 border-[#C15F3C] flex items-center justify-center text-[#C15F3C] font-bold">
  3
  </div>
- <h4 className="font-semibold mt-4 text-[#C15F3C]">Monthly close & compliance</h4>
+ <h4 className="font-bold mt-4 text-[#C15F3C]">Monthly close & compliance</h4>
  <p className="text-sm mt-2 text-gray-600">
  Reconciliations, MIS reporting and timely GST, Income Tax and
  ROC filings.
@@ -313,71 +315,49 @@ export default function BookkeepingPage(): React.ReactElement {
  </section>
 
  {/* WHY INDIAFILINGS */}
- <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
- <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">
+ <section className="bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+ <h3 className="text-xl font-bold mb-6 text-[#0B2545]">
  Why DoStartup for Fractional Accountant
  </h3>
 
  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
- <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">Affordable Expertise</h4>
- <p className="mt-2 text-sm">
+ <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors bg-white">
+ <h4 className="font-bold text-[#C15F3C] text-sm italic">Affordable Expertise</h4>
+ <p className="mt-2 text-[13px] text-gray-600">
  Skilled accountants without full-time hiring costs.
  </p>
  </div>
 
- <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">Zero Surprises</h4>
- <p className="mt-2 text-sm">
+ <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors bg-white">
+ <h4 className="font-bold text-[#C15F3C] text-sm italic">Zero Surprises</h4>
+ <p className="mt-2 text-[13px] text-gray-600">
  Transparent reporting and proactive due-date alerts.
  </p>
  </div>
 
- <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">Scalable Service</h4>
- <p className="mt-2 text-sm">
+ <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors bg-white">
+ <h4 className="font-bold text-[#C15F3C] text-sm italic">Scalable Service</h4>
+ <p className="mt-2 text-[13px] text-gray-600">
  Start with bookkeeping; add filings or advisory anytime.
  </p>
  </div>
 
- <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors">
- <h4 className="font-semibold text-[#C15F3C]">Software + Service</h4>
- <p className="mt-2 text-sm">
+ <div className="p-4 rounded-lg border border-gray-200 hover:border-[#C15F3C]/30 transition-colors bg-white">
+ <h4 className="font-bold text-[#C15F3C] text-sm italic">Software + Service</h4>
+ <p className="mt-2 text-[13px] text-gray-600">
  LEDGERS platform bundled with experts who run it.
  </p>
  </div>
  </div>
  </section>
-
- {/* FAQ */}
- <section className="bg-[#F4F3EE] rounded-lg shadow-lg border border-gray-200 p-6">
- <h3 className="text-xl font-semibold mb-4 text-[#C15F3C]">FAQs</h3>
-
- <div className="space-y-0">
- {faqQuestions.map((q, i) => (
- <div key={i} className="border-b border-gray-200 last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm hover:bg-orange-50/30 transition-colors"
- onClick={() => setFaqOpen(faqOpen === i ? null : i)}
- >
- <span className="text-slate-800 hover:text-[#C15F3C] transition-colors">{q}</span>
- <span className="text-[#C15F3C] flex items-center">
- {faqOpen === i ? "−" : <Plus size={14} />}
- </span>
- </button>
-
- {faqOpen === i && (
- <div className="px-2 pb-4 text-sm text-gray-600">
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
- </section>
  </main>
 
- <PopularSearches />
+ <div className="bg-[#F4F3EE] py-4">
+    <DynamicPricingSection category="bookkeeping" />
+ </div>
+
+ <FAQAccordion category="bookkeeping" />
+
  <Footer />
 
  {/* WhatsApp CTA */}

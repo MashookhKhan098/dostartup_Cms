@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 
 const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
-const PARTNER_API = `${COCKPIT_BASE}/api/content/items/Partner`;
+const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+const PARTNER_API = `${COCKPIT_BASE}/api/content/items/Partner?token=${TOKEN}`;
 
 export default function Partnerships() {
  const [partners, setPartners] = useState<any[]>([]);
@@ -31,7 +32,7 @@ export default function Partnerships() {
 
  // CASE 1: Asset object (correct Cockpit format)
  if (typeof partner.logo === "object" && partner.logo.path) {
- return `${COCKPIT_BASE}/storage/uploads${partner.logo.path}`;
+ return `${COCKPIT_BASE}/storage/uploads${partner.logo.path}?token=${TOKEN}`;
  }
 
  // CASE 2: String URL
@@ -39,7 +40,7 @@ export default function Partnerships() {
  // localhost fix → replace with production base
  if (partner.logo.includes("localhost")) {
  const filename = partner.logo.split("/uploads/")[1];
- return `${COCKPIT_BASE}/storage/uploads/${filename}`;
+ return `${COCKPIT_BASE}/storage/uploads/${filename}?token=${TOKEN}`;
  }
  return partner.logo;
  }

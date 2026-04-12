@@ -12,24 +12,25 @@ import {
 import Navbar from "../components/Navbar";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
+import DynamicPricingSection from "../components/DynamicPricingSection";
 
 /**
  * DIR-3 KYC Page with amber theme and imported Navbar
  */
 
 const ASSETS = {
- logo: "/images/india-logo.jpg",
- heroBg: "/images/din-ekyc-hero.jpg",
- heroPortrait:
- "https://img.indiafilings.com/catalog/mca-compliance-simplified-india.webp",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
- whatsapp: "/images/whatsapp.png",
- adRight1: "/images/company-compliance.jpg",
- dinEkyc: "/images/din.jpg",
- cartIcon: "/images/cart-icon.svg",
- indiaFlag: "/images/india-flag.png",
- heroImage: "/images/hero.png",
- portraitImage: "/images/remove.png",
+  logo: "/images/india-logo.jpg",
+  heroBg: "/images/din-ekyc-hero.jpg",
+  heroPortrait:
+  "/images/hero.webp",
+  ledgers: "/images/hero.webp",
+  whatsapp: "/images/whatsapp.png",
+  adRight1: "/images/company-compliance.jpg",
+  dinEkyc: "/images/din.jpg",
+  cartIcon: "/images/cart-icon.svg",
+  indiaFlag: "/images/india-flag.png",
+  heroImage: "/images/hero.png",
+  portraitImage: "/images/remove.png",
 };
 
 const POPULAR_SEARCHES = [
@@ -315,61 +316,8 @@ export default function DIR3KycPage(): React.ReactElement {
  </div>
  </article>
 
- {/* Pricing */}
- <section>
- <h2 className="text-xl sm:text-2xl text-center font-semibold">
- Simple, Transparent DIN eKYC Filing Pricing
- </h2>
- <p className="text-center text-xs sm:text-sm text-gray-600 mt-2">
- Apply for your DIR 3 KYC filing online with expert assistance and
- complete end-to-end tracking.
- </p>
-
- <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="bg-[#F4F3EE] rounded-xl border-2 border-amber-200 p-6 shadow-sm hover:border-amber-300 transition-colors">
- <div className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-3 py-1 rounded-full text-xs mb-3">
- Most popular
- </div>
- <h3 className="font-semibold text-lg">DIN eKYC Filing</h3>
- <div className="mt-3 text-3xl font-bold">₹1,899</div>
- <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- Complete eKYC
- </button>
-
- <ul className="mt-5 space-y-3 text-sm text-gray-600">
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> LEDGERS Accounting Software - 1 Year
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> LEDGERS Compliance Platform
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> Dedicated Accountant
- </li>
- </ul>
- </div>
-
- <div className="bg-[#F4F3EE] rounded-xl border border-gray-200 p-6 shadow-sm hover:border-amber-200 transition-colors">
- <h3 className="font-semibold text-lg">Dual DIN eKYC Filing</h3>
- <div className="mt-3 text-3xl font-bold">₹2,899</div>
- <button className="mt-4 w-full bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3 rounded-full hover:from-amber-800 hover:to-amber-900 transition-all shadow-md hover:shadow-lg">
- Complete eKYC
- </button>
-
- <ul className="mt-5 space-y-3 text-sm text-gray-600">
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> LEDGERS Accounting Software - 1 Year
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> Dedicated Compliance Advisor
- </li>
- <li className="flex items-center gap-3">
- <Check size={16} className="text-amber-600" /> DIN KYC for 2 Directors
- </li>
- </ul>
- </div>
- </div>
- </section>
+  {/* Dynamic Pricing Section */}
+  <DynamicPricingSection category="din-ekyc-filing" />
 
 
 

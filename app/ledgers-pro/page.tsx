@@ -1,3 +1,4 @@
+"use client";
 // // import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -13,7 +14,10 @@ import FAQAccordion from "../components/Faq";
 // // <Navbar />
 // // <Hero/>
 // // <DynamicTabContent tabName="GST Registration" />
-// // <FAQAccordion />
+// // <div className="bg-[#F4F3EE] py-8">
+// //    <DynamicPricingSection category="ledgers-pro" />
+// //  </div>
+// //  <FAQAccordion category="ledgers-pro" />
 // // <Popularsearches />
 // // <Footer />
 // // </>
@@ -124,7 +128,10 @@ import FAQAccordion from "../components/Faq";
 // <Navbar />
 // <Hero {...heroProps} />
 // <DynamicTabContent tabName="GST Registration" />
-// <FAQAccordion />
+// <div className="bg-[#F4F3EE] py-8">
+//    <DynamicPricingSection category="ledgers-pro" />
+//  </div>
+//  <FAQAccordion category="ledgers-pro" />
 // <Popularsearches />
 // <Footer />
 // </>
@@ -278,9 +285,14 @@ export default function Home() {
  </div>
 
  <DynamicTabContent category="GST" />
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="ledgers-pro" />
+ </div>
+ <FAQAccordion category="ledgers-pro" />
  <Popularsearches />
  <Footer />
  </>
  );
 }
+
+

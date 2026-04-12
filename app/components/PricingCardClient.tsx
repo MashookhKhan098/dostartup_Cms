@@ -14,6 +14,7 @@ export interface PricingPlan {
   description: string;
   features: PlanFeature[];
   isPopular?: boolean;
+  image?: string;
 }
 
 const PricingCardClient = ({ plan }: { plan: PricingPlan }) => {
@@ -34,6 +35,16 @@ const PricingCardClient = ({ plan }: { plan: PricingPlan }) => {
       {plan.isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C15A36] text-white px-5 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase shadow-md z-10">
           Recommended
+        </div>
+      )}
+
+      {plan.image && (
+        <div className="mb-6 flex justify-center">
+          <img 
+            src={plan.image} 
+            alt={plan.title} 
+            className="w-16 h-16 object-contain"
+          />
         </div>
       )}
 

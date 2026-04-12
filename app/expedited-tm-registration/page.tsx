@@ -1,4 +1,3 @@
-
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -9,13 +8,13 @@ import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
  return (
- <>
+ <main className="min-h-screen bg-[#F4F3EE]">
  <Navbar />
  <Hero
  trademarkService={{
  serviceName: "Expedited",
  serviceDescription:
- "Transfers are allowed only for registered trademarks. Your mark isn’t registered yet, so transfer can’t be done.",
+ "Transfers are allowed only for registered trademarks. Your mark isn't registered yet, so transfer can't be done.",
  formFields: [
  {
  type: "input",
@@ -38,9 +37,14 @@ export default function Home() {
  }}
  />
  <DynamicTabContent category="Trademark" />
- <FAQAccordion />
+ 
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="expedited-tm-registration" />
+ </div>
+ 
+ <FAQAccordion category="expedited-tm-registration" />
  <Popularsearches />
  <Footer />
- </>
+ </main>
  );
 }

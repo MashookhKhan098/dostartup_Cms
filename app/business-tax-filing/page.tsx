@@ -216,16 +216,16 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
         </aside>
       </main>
 
-      {/* FAQ & Blog Section - Stops the cart scroll */}
+      {/* Standardized Pricing Section */}
+      <section className="bg-[#F4F3EE] pb-12">
+        <DynamicPricingSection category="Business Tax Filing" />
+      </section>
+
+      {/* FAQ Section */}
       <FAQAccordion category="business-tax-filing" />
 
       {/* Popular Searches */}
       <PopularSearchesComponent />
-
-      {/* Standardized Pricing Section */}
-      <section className="bg-[#F4F3EE]">
-        <DynamicPricingSection />
-      </section>
 
       <Footer />
     </div>

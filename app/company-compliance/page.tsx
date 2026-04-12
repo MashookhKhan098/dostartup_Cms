@@ -466,42 +466,6 @@ export default function CompanyCompliancePage(): React.ReactElement {
  penalties, delays & strike-off.
  </p>
  </div>
-
- <div className="pricing-cards">
- {pricingPlans.map((plan) => (
- <article
- key={plan.name}
- className={`pricing-card ${plan.popular ? "popular" : ""}`}
- >
- {plan.popular && (
- <div className="popular-chip bg-gradient-to-r from-amber-600 to-amber-700">Most popular</div>
- )}
-
- <div className="card-top">
- <div className="card-title text-amber-800">{plan.name}</div>
- <div className="card-price text-amber-700">{plan.price}</div>
- </div>
-
- <button
- type="button"
- suppressHydrationWarning
- className="select-btn bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 transition-all"
- onClick={() => alert(`Selected plan: ${plan.name}`)}
- >
- Select
- </button>
-
- <ul className="plan-features">
- {plan.features.map((f, idx) => (
- <li key={`${plan.name}-feat-${idx}`}>
- <span className="feat-check text-amber-600">✓</span>
- <span>{f}</span>
- </li>
- ))}
- </ul>
- </article>
- ))}
- </div>
  </div>
  </section>
 
@@ -585,8 +549,13 @@ export default function CompanyCompliancePage(): React.ReactElement {
  </div>
  </section>
 
+ <div className="max-w-[1160px] mx-auto">
+   <DynamicPricingSection category="company-compliance" />
+ </div>
+
  {/* FAQ SECTION */}
  <FAQAccordion />
+
  </main>
 
  <Footer />

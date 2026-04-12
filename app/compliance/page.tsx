@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import SidebarCart from "../components/SidebarCart";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
@@ -1166,7 +1166,10 @@ function ArticleAndSidebar() {
  </div>
  </article>
 
- <FAQAccordion />
+ <div className="bg-[#F4F3EE] py-8">
+   <DynamicPricingSection category="compliance" />
+ </div>
+ <FAQAccordion category="compliance" />
 
  </div>
  </div>
@@ -1265,3 +1268,4 @@ export default function Page() {
  </div>
  );
 }
+

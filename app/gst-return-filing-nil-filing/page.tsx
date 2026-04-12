@@ -1,3 +1,4 @@
+﻿"use client";
 // import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -102,3 +103,4 @@ export default function Home() {
  </>
  );
 }
+

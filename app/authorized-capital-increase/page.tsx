@@ -20,12 +20,11 @@ const ASSETS = {
  logo: "/images/india-logo.jpg",
  hero: "/mnt/data/6ddb35b5-7190-4d8f-9f70-4c6f4f1683c7.png",
  cards: {
- compliance:
- "https://img.indiafilings.com/catalog/company-compliance-india.png",
- dinEKyc: "https://img.indiafilings.com/catalog/din-ekyc.png",
- },
- footerBg: "/images/footer-bg.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+    compliance: "/images/company-compliance-india.png",
+    dinEKyc: "/images/din-ekyc.png",
+  },
+  footerBg: "/images/footer-bg.png",
+  ledgers: "/images/ledgers.png",
  whatsapp: "/images/whatsapp.png",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
@@ -88,30 +87,7 @@ const POPULAR_SEARCHES = [
 ];
 
 export default function AuthorizedCapitalIncrease() {
- const [openFaq, setOpenFaq] = useState<number | null>(null);
  const [gstChecked, setGstChecked] = useState(false);
-
- const faqItems = [
- "What is Authorized Capital?",
- "What is the difference between Authorized and Paid-Up Capital?",
- "How can a company increase its authorized share capital?",
- "Why would a company consider increasing its authorized capital?",
- "What documents are required for increasing authorized capital?",
- "What is the procedure to increase authorized share capital?",
- "What happens if the Articles of Association do not permit changes?",
- "What is Form MGT-14 and SH-7 for?",
- ];
-
- const faqAnswers: Record<number, string> = {
- 0: "According to Section 2 (8) of the Companies Act 2013, 'Authorized Capital' is the capital authorised by the company's memorandum to be the maximum amount of the share capital of the company.",
- 1: "Authorised share capital represents the total potential value of shares a company can issue. In contrast, paid-up capital is the actual value of shares that have been fully issued, subscribed to, and paid for by shareholders.",
- 2: "A company can increase its authorized share capital by passing an ordinary resolution in a general meeting, filing Form SH-7 with the ROC, and paying the requisite fees and stamp duty.",
- 3: "Companies consider increasing authorized capital for addressing significant financial needs, funding new business initiatives, facilitating mergers or acquisitions, issuing additional shares, or converting debt into equity.",
- 4: "Documents required include the latest amended version of the MOA, updated AoA if applicable, and a copy of the ordinary resolution approved by shareholders.",
- 5: "The process involves reviewing AoA, convening board meeting, passing resolutions, conducting EGM, and filing required forms (MGT-14, SH-7) within prescribed timelines.",
- 6: "If the AoA does not permit changes, it must first be amended to allow for the increase in authorized capital before proceeding with the capital increase process.",
- 7: "Form MGT-14 is filed for special resolutions, while Form SH-7 is specifically for notifying the ROC about changes in authorized capital. Both must be filed within 30 days of the resolution.",
- };
 
   return (
     <>
@@ -203,7 +179,7 @@ export default function AuthorizedCapitalIncrease() {
 
  {/* Right Form Card */}
  <div className="lg:w-1/2 p-8 lg:p-10 bg-gradient-to-br from-amber-50 to-amber-100">
- <div className="bg-[#F4F3EE] rounded-xl shadow-lg border border-gray-200 p-6">
+ <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
  <div
  className="h-1.5 w-full rounded-t-xl mb-4"
  style={{
@@ -280,7 +256,7 @@ export default function AuthorizedCapitalIncrease() {
  {/* content column (span 2 on large) */}
  <div className="lg:col-span-2 space-y-6">
  {/* Article */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
  <h2 className="text-2xl font-bold mb-3 text-slate-900">
  Company Authorized Capital Increase
  </h2>
@@ -291,13 +267,13 @@ export default function AuthorizedCapitalIncrease() {
  But in the long run, the company will require more funds. For a
  Private Limited Company, this can be done by increasing the
  company's authorised capital. Since the private limited company
- is governed and regulated under the Company Act to make changes
+ is governed and regulated under the Companies Act to make changes
  in the structure, it is necessary to follow the Act and the
  rules stated.
  </p>
 
  <p className="text-gray-600 mb-4 leading-relaxed">
- IndiaFilings makes it easy to increase your company's authorised
+ DoStartup makes it easy to increase your company's authorised
  capital. Our experts guide you through every step, ensuring a
  hassle-free experience.
  </p>
@@ -400,7 +376,7 @@ export default function AuthorizedCapitalIncrease() {
 
  <div className="mt-6">
  <h3 className="text-2xl font-bold mb-4 text-slate-900">
- Why Choose IndiaFilings for Authorized Capital Increase
+ Why Choose DoStartup for Authorized Capital Increase
  </h3>
  <ul className="list-disc pl-5 mt-3 text-gray-600 space-y-2">
  <li>Expert MOA amendment guidance</li>
@@ -412,7 +388,7 @@ export default function AuthorizedCapitalIncrease() {
  </div>
 
  {/* Documents / Steps section */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 border border-gray-200">
+ <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
  <h3 className="text-2xl font-bold mb-4 text-slate-900">
  Procedure & Documents Summary
  </h3>
@@ -432,45 +408,13 @@ export default function AuthorizedCapitalIncrease() {
  </ul>
  </div>
 
-  {/* FAQ */}
-  <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 mt-8">
- <h3 className="text-2xl font-bold mb-4 text-slate-900">
- FAQ's on Authorized Capital Increase
- </h3>
- <div className="divide-y divide-gray-200">
- {faqItems.map((q, idx) => (
- <div key={idx} className="py-3">
- <button
- className="w-full text-left flex justify-between items-center py-3"
- onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
- >
- <span className="text-slate-800 font-medium">{q}</span>
- <span className="text-amber-600">
- {openFaq === idx ? "−" : "+"}
- </span>
- </button>
- {openFaq === idx && (
- <div className="text-gray-600 mt-2 pl-2">
- <p>{faqAnswers[idx]}</p>
- </div>
- )}
- </div>
- ))}
- <div className="py-4 flex gap-3 items-center flex-wrap">
-  <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded text-sm hover:bg-amber-50 transition-colors font-medium">
- Load More
- </button>
-  
-</div>
- </div>
- </div>
  </div>
 
  {/* Right sidebar */}
  <aside className="space-y-6">
           <SidebarCart />
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-5 border border-gray-200">
+ <div className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">
  Related Guides
  </h4>
@@ -498,7 +442,7 @@ export default function AuthorizedCapitalIncrease() {
  </ul>
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 text-center border border-gray-200">
+ <div className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-200">
  <img
  src={ASSETS.cards.compliance}
  alt="Company Compliance"
@@ -509,7 +453,7 @@ export default function AuthorizedCapitalIncrease() {
  </div>
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 text-center border border-gray-200">
+ <div className="bg-white rounded-lg shadow-sm p-4 text-center border border-gray-200">
  <img
  src={ASSETS.cards.dinEKyc}
  alt="DIN eKYC"
@@ -520,7 +464,7 @@ export default function AuthorizedCapitalIncrease() {
  </div>
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 border border-gray-200">
+ <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
  <h4 className="font-semibold mb-3 text-slate-900">
  Popular Searches
  </h4>
@@ -537,6 +481,8 @@ export default function AuthorizedCapitalIncrease() {
  </div>
  </aside>
  </div>
+ <DynamicPricingSection category="authorized-capital-increase" />
+ <FAQAccordion category="authorized-capital-increase" />
  </main>
 
   <PopularSearches />

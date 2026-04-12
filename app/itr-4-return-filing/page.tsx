@@ -521,7 +521,7 @@ export default function ITR4Page() {
 
             {/* Right — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-[#F4F3EE] border-2 border-orange-100 rounded-3xl p-6 shadow-2xl">
+              <div className="bg-white border-2 border-orange-100 rounded-3xl p-6 shadow-2xl">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
                     <Brain size={18} className="text-orange-500" />
@@ -558,7 +558,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         ELIGIBILITY
         ════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
+        <section className="bg-white py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -574,7 +574,7 @@ export default function ITR4Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-[#F4F3EE] border-2 border-orange-500 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-white border-2 border-orange-500 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <CheckCircle size={20} className="text-orange-500" /> File
                   ITR-4 If You Are:
@@ -597,7 +597,7 @@ export default function ITR4Page() {
                 </ul>
               </div>
 
-              <div className="bg-[#F4F3EE] border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
+              <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
                   <AlertTriangle size={20} className="text-orange-500" /> NOT
                   ITR-4 If:
@@ -625,7 +625,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         WHY DOSTARTUP
         ════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="compare">
+        <section className="bg-white py-6 px-4 sm:px-6" id="compare">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -641,7 +641,7 @@ export default function ITR4Page() {
                 {WHY_FEATURES.map((f) => (
                   <div
                     key={f.title}
-                    className="flex gap-4 p-4 bg-[#F4F3EE] border border-gray-200 rounded-2xl hover:border-orange-500 transition-all duration-200 group"
+                    className="flex gap-4 p-4 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 transition-all duration-200 group"
                   >
                     <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
                       {f.icon}
@@ -658,7 +658,7 @@ export default function ITR4Page() {
                 ))}
               </div>
 
-              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-[#F4F3EE]">
+              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-orange-500">
@@ -682,7 +682,7 @@ export default function ITR4Page() {
                     ].map((row, i) => (
                       <tr
                         key={row.feature}
-                        className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-[#F4F3EE]" : "bg-[#F4F3EE]"}`}
+                        className={`border-b border-gray-100 ${i % 2 === 0 ? "bg-white" : "bg-white"}`}
                       >
                         <td className="px-3 py-3 text-xs">{row.feature}</td>
                         <td className="px-2 py-3 text-center">
@@ -703,7 +703,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         CALCULATOR
         ════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="calculator">
+        <section className="bg-white py-6 px-4 sm:px-6" id="calculator">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
               <p className="text-orange-500 text-xs font-bold uppercase mb-2">
@@ -714,14 +714,14 @@ export default function ITR4Page() {
               </h2>
             </div>
 
-            <div className="bg-[#F4F3EE] rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
+            <div className="bg-white rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
               <div className="bg-orange-500 px-6 py-4 flex items-center justify-between">
                 <h3 className="font-display font-extrabold text-white text-lg">
                   ITR-4 Calculator
                 </h3>
                 <button
                   onClick={resetCalc}
-                  className="text-white bg-[#F4F3EE]/20 px-3 py-1 rounded-full text-xs font-bold"
+                  className="text-white bg-white/20 px-3 py-1 rounded-full text-xs font-bold"
                 >
                   Reset
                 </button>
@@ -775,7 +775,7 @@ export default function ITR4Page() {
                   <h4 className="font-display font-bold text-base mb-5">
                     Your Tax Summary
                   </h4>
-                  <div className="bg-[#F4F3EE] rounded-2xl border p-4 mb-4">
+                  <div className="bg-white rounded-2xl border p-4 mb-4">
                     <ResultRow
                       label="Gross Total Income"
                       value={fmt(result.grossTotal)}
@@ -825,7 +825,7 @@ export default function ITR4Page() {
         {/* ════════════════════════════════════
         FAQ
         ════════════════════════════════════ */}
-        <FAQAccordion />
+        <FAQAccordion category="itr-4-return-filing" />
       </main>
       <Footer />
     </>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 
 import React, { useState } from "react";
@@ -16,7 +16,7 @@ export default function AppointmentOfDirectorReplica() {
  const faqItems = [
  "What is the role of a director in a Private Limited Company?",
  "Why might a company need to add new directors?",
- "How does IndiaFilings assist with director appointments?",
+ "How does DoStartup assist with director appointments?",
  "What are the types of directors?",
  "What are the qualifications for becoming a director?",
  "What documents are required for director appointment?",
@@ -27,7 +27,7 @@ export default function AppointmentOfDirectorReplica() {
  const faqAnswers: Record<number, string> = {
  0: "Directors oversee company operations and strategy on behalf of shareholders. They are responsible for managing daily activities and making crucial decisions that affect the company's future.",
  1: "To add fresh expertise, maintain strategic control, revitalize board performance, meet regulatory requirements, or support business growth and expansion.",
- 2: "IndiaFilings provides end-to-end filing assistance, DIN/DSC support, compliance checks, documentation preparation, and expert guidance throughout the director appointment process.",
+ 2: "DoStartup provides end-to-end filing assistance, DIN/DSC support, compliance checks, documentation preparation, and expert guidance throughout the director appointment process.",
  3: "The main types are Executive Directors (involved in daily operations), Non-Executive Directors (provide oversight), Independent Directors (unbiased governance), and Nominee Directors.",
  4: "Candidate must be 18 or older, must not be disqualified under the Companies Act, and must have consensual agreement from shareholders/board for appointment.",
  5: "PAN Card, Proof of Identity (Aadhaar/Voter ID/Driving license), Residential Proof, Recent Passport-Sized Photograph, and Digital Signature Certificate (DSC).",
@@ -43,7 +43,7 @@ export default function AppointmentOfDirectorReplica() {
  whatsapp: "/images/whatsapp.png",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
- ledgers: "https://img.indiafilings.com/catalog/ledgers.png",
+ ledgers: "https://img.dostartup.com/catalog/ledgers.png",
  };
 
  return (
@@ -442,3 +442,4 @@ export default function AppointmentOfDirectorReplica() {
  </div>
  );
 }
+
