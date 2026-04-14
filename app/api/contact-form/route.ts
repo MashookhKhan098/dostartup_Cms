@@ -90,7 +90,7 @@ export async function POST(request: Request) {
       `💬 *Message:* ${finalMessage}\n\n` +
       `Please follow up at your earliest.`;
 
-    const whatsappUrl = `https://wa.me/${process.env.WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
     return NextResponse.json({ 
       success: true, 

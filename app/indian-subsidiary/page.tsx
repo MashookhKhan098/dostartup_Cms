@@ -3,7 +3,7 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Startup/Hero2';
+import Hero from '../components/Startup/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
 import Faq from '../components/Faq';
 
@@ -14,7 +14,7 @@ export default function Home() {
  <>
  <Navbar />
  <Hero defaultEntity = "Indian Subs."/>
- <DynamicTabContent category="Proprietorship" />
+ <DynamicTabContent category="Indian Subs." />
  <DynamicPricingSection />
       <FAQAccordion />
  <Popularsearches />

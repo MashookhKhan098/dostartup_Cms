@@ -98,22 +98,32 @@ export default function DynamicHeroSection({
 
   useEffect(() => {
     const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setIsLoggedIn(!!user);
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        setIsLoggedIn(!!session?.user);
+      } catch (err: any) {
+        console.warn("Gst/Hero2 initial auth check failed gracefully:", err.message);
+      }
     };
     checkUser();
   }, []);
 
   const handleTrackApplication = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      router.push('/profile');
-    } else {
-      // Scroll to form or show a login prompt - for now just scroll down
-      const formElement = document.querySelector('[data-form-container]');
-      if (formElement) {
-        formElement.scrollIntoView({ behavior: 'smooth' });
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const user = session?.user ?? null;
+      if (user) {
+        router.push('/profile');
+      } else {
+        const formElement = document.querySelector('[data-form-container]');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth' });
+        }
       }
+    } catch (err: any) {
+      console.error("Tracking redirection failed:", err.message);
+      document.querySelector('[data-form-container]')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

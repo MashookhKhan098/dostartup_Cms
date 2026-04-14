@@ -50,7 +50,13 @@ function PaymentContent() {
         order_id: orderId,
         handler: async function (response: any) {
           // Record payment in Supabase
-          const { data: { user } } = await supabase.auth.getUser();
+          let user = null;
+          try {
+            const { data: userData } = await supabase.auth.getUser();
+            user = userData.user;
+          } catch (e) {
+            console.warn("Auth check in payment handler failed gracefully");
+          }
           const { error: paymentError } = await supabase.from('payments').insert([{
             registration_id: registrationId,
             razorpay_payment_id: response.razorpay_payment_id,

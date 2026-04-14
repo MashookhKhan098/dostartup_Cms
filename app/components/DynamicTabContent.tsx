@@ -38,6 +38,42 @@ const FALLBACK_DATA: Record<string, any> = {
       }
     ],
     author: { name: "Legal Advisory", role: "Corporate Lawyer", updatedDate: "April 2024" }
+  },
+  "section-8": {
+    title: "Section 8 Company Registration",
+    description: "A Section 8 company is a non-profit organization established for charitable, social, or environmental objectives.",
+    introduction: "Registered under Section 8 of the Companies Act 2013, these companies are formed to promote commerce, art, science, sports, education, research, social welfare, religion, charity, and protection of the environment.",
+    sections: [
+      {
+        heading: "Benefits of Section 8",
+        content: "Section 8 companies enjoy corporate status while being exempt from certain tax obligations and profit distribution requirements.",
+        points: ["No Dividend Distribution", "Tax Exemptions", "Corporate Identity", "Credibility for Fundraising"]
+      },
+      {
+        heading: "Incorporation Steps",
+        content: "The process involves obtaining a license from the Regional Director and filing for incorporation.",
+        points: ["Grant of License", "Digital Signature (DSC)", "Name Approval", "SPICe+ Registration"]
+      }
+    ],
+    author: { name: "Audit Expert", role: "Non-Profit Advisor", updatedDate: "April 2024" }
+  },
+  "trust": {
+    title: "Trust Registration Services",
+    description: "A Trust is a legal entity created by a settlor for the benefit of beneficiaries, often used for charitable or private wealth management.",
+    introduction: "Trusts in India are governed by the Indian Trusts Act 1882 for private trusts, while public trusts are governed by state-specific Public Trust Acts. They offer a robust structure for managing property and funds for specific social or charitable goals.",
+    sections: [
+      {
+        heading: "Benefits of Trust",
+        content: "Trusts offer flexibility in management and are eligible for significant tax benefits under Section 12A and 80G.",
+        points: ["Tax Exemptions", "Asset Protection", "Fixed Objectives", "Social Credibility"]
+      },
+      {
+        heading: "Trust Formation",
+        content: "The process involves drafting a Trust Deed and registering it with the local Sub-Registrar.",
+        points: ["Drafting Trust Deed", "Minimum 2 Trustees", "Registration with Sub-Registrar", "PAN & TAN Application"]
+      }
+    ],
+    author: { name: "Legal Consultant", role: "Trust Specialist", updatedDate: "April 2024" }
   }
 };
 

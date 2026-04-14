@@ -20,11 +20,16 @@ export default function Home() {
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUserId(user?.id || null);
+    const checkUser = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        setUserId(session?.user?.id || null);
+      } catch (err: any) {
+        console.warn("GST Return Filing auth check failed gracefully:", err.message);
+      }
     };
-    getUser();
+    checkUser();
   }, []);
 
   const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {

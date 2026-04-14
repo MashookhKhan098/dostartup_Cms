@@ -1,13 +1,22 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { handleWhatsAppSubmission, handleNeedHelpWhatsApp } from "@/lib/form-utils";
 import { supabase } from "@/lib/supabase";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
 
 export default function StartBusinessPage({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
   const [activeEntity, setActiveEntity] = useState(defaultEntity);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState("");
+  const [countdown, setCountdown] = useState(0);
+  const authChecked = useRef(false);
   const [formData, setFormData] = useState({
     state: "",
     name: "",
@@ -15,26 +24,60 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
     email: "",
     phone: "",
     capital: "",
-    members: ""
+    members: "",
+    proposedName1: "",
+    proposedName2: ""
   });
 
   useEffect(() => {
     const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setIsLoggedIn(!!user);
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        const user = session?.user ?? null;
+        
+        setIsLoggedIn(!!user);
+        if (user) {
+          setFormData(prev => ({ ...prev, email: user.email || "" }));
+        }
+      } catch (err: any) {
+        console.warn("Initial auth check skipped due to lock or error:", err.message);
+      }
     };
     checkUser();
+
+    // Load Razorpay script
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    document.body.appendChild(script);
   }, []);
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (showSuccessModal && countdown > 0) {
+      timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+    } else if (showSuccessModal && countdown === 0 && whatsappUrl && paymentSuccess) {
+      window.open(whatsappUrl, '_blank');
+    }
+    return () => clearTimeout(timer);
+  }, [showSuccessModal, countdown, whatsappUrl, paymentSuccess]);
+
   const handleTrackApplication = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      router.push('/profile');
-    } else {
-      const formElement = document.querySelector('[data-form-container]');
-      if (formElement) {
-        formElement.scrollIntoView({ behavior: 'smooth' });
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const user = session?.user ?? null;
+      if (user) {
+        router.push('/profile');
+      } else {
+        const formElement = document.querySelector('[data-form-container]');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth' });
+        }
       }
+    } catch (err: any) {
+      console.error("Tracking redirection failed:", err.message);
+      document.querySelector('[data-form-container]')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -54,6 +97,11 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
     OPC: "One Person Company - perfect for solo entrepreneurs who want corporate benefits with minimal compliance.",
     Proprietorship: "Sole Proprietorship registration for small businesses. Simple structure with complete owner control.",
     Partnership: "Partnership firm registration for businesses with multiple owners. Easy to form and operate.",
+    "Section 8": "Register a non-profit company for charitable or social objects. Combines corporate structure with zero profit distribution.",
+    "Trust": "Trust registration for charitable, religious, or private purposes. Simple governance and dedicated to specific objectives.",
+    "Public Limited": "Public Limited Company for large businesses planning to raise capital from the public and have high turnover.",
+    "Indian Subs.": "Incorporate an Indian Subsidiary of a foreign company. Expand your global reach into the Indian market.",
+    "Producer Company": "Producer Company registration for groups of primary producers. Empowering agricultural and rural development.",
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -63,20 +111,379 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
     });
   };
 
+  const handlePayment = async () => {
+    setLoading(true);
+    const amount = (activeEntity === 'Partnership' || activeEntity === 'OPC' || activeEntity === 'LLP' || activeEntity === 'Company' || activeEntity === 'Section 8' || activeEntity === 'Trust' || activeEntity === 'Public Limited' || activeEntity === 'Indian Subs.' || activeEntity === 'Producer Company') ? 1999 : 999;
+
+    try {
+      const res = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, packageName: `${activeEntity} Registration` }),
+      });
+      const { orderId } = await res.json();
+
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: amount * 100,
+        currency: 'INR',
+        name: 'DoStartup',
+        description: `${activeEntity} Registration`,
+        order_id: orderId,
+        handler: async function (response: any) {
+          let user = null;
+          let userId = null;
+          try {
+            const { data: { session } } = await supabase.auth.getSession();
+            user = session?.user ?? null;
+            userId = user?.id || null;
+            supabase.auth.getUser().catch(() => {});
+          } catch (e) {
+            console.warn("Auth check in payment handler failed gracefully");
+          }
+          try {
+            // Save to Supabase if it's Proprietorship
+            if (activeEntity === 'Proprietorship') {
+              const { error: dbError } = await supabase
+                .from('proprietorship')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 999,
+                  status: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Supabase Insertion Error:", dbError.message);
+                alert(`Note: We couldn't save some details to our database, but your payment was successful. Error: ${dbError.message}`);
+              }
+            }
+
+            // Save to Supabase if it's Partnership (Table name: parternership)
+            if (activeEntity === 'Partnership') {
+              const { error: dbError } = await supabase
+                .from('parternership')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Partnership Insertion Error (Details):", dbError);
+                alert(`Note: We couldn't save some details (Partnership) to our database. Error: ${dbError.message || 'Unknown Error'}`);
+              }
+            }
+
+            // Save to Supabase if it's OPC
+            if (activeEntity === 'OPC') {
+              const { error: dbError } = await supabase
+                .from('one_person_company')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("OPC DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+
+            // Save to Supabase if it's LLP
+            if (activeEntity === 'LLP') {
+              const { error: dbError } = await supabase
+                .from('limited_liability_partnership')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("LLP DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+
+            // Save to Supabase if it's Company
+            if (activeEntity === 'Company') {
+              const { error: dbError } = await supabase
+                .from('private_limited_company')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Company DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+
+            // Save to Supabase if it's Section 8
+            if (activeEntity === 'Section 8') {
+              const { error: dbError } = await supabase
+                .from('section_8_company')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Section 8 DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+
+            // Save to Supabase if it's Trust
+            if (activeEntity === 'Trust') {
+              const { error: dbError } = await supabase
+                .from('trust_registration')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Trust DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+
+            // Save to Supabase if it's Public Limited
+            if (activeEntity === 'Public Limited') {
+              const { error: dbError } = await supabase
+                .from('public_limited_company')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Public Limited DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+
+            // Save to Supabase if it's Indian Subsidiary
+            if (activeEntity === 'Indian Subs.') {
+              const { error: dbError } = await supabase
+                .from('indian_subsidiary')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Indian Subs DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+
+            // Save to Supabase if it's Producer Company
+            if (activeEntity === 'Producer Company') {
+              const { error: dbError } = await supabase
+                .from('producer_company')
+                .insert([{
+                  user_id: userId,
+                  name: formData.name,
+                  email: formData.email,
+                  phone_no: formData.phone,
+                  state: formData.state,
+                  proposed_name1: formData.proposedName1,
+                  proposed_name2: formData.proposedName2 || null,
+                  payment_id: response.razorpay_payment_id,
+                  amount: 1999,
+                  payment_state: 'paid'
+                }]);
+              
+              if (dbError) {
+                console.error("Producer Company DB Save Error:", dbError);
+                alert(`Notice: We couldn't save your details to our history database (Error: ${dbError.message || dbError.code}). However, your payment was successful! Please continue to WhatsApp.`);
+              }
+            }
+          } catch (err: any) {
+            console.error("Critical Save Exception:", err);
+            alert(`Network Notice: We had trouble connecting to our registration database. However, your payment was successful! Please continue to WhatsApp to complete your process.`);
+          }
+
+            // Also update/upsert profile if user is logged in
+            if (user) {
+              const userName = user.user_metadata?.full_name || formData.name || user.email?.split('@')[0];
+              try {
+                const { error: profileError } = await supabase
+                  .from('profiles')
+                  .upsert({
+                    id: user.id,
+                    name: userName,
+                    email: user.email,
+                    phone: formData.phone
+                  });
+                
+                if (profileError) console.error("Profile Upsert Error:", profileError.message);
+              } catch (profileErr) {
+                console.error("Profile Update Error (non-blocking)");
+              }
+            }
+
+          // Prepare WhatsApp message
+          const whatsappMsg = 
+            `🔔 *New ${activeEntity} Registration*\n\n` +
+            `👤 *Name:* ${formData.name}\n` +
+            `📞 *Phone:* ${formData.phone}\n` +
+            `📧 *Email:* ${formData.email || 'Not provided'}\n` +
+            `📍 *State:* ${formData.state}\n` +
+            `📑 *Proposed Name 1:* ${formData.proposedName1}\n` +
+            `📑 *Proposed Name 2:* ${formData.proposedName2 || 'None'}\n` +
+            `💰 *Payment ID:* ${response.razorpay_payment_id}\n\n` +
+            `I have successfully completed the payment. Please proceed with my registration.`;
+
+          const waUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999644807'}?text=${encodeURIComponent(whatsappMsg)}`;
+
+          // Trigger email notification automatically
+          fetch('/api/send-confirmation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: formData.name,
+              email: formData.email,
+              phone: formData.phone,
+              service: `${activeEntity} Registration`,
+              paymentId: response.razorpay_payment_id,
+              details: {
+                State: formData.state,
+                'Proposed Name 1': formData.proposedName1,
+                'Proposed Name 2': formData.proposedName2 || 'None',
+              }
+            }),
+          }).catch(err => console.error("Notification API failed", err));
+
+          setWhatsappUrl(waUrl);
+          setCountdown(3);
+          setShowSuccessModal(true);
+          setPaymentSuccess(true);
+          setLoading(false);
+        },
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone
+        },
+        theme: { color: '#C15F3C' },
+        modal: { ondismiss: () => setLoading(false) }
+      };
+
+      const rzp = (window as any).Razorpay ? new (window as any).Razorpay(options) : null;
+      if (rzp) rzp.open();
+      else alert("Razorpay script not loaded. Please refresh.");
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      alert("Something went wrong with the payment.");
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const multiStepEntities = ['Proprietorship', 'Partnership', 'OPC', 'LLP', 'Company', 'Section 8', 'Trust', 'Public Limited', 'Indian Subs.', 'Producer Company'];
+    if (multiStepEntities.includes(activeEntity || '')) {
+      if (step === 1) {
+        if (!formData.state || !formData.phone || !formData.name || (!isLoggedIn && !formData.email)) {
+          alert("Please fill in all required fields");
+          return;
+        }
+        setStep(2);
+      } else if (step === 2) {
+        if (!formData.proposedName1) {
+          alert("Proposed Name 1 is required");
+          return;
+        }
+        setStep(3);
+      }
+      return;
+    }
+
+    // Default flow for other entities
     if (!formData.state || !formData.businessName || !formData.phone || !formData.name) {
       alert("Please fill in all required fields (Name, Phone, State, Business Name)");
       return;
     }
 
-    // Trigger Lead Submission to DB
     await handleWhatsAppSubmission({
       ...formData,
-      business_name: formData.businessName, // map for API clarity
+      business_name: formData.businessName,
     }, `${activeEntity} Registration`);
 
-    // Optional: Proceed to registration page
     router.push(`/register?type=${activeEntity}&state=${formData.state}&name=${formData.businessName}`);
   };
 
@@ -203,7 +610,10 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                 {entities.map(({ name }) => (
                   <button
                     key={name}
-                    onClick={() => setActiveEntity(name)}
+                    onClick={() => {
+                      setActiveEntity(name);
+                      setStep(1);
+                    }}
                     className={`px-4 py-2 text-xs font-medium rounded-lg transition-all whitespace-nowrap ${activeEntity === name
                       ? "bg-[#C15F3C] text-white"
                       : "bg-white text-[#6F6B63] border border-[#E5E2DA] hover:border-[#C15F3C] hover:text-[#C15F3C]"
@@ -227,164 +637,270 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
 
               {/* FORM */}
               <form onSubmit={handleSubmit} className="space-y-4">
+                {['Proprietorship', 'Partnership', 'OPC', 'LLP', 'Company', 'Section 8', 'Trust', 'Public Limited', 'Indian Subs.', 'Producer Company'].includes(activeEntity || '') ? (
+                  <>
+                    {/* STEP 1: CONTACT */}
+                    {step === 1 && (
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-xs text-[#6F6B63] mb-1">State</label>
+                          <select
+                            name="state"
+                            value={formData.state}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
+                          >
+                            <option value="">Select your state</option>
+                            <option value="Delhi">Delhi NCR</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Telangana">Telangana</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-[#6F6B63] mb-1">Your Name</label>
+                          <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B]"
+                            placeholder="Full Name"
+                          />
+                        </div>
+                        {!isLoggedIn && (
+                          <div>
+                            <label className="block text-xs text-[#6F6B63] mb-1">Email</label>
+                            <input
+                              type="email"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              required
+                              className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B]"
+                              placeholder="Email Address"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <label className="block text-xs text-[#6F6B63] mb-1">Phone Number</label>
+                          <input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            required
+                            maxLength={10}
+                            className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B]"
+                            placeholder="10-digit phone number"
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition"
+                        >
+                          Continue →
+                        </button>
+                      </div>
+                    )}
 
-                {/* STATE SELECT */}
-                <div>
-                  <label className="block text-xs text-[#6F6B63] mb-1">
-                    State
-                  </label>
-                  <div className="relative">
-                    <select
-                      name="state"
-                      value={formData.state}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
-                    >
-                      <option value="" className="text-[#B1ADA1]">Select your state</option>
-                      <option value="Delhi">Delhi NCR</option>
-                      <option value="Maharashtra">Maharashtra</option>
-                      <option value="Karnataka">Karnataka</option>
-                      <option value="Tamil Nadu">Tamil Nadu</option>
-                      <option value="Gujarat">Gujarat</option>
-                      <option value="Telangana">Telangana</option>
-                      <option value="West Bengal">West Bengal</option>
-                      <option value="Uttar Pradesh">Uttar Pradesh</option>
-                      <option value="Rajasthan">Rajasthan</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                      </svg>
+                    {/* STEP 2: PROPOSED NAMES */}
+                    {step === 2 && (
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-xs text-[#6F6B63] mb-1">Proposed Name 1 (Required)</label>
+                          <input
+                            type="text"
+                            name="proposedName1"
+                            value={formData.proposedName1}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B]"
+                            placeholder="First choice name"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-[#6F6B63] mb-1">Proposed Name 2 (Optional)</label>
+                          <input
+                            type="text"
+                            name="proposedName2"
+                            value={formData.proposedName2}
+                            onChange={handleInputChange}
+                            className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B]"
+                            placeholder="Alternative name"
+                          />
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setStep(1)}
+                            className="flex-1 bg-white text-[#6F6B63] border border-[#E5E2DA] font-semibold py-3 rounded-lg text-sm"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="submit"
+                            className="flex-[2] bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition"
+                          >
+                            Submit Details →
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* STEP 3 IS NOW HANDLED BY THE RegistrationSummaryModal POPUP */}
+                  </>
+                ) : (
+                  <>
+                    {/* ORIGINAL FORM FOR OTHER ENTITIES */}
+                    {/* STATE SELECT */}
+                    <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">
+                        State
+                      </label>
+                      <div className="relative">
+                        <select
+                          name="state"
+                          value={formData.state}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
+                        >
+                          <option value="" className="text-[#B1ADA1]">Select your state</option>
+                          <option value="Delhi">Delhi NCR</option>
+                          <option value="Maharashtra">Maharashtra</option>
+                          <option value="Karnataka">Karnataka</option>
+                          <option value="Tamil Nadu">Tamil Nadu</option>
+                          <option value="Gujarat">Gujarat</option>
+                          <option value="Telangana">Telangana</option>
+                          <option value="West Bengal">West Bengal</option>
+                          <option value="Uttar Pradesh">Uttar Pradesh</option>
+                          <option value="Rajasthan">Rajasthan</option>
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <svg className="w-4 h-4 text-[#6F6B63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* BUSINESS NAME */}
-                <div>
-                  <label className="block text-xs text-[#6F6B63] mb-1">
-                    Business Name
-                  </label>
-                  <input
-                    type="text"
-                    name="businessName"
-                    value={formData.businessName}
-                    onChange={handleInputChange}
-                    placeholder="e.g., Tech Solutions Pvt Ltd"
-                    required
-                    onInput={(e) => {
-                      e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9 ]/g, '');
-                    }}
-                    className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                  />
-                </div>
+                    {/* BUSINESS NAME */}
+                    <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">
+                        Business Name
+                      </label>
+                      <input
+                        type="text"
+                        name="businessName"
+                        value={formData.businessName}
+                        onChange={handleInputChange}
+                        placeholder="e.g., Tech Solutions Pvt Ltd"
+                        required
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                      />
+                    </div>
 
-                {/* NAME & EMAIL */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs text-[#6F6B63] mb-1">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Name"
-                      required
-                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-[#6F6B63] mb-1">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Email"
-                      required
-                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                    />
-                  </div>
-                </div>
+                    {/* NAME & EMAIL */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs text-[#6F6B63] mb-1">
+                          Your Name
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          placeholder="Name"
+                          required
+                          className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-[#6F6B63] mb-1">
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          placeholder="Email"
+                          required
+                          className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                        />
+                      </div>
+                    </div>
 
-                {/* PHONE */}
-                <div>
-                  <label className="block text-xs text-[#6F6B63] mb-1">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="10-digit phone number"
-                    required
-                    maxLength={10}
-                    onInput={(e) => {
-                      e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
-                    }}
-                    className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                  />
-                </div>
+                    {/* PHONE */}
+                    <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="10-digit phone number"
+                        required
+                        maxLength={10}
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                      />
+                    </div>
 
-                {/* TWO COLUMN GRID */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs text-[#6F6B63] mb-1">
-                      Capital (₹)
-                    </label>
-                    <input
-                      type="text"
-                      name="capital"
-                      value={formData.capital}
-                      onChange={handleInputChange}
-                      placeholder="Amount"
-                      required
-                      onInput={(e) => {
-                        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
-                      }}
-                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-[#6F6B63] mb-1">
-                      Members
-                    </label>
-                    <input
-                      type="number"
-                      name="members"
-                      value={formData.members}
-                      onChange={handleInputChange}
-                      placeholder="No."
-                      required
-                      onInput={(e) => {
-                        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
-                      }}
-                      className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                    />
-                  </div>
-                </div>
+                    {/* TWO COLUMN GRID */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs text-[#6F6B63] mb-1">Capital (₹)</label>
+                        <input
+                          type="text"
+                          name="capital"
+                          value={formData.capital}
+                          onChange={handleInputChange}
+                          placeholder="Amount"
+                          required
+                          className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-[#6F6B63] mb-1">Members</label>
+                        <input
+                          type="number"
+                          name="members"
+                          value={formData.members}
+                          onChange={handleInputChange}
+                          placeholder="No."
+                          required
+                          className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
+                        />
+                      </div>
+                    </div>
 
-                {/* SUBMIT BUTTON */}
-                <button
-                  type="submit"
-                  className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition shadow-sm hover:shadow-md mt-2"
-                >
-                  Register Your {activeEntity} Now →
-                </button>
+                    {/* SUBMIT BUTTON */}
+                    <button
+                      type="submit"
+                      className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition shadow-sm hover:shadow-md mt-2"
+                    >
+                      Register Your {activeEntity} Now →
+                    </button>
+                  </>
+                )}
 
                 {/* SECURITY BADGE */}
-                <div className="flex items-center justify-center gap-2 text-xs text-[#B1ADA1] pt-2">
-                  <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>100% secure · No spam · Instant confirmation</span>
-                </div>
-
+                {(step === 1 || !['Proprietorship', 'Partnership', 'OPC', 'LLP', 'Company', 'Section 8', 'Trust', 'Public Limited', 'Indian Subs.', 'Producer Company'].includes(activeEntity || '')) && (
+                  <div className="flex items-center justify-center gap-2 text-xs text-[#B1ADA1] pt-2">
+                    <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>100% secure · No spam · Instant confirmation</span>
+                  </div>
+                )}
               </form>
             </div>
 
@@ -424,6 +940,221 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
         </div>
 
       </div>
+
+      {/* REGISTRATION SUMMARY MODAL (PRE-PAYMENT) */}
+      <AnimatePresence>
+        {step === 3 && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden"
+            >
+              {/* MODAL HEADER */}
+              <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-8 py-6 flex justify-between items-center">
+                <div>
+                  <h3 className="text-xl font-bold text-white">Review Your Details</h3>
+                  <p className="text-white/80 text-xs">Verify your information before proceeding to payment</p>
+                </div>
+                <button 
+                  onClick={() => setStep(2)}
+                  className="text-white/60 hover:text-white transition"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* MODAL BODY */}
+              <div className="p-8 space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Contact Information</h4>
+                    <div className="space-y-2">
+                      <div className="flex flex-col text-sm">
+                        <span className="text-[#6F6B63]">Name</span>
+                        <span className="font-semibold text-[#2F2E2B]">{formData.name}</span>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-[#6F6B63]">Email</span>
+                        <span className="font-semibold text-[#2F2E2B] break-all">{formData.email}</span>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-[#6F6B63]">Phone</span>
+                        <span className="font-semibold text-[#2F2E2B]">{formData.phone}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 border-l border-[#E5E2DA] pl-6">
+                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Business Details</h4>
+                    <div className="space-y-2">
+                      <div className="flex flex-col text-sm">
+                        <span className="text-[#6F6B63]">Registration Type</span>
+                        <span className="font-semibold text-[#2F2E2B]">{activeEntity}</span>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-[#6F6B63]">State</span>
+                        <span className="font-semibold text-[#2F2E2B]">{formData.state}</span>
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-[#6F6B63]">Proposed Name 1</span>
+                        <span className="font-semibold text-[#2F2E2B]">{formData.proposedName1}</span>
+                      </div>
+                      {formData.proposedName2 && (
+                        <div className="flex flex-col text-sm">
+                          <span className="text-[#6F6B63]">Proposed Name 2</span>
+                          <span className="font-semibold text-[#2F2E2B]">{formData.proposedName2}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* PRICE CARD */}
+                <div className="bg-[#F9F8F6] rounded-2xl p-6 border border-[#E5E2DA] flex justify-between items-center">
+                  <div>
+                    <span className="text-[#6F6B63] text-sm">Package Amount</span>
+                    <p className="text-2xl font-bold text-[#2F2E2B]">₹{(activeEntity === 'Partnership' || activeEntity === 'OPC' || activeEntity === 'LLP' || activeEntity === 'Company' || activeEntity === 'Section 8' || activeEntity === 'Trust' || activeEntity === 'Public Limited' || activeEntity === 'Indian Subs.' || activeEntity === 'Producer Company') ? '1,999' : '999'} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Guaranteed</span>
+                    <div className="flex gap-1 justify-end text-[#C15F3C]">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setStep(2)}
+                    className="flex-1 border border-[#E5E2DA] hover:bg-[#F9F8F6] text-[#6F6B63] font-bold py-4 rounded-2xl transition"
+                  >
+                    Edit Details
+                  </button>
+                  <button
+                    onClick={handlePayment}
+                    disabled={loading}
+                    className="flex-[2] bg-[#C15F3C] hover:bg-[#A94E30] text-white font-bold py-4 rounded-2xl transition shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2 group"
+                  >
+                    {loading ? (
+                      <span className="flex items-center gap-2">
+                        <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Processing...
+                      </span>
+                    ) : (
+                      <>
+                        Pay Now →
+                      </>
+                    )}
+                  </button>
+                </div>
+                
+                <p className="text-center text-[10px] text-[#B1ADA1]">
+                  By clicking Pay Now, you agree to our terms and conditions. Instant automated confirmation.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* SUCCESS POPUP MODAL */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
+            >
+              {/* MODAL HEADER */}
+              <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] p-8 text-center relative">
+                <button 
+                  onClick={() => setShowSuccessModal(false)}
+                  className="absolute top-4 right-4 text-white/80 hover:text-white transition"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", damping: 12, delay: 0.2 }}
+                  className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
+                >
+                  <CheckCircle2 className="w-12 h-12 text-[#C15F3C]" />
+                </motion.div>
+                
+                <h3 className="text-2xl font-bold text-white mb-1">Payment Successful!</h3>
+                <p className="text-white/80 text-sm italic">Order ID: #{Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+              </div>
+
+              {/* MODAL BODY */}
+              <div className="p-8 space-y-6">
+                <div className="space-y-3 text-center">
+                  <p className="text-[#2F2E2B] font-medium text-lg">
+                    Thank you, {formData.name}!
+                  </p>
+                  <p className="text-[#6F6B63] text-sm leading-relaxed">
+                    Your payment of <span className="font-bold text-[#C15F3C]">₹{(activeEntity === 'Partnership' || activeEntity === 'OPC' || activeEntity === 'LLP' || activeEntity === 'Company' || activeEntity === 'Section 8' || activeEntity === 'Trust' || activeEntity === 'Public Limited' || activeEntity === 'Indian Subs.' || activeEntity === 'Producer Company') ? '1,999' : '999'}</span> has been received successfully. 
+                    We have captured all your registration details.
+                  </p>
+                </div>
+
+                <div className="bg-[#F9F8F6] rounded-2xl p-4 border border-[#E5E2DA] space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-[#6F6B63]">Service</span>
+                    <span className="font-semibold text-[#2F2E2B]">{activeEntity} Registration</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-[#6F6B63]">Status</span>
+                    <span className="text-[#10B981] font-bold">PAID</span>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <div className="text-center text-[10px] text-[#B1ADA1] mb-4 uppercase tracking-widest font-bold">
+                    What's Next?
+                  </div>
+                  
+                  <button 
+                    onClick={() => window.open(whatsappUrl, '_blank')}
+                    className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-2xl transition shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2 group"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    Complete via WhatsApp
+                    <ExternalLink className="w-4 h-4 opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </button>
+                  
+                  <div className="mt-4 text-center">
+                    <p className="text-xs text-[#6F6B63] flex items-center justify-center gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                      Redirecting to WhatsApp in <span className="font-bold text-[#C15F3C]">{countdown}s</span>...
+                    </p>
+                    <p className="text-[10px] text-[#B1ADA1] mt-1">Please provide any remaining documents there.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* MODAL FOOTER */}
+              <div className="bg-[#F4F3EE] p-4 text-center">
+                <p className="text-[10px] text-[#B1ADA1]">
+                  A confirmation email has also been sent to {formData.email}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

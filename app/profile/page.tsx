@@ -94,8 +94,191 @@ export default function ProfilePage() {
         console.log('No GST returns found for user')
       }
 
-      // Combine both
-      const allRegistrations = [...userRegistrations, ...userReturns]
+      // Fetch user's Proprietorship registrations
+      let userProprietorship: any[] = []
+      const { data: propData, error: propError } = await supabase
+        .from('proprietorship')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!propError && propData) {
+        userProprietorship = propData.map(p => ({
+          ...p,
+          registration_type: 'Proprietorship Registration',
+          id: p.id,
+          status: p.status || 'paid'
+        }))
+      }
+
+      // Fetch user's Partnership registrations (Table: parternership)
+      let userPartnership: any[] = []
+      const { data: partData, error: partError } = await supabase
+        .from('parternership')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+
+      if (!partError && partData) {
+        userPartnership = partData.map(p => ({
+          ...p,
+          registration_type: 'Partnership Registration',
+          id: p.id,
+          status: p.payment_state || 'paid' // Use payment_state from schema
+        }))
+      }
+
+      // Fetch user's OPC registrations
+      let userOPC: any[] = []
+      const { data: opcData, error: opcError } = await supabase
+        .from('one_person_company')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!opcError && opcData) {
+        userOPC = opcData.map(p => ({
+          ...p,
+          registration_type: 'OPC Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's LLP registrations
+      let userLLP: any[] = []
+      const { data: llpData, error: llpError } = await supabase
+        .from('limited_liability_partnership')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!llpError && llpData) {
+        userLLP = llpData.map(p => ({
+          ...p,
+          registration_type: 'LLP Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Private Limited Company registrations
+      let userPvtLtd: any[] = []
+      const { data: pvtLtdData, error: pvtLtdError } = await supabase
+        .from('private_limited_company')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!pvtLtdError && pvtLtdData) {
+        userPvtLtd = pvtLtdData.map(p => ({
+          ...p,
+          registration_type: 'Private Limited Company',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Section 8 registrations
+      let userSection8: any[] = []
+      const { data: s8Data, error: s8Error } = await supabase
+        .from('section_8_company')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!s8Error && s8Data) {
+        userSection8 = s8Data.map(p => ({
+          ...p,
+          registration_type: 'Section 8 Company',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trust registrations
+      let userTrust: any[] = []
+      const { data: trustData, error: trustError } = await supabase
+        .from('trust_registration')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!trustError && trustData) {
+        userTrust = trustData.map(p => ({
+          ...p,
+          registration_type: 'Trust Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Public Limited Company registrations
+      let userPublicLimited: any[] = []
+      const { data: pubLtdData, error: pubLtdError } = await supabase
+        .from('public_limited_company')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!pubLtdError && pubLtdData) {
+        userPublicLimited = pubLtdData.map(p => ({
+          ...p,
+          registration_type: 'Public Limited Company',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Indian Subsidiary registrations
+      let userIndianSubs: any[] = []
+      const { data: indianSubsData, error: indianSubsError } = await supabase
+        .from('indian_subsidiary')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!indianSubsError && indianSubsData) {
+        userIndianSubs = indianSubsData.map(p => ({
+          ...p,
+          registration_type: 'Indian Subsidiary',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Producer Company registrations
+      let userProducerCompany: any[] = []
+      const { data: prodCoData, error: prodCoError } = await supabase
+        .from('producer_company')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+      
+      if (!prodCoError && prodCoData) {
+        userProducerCompany = prodCoData.map(p => ({
+          ...p,
+          registration_type: 'Producer Company',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Combine all
+      const allRegistrations = [
+        ...userRegistrations, 
+        ...userReturns, 
+        ...userProprietorship,
+        ...userPartnership,
+        ...userOPC,
+        ...userLLP,
+        ...userPvtLtd,
+        ...userSection8,
+        ...userTrust,
+        ...userPublicLimited,
+        ...userIndianSubs,
+        ...userProducerCompany
+      ]
       console.log('Final combined registrations:', allRegistrations)
       setPayments(allRegistrations)
 
@@ -106,8 +289,13 @@ export default function ProfilePage() {
   }, [router])
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    router.push('/login')
+    try {
+      await supabase.auth.signOut()
+      setUser(null)
+      window.location.href = "/login"
+    } catch (error) {
+      window.location.href = "/login"
+    }
   }
 
   if (loading) {
@@ -207,9 +395,9 @@ export default function ProfilePage() {
                           )}
                         </div>
                         <div className="text-left md:text-right">
-                          {reg.package && (
+                          {(reg.package || reg.amount) && (
                             <p className="text-lg font-semibold text-[#C15F3C]">
-                              {reg.package.split('-').pop()?.trim()}
+                              {reg.package ? reg.package.split('-').pop()?.trim() : `₹${reg.amount}`}
                             </p>
                           )}
                           {reg.state && (
@@ -220,6 +408,13 @@ export default function ProfilePage() {
                           )}
                           {reg.pan && (
                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">PAN: {reg.pan}</p>
+                          )}
+                          {reg.proposed_name1 && (
+                            <div className="mt-1">
+                              <p className="text-[10px] text-[#B1ADA1] uppercase font-bold tracking-wider">Proposed Names</p>
+                              <p className="text-xs text-[#6F6B63]">1. {reg.proposed_name1}</p>
+                              {reg.proposed_name2 && <p className="text-xs text-[#6F6B63]">2. {reg.proposed_name2}</p>}
+                            </div>
                           )}
                         </div>
                       </div>
