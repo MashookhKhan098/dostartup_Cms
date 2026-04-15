@@ -22,9 +22,9 @@ export default function Home() {
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const { data: { user }, error } = await supabase.auth.getUser();
         if (error) throw error;
-        setUserId(session?.user?.id || null);
+        setUserId(user?.id || null);
       } catch (err: any) {
         console.warn("GST Return Filing auth check failed gracefully:", err.message);
       }

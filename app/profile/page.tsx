@@ -17,8 +17,9 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      const user = session?.user ?? null
+      const { data: { user }, error } = await supabase.auth.getUser();
+      const session = user ? { user } : null;
+
       if (!user) {
         router.push('/login')
         return
@@ -264,6 +265,125 @@ export default function ProfilePage() {
         }))
       }
 
+      // Fetch user's Startup India registrations (using email)
+      let userStartupIndia: any[] = []
+      const { data: startupData, error: startupError } = await supabase
+        .from('startup_india')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!startupError && startupData) {
+        userStartupIndia = startupData.map(p => ({
+          ...p,
+          registration_type: 'Startup India Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trade License registrations (using email)
+      let userTradeLicense: any[] = []
+      const { data: tradeData, error: tradeError } = await supabase
+        .from('trade_license')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!tradeError && tradeData) {
+        userTradeLicense = tradeData.map(p => ({
+          ...p,
+          registration_type: 'Trade License Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's FSSAI registrations (using email)
+      let userFssai: any[] = []
+      const { data: fssaiData, error: fssaiError } = await supabase
+        .from('fssai_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!fssaiError && fssaiData) {
+        userFssai = fssaiData.map(p => ({
+          ...p,
+          registration_type: 'FSSAI Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's FSSAI License registrations (using email)
+      let userFssaiLicense: any[] = []
+      const { data: fssaiLicenseData, error: fssaiLicenseError } = await supabase
+        .from('fssai_license')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!fssaiLicenseError && fssaiLicenseData) {
+        userFssaiLicense = fssaiLicenseData.map(p => ({
+          ...p,
+          registration_type: 'FSSAI License',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Halal Certificate registrations (using email)
+      let userHalal: any[] = []
+      const { data: halalData, error: halalError } = await supabase
+        .from('halal_certificate')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!halalError && halalData) {
+        userHalal = halalData.map(p => ({
+          ...p,
+          registration_type: 'Halal Certification',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's ICEGATE registrations (using email)
+      let userIcegate: any[] = []
+      const { data: icegateData, error: icegateError } = await supabase
+        .from('icegate_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!icegateError && icegateData) {
+        userIcegate = icegateData.map(p => ({
+          ...p,
+          registration_type: 'ICEGATE Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's IEC registrations (using email)
+      let userIEC: any[] = []
+      const { data: iecData, error: iecError } = await supabase
+        .from('import_export_code')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!iecError && iecData) {
+        userIEC = iecData.map(p => ({
+          ...p,
+          registration_type: 'Import Export Code',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
       // Combine all
       const allRegistrations = [
         ...userRegistrations, 
@@ -277,7 +397,14 @@ export default function ProfilePage() {
         ...userTrust,
         ...userPublicLimited,
         ...userIndianSubs,
-        ...userProducerCompany
+        ...userProducerCompany,
+        ...userStartupIndia,
+        ...userTradeLicense,
+        ...userFssai,
+        ...userFssaiLicense,
+        ...userHalal,
+        ...userIcegate,
+        ...userIEC
       ]
       console.log('Final combined registrations:', allRegistrations)
       setPayments(allRegistrations)
@@ -415,6 +542,22 @@ export default function ProfilePage() {
                               <p className="text-xs text-[#6F6B63]">1. {reg.proposed_name1}</p>
                               {reg.proposed_name2 && <p className="text-xs text-[#6F6B63]">2. {reg.proposed_name2}</p>}
                             </div>
+                          )}
+                          {/* FSSAI Specific Details */}
+                          {reg.licence_type && (
+                            <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Type: {reg.licence_type}</p>
+                          )}
+                          {reg.bussiness_activity && (
+                            <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Activity: {reg.bussiness_activity}</p>
+                          )}
+                          {reg.year && (
+                            <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Validity: {reg.year}</p>
+                          )}
+                          {reg.pan_gstin && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">PAN/GST: {reg.pan_gstin}</p>
+                          )}
+                          {reg.variant && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Variant: {reg.variant}</p>
                           )}
                         </div>
                       </div>

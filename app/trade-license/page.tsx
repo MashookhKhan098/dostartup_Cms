@@ -3,101 +3,54 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Registration/Hero';
+import Hero from '../components/Registration/TradeLicenseHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
 
- const heroProps = {
- // ================= LEFT SIDE =================
- heading: "Get your ",
- headingHighlight: "Trade License",
- description:
- "A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using DoStartup and ensure full compliance with local municipal regulations.",
+  const heroProps = {
+    // ================= LEFT SIDE =================
+    heading: "Get your ",
+    headingHighlight: "Trade License",
+    description:
+      "A Trade License is mandatory for businesses operating from commercial properties. Easily apply for Trade License online using DoStartup and ensure full compliance with local municipal regulations.",
 
- features: [
- {
- icon: "document",
- text: "Digital Process",
- },
- {
- icon: "chart",
- text: "Incorporation Dashboard",
- },
- {
- icon: "rocket",
- text: "Super Fast Service",
- },
- {
- icon: "document",
- text: "Trade License Registration",
- },
- {
- icon: "users",
- text: "Trade License Renewal",
- },
- ],
+    features: [
+      {
+        icon: "rocket",
+        text: "Digital Process",
+      },
+      {
+        icon: "document",
+        text: "Trade License Registration",
+      },
+      {
+        icon: "shield",
+        text: "Full Compliance Support",
+      },
+      {
+        icon: "chart",
+        text: "Incorporation Dashboard",
+      },
+      {
+        icon: "users",
+        text: "Trade License Renewal",
+      },
+    ],
+    buttonText: "Pay INR 2,999 Online",
+  };
 
- // ================= RIGHT SIDE =================
- tabs: [],
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- {
- type: "input",
- inputType: "text",
- name: "pan_gstin",
- placeholder: "PAN / GSTIN *",
- },
- {
- type: "select",
- name: "state",
- placeholder: "State *",
- options: [
- "Andhra Pradesh",
- "Delhi",
- "Gujarat",
- "Karnataka",
- "Maharashtra",
- "Tamil Nadu",
- "Telangana",
- "Uttar Pradesh",
- ],
- },
- {
- type: "select",
- name: "nature_of_trade",
- placeholder: "Nature of Trade *",
- options: [
- "Manufacturing",
- "Trading",
- "Retail Business",
- "Wholesale Business",
- "Service Provider",
- "Restaurant / Food Business",
- "Other",
- ],
- },
- ],
-
- buttonText: "Continue",
-};
-
-
-
- 
-
- return (
- <>
- <Navbar />
- <Hero {...heroProps}/>
- <DynamicTabContent category="Proprietorship" />
- <DynamicPricingSection />
-      <FAQAccordion />
- <Popularsearches />
- <Footer />
- </>
- );
+  return (
+    <>
+      <Navbar />
+      <Hero {...heroProps}/>
+      <DynamicTabContent category="Proprietorship" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="trade-license" />
+      </div>
+      <FAQAccordion category="trade-license" />
+      <Popularsearches />
+      <Footer />
+    </>
+  );
 }

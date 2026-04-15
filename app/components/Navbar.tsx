@@ -345,9 +345,9 @@ export default function Navbar() {
  const router = useRouter();
 
  useEffect(() => {
-   supabase.auth.getSession().then(({ data: { session } }) => {
-     setUser(session?.user ?? null);
-   });
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
 
    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
      setUser(session?.user ?? null);

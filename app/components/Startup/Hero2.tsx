@@ -18,9 +18,9 @@ export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: s
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const { data: { user }, error } = await supabase.auth.getUser();
         if (error) throw error;
-        setIsLoggedIn(!!session?.user);
+        setIsLoggedIn(!!user);
       } catch (err: any) {
         console.warn("Hero2 initial auth check failed gracefully:", err.message);
       }
@@ -30,8 +30,7 @@ export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: s
 
   const handleTrackApplication = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const user = session?.user ?? null;
+      const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         router.push('/profile');
       } else {

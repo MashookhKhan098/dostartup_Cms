@@ -32,9 +32,8 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const { data: { user }, error } = await supabase.auth.getUser();
         if (error) throw error;
-        const user = session?.user ?? null;
         
         setIsLoggedIn(!!user);
         if (user) {
@@ -65,8 +64,7 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
 
   const handleTrackApplication = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const user = session?.user ?? null;
+      const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         router.push('/profile');
       } else {
@@ -134,8 +132,8 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
           let user = null;
           let userId = null;
           try {
-            const { data: { session } } = await supabase.auth.getSession();
-            user = session?.user ?? null;
+            const { data: { user: currentUser } } = await supabase.auth.getUser();
+            user = currentUser ?? null;
             userId = user?.id || null;
             supabase.auth.getUser().catch(() => {});
           } catch (e) {

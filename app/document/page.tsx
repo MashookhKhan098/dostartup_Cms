@@ -63,14 +63,11 @@ function DocumentsContent() {
   const [user, setUser] = useState<any>(null)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session }, error }) => {
-      if (error) {
-        console.warn("Document page auth session check failed:", error.message);
-      }
-      setUser(session?.user ?? null)
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user)
       setIsLoadingAuth(false)
     }).catch(err => {
-      console.error("Document page auth check inner error:", err);
+      console.warn("Document page auth check inner error:", err);
       setIsLoadingAuth(false);
     });
   }, [])
