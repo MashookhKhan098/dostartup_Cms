@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import SidebarCart from "../components/SidebarCart";
+import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
+import Footer from "../components/Footer";
 import { ChevronDown, ShoppingBag, Plus, Check, Search } from "lucide-react";
 
 const ASSETS = {
@@ -402,6 +405,48 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  />
  </div>
  </section>
+
+ {/* FAQ */}
+ <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 mt-6">
+ <h3 className="text-xl font-semibold mb-4">
+ FAQ's on Income Tax E-Filing
+ </h3>
+ <div className="space-y-0">
+ {faqQuestions.map((q, i) => (
+ <div key={i} className="border-b last:border-b-0">
+ <button
+ className="w-full text-left py-4 flex justify-between items-center text-sm"
+ onClick={() => setFaqOpen(faqOpen === i ? null : i)}
+ aria-expanded={faqOpen === i}
+ aria-controls={`faq-${i}`}
+ >
+ <span className="text-slate-800">{q}</span>
+ <span className="text-indigo-600 flex items-center gap-2">
+ {faqOpen === i ? "-" : <Plus size={14} />}
+ </span>
+ </button>
+
+ {faqOpen === i && (
+ <div
+ id={`faq-${i}`}
+ className="px-2 pb-4 text-sm text-gray-600"
+ >
+ {faqAnswers[i]}
+ </div>
+ )}
+ </div>
+ ))}
+ </div>
+
+ <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
+
+ <button className="px-4 py-2 border rounded text-sm">
+ Load More
+ </button>
+ 
+
+</div>
+ </div>
 
  {/* long textual content */}
  <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
@@ -920,48 +965,6 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  />
  </div>
  </article>
-
- {/* FAQ */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- FAQ's on Income Tax E-Filing
- </h3>
- <div className="space-y-0">
- {faqQuestions.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setFaqOpen(faqOpen === i ? null : i)}
- aria-expanded={faqOpen === i}
- aria-controls={`faq-${i}`}
- >
- <span className="text-slate-800">{q}</span>
- <span className="text-indigo-600 flex items-center gap-2">
- {faqOpen === i ? "-" : <Plus size={14} />}
- </span>
- </button>
-
- {faqOpen === i && (
- <div
- id={`faq-${i}`}
- className="px-2 pb-4 text-sm text-gray-600"
- >
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
-
- <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-
- <button className="px-4 py-2 border rounded text-sm">
- Load More
- </button>
- 
-
-</div>
- </div>
  </section>
 
  {/* Sidebar */}
@@ -1012,41 +1015,7 @@ export default function IncomeTaxFilingPage(): React.ReactElement {
  </aside>
  </main>
 
- {/* Footer */}
- <footer className="bg-[#F4F3EE] mt-12 py-3 border-t">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-600">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">DoStartup</h5>
- <a className="block">About DoStartup</a>
- <a className="block">Careers</a>
- <a className="block">Contact Us</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
- <a className="block">Business Search</a>
- <a className="block">Trademark Search</a>
- <a className="block">Filings.AE for UAE</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
- <a className="block">Terms & Conditions</a>
- <a className="block">Privacy Policy</a>
- <a className="block">Refund Policy</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
- <a className="block">Confidentiality Policy</a>
- <a className="block">Disclaimer Policy</a>
- <a className="block">DoStartup Review</a>
- </div>
- </div>
-
- <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} DoStartup - Sample replica footer
- </div>
- </div>
- </footer>
+ <Footer />
 
  {/* WhatsApp CTA */}
  <div className="fixed right-6 bottom-6 bg-green-500 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50">

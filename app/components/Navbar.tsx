@@ -337,24 +337,20 @@ function NavItem({
 }
 
 export default function Navbar() {
- const [mobileOpen, setMobileOpen] = useState(false);
- const [searchOpen, setSearchOpen] = useState(false);
- const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
- const [scrolled, setScrolled] = useState(false);
- const [user, setUser] = useState<any>(null);
- const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
 
- useEffect(() => {
-   supabase.auth.getSession().then(({ data: { session } }) => {
-     setUser(session?.user ?? null);
-   });
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
 
-   const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-     setUser(session?.user ?? null);
-   });
-
-   return () => subscription.unsubscribe();
- }, []);
+    return () => subscription.unsubscribe();
+  }, []);
 
  const handleLogout = async () => {
    await supabase.auth.signOut();
@@ -405,7 +401,7 @@ export default function Navbar() {
     }
   };
 
- return (
+  return (
  <>
  <style dangerouslySetInnerHTML={{
  __html: `
@@ -540,81 +536,9 @@ export default function Navbar() {
  panelStyle={{ right: 0, left: "auto", width: "min(500px, calc(100vw - 2rem))" }}
  >
  <div className="grid grid-cols-1 gap-1">
- {NSWS.map((item) => {
- const [submenuOpen, setSubmenuOpen] = useState(false);
- const submenuTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
- const handleMouseEnter = () => {
- if (submenuTimer.current) clearTimeout(submenuTimer.current);
- setSubmenuOpen(true);
- };
-
- const handleMouseLeave = () => {
- submenuTimer.current = setTimeout(() => setSubmenuOpen(false), 80);
- };
-
- return (
- <div
- key={item.url}
- className="relative"
- onMouseEnter={handleMouseEnter}
- onMouseLeave={handleMouseLeave}
- >
- <button
- className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-[#F5F5F5] transition-all duration-200 text-left"
- style={{ 
- color: submenuOpen ? "#C15F3C" : "#2F2E2B",
- backgroundColor: submenuOpen ? "#F5F5F5" : "transparent"
- }}
- >
- <div className="flex-1">
- <div className="text-[12px] font-semibold transition-colors uppercase tracking-tight">
- {item.label}
- </div>
- {item.label !== "State Approvals" && (
- <div className="text-[10px] text-[#9D9690] mt-0.5 leading-tight">
- {item.label === "Central Approvals" && "Issued by Ministries of Govt. of India"}
- {item.label === "Government Schemes" && "Avail the benefits by Govt. of India"}
- </div>
- )}
- </div>
- </button>
- 
- {/* Invisible bridge to keep hover alive */}
- {submenuOpen && item.submenu && (
- <div className="absolute top-full left-0 w-full h-2 z-[9998]" />
- )}
- 
- {/* Submenu that appears on hover */}
- {submenuOpen && item.submenu && (
- <div 
- className="absolute left-full top-0 bg-white rounded-lg shadow-lg border border-gray-200 ml-2 z-[9999] min-w-max"
- style={{
- maxHeight: item.label === "State Approvals" ? "300px" : "auto",
- overflowY: item.label === "State Approvals" ? "auto" : "visible",
- scrollbarWidth: "none",
- msOverflowStyle: "none"
- }}
- >
- <style>{`
- div[style*="overflow-y: auto"]::-webkit-scrollbar {
- display: none;
- }
- `}</style>
- {item.submenu.map((subitem) => (
- <Link
- key={subitem.url}
- href={subitem.url}
- className="text-xs text-[#6F6B63] px-3 py-1.5 rounded-xl hover:bg-[#F5F5F5] hover:text-[#C15F3C] whitespace-normal transition-all duration-150 block"
- >
- {subitem.label}
- </Link>
+ {NSWS.map((item) => (
+  <NswsItem key={item.url} item={item} />
  ))}
- </div>
- )}
- </div>
- );
- })}
  </div>
  </NavItem>
 
@@ -705,30 +629,30 @@ export default function Navbar() {
  )}
 
  {user ? (
-   <>
-    <Link href="/profile" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
-     <FiUser size={15} /> Profile
-    </Link>
-    <button onClick={handleLogout} className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-[#6F6B63] border border-[#E5E2DA] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200 shadow-sm whitespace-nowrap">
-     Logout
-    </button>
-   </>
- ) : (
-   <>
-    <Link href="/login" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
-     <FiUser size={15} /> Login
-    </Link>
+    <>
+     <Link href="/profile" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
+      <FiUser size={15} /> Profile
+     </Link>
+     <button onClick={handleLogout} className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-[#6F6B63] border border-[#E5E2DA] hover:text-[#C15F3C] hover:border-[#C15F3C] transition-all duration-200 shadow-sm whitespace-nowrap">
+      Logout
+     </button>
+    </>
+  ) : (
+    <>
+     <Link href="/login" className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200 whitespace-nowrap">
+      <FiUser size={15} /> Login
+     </Link>
 
-    <Link href="/signup"
-     className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-white transition-all duration-200 shadow-sm whitespace-nowrap"
-     style={{ background: "#C15F3C" }}
-     onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
-     onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
-    >
-     Sign up
-    </Link>
-   </>
- )}
+     <Link href="/signup"
+      className="hidden sm:block px-4 py-2 rounded-lg text-[13px] font-semibold text-white transition-all duration-200 shadow-sm whitespace-nowrap"
+      style={{ background: "#C15F3C" }}
+      onMouseOver={(e) => (e.currentTarget.style.background = "#A94E30")}
+      onMouseOut={(e) => (e.currentTarget.style.background = "#C15F3C")}
+     >
+      Sign up
+     </Link>
+    </>
+  )}
 
  <button
  className="lg:hidden p-2 rounded-lg text-[#6F6B63] hover:text-[#C15F3C] hover:bg-[#F5F5F5] transition-all duration-200"

@@ -410,6 +410,9 @@ export default function ITR1Page() {
                 India's smartest income tax filing platform. Our AI reads your
                 Form-16, finds every deduction, picks the best tax regime, and
                 files in under 5 minutes.
+                <span className="block mt-2 text-black font-semibold">
+                  Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner — 40% cheaper!
+                </span>
               </p>
               <div className="flex flex-wrap gap-3 mb-10">
                 <a
@@ -949,7 +952,7 @@ export default function ITR1Page() {
         ══════════════════════════════════════ */}
         <FAQAccordion />
 
-        <section className="bg-white py-6 px-4 sm:px-6 relative overflow-hidden border-t border-[#E5E2DA]">
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6 relative overflow-hidden border-t border-[#C15F3C]/10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center gap-0.5 mb-4">
               {[...Array(5)].map((_, i) => (

@@ -13,8 +13,8 @@ import SidebarCart from "../components/SidebarCart";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
-  hero: "/images/mca-compliance-simplified-india.webp",
-  ledgers: "/images/ledgers.png",
+  hero: "/images/company-compliance.jpg",
+  ledgers: "/images/ledgers.jpg",
   whatsapp: "/images/whatsapp.png",
   companyCompliance: "/images/company-compliance.jpg",
 };
@@ -46,7 +46,7 @@ export default function ADT1FilingPage() {
       </div>
 
       <main className="max-w-[1240px] mx-auto px-6 py-6">
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
+        <div className="flex flex-col lg:flex-row gap-8">
         
         {/* Left Section */}
         <section className="flex-1 space-y-6">
@@ -258,36 +258,38 @@ export default function ADT1FilingPage() {
 
         {/* Persistent Sticky Sidebar */}
         <aside className="lg:w-80 flex-shrink-0 space-y-6">
-           <div className="sticky top-28 space-y-6">
+           <div className="sticky top-28">
               <SidebarCart />
-              
-              <div className="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm font-bold">
-                <h4 className="font-black text-gray-900 mb-8 text-xs border-b pb-4 uppercase tracking-widest">Related Guides</h4>
-                <ul className="text-sm space-y-5 text-gray-400">
-                  {["Form-ADT-1", "MCA Relaxes Levy of Additional Fee", "Exemption for Form Adt 1"].map((item) => (
-                    <li key={item} className="hover:text-[#C15F3C] cursor-pointer flex gap-3 group items-center transition-all">
-                       <span className="group-hover:translate-x-1 transition-transform group-hover:text-gray-900">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+           </div>
+           
+           <div className="bg-white p-10 rounded-[40px] border border-gray-100 shadow-sm font-bold">
+             <h4 className="font-black text-gray-900 mb-8 text-xs border-b pb-4 uppercase tracking-widest">Related Guides</h4>
+             <ul className="text-sm space-y-5 text-gray-400">
+               {["Form-ADT-1", "MCA Relaxes Levy of Additional Fee", "Exemption for Form Adt 1"].map((item) => (
+                 <li key={item} className="hover:text-[#C15F3C] cursor-pointer flex gap-3 group items-center transition-all">
+                    <span className="group-hover:translate-x-1 transition-transform group-hover:text-gray-900">{item}</span>
+                 </li>
+               ))}
+             </ul>
+           </div>
 
-              <div className="rounded-[40px] overflow-hidden shadow-2xl group border border-gray-100">
-                <img src="/images/company-compliance.jpg" alt="compliance" className="w-full h-auto grayscale transition-all duration-700 group-hover:grayscale-0" />
-                <div className="p-8 bg-white font-black text-center">
-                   <div className="text-[14px] text-gray-900 mt-1 uppercase tracking-tighter">Company Compliance</div>
-                </div>
-              </div>
+           <div className="rounded-[40px] overflow-hidden shadow-2xl group border border-gray-100">
+             <img src="/images/company-compliance.jpg" alt="compliance" className="w-full h-auto grayscale transition-all duration-700 group-hover:grayscale-0" />
+             <div className="p-8 bg-white font-black text-center">
+                <div className="text-[14px] text-gray-900 mt-1 uppercase tracking-tighter">Company Compliance</div>
+             </div>
            </div>
         </aside>
         </div>
       </main>
 
+
+      <FAQAccordion category="adt-1-filing" />
+
       <div className="max-w-[1240px] mx-auto px-6 mb-16">
         <DynamicPricingSection category="adt-1-filing" />
       </div>
 
-      <FAQAccordion category="adt-1-filing" />
       <PopularSearches />
       <Footer />
 

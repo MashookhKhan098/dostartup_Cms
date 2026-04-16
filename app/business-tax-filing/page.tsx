@@ -218,11 +218,11 @@ export default function BusinessTaxFilingPage(): React.ReactElement {
 
       {/* Standardized Pricing Section */}
       <section className="bg-[#F4F3EE] pb-12">
-        <DynamicPricingSection category="Business Tax Filing" />
+        <DynamicPricingSection category="business-tax-filing" />
       </section>
 
       {/* FAQ Section */}
-      <FAQAccordion category="business-tax-filing" />
+      <FAQAccordion category="business-tax-return-filing" />
 
       {/* Popular Searches */}
       <PopularSearchesComponent />

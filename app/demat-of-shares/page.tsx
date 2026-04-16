@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 
 
 /* eslint-disable @next/next/no-img-element */
 
 import React, { useState } from "react";
-import { ChevronRight, ShoppingBag, Star, Plus, CheckCircle, ShoppingCart } from "lucide-react";
+import { Star, Plus, CheckCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -15,7 +15,7 @@ import SidebarCart from "../components/SidebarCart";
 const ASSETS = {
   logo: "/images/india-logo.jpg",
   hero: "/images/demat-hero.jpg",
-  man: "https://img.dostartup.com/catalog/mca-compliance-simplified-india.webp",
+  man: "/images/simplying-comiplance.jpg",
   ledgers: "/images/ledgers.jpg",
   whatsapp: "/images/whatsapp.png",
   companyCompliance: "/images/company-compliance.jpg",
@@ -24,24 +24,13 @@ const ASSETS = {
 };
 
 export default function DematerialisationPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const faqItems = [
-    { q: "What is dematerialisation of shares?", a: "Dematerialisation is the process of converting physical share certificates into electronic form and holding them in a Demat account with a depository participant (DP)." },
-    { q: "What are the benefits of dematerialising shares?", a: "Benefits include enhanced security (no risk of loss/theft), faster trading, reduced costs (lower stamp duties), and convenience of online access." },
-    { q: "Is dematerialisation mandatory for private companies?", a: "Yes ΓÇö following the MCA amendment (Rule 9B), private limited companies except 'small companies' are required to dematerialise their securities by September 30, 2024." },
-    { q: "What is Rule 9B?", a: "Rule 9B requires private companies (except small companies) to issue and maintain securities in dematerialised form and convert existing physical shares accordingly." },
-    { q: "Which companies are exempt?", a: "Small companies (paid-up capital Γëñ INR 4 crore and turnover Γëñ INR 40 crore) are generally exempt, unless they are holding/subsidiary companies." },
-    { q: "What is the deadline for compliance?", a: "The deadline for compliance is September 30, 2024, for companies falling under the Rule 9B mandate." }
-  ];
-
   return (
     <div className="min-h-screen bg-[#F4F3EE] text-slate-800">
       <Navbar />
 
       {/* Breadcrumb */}
-      <div className="bg-gradient-to-r from-white to-slate-50 py-3 text-slate-800 border-b border-slate-100">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 text-sm text-gray-500 font-bold">
+      <div className="py-4 text-slate-800">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 text-sm text-gray-500 font-bold uppercase tracking-widest text-[10px]">
           Home / MCA Services / <span className="text-amber-700 font-medium">Dematerialisation of Shares</span>
         </div>
       </div>
@@ -55,7 +44,7 @@ export default function DematerialisationPage() {
           {/* Header Block: 2-Col Hero Area */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
              {/* Col 1: Hero Image Card */}
-             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
+             <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-lg flex flex-col h-full overflow-hidden">
                <div className="rounded-lg overflow-hidden border border-gray-200 flex-1 flex flex-col">
                 <div className="bg-[#9e4a2d] p-6 text-center">
                   <h2 className="text-white text-xl font-bold uppercase">DEMATERIALISATION</h2>
@@ -79,7 +68,7 @@ export default function DematerialisationPage() {
             </div>
 
             {/* Col 2: Info Card */}
-            <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-lg flex flex-col h-full">
                <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2 w-fit">
                     <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
                     <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA COMPLIANCE</span>
@@ -95,7 +84,7 @@ export default function DematerialisationPage() {
                </p>
 
                <div className="border-2 border-dashed border-amber-200 rounded-xl p-5 bg-amber-50/10 relative mt-auto">
-                  <div className="absolute -top-3 left-4 bg-[#F4F3EE] px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Compliance</div>
+                  <div className="absolute -top-3 left-4 bg-white px-2 text-[10px] uppercase font-bold text-amber-700 rounded border border-amber-200 tracking-wider">Expert Compliance</div>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-2 text-[13px] text-slate-600 font-bold">
                       <CheckCircle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" /> ISIN Setup & Depository Agreement
@@ -109,83 +98,107 @@ export default function DematerialisationPage() {
             </div>
           </div>
 
-          <div className="space-y-12">
-             <article className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
-                <h1 className="text-2xl font-bold text-[#9e4a2d] mb-8 border-b-2 border-amber-600/10 pb-4 text-center uppercase">
-                   Dematerialisation of Shares Guide
-                </h1>
+          <div className="space-y-6">
+            <article className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-4 text-center uppercase tracking-wider">
+                Dematerialisation of Shares Guide
+              </h2>
 
-                <div className="prose prose-sm max-w-none text-slate-600 space-y-6 leading-relaxed font-bold">
-                   <p>
-                    Dematerialisation is the process of transferring physical shares into a digital account, known as a Demat account, which simplifies managing and trading shares. Converting physical shares to Demat enhances security, reducing the risks associated with physical shares like loss or theft. It also makes trading faster and more efficient and simplifies share management. Previously required mainly for public companies, the dematerialisation process is now mandatory for private limited companies (except small companies).
-                   </p>
-                   
-                   <h3 className="text-xl font-bold text-slate-900 pt-4 uppercase">What is Dematerialisation of shares?</h3>
-                   <p>Dematerialisation refers to the process of converting physical securities, such as share certificates and other documents, into electronic format. These securities are then held in a demat account.</p>
+              <div className="prose prose-sm max-w-none text-slate-600 space-y-8 leading-relaxed font-bold">
+                <p>
+                  Dematerialisation is the process of transferring physical shares into a digital account, known as a Demat account, which simplifies managing and trading shares. Converting physical shares to Demat enhances security, reducing the risks associated with physical shares like loss or theft. It also makes trading faster and more efficient and simplifies share management. Previously required mainly for public companies, the dematerialisation process is now mandatory for private limited companies (except small companies).
+                </p>
 
-                   <h3 className="text-lg font-bold text-slate-900 pt-6 uppercase">Applicability (Rule 9B)</h3>
-                   <p className="border-l-4 border-amber-600 pl-4 py-1 bg-amber-50/20 font-bold text-amber-800">
-                    From October 2023, the Ministry of Corporate Affairs (MCA) mandated that private limited companies (excluding small companies) must issue and maintain their securities only in dematerialised form. Smaller companies ΓÇö those with a paid-up capital of Γëñ INR 4 crore and turnover Γëñ INR 40 crore ΓÇö are generally exempt, unless they are holding or subsidiary companies of other corporate bodies.
-                   </p>
+                <p className="text-amber-800 text-center text-lg font-black border-y border-amber-100 py-4 uppercase tracking-tighter">
+                  Convert Your Physical Shares to Demat with IndiaFilings – Get Started Now!
+                </p>
 
-                   <h3 className="text-lg font-bold text-slate-900 pt-6 uppercase">Last Date for Compliance</h3>
-                   <p>The deadline for compliance is September 30, 2024. Companies falling under the mandate must ensure their shares are dematerialised by this date to avoid restrictions on further allotments or transfers.</p>
-
-                   <h3 className="text-lg font-bold text-slate-900 pt-6 uppercase underline">How to Convert Physical Shares to Demat?</h3>
-                   <ol className="list-decimal pl-5 space-y-3 font-bold text-slate-700">
-                     <li>Enter into an agreement with a depository (NSDL or CDSL).</li>
-                     <li>Appoint a Registrar and Transfer Agent (RTA).</li>
-                     <li>Obtain ISIN (International Securities Identification Number) for each security.</li>
-                     <li>Shareholders open Demat accounts with Depository Participants.</li>
-                     <li>Submit physical certificates with the Dematerialisation Request Form (DRF).</li>
-                   </ol>
-
-                   <h3 className="text-lg font-bold text-slate-900 pt-6 uppercase">Penalties for Non-Compliance</h3>
-                   <p>Failure to comply with Rule 9B leads to restrictions on share transfers and allotments. Additionally, such companies cannot issue new securities until the mandate is fulfilled. Directors and officers may also face fines under the Companies Act 2013.</p>
+                <div className="space-y-4">
+                  <h3 className="text-lg font-bold text-slate-900 uppercase underline decoration-amber-500 underline-offset-8 decoration-2">What is Dematerialisation of shares?</h3>
+                  <p>Dematerialisation refers to the process of converting physical securities, such as share certificates and other documents, into electronic format. These securities are then held in a demat account.</p>
                 </div>
-             </article>
 
-             {/* Documents Section */}
-             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
-                <h3 className="text-xl font-bold text-[#9e4a2d] mb-6 border-b border-gray-50 pb-3 uppercase text-[16px]">Documents Required For Dematerialisation</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
-                  {[
-                    "Original Physical Share Certificates",
-                    "Dematerialisation Request Form (DRF)",
-                    "Board Resolution for RTA Appointment",
-                    "Company PAN & Address Proof",
-                    "ISIN Activation Forms"
-                  ].map((doc, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 bg-[#F4F3EE]/50 rounded-xl border border-gray-100 group hover:border-amber-200 transition-colors">
-                       <span className="text-sm text-slate-700 group-hover:text-amber-800">{doc}</span>
-                    </div>
-                  ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4 border-b border-gray-50 pb-8">
+                  <div>
+                    <h4 className="font-bold text-slate-900 mb-3 uppercase text-xs tracking-widest border-b pb-2">Depositories in India</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li>• NSDL (National Securities Depository Ltd.)</li>
+                      <li>• CDSL (Central Depository Services (India) Ltd.)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 mb-3 uppercase text-xs tracking-widest border-b pb-2">Rule 9B Mandate</h4>
+                    <p className="text-[12px] leading-relaxed font-medium">Mandated for private limited companies (except small companies) to ensure shares are issued and held in dematerialised form.</p>
+                  </div>
                 </div>
-             </div>
 
-             {/* FAQ Section */}
-             <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-8 shadow-sm">
-                <h3 className="text-xl font-bold text-[#9e4a2d] mb-8 border-b border-gray-50 pb-4 uppercase tracking-widest text-[16px]">FAQ's</h3>
-                <div className="space-y-4 font-bold">
-                  {faqItems.map((faq, idx) => (
-                    <div key={idx} className="border border-slate-100 rounded-xl overflow-hidden hover:border-amber-200 transition-colors shadow-sm bg-[#F4F3EE]">
-                      <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50/10 transition-colors group">
-                        <span className="text-sm font-bold text-slate-800 group-hover:text-amber-700">{faq.q}</span>
-                        <div className={`p-1.5 rounded-full bg-amber-50 transition-all shrink-0 ${openFaq === idx ? 'rotate-45' : ''}`}>
-                           <Plus className="w-4 h-4 text-amber-600" />
-                        </div>
-                      </button>
-                      {openFaq === idx && (
-                        <div className="p-5 bg-amber-50/5 text-sm text-slate-500 border-t border-slate-100 leading-relaxed font-bold">{faq.a}</div>
-                      )}
-                    </div>
-                  ))}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-bold text-slate-900 uppercase">Dematerialisation of Shares of Private Companies</h3>
+                  <p>In October 2023, the MCA introduced an amendment (Rule 9B) requiring private limited companies, except small companies, to dematerialise their securities. This involves issuing shares in electronic form and converting existing physical shares to Demat.</p>
                 </div>
-                <div className="flex gap-3 items-center flex-wrap mt-4">
-  <button className="mt-10 px-10 py-2.5 border-2 border-amber-600 text-amber-700 rounded-lg text-sm font-bold hover:bg-amber-50 uppercase tracking-wide">Load More</button>
-  
-</div>
-</div>
+
+                <div className="space-y-4 pt-6 border-t border-gray-50">
+                  <h3 className="text-lg font-bold text-slate-900 uppercase">MCA&apos;s Rule 9B Overview</h3>
+                  <p>Rule 9B requires private companies (except small companies) to ensure shares are issued and held in dematerialised form. Companies must convert physical share certificates into electronic holdings and ensure promoters/key managerial personnel have dematerialised their shareholdings.</p>
+                  
+                  <div className="mt-4 pt-4">
+                    <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase">Applicability</h4>
+                    <p className="text-slate-500">Dematerialisation applies to public and private companies (subject to exceptions). Holding and subsidiary companies are required to dematerialise regardless of small-company thresholds.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4 pt-6 border-t border-gray-50">
+                  <h3 className="text-lg font-bold text-slate-900 uppercase">Requirements to Comply</h3>
+                  <ul className="space-y-3 pl-4">
+                    {[
+                      "Amend Articles of Association (AoA) to allow dematerialised holdings",
+                      "Appoint a Registrar & Transfer Agent (RTA)",
+                      "Obtain ISINs for each security type",
+                      "Open Demat accounts for shareholders with a Depository Participant (DP)",
+                      "File required returns (e.g., PAS-6) and coordinate with the RTA for conversion"
+                    ].map((req, i) => (
+                      <li key={i} className="flex gap-2 items-start text-[13px]">
+                        <span className="text-amber-600 font-black shrink-0">✔</span>
+                        <span>{req}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="py-6 px-4 border border-slate-100 rounded-lg">
+                  <h3 className="text-lg font-bold text-slate-900 uppercase mb-3">Last Date for Dematerialisation</h3>
+                  <p className="text-slate-500 leading-relaxed font-medium">
+                    The deadline depends on the company&apos;s financial year-end. For companies with FY ending March 31, 2023, the deadline was **September 30, 2024** (18 months). Other companies have an 18-month window from their relevant financial year-end.
+                  </p>
+                </div>
+
+                <div className="space-y-4 pt-6 border-t border-gray-50">
+                  <h3 className="text-lg font-bold text-slate-900 uppercase">How to Convert Physical Shares into Demat?</h3>
+                  <ol className="space-y-4 list-decimal pl-5">
+                    {[
+                      { t: "Open Demat account with a Depository Participant (DP).", d: "" },
+                      { t: "Submit a Dematerialisation Request Form (DRF) to your DP with the physical certificates.", d: "" },
+                      { t: "DP verifies and forwards the request to the company's RTA.", d: "" },
+                      { t: "RTA validates and approves conversion; physical certificates are cancelled and electronic credits are made to the Demat account.", d: "" },
+                      { t: "You receive Dematerialisation Request Number (DRN) and the shares are credited to your Demat account.", d: "" }
+                    ].map((step, i) => (
+                      <li key={i} className="pl-2">
+                        <span className="text-slate-700">{step.t}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div className="pt-6 border-t border-gray-50">
+                  <h3 className="text-lg font-bold text-red-700 uppercase mb-2">Penalties for Non-Compliance</h3>
+                  <p className="text-slate-500 text-sm font-medium">Failure to dematerialise as required may lead to restrictions on securities transactions, limitations on shareholder rights, monetary fines for the company and officers in default, and other regulatory actions.</p>
+                </div>
+
+                <div className="pt-6 text-center italic border-t border-slate-100 text-slate-400 font-medium">
+                  Why demat? Demat ensures security, faster transactions, automatic corporate action updates and easier compliance — all reasons regulators are pushing for wide adoption.
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -194,7 +207,7 @@ export default function DematerialisationPage() {
            <div className="sticky top-28 space-y-6">
               <SidebarCart />
               
-              <div className="bg-[#F4F3EE] p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
+              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm font-bold">
                 <h4 className="font-bold text-slate-900 mb-5 text-[14px] border-b pb-3 uppercase tracking-wider">Related Guides</h4>
                 <ul className="text-[13px] space-y-4 text-amber-700">
                   {["Rule 9B Detailed Overview", "NSDL vs CDSL Comparison", "Appointing an RTA Guide", "Share Transfer in Demat"].map((item) => (
@@ -208,7 +221,7 @@ export default function DematerialisationPage() {
 
               <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:scale-[1.02] transition-transform font-bold">
                 <img src={ASSETS.companyCompliance} alt="compliance" className="w-full h-auto object-cover" />
-                <div className="p-5 bg-[#F4F3EE]">
+                <div className="p-5 bg-white">
                     <div className="text-[14px] text-slate-800 uppercase">Corporate Compliance</div>
                     <div className="text-[11px] text-slate-400 mt-1 font-bold">Stay ahead of ROC deadlines</div>
                 </div>
@@ -217,6 +230,8 @@ export default function DematerialisationPage() {
         </aside>
       </main>
 
+      <DynamicPricingSection category="demat-of-shares" />
+      <FAQAccordion category="demat-of-shares" />
       <PopularSearches />
       <Footer />
 
@@ -228,4 +243,3 @@ export default function DematerialisationPage() {
     </div>
   );
 }
-

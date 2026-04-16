@@ -23,9 +23,9 @@ const ASSETS = {
   cartIcon: "/images/cart.png",
   tdsreturnIcon: "/images/tdsreturn.png",
   indiaFlag: "/images/india-flag.png",
-  ledgersBadge: "/images/ledgers-badge.png",
-  docsImg: "/images/tds-docs.png",
-  pricingBadge: "/images/ledgers-badge.png",
+  ledgersBadge: "/images/ledgers.jpg",
+  docsImg: "/images/docs.png",
+  pricingBadge: "/images/ledgers.jpg",
 };
 
 export default function TdsReturnFilingPage(): React.ReactElement {
@@ -121,7 +121,8 @@ export default function TdsReturnFilingPage(): React.ReactElement {
       </section>
 
       {/* Main content */}
-      <main className="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <main>
+        <div className="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left column */}
         <section className="lg:col-span-8 space-y-12">
           {/* Services Offered */}
@@ -282,17 +283,19 @@ export default function TdsReturnFilingPage(): React.ReactElement {
             </div>
           </article>
 
-          {/* FAQ */}
-          <FAQAccordion category="TDS Return Filing" />
-
-          {/* Popular Searches */}
-          <PopularSearchesComponent />
         </section>
 
         {/* Sidebar */}
         <aside className="lg:col-span-4 sticky top-28">
           <SidebarCart />
         </aside>
+        </div>
+
+        {/* FAQ */}
+        <FAQAccordion category="tds-return-filing" />
+
+        {/* Popular Searches */}
+        <PopularSearchesComponent />
       </main>
 
       <Footer />

@@ -178,7 +178,7 @@ export default function AuthorizedCapitalIncrease() {
  </div>
 
  {/* Right Form Card */}
- <div className="lg:w-1/2 p-8 lg:p-10 bg-gradient-to-br from-amber-50 to-amber-100">
+ <div className="lg:w-1/2 p-8 lg:p-10">
  <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
  <div
  className="h-1.5 w-full rounded-t-xl mb-4"

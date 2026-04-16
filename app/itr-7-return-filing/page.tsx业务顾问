@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import Popularsearches from "../components/PopularSearches";
 import { Plus, ShoppingBag, CheckCircle, Shield, FileText, Zap, Star, Brain, AlertTriangle, ArrowRight, Target, Building2 } from "lucide-react";
 import Faq from "../components/Faq";
 
@@ -106,9 +105,6 @@ export default function ITR7Page() {
 
               <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-lg">
                 For charitable trusts, political parties, research institutions, universities, hospitals &amp; mutual funds. Our AI handles all exemptions, Form 10B/10BB audit, and files ITR-7 with zero errors.
-                <span className="block mt-2 text-black font-semibold">
-                  Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner — 40% cheaper!
-                </span>
               </p>
 
               <div className="flex flex-wrap gap-3 mb-10">
@@ -328,30 +324,28 @@ export default function ITR7Page() {
         <FAQAccordion />
 
         {/* ═══════════ CTA STRIP ═══════════ */}
-        <section className="bg-[#F4F3EE] py-20 px-4 sm:px-6 text-center">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex justify-center gap-1 mb-5">
+        <section className="bg-[#C15F3C] py-12 px-4 sm:px-6 text-center">
+          <div className="max-w-2xl mx-auto">
+            <div className="flex justify-center gap-1 mb-3">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={20} className="fill-[#C15F3C] text-[#C15F3C]" />
+                <Star key={i} size={18} className="fill-white text-white" />
               ))}
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-4">
+            <h2 className="text-3xl font-extrabold text-white mb-3">
               Ready to File ITR-7?
             </h2>
-            <p className="text-gray-600 mb-10 text-lg max-w-xl mx-auto">
+            <p className="text-[#C15F3C]/10 mb-6">
               Expert CA assistance from document collection to e-filing — stress-free compliance for your trust or institution.
             </p>
             <Link
               href="#pricing"
-              className="inline-flex items-center gap-2 bg-[#C15F3C] text-white font-bold px-10 py-4 rounded-full text-lg hover:bg-[#A94E30] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-white text-[#C15F3C] font-bold px-8 py-4 rounded-full text-base hover:bg-[#C15F3C]/5 transition-colors shadow-xl"
             >
-              <ShoppingBag size={20} />
+              <ShoppingBag size={18} />
               Start Filing ITR-7 Now
             </Link>
           </div>
         </section>
-
-        <Popularsearches />
       </main>
       <Footer />
     </>

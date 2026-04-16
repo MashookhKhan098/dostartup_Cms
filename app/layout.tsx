@@ -3,6 +3,18 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
+// Fix for fetch failed errors by enforcing IPv4 first
+if (typeof window === 'undefined') {
+  try {
+    const dns = require('node:dns');
+    if (dns && typeof dns.setDefaultResultOrder === 'function') {
+      dns.setDefaultResultOrder('ipv4first');
+    }
+  } catch (err) {
+    // Silently fail if dns module is not available (e.g. edge runtime)
+  }
+}
+
 const geistSans = Inter({
  subsets: ["latin"],
  variable: "--font-geist-sans",

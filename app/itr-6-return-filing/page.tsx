@@ -4,6 +4,9 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import FAQAccordion from "../components/Faq";
+import Popularsearches from "../components/PopularSearches";
+import DynamicPricingSection from "../components/DynamicPricingSection";
 
 import {
  ChevronRight,
@@ -398,10 +401,11 @@ export default function TaxCalculatorPage() {
  {/* ── STEP INDICATOR ── */}
  <StepIndicator current={step} total={4} />
 
- <div className="grid lg:grid-cols-[1fr_380px] gap-6 items-start">
-
- {/* ══════════════════════════ MAIN FORM PANEL ══════════════════════════ */}
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+ <div className="grid lg:grid-cols-[1fr_380px] gap-4 items-start">
+ 
+  {/* ══════════════════════════ MAIN COLUMN ══════════════════════════ */}
+  <div className="space-y-4">
+  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
 
  {/* ── STEP 1: Personal Info ── */}
  {step === 1 && (
@@ -696,6 +700,26 @@ export default function TaxCalculatorPage() {
  </div>
  )}
  </div>
+ 
+  {/* Why DoStartup Box at the bottom of left column */}
+  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4">
+  <h3 className="font-display font-bold text-black text-sm mb-3">Why DoStartup.in?</h3>
+  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+  {[
+  { icon: "🤖", text: "AI Form-16 reading" },
+  { icon: "⚡", text: "File in 5 minutes" },
+  { icon: "💰", text: "40% cheaper" },
+  { icon: "🔒", text: "Bank-grade security" },
+  { icon: "📱", text: "Mobile & desktop" },
+  ].map((f) => (
+  <div key={f.text} className="flex items-center gap-2 py-1">
+  <span className="text-base">{f.icon}</span>
+  <span className="text-xs text-gray-600 font-medium">{f.text}</span>
+  </div>
+  ))}
+  </div>
+  </div>
+  </div>
 
  {/* ══════════════════════════ SIDE PANEL ══════════════════════════ */}
  <div className="space-y-4">
@@ -747,28 +771,11 @@ export default function TaxCalculatorPage() {
  {[...Array(5)].map((_, i) => <Star key={i} size={13} className="fill-white text-white" />)}
  </div>
  <h3 className="font-display font-bold text-white text-base mb-1">Ready to File?</h3>
- <p className="text-orange-100 text-xs mb-3">Use this calculation to file your ITR in 5 minutes</p>
+ <p className="text-orange-100 text-xs mb-3">Use this calculation to file your ITR in 5 m</p>
  <Link href="/itr-1-return-filing"
  className="block bg-white text-orange-500 font-bold text-sm py-2.5 rounded-xl hover:bg-orange-50 transition-colors">
  File ITR Now →
  </Link>
- </div>
-
- {/* Why DoStartup */}
- <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
- <h3 className="font-display font-bold text-black text-sm mb-3">Why DoStartup.in?</h3>
- {[
- { icon: "🤖", text: "AI reads Form-16 automatically" },
- { icon: "⚡", text: "File in under 5 minutes" },
- { icon: "💰", text: "40% cheaper than ClearTax" },
- { icon: "🔒", text: "Bank-grade 256-bit SSL" },
- { icon: "📱", text: "Works on mobile & desktop" },
- ].map((f) => (
- <div key={f.text} className="flex items-center gap-2.5 py-1.5 border-b border-gray-50 last:border-0">
- <span className="text-base">{f.icon}</span>
- <span className="text-xs text-gray-600">{f.text}</span>
- </div>
- ))}
  </div>
  </div>
  </div>
@@ -817,9 +824,16 @@ export default function TaxCalculatorPage() {
  </div>
  </div>
  </div>
-    
-    </main>
-    <Footer />
-  </>
-);
+
+ <section className="bg-[#F4F3EE] py-6">
+  <DynamicPricingSection />
+ </section>
+
+ <FAQAccordion category="itr-6-return-filing" />
+ 
+ <Popularsearches />
+ </main>
+ <Footer />
+</>
+ );
 }

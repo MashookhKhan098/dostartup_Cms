@@ -6,12 +6,7 @@ import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-import { createClient } from '@supabase/supabase-js'
-
-const supabase = createClient(
- process.env.NEXT_PUBLIC_SUPABASE_URL!,
- process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+import { supabase } from '@/lib/supabase'
 
 export default function SignupPage() {
  const [step, setStep] = useState(1)

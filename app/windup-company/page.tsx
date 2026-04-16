@@ -18,7 +18,7 @@ export default function WindupCompanyPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fb] font-sans text-gray-800">
+    <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
       <Navbar />
 
       {/* Main Content Container */}
@@ -60,7 +60,7 @@ export default function WindupCompanyPage() {
 
         {/* 3 Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <div className="bg-[#F4F3EE] rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-start">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-start">
              <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center mb-4 text-indigo-600">
                <Users size={20} className="fill-indigo-600" />
              </div>
@@ -69,7 +69,7 @@ export default function WindupCompanyPage() {
                Get an experienced accountant to manage your ledgers, vendor & customer reconciliations, bank reconciliations, and monthly close with precision and reliability - all at a fraction of the cost of a full-time hire.
              </p>
           </div>
-          <div className="bg-[#F4F3EE] rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-start">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-start">
              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mb-4 text-blue-600">
                <Check size={20} strokeWidth={3} />
              </div>
@@ -78,7 +78,7 @@ export default function WindupCompanyPage() {
                End-to-end MCA compliance for Pvt Ltd Companies & LLPs - filing of Annual Returns (AOC-4, MGT-7/7A), DIR-3 KYC, Director Disclosures, and Statutory Registers. Stay updated with MCA regulations, automatic due date reminders, proactive compliance management, and expert guidance—so your business avoids penalties and stays legally compliant, always.
              </p>
           </div>
-          <div className="bg-[#F4F3EE] rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-start">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-start">
              <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center mb-4 text-orange-500">
                <Zap size={20} className="fill-orange-500 text-orange-500" />
              </div>
@@ -93,7 +93,7 @@ export default function WindupCompanyPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           <section className="lg:col-span-8 space-y-6">
-            <div className="bg-[#F4F3EE] rounded-2xl border border-gray-100 p-8 shadow-sm">
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
               <h2 className="text-[22px] font-bold text-gray-900 mb-4">Winding up of an LLP</h2>
               <div className="prose prose-sm max-w-none text-gray-600 space-y-4">
                 <p>
@@ -128,9 +128,9 @@ export default function WindupCompanyPage() {
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                       <tr>
-                        <td className="p-4 text-gray-600 bg-[#F4F3EE]">Meaning</td>
-                        <td className="p-4 text-gray-600 bg-[#F4F3EE] border-l border-gray-200">Preparing to close by selling assets and paying creditors.</td>
-                        <td className="p-4 text-gray-600 bg-[#F4F3EE] border-l border-gray-200">Final step; LLP ceases to exist after all procedures are complete.</td>
+                        <td className="p-4 text-gray-600 bg-gray-50">Meaning</td>
+                        <td className="p-4 text-gray-600 bg-gray-50 border-l border-gray-200">Preparing to close by selling assets and paying creditors.</td>
+                        <td className="p-4 text-gray-600 bg-gray-50 border-l border-gray-200">Final step; LLP ceases to exist after all procedures are complete.</td>
                       </tr>
                       <tr>
                         <td className="p-4 text-gray-600 bg-[#fbfbfa]/50">Legal Entity</td>
@@ -184,9 +184,9 @@ export default function WindupCompanyPage() {
             <div className="sticky top-28 space-y-6">
                <SidebarCart />
                
-               <div className="bg-[#F4F3EE] p-6 rounded-2xl border border-gray-100 shadow-sm">
+               <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                  <h4 className="font-bold text-gray-900 mb-5 text-[15px] border-b border-gray-100 pb-3">Related Guides</h4>
-                 <ul className="text-[14px] space-y-4 text-blue-600">
+                 <ul className="text-[14px] space-y-4 text-gray-700 font-bold">
                    {["How to Close a LLP - Winding Up of LLP", "Voluntary Liquidation of LLPs", "LLP Form 24 - Easily Close a LLP", "Difference between Winding up and Dissolution"].map((item) => (
                      <li key={item} className="hover:text-amber-700 cursor-pointer flex gap-3 group items-start leading-tight">
                         <span className="text-gray-400 mt-1">&rarr;</span>
@@ -198,7 +198,7 @@ export default function WindupCompanyPage() {
 
                <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                  <img src={ASSETS.companyCompliance} alt="compliance" className="w-full h-auto object-cover" />
-                 <div className="p-5 bg-[#F4F3EE]">
+                 <div className="p-5 bg-white">
                    <div className="text-[14px] font-bold text-gray-900">Corporate Compliance</div>
                    <div className="text-[12px] text-gray-500 mt-1">Compliance simplified for you</div>
                  </div>

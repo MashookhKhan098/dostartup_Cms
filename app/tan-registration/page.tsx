@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -119,46 +119,7 @@ const POPULAR_SEARCHES = [
  Component
  --------------------------- */
 export default function TanRegistrationPage(): React.ReactElement {
- const [openFaq, setOpenFaq] = useState<number | null>(null);
- 
  const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
-
- const faqItems = [
- "What is TAN registration number?",
- "Who needs a TAN?",
- "Why is TAN important?",
- "What is the validity of TAN?",
- "Is TAN required for TDS payments?",
- "Do proprietors need TAN?",
- "What are the benefits of TAN registration?",
- "What are the documents required for TAN application?",
- "How can I register for TAN in India?",
- "What is the TAN application fees?",
- // extra FAQ entries to expand content and match requested line count
- "Can TAN be applied for offline?",
- "How long does TAN issuance take?",
- "Can TAN be modified after issuance?",
- "Is TAN mandatory for salaried individuals?",
- "What happens if TAN is not quoted in challans?",
- ];
-
- const faqAnswers: Record<number, string> = {
- 0: "TAN (Tax Deduction and Collection Account Number) is a 10-digit alphanumeric identifier issued by the Income Tax Department used by entities responsible for deducting or collecting tax at source (TDS/TCS).",
- 1: "Any individual or organisation that needs to deduct tax at source (e.g., employers, businesses, contractors making specified payments) must obtain a TAN.",
- 2: "TAN is mandatory for filing TDS/TCS returns, challans and certificates. Non-compliance can lead to penalties and processing issues with tax authorities.",
- 3: "TAN has lifetime validity once issued and does not require periodic renewal.",
- 4: "Yes — TAN must be quoted in TDS/TCS payments and related challans; banks may refuse TDS deposits without a quoted TAN.",
- 5: "Yes — proprietors who are liable to deduct tax at source must obtain a TAN.",
- 6: "Benefits include legal compliance, streamlined tax operations, easier reconciliation of TDS/TCS records, and accurate tracking of tax transactions.",
- 7: "Common documents: legal entity registration (if applicable), passport-size photograph, proof of registered office address, PAN card of the company or the applicant, and completed application form (Form 49B for TAN).",
- 8: "TAN can be applied online through the NSDL (TIN-NSDL) portal by submitting Form 49B, or offline by filling the form and submitting to a TIN-Facilitation Center (TIN-FC).",
- 9: "Fees vary depending on the channel and the service provider; check the NSDL/Protean portal or authorised TIN-FC for the current application fee.",
- 10: "Yes — offline TAN application is done via Form 49B which can be submitted at designated TIN-FCs or service centres with the required payment.",
- 11: "Issuance time depends on the channel and correctness of documents. Online applications submitted correctly are typically processed faster, while offline processing may take longer.",
- 12: "TAN details cannot be edited online once issued — in practice, if corrections are required, contact the issuing authority or reapply as per the guidelines provided by NSDL/Protean.",
- 13: "Salaried individuals who do not deduct tax at source are not required to obtain TAN; only entities responsible for deducting/collecting TDS/TCS are required to have TAN.",
- 14: "If TAN is not quoted, TDS payments may be rejected by banks and returns may not be processed correctly. Penalties and administrative issues may follow.",
- };
 
  /* -----------------------------------
  Render
@@ -180,10 +141,10 @@ export default function TanRegistrationPage(): React.ReactElement {
  {/* Left column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top card */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card (square hero image) */}
  <div className="md:w-1/3 flex-shrink-0">
- <div className="rounded-lg overflow-hidden">
+ <div className="rounded-lg overflow-hidden border border-gray-100">
  <div className="bg-[#C15F3C] rounded-t-lg p-4 text-white text-center">
  <h2 className="text-2xl font-bold ">
  TAN Registration
@@ -193,9 +154,9 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
+ <div className="bg-white px-4 py-6 flex justify-center">
  {/* square image — remove rounded-full to keep square */}
- <div className="w-44 h-44 rounded-md overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
+ <div className="w-44 h-44 rounded-md overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4 border border-gray-100">
  <img
  src={ASSETS.hero}
  alt="tan registration hero"
@@ -240,10 +201,10 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  {/* Offer box */}
  <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-[#F4F3EE] px-2 rounded-md text-xs text-[#C15F3C] border border-[#eff8f0]">
+ <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs text-[#C15F3C] border border-[#eff8f0]">
  1 Exclusive Offers
  </div>
- <div className="border-2 border-dashed rounded-md border-[#f0dcd0] p-4 bg-[#F4F3EE]">
+ <div className="border-2 border-dashed rounded-md border-[#f0dcd0] p-4 bg-gray-50">
  <div className="font-semibold text-slate-900">Basic</div>
  <ul className="mt-2 text-sm text-gray-600">
  <li className="flex items-center gap-2">
@@ -254,7 +215,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </li>
  </ul>
  <div className="mt-3">
- <button className="bg-[#F4F3EE] border border-[#C15F3C] text-[#C15F3C] px-3 py-1 rounded">
+ <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-1 rounded hover:bg-[#C15F3C]/5 transition-colors">
  ADD
  </button>
  </div>
@@ -292,7 +253,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
 
  {/* Article */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  TAN Registration
  </h1>
@@ -477,28 +438,28 @@ export default function TanRegistrationPage(): React.ReactElement {
 
  {/* Documents + other registrations */}
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
- <div className="lg:col-span-7 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <div className="lg:col-span-7 bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold mb-4">
  Key Documents for TAN Application
  </h3>
  <ul className="space-y-3 text-sm text-gray-700">
- <li className="border-b pb-3">Form 49B (TAN Application)</li>
- <li className="border-b pb-3">
+ <li className="border-b border-gray-100 pb-3">Form 49B (TAN Application)</li>
+ <li className="border-b border-gray-100 pb-3">
  PAN Card copy of the applicant
  </li>
- <li className="border-b pb-3">
+ <li className="border-b border-gray-100 pb-3">
  Proof of Registered Office Address
  </li>
- <li className="border-b pb-3">
+ <li className="border-b border-gray-100 pb-3">
  Passport size photograph (if applicable)
  </li>
- <li className="mt-4 inline-block px-3 py-2 border rounded-md text-sm text-[#C15F3C]">
+ <li className="mt-4 inline-block px-3 py-2 border border-gray-200 rounded-md text-sm text-[#C15F3C] cursor-pointer hover:bg-gray-50 transition-colors">
  Load More
  </li>
  </ul>
  </div>
 
- <aside className="lg:col-span-5 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <aside className="lg:col-span-5 bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold mb-4">Related Guides</h3>
  <ul className="space-y-3 text-sm text-[#C15F3C]">
  <li>
@@ -517,46 +478,8 @@ export default function TanRegistrationPage(): React.ReactElement {
  </aside>
  </div>
 
- {/* FAQ */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- FAQ's on TAN Registration
- </h3>
- <div className="space-y-0">
- {faqItems.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setOpenFaq(openFaq === i ? null : i)}
- aria-expanded={openFaq === i}
- >
- <span className="text-slate-800">{q}</span>
- <span className="text-[#C15F3C] flex items-center gap-2">
- {openFaq === i ? "-" : <Plus size={14} />}
- </span>
- </button>
- {openFaq === i && (
- <div className="px-2 pb-4 text-sm text-gray-600">
- {faqAnswers[i] ??
- "Please contact our experts for a tailored reply."}
- </div>
- )}
- </div>
- ))}
- </div>
-
- <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-
- <button className="px-4 py-2 border rounded-md text-sm text-[#C15F3C]">
- Load More
- </button>
- 
-
-</div>
- </div>
-
  {/* Extra long content block — to expand file length and provide more reference text */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold">
  Compliance Calendar & Notes
  </h3>
@@ -569,35 +492,35 @@ export default function TanRegistrationPage(): React.ReactElement {
  <div className="mt-4 overflow-x-auto">
  <table className="min-w-full text-sm text-left">
  <thead>
- <tr className="text-gray-700">
- <th className="py-2 px-3 border-b">Task</th>
- <th className="py-2 px-3 border-b">Frequency</th>
- <th className="py-2 px-3 border-b">Relevant Form</th>
- <th className="py-2 px-3 border-b">Notes</th>
+ <tr className="text-gray-700 border-b border-gray-200">
+ <th className="py-2 px-3">Task</th>
+ <th className="py-2 px-3">Frequency</th>
+ <th className="py-2 px-3">Relevant Form</th>
+ <th className="py-2 px-3">Notes</th>
  </tr>
  </thead>
  <tbody>
- <tr>
- <td className="py-2 px-3 border-b">TDS Payment</td>
- <td className="py-2 px-3 border-b">Monthly/Quarterly</td>
- <td className="py-2 px-3 border-b">Challan</td>
- <td className="py-2 px-3 border-b">
+ <tr className="border-b border-gray-50">
+ <td className="py-2 px-3">TDS Payment</td>
+ <td className="py-2 px-3">Monthly/Quarterly</td>
+ <td className="py-2 px-3">Challan</td>
+ <td className="py-2 px-3">
  Ensure TAN is quoted on challan
  </td>
  </tr>
- <tr>
- <td className="py-2 px-3 border-b">TDS Returns</td>
- <td className="py-2 px-3 border-b">Quarterly</td>
- <td className="py-2 px-3 border-b">Form 24Q / 26Q / 27Q</td>
- <td className="py-2 px-3 border-b">
+ <tr className="border-b border-gray-50">
+ <td className="py-2 px-3">TDS Returns</td>
+ <td className="py-2 px-3">Quarterly</td>
+ <td className="py-2 px-3">Form 24Q / 26Q / 27Q</td>
+ <td className="py-2 px-3">
  Use TAN for filing returns & certificates
  </td>
  </tr>
  <tr>
- <td className="py-2 px-3 border-b">TDS Certificates</td>
- <td className="py-2 px-3 border-b">Annual</td>
- <td className="py-2 px-3 border-b">Form 16 / 16A</td>
- <td className="py-2 px-3 border-b">
+ <td className="py-2 px-3">TDS Certificates</td>
+ <td className="py-2 px-3">Annual</td>
+ <td className="py-2 px-3">Form 16 / 16A</td>
+ <td className="py-2 px-3">
  Issue to deductees as required
  </td>
  </tr>
@@ -608,10 +531,10 @@ export default function TanRegistrationPage(): React.ReactElement {
  </section>
 
  {/* Right column (sidebar) */}
- <aside className="lg:col-span-4 hidden lg:block">
+ <aside className="lg:col-span-4 hidden lg:block sticky top-24 self-start">
  <SidebarCart />
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Offers and discounts</h4>
  <div className="p-3 border rounded-md flex items-center gap-3">
  <img
@@ -646,13 +569,13 @@ export default function TanRegistrationPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg p-4">
+ <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 20).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-gray-50 text-gray-700"
  >
  {t}
  </span>
@@ -661,7 +584,7 @@ export default function TanRegistrationPage(): React.ReactElement {
  </div>
 
  {/* small content block to make sidebar informative */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mt-4">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mt-4">
  <h4 className="font-semibold mb-3">Contact Advisor</h4>
  <p className="text-sm text-gray-600">
  Need help with TAN? Our advisors can assist with end-to-end filing
@@ -676,8 +599,10 @@ export default function TanRegistrationPage(): React.ReactElement {
  </aside>
  </main>
 
+ <DynamicPricingSection />
+ <FAQAccordion category="tan-registration" />
+
  <Footer />
  </div>
  );
 }
-

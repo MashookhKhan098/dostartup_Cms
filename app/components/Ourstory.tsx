@@ -2,12 +2,34 @@ const COCKPIT_URL = process.env.NEXT_PUBLIC_COCKPIT_URL;
 const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 
 async function getOurStory() {
- const res = await fetch(
- `${COCKPIT_URL}/api/content/item/ourstory?token=${TOKEN}`,
- { cache: "no-store" }
- );
- const json = await res.json();
- return json;
+  if (typeof window === 'undefined') {
+    try {
+      const dns = require('node:dns');
+      if (dns && typeof dns.setDefaultResultOrder === 'function') {
+        dns.setDefaultResultOrder('ipv4first');
+      }
+    } catch (e) {}
+  }
+  try {
+    const res = await fetch(
+      `${COCKPIT_URL}/api/content/item/ourstory?token=${TOKEN}`,
+      { 
+        cache: "no-store",
+        next: { revalidate: 0 } 
+      }
+    );
+    
+    if (!res.ok) {
+      console.error(`Cockpit API Error: ${res.status} ${res.statusText}`);
+      return null;
+    }
+    
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    console.error("Failed to fetch ourstory from Cockpit:", error);
+    return null;
+  }
 }
 
 function renderRichText(text: string) {

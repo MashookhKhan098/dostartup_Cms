@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import NewsletterForm from "./NewsletterForm";
 
 interface DynamicTabContentProps {
@@ -41,45 +44,63 @@ const FALLBACK_DATA: Record<string, any> = {
   }
 };
 
-async function getTabData(category: string) {
-  try {
-    const url = `${COCKPIT_URL}/api/content/items/testing?token=${TOKEN}`;
-    const res = await fetch(url, { cache: "no-store" });
-    const json = await res.json();
+export default function DynamicTabContent({ category }: DynamicTabContentProps) {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-    if (Array.isArray(json) && json.length > 0) {
-      const item = json.find(
-        (entry: any) => entry.category?.toLowerCase() === category?.toLowerCase()
-      );
-      if (item?.description) return item.description;
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const url = `${COCKPIT_URL}/api/content/items/testing?token=${TOKEN}`;
+        const res = await fetch(url, { cache: "no-store" });
+        const json = await res.json();
+
+        if (Array.isArray(json) && json.length > 0) {
+          const item = json.find(
+            (entry: any) => entry.category?.toLowerCase() === category?.toLowerCase()
+          );
+          if (item?.description) {
+            setData(item.description);
+            setLoading(false);
+            return;
+          }
+        }
+      } catch (error) {
+        console.error("DynamicTabContent fetch error:", error);
+      }
+
+      // Fallback
+      const lowerCat = category.toLowerCase();
+      setData(FALLBACK_DATA[lowerCat] || FALLBACK_DATA[category] || null);
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("DynamicTabContent fetch error:", error);
+
+    fetchData();
+  }, [category]);
+
+  if (loading) {
+    return (
+      <div className="bg-white rounded-2xl p-10 animate-pulse">
+        <div className="h-8 bg-gray-100 rounded w-1/2 mb-4"></div>
+        <div className="h-4 bg-gray-100 rounded w-full mb-2"></div>
+        <div className="h-4 bg-gray-100 rounded w-3/4"></div>
+      </div>
+    );
   }
-
-  // Fallback to hardcoded data if fetch fails or category not found
-  const lowerCat = category.toLowerCase();
-  return FALLBACK_DATA[lowerCat] || FALLBACK_DATA[category] || null;
-
-}
-
-export default async function DynamicTabContent({
-  category,
-}: DynamicTabContentProps) {
-  const data = await getTabData(category);
 
   if (!data) {
     return (
-      <div className="bg-[#F4F3EE] border border-[#E5E2DA] rounded-2xl p-8 text-center">
+      <div className="bg-white border border-gray-100 rounded-2xl p-8 text-center">
         <p className="text-[#C15F3C] font-medium">
-          No data found for "{category}". Please check the category.
+          No data found for "{category}".
         </p>
       </div>
     );
   }
 
   return (
-    <div className="bg-[#F4F3EE] py-5 sm:py-6">
+    <div className="bg-white py-5 sm:py-6 rounded-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Modern Hero with Split Layout */}
@@ -88,13 +109,13 @@ export default async function DynamicTabContent({
 
             {/* Left Side - Content */}
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-[#E5E2DA] rounded-full px-4 py-1.5 shadow-sm">
+              <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-gray-100 rounded-full px-4 py-1.5 shadow-sm">
                 <div className="relative">
                   <div className="w-2 h-2 bg-[#C15F3C] rounded-full animate-ping absolute"></div>
                   <div className="w-2 h-2 bg-[#C15F3C] rounded-full"></div>
                 </div>
                 <span className="text-xs font-medium text-[#C15F3C] uppercase">Expert Guide</span>
-                <div className="w-px h-3 bg-[#E5E2DA]"></div>
+                <div className="w-px h-3 bg-gray-100"></div>
                 <span className="text-xs text-[#6F6B63]">Updated Weekly</span>
               </div>
 
@@ -125,7 +146,7 @@ export default async function DynamicTabContent({
             {/* Right Side - Visual */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-[#C15F3C]/20 to-transparent rounded-full blur-3xl"></div>
-              <div className="relative bg-[#F4F3EE] rounded-2xl shadow-xl border border-[#E5E2DA] p-6 backdrop-blur-sm">
+              <div className="relative bg-[#F9F8F6] rounded-2xl shadow-xl border border-gray-100 p-6 backdrop-blur-sm">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C15F3C] to-[#A94E30] flex items-center justify-center">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +186,7 @@ export default async function DynamicTabContent({
             <div className="space-y-6 sticky top-6">
 
               {/* Author Profile Card */}
-              <div className="bg-white rounded-2xl border border-[#E5E2DA] overflow-hidden shadow-sm">
+              <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
                 <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-5 py-4">
                   <h3 className="text-white font-semibold text-sm">About the Author</h3>
                 </div>
@@ -189,36 +210,17 @@ export default async function DynamicTabContent({
               </div>
 
               {/* Progress Card */}
-              <div className="bg-white rounded-2xl border border-[#E5E2DA] p-5">
+              <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <svg className="w-5 h-5 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                   <h4 className="font-semibold text-[#2F2E2B] text-sm">Reading Progress</h4>
                 </div>
-                <div className="h-2 bg-[#F4F3EE] rounded-full overflow-hidden mb-2">
+                <div className="h-2 bg-[#F9F8F6] rounded-full overflow-hidden mb-2">
                   <div className="h-full bg-gradient-to-r from-[#C15F3C] to-[#A94E30] rounded-full" style={{ width: '65%' }}></div>
                 </div>
                 <p className="text-xs text-[#B1ADA1]">65% completed • 3 min left</p>
-              </div>
-
-              {/* Quick Actions */}
-              <div className="bg-white rounded-2xl border border-[#E5E2DA] p-5">
-                <h4 className="font-semibold text-[#2F2E2B] text-sm mb-3">Quick Actions</h4>
-                <div className="space-y-2">
-                  <button className="w-full flex items-center justify-between px-3 py-2 bg-[#F4F3EE] hover:bg-[#C15F3C]/10 rounded-lg transition-all group">
-                    <span className="text-sm text-[#6F6B63] group-hover:text-[#C15F3C]">Save for later</span>
-                    <svg className="w-4 h-4 text-[#B1ADA1] group-hover:text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                    </svg>
-                  </button>
-                  <button className="w-full flex items-center justify-between px-3 py-2 bg-[#F4F3EE] hover:bg-[#C15F3C]/10 rounded-lg transition-all group">
-                    <span className="text-sm text-[#6F6B63] group-hover:text-[#C15F3C]">Download PDF</span>
-                    <svg className="w-4 h-4 text-[#B1ADA1] group-hover:text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                  </button>
-                </div>
               </div>
 
             </div>
@@ -226,7 +228,7 @@ export default async function DynamicTabContent({
 
           {/* Main Content - Center */}
           <div className="lg:col-span-6 order-1 lg:order-2">
-            <div className="bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
               {/* Content */}
               <div className="px-6 md:px-8 py-3 md:py-4">
@@ -242,8 +244,8 @@ export default async function DynamicTabContent({
 
                 {/* Sections with Timeline Style */}
                 {(data.sections || []).map((section: any, index: number) => (
-                  <div key={index} className="relative mb-12 last:mb-0 pl-8 border-l-2 border-[#E5E2DA] group">
-                    <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#F4F3EE] border-2 border-[#C15F3C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div key={index} className="relative mb-12 last:mb-0 pl-8 border-l-2 border-gray-100 group">
+                    <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#F9F8F6] border-2 border-[#C15F3C] flex items-center justify-center group-hover:scale-110 transition-transform">
                       <div className="w-2 h-2 rounded-full bg-[#C15F3C]"></div>
                     </div>
 
@@ -260,7 +262,7 @@ export default async function DynamicTabContent({
                         {(section.points || []).map((point: string, i: number) => {
                           const [title] = point.split(":");
                           return (
-                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F4F3EE] rounded-full text-xs text-[#6F6B63] hover:bg-[#C15F3C] hover:text-white transition-all cursor-pointer group/item">
+                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F9F8F6] rounded-full text-xs text-[#6F6B63] hover:bg-[#C15F3C] hover:text-white transition-all cursor-pointer group/item">
                               <svg className="w-3 h-3 group-hover/item:text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                               </svg>
@@ -274,29 +276,6 @@ export default async function DynamicTabContent({
                 ))}
               </div>
 
-              {/* Engagement Footer */}
-              <div className="px-6 md:px-8 py-5 bg-[#F4F3EE] border-t border-[#E5E2DA]">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-[#F4F3EE] rounded-lg text-sm text-[#6F6B63] hover:text-[#C15F3C] hover:shadow-sm transition-all">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                      </svg>
-                      <span>Helpful (245)</span>
-                    </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-[#F4F3EE] rounded-lg text-sm text-[#6F6B63] hover:text-[#C15F3C] transition-all">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                      </svg>
-                      <span>Share</span>
-                    </button>
-                  </div>
-                  <div className="text-xs text-[#B1ADA1]">
-                    Last updated: {data.author?.updatedDate || "March 2024"}
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
 
@@ -304,48 +283,28 @@ export default async function DynamicTabContent({
           <div className="lg:col-span-3 order-3">
             <div className="space-y-6 sticky top-6">
 
-              {/* Support Card */}
-              <div className="bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-2xl p-5 text-white text-center">
-                <div className="w-16 h-16 mx-auto bg-[#F4F3EE]/20 rounded-2xl flex items-center justify-center text-3xl mb-4">
-                  💬
+              {/* Status Badge */}
+              <div className="bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-2xl p-5 text-white text-center shadow-lg">
+                <div className="w-16 h-16 mx-auto bg-white/20 rounded-2xl flex items-center justify-center text-3xl mb-4">
+                  🏆
                 </div>
-                <h3 className="font-bold text-lg mb-2">Need Help?</h3>
-                <p className="text-white/90 text-sm mb-4">Chat with our experts for personalized guidance</p>
-                <a
-                  href="https://wa.me/919999644807"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-[#F4F3EE] text-[#C15F3C] font-semibold py-2.5 rounded-xl hover:shadow-lg transition-all"
-                >
-                  Start Conversation →
-                </a>
-              </div>
-
-              {/* Popular Tags */}
-              <div className="bg-white rounded-2xl border border-[#E5E2DA] p-5">
-                <h4 className="font-semibold text-[#2F2E2B] text-sm mb-3">Popular Topics</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["Compliance", "Registration", "Taxation", "Legal", "Startup", "Funding", "IPR", "GST"].map((tag, i) => (
-                    <span key={i} className="px-3 py-1.5 bg-[#F4F3EE] text-[#C15F3C] text-xs rounded-full hover:bg-[#C15F3C] hover:text-white transition-all cursor-pointer">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
+                <h3 className="font-bold text-lg mb-2">Verified Guide</h3>
+                <p className="text-white/90 text-sm mb-4">Our compliance team has verified this information for 2024-25.</p>
               </div>
 
               {/* Newsletter */}
-              <div className="bg-white rounded-2xl border border-[#E5E2DA] p-5">
+              <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <svg className="w-5 h-5 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <h4 className="font-semibold text-[#2F2E2B] text-sm">Weekly Newsletter</h4>
+                  <h4 className="font-semibold text-[#2F2E2B] text-sm">Stay Updated</h4>
                 </div>
-                <p className="text-xs text-[#6F6B63] mb-3">Get expert insights delivered to your inbox</p>
+                <p className="text-xs text-[#6F6B63] mb-3">Compliance alerts sent to your inbox</p>
                 <NewsletterForm
-                  wrapperClassName="flex flex-col sm:flex-row gap-2"
-                  inputClassName="flex-1 w-full px-3 py-2 border border-[#E5E2DA] rounded-lg text-sm bg-[#F4F3EE] focus:ring-1 focus:ring-[#C15F3C] outline-none"
-                  buttonClassName="w-full sm:w-auto px-4 py-2 bg-[#C15F3C] text-white rounded-lg text-sm hover:bg-[#A94E30] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                  wrapperClassName="flex flex-col gap-2"
+                  inputClassName="w-full px-3 py-2 border border-gray-100 rounded-lg text-sm bg-[#F9F8F6] focus:ring-1 focus:ring-[#C15F3C] outline-none"
+                  buttonClassName="w-full px-4 py-2 bg-[#C15F3C] text-white rounded-lg text-sm hover:bg-[#A94E30] transition-all"
                 />
               </div>
 
