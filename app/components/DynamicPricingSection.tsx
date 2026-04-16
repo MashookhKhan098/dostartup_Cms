@@ -104,8 +104,10 @@ export default function DynamicPricingSection({ category: propCategory }: Pricin
               if (typeof card.image === "string") {
                 imageUrl = card.image;
               } else if (card.image.path) {
-                // If it's a Cockpit asset, construct the URL
-                imageUrl = `${COCKPIT_BASE}/storage/uploads${card.image.path}`;
+                // If it's a Cockpit asset, construct the URL safely
+                const base = COCKPIT_BASE?.endsWith("/") ? COCKPIT_BASE.slice(0, -1) : COCKPIT_BASE;
+                const path = card.image.path.startsWith("/") ? card.image.path : `/${card.image.path}`;
+                imageUrl = `${base}/storage/uploads${path}`;
               }
             }
 

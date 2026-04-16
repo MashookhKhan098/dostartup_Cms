@@ -118,35 +118,7 @@ const POPULAR_SEARCHES = [
  Component
  --------------------------- */
 export default function FifteenCa15CbPage(): React.ReactElement {
- const [openFaq, setOpenFaq] = useState<number | null>(null);
- 
  const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
-
- const faqItems = [
- "What is Form 15CA-15CB?",
- "What is the difference between Form 15CA and Form 15CB?",
- "Who is required to file Form 15CA-15CB?",
- "What are the different types of transactions that require 15CA-15CB filing?",
- "Is Form 15CA-15CB mandatory for all foreign remittances?",
- "How is the information provided in Form 15CA verified?",
- "Can Form 15CA-15CB be filed manually?",
- "What is the penalty for not filing Form 15CA-15CB?",
- "Can the same Form 15CA be used for multiple transactions?",
- "Is Form 15CB required for all transactions?",
- ];
-
- const faqAnswers: Record<number, string> = {
- 0: "Form 15CA is a declaration of remittance by a person making payment to a non-resident. Form 15CB is a certificate issued by a Chartered Accountant (CA), verifying taxability and applicability of tax treaties (DTAA) where required.",
- 1: "Form 15CA is the remitter's declaration; Form 15CB is a CA's certificate. Form 15CB is required in certain cases (commonly when remittance exceeds INR 5 lakh or as required by provisions of the Income-tax Act).",
- 2: "Any individual or entity making payments to a non-resident that may be chargeable to tax in India may need to file Form 15CA, and a CA may have to issue Form 15CB depending on the nature and amount of payment.",
- 3: "Transactions like payments for services, royalties, professional fees, fees for technical services, dividends, interest, and other cross-border payments often require 15CA/15CB depending on taxability and thresholds.",
- 4: "Not always — certain specified payments are excluded as per the rules (e.g., those listed under Rule 37BB) and other exceptions like some education/remittance limits and RBI-prescribed exemptions.",
- 5: "The Income-tax Department may verify the information through reconciliation, audits, and cross-checking with bank records and CA certificates where submitted.",
- 6: "Yes — Form 15CA can be filed online on the Income-tax Department's e-filing portal. Form 15CB is issued by a CA and is uploaded when required.",
- 7: "Penalty for non-filing or late filing can be imposed — an example penalty mentioned is ₹10,000 per instance, but users should check the latest statutory provisions for current penalties.",
- 8: "No — Form 15CA is transaction specific, but multiple transactions can be covered depending on the part chosen and the nature of remittances; follow instructions on the e-filing portal.",
- 9: "Not for all transactions — Form 15CB is typically required when remittances exceed certain thresholds (like ₹5 lakh) or where taxability requires CA certification.",
- };
 
  return (
  <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
@@ -167,10 +139,10 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  {/* Left column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top card */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
  {/* Left image card (square hero image) */}
  <div className="md:w-1/3 flex-shrink-0">
- <div className="rounded-lg overflow-hidden">
+ <div className="rounded-lg overflow-hidden border border-gray-100">
  <div className="bg-[#C15F3C] rounded-t-lg p-4 text-white text-center">
  <h2 className="text-2xl font-bold ">
  15CA · 15CB FILING
@@ -180,9 +152,9 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </div>
  </div>
 
- <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
+ <div className="bg-white px-4 py-6 flex justify-center">
  {/* square image — keep square */}
- <div className="w-44 h-44 rounded-md overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
+ <div className="w-44 h-44 rounded-md overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4 border border-gray-100">
  <img
  src={ASSETS.hero}
  alt="15ca 15cb hero"
@@ -269,7 +241,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </div>
 
  {/* Article */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  15CA-15CB Filing - Compliance for Foreign Remittances
  </h1>
@@ -512,10 +484,10 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </section>
 
  {/* Right column (sidebar) */}
- <aside className="lg:col-span-4 hidden lg:block">
+ <aside className="lg:col-span-4 hidden lg:block sticky top-24 self-start">
  <SidebarCart />
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Offers and discounts</h4>
  <div className="p-3 border rounded-md flex items-center gap-3">
  <img
@@ -550,13 +522,13 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg p-4">
+ <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 20).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-gray-50 text-gray-700"
  >
  {t}
  </span>
@@ -565,7 +537,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
  </div>
 
  {/* small content block to make sidebar informative */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mt-4">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mt-4">
  <h4 className="font-semibold mb-3">Contact Advisor</h4>
  <p className="text-sm text-gray-600">
  Need help with 15CA / 15CB? Our advisors can assist with
@@ -582,43 +554,7 @@ export default function FifteenCa15CbPage(): React.ReactElement {
 
 <DynamicPricingSection />
 
-<section className="max-w-[1180px] mx-auto px-6 py-8">
-  <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
-    
- <h3 className="text-lg font-semibold mb-4">
- FAQ's on 15CA - 15CB Filing
- </h3>
- <div className="space-y-2 text-sm text-gray-700">
- {faqItems.map((q, i) => (
- <div key={q} className="border-b pb-2">
- <button
- className="w-full text-left py-2 flex justify-between items-center text-sm"
- onClick={() => setOpenFaq(openFaq === i ? null : i)}
- aria-expanded={openFaq === i}
- >
- <span className="text-slate-800">{q}</span>
- <span className="text-[#C15F3C] flex items-center gap-2">
- {openFaq === i ? "-" : <Plus size={14} />}
- </span>
- </button>
- {openFaq === i && (
- <div className="px-2 pb-2 text-sm text-gray-600">
- {faqAnswers[i] ??
- "Please contact our experts for a tailored reply."}
- </div>
- )}
- </div>
- ))}
- <div className="mt-3 flex gap-3 items-center flex-wrap">
-  <button className="px-4 py-2 border rounded-md text-sm text-[#C15F3C]">
- Load More
- </button>
-  
-</div>
- </div>
- 
-  </div>
-</section>
+<FAQAccordion category="15ca-15cb-filing" />
 
 
  <Footer />

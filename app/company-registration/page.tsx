@@ -13,11 +13,12 @@ export default function Home() {
       <Navbar />
       <Hero defaultEntity="Company" />
       <DynamicTabContent category="Company Registration" />
-      <DynamicPricingSection category="company-registration" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="company-registration" />
+      </div>
       <FAQAccordion category="company-registration" />
       <PopularSearches />
       <Footer />
     </div>
   );
 }
-

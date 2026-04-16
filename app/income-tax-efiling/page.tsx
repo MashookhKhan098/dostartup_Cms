@@ -820,7 +820,8 @@ export default function TaxCalculatorPage() {
         </div>
 
         {/* ── PRICING SECTION ── */}
-        <DynamicPricingSection />
+        <DynamicPricingSection category="income-tax-efiling" />
+        <FAQAccordion category="income-tax-filing" />
       </main>
       <Footer />
     </>

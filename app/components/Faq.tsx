@@ -20,12 +20,14 @@ interface FAQ {
 interface FAQAccordionProps {
   category?: string;
   blogCategory?: string;
+  transparent?: boolean;
+  title?: string;
 }
 
 const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 const CMS_URL = process.env.NEXT_PUBLIC_COCKPIT_URL;
 
-export default function FAQAccordion({ category: propCategory, blogCategory }: FAQAccordionProps) {
+export default function FAQAccordion({ category: propCategory, blogCategory, transparent, title }: FAQAccordionProps) {
   const pathname = usePathname();
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
@@ -65,11 +67,11 @@ export default function FAQAccordion({ category: propCategory, blogCategory }: F
   const visibleFaqs = faqs.slice(0, visibleCount);
 
   return (
-    <div className="bg-[#F4F3EE] py-16 border-t border-[#E5E2DA]">
+    <div className={`${transparent ? "bg-transparent" : "bg-[#F4F3EE]"} py-16 border-t border-[#E5E2DA]`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-10">
           <h2 className="text-3xl font-bold text-[#0B2545]">
-            FAQs for {displayTitle}
+            {title || `FAQs for ${displayTitle}`}
           </h2>
         </div>
 
@@ -81,7 +83,7 @@ export default function FAQAccordion({ category: propCategory, blogCategory }: F
               </h3>
             </div>
             
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden divide-y divide-gray-100">
+            <div className={`${transparent ? "bg-transparent" : "bg-white"} rounded-xl shadow-sm border border-gray-200 overflow-hidden divide-y divide-gray-100`}>
               {faqs.length > 0 ? (
                 visibleFaqs.map((faq, index) => (
                   <div key={index}>

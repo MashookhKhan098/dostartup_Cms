@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
@@ -131,25 +131,6 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
  const [searchQuery, setSearchQuery] = useState("");
 
- // sidebar form states
- 
-
- // FAQ state for main article
- const [faqOpen, setFaqOpen] = useState<number | null>(null);
-
- const faqQuestions = [
- "What is an Income Tax Notice?",
- "Why did I receive an Income Tax Notice?",
- "How should I respond to an Income Tax Notice?",
- "Can I ignore an Income Tax Notice?",
- "How can DoStartup help me with an Income Tax Notice?",
- "What types of notices can I receive from the Income Tax Department?",
- "How can I verify if the notice is fake or fraudulent?",
- "Can I file a revised return after receiving a notice?",
- "What should I do if I disagree with the tax demand mentioned in the notice?",
- "Is it mandatory to respond to every notice?",
- ];
-
  const onTaxFileChange = useCallback((file?: File) => {
  if (!file) return;
  setTnFileName(file.name);
@@ -176,9 +157,9 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
 
  {/* TAX NOTICE HERO */}
  <div className="max-w-[1180px] mx-auto px-6 py-6">
- <div className="bg-[#F4F3EE] rounded-xl shadow-md overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12">
  {/* Left image */}
- <div className="lg:col-span-7 relative bg-[#F4F3EE]">
+ <div className="lg:col-span-7 relative bg-white">
  <div className="h-[420px] lg:h-full w-full relative">
  <Image
  src={ASSETS.taxHero}
@@ -211,7 +192,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
 
  <button
  type="button"
- className="ml-4 px-3 py-1 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-[#F4F3EE]"
+ className="ml-4 px-3 py-1 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-gray-50"
  >
  Consult Advisor
  </button>
@@ -239,7 +220,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  className={`relative rounded-lg ${
  tnDragActive
  ? "border-2 border-[#C15F3C] bg-[#C15F3C]/10"
- : "border-2 border-dashed border-slate-300 bg-[#F4F3EE]"
+ : "border-2 border-dashed border-slate-300 bg-gray-50"
  } p-6 flex flex-col items-center justify-center text-center transition`}
  style={{ minHeight: 120 }}
  >
@@ -269,14 +250,14 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </div>
 
  {tnFileName && (
- <div className="absolute bottom-3 left-6 right-6 bg-[#F4F3EE] border border-slate-100 rounded-md px-3 py-2 text-sm text-slate-700 shadow-sm">
+ <div className="absolute bottom-3 left-6 right-6 bg-white border border-gray-200 rounded-md px-3 py-2 text-sm text-slate-700 shadow-sm">
  Uploaded: <span className="font-medium">{tnFileName}</span>
  </div>
  )}
  </div>
  </div>
 
- <div className="mt-6 border rounded-lg p-4 bg-[#F4F3EE] shadow-sm">
+ <div className="mt-6 border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
  <p className="text-sm text-slate-700">
  Upload your income tax notice and our experts will review it.
  You’ll receive clear insights and next steps, along with a
@@ -294,7 +275,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </button>
  <button
  type="button"
- className="px-4 py-2 border border-slate-200 rounded-md text-sm text-slate-700 hover:bg-[#F4F3EE]"
+ className="px-4 py-2 border border-slate-200 rounded-md text-sm text-slate-700 hover:bg-gray-50"
  >
  Live Chat
  </button>
@@ -324,7 +305,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  <section className="lg:col-span-8 space-y-6">
  {/* Top cards */}
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold">
  30 Minutes - Tax Consultation
  </h3>
@@ -339,13 +320,13 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </ul>
  <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
 
- <button className="bg-[#F4F3EE] border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded">
+ <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded hover:bg-[#C15F3C]/5 transition-colors">
  ADD
  </button>
  </div>
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h3 className="text-lg font-semibold">Professional Services</h3>
  <p className="text-sm text-gray-600 mt-2">
  Section 139 • Professional Consultation • Reply Drafting • Reply
@@ -360,7 +341,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </li>
  </ul>
  <div className="mt-4">
- <button className="bg-[#F4F3EE] border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded">
+ <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded hover:bg-[#C15F3C]/5 transition-colors">
  ADD
  </button>
  </div>
@@ -368,7 +349,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </div>
 
  {/* Article */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h1 className="text-2xl font-semibold text-center">
  Income Tax Notice: Check & Authenticate ITR Notices Online
  </h1>
@@ -438,7 +419,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </article>
 
  {/* Documents required */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
+ <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
  <h3 className="text-xl font-semibold mb-4">
  Documents Required For Income Tax Notice Response
  </h3>
@@ -448,54 +429,13 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  <li>Income Tax notice (copy)</li>
  </ul>
  </article>
-
- {/* FAQ */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- FAQ's on Income Tax Notice Response
- </h3>
- <div className="space-y-0">
- {faqQuestions.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setFaqOpen(faqOpen === i ? null : i)}
- aria-expanded={faqOpen === i}
- >
- <span className="text-slate-800">{q}</span>
- <span className="text-[#C15F3C] flex items-center gap-2">
- {faqOpen === i ? "-" : <Plus size={14} />}
- </span>
- </button>
-
- {faqOpen === i && (
- <div className="px-2 pb-4 text-sm text-gray-600">
- <p>
- Please contact our experts for a tailored reply.
- DoStartup can help analyse the notice and prepare an
- appropriate response.
- </p>
- </div>
- )}
- </div>
- ))}
- </div>
-
- <div className="mt-4">
- <button className="px-4 py-2 border rounded text-sm">
- Load More
- </button>
- 
-
-</div>
- </div>
  </section>
 
  {/* Sidebar */}
- <aside className="lg:col-span-4 hidden lg:block">
+ <aside className="lg:col-span-4 hidden lg:block sticky top-24 self-start">
  <SidebarCart />
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
+ <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-4">
  <h4 className="font-semibold mb-3">Offers and discounts</h4>
  <div className="p-3 border rounded-md flex items-center gap-3">
  <img
@@ -514,7 +454,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </div>
  </div>
 
- <div className="rounded-lg overflow-hidden shadow-sm mb-4">
+ <div className="rounded-lg overflow-hidden shadow-sm mb-4 border border-gray-200 shadow-sm">
  <img
  src={ASSETS.adRight1}
  alt="company compliance"
@@ -522,7 +462,7 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  />
  </div>
 
- <div className="rounded-lg overflow-hidden shadow-sm mb-6">
+ <div className="rounded-lg overflow-hidden shadow-sm mb-6 border border-gray-200 shadow-sm">
  <img
  src={ASSETS.dinEkyc}
  alt="din ekyc"
@@ -530,13 +470,13 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg p-4">
+ <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-4">
  <h4 className="font-semibold mb-3">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
  {POPULAR_SEARCHES.slice(0, 14).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border rounded bg-[#F4F3EE] text-gray-700"
+ className="text-xs px-3 py-1 border border-gray-200 rounded bg-gray-50 text-gray-700"
  >
  {t}
  </span>
@@ -546,8 +486,10 @@ export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
  </aside>
  </main>
 
+ <DynamicPricingSection />
+ <FAQAccordion category="income-tax-notice" />
+
  <Footer />
  </div>
  );
 }
-

@@ -9,7 +9,7 @@ const SidebarCart = () => {
   const [gstChecked, setGstChecked] = useState(false);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 w-full transition-all">
+    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 w-full transition-all">
       <div className="text-center text-gray-600">
         <img
           src="/images/cart.png"

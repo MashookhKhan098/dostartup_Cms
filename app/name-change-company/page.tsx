@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 import React, { useState } from "react";
@@ -18,37 +18,15 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
+import PopularSearches from "../components/PopularSearches";
 
 export default function CompanyNameChange() {
- const [openFaq, setOpenFaq] = useState<number | null>(null);
  const [gstChecked, setGstChecked] = useState(false);
-
- const faqItems = [
- "What is the process for changing a company name?",
- "How long does it take to change a company name?",
- "What documents are required for company name change?",
- "What is Form MGT-14 and INC-24?",
- "Can any company name be changed?",
- "What are the reasons for company name change rejection?",
- "How much does it cost to change a company name?",
- "Is board resolution required for name change?",
- ];
-
- const faqAnswers: Record<number, string> = {
- 0: "The process involves passing a board resolution, special resolution by shareholders, filing Form MGT-14 and INC-24 with ROC, and obtaining a new Certificate of Incorporation.",
- 1: "Company name change typically takes around 10 to 15 working days due to the need for approvals from various departments.",
- 2: "Documents include board resolution, special resolution, altered MOA & AOA, notice of general meeting, affidavit from directors, and Form MGT-14 & INC-24 attachments.",
- 3: "Form MGT-14 is filed for special resolutions, while Form INC-24 is specifically for name change approval from the ROC.",
- 4: "Yes, any company can change its name by following the proper legal procedure under the Companies Act, 2013, provided the new name is available and complies with naming guidelines.",
- 5: "Common reasons include similarity to existing company names, non-compliance with naming guidelines, incomplete documentation, or objections from the ROC.",
- 6: "The cost includes government fees, professional fees, and name availability search fees. Contact DoStartup for exact pricing based on your company type.",
- 7: "Yes, a board resolution is the first step to initiate the name change process, followed by a special resolution passed by shareholders.",
- };
 
  const ASSETS = {
  logo: "/images/india-logo.jpg",
- hero: "https://img.dostartup.com/catalog/mca-compliance-simplified-india.webp",
- ledgers: "https://img.dostartup.com/catalog/ledgers.png",
+ hero: "/images/company-compliance.jpg",
+ ledgers: "/images/ledgers.jpg",
  whatsapp: "/images/whatsapp.png",
  cartIcon: "/images/cart-icon.svg",
  indiaFlag: "/images/india-flag.png",
@@ -62,24 +40,24 @@ export default function CompanyNameChange() {
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-[#F4F3EE] py-5">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
+ <div className="py-5 bg-[#F4F3EE]">
+ <div className="max-w-7xl mx-auto px-4 sm:px-6 text-sm text-gray-500 font-bold">
  Home / MCA Services /{" "}
  <span className="text-amber-700 font-medium">Company Name Change</span>
  </div>
  </div>
 
  {/* Main Content */}
- <main className="max-w-[1180px] mx-auto px-6 py-3 grid grid-cols-1 lg:grid-cols-12 gap-8">
+ <main className="max-w-7xl mx-auto px-4 sm:px-6 py-3 grid grid-cols-1 lg:grid-cols-12 gap-8">
  {/* Left Column */}
  <section className="lg:col-span-8 space-y-6">
  {/* Top Card */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
+ <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 sm:p-10 flex flex-col md:flex-row gap-8">
  {/* Left image card */}
  <div className="md:w-1/3 flex-shrink-0">
- <div className="rounded-lg overflow-hidden">
- <div className="bg-gradient-to-r from-amber-700 to-amber-800 rounded-t-lg p-4 text-white text-center">
- <h2 className="text-2xl font-bold ">
+ <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100">
+ <div className="bg-gradient-to-r from-amber-700 to-amber-800 rounded-t-xl p-4 text-white text-center">
+ <h2 className="text-xl font-bold">
  NAME CHANGE
  </h2>
  <div className="text-xs mt-1 opacity-90">
@@ -87,8 +65,8 @@ export default function CompanyNameChange() {
  </div>
  </div>
 
- <div className="bg-[#F4F3EE] px-4 py-6 flex justify-center">
- <div className="w-44 h-44 rounded-full overflow-hidden bg-[#F4F3EE] shadow-sm flex items-center justify-center -mt-4">
+ <div className="bg-white px-4 py-8 flex justify-center">
+ <div className="w-40 h-40 rounded-full overflow-hidden shadow-sm border-4 border-white flex items-center justify-center -mt-4">
  <img
  src={ASSETS.hero}
  alt="Name Change"
@@ -98,12 +76,19 @@ export default function CompanyNameChange() {
  </div>
  </div>
 
- <ul className="mt-4 text-sm space-y-2 text-gray-600">
- <li className="hover:text-amber-700 cursor-pointer transition-colors">Board Resolution for Name Change</li>
- <li className="hover:text-amber-700 cursor-pointer transition-colors">Special Resolution (MGT-14)</li>
- <li className="hover:text-amber-700 cursor-pointer transition-colors">Form INC-24 Filing</li>
- <li className="hover:text-amber-700 cursor-pointer transition-colors">Altered MOA & AOA</li>
- <li className="text-amber-700 underline cursor-pointer hover:text-amber-800">Load More</li>
+ <ul className="mt-6 text-sm space-y-3 text-gray-600 font-bold">
+ <li className="hover:text-amber-700 cursor-pointer transition-colors flex items-center gap-2">
+    <ChevronRight size={14} className="text-amber-600" /> Board Resolution for Name Change
+ </li>
+ <li className="hover:text-amber-700 cursor-pointer transition-colors flex items-center gap-2">
+    <ChevronRight size={14} className="text-amber-600" /> Special Resolution (MGT-14)
+ </li>
+ <li className="hover:text-amber-700 cursor-pointer transition-colors flex items-center gap-2">
+    <ChevronRight size={14} className="text-amber-600" /> Form INC-24 Filing
+ </li>
+ <li className="hover:text-amber-700 cursor-pointer transition-colors flex items-center gap-2">
+    <ChevronRight size={14} className="text-amber-600" /> Altered MOA & AOA
+ </li>
  </ul>
  </div>
 
@@ -111,11 +96,11 @@ export default function CompanyNameChange() {
  <div className="md:w-2/3 flex-1">
  <div className="flex flex-col sm:flex-row justify-between gap-4">
  <div>
- <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-2">
+ <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 mb-3">
  <div className="w-1.5 h-1.5 bg-amber-600 rounded-full" />
- <span className="text-xs font-medium text-amber-700">MCA COMPLIANCE</span>
+ <span className="text-[10px] font-bold text-amber-700 uppercase tracking-widest">MCA COMPLIANCE</span>
  </div>
- <h2 className="text-lg font-semibold text-slate-900">
+ <h2 className="text-3xl font-extrabold text-slate-900 mb-2">
  Company Name Change
  </h2>
  <div className="flex items-center gap-3 mt-2">
@@ -125,39 +110,39 @@ export default function CompanyNameChange() {
  ))}
  <Star size={14} className="text-gray-300" />
  </div>
- <span className="text-xs text-slate-500">(34 Reviews)</span>
+ <span className="text-sm font-bold text-slate-500">(34 Reviews)</span>
+ </div>
  </div>
  </div>
 
- <p className="text-sm text-gray-600 max-w-md">
+ <p className="text-sm text-gray-600 max-w-md font-bold leading-relaxed mt-4">
  Change your company name seamlessly with our expert-assisted
  process. Get your new company name approved and incorporated
  with 100% digital and paperless filing.
  </p>
- </div>
 
  {/* Features List */}
- <div className="mt-6 space-y-3">
+ <div className="mt-6 space-y-3 font-bold">
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+ <div className="w-8 h-8 bg-amber-50 border border-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
  <Search className="w-4 h-4 text-amber-600" />
  </div>
  <span className="text-sm text-gray-700">AI-Powered Name Approval</span>
  </div>
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+ <div className="w-8 h-8 bg-amber-50 border border-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
  <MessageCircle className="w-4 h-4 text-amber-600" />
  </div>
  <span className="text-sm text-gray-700">Expert Guidance Throughout</span>
  </div>
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+ <div className="w-8 h-8 bg-amber-50 border border-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
  <Grid className="w-4 h-4 text-amber-600" />
  </div>
  <span className="text-sm text-gray-700">Paperless & Digital Process</span>
  </div>
  <div className="flex items-center gap-3">
- <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+ <div className="w-8 h-8 bg-amber-50 border border-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
  <Zap className="w-4 h-4 text-amber-600" />
  </div>
  <span className="text-sm text-gray-700">Fast & Reliable Service</span>
@@ -165,54 +150,52 @@ export default function CompanyNameChange() {
  </div>
 
  {/* Offer box */}
- <div className="relative mt-6">
- <div className="absolute -top-3 left-6 bg-[#F4F3EE] px-2 rounded-md text-xs text-amber-700 border border-amber-200">
+ <div className="relative mt-8">
+ <div className="absolute -top-3 left-6 bg-white px-2 rounded-md text-xs font-bold text-amber-700 border border-amber-200 uppercase tracking-widest">
  2 Exclusive Offers
  </div>
- <div className="border-2 border-dashed rounded-md border-amber-200 p-4 bg-amber-50/30">
- <div className="font-semibold text-slate-900">Basic</div>
- <ul className="mt-2 text-sm text-gray-600">
- <li className="flex items-center gap-2">
- <ChevronRight size={14} className="text-amber-600" /> Application Filing in MCA
+ <div className="border-2 border-dashed rounded-xl border-amber-200 p-5 bg-amber-50/30">
+ <div className="font-bold text-slate-900">Basic</div>
+ <ul className="mt-3 text-sm text-gray-600 font-bold space-y-2">
+ <li className="flex items-start gap-2">
+ <ChevronRight size={16} className="text-amber-600 mt-0.5" /> Application Filing in MCA
  </li>
- <li className="flex items-center gap-2">
- <ChevronRight size={14} className="text-amber-600" /> Provide Updated MOA & AOA
+ <li className="flex items-start gap-2">
+ <ChevronRight size={16} className="text-amber-600 mt-0.5" /> Provide Updated MOA & AOA
  </li>
- <li className="flex items-center gap-2">
- <ChevronRight size={14} className="text-amber-600" /> New Incorporation Certificate
+ <li className="flex items-start gap-2">
+ <ChevronRight size={16} className="text-amber-600 mt-0.5" /> New Incorporation Certificate
  </li>
  </ul>
- <div className="mt-3">
- <button className="bg-[#F4F3EE] border-2 border-amber-600 text-amber-700 px-4 py-1.5 rounded hover:bg-amber-50 transition-colors text-sm font-medium">
+ <div className="mt-5">
+ <button className="bg-white border-2 border-amber-600 text-amber-700 px-6 py-2 rounded-lg hover:bg-amber-50 transition-colors text-sm font-bold uppercase tracking-wide">
  ADD TO CART
  </button>
  </div>
  </div>
  </div>
 
- <div className="mt-4 border-t pt-4 text-sm flex justify-between items-center text-slate-600">
- <a className="text-amber-700 underline hover:text-amber-800 cursor-pointer">
+ <div className="mt-6 border-t border-gray-100 pt-4 text-sm flex justify-between items-center text-slate-600 font-bold">
+ <a className="text-amber-700 hover:text-amber-800 cursor-pointer transition-colors">
  Terms and conditions
  </a>
- <a className="text-amber-700 underline hover:text-amber-800 cursor-pointer">Refer a Friend</a>
+ <a className="text-amber-700 hover:text-amber-800 cursor-pointer transition-colors">Refer a Friend</a>
  </div>
 
- <div className="mt-6">
- <h4 className="font-semibold mb-2">Offers and discounts</h4>
- <div className="p-3 border border-gray-200 rounded-lg hover:border-amber-200 transition-colors">
- <div className="flex items-center gap-3">
+ <div className="mt-8 border border-gray-100 rounded-xl p-4 hover:border-amber-200 transition-colors shadow-sm">
+ <h4 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide">Offers and discounts</h4>
+ <div className="flex items-center gap-4">
  <img
  src={ASSETS.ledgers}
  alt="ledgers"
- className="h-8 w-8 object-contain"
+ className="h-10 w-10 object-contain rounded"
  />
- <div className="text-sm">
- <div className="text-amber-700 font-medium">
+ <div>
+ <div className="text-amber-700 font-bold text-sm">
  LEDGERS - Compliance Platform
  </div>
- <div className="text-gray-500 text-xs">
+ <div className="text-gray-500 font-bold text-xs mt-0.5">
  Invoicing, GST Filing, Banking and Payroll
- </div>
  </div>
  </div>
  </div>
@@ -221,12 +204,12 @@ export default function CompanyNameChange() {
  </div>
 
  {/* Article */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h1 className="text-2xl font-semibold text-center text-slate-900">
+ <article className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 sm:p-10">
+ <h1 className="text-3xl font-extrabold text-slate-900 mb-8 border-b pb-4">
  Company Name Change Process Under Companies Act, 2013
  </h1>
 
- <div className="mt-4 text-[15px] leading-7 text-gray-700">
+ <div className="space-y-6 text-[15px] leading-relaxed text-gray-700 font-bold">
  <p>
  Changing a company's name is a strategic decision that may be
  driven by rebranding, expansion, or legal requirements. Under
@@ -235,74 +218,76 @@ export default function CompanyNameChange() {
  the Registrar of Companies (ROC).
  </p>
 
- <h3 className="mt-6 text-lg font-semibold text-slate-900">
- Documents Required to Change Business Name
+ <h3 className="text-xl font-bold text-slate-900 pt-4 flex items-center gap-2">
+    <div className="w-1.5 h-6 bg-amber-600 rounded-full" />
+    Documents Required to Change Business Name
  </h3>
- <p className="mt-2">
+ <p>
  The documents required for changing a company name include:
  </p>
 
- <h4 className="mt-4 font-semibold text-slate-900">
+ <h4 className="font-bold text-slate-900 text-lg mt-4">
  Attachments to Form MGT-14 (For Changing Company Name):
  </h4>
- <ul className="mt-2 space-y-2">
- <li className="flex items-start gap-2 text-sm">
+ <ul className="list-none space-y-3 bg-gray-50 p-6 rounded-xl border border-gray-100">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Certified True Copies of the Special Resolutions along with the explanatory statement.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>A copy of the meeting notice was sent to members, including all annexures.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Altered Memorandum & Article of Association.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Copy of the Attendance Sheet of the General Meeting.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Shorter Notice Consent, if applicable.</span>
  </li>
  </ul>
 
- <h4 className="mt-4 font-semibold text-slate-900">
+ <h4 className="font-bold text-slate-900 text-lg mt-6">
  Attachments to Form INC-24 (For Name Change Approval):
  </h4>
- <ul className="mt-2 space-y-2">
- <li className="flex items-start gap-2 text-sm">
+ <ul className="list-none space-y-3 bg-gray-50 p-6 rounded-xl border border-gray-100">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Notice along with Explanatory Statements.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Certified True Copy of the Special Resolution.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Altered Memorandum & Article of Association.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Minutes of the General Meeting.</span>
  </li>
- <li className="flex items-start gap-2 text-sm">
+ <li className="flex items-start gap-3">
  <CheckCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
  <span>Affidavit from Directors.</span>
  </li>
  </ul>
 
- <p className="mt-6 text-sm text-gray-600">
+ <p className="mt-6 text-sm text-gray-500">
  Changing a company's name typically takes around 10 to 15 working
  days due to the need for approvals from various departments.
  </p>
 
- <h3 className="mt-6 text-lg font-semibold text-slate-900">
- Procedure for Company Name Change
+ <h3 className="text-xl font-bold text-slate-900 pt-6 flex items-center gap-2">
+    <div className="w-1.5 h-6 bg-amber-600 rounded-full" />
+    Procedure for Company Name Change
  </h3>
- <ol className="mt-3 list-decimal list-inside text-sm text-gray-600 space-y-2">
+ <ol className="list-decimal pl-5 space-y-3 p-4">
  <li>Convene a Board Meeting and pass a resolution for name change.</li>
  <li>Check name availability with ROC (apply for name reservation).</li>
  <li>Call a General Meeting and pass Special Resolution.</li>
@@ -315,37 +300,37 @@ export default function CompanyNameChange() {
 
  {/* Documents + other registrations */}
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
- <div className="lg:col-span-7 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-semibold mb-4 text-slate-900">
+ <div className="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+ <h3 className="text-xl font-bold mb-6 text-slate-900 border-b pb-3">
  Documents Required For Name Change
  </h3>
- <ul className="space-y-3 text-sm text-gray-700">
- <li className="border-b pb-3 hover:text-amber-700 cursor-pointer transition-colors">
- Board Resolution for Name Change
+ <ul className="space-y-4 text-sm text-gray-700 font-bold">
+ <li className="flex items-center gap-3 hover:text-amber-700 cursor-pointer transition-colors">
+    <ChevronRight className="w-4 h-4 text-amber-500" /> Board Resolution for Name Change
  </li>
- <li className="border-b pb-3 hover:text-amber-700 cursor-pointer transition-colors">
- Special Resolution (Form MGT-14)
+ <li className="flex items-center gap-3 hover:text-amber-700 cursor-pointer transition-colors">
+    <ChevronRight className="w-4 h-4 text-amber-500" /> Special Resolution (Form MGT-14)
  </li>
- <li className="border-b pb-3 hover:text-amber-700 cursor-pointer transition-colors">
- Altered Memorandum of Association
+ <li className="flex items-center gap-3 hover:text-amber-700 cursor-pointer transition-colors">
+    <ChevronRight className="w-4 h-4 text-amber-500" /> Altered Memorandum of Association
  </li>
- <li className="border-b pb-3 hover:text-amber-700 cursor-pointer transition-colors">
- Altered Articles of Association
+ <li className="flex items-center gap-3 hover:text-amber-700 cursor-pointer transition-colors">
+    <ChevronRight className="w-4 h-4 text-amber-500" /> Altered Articles of Association
  </li>
- <li className="border-b pb-3 hover:text-amber-700 cursor-pointer transition-colors">
- Notice of General Meeting
- </li>
- <li className="mt-4 inline-block px-3 py-2 border-2 border-amber-600 rounded-md text-sm text-amber-700 hover:bg-amber-50 cursor-pointer transition-colors">
- Load More
+ <li className="flex items-center gap-3 hover:text-amber-700 cursor-pointer transition-colors">
+    <ChevronRight className="w-4 h-4 text-amber-500" /> Notice of General Meeting
  </li>
  </ul>
+ <button className="mt-8 px-6 py-2 border-2 border-slate-900 rounded-lg text-sm font-bold text-slate-900 hover:bg-slate-900 hover:text-white transition-all w-full">
+ LOAD MORE
+ </button>
  </div>
 
- <aside className="lg:col-span-5 bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-semibold mb-4 text-slate-900">
- Documents Required for Other Registrations
+ <aside className="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+ <h3 className="text-xl font-bold mb-6 text-slate-900 border-b pb-3">
+ Other Registrations
  </h3>
- <ul className="space-y-3 text-sm">
+ <ul className="space-y-4 text-sm font-bold">
  {[
  ["Documents Required for LLP Registration", 8],
  ["Documents Required for Proprietorship Registration", 2],
@@ -355,10 +340,10 @@ export default function CompanyNameChange() {
  ].map(([label, count]) => (
  <li
  key={label as string}
- className="flex justify-between items-center border-b pb-2 hover:text-amber-700 cursor-pointer transition-colors"
+ className="flex justify-between items-start hover:text-amber-700 cursor-pointer transition-colors group"
  >
- <span>{label}</span>
- <span className="bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-full w-6 h-6 inline-flex items-center justify-center text-xs">
+ <span className="group-hover:translate-x-1 transition-transform">{label}</span>
+ <span className="bg-amber-100 text-amber-800 rounded-full w-6 h-6 inline-flex items-center justify-center text-xs ml-3 shrink-0">
  {count}
  </span>
  </li>
@@ -367,123 +352,84 @@ export default function CompanyNameChange() {
  </aside>
  </div>
 
- {/* FAQ */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4 text-slate-900">
- FAQ's on Company Name Change
- </h3>
- <div className="space-y-0">
- {faqItems.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setOpenFaq(openFaq === i ? null : i)}
- >
- <span className="text-slate-800 font-medium">{q}</span>
- <span className="text-amber-700 flex items-center gap-2">
- {openFaq === i ? "−" : <Plus size={14} />}
- </span>
- </button>
- {openFaq === i && (
- <div className="px-2 pb-4 text-sm text-gray-600">
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
 
- <div className="mt-4 flex gap-3 items-center flex-wrap">
-  <button className="px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-md text-sm hover:bg-amber-50 transition-colors font-medium">
- Load More
- </button>
-  
-</div>
- </div>
  </section>
 
  {/* Right column (sidebar) */}
- <aside className="lg:col-span-4 hidden lg:block">
-          <SidebarCart />
+ <aside className="lg:col-span-4 hidden lg:block relative">
+    <div className="sticky top-28 z-30 mb-6">
+      <SidebarCart />
+    </div>
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
- <h4 className="font-semibold mb-3 text-slate-900">Related Guides</h4>
- <ul className="text-sm space-y-2">
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Company Name Change Process</li>
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover-underline">Form INC-24 Filing Guide</li>
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">MCA Name Approval Guidelines</li>
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">MOA & AOA Amendment</li>
+ <div className="bg-white rounded-2xl shadow-sm p-6 mb-6 border border-gray-100">
+ <h4 className="font-bold mb-4 text-slate-900 text-sm uppercase tracking-wider border-b pb-2">Related Guides</h4>
+ <ul className="text-sm space-y-3 font-bold text-gray-700">
+ <li className="hover:text-amber-700 cursor-pointer flex gap-3 group items-center">
+    <div className="w-1.5 h-1.5 bg-gray-300 rounded-full group-hover:bg-amber-600 transition-colors" />
+    <span className="group-hover:translate-x-1 transition-transform">Company Name Change Process</span>
+ </li>
+ <li className="hover:text-amber-700 cursor-pointer flex gap-3 group items-center">
+    <div className="w-1.5 h-1.5 bg-gray-300 rounded-full group-hover:bg-amber-600 transition-colors" />
+    <span className="group-hover:translate-x-1 transition-transform">Form INC-24 Filing Guide</span>
+ </li>
+ <li className="hover:text-amber-700 cursor-pointer flex gap-3 group items-center">
+    <div className="w-1.5 h-1.5 bg-gray-300 rounded-full group-hover:bg-amber-600 transition-colors" />
+    <span className="group-hover:translate-x-1 transition-transform">MCA Name Approval Guidelines</span>
+ </li>
+ <li className="hover:text-amber-700 cursor-pointer flex gap-3 group items-center">
+    <div className="w-1.5 h-1.5 bg-gray-300 rounded-full group-hover:bg-amber-600 transition-colors" />
+    <span className="group-hover:translate-x-1 transition-transform">MOA & AOA Amendment</span>
+ </li>
  </ul>
  </div>
 
- <div className="rounded-lg overflow-hidden shadow-sm mb-4">
- <img
- src={ASSETS.adRight1}
- alt="company compliance"
- className="w-full h-56 object-cover"
- />
+ <div className="rounded-2xl overflow-hidden shadow-sm mb-6 border border-gray-100 group cursor-pointer relative">
+    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors z-10"></div>
+    <img
+    src={ASSETS.adRight1}
+    alt="company compliance"
+    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+    />
+    <div className="absolute bottom-4 left-4 right-4 z-20">
+       <div className="bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg text-center">
+          <h4 className="font-bold text-slate-900 text-sm">Company Compliance</h4>
+       </div>
+    </div>
  </div>
 
- <div className="rounded-lg overflow-hidden shadow-sm mb-6">
- <img
- src={ASSETS.dinEkyc}
- alt="din ekyc"
- className="w-full h-56 object-cover"
- />
+ <div className="rounded-2xl overflow-hidden shadow-sm mb-8 border border-gray-100 group cursor-pointer relative">
+    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors z-10"></div>
+    <img
+    src={ASSETS.dinEkyc}
+    alt="din ekyc"
+    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+    />
+    <div className="absolute bottom-4 left-4 right-4 z-20">
+       <div className="bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg text-center">
+          <h4 className="font-bold text-slate-900 text-sm">DIN eKYC Filing</h4>
+       </div>
+    </div>
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg p-4">
- <h4 className="font-semibold mb-3 text-slate-900">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {[
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Nadakacheri",
- "Flipkart Seller",
- "Caste Certificate",
- "IAY",
- "EPFO Passbook",
- "Domicile Certificate",
- "Udyog Aadhaar",
- "PF Withdrawal",
- "Karnataka One",
- "Encumbrance Certificate",
- "Bonafide Certificate",
- "Instant PAN Card",
- "E PAN Card",
- "Income Certificate",
- "Marriage Certificate",
- "Passport Renewal",
- "MSME Registration",
- "Trademark Status",
- "Trade License",
- "Domicile",
- "eMitra",
- "UAN",
- "PICME",
- ].slice(0, 14).map((t) => (
- <span
- key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
- >
- {t}
- </span>
- ))}
- </div>
- </div>
  </aside>
  </main>
+ 
+ <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-12">
+    <DynamicPricingSection category="name-change" />
+ </div>
+
+ <FAQAccordion category="name-change" title="FAQs for Company Name Change" />
+
+ <PopularSearches />
+ 
+ {/* Re-added Footer as requested */}
+ <Footer />
 
  {/* WhatsApp CTA */}
- <div className="fixed right-6 bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">
- <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5" />
- <span className="font-semibold text-sm">Live Chat with Experts</span>
+ <div className="fixed right-6 bottom-6 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:scale-105 transition-all cursor-pointer">
+ <img src={ASSETS.whatsapp} alt="wa" className="w-5 h-5 brightness-0 invert" />
+ <span className="font-bold text-sm tracking-wide">Expert Chat</span>
  </div>
  </div>
  );
 }
-

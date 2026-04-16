@@ -13,6 +13,8 @@ import Navbar from "../components/Navbar";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 import DynamicPricingSection from "../components/DynamicPricingSection";
+import FAQAccordion from "../components/Faq";
+import PopularSearches from "../components/PopularSearches";
 
 /**
  * DIR-3 KYC Page with amber theme and imported Navbar
@@ -33,7 +35,7 @@ const ASSETS = {
   portraitImage: "/images/remove.png",
 };
 
-const POPULAR_SEARCHES = [
+const POPULAR_SEARCHES_SIDEBAR = [
  "Partnership",
  "Limited Liability Partnership",
  "Digital Signature",
@@ -69,37 +71,10 @@ const POPULAR_SEARCHES = [
 ];
 
 export default function DIR3KycPage(): React.ReactElement {
- const [faqOpen, setFaqOpen] = useState<number | null>(null);
  const [gstChecked, setGstChecked] = useState(false);
  const [din, setDin] = useState("");
  const [searchQuery, setSearchQuery] = useState("");
  const [companyName, setCompanyName] = useState("");
-
- const faqQuestions = [
- "What is DIR-3 KYC (Application for KYC of Directors)?",
- "Who must file Form DIR-3 KYC?",
- "What is the due date for filing DIR-3 KYC?",
- "What are the types of DIR-3 KYC forms?",
- "What are the consequences of not filing DIR-3 KYC?",
- "What documents are required for filing DIR-3 KYC?",
- "How can I file DIR-3 KYC form online?",
- "What is the Service Request Number (SRN)?",
- "How can I verify if my DIR-3 KYC filing has been successful?",
- "Can I get assistance for DIR-3 KYC?",
- ];
-
- const faqAnswers: Record<number, string> = {
- 0: "Form DIR-3 KYC is the electronic form mandated by MCA for updating KYC details of directors holding a DIN.",
- 1: "Directors allotted a DIN (approved status) must file DIR-3 KYC annually.",
- 2: "Generally, DIR-3 KYC must be filed by 30th September of the immediately following financial year. Late filing penalties may apply.",
- 3: "DIR-3 KYC (first time or when details change) and DIR-3 KYC WEB (re-filing when no changes are required).",
- 4: "Non-filing may attract penalties, DIN deactivation, and other compliance consequences.",
- 5: "Typical documents: PAN card, Aadhaar, Passport (if applicable), and any supporting proofs required by MCA.",
- 6: "File via MCA portal: login, provide mobile/email for OTP, fill personal details, attach DSC and submit.",
- 7: "SRN (Service Request Number) is generated on successful submission — save it for tracking.",
- 8: "Verify via MCA portal SRN tracking and acknowledgement emails. You can also check DIN status on MCA.",
- 9: "Yes — we provide assisted filing, document checks, and end-to-end support.",
- };
 
  const handleAddDirector = (e?: React.MouseEvent | React.FormEvent) => {
  e?.preventDefault();
@@ -116,7 +91,7 @@ export default function DIR3KycPage(): React.ReactElement {
  <Navbar />
 
  {/* Breadcrumb */}
- <div className="bg-gradient-to-r from-white to-slate-50 py-4">
+ <div className="bg-[#F4F3EE] py-4 font-bold text-slate-800">
  <div className="max-w-[1180px] mx-auto px-4 sm:px-6 text-sm text-gray-500">
  Home / MCA Services /{" "}
  <span className="text-amber-700 font-medium">DIR 3 KYC Filing</span>
@@ -124,7 +99,7 @@ export default function DIR3KycPage(): React.ReactElement {
  </div>
 
  {/* Main */}
- <main className="max-w-[1180px] mx-auto px-4 sm:px-6 py-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
+ <main className="max-w-[1180px] mx-auto px-4 sm:px-6 py-4 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
  {/* Left content */}
  <section className="lg:col-span-8 space-y-6">
  {/* Director Management HERO */}
@@ -234,8 +209,8 @@ export default function DIR3KycPage(): React.ReactElement {
  </section>
 
 
- {/* Article content */}
- <article className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 sm:p-6">
+ {/* Article content - WHITE BOX */}
+ <article className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 sm:p-10">
  <h1 className="text-xl sm:text-2xl font-semibold text-center">
  DIR 3 KYC — Application for KYC of Directors
  </h1>
@@ -315,58 +290,28 @@ export default function DIR3KycPage(): React.ReactElement {
  </ol>
  </div>
  </article>
+ 
+ {/* Pricing section within the main column */}
+ <DynamicPricingSection category="din-ekyc-filing" />
 
-  {/* Dynamic Pricing Section */}
-  <DynamicPricingSection category="din-ekyc-filing" />
-
-
-
- {/* FAQ */}
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 sm:p-6">
- <h3 className="text-lg sm:text-xl font-semibold mb-4">FAQ's on DIR-3 KYC</h3>
- <div className="space-y-0">
- {faqQuestions.map((q, i) => (
- <div key={i} className="border-b last:border-b-0">
- <button
- className="w-full text-left py-4 flex justify-between items-center text-sm"
- onClick={() => setFaqOpen(faqOpen === i ? null : i)}
- aria-expanded={faqOpen === i}
- aria-controls={`faq-${i}`}
- >
- <span className="text-slate-800 hover:text-amber-700 transition-colors">{q}</span>
- <span className="text-amber-700 flex items-center gap-2">
- {faqOpen === i ? "−" : <Plus size={14} />}
- </span>
- </button>
- {faqOpen === i && (
- <div
- id={`faq-${i}`}
- className="px-2 pb-4 text-sm text-gray-600"
- >
- {faqAnswers[i]}
- </div>
- )}
- </div>
- ))}
- </div>
- </div>
  </section>
 
  {/* Sidebar */}
  <aside className="lg:col-span-4 hidden lg:block">
-          <SidebarCart />
+ <div className="sticky top-28 space-y-6">
+ <SidebarCart />
 
- <div className="bg-[#F4F3EE] rounded-lg shadow-sm p-4 mb-4">
- <h4 className="font-semibold mb-3">Related Guides</h4>
- <ul className="text-sm space-y-2">
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">A Complete Guide on Director Identification Number (DIN)</li>
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">DIN Number Registration and Search</li>
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">How to Obtain DIN?</li>
- <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline">Company Compliance</li>
+ <div className="bg-white rounded-2xl border border-[#E5E2DA] shadow-sm p-6 mb-4">
+ <h4 className="font-semibold text-[#2F2E2B] mb-4">Related Guides</h4>
+ <ul className="text-sm space-y-3">
+ <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline transition-colors">A Complete Guide on Director Identification Number (DIN)</li>
+ <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline transition-colors">DIN Number Registration and Search</li>
+ <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline transition-colors">How to Obtain DIN?</li>
+ <li className="text-amber-700 hover:text-amber-800 cursor-pointer hover:underline transition-colors">Company Compliance</li>
  </ul>
  </div>
 
- <div className="rounded-lg overflow-hidden shadow-sm mb-4">
+ <div className="rounded-2xl overflow-hidden shadow-sm mb-4 border border-[#E5E2DA]">
  <img
  src={ASSETS.adRight1}
  alt="company compliance"
@@ -374,7 +319,7 @@ export default function DIR3KycPage(): React.ReactElement {
  />
  </div>
 
- <div className="rounded-lg overflow-hidden shadow-sm mb-6">
+ <div className="rounded-2xl overflow-hidden shadow-sm mb-6 border border-[#E5E2DA]">
  <img
  src={ASSETS.dinEkyc}
  alt="din ekyc"
@@ -382,57 +327,28 @@ export default function DIR3KycPage(): React.ReactElement {
  />
  </div>
 
- <div className="bg-[#F4F3EE] rounded-lg p-4">
- <h4 className="font-semibold mb-3">Popular Searches</h4>
+ <div className="bg-white rounded-2xl border border-[#E5E2DA] shadow-sm p-6">
+ <h4 className="font-semibold text-[#2F2E2B] mb-4">Popular Searches</h4>
  <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 14).map((t) => (
+ {POPULAR_SEARCHES_SIDEBAR.slice(0, 14).map((t) => (
  <span
  key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
+ className="text-xs px-3 py-1.5 border border-gray-100 rounded-lg bg-[#F9F9F9] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-all"
  >
  {t}
  </span>
  ))}
  </div>
  </div>
+ </div>
  </aside>
  </main>
 
- {/* Footer */}
- <footer className="bg-[#F4F3EE] mt-12 py-3 border-t">
- <div className="max-w-[1180px] mx-auto px-4 sm:px-6 text-sm text-gray-600">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Company</h5>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">About Us</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Careers</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Contact Us</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Platforms</h5>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Business Search</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Trademark Search</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Filings.AE for UAE</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Usage</h5>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Terms & Conditions</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Privacy Policy</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Refund Policy</a>
- </div>
- <div>
- <h5 className="font-semibold text-gray-800 mb-2">Policies</h5>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Confidentiality Policy</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Disclaimer Policy</a>
- <a className="block hover:text-amber-700 cursor-pointer transition-colors">Reviews</a>
- </div>
- </div>
+ {/* FAQ Section like partnership page - full width below main content */}
+ <FAQAccordion transparent={true} />
 
- <div className="text-center text-gray-500 mt-6">
- © {new Date().getFullYear()} All rights reserved.
- </div>
- </div>
- </footer>
+ {/* Footer from components */}
+ <Footer />
 
  {/* Floating WhatsApp CTA */}
  <div className="fixed right-4 sm:right-6 bottom-4 sm:bottom-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 z-50 hover:from-amber-700 hover:to-amber-800 transition-all cursor-pointer">

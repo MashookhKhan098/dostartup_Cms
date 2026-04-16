@@ -42,7 +42,7 @@ export default function Home() {
    <DynamicPricingSection category="expedited-tm-registration" />
  </div>
  
- <FAQAccordion category="expedited-tm-registration" />
+ <FAQAccordion category="expedited-trademark-registration" />
  <Popularsearches />
  <Footer />
  </main>

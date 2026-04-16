@@ -494,7 +494,7 @@ export default function ITR5Page() {
               <div className="flex flex-wrap gap-3 mb-10">
                 <Link
                   href="#pricing"
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-7 py-3.5 rounded-full text-base transition-all hover:shadow-xl hover:shadow-orange-100 hover:-translate-y-0.5 inline-flex items-center gap-2 group"
+                  className="bg-[#C15F3C] hover:bg-#A04D30 text-white font-bold px-7 py-3.5 rounded-full text-base transition-all hover:shadow-xl hover:shadow-[#C15F3C]/10 hover:-translate-y-0.5 inline-flex items-center gap-2 group"
                 >
                   🚀 Start Filing ITR-5
                   <ArrowRight
@@ -504,7 +504,7 @@ export default function ITR5Page() {
                 </Link>
                 <Link
                   href="#calculator"
-                  className="border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all"
+                  className="border-2 border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all"
                 >
                   <Calculator size={16} className="inline mr-2" />
                   Firm Tax Calculator →
@@ -747,7 +747,7 @@ export default function ITR5Page() {
               <div className="overflow-x-auto">
                 <table className="w-full text-xs sm:text-sm">
                   <thead>
-                    <tr className="bg-[#C15F3C] text-white">
+                    <tr className="bg-white text-black border-b-2 border-gray-100">
                       <th className="px-3 py-2.5 text-left rounded-tl-xl font-bold">
                         Entity Type
                       </th>
@@ -856,9 +856,9 @@ export default function ITR5Page() {
               </div>
 
               <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
-                <div className="bg-[#C15F3C] px-4 py-3">
-                  <h3 className="text-white font-bold text-sm flex items-center gap-2">
-                    <TrendingUp size={16} className="text-white" />
+                <div className="bg-white border-b border-gray-200 px-4 py-3">
+                  <h3 className="text-black font-bold text-sm flex items-center gap-2">
+                    <TrendingUp size={16} className="text-[#C15F3C]" />
                     Feature Comparison — ITR-5 Platforms
                   </h3>
                 </div>
@@ -1088,38 +1088,36 @@ export default function ITR5Page() {
               <p className="text-gray-500 text-sm max-w-2xl mx-auto">
                 Enter your firm's income, expenses & partner details to get
                 instant tax computation.
-                <span className="block mt-1 text-orange-500 font-semibold">
+                <span className="block mt-1 text-[#C15F3C] font-semibold">
                   Used by 10,000+ firms this month
                 </span>
               </p>
             </div>
 
             <div className="bg-white rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
-              <div className="bg-orange-500 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
+              <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-                    <Building2 size={20} className="text-white" />
+                    <Building2 size={20} className="text-[#C15F3C]" />
                   </div>
                   <div>
-                    <h3 className="font-display font-extrabold text-white text-lg flex items-center gap-2">
+                    <h3 className="font-display font-extrabold text-black text-lg flex items-center gap-2">
                       ITR-5 Firm Tax Calculator
                       <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full">
                         Live
                       </span>
                     </h3>
-                    <p className="text-orange-100 text-xs mt-0.5">
                       AY 2026-27 | Firms, LLPs, AOPs & BOIs
-                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button
+                    <button
                     onClick={resetCalc}
-                    className="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
+                    className="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
                   >
                     <RefreshCw size={12} /> Reset
                   </button>
-                  <span className="bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                  <span className="bg-[#C15F3C]/10 text-[#C15F3C] text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
                     <Zap size={12} /> AI Powered
                   </span>
                 </div>
@@ -1129,7 +1127,7 @@ export default function ITR5Page() {
                 {/* INPUTS */}
                 <div className="p-6 border-b lg:border-b-0 lg:border-r border-gray-100">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
-                    <FileText size={16} className="text-orange-500" />
+                    <FileText size={16} className="text-[#C15F3C]" />
                     Scroll to Enter Firm Details
                   </h4>
 
@@ -1142,7 +1140,7 @@ export default function ITR5Page() {
                       onChange={(e) =>
                         upd("entityType", e.target.value as EntityType)
                       }
-                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-white"
+                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-white"
                     >
                       <option value="partnership">
                         Partnership Firm (30% flat tax)
@@ -1166,7 +1164,7 @@ export default function ITR5Page() {
                   </div>
 
                   <div className="mb-2 pb-4 border-b border-gray-100">
-                    <p className="text-xs font-bold text-orange-500 mb-4 uppercase flex items-center gap-1">
+                    <p className="text-xs font-bold text-[#C15F3C] mb-4 uppercase flex items-center gap-1">
                       <Briefcase size={12} /> Business Income & Expenses
                     </p>
                     <SliderRow
@@ -1208,7 +1206,7 @@ export default function ITR5Page() {
                   {(calc.entityType === "partnership" ||
                     calc.entityType === "llp") && (
                     <div className="mb-2 pt-4 pb-4 border-b border-gray-100">
-                      <p className="text-xs font-bold text-orange-500 mb-4 uppercase flex items-center gap-1">
+                      <p className="text-xs font-bold text-[#C15F3C] mb-4 uppercase flex items-center gap-1">
                         <Users size={12} /> Partner Deductions (Sec 40(b))
                       </p>
                       <SliderRow
@@ -1233,7 +1231,7 @@ export default function ITR5Page() {
                   )}
 
                   <div className="pt-4">
-                    <p className="text-xs font-bold text-orange-500 mb-4 uppercase ">
+                    <p className="text-xs font-bold text-[#C15F3C] mb-4 uppercase ">
                       💡 Other Deductions
                     </p>
                     <SliderRow
@@ -1251,16 +1249,16 @@ export default function ITR5Page() {
                 {/* RESULTS */}
                 <div className="p-6 bg-white">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
-                    <BarChart3 size={16} className="text-orange-500" />
+                    <BarChart3 size={16} className="text-[#C15F3C]" />
                     Firm Tax Breakdown
                   </h4>
 
                   {/* Audit Alert */}
                   <div
-                    className={`rounded-2xl p-4 mb-4 border-2 ${result.auditRequired ? "bg-red-50 border-red-300" : "bg-orange-50 border-orange-200"}`}
+                    className={`rounded-2xl p-4 mb-4 border-2 ${result.auditRequired ? "bg-white border-red-200" : "bg-white border-gray-100"}`}
                   >
                     <p
-                      className={`text-xs font-bold uppercase mb-1 ${result.auditRequired ? "text-red-600" : "text-orange-500"}`}
+                      className={`text-xs font-bold uppercase mb-1 ${result.auditRequired ? "text-red-600" : "text-[#C15F3C]"}`}
                     >
                       {result.auditRequired
                         ? "⚠️ Tax Audit Required"
@@ -1276,8 +1274,8 @@ export default function ITR5Page() {
                   </div>
 
                   {/* Income Breakdown */}
-                  <div className="bg-white rounded-2xl border-2 border-orange-500 p-4 mb-4">
-                    <p className="text-xs font-bold text-orange-500 mb-2 uppercase ">
+                  <div className="bg-white rounded-2xl border-2 border-[#C15F3C] p-4 mb-4">
+                    <p className="text-xs font-bold text-[#C15F3C] mb-2 uppercase ">
                       🏢 Income Computation
                     </p>
                     <ResultRow
@@ -1292,7 +1290,7 @@ export default function ITR5Page() {
                     <ResultRow
                       label="Net Business Income"
                       value={fmt(result.netBusinessIncome)}
-                      color="text-orange-500"
+                      color="text-[#C15F3C]"
                     />
                     {(calc.entityType === "partnership" ||
                       calc.entityType === "llp") && (
@@ -1309,7 +1307,7 @@ export default function ITR5Page() {
                     <ResultRow
                       label="Taxable Income (after deductions)"
                       value={fmt(result.taxableIncome)}
-                      color="text-orange-500"
+                      color="text-[#C15F3C]"
                     />
                   </div>
 
@@ -1338,7 +1336,7 @@ export default function ITR5Page() {
                     <ResultRow
                       label="Total Tax Payable"
                       value={fmt(result.totalTax)}
-                      color="text-orange-500"
+                      color="text-[#C15F3C]"
                     />
                     <ResultRow
                       label="Est. TDS Deducted (@ 2%)"
@@ -1357,14 +1355,14 @@ export default function ITR5Page() {
                           : fmt(-result.refund)
                       }
                       color={
-                        result.refund >= 0 ? "text-orange-500" : "text-red-500"
+                        result.refund >= 0 ? "text-[#C15F3C]" : "text-red-500"
                       }
                     />
                   </div>
 
                   <Link
                     href="#pricing"
-                    className="block bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm text-center py-3.5 rounded-2xl transition-all hover:shadow-lg hover:-translate-y-0.5"
+                    className="block bg-[#C15F3C] hover:bg-#A04D30 text-white font-bold text-sm text-center py-3.5 rounded-2xl transition-all hover:shadow-lg hover:-translate-y-0.5"
                   >
                     🚀 File ITR-5 Now — Use This Data
                   </Link>
@@ -1384,7 +1382,7 @@ export default function ITR5Page() {
         <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">
+              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">
                 Testimonials
               </p>
               <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-2">
@@ -1398,20 +1396,20 @@ export default function ITR5Page() {
               {TESTIMONIALS.map((t, i) => (
                 <div
                   key={i}
-                  className="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1"
+                  className="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-[#C15F3C] hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   <div className="flex gap-1 mb-3">
                     {[...Array(5)].map((_, j) => (
                       <Star
                         key={j}
                         size={16}
-                        className="fill-orange-500 text-orange-500"
+                        className="fill-#C15F3C text-[#C15F3C]"
                       />
                     ))}
                   </div>
                   <p className="text-black text-sm mb-4">"{t.text}"</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-10 h-10 rounded-full bg-[#C15F3C] flex items-center justify-center text-white font-bold text-sm">
                       {t.name.charAt(0)}
                     </div>
                     <div>
@@ -1451,7 +1449,7 @@ export default function ITR5Page() {
                 <Star
                   key={i}
                   size={24}
-                  className="text-orange-500 fill-orange-500"
+                  className="text-[#C15F3C] fill-#C15F3C"
                 />
               ))}
             </div>
@@ -1469,7 +1467,7 @@ export default function ITR5Page() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="#pricing"
-                className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-base px-8 py-4 rounded-full hover:shadow-xl hover:shadow-orange-100 hover:-translate-y-1 transition-all duration-150 group"
+                className="inline-flex items-center gap-2 bg-[#C15F3C] hover:bg-#A04D30 text-white font-bold text-base px-8 py-4 rounded-full hover:shadow-xl hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all duration-150 group"
               >
                 🚀 File ITR-5 Free Today
                 <ArrowRight
@@ -1479,7 +1477,7 @@ export default function ITR5Page() {
               </Link>
               <Link
                 href="#calculator"
-                className="inline-flex items-center gap-2 border-2 border-orange-500 text-orange-500 font-semibold text-base px-8 py-4 rounded-full hover:bg-orange-500 hover:text-white transition-all"
+                className="inline-flex items-center gap-2 border-2 border-[#C15F3C] text-[#C15F3C] font-semibold text-base px-8 py-4 rounded-full hover:bg-[#C15F3C] hover:text-white transition-all"
               >
                 <Calculator size={18} />
                 Try Calculator First →
@@ -1487,20 +1485,19 @@ export default function ITR5Page() {
             </div>
             <div className="mt-8 flex items-center justify-center gap-6 text-xs text-gray-400">
               <span className="flex items-center gap-1">
-                <Shield size={12} className="text-orange-500" /> 256-bit SSL
+                <Shield size={12} className="text-[#C15F3C]" /> 256-bit SSL
               </span>
               <span className="flex items-center gap-1">
-                <Clock size={12} className="text-orange-500" /> CA-Assisted
+                <Clock size={12} className="text-[#C15F3C]" /> CA-Assisted
                 Filing
               </span>
               <span className="flex items-center gap-1">
-                <Users size={12} className="text-orange-500" /> 50K+ Firms Filed
+                <Users size={12} className="text-[#C15F3C]" /> 50K+ Firms Filed
               </span>
             </div>
           </div>
         </section>
 
-        <DynamicPricingSection category="itr-5-return-filing" />
         <Footer />
       </main>
     </>

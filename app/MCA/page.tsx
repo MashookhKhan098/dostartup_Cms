@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -140,7 +140,7 @@ export default function MCA() {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar Filter */}
           <aside className="lg:col-span-1">
-            <div className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm p-3 sticky top-24">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-3 sticky top-24">
               <h3 className="font-bold text-slate-900 px-3 py-2 mb-2 uppercase text-xs tracking-widest">Categories</h3>
               <ul className="space-y-1">
                 {categories.map((c) => (
@@ -162,7 +162,7 @@ export default function MCA() {
           <div className="lg:col-span-3">
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
               {services.map((s) => (
-                <div key={s.id} className="bg-[#F4F3EE] rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-all group border-b-4 border-b-transparent hover:border-b-[#C15F3C]">
+                <div key={s.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-all group border-b-4 border-b-transparent hover:border-b-[#C15F3C]">
                   <div className="h-44 overflow-hidden">
                     <img src={s.image} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>

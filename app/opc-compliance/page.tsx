@@ -9,7 +9,7 @@ import PopularSearches from "../components/PopularSearches";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
-  hero: "https://img.dostartup.com/catalog/llp-compliance-india.webp",
+  hero: "/images/company-compliance.jpg",
 };
 
 export default function OPCCompliancePage(): React.ReactElement {
@@ -186,19 +186,92 @@ export default function OPCCompliancePage(): React.ReactElement {
           <div className="max-w-[1200px] mx-auto px-4 grid md:grid-cols-2 gap-10">
             <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
               <h3 className="text-2xl font-bold text-amber-800 mb-6">Documents Required</h3>
-              <ul className="space-y-4 text-slate-600 text-sm">
+              <ul className="space-y-4 text-slate-600 text-sm font-bold">
                 <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Financial Statements (Balance Sheet + P&L)</li>
                 <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Director PAN & Aadhaar</li>
-                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> DSB (Digital Signature Certificate)</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Bank Statements</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> GST Returns (if applicable)</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> OPC MOA & AOA</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> DSC (Digital Signature Certificate)</li>
               </ul>
             </div>
             <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
               <h3 className="text-2xl font-bold text-amber-800 mb-6">Event-Based Compliance</h3>
-              <ul className="space-y-4 text-slate-600 text-sm">
+              <ul className="space-y-4 text-slate-600 text-sm font-bold">
                 <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Change of registered office</li>
-                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Increase in authorized capital</li>
-                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Appointing or removing a director</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Change of nominee</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Increase in capital</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Director change</li>
+                <li className="flex gap-2 items-center"><span className="text-amber-600 font-bold">✓</span> Voluntary conversion to Pvt Ltd</li>
               </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Exemptions */}
+        <section className="py-12 bg-[#F4F3EE]">
+          <div className="max-w-[1200px] mx-auto px-4">
+            <h2 className="text-3xl font-bold text-amber-800 mb-8 text-center font-bold">OPC Compliance Exemptions</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-amber-200 transition-colors">
+                <h3 className="text-xl font-bold text-slate-800 mb-3">No AGM Required</h3>
+                <p className="text-slate-600 text-sm font-bold">OPC does not need to conduct an Annual General Meeting.</p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-amber-200 transition-colors">
+                <h3 className="text-xl font-bold text-slate-800 mb-3">Reduced Filings</h3>
+                <p className="text-slate-600 text-sm font-bold">MGT-7A is simpler and lighter compared to MGT-7.</p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-amber-200 transition-colors">
+                <h3 className="text-xl font-bold text-slate-800 mb-3">No Cash Flow Statement</h3>
+                <p className="text-slate-600 text-sm font-bold">OPCs are exempt from preparing a cash flow statement in financial reports.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Process Flow */}
+        <section className="py-12 bg-transparent">
+          <div className="max-w-[1200px] mx-auto px-4">
+            <h2 className="text-3xl font-bold text-amber-800 mb-10 text-center font-bold">OPC Compliance Process Flow</h2>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              {[
+                { step: "Step 1", title: "Upload Documents" },
+                { step: "Step 2", title: "Bookkeeping & Reconciliation" },
+                { step: "Step 3", title: "Financial Statement Preparation" },
+                { step: "Step 4", title: "MCA + ITR Filing" }
+              ].map((s, i) => (
+                <div key={i} className="flex-1 text-center w-full relative">
+                  <div className="w-20 h-20 mx-auto bg-amber-50 rounded-full flex items-center justify-center font-bold text-amber-700 mb-4 border-4 border-amber-200 shadow-md text-sm">
+                    {s.step}
+                  </div>
+                  <h3 className="font-bold text-slate-800">{s.title}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="py-16 bg-[#F4F3EE]">
+          <div className="max-w-[1200px] mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-amber-800 mb-4 font-bold">Why 3,50,000+ Businesses Choose Us</h2>
+              <p className="text-slate-600 max-w-2xl mx-auto font-bold">India's most trusted platform for compliance, accounting, GST, taxation & registrations.</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-200 transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Dedicated Compliance Manager</h3>
+                <p className="text-slate-600 text-sm font-bold leading-relaxed">Full support for all OPC filings & document handling.</p>
+              </div>
+              <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-200 transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Timely Reminders</h3>
+                <p className="text-slate-600 text-sm font-bold leading-relaxed">Automation ensures you never miss a compliance deadline.</p>
+              </div>
+              <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:border-amber-200 transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 mb-3">LEDGERS Accounting Platform</h3>
+                <p className="text-slate-600 text-sm font-bold leading-relaxed">Automated bookkeeping, reconciliation & secure vault.</p>
+              </div>
             </div>
           </div>
         </section>

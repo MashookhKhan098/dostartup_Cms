@@ -17,40 +17,33 @@ import PopularSearches from "../components/PopularSearches";
  ------------------------------ */
 const ASSETS = {
  logo: "/images/india-logo.jpg",
- hero: "/images/mca-compliance-simplified-india.webp",
- promoBlue:
- "/images/company-compliance-india.png",
- ledgers: "/images/ledgers.png",
- gstSave: "/images/gstin.png",
+ hero: "/images/company-compliance.jpg",
+ promoBlue: "/images/company-compliance.jpg",
+ ledgers: "/images/ledgers.jpg",
+ gstSave: "/images/india-flag.png",
  cards: {
- companyCompliance:
- "/images/company-compliance-india.png",
- dinEKyc: "/images/din-ekyc.png",
- directorChange: "/images/director-change.png",
- removeDirector: "/images/remove-director.png",
- shareTransfer: "/images/share-transfer.png",
- moaAmendment: "/images/moa-amendment.png",
- officeChange:
- "/images/registered-office-change.png",
- capitalIncrease:
- "/images/authorized-capital-increase.png",
- form10bd: "/images/form-10bd-filing.png",
- llpForm11: "/images/llp-form-11.png",
- strikeOffRevival:
- "/images/strike-off-revival.png",
- fdiRbi: "/images/fdi-filing-rbi.png",
- rera: "/images/rera.png",
- opcCompliance: "/images/opc-compliance.png",
- dpt3: "/images/dpt3.png",
- aoaAmendment: "/images/aoa-amendment.png",
- lei: "/images/lei.png",
- chargeCreate: "/images/charge-creation.png",
- chargeSatisfaction:
- "/images/charge-satisfaction.png",
- dematShares: "/images/demat-shares.png",
- businessPlan: "/images/business-plan.png",
- professionalTax:
- "/images/professional-tax-return.png",
+ companyCompliance: "/images/company-compliance.jpg",
+ dinEKyc: "/images/din.jpg",
+ directorChange: "/images/Director-Change.jpg",
+ removeDirector: "/images/remove-director.jpg",
+ shareTransfer: "/images/hero1.jpg",
+ moaAmendment: "/images/hero2.jpg",
+ officeChange: "/images/hero3.jpg",
+ capitalIncrease: "/images/company-compliance.jpg",
+ form10bd: "/images/tax-notice.png",
+ llpForm11: "/images/windup.png",
+ strikeOffRevival: "/images/company-compliance.jpg",
+ fdiRbi: "/images/FDI-filing-RBI.jpg",
+ rera: "/images/company-compliance.jpg",
+ opcCompliance: "/images/company-compliance.jpg",
+ dpt3: "/images/company-compliance.jpg",
+ aoaAmendment: "/images/company-compliance.jpg",
+ lei: "/images/company-compliance.jpg",
+ chargeCreate: "/images/company-compliance.jpg",
+ chargeSatisfaction: "/images/company-compliance.jpg",
+ dematShares: "/images/demat-hero.jpg",
+ businessPlan: "/images/hero1.jpg",
+ professionalTax: "/images/tax-notice.png",
  },
 };
 

@@ -154,17 +154,17 @@ const fmt = (n: number) => "₹" + Math.abs(Math.round(n)).toLocaleString("en-IN
 // DATA
 // ─────────────────────────────────────────────
 const AI_STEPS = [
-  { icon: "📋", title: "Books of Accounts Analyzed", desc: "AI read P&L, Balance Sheet & Trial Balance in 8 seconds", bg: "bg-orange-500/20" },
-  { icon: "💹", title: "F&O Turnover Computed", desc: "All trades aggregated — turnover ₹2.4Cr, profit ₹1.8L", bg: "bg-orange-500/15" },
-  { icon: "🧾", title: "Expenses Categorized & Verified", desc: "31 business expenses validated, ₹68,000 maximized", bg: "bg-orange-500/10" },
-  { icon: "✅", title: "ITR-3 Ready to File", desc: "0 errors • Audit not required • Refund: ₹41,200", bg: "bg-orange-500/20" },
+  { icon: "📋", title: "Books of Accounts Analyzed", desc: "AI read P&L, Balance Sheet & Trial Balance in 8 seconds", bg: "bg-[#C15F3C]/20" },
+  { icon: "💹", title: "F&O Turnover Computed", desc: "All trades aggregated — turnover ₹2.4Cr, profit ₹1.8L", bg: "bg-[#C15F3C]/15" },
+  { icon: "🧾", title: "Expenses Categorized & Verified", desc: "31 business expenses validated, ₹68,000 maximized", bg: "bg-[#C15F3C]/10" },
+  { icon: "✅", title: "ITR-3 Ready to File", desc: "0 errors • Audit not required • Refund: ₹41,200", bg: "bg-[#C15F3C]/20" },
 ];
 
 const WHY_FEATURES = [
-  { icon: <BookOpen size={20} className="text-orange-500" />, title: "Auto Books Import", desc: "Imports Tally, Zoho Books, QuickBooks P&L and Balance Sheet. AI maps every account to correct ITR-3 schedule." },
-  { icon: <TrendingUp size={20} className="text-orange-500" />, title: "F&O Turnover Calculator", desc: "Automatically computes F&O turnover using absolute profit method. Determines tax audit applicability instantly." },
-  { icon: <Brain size={20} className="text-orange-500" />, title: "AI Expense Maximizer", desc: "Identifies all allowable business deductions — depreciation, rent, salary, professional fees — to minimize tax." },
-  { icon: <Shield size={20} className="text-orange-500" />, title: "Tax Audit Support", desc: "If turnover exceeds limits, our empanelled CAs handle Form 3CA/3CB/3CD audit end-to-end." },
+  { icon: <BookOpen size={20} className="text-[#C15F3C]" />, title: "Auto Books Import", desc: "Imports Tally, Zoho Books, QuickBooks P&L and Balance Sheet. AI maps every account to correct ITR-3 schedule." },
+  { icon: <TrendingUp size={20} className="text-[#C15F3C]" />, title: "F&O Turnover Calculator", desc: "Automatically computes F&O turnover using absolute profit method. Determines tax audit applicability instantly." },
+  { icon: <Brain size={20} className="text-[#C15F3C]" />, title: "AI Expense Maximizer", desc: "Identifies all allowable business deductions — depreciation, rent, salary, professional fees — to minimize tax." },
+  { icon: <Shield size={20} className="text-[#C15F3C]" />, title: "Tax Audit Support", desc: "If turnover exceeds limits, our empanelled CAs handle Form 3CA/3CB/3CD audit end-to-end." },
 ];
 
 const AI_FEATURES = [
@@ -214,7 +214,7 @@ function SliderRow({
     <div className="mb-6">
       <div className="flex justify-between items-center mb-1">
         <label className="text-xs font-semibold text-black">{label}</label>
-        <span className="text-xs font-bold text-orange-500 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-lg">
+        <span className="text-xs font-bold text-[#C15F3C] bg-[#C15F3C]/5 border border-[#C15F3C]/10 px-2 py-0.5 rounded-lg">
           {fmt(value)}
         </span>
       </div>
@@ -223,7 +223,7 @@ function SliderRow({
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full h-2 rounded-full appearance-none cursor-pointer"
-        style={{ background: `linear-gradient(to right, #f97316 0%, #f97316 ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)` }}
+        style={{ background: `linear-gradient(to right, #C15F3C 0%, #C15F3C ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)` }}
       />
       <div className="flex justify-between text-[10px] text-gray-400 mt-1">
         <span>{fmt(min)}</span><span>{fmt(max)}</span>
@@ -236,10 +236,10 @@ function SliderRow({
 // STATUS CELL
 // ─────────────────────────────────────────────
 function StatusCell({ val }: { val: boolean | string }) {
-  if (val === true) return <CheckCircle size={16} className="text-orange-500 mx-auto" />;
+  if (val === true) return <CheckCircle size={16} className="text-[#C15F3C] mx-auto" />;
   if (val === false) return <XCircle size={16} className="text-gray-300 mx-auto" />;
-  if (val === "~") return <span className="text-orange-400 font-bold text-sm">~</span>;
-  return <span className="font-bold text-sm text-orange-500">{val}</span>;
+  if (val === "~") return <span className="text-[#C15F3C]/60 font-bold text-sm">~</span>;
+  return <span className="font-bold text-sm text-[#C15F3C]">{val}</span>;
 }
 
 // ─────────────────────────────────────────────
@@ -277,51 +277,52 @@ export default function ITR3Page() {
     businessType: "profession",
   });
 
-  const upd = useCallback(
-    function update<K extends keyof CalcState>(k: K, v: CalcState[K]) {
-      setCalc((p) => ({ ...p, [k]: v }));
-    },
-    []
-  );
+  const upd = useCallback((k: keyof CalcState, v: any) => {
+    setCalc((p) => ({ ...p, [k]: v }));
+  }, []);
 
   const result = runCalc(calc);
 
-  const resetCalc = () =>
+  function resetCalc() {
     setCalc({
-      salary: 0, businessIncome: 2500000, businessExpenses: 800000,
-      capitalGains: 150000, houseProperty: 0,
-      ded80c: 150000, ded80d: 25000, age: "below60", businessType: "profession",
+      salary: 0,
+      businessIncome: 2500000,
+      businessExpenses: 800000,
+      capitalGains: 150000,
+      houseProperty: 0,
+      ded80c: 150000,
+      ded80d: 25000,
+      age: "below60",
+      businessType: "profession",
     });
+  }
 
   return (
     <>
-      <Navbar />
-      <main className="min-h-screen bg-[#F4F3EE] font-sans">
-
-        {/* ════════════════════════════════════
-        HERO
-        ════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] relative overflow-hidden pt-8 pb-20">
+      <div className="min-h-screen bg-[#F4F3EE] font-sans">
+        <Navbar />
+        {/* HERO */}
+        <section className="bg-[#F4F3EE] relative overflow-hidden pt-8 pb-20 border-b border-[#C15F3C]/10">
           <div className="absolute inset-0 opacity-[0.03]"
-            style={{ backgroundImage: "linear-gradient(#f97316 1px,transparent 1px),linear-gradient(90deg,#f97316 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
-          <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-orange-100 rounded-full blur-3xl pointer-events-none opacity-60" />
-          <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-orange-50 rounded-full blur-2xl pointer-events-none opacity-80" />
-          <div className="absolute top-20 left-10 w-2 h-2 bg-orange-500 rounded-full opacity-20 animate-ping" />
-          <div className="absolute bottom-20 right-20 w-3 h-3 bg-orange-500 rounded-full opacity-20 animate-pulse" />
+            style={{ backgroundImage: "linear-gradient(#C15F3C 1px,transparent 1px),linear-gradient(90deg,#C15F3C 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
+          <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-[#C15F3C]/5 rounded-full blur-3xl pointer-events-none opacity-60" />
+          <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-[#C15F3C]/5 rounded-full blur-2xl pointer-events-none opacity-80" />
+          <div className="absolute top-20 left-10 w-2 h-2 bg-[#C15F3C] rounded-full opacity-20 animate-ping" />
+          <div className="absolute bottom-20 right-20 w-3 h-3 bg-[#C15F3C] rounded-full opacity-20 animate-pulse" />
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
 
             {/* Left */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 text-orange-500 text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase ">
-                <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 bg-[#C15F3C]/5 border border-[#C15F3C]/10 text-[#C15F3C] text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase ">
+                <span className="w-2 h-2 bg-[#C15F3C] rounded-full animate-pulse" />
                 AY 2026-27 · ITR-3 Filing Open · Last Date: July 31, 2026
               </div>
 
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-black leading-[1.08] mb-5">
-                File <span className="text-orange-500">ITR-3</span> Online
+                File <span className="text-[#C15F3C]">ITR-3</span> Online
                 <br />
-                For <span className="text-orange-500">Business & F&O</span>
+                For <span className="text-[#C15F3C]">Business & F&O</span>
               </h1>
 
               <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-lg">
@@ -333,12 +334,12 @@ export default function ITR3Page() {
 
               <div className="flex flex-wrap gap-3 mb-10">
                 <Link href="#pricing"
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-7 py-3.5 rounded-full text-base transition-all hover:shadow-xl hover:shadow-orange-100 hover:-translate-y-0.5 inline-flex items-center gap-2 group">
+                  className="bg-[#C15F3C] hover:bg-[#A04D30] text-white font-bold px-7 py-3.5 rounded-full text-base transition-all hover:shadow-xl hover:shadow-[#C15F3C]/20 hover:-translate-y-0.5 inline-flex items-center gap-2 group">
                   🚀 Start Filing ITR-3
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link href="#calculator"
-                  className="border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all">
+                  className="border-2 border-[#C15F3C] text-[#C15F3C] hover:bg-[#C15F3C] hover:text-white font-semibold px-7 py-3.5 rounded-full text-base transition-all">
                   <Calculator size={16} className="inline mr-2" />
                   Business Tax Calculator →
                 </Link>
@@ -346,12 +347,12 @@ export default function ITR3Page() {
 
               <div className="flex gap-8 flex-wrap">
                 {[
-                  ["1L+", "ITR-3 Filed", <FileText key="f" size={16} className="text-orange-500" />],
-                  ["₹85Cr+", "Business Income", <Briefcase key="b" size={16} className="text-orange-500" />],
-                  ["4.9★", "Google Rating", <Star key="s" size={16} className="text-orange-500 fill-orange-500" />],
+                  ["1L+", "ITR-3 Filed", <FileText key="f" size={16} className="text-[#C15F3C]" />],
+                  ["₹85Cr+", "Business Income", <Briefcase key="b" size={16} className="text-[#C15F3C]" />],
+                  ["4.9★", "Google Rating", <Star key="s" size={16} className="text-[#C15F3C] fill-[#C15F3C]" />],
                 ].map(([num, lbl, icon]) => (
                   <div key={String(lbl)} className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-orange-50 border border-orange-200 flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-full bg-[#C15F3C]/5 border border-[#C15F3C]/10 flex items-center justify-center">
                       {icon}
                     </div>
                     <div>
@@ -365,21 +366,21 @@ export default function ITR3Page() {
 
             {/* Right — AI Card */}
             <div className="lg:pl-4">
-              <div className="bg-white border-2 border-orange-100 rounded-3xl p-6 shadow-2xl shadow-orange-100 hover:border-orange-300 hover:shadow-orange-200 transition-all duration-300">
+              <div className="bg-white border border-[#C15F3C]/20 rounded-3xl p-6 shadow-none hover:border-[#C15F3C]/50 transition-all duration-300">
                 <div className="flex items-center justify-between mb-5">
                   <span className="font-display font-bold text-black text-sm flex items-center gap-2">
-                    <Brain size={18} className="text-orange-500" />
+                    <Brain size={18} className="text-[#C15F3C]" />
                     🤖 AI ITR-3 Assistant — Live
                   </span>
-                  <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                  <span className="bg-[#C15F3C] text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-[#F4F3EE] rounded-full animate-pulse" />
                     ACTIVE
                   </span>
                 </div>
 
                 {AI_STEPS.map((s, i) => (
-                  <div key={i} className="flex items-start gap-3 py-3 border-b border-gray-100 last:border-0 hover:bg-orange-50 rounded-lg px-2 transition-colors">
-                    <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center text-xl flex-shrink-0">
+                  <div key={i} className="flex items-start gap-3 py-3 border-b border-gray-100 last:border-0 hover:bg-[#C15F3C]/5 rounded-lg px-2 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-[#C15F3C]/5 border border-[#C15F3C]/10 flex items-center justify-center text-xl flex-shrink-0">
                       {s.icon}
                     </div>
                     <div>
@@ -389,15 +390,15 @@ export default function ITR3Page() {
                   </div>
                 ))}
 
-                <div className="mt-4 bg-orange-50 border border-orange-100 rounded-xl p-4">
+                <div className="mt-4 bg-[#C15F3C]/5 border border-[#C15F3C]/10 rounded-xl p-4">
                   <div className="flex justify-between text-xs mb-2">
                     <span className="text-gray-500 flex items-center gap-1">
-                      <Zap size={12} className="text-orange-500" /> Processing Business Returns
+                      <Zap size={12} className="text-[#C15F3C]" /> Processing Business Returns
                     </span>
-                    <span className="font-bold text-orange-500">78% Complete</span>
+                    <span className="font-bold text-[#C15F3C]">78% Complete</span>
                   </div>
                   <div className="h-2 bg-[#F4F3EE] rounded-full overflow-hidden">
-                    <div className="h-full w-[78%] bg-orange-500 rounded-full" />
+                    <div className="h-full w-[78%] bg-[#C15F3C] rounded-full" />
                   </div>
                   <p className="text-[10px] text-gray-400 mt-2">Verifying expenses & depreciation • 2 steps remaining</p>
                 </div>
@@ -406,7 +407,7 @@ export default function ITR3Page() {
                   <p className="text-gray-400 text-xs mb-2">📊 Supported Platforms</p>
                   <div className="flex flex-wrap gap-1.5">
                     {BROKERS.map((b) => (
-                      <span key={b} className="bg-orange-50 border border-orange-100 text-orange-500 text-[10px] font-semibold px-2 py-1 rounded-md">
+                      <span key={b} className="bg-[#C15F3C]/5 border border-[#C15F3C]/10 text-[#C15F3C] text-[10px] font-semibold px-2 py-1 rounded-md">
                         {b}
                       </span>
                     ))}
@@ -425,9 +426,9 @@ export default function ITR3Page() {
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
               <span className="text-xs text-gray-400 font-semibold uppercase ">Trusted by</span>
               {["SBI", "HDFC Bank", "ICICI", "Axis Bank", "Kotak"].map((b) => (
-                <div key={b} className="text-gray-300 font-bold text-sm hover:text-orange-500 transition-colors">{b}</div>
+                <div key={b} className="text-gray-300 font-bold text-sm hover:text-[#C15F3C] transition-colors">{b}</div>
               ))}
-              <span className="text-xs text-orange-500 font-bold flex items-center gap-1">
+              <span className="text-xs text-[#C15F3C] font-bold flex items-center gap-1">
                 <Shield size={14} /> ISO 27001 Certified
               </span>
             </div>
@@ -440,7 +441,7 @@ export default function ITR3Page() {
         <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="eligibility">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
+              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
                 <Target size={14} /> Eligibility
               </p>
               <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-3">Who Should File ITR-3?</h2>
@@ -450,9 +451,9 @@ export default function ITR3Page() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border-2 border-orange-500 rounded-2xl p-6 hover:shadow-lg hover:shadow-orange-100 transition-all">
-                <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
-                  <CheckCircle size={20} className="text-orange-500" /> File ITR-3 If You Have:
+              <div className="bg-white border border-[#C15F3C]/20 rounded-2xl p-6 hover:border-[#C15F3C] hover:shadow-xl transition-all">
+                <div className="flex items-center gap-2 font-bold text-slate-900 mb-4 text-base">
+                  <CheckCircle size={20} className="text-[#C15F3C]" /> File ITR-3 If You Have:
                 </div>
                 <ul className="space-y-2.5">
                   {[
@@ -466,7 +467,7 @@ export default function ITR3Page() {
                     "Income from speculative business (intraday)",
                   ].map((item) => (
                     <li key={item} className="flex gap-2 text-sm text-black">
-                      <span className="text-orange-500 mt-0.5 flex-shrink-0 font-bold">✓</span>{item}
+                      <span className="text-[#C15F3C] mt-0.5 flex-shrink-0 font-bold">✓</span>{item}
                     </li>
                   ))}
                 </ul>
@@ -474,7 +475,7 @@ export default function ITR3Page() {
 
               <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-2 font-bold text-black mb-4 text-base">
-                  <AlertTriangle size={20} className="text-orange-500" /> NOT ITR-3 — Use Other Forms:
+                  <AlertTriangle size={20} className="text-[#C15F3C]" /> NOT ITR-3 — Use Other Forms:
                 </div>
                 <ul className="space-y-3">
                   {[
@@ -483,7 +484,7 @@ export default function ITR3Page() {
                     { form: "ITR-4", desc: "Presumptive business income under Section 44AD / 44ADA / 44AE" },
                   ].map((item) => (
                     <li key={item.form} className="flex gap-3 text-sm">
-                      <span className="bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-md flex-shrink-0 h-fit">{item.form}</span>
+                      <span className="bg-[#C15F3C] text-white text-xs font-bold px-2 py-0.5 rounded-md flex-shrink-0 h-fit">{item.form}</span>
                       <span className="text-black">{item.desc}</span>
                     </li>
                   ))}
@@ -496,15 +497,15 @@ export default function ITR3Page() {
             </div>
 
             {/* Who Files ITR-3 Table */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-[#E5E2DA] rounded-2xl p-6 shadow-sm">
               <h3 className="font-display font-bold text-black text-lg mb-4 flex items-center gap-2">
-                <BarChart3 size={20} className="text-orange-500" />
+                <BarChart3 size={20} className="text-[#C15F3C]" />
                 📊 ITR-3 Filing Guide by Income Type
               </h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs sm:text-sm">
                   <thead>
-                    <tr className="bg-orange-500 text-white">
+                    <tr className="bg-[#C15F3C] text-white">
                       <th className="px-3 py-2.5 text-left rounded-tl-xl font-bold">Income Type</th>
                       <th className="px-3 py-2.5 text-center font-bold">ITR Form</th>
                       <th className="px-3 py-2.5 text-center font-bold">Turnover Method</th>
@@ -514,22 +515,22 @@ export default function ITR3Page() {
                   </thead>
                   <tbody>
                     {INCOME_TYPES_TABLE.map((row, i) => (
-                      <tr key={row.type} className={`border-b border-gray-100 hover:bg-orange-50 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}>
+                      <tr key={row.type} className={`border-b border-gray-100 hover:bg-[#C15F3C]/5 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white/60"}`}>
                         <td className="px-3 py-2.5 font-semibold text-black">{row.type}</td>
-                        <td className="px-3 py-2.5 text-center font-bold text-orange-500">{row.itr}</td>
+                        <td className="px-3 py-2.5 text-center font-bold text-[#C15F3C]">{row.itr}</td>
                         <td className="px-3 py-2.5 text-center text-gray-600">{row.turnoverLimit}</td>
                         <td className="px-3 py-2.5 text-center text-gray-600">{row.audit}</td>
-                        <td className="px-3 py-2.5 text-right font-bold text-orange-500">{row.regime}</td>
+                        <td className="px-3 py-2.5 text-right font-bold text-[#C15F3C]">{row.regime}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
               <div className="mt-3 grid sm:grid-cols-2 gap-2">
-                <p className="text-xs text-gray-600 bg-orange-50 rounded-xl px-3 py-2 border border-orange-100">
-                  💡 <strong className="text-black">F&O Turnover:</strong> Computed using <strong className="text-orange-500">absolute profit method</strong> — sum of all profits + losses (not contract value).
+                <p className="text-xs text-gray-600 bg-[#C15F3C]/5 rounded-xl px-3 py-2 border border-[#C15F3C]/10">
+                  💡 <strong className="text-black">F&O Turnover:</strong> Computed using <strong className="text-[#C15F3C]">absolute profit method</strong> — sum of all profits + losses (not contract value).
                 </p>
-                <p className="text-xs text-gray-600 bg-orange-50 rounded-xl px-3 py-2 border border-orange-100">
+                <p className="text-xs text-gray-600 bg-[#C15F3C]/5 rounded-xl px-3 py-2 border border-[#C15F3C]/10">
                   💡 <strong className="text-black">Business Loss:</strong> ITR-3 losses can be carried forward 8 years and set off against future business profits.
                 </p>
               </div>
@@ -543,10 +544,10 @@ export default function ITR3Page() {
         <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="compare">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">Why Choose Us</p>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-3">
+              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">Why Choose Us</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
                 Better Than{" "}
-                <span className="text-orange-500">ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner</span>
+                <span className="text-[#C15F3C]">ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner</span>
               </h2>
               <p className="text-gray-500 max-w-2xl mx-auto text-sm">
                 We studied every competitor and built what they missed — a truly AI-first ITR-3 experience at the lowest price in India.
@@ -556,12 +557,12 @@ export default function ITR3Page() {
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               <div className="space-y-3">
                 {WHY_FEATURES.map((f) => (
-                  <div key={f.title} className="flex gap-4 p-4 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 group">
-                    <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-orange-100 group-hover:scale-110 transition-all">{f.icon}</div>
+                  <div key={f.title} className="flex gap-4 p-4 bg-white border border-[#E5E2DA] rounded-2xl hover:border-[#C15F3C] hover:shadow-lg transition-all duration-200 group">
+                    <div className="w-10 h-10 bg-[#F4F3EE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#C15F3C]/10 group-hover:scale-110 transition-all">{f.icon}</div>
                     <div>
                       <div className="font-semibold text-black text-sm mb-0.5 flex items-center gap-2">
                         {f.title}
-                        {f.title.includes("AI") && <Sparkles size={12} className="text-orange-500" />}
+                        {f.title.includes("AI") && <Sparkles size={12} className="text-[#C15F3C]" />}
                       </div>
                       <div className="text-gray-500 text-xs leading-relaxed">{f.desc}</div>
                     </div>
@@ -569,8 +570,8 @@ export default function ITR3Page() {
                 ))}
               </div>
 
-              <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
-                <div className="bg-orange-500 px-4 py-3">
+              <div className="rounded-2xl overflow-hidden border border-[#E5E2DA] shadow-xl bg-white">
+                <div className="bg-[#C15F3C] px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">
                     <TrendingUp size={16} className="text-white" />
                     Feature Comparison — ITR-3 Platforms
@@ -578,9 +579,9 @@ export default function ITR3Page() {
                 </div>
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-[#F4F3EE]">
-                      <th className="px-3 py-3 text-left font-bold text-xs text-black w-[28%]">Feature</th>
-                      <th className="px-2 py-3 text-center font-bold text-xs text-orange-500">DoStartup</th>
+                    <tr className="bg-white">
+                      <th className="px-3 py-3 text-left font-bold text-xs text-slate-900 w-[28%]">Feature</th>
+                      <th className="px-2 py-3 text-center font-bold text-xs text-[#C15F3C]">DoStartup</th>
                       <th className="px-2 py-3 text-center font-bold text-xs text-gray-500">ClearTax</th>
                       <th className="px-2 py-3 text-center font-bold text-xs text-gray-500">Tax2Win</th>
                       <th className="px-2 py-3 text-center font-bold text-xs text-gray-500">Quicko</th>
@@ -597,8 +598,8 @@ export default function ITR3Page() {
                       { feature: "Tax Audit (3CA/3CD)", d: true, c: true, t: true, q: "~", h: true, ts: true },
                       { feature: "Price (ITR-3)", d: "₹1,499", c: "₹1,999", t: "₹1,799", q: "₹1,499", h: "₹2,499", ts: "₹1,299" },
                     ].map((row, i) => (
-                      <tr key={row.feature} className={`border-b border-gray-100 hover:bg-orange-50 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white"}`}>
-                        <td className="px-3 py-3 font-medium text-black text-xs">{row.feature}</td>
+                      <tr key={row.feature} className={`border-b border-gray-100 hover:bg-[#C15F3C]/5 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-white/60"}`}>
+                        <td className="px-3 py-3 font-medium text-slate-900 text-xs">{row.feature}</td>
                         <td className="px-2 py-3 text-center"><StatusCell val={row.d} /></td>
                         <td className="px-2 py-3 text-center"><StatusCell val={row.c} /></td>
                         <td className="px-2 py-3 text-center"><StatusCell val={row.t} /></td>
@@ -609,8 +610,8 @@ export default function ITR3Page() {
                     ))}
                   </tbody>
                 </table>
-                <div className="bg-orange-50 p-3 text-center text-xs text-black border-t border-orange-100">
-                  <ThumbsUp size={12} className="inline mr-1 text-orange-500" />
+                <div className="bg-[#C15F3C]/5 p-3 text-center text-xs text-black border-t border-[#C15F3C]/10">
+                  <ThumbsUp size={12} className="inline mr-1 text-[#C15F3C]" />
                   DoStartup.in — Best AI ITR-3 platform at the lowest price
                 </div>
               </div>
@@ -624,7 +625,7 @@ export default function ITR3Page() {
         <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="features">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
+              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
                 <Sparkles size={14} /> AI Technology
               </p>
               <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-3">Built for Complex ITR-3 Filing</h2>
@@ -635,11 +636,11 @@ export default function ITR3Page() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {AI_FEATURES.map((f) => (
-                <div key={f.title} className="bg-white border-2 border-gray-100 rounded-2xl p-5 hover:-translate-y-1.5 hover:border-orange-500 hover:shadow-lg hover:shadow-orange-100 transition-all duration-200 group">
-                  <div className="text-orange-500 mb-3 group-hover:scale-110 transform inline-block transition-transform">{f.icon}</div>
-                  <div className="font-display font-bold text-black text-base mb-2 flex items-center gap-2">
+                <div key={f.title} className="bg-white border border-[#E5E2DA] rounded-2xl p-5 hover:-translate-y-1.5 hover:border-[#C15F3C] hover:shadow-lg transition-all duration-200 group">
+                  <div className="text-[#C15F3C] mb-3 group-hover:scale-110 transform inline-block transition-transform">{f.icon}</div>
+                  <div className="font-display font-bold text-slate-900 text-base mb-2 flex items-center gap-2">
                     {f.title}
-                    <span className="text-[10px] bg-orange-50 text-orange-500 border border-orange-200 px-2 py-0.5 rounded-full">AI</span>
+                    <span className="text-[10px] bg-[#F4F3EE] text-[#C15F3C] border border-[#C15F3C]/20 px-2 py-0.5 rounded-full">AI</span>
                   </div>
                   <div className="text-gray-500 text-sm leading-relaxed">{f.desc}</div>
                 </div>
@@ -654,26 +655,26 @@ export default function ITR3Page() {
         <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="process">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">How It Works</p>
+              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">How It Works</p>
               <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black">File ITR-3 in 5 Simple Steps</h2>
               <p className="text-gray-500 text-sm mt-2">Complex business returns, simple filing — our AI handles everything</p>
             </div>
             <div className="relative">
-              <div className="hidden lg:block absolute top-7 left-[10%] right-[10%] h-0.5 bg-orange-500 z-0 opacity-30" />
+              <div className="hidden lg:block absolute top-7 left-[10%] right-[10%] h-0.5 bg-[#C15F3C] z-0 opacity-30" />
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
                 {PROCESS_STEPS.map((s) => (
                   <div key={s.num} className="text-center group cursor-pointer">
-                    <div className="w-14 h-14 rounded-full bg-white border-2 border-orange-500 flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-200">
+                    <div className="w-14 h-14 rounded-full bg-white border-2 border-[#C15F3C] flex items-center justify-center text-2xl mx-auto mb-3 shadow-md group-hover:bg-[#C15F3C] group-hover:text-white group-hover:scale-110 transition-all duration-200">
                       {s.icon}
                     </div>
-                    <div className="text-orange-500 text-xs font-bold mb-1">STEP {s.num}</div>
+                    <div className="text-[#C15F3C] text-xs font-bold mb-1">STEP {s.num}</div>
                     <div className="text-black text-sm font-semibold leading-tight">{s.label}</div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="mt-10 text-center">
-              <Link href="#pricing" className="inline-flex items-center gap-2 text-orange-500 font-semibold text-sm hover:text-orange-600">
+              <Link href="#pricing" className="inline-flex items-center gap-2 text-[#C15F3C] font-semibold text-sm hover:text-[#A04D30]">
                 Start your ITR-3 filing now <ArrowRight size={14} />
               </Link>
             </div>
@@ -686,7 +687,7 @@ export default function ITR3Page() {
         <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6" id="calculator">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
+              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2 flex items-center justify-center gap-2">
                 <Calculator size={14} /> Free Tool
               </p>
               <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-2">
@@ -694,22 +695,22 @@ export default function ITR3Page() {
               </h2>
               <p className="text-gray-500 text-sm max-w-2xl mx-auto">
                 Scroll sliders to compute business income tax, compare regimes & check audit requirement.
-                <span className="block mt-1 text-orange-500 font-semibold">Used by 20,000+ business owners this month</span>
+                <span className="block mt-1 text-[#C15F3C] font-semibold">Used by 20,000+ business owners this month</span>
               </p>
             </div>
 
             <div className="bg-white rounded-3xl border border-gray-200 shadow-2xl overflow-hidden">
-              <div className="bg-orange-500 px-6 py-4 flex items-center justify-between flex-wrap gap-3">
+              <div className="bg-[#C15F3C] px-6 py-4 flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#F4F3EE]/20 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                     <Briefcase size={20} className="text-white" />
                   </div>
                   <div>
                     <h3 className="font-display font-extrabold text-white text-lg flex items-center gap-2">
                       ITR-3 Business Tax Calculator
-                      <span className="text-[10px] bg-[#F4F3EE]/20 text-white px-2 py-0.5 rounded-full">Live</span>
+                      <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-full">Live</span>
                     </h3>
-                    <p className="text-orange-100 text-xs mt-0.5">AY 2026-27 | Includes Tax Audit Check</p>
+                    <p className="text-white/80 text-xs mt-0.5">AY 2026-27 | Includes Tax Audit Check</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -727,7 +728,7 @@ export default function ITR3Page() {
                 {/* INPUTS */}
                 <div className="p-6 border-b lg:border-b-0 lg:border-r border-gray-100">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
-                    <FileText size={16} className="text-orange-500" />
+                    <FileText size={16} className="text-[#C15F3C]" />
                     Scroll to Enter Your Details
                   </h4>
 
@@ -735,7 +736,7 @@ export default function ITR3Page() {
                   <div className="mb-5">
                     <label className="block text-xs font-semibold text-black mb-1.5">Business / Income Type</label>
                     <select value={calc.businessType} onChange={(e) => upd("businessType", e.target.value as BusinessType)}
-                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-[#F4F3EE]">
+                      className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-[#F4F3EE]">
                       <option value="profession">Professional / Freelancer (44ADA not opted)</option>
                       <option value="business">Business Owner / Proprietor</option>
                       <option value="fno">F&O / Intraday Trader</option>
@@ -744,7 +745,7 @@ export default function ITR3Page() {
 
                   {/* Income */}
                   <div className="mb-2 pb-4 border-b border-gray-100">
-                    <p className="text-xs font-bold text-orange-500 mb-4 uppercase flex items-center gap-1">
+                    <p className="text-xs font-bold text-[#C15F3C] mb-4 uppercase flex items-center gap-1">
                       <Briefcase size={12} /> Income & Revenue
                     </p>
                     <SliderRow label="Gross Business / Professional Revenue (₹)" value={calc.businessIncome} min={0} max={20000000} step={100000} onChange={(v) => upd("businessIncome", v)} note="Total receipts / turnover before expenses" />
@@ -755,7 +756,7 @@ export default function ITR3Page() {
 
                   {/* Deductions */}
                   <div className="pt-4">
-                    <p className="text-xs font-bold text-orange-500 mb-4 uppercase ">
+                    <p className="text-xs font-bold text-[#C15F3C] mb-4 uppercase ">
                       🏛 Old Regime Deductions
                     </p>
                     <SliderRow label="80C Investments — Max ₹1,50,000" value={calc.ded80c} min={0} max={150000} step={5000} onChange={(v) => upd("ded80c", v)} />
@@ -766,7 +767,7 @@ export default function ITR3Page() {
                         <Users size={13} /> Age Group
                       </label>
                       <select value={calc.age} onChange={(e) => upd("age", e.target.value as AgeGroup)}
-                        className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100 transition-colors bg-white">
+                        className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm font-medium text-black focus:outline-none focus:border-[#C15F3C] focus:ring-2 focus:ring-[#C15F3C]/10 transition-colors bg-white">
                         <option value="below60">Below 60 years</option>
                         <option value="60to80">60–80 years (Senior Citizen)</option>
                         <option value="above80">Above 80 years (Super Senior)</option>
@@ -778,16 +779,16 @@ export default function ITR3Page() {
                 {/* RESULTS */}
                 <div className="p-6 bg-white">
                   <h4 className="font-display font-bold text-black text-base mb-5 flex items-center gap-2">
-                    <BarChart3 size={16} className="text-orange-500" />
+                    <BarChart3 size={16} className="text-[#C15F3C]" />
                     Your Tax Breakdown
                   </h4>
 
                   {/* Audit Alert */}
-                  <div className={`rounded-2xl p-4 mb-4 border-2 ${result.auditRequired ? "bg-red-50 border-red-300" : "bg-orange-50 border-orange-200"}`}>
-                    <p className={`text-xs font-bold uppercase mb-1 ${result.auditRequired ? "text-red-600" : "text-orange-500"}`}>
+                  <div className={`rounded-2xl p-4 mb-4 border-2 ${result.auditRequired ? "bg-red-50 border-red-300" : "bg-slate-50 border-[#C15F3C]/20"}`}>
+                    <p className={`text-xs font-bold uppercase mb-1 ${result.auditRequired ? "text-red-600" : "text-[#C15F3C]"}`}>
                       {result.auditRequired ? "⚠️ Tax Audit Required" : "✅ No Tax Audit Required"}
                     </p>
-                    <p className={`text-sm font-semibold ${result.auditRequired ? "text-red-800" : "text-black"}`}>
+                    <p className={`text-sm font-semibold ${result.auditRequired ? "text-red-800" : "text-slate-900"}`}>
                       {result.auditRequired
                         ? "Your turnover exceeds the audit threshold. Form 3CA/3CB/3CD required by Oct 31, 2026."
                         : "Your turnover is within limits. File ITR-3 directly by July 31, 2026."}
@@ -795,35 +796,35 @@ export default function ITR3Page() {
                   </div>
 
                   {/* Business Income Summary */}
-                  <div className="bg-white rounded-2xl border-2 border-orange-500 p-4 mb-4">
-                    <p className="text-xs font-bold text-orange-500 mb-2 uppercase ">💼 Business Income</p>
+                  <div className="bg-white rounded-2xl border-2 border-[#C15F3C] p-4 mb-4">
+                    <p className="text-xs font-bold text-[#C15F3C] mb-2 uppercase ">💼 Business Income</p>
                     <ResultRow label="Gross Revenue" value={fmt(calc.businessIncome)} />
                     <ResultRow label="Less: Business Expenses" value={`- ${fmt(calc.businessExpenses)}`} color="text-gray-500" />
-                    <ResultRow label="Net Business Income" value={fmt(result.netBusinessIncome)} color="text-orange-500" />
+                    <ResultRow label="Net Business Income" value={fmt(result.netBusinessIncome)} color="text-[#C15F3C]" />
                   </div>
 
                   {/* Full Summary */}
                   <div className="bg-[#F4F3EE] rounded-2xl border border-gray-200 p-4 mb-4 shadow-sm">
                     <ResultRow label="Gross Total Income" value={fmt(result.grossTotal)} />
-                    <ResultRow label="Total Tax — New Regime" value={fmt(result.totalTaxNew)} color="text-orange-500" />
-                    <ResultRow label="Total Tax — Old Regime" value={fmt(result.totalTaxOld)} color="text-orange-500" />
+                    <ResultRow label="Total Tax — New Regime" value={fmt(result.totalTaxNew)} color="text-[#C15F3C]" />
+                    <ResultRow label="Total Tax — Old Regime" value={fmt(result.totalTaxOld)} color="text-[#C15F3C]" />
                     <ResultRow label="Est. TDS Deducted" value={fmt(result.tds)} tooltip="TDS on salary component" />
                     <ResultRow
                       label={result.refund >= 0 ? "🎉 Estimated Tax Refund" : "⚠️ Tax Payable"}
                       value={result.refund >= 0 ? fmt(result.refund) : fmt(-result.refund)}
-                      color={result.refund >= 0 ? "text-orange-500" : "text-red-500"}
+                      color={result.refund >= 0 ? "text-[#C15F3C]" : "text-red-500"}
                     />
                   </div>
 
                   {/* AI Recommendation */}
-                  <div className="rounded-2xl p-4 border-2 border-orange-500 bg-orange-50 text-center mb-4 transform hover:scale-105 transition-transform">
-                    <div className="text-xs font-bold uppercase mb-1 flex items-center justify-center gap-1 text-orange-500">
+                  <div className="rounded-2xl p-4 border-2 border-[#C15F3C] bg-[#C15F3C]/5 text-center mb-4 transform hover:scale-105 transition-transform">
+                    <div className="text-xs font-bold uppercase mb-1 flex items-center justify-center gap-1 text-[#C15F3C]">
                       <Brain size={14} /> AI Recommendation
                     </div>
                     <div className="font-display font-bold text-black text-base">
                       {result.recommendation === "new" ? "✨ New Regime is better for you" : "🏛 Old Regime is better for you"}
                     </div>
-                    <div className="font-extrabold text-2xl mt-1 text-orange-500">
+                    <div className="font-extrabold text-2xl mt-1 text-[#C15F3C]">
                       Save {fmt(result.savings)} more
                     </div>
                   </div>
@@ -834,7 +835,7 @@ export default function ITR3Page() {
                       { label: "New Regime", tax: result.totalTaxNew, win: result.recommendation === "new" },
                       { label: "Old Regime", tax: result.totalTaxOld, win: result.recommendation === "old" },
                     ].map((r) => (
-                      <div key={r.label} className={`rounded-xl p-3 border-2 text-center transition-all ${r.win ? "bg-orange-500 border-orange-500 shadow-lg" : "bg-[#F4F3EE] border-gray-200 hover:border-orange-500"}`}>
+                      <div key={r.label} className={`rounded-xl p-3 border-2 text-center transition-all ${r.win ? "bg-[#C15F3C] border-[#C15F3C] shadow-lg shadow-[#C15F3C]/20" : "bg-[#F4F3EE] border-gray-200 hover:border-[#C15F3C]"}`}>
                         <div className={`text-xs font-bold ${r.win ? "text-white" : "text-gray-500"}`}>{r.label}</div>
                         <div className={`font-extrabold text-lg ${r.win ? "text-white" : "text-black"}`}>{fmt(r.tax)}</div>
                         {r.win && (
@@ -847,7 +848,7 @@ export default function ITR3Page() {
                   </div>
 
                   <Link href="#pricing"
-                    className="block bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm text-center py-3.5 rounded-2xl transition-all hover:shadow-lg hover:-translate-y-0.5">
+                    className="block bg-[#C15F3C] hover:bg-[#A04D30] text-white font-bold text-sm text-center py-3.5 rounded-2xl transition-all hover:shadow-lg hover:-translate-y-0.5">
                     🚀 File ITR-3 Now — Use This Data
                   </Link>
                   <p className="text-center text-[10px] text-gray-400 mt-2">
@@ -865,21 +866,21 @@ export default function ITR3Page() {
         <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-orange-500 text-xs font-bold uppercase mb-2">Testimonials</p>
+              <p className="text-[#C15F3C] text-xs font-bold uppercase mb-2">Testimonials</p>
               <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-2">Trusted by 1 Lakh+ Business Owners</h2>
               <p className="text-gray-500 text-sm">See what freelancers, traders & business owners say about DoStartup.in</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {TESTIMONIALS.map((t, i) => (
-                <div key={i} className="bg-[#F4F3EE] border-2 border-gray-100 rounded-2xl p-6 hover:border-orange-500 hover:shadow-xl transition-all hover:-translate-y-1">
+                <div key={i} className="bg-white border border-[#E5E2DA] rounded-2xl p-6 hover:border-[#C15F3C] transition-all">
                   <div className="flex gap-1 mb-3">
                     {[...Array(5)].map((_, j) => (
-                      <Star key={j} size={16} className="fill-orange-500 text-orange-500" />
+                      <Star key={j} size={16} className="fill-[#C15F3C] text-[#C15F3C]" />
                     ))}
                   </div>
                   <p className="text-black text-sm mb-4">"{t.text}"</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-10 h-10 rounded-full bg-[#C15F3C] flex items-center justify-center text-white font-bold text-sm">
                       {t.name.charAt(0)}
                     </div>
                     <div>
@@ -896,16 +897,71 @@ export default function ITR3Page() {
         {/* ════════════════════════════════════
         STANDARDIZED END SECTIONS
         ════════════════════════════════════ */}
-        <section className="bg-[#F4F3EE] pb-12">
-          <DynamicPricingSection category="ITR-3 Return Filing" />
+        <div id="pricing">
+          <DynamicPricingSection category="itr-3-return-filing" />
+        </div>
+
+        <FAQAccordion category="itr-3-form" />
+
+        {/* ════════════════════════════════════
+        FINAL CTA
+        ════════════════════════════════════ */}
+        <section className="bg-[#F4F3EE] py-6 px-4 sm:px-6 border-t border-gray-100">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex justify-center gap-0.5 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  size={24}
+                  className="text-[#C15F3C] fill-[#C15F3C]"
+                />
+              ))}
+            </div>
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-black mb-4">
+              Complex Business. Simple Filing.
+            </h2>
+            <p className="text-gray-500 text-lg mb-8 max-w-2xl mx-auto">
+              Join 1 lakh+ business owners, freelancers & F&O traders who trust DoStartup AI to file ITR-3 accurately.
+              <span className="block mt-2 text-black font-semibold">
+                Compare with ClearTax, Tax2Win, Quicko, H&R Block & TaxSpanner — we're 40% cheaper!
+              </span>
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                href="#pricing"
+                className="inline-flex items-center gap-2 bg-[#C15F3C] hover:bg-[#A04D30] text-white font-bold text-base px-8 py-4 rounded-full hover:shadow-xl hover:shadow-[#C15F3C]/10 hover:-translate-y-1 transition-all duration-150 group"
+              >
+                🚀 File ITR-3 Free Today
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+              <Link
+                href="#calculator"
+                className="inline-flex items-center gap-2 border-2 border-[#C15F3C] text-[#C15F3C] font-semibold text-base px-8 py-4 rounded-full hover:bg-[#C15F3C] hover:text-white transition-all"
+              >
+                <Calculator size={18} />
+                Try Calculator First →
+              </Link>
+            </div>
+            <div className="mt-8 flex items-center justify-center gap-6 text-xs text-gray-400">
+              <span className="flex items-center gap-1">
+                <Shield size={12} className="text-[#C15F3C]" /> 256-bit SSL
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock size={12} className="text-[#C15F3C]" /> 15-min filing
+              </span>
+              <span className="flex items-center gap-1">
+                <Users size={12} className="text-[#C15F3C]" /> 1L+ businesses
+              </span>
+            </div>
+          </div>
         </section>
 
-        <FAQAccordion category="itr-3-return-filing" />
-        
         <PopularSearches />
         <Footer />
-
-      </main>
+      </div>
     </>
   );
 }

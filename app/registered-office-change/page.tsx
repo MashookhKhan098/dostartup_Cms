@@ -11,13 +11,12 @@ import PopularSearches from "../components/PopularSearches";
 
 const ASSETS = {
   logo: "/images/india-logo.jpg",
-  hero: "https://img.dostartup.com/catalog/registered-office-change.png",
+  hero: "/images/registered-office-change.png",
   cards: {
-    compliance: "https://img.dostartup.com/catalog/company-compliance-india.png",
-    dinEKyc: "https://img.dostartup.com/catalog/din-ekyc.png",
+    compliance: "/images/company-compliance.jpg",
+    dinEKyc: "/images/din.jpg",
   },
-  footerBg: "/images/footer-bg.png",
-  ledgers: "https://img.dostartup.com/catalog/ledgers.png",
+  ledgers: "/images/ledgers.jpg",
   whatsapp: "/images/whatsapp.png",
   cartIcon: "/images/cart-icon.svg",
   indiaFlag: "/images/india-flag.png",
@@ -180,7 +179,7 @@ export default function RegisteredOfficeChange() {
             </div>
 
             {/* Right Form Card */}
-            <div className="lg:w-1/2 p-8 lg:p-10 bg-gradient-to-br from-amber-50 to-amber-100">
+            <div className="lg:w-1/2 p-8 lg:p-10 bg-[#F4F3EE]">
               <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
                 <div
                   className="h-1.5 w-full rounded-t-xl mb-4"
@@ -389,8 +388,10 @@ export default function RegisteredOfficeChange() {
           </div>
 
           {/* Right sidebar */}
-          <aside className="space-y-6">
-            <SidebarCart />
+          <aside className="space-y-6 relative">
+            <div className="sticky top-28 z-30">
+              <SidebarCart />
+            </div>
 
             <div className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
               <h4 className="font-semibold mb-3 text-slate-900">
@@ -442,21 +443,6 @@ export default function RegisteredOfficeChange() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
-              <h4 className="font-semibold mb-3 text-slate-900">
-                Popular Searches
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {POPULAR_SEARCHES.slice(0, 18).map((t) => (
-                  <span
-                    key={t}
-                    className="text-xs px-2 py-1 border border-gray-200 rounded bg-[#F4F3EE] text-gray-700 hover:border-amber-300 hover:text-amber-700 cursor-pointer transition-colors"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
           </aside>
         </div>
 
