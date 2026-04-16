@@ -17,21 +17,31 @@ export default function Hero2({ defaultEntity = "Startup" }: { defaultEntity?: s
 
   useEffect(() => {
     const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setIsLoggedIn(!!user);
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error) throw error;
+        setIsLoggedIn(!!user);
+      } catch (err: any) {
+        console.warn("Hero2 initial auth check failed gracefully:", err.message);
+      }
     };
     checkUser();
   }, []);
 
   const handleTrackApplication = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      router.push('/profile');
-    } else {
-      const formElement = document.querySelector('[data-form-container]');
-      if (formElement) {
-        formElement.scrollIntoView({ behavior: 'smooth' });
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        router.push('/profile');
+      } else {
+        const formElement = document.querySelector('[data-form-container]');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth' });
+        }
       }
+    } catch (err: any) {
+      console.error("Tracking redirection failed:", err.message);
+      document.querySelector('[data-form-container]')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

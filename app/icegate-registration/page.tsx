@@ -1,100 +1,36 @@
-﻿import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Registration/Hero';
+import IcegateHero from '../components/Registration/IcegateHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
+  const heroProps = {
+    heading: "Fast & Secure",
+    headingHighlight: "ICEGATE Registration",
+    description: "Register on the ICEGATE portal easily to handle customs and trade compliance efficiently. Our experts guide you through the process for a smooth experience.",
+    features: [
+      { text: "Seamless Portal Registration Support" },
+      { text: "Customs Compliance Guided by Experts" },
+      { text: "Fully Online & Paperless Application" },
+      { text: "Quick Turnaround Time" },
+      { text: "Dedicated Support Team" },
+    ],
+  };
 
- const heroProps = {
- // ================= LEFT SIDE =================
- headingHighlight: "ICEGATE Registration",
- description:
- "Register on ICEGATE quickly to manage your import and export filings seamlessly with expert support.",
-
- features: [
- {
- icon: "document",
- text: "End-to-End Assistance for All Registrations",
- },
- {
- icon: "chart",
- text: "Smart Solutions Tailored to Your Business Needs",
- },
- {
- icon: "users",
- text: "100% Online and Paperless Process",
- },
- {
- icon: "plus",
- text: "Quick Turnaround with Zero Hassle",
- },
- {
- icon: "document",
- text: "Dedicated Experts to Guide You at Every Step",
- },
- ],
-
- // ================= RIGHT SIDE =================
- tabs: [],
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- // 🔹 TEXT BLOCK (this was missing earlier)
- {
- type: "text",
- content: "Registration Service",
- },
- {
- type: "text",
- content:
- "ICEGATE Registration\nPortal for importers and exporters to file customs documents online. Simplifies trade processes with Indian Customs.",
- },
-
- // 🔹 INPUTS
- {
- type: "input",
- inputType: "text",
- name: "pan_gstin",
- placeholder: "PAN / GSTIN",
- },
- {
- type: "select",
- name: "state",
- placeholder: "Select State / UT",
- options: [
- "Andaman & Nicobar Islands",
- "Delhi",
- "Gujarat",
- "Karnataka",
- "Maharashtra",
- "Tamil Nadu",
- "Telangana",
- "Uttar Pradesh",
- "West Bengal",
- ],
- },
- ],
-
- buttonText: "Apply Now",
-};
-
- return (
- <>
- <Navbar />
- <Hero {...heroProps}/>
- <DynamicTabContent category="E-Invoice" />
- <div className="bg-[#F4F3EE] py-8">
-   <DynamicPricingSection category="icegate-registration" />
- </div>
- <FAQAccordion category="icegate-registration" />
- <Popularsearches />
- <Footer />
- </>
- );
+  return (
+    <>
+      <Navbar />
+      <IcegateHero {...heroProps} />
+      <DynamicTabContent category="E-Invoice" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="icegate-registration" />
+      </div>
+      <FAQAccordion category="icegate-registration" />
+      <Popularsearches />
+      <Footer />
+    </>
+  );
 }
-

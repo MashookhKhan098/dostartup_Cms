@@ -66,7 +66,10 @@ function DocumentsContent() {
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user)
       setIsLoadingAuth(false)
-    })
+    }).catch(err => {
+      console.warn("Document page auth check inner error:", err);
+      setIsLoadingAuth(false);
+    });
   }, [])
 
   const handleFileChange = (key: string, file: File | null) => {

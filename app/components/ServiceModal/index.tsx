@@ -67,8 +67,8 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
   // Check if already logged in when modal opens
   useEffect(() => {
     if (!isOpen) return
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) setStep('documents')
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) setStep('documents')
     })
   }, [isOpen])
 
@@ -102,11 +102,11 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
     setAuthLoading(true)
     try {
       if (authMode === 'login') {
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        const { data: authData, error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) { setAuthError(error.message); return }
         
         // For login, ensure profile exists
-        const { data: { session: loginSession } } = await supabase.auth.getSession()
+        const loginSession = authData.session
         const loggedInUser = loginSession?.user
         if (loggedInUser) {
           const { data: existingProfile } = await supabase
@@ -144,9 +144,9 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
         }
       }
 
-      const { data: { session: currentSession } } = await supabase.auth.getSession()
-      if (currentSession?.user) {
-        await supabase.from('gst_registrations').update({ user_id: currentSession.user.id }).eq('id', registrationId)
+      const { data: { user: currentUser } } = await supabase.auth.getUser()
+      if (currentUser) {
+        await supabase.from('gst_registrations').update({ user_id: currentUser.id }).eq('id', registrationId)
       }
 
       setStep('documents')
@@ -235,8 +235,8 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
         order_id: orderId,
         handler: async (response: any) => {
           try {
-            const { data: { session: paySession } } = await supabase.auth.getSession();
-            const user = paySession?.user ?? null;
+            const { data: { user: payUser } } = await supabase.auth.getUser();
+            const user = payUser;
             
             // Get user's name from auth metadata
             const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';

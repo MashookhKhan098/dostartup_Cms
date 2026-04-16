@@ -19,11 +19,11 @@ export default function Home() {
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUserId(session?.user?.id || null);
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUserId(user?.id || null);
     };
-    getUser();
+    fetchUser();
   }, []);
 
   const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {

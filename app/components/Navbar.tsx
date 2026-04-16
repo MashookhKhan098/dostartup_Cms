@@ -352,10 +352,15 @@ export default function Navbar() {
     return () => subscription.unsubscribe();
   }, []);
 
- const handleLogout = async () => {
-   await supabase.auth.signOut();
-   router.refresh();
- };
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+      window.location.href = "/";
+    } catch (error) {
+      window.location.href = "/";
+    }
+  };
 
  useEffect(() => {
  const handleScroll = () => setScrolled(window.scrollY > 10);
