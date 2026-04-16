@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { FiUser, FiMail, FiLogOut, FiArrowLeft } from 'react-icons/fi'
+import { FiUser, FiMail, FiLogOut, FiArrowLeft, FiPhone } from 'react-icons/fi'
 
 export default function ProfilePage() {
   const [user, setUser] = useState<any>(null)
@@ -384,6 +384,23 @@ export default function ProfilePage() {
         }))
       }
 
+      // Fetch user's LEI Code registrations (using email)
+      let userLEI: any[] = []
+      const { data: leiData, error: leiError } = await supabase
+        .from('legal_entity_identifier_code')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!leiError && leiData) {
+        userLEI = leiData.map(p => ({
+          ...p,
+          registration_type: 'LEI Code Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
       // Combine all
       const allRegistrations = [
         ...userRegistrations, 
@@ -404,7 +421,8 @@ export default function ProfilePage() {
         ...userFssaiLicense,
         ...userHalal,
         ...userIcegate,
-        ...userIEC
+        ...userIEC,
+        ...userLEI
       ]
       console.log('Final combined registrations:', allRegistrations)
       setPayments(allRegistrations)
@@ -463,6 +481,11 @@ export default function ProfilePage() {
                 <p className="text-[#6F6B63] flex items-center gap-2 mt-1">
                   <FiMail className="w-4 h-4" /> {user?.email || 'Email not available'}
                 </p>
+                {profile?.phone && (
+                  <p className="text-[#6F6B63] flex items-center gap-2 mt-1">
+                    <FiPhone className="w-4 h-4" /> {profile.phone}
+                  </p>
+                )}
               </div>
 
               <div className="mt-8 border-t border-[#E5E2DA] pt-8">

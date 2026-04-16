@@ -109,19 +109,25 @@ export default function IcegateHero({
             console.warn("Auth check in payment handler failed gracefully");
           }
 
-          // Try updating user profile if logged in
-          if (user) {
-            const userName = user.user_metadata?.full_name || formData.name || user.email?.split('@')[0];
-            try {
-              await supabase.from('profiles').upsert({
-                id: user.id,
+          // Try updating user profile based on email (works for both guests and logged-in users)
+          try {
+            const finalEmail = user?.email || formData.email;
+            const userName = user?.user_metadata?.full_name || formData.name || finalEmail?.split('@')[0];
+            
+            if (finalEmail) {
+              const profileData: any = {
                 name: userName,
-                email: user.email,
-                phone: formData.phone
-              });
-            } catch (profileErr) {
-              console.error("Profile Update Error (non-blocking)");
+                email: finalEmail,
+                phone: formData.phone,
+                phone_no: formData.phone,
+                updated_at: new Date().toISOString()
+              };
+              if (user?.id) profileData.id = user.id;
+
+              await supabase.from('profiles').upsert(profileData, { onConflict: 'email' });
             }
+          } catch (profileErr: any) {
+            console.error("❌ PROFILE EXCEPTION:", profileErr.message);
           }
 
           // Prepare WhatsApp message

@@ -121,19 +121,33 @@ export default function FssaiHero({
             console.warn("Auth check in payment handler failed gracefully");
           }
 
-          // Try updating user profile if logged in
-          if (user) {
-            const userName = user.user_metadata?.full_name || formData.name || user.email?.split('@')[0];
-            try {
-              await supabase.from('profiles').upsert({
-                id: user.id,
+          // Try updating user profile based on email (works for both guests and logged-in users)
+          try {
+            const finalEmail = user?.email || formData.email;
+            const userName = user?.user_metadata?.full_name || formData.name || finalEmail?.split('@')[0];
+            
+            if (finalEmail) {
+              const profileData: any = {
                 name: userName,
-                email: user.email,
-                phone: formData.phone
-              });
-            } catch (profileErr) {
-              console.error("Profile Update Error (non-blocking)");
+                email: finalEmail,
+                updated_at: new Date().toISOString()
+              };
+              if (user?.id) profileData.id = user.id;
+
+              // Step 1: Try with phone field
+              const { error: profileError } = await supabase
+                .from('profiles')
+                .upsert({ ...profileData, phone: formData.phone }, { onConflict: 'email' });
+              
+              // Step 2: Fallback if phone column doesn't exist
+              if (profileError && (profileError.message.includes('column') || profileError.code === '42703')) {
+                await supabase
+                  .from('profiles')
+                  .upsert(profileData, { onConflict: 'email' });
+              }
             }
+          } catch (profileErr: any) {
+            console.error("❌ PROFILE EXCEPTION:", profileErr.message);
           }
 
           // Prepare WhatsApp message

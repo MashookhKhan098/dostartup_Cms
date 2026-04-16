@@ -111,19 +111,25 @@ export default function StartupIndiaHero({
             console.warn("Auth check in payment handler failed gracefully");
           }
 
-          // Try updating user profile if logged in
-          if (user) {
-            const userName = user.user_metadata?.full_name || formData.name || user.email?.split('@')[0];
-            try {
-              await supabase.from('profiles').upsert({
-                id: user.id,
+          // Try updating user profile based on email (works for both guests and logged-in users)
+          try {
+            const finalEmail = user?.email || formData.email;
+            const userName = user?.user_metadata?.full_name || formData.name || finalEmail?.split('@')[0];
+            
+            if (finalEmail) {
+              const profileData: any = {
                 name: userName,
-                email: user.email,
-                phone: formData.phone
-              });
-            } catch (profileErr) {
-              console.error("Profile Update Error (non-blocking)");
+                email: finalEmail,
+                phone: formData.phone,
+                phone_no: formData.phone,
+                updated_at: new Date().toISOString()
+              };
+              if (user?.id) profileData.id = user.id;
+
+              await supabase.from('profiles').upsert(profileData, { onConflict: 'email' });
             }
+          } catch (profileErr: any) {
+            console.error("❌ PROFILE EXCEPTION:", profileErr.message);
           }
 
           // Prepare WhatsApp message
@@ -335,7 +341,7 @@ export default function StartupIndiaHero({
           {/* RIGHT SIDEBAR - MULTI-STEP FORM */}
           <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden self-start">
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
-              <h2 className="text-lg font-semibold text-white">Sign In</h2>
+              <h2 className="text-lg font-semibold text-white">{isLoggedIn ? "Register Now" : "Sign In"}</h2>
               <p className="text-sm text-[#F4F3EE]">to get started with your registration</p>
             </div>
 
@@ -490,14 +496,16 @@ export default function StartupIndiaHero({
                 </div>
               </form>
             </div>
-            <div className="bg-white px-6 py-3 border-t border-[#E5E2DA]">
-              <p className="text-sm text-center text-[#6F6B63]">
-                New user?{' '}
-                <button className="text-[#C15F3C] hover:underline font-semibold">
-                  Create account →
-                </button>
-              </p>
-            </div>
+            {!isLoggedIn && (
+              <div className="bg-white px-6 py-3 border-t border-[#E5E2DA]">
+                <p className="text-sm text-center text-[#6F6B63]">
+                  New user?{' '}
+                  <button className="text-[#C15F3C] hover:underline font-semibold">
+                    Create account →
+                  </button>
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
