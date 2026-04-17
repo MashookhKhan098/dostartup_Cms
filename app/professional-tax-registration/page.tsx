@@ -3,7 +3,7 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Registration/Hero';
+import ProfessionalTaxRegistrationHero from '../components/Registration/ProfessionalTaxRegistrationHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 
@@ -38,61 +38,13 @@ const heroProps = {
  text: "Ensuring your business stays fully compliant",
  },
  ],
-
- // ================= RIGHT SIDE =================
- tabs: [],
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- // 🔹 TEXT BLOCKS
- {
- type: "text",
- content: "Service",
- },
- {
- type: "text",
- content:
- "Professional Tax Registration\nProfessional Tax Registration made easy with expert guidance and accurate documentation. Our expert team manages all state-wise requirements to ensure a fast and seamless registration process.",
- },
-
- // 🔹 SELECT & INPUT FIELDS
- {
- type: "select",
- name: "state",
- placeholder: "Select State/UT",
- options: [
- "Andaman & Nicobar Islands",
- "Delhi",
- "Gujarat",
- "Karnataka",
- "Maharashtra",
- "Tamil Nadu",
- "Telangana",
- "Uttar Pradesh",
- "West Bengal",
- ],
- },
- {
- type: "input",
- inputType: "text",
- name: "pan_gstin",
- placeholder: "PAN or GSTIN",
- },
- ],
-
- buttonText: "Apply Now",
 };
-
-
- 
 
 
  return (
  <>
  <Navbar />
- <Hero {...heroProps}/>
+ <ProfessionalTaxRegistrationHero {...heroProps}/>
  <DynamicTabContent category="Proprietorship" />
  <DynamicPricingSection />
       <FAQAccordion />

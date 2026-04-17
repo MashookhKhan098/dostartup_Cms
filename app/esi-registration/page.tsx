@@ -3,7 +3,7 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Registration/Hero';
+import EsiRegistrationHero from '../components/Registration/EsiRegistrationHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 
@@ -38,50 +38,13 @@ const heroProps = {
  text: "Ensuring your organisation stays compliant from day one",
  },
  ],
-
- // ================= RIGHT SIDE =================
- tabs: [],
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- // 🔹 TEXT BLOCKS
- {
- type: "text",
- content: "Service",
- },
- {
- type: "text",
- content:
- "ESI Registration\nESI registration allows employers to register with the Employees’ State Insurance Corporation (ESIC) to provide medical and cash benefits to employees under the ESI scheme.",
- },
-
- // 🔹 SELECT & INPUT FIELDS
- {
- type: "input",
- inputType: "text",
- name: "cin_gstin",
- placeholder: "CIN / GSTIN",
- },
- {
- type: "input",
- inputType: "number",
- name: "employee_count",
- placeholder: "Employee Count",
- },
- ],
-
- buttonText: "Register Now",
 };
-
-
 
 
  return (
  <>
  <Navbar />
- <Hero {...heroProps}/>
+ <EsiRegistrationHero {...heroProps}/>
  <DynamicTabContent category="Trademark" />
  <DynamicPricingSection />
       <FAQAccordion />

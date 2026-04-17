@@ -93,11 +93,20 @@ export default function HeroSection() {
  const [fade, setFade] = useState(true);
  const [isHovered, setIsHovered] = useState(false);
 
- useEffect(() => {
- fetch(`${STRAPI_URL}/api/content/item/heroslide`)
- .then((res) => res.json())
- .then((json) => setImages(json.images || []));
- }, []);
+  useEffect(() => {
+    fetch(`${STRAPI_URL}/api/content/item/heroslide`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((json) => setImages(json.images || []))
+      .catch((err) => {
+        console.error("Failed to fetch hero slides:", err);
+        setImages([]);
+      });
+  }, []);
 
  const slideContent = [
  {

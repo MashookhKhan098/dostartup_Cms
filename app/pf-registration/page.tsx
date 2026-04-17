@@ -3,7 +3,7 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Registration/Hero';
+import PfRegistrationHero from '../components/Registration/PfRegistrationHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 
@@ -39,39 +39,6 @@ const heroProps = {
  },
  ],
 
- // ================= RIGHT SIDE =================
- tabs: [],
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- // 🔹 TEXT BLOCKS
- {
- type: "text",
- content: "Service",
- },
- {
- type: "text",
- content:
- "PF Registration\nPF Registration is the process through which an employer registers with the Employees’ Provident Fund Organisation (EPFO) to participate in the Provident Fund scheme.",
- },
-
- // 🔹 SELECT & INPUT FIELDS
- {
- type: "input",
- inputType: "text",
- name: "cin_gstin",
- placeholder: "CIN / GSTIN",
- },
- {
- type: "input",
- inputType: "number",
- name: "employee_count",
- placeholder: "Employee Count",
- },
- ],
-
  buttonText: "Register Now",
 };
 
@@ -81,7 +48,7 @@ const heroProps = {
  return (
  <>
  <Navbar />
- <Hero {...heroProps}/>
+ <PfRegistrationHero {...heroProps}/>
  <DynamicTabContent category="Proprietorship" />
  <DynamicPricingSection />
       <FAQAccordion />
