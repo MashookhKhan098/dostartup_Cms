@@ -29,18 +29,25 @@ export default function BlogDetails() {
 
   const getImageUrl = (image: any) => {
     if (!image) return null;
+    
     let path = "";
+    
     if (typeof image === "string") {
       path = image;
-    } else if (image && typeof image === "object" && image.path) {
-      path = image.path;
-    } else {
-      return null;
+    } else if (image && typeof image === "object") {
+      path = image.path || image.url || "";
     }
+    
     if (!path) return null;
     if (path.startsWith("http")) return path;
+
     const base = CMS_URL.endsWith("/") ? CMS_URL.slice(0, -1) : CMS_URL;
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    
+    // Check if it's already a full storage path
+    if (cleanPath.includes("/storage/uploads")) {
+      return `${base}${cleanPath}`;
+    }
     return `${base}/storage/uploads${cleanPath}`;
   };
 
@@ -137,19 +144,22 @@ export default function BlogDetails() {
                   dangerouslySetInnerHTML={{ __html: blog.content }} 
                   className="blog-inner-html-render"
                 />
+              ) : Array.isArray(blog.content) ? (
+                <div className="space-y-6">
+                  {blog.content.map((block: any, idx: number) => {
+                    const contentValue = typeof block === 'string' ? block : (block.value || block.settings?.text || block.content || "");
+                    return contentValue ? (
+                      <div 
+                        key={idx} 
+                        className="text-[#4A463F] text-lg leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: contentValue }}
+                      />
+                    ) : null;
+                  })}
+                </div>
               ) : (
-                <div className="space-y-8">
-                  {Array.isArray(blog.content) ? (
-                    blog.content.map((block: any, idx: number) => (
-                      <div key={idx} className="text-[#4A463F] text-lg leading-relaxed font-medium">
-                        {typeof block === "string" ? block : JSON.stringify(block)}
-                      </div>
-                    ))
-                  ) : (
-                    <div className="p-12 text-center rounded-3xl bg-white border border-[#E5E2DA]">
-                       <p className="text-[#6F6B63] font-medium italic">Article body is being finalized.</p>
-                    </div>
-                  )}
+                <div className="p-12 text-center rounded-3xl bg-white border border-[#E5E2DA]">
+                   <p className="text-[#6F6B63] font-medium italic">Article body is being finalized.</p>
                 </div>
               )}
             </article>

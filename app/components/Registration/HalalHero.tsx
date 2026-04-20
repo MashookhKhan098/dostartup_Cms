@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
+import { CheckCircle2, MessageCircle, ExternalLink, X, Star } from "lucide-react";
 
 export type Feature = { icon?: string; text: string };
 
@@ -31,6 +31,7 @@ export default function HalalHero({
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState("");
   const [countdown, setCountdown] = useState(0);
+  const [hasMounted, setHasMounted] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -42,6 +43,7 @@ export default function HalalHero({
   });
 
   useEffect(() => {
+    setHasMounted(true);
     const checkUser = async () => {
       try {
         const { data: { user }, error } = await supabase.auth.getUser();
@@ -279,7 +281,7 @@ export default function HalalHero({
             <div className="flex flex-col md:flex-row gap-8">
               <div className="w-full md:w-64 flex-shrink-0">
                 <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
-                  <span className="text-white font-bold text-xl text-center px-4">Halal Certificate</span>
+                    <span className="text-white font-bold text-xl text-center px-4 uppercase tracking-tighter">Registrations</span>
                 </div>
                 <div className="mt-4 space-y-2">
                   {["Documents Required", "Process", "Benefits"].map((item) => (
@@ -295,50 +297,61 @@ export default function HalalHero({
 
               <div className="flex-1 space-y-6">
                 <div>
-                  <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1">
+                  <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1 mb-2">
                     <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
-                    <span className="text-xs font-medium text-[#C15F3C]">
-                      GLOBAL COMPLIANCE PARTNER
+                    <span className="text-[10px] font-bold text-[#C15F3C] uppercase tracking-wider">
+                      {hasMounted ? "TRUSTED BY 50K+ BUSINESSES" : "GLOBAL COMPLIANCE PARTNER"}
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-semibold text-[#2F2E2B] leading-tight">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-[#2F2E2B] leading-tight">
                     {heading}<br />
                     <span className="text-[#C15F3C]">{headingHighlight}</span>
                   </h1>
-                  <p className="text-sm text-[#6F6B63] leading-relaxed mt-3">
-                    {description}
-                  </p>
                 </div>
 
-                <div className="bg-[#F9F8F6] border border-[#E5E2DA] rounded-2xl p-6">
-                  <span className="inline-block bg-[#C15F3C] text-white text-[10px] font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">
-                    Key Features
-                  </span>
-                  <div className="space-y-3">
-                    {features?.map((f, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA]">
-                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                           </svg>
-                        </div>
-                        <span className="text-sm font-medium text-[#2F2E2B]">{f.text}</span>
+                <div className="bg-white border border-[#E5E2DA] rounded-3xl p-6 lg:p-8 shadow-sm">
+                  <div className="flex flex-col gap-6">
+                    <div className="bg-[#F9F8F6] border border-[#E5E2DA] rounded-2xl p-6">
+                      <span className="inline-block bg-[#C15F3C] text-white text-[10px] font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">
+                        Key Features
+                      </span>
+                      <div className="space-y-4">
+                        {features?.map((f, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA] shadow-sm">
+                               <CheckCircle2 className="w-4 h-4" />
+                            </div>
+                            <span className="text-sm font-semibold text-[#2F2E2B]">{f.text}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
 
-                <div className="flex justify-between text-sm">
-                  <button className="text-[#C15F3C] hover:underline">Terms and conditions</button>
-                  <button 
-                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Halal Certificate")}
-                    className="text-[#C15F3C] hover:underline"
-                  >
-                    Need Help?
-                  </button>
+                    {/* INTERNAL TRUST INDICATOR */}
+                    <div className="flex items-center gap-2 px-2">
+                       <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-[#C15F3C] text-[#C15F3C]" />
+                        ))}
+                      </div>
+                      <span className="text-sm font-bold text-[#2F2E2B]">4.9/5</span>
+                      <span className="text-sm text-[#E5E2DA]">|</span>
+                      <span className="text-sm text-[#6F6B63]">50k+ reviews</span>
+                    </div>
+
+                    <div className="flex justify-between items-center text-xs pt-4 border-t border-[#F4F3EE]">
+                      <button className="text-[#C15F3C] font-medium hover:underline">Terms and conditions</button>
+                      <button 
+                        onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Halal Certificate")}
+                        className="text-[#C15F3C] font-medium hover:underline"
+                      >
+                        Need Help?
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -665,6 +678,37 @@ export default function HalalHero({
           </div>
         )}
       </AnimatePresence>
+
+      {/* TRUST INDICATORS - BELOW UPPER BOX */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
+        <div className="mt-0 flex flex-col items-center justify-center gap-2">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <div className="flex items-center gap-2">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-[#C15F3C] text-[#C15F3C]" />
+                ))}
+              </div>
+              <div className="text-[13px] font-bold text-[#201F1D]">
+                4.9/5 <span className="text-[#6F6B63] font-normal">(2.5k+ reviews)</span>
+              </div>
+            </div>
+            
+            <div className="hidden md:block w-px h-4 bg-[#E5E2DA]" />
+            
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-1">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="w-5 h-5 rounded-full border-2 border-white bg-[#F9F8F6] flex items-center justify-center overflow-hidden shadow-sm">
+                    <div className="w-full h-full bg-gradient-to-br from-[#C15F3C] to-[#A94E30]" />
+                  </div>
+                ))}
+              </div>
+              <span className="text-[13px] font-bold text-[#201F1D]">Trusted by 50k+ businesses</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

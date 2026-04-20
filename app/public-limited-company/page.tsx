@@ -12,8 +12,8 @@ export default function Home() {
  <Navbar />
  <Hero defaultEntity = "Public Limited"/>
  <DynamicTabContent category="Public Limited" />
- <DynamicPricingSection />
-      <FAQAccordion />
+ <DynamicPricingSection category="public-limited-company" />
+      <FAQAccordion category="public-limited-company" title="FAQs for Public Limited Company" />
  <Popularsearches />
  <Footer />
  </>

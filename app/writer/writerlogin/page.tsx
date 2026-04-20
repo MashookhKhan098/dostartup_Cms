@@ -15,11 +15,71 @@ export default function WriterLoginPage() {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Logic for login can be added here
-    console.log("Writer Login Attempted", { username, password });
-    router.push('/writer/dashboard');
+    setError('');
+    setLoading(true);
+
+    try {
+      const CMS_URL = process.env.NEXT_PUBLIC_COCKPIT_URL || "https://cms.dostartup.in";
+      const TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY || "";
+      
+      // Query the custom 'writer' collection
+      const res = await fetch(`${CMS_URL}/api/content/items/writer?token=${TOKEN}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const items = await res.json();
+
+      // Handle Cockpit's various response formats
+      let userList: any[] = [];
+      if (Array.isArray(items)) {
+        userList = items;
+      } else if (items.entries && Array.isArray(items.entries)) {
+        userList = items.entries;
+      } else if (items && typeof items === 'object') {
+        userList = [items];
+      }
+
+      if (userList.length > 0) {
+        // Find matching credentials (using robust normalization)
+        const authenticatedUser = userList.find((u: any) => {
+          const normalizedUser: any = {};
+          Object.keys(u).forEach(k => {
+            normalizedUser[k.trim().toLowerCase()] = u[k];
+          });
+
+          // Checking possible username fields: 'name', 'username'
+          const uLogin = (normalizedUser.name || normalizedUser.username || "").toString().trim().toLowerCase();
+          const uPass = (normalizedUser.password || "").toString().trim();
+          
+          return uLogin === username.trim().toLowerCase() && uPass === password.trim();
+        });
+
+        if (authenticatedUser) {
+          // Success! Store the writer name in localStorage (normalized keys for Writer_name -> writer_name)
+          const normalizedAuth: any = {};
+          Object.keys(authenticatedUser).forEach(k => {
+            normalizedAuth[k.trim().toLowerCase()] = authenticatedUser[k];
+          });
+
+          localStorage.setItem('writerName', normalizedAuth.writer_name || normalizedAuth.name || username);
+          router.push('/writer/dashboard');
+          return;
+        }
+      } 
+      
+      setError('Invalid Writer Name or Password');
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Connection failed. Please check your CMS settings.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,7 +94,12 @@ export default function WriterLoginPage() {
             <p className="text-[#6F6B63] text-lg font-medium">Welcome back! Please enter your details</p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-8">
+          <form onSubmit={handleLogin} className="space-y-6">
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm font-bold animate-pulse">
+                {error}
+              </div>
+            )}
             <div className="space-y-2">
               <label htmlFor="username" className="block text-[#2F2E2B] font-bold text-base ml-1">
                 Username
@@ -76,9 +141,10 @@ export default function WriterLoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-[#C15F3C] hover:bg-[#A94E30] text-white font-extrabold py-5 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] mt-4 text-xl tracking-wide uppercase"
+              disabled={loading}
+              className="w-full bg-[#C15F3C] hover:bg-[#A94E30] text-white font-extrabold py-5 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] mt-4 text-xl tracking-wide uppercase disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Log in
+              {loading ? 'Logging in...' : 'Log in'}
             </button>
           </form>
         </div>

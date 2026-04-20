@@ -8,6 +8,7 @@ type GSTInvoicingProps = {
   rating: number | string;
   description?: string;
   exclusiveOffersCount?: number;
+  subHeading?: string;
   features?: string[];
 };
 
@@ -17,6 +18,7 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
   rating,
   description = '',
   exclusiveOffersCount = 0,
+  subHeading = "1 Year License",
   features = []
 }) => {
   return (
@@ -86,13 +88,13 @@ const GSTInvoicingComponent: React.FC<GSTInvoicingProps> = ({
                   </span>
 
                   <p className="font-semibold text-[#2F2E2B] text-sm mb-2">
-                    1 Year License
+                    {subHeading}
                   </p>
 
                   <div className="space-y-2">
                     {features.map((feature, index) => (
                       <div key={index} className="flex gap-2">
-                        <span className="text-[#C15F3C] font-bold text-lg">â€º</span>
+                        <span className="text-[#C15F3C] font-bold text-lg">›</span>
                         <p className="text-sm text-[#4F4C45]">{feature}</p>
                       </div>
                     ))}

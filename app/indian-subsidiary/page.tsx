@@ -13,10 +13,10 @@ export default function Home() {
  return (
  <>
  <Navbar />
- <Hero defaultEntity = "Indian Subs."/>
+ <Hero defaultEntity="Indian Subs." />
  <DynamicTabContent category="Indian Subs." />
- <DynamicPricingSection />
-      <FAQAccordion />
+ <DynamicPricingSection category="indian-subsidiary" />
+      <FAQAccordion category="indian-subsidiary" title="FAQs for Indian Subsidiary Registration" />
  <Popularsearches />
  <Footer />
  </>

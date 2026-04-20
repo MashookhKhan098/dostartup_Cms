@@ -14,11 +14,11 @@ const heroProps = {
   description:
     "Get your Legal Entity Identifier (LEI) code to meet global financial compliance standards effortlessly.",
   features: [
-    { text: "End-to-End Assistance for All Registrations" },
-    { text: "Smart Solutions Tailored to Your Business Needs" },
+    { text: "Key Features" },
+    { text: "Digital Process" },
+    { text: "Super Fast Service" },
+    { text: "Trade License Renewal" },
     { text: "100% Online and Paperless Process" },
-    { text: "Quick Turnaround with Zero Hassle" },
-    { text: "Dedicated Experts to Guide You at Every Step" },
   ],
 };
 

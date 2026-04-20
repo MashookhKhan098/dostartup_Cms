@@ -9,87 +9,85 @@ import DynamicTabContent from '../components/DynamicTabContent';
 import { handleWhatsAppSubmission } from "@/lib/form-utils";
 
 export default function Home() {
- 
+  const heroProps = {
+    // ================= LEFT SIDE =================
+    heading: "Easy",
+    headingHighlight: "Patent",
+    description:
+      "Secure your inventions with DoStartup. Our simplified online process helps you file and protect your innovative ideas under the Indian Patent Act—guided by experts at every step.",
 
+    features: [
+      {
+        icon: "shield",
+        text: "Legal Protection for Your Inventions",
+      },
+      {
+        icon: "rocket",
+        text: "Quick & Simple Online Filing",
+      },
+      {
+        icon: "user-check",
+        text: "Expert Guidance from Start to Grant",
+      },
+    ],
 
- const heroProps = {
- // ================= LEFT SIDE =================
- heading: "Easy",
- headingHighlight: "Patent",
- description:
- "Secure your inventions with DoStartup. Our simplified online process helps you file and protect your innovative ideas under the Indian Patent Act—guided by experts at every step.",
+    // ================= RIGHT SIDE =================
+    tabs: [], // no tabs in this design
+    defaultTab: null,
+    tabDescriptions: null,
 
- features: [
- {
- icon: "shield",
- text: "Legal Protection for Your Inventions",
- },
- {
- icon: "rocket",
- text: "Quick & Simple Online Filing",
- },
- {
- icon: "user-check",
- text: "Expert Guidance from Start to Grant",
- },
- ],
+    // ================= FORM FIELDS =================
+    formFields: [
+      {
+        type: "input",
+        inputType: "text",
+        name: "name",
+        placeholder: "Your Name",
+      },
+      {
+        type: "input",
+        inputType: "email",
+        name: "email",
+        placeholder: "Your Email",
+      },
+      {
+        type: "input",
+        inputType: "tel",
+        name: "phone",
+        placeholder: "Phone Number",
+      },
+      {
+        type: "select",
+        name: "patent_service_type",
+        placeholder: "Select Patent Search Type",
+        options: [
+          "Patent Search",
+          "Provisional Patent",
+          "Complete Patent"
+        ],
+      },
+      {
+        type: "input",
+        inputType: "text",
+        name: "invention_name",
+        placeholder: "Identify your invention",
+      },
+    ],
 
- // ================= RIGHT SIDE =================
- tabs: [], // no tabs in this design
- defaultTab: null,
- tabDescriptions: null,
+    onSubmit: (data: any) => handleWhatsAppSubmission(data, "Patent Registration"),
+  };
 
-  // ================= FORM FIELDS =================
-  formFields: [
-    {
-      type: "input",
-      inputType: "text",
-      name: "name",
-      placeholder: "Your Name",
-    },
-    {
-      type: "input",
-      inputType: "email",
-      name: "email",
-      placeholder: "Your Email",
-    },
-    {
-      type: "input",
-      inputType: "tel",
-      name: "phone",
-      placeholder: "Phone Number",
-    },
-    {
-      type: "select",
-      name: "patent_service_type",
-      placeholder: "Select Patent Search Type",
-      options: [
-        "Patent Search",
-        "Provisional Patent",
-        "Complete Patent"
-      ],
-    },
-    {
-      type: "input",
-      inputType: "text",
-      name: "invention_name",
-      placeholder: "Identify your invention",
-    },
-  ],
-
-  onSubmit: (data: any) => handleWhatsAppSubmission(data, "Patent Registration"),
-};
-
-
- return (
- <>
- <Navbar />
- <Hero {...heroProps} />
- <DynamicTabContent category="E-Invoice" />
- <DynamicPricingSection />
-      <FAQAccordion />
- <Popularsearches />
- <Footer />
- </>
- );
+  return (
+    <>
+      <Navbar />
+      <Hero {...heroProps} />
+      <DynamicTabContent category="patent-registration" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="patent-registration" />
+      </div>
+      <FAQAccordion category="patent-registration" />
+      <Popularsearches />
+      <Footer />
+    </>
+  );
 }

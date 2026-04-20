@@ -285,7 +285,7 @@ export default function DynamicHeroSection({
               {/* LEFT SIDEBAR WITH IMAGE PLACEHOLDER */}
               <div className="w-full md:w-64 flex-shrink-0">
                 <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">GST</span>
+                  <span className="text-white font-bold text-xl uppercase tracking-tighter">REGISTRATIONS</span>
                 </div>
 
                 <div className="mt-4 space-y-2">
@@ -384,29 +384,7 @@ export default function DynamicHeroSection({
                   </button>
                 </div>
 
-                {/* HOW IT WORKS TIMELINE - ADDED TO FILL SPACE */}
-                <div className="mt-8 pt-6 border-t border-[#F4F3EE]">
-                  <h3 className="text-xs font-bold text-[#2F2E2B] uppercase tracking-widest mb-6 opacity-60">How it Works</h3>
-                  <div className="relative">
-                    <div className="absolute top-4 left-0 w-full h-0.5 bg-[#F4F3EE]"></div>
-                    <div className="flex justify-between relative text-center">
-                      {[
-                        { step: "01", label: "Consultation", sub: "Expert Guidance" },
-                        { step: "02", label: "Documentation", sub: "Paperless Upload" },
-                        { step: "03", label: "Submission", sub: "Fast Filing" },
-                        { step: "04", label: "Approval", sub: "Final Certificate" }
-                      ].map((s, idx) => (
-                        <div key={idx} className="flex flex-col items-center">
-                          <div className="w-8 h-8 rounded-full bg-white border-2 border-[#C15F3C] flex items-center justify-center text-[10px] font-bold text-[#C15F3C] z-10 mb-2 shadow-sm">
-                            {s.step}
-                          </div>
-                          <p className="text-[10px] font-bold text-[#2F2E2B]">{s.label}</p>
-                          <p className="text-[9px] text-[#B1ADA1]">{s.sub}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+
 
               </div>
             </div>

@@ -17,24 +17,16 @@ export default function Home() {
 
  features: [
  {
- icon: "rocket",
- text: "Register Your Business",
+ icon: "monitor",
+ text: "Digital Process",
  },
  {
- icon: "document",
- text: "DPIIT Recognition",
+ icon: "zap",
+ text: "Super Fast Service",
  },
  {
- icon: "shield",
- text: "Tax Exemptions & Compliance Benefits",
- },
- {
- icon: "chart",
- text: "Funding Support & Startup Schemes",
- },
- {
- icon: "users",
- text: "Boost Credibility with Investors",
+ icon: "clipboard",
+ text: "Trade License Renewal",
  },
  ],
 
@@ -46,7 +38,7 @@ export default function Home() {
  <>
  <Navbar />
  <Hero {...heroProps}/>
- <DynamicTabContent category="Proprietorship" />
+ <DynamicTabContent category="startup-india" />
  <div className="bg-[#F4F3EE] py-8">
    <DynamicPricingSection category="start-up-india" />
  </div>

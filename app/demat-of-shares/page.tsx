@@ -110,7 +110,7 @@ export default function DematerialisationPage() {
                 </p>
 
                 <p className="text-amber-800 text-center text-lg font-black border-y border-amber-100 py-4 uppercase tracking-tighter">
-                  Convert Your Physical Shares to Demat with IndiaFilings – Get Started Now!
+                  Convert Your Physical Shares to Demat with DoStartup – Get Started Now!
                 </p>
 
                 <div className="space-y-4">

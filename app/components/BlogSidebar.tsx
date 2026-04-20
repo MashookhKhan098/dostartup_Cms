@@ -15,6 +15,7 @@ interface Blog {
   author_image: any;
   upload_date: string;
   writer_name: string;
+  status?: string; // e.g., 'draft', 'pending', 'published'
 }
 
 interface BlogSidebarProps {
@@ -70,12 +71,19 @@ export default function BlogSidebar({ category, isMainFeed = false, maxItems, co
         const res = await fetch(API);
         const data = await res.json();
         if (Array.isArray(data)) {
-          const filtered = category
-            ? data.filter(
-                (b: Blog) =>
-                  b.category?.toLowerCase() === category?.toLowerCase()
-              )
-            : data;
+          // Filter: Only show approved/published blogs (legacy or new)
+          const filtered = data.filter((b: any) => {
+            const status = (b.post_status || b.status || "").toString().toLowerCase();
+            const isApproved = status === "approved" || status === "published";
+            
+            // If no category filter is applied, just check approval
+            if (!category) return isApproved;
+            
+            // Check category match AND approval
+            const matchesCategory = b.category?.toLowerCase() === category?.toLowerCase();
+            return matchesCategory && isApproved;
+          });
+          
           setBlogs(filtered);
         }
       } catch (error) {

@@ -24,7 +24,7 @@ export default function Home() {
     <>
       <Navbar />
       <HalalHero {...heroProps} />
-      <DynamicTabContent category="E-Invoice" />
+      <DynamicTabContent category="halal-certificate" />
       <div className="bg-[#F4F3EE] py-8">
         <DynamicPricingSection category="halal-certificate" />
       </div>
@@ -34,4 +34,3 @@ export default function Home() {
     </>
   );
 }
-

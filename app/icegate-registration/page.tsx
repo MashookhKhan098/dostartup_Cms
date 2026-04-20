@@ -24,7 +24,7 @@ export default function Home() {
     <>
       <Navbar />
       <IcegateHero {...heroProps} />
-      <DynamicTabContent category="E-Invoice" />
+      <DynamicTabContent category="icegate-registration" />
       <div className="bg-[#F4F3EE] py-8">
         <DynamicPricingSection category="icegate-registration" />
       </div>

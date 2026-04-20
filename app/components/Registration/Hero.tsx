@@ -1,11 +1,17 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import React, { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { handleNeedHelpWhatsApp } from "@/lib/form-utils";
 
 type Tab = { name: string; path?: string };
 type Feature = { icon: string; text: string };
 type FormField = { type: string;[key: string]: any };
+
+export type Offer = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+};
 
 export type DynamicHeroSectionProps = {
   heading?: string;
@@ -18,6 +24,7 @@ export type DynamicHeroSectionProps = {
   formFields?: FormField[];
   buttonText?: string;
   onSubmit?: (data: Record<string, FormDataEntryValue>) => void;
+  offers?: Offer[];
 };
 
 export default function RegistrationHero({
@@ -30,7 +37,8 @@ export default function RegistrationHero({
   tabDescriptions,
   formFields,
   buttonText,
-  onSubmit
+  onSubmit,
+  offers = []
 }: DynamicHeroSectionProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>(defaultTab || tabs?.[0]?.name || "");
@@ -103,39 +111,50 @@ export default function RegistrationHero({
                   </span>
 
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA]">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-medium text-[#2F2E2B]">
-                        Digital Process
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-[#C15F3C] rounded-full flex items-center justify-center text-white">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-medium text-[#2F2E2B]">
-                        Super Fast Service
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA]">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM13.536 14.95a1 1 0 010-1.414l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM6.464 14.95a1 1 0 01-1.414 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414z" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-medium text-[#2F2E2B]">
-                        Trade License Renewal
-                      </span>
-                    </div>
+                    {features && features.length > 0 ? (
+                      features.map((feature: any, index: number) => (
+                        <div key={index} className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA] shadow-sm">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-sm font-medium text-[#2F2E2B]">
+                            {feature.text}
+                          </span>
+                        </div>
+                      ))
+                    ) : (
+                      // Fallback to original features if none provided
+                      <>
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA]">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-sm font-medium text-[#2F2E2B]">Digital Process</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-[#C15F3C] rounded-full flex items-center justify-center text-white">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-sm font-medium text-[#2F2E2B]">Super Fast Service</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA]">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM13.536 14.95a1 1 0 010-1.414l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM6.464 14.95a1 1 0 01-1.414 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414z" />
+                            </svg>
+                          </div>
+                          <span className="text-sm font-medium text-[#2F2E2B]">Trade License Renewal</span>
+                        </div>
+                      </>
+                    )}
                   </div>
+
                 </div>
 
                 {/* RATING */}
@@ -166,6 +185,32 @@ export default function RegistrationHero({
                     Need Help?
                   </button>
                 </div>
+
+                {/* OFFERS AND DISCOUNTS */}
+                {offers.length > 0 && (
+                  <div className="pt-6 mt-6 border-t border-[#F4F3EE] space-y-4">
+                    <h3 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">
+                      Offers and discounts
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {offers.map((offer, idx) => (
+                        <div key={idx} className="flex items-center gap-3 p-3 bg-[#F9F8F6] border border-[#E5E2DA] rounded-xl hover:shadow-sm transition-all group cursor-pointer">
+                          <div className="w-10 h-10 flex-shrink-0 bg-white rounded-lg flex items-center justify-center border border-[#E5E2DA] group-hover:border-[#C15F3C] transition-colors">
+                            {offer.icon}
+                          </div>
+                          <div>
+                            <h4 className="text-xs font-bold text-[#201F1D] group-hover:text-[#C15F3C] transition-colors">
+                              {offer.title}
+                            </h4>
+                            <p className="text-[10px] text-[#6F6B63] leading-tight">
+                              {offer.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
               </div>
             </div>
@@ -313,7 +358,7 @@ export default function RegistrationHero({
         </div>
 
         {/* TRUST BADGES - REDUCED BOTTOM GAP */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[#6F6B63] mt-2">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[#6F6B63] mt-0 pb-4">
           <div className="flex items-center gap-1">
             <div className="flex">
               {[...Array(5)].map((_, i) => (

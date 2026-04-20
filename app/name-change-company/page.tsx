@@ -19,6 +19,7 @@ import FAQAccordion from "../components/Faq";
 import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
 import PopularSearches from "../components/PopularSearches";
+import BlogSidebar from "../components/BlogSidebar";
 
 export default function CompanyNameChange() {
  const [gstChecked, setGstChecked] = useState(false);

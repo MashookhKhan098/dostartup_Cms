@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { handleWhatsAppSubmission, handleNeedHelpWhatsApp } from "@/lib/form-utils";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
+import { CheckCircle2, MessageCircle, ExternalLink, X, Clock, Calendar } from "lucide-react";
 
 export default function StartBusinessPage({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
@@ -515,27 +515,29 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
               {/* MAIN CONTENT */}
               <div className="flex-1 space-y-6">
 
-                {/* BADGE */}
-                <div>
-                  <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1">
-                    <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
-                    <span className="text-xs font-medium text-[#C15F3C]">
-                      #1 REGISTRATION PLATFORM
-                    </span>
-                  </div>
+                {/* BADGES */}
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-[10px] font-bold px-2.5 py-1.5 rounded-full border border-green-200/50 uppercase tracking-wider">
+                    <CheckCircle2 size={12} className="text-green-600" />
+                    Expert Guide
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 text-[10px] font-bold px-2.5 py-1.5 rounded-full border border-blue-200/50 uppercase tracking-wider">
+                    <Clock size={12} className="text-blue-600" />
+                    Updated Weekly
+                  </span>
                 </div>
 
                 {/* HEADING */}
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-semibold text-[#2F2E2B] leading-tight">
-                    Start Your<br />
+                  <h1 className="text-2xl sm:text-4xl font-bold text-[#2F2E2B] leading-tight">
+                    {activeEntity} Registration<br />
                     <span className="text-[#C15F3C]">
-                      Dream Business
+                      in India
                     </span>
                   </h1>
 
-                  <p className="text-sm text-[#6F6B63] leading-relaxed mt-3">
-                    Join 50,000+ entrepreneurs. Complete digital process, expert support.
+                  <p className="text-sm text-[#6F6B63] leading-relaxed mt-4">
+                    Join 50,000+ entrepreneurs. Complete digital process with expert CA support and seamless compliance tracking.
                   </p>
                 </div>
 
@@ -561,12 +563,15 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                     Key Features
                   </span>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {[
                       { icon: "⚡", text: "Same Day Registration" },
                       { icon: "🛡️", text: "100% Digital" },
                       { icon: "🎯", text: "Expert CA Support" },
                       { icon: "💰", text: "Money-back Guarantee" },
+                      { icon: "💻", text: "Digital Process" },
+                      { icon: "🚀", text: "Super Fast Service" },
+                      { icon: "📋", text: "Trade License Renewal" },
                     ].map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2 bg-white rounded-lg p-3 border border-[#E5E2DA] shadow-sm">
                         <span className="text-base">{feature.icon}</span>
@@ -577,16 +582,65 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                 </div>
 
                 {/* LINKS */}
-                <div className="flex justify-between text-sm">
-                  <button className="text-[#C15F3C] hover:underline">
-                    Terms and conditions
-                  </button>
-                  <button 
-                    onClick={() => handleNeedHelpWhatsApp(activeEntity || "Business Registration")}
-                    className="text-[#C15F3C] hover:underline"
-                  >
-                    Need Help?
-                  </button>
+                <div className="flex justify-between text-sm items-center mb-6">
+                  <div className="flex gap-4">
+                    <button className="text-[#C15F3C] font-medium hover:underline">
+                      Terms and conditions
+                    </button>
+                    <button 
+                      onClick={() => handleNeedHelpWhatsApp(activeEntity || "Business Registration")}
+                      className="text-[#C15F3C] font-medium hover:underline"
+                    >
+                      Need Help?
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-1.5 bg-green-50 px-3 py-1 rounded-full border border-green-200">
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-[10px] font-bold text-green-700 uppercase">System Online</span>
+                  </div>
+                </div>
+                
+                {/* EXTRA CONTENT TO FILL SPACE */}
+                <div className="mt-8 pt-8 border-t border-[#E5E2DA] grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <h4 className="text-xs font-bold text-[#201F1D] uppercase tracking-wider">What&apos;s Included</h4>
+                    <ul className="space-y-2">
+                      {[
+                        "Free Name Search & Approval assistance",
+                        "Preparation of Incorporation documents",
+                        "Dedicated Relationship Manager",
+                        "Digital Signature (DSC) for primary owner",
+                        "Lifetime compliance support"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-[#6F6B63]">
+                          <CheckCircle2 size={14} className="text-[#C15F3C] mt-0.5 shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <h4 className="text-xs font-bold text-[#201F1D] uppercase tracking-wider">Trust & Security</h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-[#F9F8F6] p-3 rounded-xl border border-[#E5E2DA] flex flex-col items-center text-center">
+                        <span className="text-xl mb-1">🔒</span>
+                        <span className="text-[10px] font-bold text-[#201F1D] uppercase">Secure Data</span>
+                      </div>
+                      <div className="bg-[#F9F8F6] p-3 rounded-xl border border-[#E5E2DA] flex flex-col items-center text-center">
+                        <span className="text-xl mb-1">🤝</span>
+                        <span className="text-[10px] font-bold text-[#201F1D] uppercase">Verified Experts</span>
+                      </div>
+                      <div className="bg-[#F9F8F6] p-3 rounded-xl border border-[#E5E2DA] flex flex-col items-center text-center">
+                        <span className="text-xl mb-1">📜</span>
+                        <span className="text-[10px] font-bold text-[#201F1D] uppercase">Govt. Certified</span>
+                      </div>
+                      <div className="bg-[#F9F8F6] p-3 rounded-xl border border-[#E5E2DA] flex flex-col items-center text-center">
+                        <span className="text-xl mb-1">⚡</span>
+                        <span className="text-[10px] font-bold text-[#201F1D] uppercase">Fast Delivery</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>

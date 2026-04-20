@@ -8,6 +8,7 @@ import Popularsearches from '../components/PopularSearches';
 import Hero from '../components/Registration/Hero';
 import DynamicTabContent from '../components/DynamicTabContent';
 import { handleWhatsAppSubmission } from "@/lib/form-utils";
+
 export default function Home() {
 
 const heroProps = {
@@ -15,7 +16,7 @@ const heroProps = {
  heading: "Get Your ",
  headingHighlight: "Udyam Registration",
  description:
- "Register your business easily with Udyam Registration. Our expert team ensures a seamless process, helping you establish your business under the Government of India's Udyam scheme.",
+ "Register your business easily with Udyam Registration (MSME). Our expert team ensures a seamless process, helping you establish your business under the Government of India's Udyam scheme and unlock exclusive benefits.",
 
  features: [
  {
@@ -122,17 +123,30 @@ const heroProps = {
 
   buttonText: "Apply Now",
   onSubmit: (data: any) => handleWhatsAppSubmission(data, "Udyam Registration"),
+  offers: [
+    {
+      icon: <div className="w-5 h-5 bg-[#A94E30] rounded" />,
+      title: "MSME Benefits Access",
+      description: "Unlock collateral-free loans, subsidies, and government tenders."
+    },
+    {
+      icon: <div className="w-5 h-5 bg-[#A94E30] rounded opacity-80" />,
+      title: "LEDGERS HR Software",
+      description: "Attendance, Payroll, Employee Portal & HR Compliance"
+    },
+    {
+      icon: <div className="text-[10px] font-bold text-[#C15F3C]">GST</div>,
+      title: "Save 18% with GST Registration",
+      description: "Get GST invoice with Input Tax Credit"
+    }
+  ]
 };
-
-
- 
-
 
  return (
  <>
  <Navbar />
  <Hero {...heroProps}/>
- <DynamicTabContent category="E-Invoice" />
+ <DynamicTabContent category="udyam-registration" />
  <div className="bg-[#F4F3EE] py-8">
    <DynamicPricingSection category="udyam-registration" />
  </div>
@@ -142,4 +156,3 @@ const heroProps = {
  </>
  );
 }
-

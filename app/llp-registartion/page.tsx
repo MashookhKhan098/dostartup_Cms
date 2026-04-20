@@ -14,7 +14,7 @@ export default function LLPRegistration() {
       <Hero defaultEntity="LLP" />
       <DynamicTabContent category="llp" />
       <DynamicPricingSection category="llp" />
-      <FAQAccordion category="llp" />
+      <FAQAccordion category="llp" title="FAQs for LLP Registration" />
       <PopularSearches />
       <Footer />
     </div>
