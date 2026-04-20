@@ -14,8 +14,17 @@ export default function HeroSection() {
   useEffect(() => {
     const TOKEN = "API-217623942d11b9d6bc4576ea8b24b38";
     fetch(`${STRAPI_URL}/api/content/item/heroslide?token=${TOKEN}`)
-      .then((res) => res.json())
-      .then((json) => setImages(json.images || []));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((json) => setImages(json.images || []))
+      .catch((err) => {
+        console.error("Failed to fetch hero slides:", err);
+        setImages([]);
+      });
   }, []);
 
   const slideContent = [

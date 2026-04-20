@@ -1,9 +1,9 @@
-﻿import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Registration/Hero';
+import RcmcRegistrationHero from '../components/Registration/RcmcRegistrationHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 // 
 export default function Home() {
@@ -37,73 +37,13 @@ const heroProps = {
  text: "Dedicated Experts to Guide You at Every Step",
  },
  ],
-
- // ================= RIGHT SIDE =================
- tabs: [],
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- // 🔹 TEXT BLOCKS
- {
- type: "text",
- content: "Service",
- },
- {
- type: "text",
- content:
- "RCMC Registration\nRegistration-Cum-Membership Certificate issued by export promotion councils. Required to avail export benefits and schemes.",
- },
-
- // 🔹 SELECT & INPUT FIELDS
- {
- type: "input",
- inputType: "text",
- name: "pan_gstin",
- placeholder: "PAN / GSTIN",
- },
- {
- type: "select",
- name: "state",
- placeholder: "Select State / UT",
- options: [
- "Andaman & Nicobar Islands",
- "Delhi",
- "Gujarat",
- "Karnataka",
- "Maharashtra",
- "Tamil Nadu",
- "Telangana",
- "Uttar Pradesh",
- "West Bengal",
- ],
- },
- {
- type: "select",
- name: "variant",
- placeholder: "Select Variant",
- options: [
- "Textile Exporters",
- "Handicraft Exporters",
- "Leather Exporters",
- "Marine Product Exporters",
- "Others",
- ],
- },
- ],
-
- buttonText: "Apply Now",
 };
-
-
-
 
 
  return (
  <>
  <Navbar />
- <Hero {...heroProps}/>
+ <RcmcRegistrationHero {...heroProps}/>
  <DynamicTabContent category="E-Invoice" />
  <div className="bg-[#F4F3EE] py-8">
    <DynamicPricingSection category="rcmc-registration" />
@@ -114,4 +54,3 @@ const heroProps = {
  </>
  );
 }
-

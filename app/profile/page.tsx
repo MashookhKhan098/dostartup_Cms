@@ -401,6 +401,201 @@ export default function ProfilePage() {
         }))
       }
 
+      // Fetch user's ISO registrations (using email)
+      let userISO: any[] = []
+      const { data: isoData, error: isoError } = await supabase
+        .from('iso_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!isoError && isoData) {
+        userISO = isoData.map(p => ({
+          ...p,
+          registration_type: 'ISO Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's PF registrations (using email)
+      let userPF: any[] = []
+      const { data: pfData, error: pfError } = await supabase
+        .from('pf_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!pfError && pfData) {
+        userPF = pfData.map(p => ({
+          ...p,
+          registration_type: 'PF Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's ESI registrations (using email)
+      let userESI: any[] = []
+      const { data: esiData, error: esiError } = await supabase
+        .from('esi_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!esiError && esiData) {
+        userESI = esiData.map(p => ({
+          ...p,
+          registration_type: 'ESI Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Professional Tax registrations (using email)
+      let userProfTax: any[] = []
+      const { data: profTaxData, error: profTaxError } = await supabase
+        .from('professional_tax_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!profTaxError && profTaxData) {
+        userProfTax = profTaxData.map(p => ({
+          ...p,
+          state: p.state_region,
+          pan_gstin: p.cin_gstin,
+          registration_type: 'Professional Tax Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's RCMC registrations (using email)
+      let userRCMC: any[] = []
+      const { data: rcmcData, error: rcmcError } = await supabase
+        .from('rcmc_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!rcmcError && rcmcData) {
+        userRCMC = rcmcData.map(p => ({
+          ...p,
+          state: p.state_region,
+          pan_gstin: p.cin_gstin,
+          registration_type: 'RCMC Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's RERA registrations (using email)
+      let userRERA: any[] = []
+      const { data: reraData, error: reraError } = await supabase
+        .from('tn_rera_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!reraError && reraData) {
+        userRERA = reraData.map(p => ({
+          ...p,
+          state: p.state_region,
+          pan_gstin: p.pan_gstin,
+          registration_type: 'RERA Agent Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's 12A registrations (using email)
+      let userA12: any[] = []
+      const { data: a12Data, error: a12Error } = await supabase
+        .from('a12_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!a12Error && a12Data) {
+        userA12 = a12Data.map(p => ({
+          ...p,
+          registration_type: '12A Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's 80G registrations (using email)
+      let userA80G: any[] = []
+      const { data: a80gData, error: a80gError } = await supabase
+        .from('a80g_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!a80gError && a80gData) {
+        userA80G = a80gData.map(p => ({
+          ...p,
+          registration_type: '80G Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's 12A & 80G registrations (using email)
+      let userA1280G: any[] = []
+      const { data: a1280gData, error: a1280gError } = await supabase
+        .from('a12_80g_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!a1280gError && a1280gData) {
+        userA1280G = a1280gData.map(p => ({
+          ...p,
+          state: p.state,
+          pan_gstin: p.pan_gstin,
+          registration_type: '12A & 80G Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Barcode registrations (using email)
+      let userBarcode: any[] = []
+      const { data: barcodeData, error: barcodeError } = await supabase
+        .from('barcode_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!barcodeError && barcodeData) {
+        userBarcode = barcodeData.map(p => ({
+          ...p,
+          registration_type: 'Barcode Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Darpan registrations (using email)
+      let userDarpan: any[] = []
+      const { data: darpanData, error: darpanError } = await supabase
+        .from('darpan_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!darpanError && darpanData) {
+        userDarpan = darpanData.map(p => ({
+          ...p,
+          registration_type: 'NGO Darpan Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
       // Combine all
       const allRegistrations = [
         ...userRegistrations, 
@@ -422,7 +617,18 @@ export default function ProfilePage() {
         ...userHalal,
         ...userIcegate,
         ...userIEC,
-        ...userLEI
+        ...userLEI,
+        ...userISO,
+        ...userPF,
+        ...userESI,
+        ...userProfTax,
+        ...userRCMC,
+        ...userRERA,
+        ...userA12,
+        ...userA80G,
+        ...userA1280G,
+        ...userBarcode,
+        ...userDarpan
       ]
       console.log('Final combined registrations:', allRegistrations)
       setPayments(allRegistrations)
@@ -578,6 +784,15 @@ export default function ProfilePage() {
                           )}
                           {reg.pan_gstin && (
                              <p className="text-xs text-[#B1ADA1] mt-1 font-mono">PAN/GST: {reg.pan_gstin}</p>
+                          )}
+                          {reg.cin_gstin && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">CIN/GSTIN: {reg.cin_gstin}</p>
+                          )}
+                          {reg.employee_count && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Employees: {reg.employee_count}</p>
+                          )}
+                          {reg.state_region && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Region: {reg.state_region}</p>
                           )}
                           {reg.variant && (
                              <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Variant: {reg.variant}</p>
