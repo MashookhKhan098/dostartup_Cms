@@ -1,7 +1,7 @@
 "use client";
+
 import { useState, Suspense, useEffect } from 'react';
 import Navbar from "../components/Navbar";
-
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
@@ -19,11 +19,11 @@ export default function Home() {
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUserId(user?.id || null);
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUserId(session?.user?.id || null);
     };
-    fetchUser();
+    getUser();
   }, []);
 
   const handleFormSubmit = async (formData: Record<string, FormDataEntryValue>) => {
@@ -109,4 +109,3 @@ export default function Home() {
     </>
   );
 }
-
