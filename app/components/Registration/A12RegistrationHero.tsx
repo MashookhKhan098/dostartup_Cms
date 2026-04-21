@@ -132,7 +132,7 @@ export default function A12RegistrationHero({
             `🔢 *PAN / GSTIN:* ${formData.pan_gstin.toUpperCase()}\n` +
             `📍 *State:* ${formData.state}\n` +
             `💰 *Payment ID:* ${response.razorpay_payment_id}\n\n` +
-            `I have successfully completed the payment. Please proceed with my 12A registration.`;
+            `I have successfully completed the payment. Please proceed with my registration.`;
 
           const waUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999644807"}?text=${encodeURIComponent(whatsappMsg)}`;
 
@@ -174,7 +174,7 @@ export default function A12RegistrationHero({
           }).catch(err => console.error("Confirmation email failed", err));
 
           setWhatsappUrl(waUrl);
-          setCountdown(3);
+          setCountdown(5);
           setShowSuccessModal(true);
           setPaymentSuccess(true);
           setLoading(false);

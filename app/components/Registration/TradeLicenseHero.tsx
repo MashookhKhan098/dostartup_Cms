@@ -186,7 +186,7 @@ export default function TradeLicenseHero({
           }).catch(err => console.error("Notification API failed", err));
 
           setWhatsappUrl(waUrl);
-          setCountdown(3);
+          setCountdown(5);
           setShowSuccessModal(true);
           setPaymentSuccess(true);
           setLoading(false);

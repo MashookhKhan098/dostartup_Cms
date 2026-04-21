@@ -113,6 +113,7 @@ export default function Home() {
         registrationId={registrationId}
         packageName={packageName}
         serviceName="GST Return Filing"
+        tableName="gst_returns"
       />
     </>
   );

@@ -199,7 +199,7 @@ export default function IsoRegistrationHero({
           }).catch(err => console.error("Confirmation email failed", err));
 
           setWhatsappUrl(waUrl);
-          setCountdown(3);
+          setCountdown(5);
           setShowSuccessModal(true);
           setPaymentSuccess(true);
           setLoading(false);

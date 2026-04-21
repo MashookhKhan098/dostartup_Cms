@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
-import { X, CheckCircle, Upload, CreditCard, LogIn } from 'lucide-react'
+import { X, CheckCircle, Upload, CreditCard, LogIn, MessageCircle, ExternalLink } from 'lucide-react'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 type Step = 'auth' | 'documents' | 'payment' | 'success'
@@ -14,6 +14,7 @@ interface ServiceModalProps {
   registrationId: string
   packageName: string
   serviceName?: string
+  tableName?: string
 }
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -35,7 +36,7 @@ const PACKAGE_PRICES: Record<string, number> = {
 declare global { interface Window { Razorpay: any } }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function ServiceModal({ isOpen, onClose, registrationId, packageName, serviceName = 'Service' }: ServiceModalProps) {
+export default function ServiceModal({ isOpen, onClose, registrationId, packageName, serviceName = 'Service', tableName }: ServiceModalProps) {
   const [step, setStep] = useState<Step>('auth')
   const [authMode, setAuthMode] = useState<AuthMode>('login')
 
@@ -43,6 +44,7 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
   const [authLoading, setAuthLoading] = useState(false)
   const [authError, setAuthError] = useState('')
 
@@ -54,6 +56,8 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
   // Payment state
   const [payLoading, setPayLoading] = useState(false)
   const amount = PACKAGE_PRICES[packageName] || 999
+  const [whatsappUrl, setWhatsappUrl] = useState('')
+  const [countdown, setCountdown] = useState(0)
 
   // Load Razorpay script
   useEffect(() => {
@@ -71,6 +75,17 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
       if (user) setStep('documents')
     })
   }, [isOpen])
+
+  // Success redirect timer
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+    if (step === 'success' && countdown > 0) {
+      timer = setTimeout(() => setCountdown(countdown - 1), 1000)
+    } else if (step === 'success' && countdown === 0 && whatsappUrl) {
+      window.open(whatsappUrl, '_blank')
+    }
+    return () => clearTimeout(timer)
+  }, [step, countdown, whatsappUrl])
 
   // Reset on close
   const handleClose = () => {
@@ -215,6 +230,67 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
     setStep('payment')
   }
 
+  // ─── Notification Handler ──────────────────────────────────────────────────
+  const triggerNotifications = async (payUser: any, paymentId: string) => {
+    try {
+      // 1. Fetch full registration data
+      const effectiveTableName = tableName || (serviceName === 'GST Return Filing' ? 'gst_returns' : 'gst_registrations');
+      const { data: regData, error: fetchError } = await supabase
+        .from(effectiveTableName)
+        .select('*')
+        .eq('id', registrationId)
+        .single();
+
+      if (fetchError) throw fetchError;
+
+      // 2. Prepare payload for confirmation API
+      const userEmail = payUser?.email || email;
+      const userName = payUser?.user_metadata?.full_name || name || userEmail?.split('@')[0];
+      const userPhone = regData.phone || regData.phone_no || phone || '';
+
+      const details: Record<string, any> = {};
+      Object.entries(regData).forEach(([key, value]) => {
+        if (!['id', 'user_id', 'status', 'created_at', 'updated_at', 'payment_id', 'payment_status', 'amount'].includes(key) && value) {
+          const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          details[label] = value;
+        }
+      });
+
+      // 3. Trigger Confirmation Email
+      await fetch('/api/send-confirmation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: userName,
+          email: userEmail,
+          phone: userPhone,
+          service: serviceName,
+          paymentId: paymentId,
+          details
+        }),
+      });
+
+      // 4. Generate WhatsApp URL
+      const whatsappMsg =
+        `🔔 *New Registration - DoStartup*\n\n` +
+        `👤 *Name:* ${userName}\n` +
+        `📞 *Phone:* ${userPhone}\n` +
+        `📧 *Email:* ${userEmail || "Not provided"}\n` +
+        `🎯 *Service:* ${serviceName}\n` +
+        `💰 *Payment ID:* ${paymentId}\n\n` +
+        `*Details:*\n` +
+        Object.entries(details).map(([k, v]) => `• ${k}: ${v}`).join('\n') +
+        `\n\nI have successfully completed the payment. Please proceed with my application.`;
+
+      const waUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999644807"}?text=${encodeURIComponent(whatsappMsg)}`;
+      setWhatsappUrl(waUrl);
+      setCountdown(5);
+
+    } catch (err) {
+      console.error('Notification error:', err);
+    }
+  }
+
   // ─── Payment Handler ──────────────────────────────────────────────────────
   const handlePayment = async () => {
     setPayLoading(true)
@@ -237,56 +313,63 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
           try {
             const { data: { user: payUser } } = await supabase.auth.getUser();
             const user = payUser;
-            
+
             // Get user's name from auth metadata
             const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
-            
+
             // Save payment record
-            await supabase.from('payments').insert([{
-              registration_id: registrationId,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_order_id: response.razorpay_order_id,
-              amount,
-              package: packageName,
-              payment_status: 'paid',
-            }])
-            
+            try {
+              await supabase.from('payments').insert([{
+                registration_id: registrationId,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                amount,
+                package: packageName,
+                payment_status: 'paid',
+              }]);
+            } catch (err: any) {
+              console.error('Payment record error:', err.message);
+            }
+
             // Update profile with user's name
             if (user) {
-              console.log('💾 SAVING PROFILE:', { userId: user.id, name: userName, email: user.email })
-              
+              console.log('💾 SAVING PROFILE:', { userId: user.id, name: userName, email: user.email });
               try {
                 const { data, error } = await supabase
                   .from('profiles')
-                  .upsert({
-                    id: user.id,
-                    name: userName,
-                    email: user.email
-                  })
-                  .select()
-                
+                  .upsert({ id: user.id, name: userName, email: user.email })
+                  .select();
                 if (error) {
-                  console.error('❌ PROFILE SAVE FAILED:', error.message)
+                  console.error('❌ PROFILE SAVE FAILED:', error.message);
                 } else {
-                  console.log('✅ PROFILE SAVED:', data)
+                  console.log('✅ PROFILE SAVED:', data);
                 }
               } catch (err: any) {
-                console.error('❌ PROFILE ERROR:', err.message)
+                console.error('❌ PROFILE ERROR:', err.message);
               }
             }
-            
+
             // Update registration status
             if (user) {
-              await supabase.from('gst_registrations').update({ status: 'paid', user_id: user.id }).eq('id', registrationId)
-              
-              // Also update gst_returns if this is a GST Return Filing
-              if (serviceName === 'GST Return Filing') {
-                await supabase.from('gst_returns').update({ status: 'paid', user_id: user.id }).eq('id', registrationId)
+              try {
+                await supabase.from('gst_registrations').update({ status: 'paid', user_id: user.id }).eq('id', registrationId);
+                if (serviceName === 'GST Return Filing') {
+                  await supabase.from('gst_returns').update({ status: 'paid', user_id: user.id }).eq('id', registrationId);
+                }
+              } catch (err: any) {
+                console.error('Registration update error:', err.message);
               }
             }
-          } catch (err) { console.error('Payment record error:', err) }
-          setPayLoading(false)
-          setStep('success')
+
+            // Trigger Notifications
+            await triggerNotifications(payUser, response.razorpay_payment_id);
+
+            setPayLoading(false);
+            setStep('success');
+          } catch (err: any) {
+            console.error('Payment completion error:', err);
+            setPayLoading(false);
+          }
         },
         prefill: { name: '', email: '', contact: '' },
         theme: { color: '#C15F3C' },
@@ -384,6 +467,16 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
                     placeholder="Full Name"
                     value={name}
                     onChange={e => setName(e.target.value)}
+                    className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none"
+                  />
+                )}
+                {authMode === 'signup' && (
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={phone}
+                    onChange={e => setPhone(e.target.value.replace(/[^0-9]/g, ""))}
+                    maxLength={10}
                     className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:ring-1 focus:ring-[#C15F3C] outline-none"
                   />
                 )}
@@ -521,21 +614,52 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
 
           {/* ─── Step 4: Success ─────────────────────────────────────────── */}
           {step === 'success' && (
-            <div className="text-center space-y-4 py-4">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+            <div className="text-center space-y-6 py-6 px-4">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                <CheckCircle className="w-10 h-10 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-[#2F2E2B]">Payment Successful! 🎉</h3>
-              <p className="text-sm text-[#6F6B63]">
-                Your {serviceName} application is complete. Our team will contact you within 24 hours.
-              </p>
-              <p className="text-xs text-[#B1ADA1]">Registration ID: {registrationId.slice(0, 8)}...</p>
-              <button
-                onClick={handleClose}
-                className="bg-[#C15F3C] text-white font-semibold px-8 py-3 rounded-xl text-sm hover:bg-[#A94E30] transition"
-              >
-                Done
-              </button>
+              <div>
+                <h3 className="text-xl font-bold text-[#2F2E2B]">Payment Successful! 🎉</h3>
+                <p className="text-sm text-[#6F6B63] mt-2">
+                  Your {serviceName} application is being processed.
+                </p>
+              </div>
+
+              <div className="bg-[#F9F8F6] rounded-2xl p-4 border border-[#E5E2DA] space-y-2 mb-6">
+                <div className="flex justify-between text-xs">
+                  <span className="text-[#6F6B63]">Service</span>
+                  <span className="font-semibold text-[#2F2E2B]">{serviceName}</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-[#6F6B63]">Registration ID</span>
+                  <span className="font-mono text-[#B1ADA1]">{registrationId.slice(0, 8)}...</span>
+                </div>
+              </div>
+
+              <div className="space-y-3 pt-2">
+                <button
+                  onClick={() => window.open(whatsappUrl, '_blank')}
+                  className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Complete via WhatsApp
+                  <ExternalLink className="w-4 h-4 opacity-70" />
+                </button>
+                
+                {whatsappUrl && (
+                  <p className="text-[11px] text-[#6F6B63] flex items-center justify-center gap-2">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    Redirecting to WhatsApp in <span className="font-bold text-[#C15F3C]">{countdown}s</span>...
+                  </p>
+                )}
+
+                <button
+                  onClick={handleClose}
+                  className="w-full text-sm text-[#B1ADA1] hover:text-[#2F2E2B] font-medium transition py-2"
+                >
+                  Skip and goto Dashboard
+                </button>
+              </div>
             </div>
           )}
         </div>

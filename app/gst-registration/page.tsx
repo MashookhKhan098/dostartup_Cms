@@ -91,6 +91,7 @@ export default function Home() {
         registrationId={registrationId}
         packageName={packageName}
         serviceName="GST Registration"
+        tableName="gst_registrations"
       />
     </>
   );

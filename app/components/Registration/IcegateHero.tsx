@@ -174,7 +174,7 @@ export default function IcegateHero({
           }).catch(err => console.error("Notification API failed", err));
 
           setWhatsappUrl(waUrl);
-          setCountdown(3);
+          setCountdown(5);
           setStep(4); // Use step 4 to signal background state
           setShowSuccessModal(true);
           setPaymentSuccess(true);

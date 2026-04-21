@@ -55,10 +55,14 @@ export async function POST(request: Request) {
           </div>
           <div style="padding: 30px;">
             <p style="color: #2F2E2B; font-size: 16px; line-height: 1.6;">Our team will review your details and contact you within 24 hours to proceed with the next steps.</p>
+            
             <div style="background: #F4F3EE; padding: 20px; border-radius: 8px; margin-top: 20px;">
-              <p style="margin: 0; color: #6F6B63; font-size: 14px;"><strong>Payment ID:</strong> ${paymentId}</p>
-              <p style="margin: 5px 0 0 0; color: #6F6B63; font-size: 14px;"><strong>Service:</strong> ${service}</p>
+              <h4 style="margin: 0 0 10px 0; color: #2F2E2B; font-size: 15px; border-bottom: 1px solid #E5E2DA; padding-bottom: 5px;">Registration Details</h4>
+              <p style="margin: 5px 0; color: #6F6B63; font-size: 14px;"><strong>Service:</strong> ${service}</p>
+              <p style="margin: 5px 0; color: #6F6B63; font-size: 14px;"><strong>Payment ID:</strong> ${paymentId}</p>
+              ${Object.entries(details).map(([key, value]) => `<p style="margin: 5px 0; color: #6F6B63; font-size: 14px;"><strong>${key}:</strong> ${value}</p>`).join('')}
             </div>
+
             <p style="color: #6F6B63; font-size: 14px; margin-top: 20px;">If you have any questions, feel free to reply to this email or contact us on WhatsApp at ${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}.</p>
           </div>
         </div>
