@@ -32,7 +32,7 @@ export default function Home() {
  <Navbar />
  
  {/* Hero Section - Virtual Office + GSTIN */}
- <div className="bg-gradient-to-b from-gray-50 to-white py-6 px-4">
+ <div className="bg-[#F4F3EE] py-6 px-4">
  <div className="max-w-7xl mx-auto">
  {/* Top Section */}
  <div className="text-center mb-12">
@@ -48,15 +48,15 @@ export default function Home() {
 
  {/* Feature Pills */}
  <div className="flex flex-wrap justify-center gap-4 mb-16">
- <div className="flex items-center gap-2 bg-[#F4F3EE] px-6 py-3 rounded-full shadow-sm border border-gray-200">
+ <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
  <CheckCircle2 className="w-5 h-5 text-green-500" />
  <span className="text-gray-700 font-medium">Assured Virtual Office Setup</span>
  </div>
- <div className="flex items-center gap-2 bg-[#F4F3EE] px-6 py-3 rounded-full shadow-sm border border-gray-200">
+ <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
  <CheckCircle2 className="w-5 h-5 text-green-500" />
  <span className="text-gray-700 font-medium">11-Month Agreement with Stamp Paper</span>
  </div>
- <div className="flex items-center gap-2 bg-[#F4F3EE] px-6 py-3 rounded-full shadow-sm border border-gray-200">
+ <div className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
  <CheckCircle2 className="w-5 h-5 text-green-500" />
  <span className="text-gray-700 font-medium">100% Refund Guarantee</span>
  </div>
@@ -65,7 +65,7 @@ export default function Home() {
  {/* Main Content Grid */}
  <div className="grid md:grid-cols-2 gap-8 items-start">
  {/* Left Side - Form */}
- <div className="bg-[#F4F3EE] rounded-2xl shadow-lg p-8 border border-gray-100">
+ <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
  <h2 className="text-2xl font-bold text-gray-900 mb-6">
  Start Your Virtual Office
  </h2>
@@ -89,12 +89,12 @@ export default function Home() {
  <input
  type="text"
  placeholder="PAN / GSTIN"
- className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+ className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-[#F9F8F6]"
  />
  
  <div className="relative">
  <select
- className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none appearance-none bg-[#F4F3EE]"
+ className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none appearance-none bg-[#F9F8F6]"
  >
  <option>Virtual Office Location</option>
  <option>Delhi</option>
@@ -124,46 +124,46 @@ export default function Home() {
  </div>
 
  {/* Right Side - Benefits */}
- <div className="bg-gradient-to-br from-purple-100 via-pink-50 to-orange-100 rounded-2xl p-8 space-y-6">
- <div className="flex items-start gap-4">
- <div className="bg-[#F4F3EE] rounded-full p-2 mt-1">
- <CheckCircle2 className="w-6 h-6 text-green-500" />
+ <div className="bg-white rounded-2xl p-8 space-y-6 shadow-lg border border-gray-100">
+ <div className="flex items-start gap-4 group">
+ <div className="bg-[#FDF1EC] rounded-2xl p-3 mt-1 shadow-sm border border-[#C15F3C]/10 group-hover:bg-[#C15F3C]/10 transition-colors duration-300">
+ <CheckCircle2 className="w-6 h-6 text-[#C15F3C]" />
  </div>
  <div>
- <h3 className="font-bold text-gray-900 text-lg mb-2">
+ <h3 className="font-bold text-[#201F1D] text-lg mb-2">
  Assured Service by Trusted Partner
  </h3>
- <p className="text-gray-600">
+ <p className="text-[#6F6B63] text-sm leading-relaxed">
  Your virtual office and GSTIN setup is handled by verified partners, ensuring a
  seamless and professional experience.
  </p>
  </div>
  </div>
 
- <div className="flex items-start gap-4">
- <div className="bg-[#F4F3EE] rounded-full p-2 mt-1">
- <CheckCircle2 className="w-6 h-6 text-green-500" />
+ <div className="flex items-start gap-4 group">
+ <div className="bg-[#FDF1EC] rounded-2xl p-3 mt-1 shadow-sm border border-[#C15F3C]/10 group-hover:bg-[#C15F3C]/10 transition-colors duration-300">
+ <CheckCircle2 className="w-6 h-6 text-[#C15F3C]" />
  </div>
  <div>
- <h3 className="font-bold text-gray-900 text-lg mb-2">
+ <h3 className="font-bold text-[#201F1D] text-lg mb-2">
  11-Month Agreement with Stamp Paper
  </h3>
- <p className="text-gray-600">
+ <p className="text-[#6F6B63] text-sm leading-relaxed">
  Receive a legally valid 11-month agreement, documented on stamp paper,
  providing full compliance and peace of mind.
  </p>
  </div>
  </div>
 
- <div className="flex items-start gap-4">
- <div className="bg-[#F4F3EE] rounded-full p-2 mt-1">
- <CheckCircle2 className="w-6 h-6 text-green-500" />
+ <div className="flex items-start gap-4 group">
+ <div className="bg-[#FDF1EC] rounded-2xl p-3 mt-1 shadow-sm border border-[#C15F3C]/10 group-hover:bg-[#C15F3C]/10 transition-colors duration-300">
+ <CheckCircle2 className="w-6 h-6 text-[#C15F3C]" />
  </div>
  <div>
- <h3 className="font-bold text-gray-900 text-lg mb-2">
+ <h3 className="font-bold text-[#201F1D] text-lg mb-2">
  100% Refund Guarantee
  </h3>
- <p className="text-gray-600">
+ <p className="text-[#6F6B63] text-sm leading-relaxed">
  If the service is not successfully completed, you are eligible for a full refund,
  making your investment risk-free.
  </p>
@@ -175,20 +175,20 @@ export default function Home() {
  </div>
  
  {/* Feature Cards Section */}
- <div className="py-6 px-4 bg-[#F4F3EE]">
+ <div className="py-12 px-4 bg-[#F4F3EE]">
  <div className="max-w-7xl mx-auto">
- <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+ <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
  {features.map((feature, index) => (
  <div 
  key={index}
- className="bg-[#F4F3EE] rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+ className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-[#E5E2DA]"
  >
- <div className="flex justify-center mb-4">
- <div className="p-3 bg-blue-50 rounded-full">
+ <div className="flex justify-center mb-6">
+ <div className="p-4 bg-blue-50 rounded-2xl shadow-inner">
  {feature.icon}
  </div>
  </div>
- <h3 className="text-xl font-semibold text-gray-900 text-center mb-3">
+ <h3 className="text-xl font-bold text-gray-900 text-center mb-4">
  {feature.title}
  </h3>
  <p className="text-gray-600 text-center text-sm leading-relaxed">

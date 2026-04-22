@@ -1,6 +1,6 @@
 "use client";
 
-
+import React from "react";
 import { supabase } from "../../lib/supabase";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -83,17 +83,17 @@ export default function Home() {
 
   const features = [
     {
-      icon: <Rocket className="w-8 h-8 text-blue-600" />,
+      icon: <Rocket className="w-8 h-8" />,
       title: "Scale Smarter, Grow Faster",
       description: "Designed specifically for CA, Tax Practitioners & Consultants professionals, LEDGERS Pro CRM streamlines client management and operations, empowering you to scale your business seamlessly.",
     },
     {
-      icon: <Zap className="w-8 h-8 text-blue-600" />,
+      icon: <Zap className="w-8 h-8" />,
       title: "Productivity, Powered by AI",
       description: "Stay ahead in a competitive market. Our AI tools equip your in-house team to manage client demands efficiently while maintaining quality and compliance.",
     },
     {
-      icon: <Users className="w-8 h-8 text-blue-600" />,
+      icon: <Users className="w-8 h-8" />,
       title: "Dedicated Customer Experience",
       description: "Our team is committed to providing personalized support at every step-onboarding, troubleshooting, and optimizing your use of LEDGERS.",
     },
@@ -126,23 +126,23 @@ export default function Home() {
       <Hero {...heroProps} onSubmit={handleSubmit} />
 
       {/* Feature Cards Section */}
-      <div className="py-6 px-4 bg-[#F4F3EE]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="py-16 bg-[#F4F3EE]">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-[#F4F3EE] rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+                className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-[#E5E2DA] group"
               >
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-blue-50 rounded-full">
-                    {feature.icon}
+                <div className="flex justify-center mb-6">
+                  <div className="p-4 bg-[#FDF1EC] rounded-2xl border border-[#C15F3C]/10 group-hover:bg-[#C15F3C]/10 transition-colors">
+                    {React.cloneElement(feature.icon as React.ReactElement, { className: "w-8 h-8 text-[#C15F3C]" })}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 text-center mb-3">
+                <h3 className="text-xl font-bold text-[#2F2E2B] text-center mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 text-center text-sm leading-relaxed">
+                <p className="text-[#6F6B63] text-center text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>

@@ -5,6 +5,9 @@ import NewsletterForm from "./NewsletterForm";
 
 interface DynamicTabContentProps {
   category: string;
+  hideHero?: boolean;
+  showOnlyHero?: boolean;
+  showOnlyContent?: boolean;
 }
 
 const COCKPIT_URL = process.env.NEXT_PUBLIC_COCKPIT_URL;
@@ -676,6 +679,33 @@ const FALLBACK_DATA: Record<string, any> = {
       }
     ],
     author: { name: "DoStartup Expert", role: "Design Law & IP Specialist", updatedDate: "Jan 2025" }
+  },
+  "virtual-office": {
+    title: "Virtual Office Registration and GST Compliance",
+    description: "Secure a professional business address for GST registration and legal presence across India. Ideal for digital businesses, remote teams, and startups.",
+    introduction: "At DoStartup, we provide end-to-end Virtual Office solutions that are fully compliant with GST regulations. From premium address allocation and 11-month agreements to mail handling and document management, our platform empowers you to establish a corporate presence anywhere in India without the overheads of a physical office.",
+    sections: [
+      {
+        heading: "What is a Virtual Office?",
+        content: "A Virtual Office is a modern business solution that provides a professional mailing address, document handling, and GST registration capabilities without requiring a physical workspace. It is fully recognized by the Ministry of Corporate Affairs and the GST Department, making it a legal and cost-effective choice for modern businesses.",
+        points: ["Full Legal GST Compliance", "Premium Business Addresses", "No Physical Lease Required", "Digital Document Management", "Reduced Operational Costs"]
+      },
+      {
+        heading: "Benefits of Virtual Office for GSTIN",
+        content: "Businesses can now obtain multiple GST registrations in different states using our virtual office service, which is essential for e-commerce and pan-India service providers.",
+        points: ["Cross-State Business Expansion", "Legally Valid 11-Month Agreements", "NOC & Address Proof Support", "Dedicated Local Representative", "Instant Mail Notifications"]
+      },
+      {
+        heading: "Required Documents for Setup",
+        content: "To register your Virtual Office, you'll need standard KYC documents for the business and its directors.",
+        points: ["PAN Card of the Business", "Identity Proof of Directors (Aadhaar/Passport)", "MOA/AOA or Partnership Deed", "Previous Business Address Proof", "Board Resolution for New Address"]
+      },
+      {
+        heading: "The Registration Process", content: "Our streamlined process ensures your virtual office is ready for GST filing in as little as 48 hours.",
+        points: ["Step 1: Choose Your Desired State/City", "Step 2: Submit Digital Copies of KYC", "Step 3: Receive 11-Month Rental Agreement", "Step 4: Use Address for GST/MCA Filings", "Step 5: Active Document Scanning & Forwarding"]
+      }
+    ],
+    author: { name: "Santosh Kumari M", role: "Business Advisor", updatedDate: "Jan 2025" }
   }
 };
 
@@ -686,7 +716,12 @@ FALLBACK_DATA["patent"] = FALLBACK_DATA["patent-registration"];
 FALLBACK_DATA["certificate-incumbency"] = FALLBACK_DATA["certificate-incumbency"]; // already exists
 
 
-export default function DynamicTabContent({ category }: DynamicTabContentProps) {
+export default function DynamicTabContent({ 
+  category, 
+  hideHero = false, 
+  showOnlyHero = false, 
+  showOnlyContent = false 
+}: DynamicTabContentProps) {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -748,256 +783,260 @@ export default function DynamicTabContent({ category }: DynamicTabContentProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Modern Hero with Split Layout */}
-        <div className="relative mb-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {!hideHero && !showOnlyContent && (
+          <div className="relative mb-16">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-            {/* Left Side - Content */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-gray-100 rounded-full px-4 py-1.5 shadow-sm">
-                <div className="relative">
-                  <div className="w-2 h-2 bg-[#C15F3C] rounded-full animate-ping absolute"></div>
-                  <div className="w-2 h-2 bg-[#C15F3C] rounded-full"></div>
-                </div>
-                <span className="text-xs font-medium text-[#C15F3C] uppercase">Expert Guide</span>
-                <div className="w-px h-3 bg-gray-100"></div>
-                <span className="text-xs text-[#6F6B63]">Updated Weekly</span>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-[#2F2E2B]">{data.title?.split(' ').slice(0, -1).join(' ')}</span>
-                <br />
-                <span className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] bg-clip-text text-transparent">
-                  {data.title?.split(' ').slice(-1)}
-                </span>
-              </h1>
-
-              <p className="text-[#6F6B63] text-lg leading-relaxed max-w-lg">
-                {data.description}
-              </p>
-
-              <div className="flex items-center gap-4 pt-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-r from-[#C15F3C] to-[#A94E30] border-2 border-white shadow-sm"></div>
-                  ))}
-                </div>
-                <div className="text-sm text-[#6F6B63]">
-                  <span className="font-semibold text-[#2F2E2B]">2.5k+</span> readers this week
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side - Visual */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#C15F3C]/20 to-transparent rounded-full blur-3xl"></div>
-              <div className="relative bg-[#F9F8F6] rounded-2xl shadow-xl border border-gray-100 p-6 backdrop-blur-sm">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C15F3C] to-[#A94E30] flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
+              {/* Left Side - Content */}
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-gray-100 rounded-full px-4 py-1.5 shadow-sm">
+                  <div className="relative">
+                    <div className="w-2 h-2 bg-[#C15F3C] rounded-full animate-ping absolute"></div>
+                    <div className="w-2 h-2 bg-[#C15F3C] rounded-full"></div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-[#2F2E2B]">Quick Summary</h3>
-                    <p className="text-xs text-[#6F6B63]">5 min read</p>
+                  <span className="text-xs font-medium text-[#C15F3C] uppercase">Expert Guide</span>
+                  <div className="w-px h-3 bg-gray-100"></div>
+                  <span className="text-xs text-[#6F6B63]">Updated Weekly</span>
+                </div>
+
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                  <span className="text-[#2F2E2B]">{data.title?.split(' ').slice(0, -1).join(' ')}</span>
+                  <br />
+                  <span className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] bg-clip-text text-transparent">
+                    {data.title?.split(' ').slice(-1)}
+                  </span>
+                </h1>
+
+                <p className="text-[#6F6B63] text-lg leading-relaxed max-w-lg">
+                  {data.description}
+                </p>
+
+                <div className="flex items-center gap-4 pt-4">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-r from-[#C15F3C] to-[#A94E30] border-2 border-white shadow-sm"></div>
+                    ))}
+                  </div>
+                  <div className="text-sm text-[#6F6B63]">
+                    <span className="font-semibold text-[#2F2E2B]">2.5k+</span> readers this week
                   </div>
                 </div>
-                <ul className="space-y-2">
-                  {[
-                    "Complete step-by-step guide",
-                    "Expert tips & best practices",
-                    "Latest compliance updates"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-[#6F6B63]">
-                      <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </div>
+
+              {/* Right Side - Visual */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#C15F3C]/20 to-transparent rounded-full blur-3xl"></div>
+                <div className="relative bg-[#F9F8F6] rounded-2xl shadow-xl border border-gray-100 p-6 backdrop-blur-sm">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C15F3C] to-[#A94E30] flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-[#2F2E2B]">Quick Summary</h3>
+                      <p className="text-xs text-[#6F6B63]">5 min read</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-2">
+                    {[
+                      "Complete step-by-step guide",
+                      "Expert tips & best practices",
+                      "Latest compliance updates"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-[#6F6B63]">
+                        <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
 
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-12 gap-8">
+        {!showOnlyHero && (
+          <div className="grid lg:grid-cols-12 gap-8">
 
-          {/* Sidebar - Left */}
-          <div className="lg:col-span-3 order-2 lg:order-1">
-            <div className="space-y-6 sticky top-6">
+            {/* Sidebar - Left */}
+            <div className="lg:col-span-3 order-2 lg:order-1">
+              <div className="space-y-6 sticky top-6">
 
-              {/* Author Profile Card */}
-              <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-                <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-5 py-4">
-                  <h3 className="text-white font-semibold text-sm">About the Author</h3>
-                </div>
-                <div className="p-5 text-center">
-                  <div className="w-20 h-20 mx-auto bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-3">
-                    {(data.author?.name || "NA")
-                      .split(" ")
-                      .map((n: string) => n[0])
-                      .join("")}
+                {/* Author Profile Card */}
+                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-5 py-4">
+                    <h3 className="text-white font-semibold text-sm">About the Author</h3>
                   </div>
-                  <h4 className="font-semibold text-[#2F2E2B]">{data.author?.name || "Expert Author"}</h4>
-                  <p className="text-sm text-[#C15F3C] font-medium mt-1">{data.author?.role || "Industry Expert"}</p>
-                  <div className="flex items-center justify-center gap-1 mt-2">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-3 h-3 fill-[#C15F3C] text-[#C15F3C]" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  <div className="p-5 text-center">
+                    <div className="w-20 h-20 mx-auto bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-3">
+                      {(data.author?.name || "NA")
+                        .split(" ")
+                        .map((n: string) => n[0])
+                        .join("")}
+                    </div>
+                    <h4 className="font-semibold text-[#2F2E2B]">{data.author?.name || "Expert Author"}</h4>
+                    <p className="text-sm text-[#C15F3C] font-medium mt-1">{data.author?.role || "Industry Expert"}</p>
+                    <div className="flex items-center justify-center gap-1 mt-2">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-[#C15F3C] text-[#C15F3C]" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Progress Card */}
+                <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <svg className="w-5 h-5 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <h4 className="font-semibold text-[#2F2E2B] text-sm">Reading Progress</h4>
+                  </div>
+                  <div className="h-2 bg-[#F9F8F6] rounded-full overflow-hidden mb-2">
+                    <div className="h-full bg-gradient-to-r from-[#C15F3C] to-[#A94E30] rounded-full" style={{ width: '65%' }}></div>
+                  </div>
+                  <p className="text-xs text-[#B1ADA1]">65% completed • 3 min left</p>
+                </div>
+
+                {/* Quick Actions Card */}
+                <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+                  <h4 className="font-semibold text-[#2F2E2B] text-sm mb-4">Quick Actions</h4>
+                  <div className="space-y-2">
+                    <button className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl border border-[#E5E2DA] text-sm text-[#6F6B63] hover:border-[#C15F3C] hover:text-[#C15F3C] transition-all group">
+                      <span>Save for later</span>
+                      <svg className="w-4 h-4 group-hover:text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                       </svg>
+                    </button>
+                    <button className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl border border-[#E5E2DA] text-sm text-[#6F6B63] hover:border-[#C15F3C] hover:text-[#C15F3C] transition-all group">
+                      <span>Download PDF</span>
+                      <svg className="w-4 h-4 group-hover:text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Main Content - Center */}
+            <div className="lg:col-span-6 order-1 lg:order-2">
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+
+                {/* Content */}
+                <div className="px-6 md:px-8 py-3 md:py-4">
+
+                  {/* Introduction */}
+                  <div className="mb-10">
+                    <div className="prose prose-lg max-w-none">
+                      <p className="text-[#6F6B63] leading-relaxed text-base first-letter:text-4xl first-letter:font-bold first-letter:text-[#C15F3C] first-letter:mr-2 first-letter:float-left">
+                        {data.introduction}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Sections with Timeline Style */}
+                  {(data.sections || []).map((section: any, index: number) => (
+                    <div key={index} className="relative mb-12 last:mb-0 pl-8 border-l-2 border-gray-100 group">
+                      <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#F9F8F6] border-2 border-[#C15F3C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <div className="w-2 h-2 rounded-full bg-[#C15F3C]"></div>
+                      </div>
+
+                      <h2 className="text-2xl font-bold text-[#2F2E2B] mb-4 group-hover:text-[#C15F3C] transition-colors">
+                        {section.heading}
+                      </h2>
+
+                      <p className="text-[#6F6B63] leading-relaxed mb-5">
+                        {section.content}
+                      </p>
+
+                      {(section.points || []).length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {(section.points || []).map((point: string, i: number) => {
+                            const [title] = point.split(":");
+                            return (
+                              <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F9F8F6] rounded-full text-xs text-[#6F6B63] hover:bg-[#C15F3C] hover:text-white transition-all cursor-pointer group/item">
+                                <svg className="w-3 h-3 group-hover/item:text-white" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                                <span>{title}</span>
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+            </div>
+
+            {/* Sidebar - Right */}
+            <div className="lg:col-span-3 order-3">
+              <div className="space-y-6 sticky top-6">
+
+                {/* Need Help Card */}
+                <div className="bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-2xl p-5 text-white text-center shadow-lg">
+                  <div className="w-14 h-14 mx-auto bg-white/20 rounded-2xl flex items-center justify-center text-2xl mb-3">
+                    💬
+                  </div>
+                  <h3 className="font-bold text-base mb-1">Need Help?</h3>
+                  <p className="text-white/85 text-xs mb-4">Chat with our experts for personalized guidance</p>
+                  <button 
+                    onClick={() => {
+                      const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+                      if (number) {
+                        window.open(`https://wa.me/${number}`, "_blank");
+                      }
+                    }}
+                    className="w-full bg-white text-[#C15F3C] font-semibold py-2.5 rounded-xl text-sm hover:bg-[#F9F8F6] transition-all"
+                  >
+                    Start Conversation →
+                  </button>
+                </div>
+
+                {/* Popular Topics */}
+                <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+                  <h4 className="font-semibold text-[#2F2E2B] text-sm mb-4">Popular Topics</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["#Compliance", "#Registration", "#Taxation", "#Legal", "#Startup", "#Funding", "#IPR", "#GST"].map((tag) => (
+                      <span key={tag} className="px-3 py-1 bg-[#F9F8F6] border border-[#E5E2DA] rounded-full text-xs text-[#6F6B63] hover:bg-[#C15F3C] hover:text-white hover:border-[#C15F3C] transition-all cursor-pointer">
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Progress Card */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <svg className="w-5 h-5 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  <h4 className="font-semibold text-[#2F2E2B] text-sm">Reading Progress</h4>
-                </div>
-                <div className="h-2 bg-[#F9F8F6] rounded-full overflow-hidden mb-2">
-                  <div className="h-full bg-gradient-to-r from-[#C15F3C] to-[#A94E30] rounded-full" style={{ width: '65%' }}></div>
-                </div>
-                <p className="text-xs text-[#B1ADA1]">65% completed • 3 min left</p>
-              </div>
-
-              {/* Quick Actions Card */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                <h4 className="font-semibold text-[#2F2E2B] text-sm mb-4">Quick Actions</h4>
-                <div className="space-y-2">
-                  <button className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl border border-[#E5E2DA] text-sm text-[#6F6B63] hover:border-[#C15F3C] hover:text-[#C15F3C] transition-all group">
-                    <span>Save for later</span>
-                    <svg className="w-4 h-4 group-hover:text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                {/* Weekly Newsletter */}
+                <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-2">
+                    <svg className="w-5 h-5 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                  </button>
-                  <button className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl border border-[#E5E2DA] text-sm text-[#6F6B63] hover:border-[#C15F3C] hover:text-[#C15F3C] transition-all group">
-                    <span>Download PDF</span>
-                    <svg className="w-4 h-4 group-hover:text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Main Content - Center */}
-          <div className="lg:col-span-6 order-1 lg:order-2">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-
-              {/* Content */}
-              <div className="px-6 md:px-8 py-3 md:py-4">
-
-                {/* Introduction */}
-                <div className="mb-10">
-                  <div className="prose prose-lg max-w-none">
-                    <p className="text-[#6F6B63] leading-relaxed text-base first-letter:text-4xl first-letter:font-bold first-letter:text-[#C15F3C] first-letter:mr-2 first-letter:float-left">
-                      {data.introduction}
-                    </p>
+                    <h4 className="font-semibold text-[#2F2E2B] text-sm">Weekly Newsletter</h4>
                   </div>
+                  <p className="text-xs text-[#6F6B63] mb-3">Get expert insights delivered to your inbox</p>
+                  <NewsletterForm
+                    wrapperClassName="flex flex-col gap-2"
+                    inputClassName="w-full px-3 py-2 border border-[#E5E2DA] rounded-lg text-sm bg-[#F9F8F6] focus:ring-1 focus:ring-[#C15F3C] outline-none placeholder-[#B1ADA1]"
+                    buttonClassName="w-full px-4 py-2 bg-[#C15F3C] text-white rounded-lg text-sm font-semibold hover:bg-[#A94E30] transition-all"
+                  />
                 </div>
 
-                {/* Sections with Timeline Style */}
-                {(data.sections || []).map((section: any, index: number) => (
-                  <div key={index} className="relative mb-12 last:mb-0 pl-8 border-l-2 border-gray-100 group">
-                    <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#F9F8F6] border-2 border-[#C15F3C] flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <div className="w-2 h-2 rounded-full bg-[#C15F3C]"></div>
-                    </div>
-
-                    <h2 className="text-2xl font-bold text-[#2F2E2B] mb-4 group-hover:text-[#C15F3C] transition-colors">
-                      {section.heading}
-                    </h2>
-
-                    <p className="text-[#6F6B63] leading-relaxed mb-5">
-                      {section.content}
-                    </p>
-
-                    {(section.points || []).length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {(section.points || []).map((point: string, i: number) => {
-                          const [title] = point.split(":");
-                          return (
-                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F9F8F6] rounded-full text-xs text-[#6F6B63] hover:bg-[#C15F3C] hover:text-white transition-all cursor-pointer group/item">
-                              <svg className="w-3 h-3 group-hover/item:text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                              <span>{title}</span>
-                            </span>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                ))}
               </div>
-
             </div>
+
           </div>
-
-          {/* Sidebar - Right */}
-          <div className="lg:col-span-3 order-3">
-            <div className="space-y-6 sticky top-6">
-
-              {/* Need Help Card */}
-              <div className="bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-2xl p-5 text-white text-center shadow-lg">
-                <div className="w-14 h-14 mx-auto bg-white/20 rounded-2xl flex items-center justify-center text-2xl mb-3">
-                  💬
-                </div>
-                <h3 className="font-bold text-base mb-1">Need Help?</h3>
-                <p className="text-white/85 text-xs mb-4">Chat with our experts for personalized guidance</p>
-                <button 
-                  onClick={() => {
-                    const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-                    if (number) {
-                      window.open(`https://wa.me/${number}`, "_blank");
-                    }
-                  }}
-                  className="w-full bg-white text-[#C15F3C] font-semibold py-2.5 rounded-xl text-sm hover:bg-[#F9F8F6] transition-all"
-                >
-                  Start Conversation →
-                </button>
-              </div>
-
-              {/* Popular Topics */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                <h4 className="font-semibold text-[#2F2E2B] text-sm mb-4">Popular Topics</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["#Compliance", "#Registration", "#Taxation", "#Legal", "#Startup", "#Funding", "#IPR", "#GST"].map((tag) => (
-                    <span key={tag} className="px-3 py-1 bg-[#F9F8F6] border border-[#E5E2DA] rounded-full text-xs text-[#6F6B63] hover:bg-[#C15F3C] hover:text-white hover:border-[#C15F3C] transition-all cursor-pointer">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Weekly Newsletter */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <svg className="w-5 h-5 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <h4 className="font-semibold text-[#2F2E2B] text-sm">Weekly Newsletter</h4>
-                </div>
-                <p className="text-xs text-[#6F6B63] mb-3">Get expert insights delivered to your inbox</p>
-                <NewsletterForm
-                  wrapperClassName="flex flex-col gap-2"
-                  inputClassName="w-full px-3 py-2 border border-[#E5E2DA] rounded-lg text-sm bg-[#F9F8F6] focus:ring-1 focus:ring-[#C15F3C] outline-none placeholder-[#B1ADA1]"
-                  buttonClassName="w-full px-4 py-2 bg-[#C15F3C] text-white rounded-lg text-sm font-semibold hover:bg-[#A94E30] transition-all"
-                />
-              </div>
-
-            </div>
-          </div>
-
-        </div>
+        )}
       </div>
     </div>
   );
