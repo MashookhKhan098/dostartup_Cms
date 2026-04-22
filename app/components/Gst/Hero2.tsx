@@ -275,16 +275,16 @@ export default function DynamicHeroSection({
 
   return (
     <div className="bg-[#F4F3EE]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
 
           {/* LEFT SECTION */}
-          <div className="flex-1 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6">
-            <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex-1 bg-white rounded-2xl shadow-xl border border-[#E5E2DA] p-8 lg:p-10">
+            <div className="flex flex-col md:flex-row gap-10">
 
               {/* LEFT SIDEBAR WITH IMAGE PLACEHOLDER */}
               <div className="w-full md:w-64 flex-shrink-0">
-                <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
+                <div className="w-full h-64 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
                   <span className="text-white font-bold text-xl uppercase tracking-tighter">REGISTRATIONS</span>
                 </div>
 
@@ -315,7 +315,7 @@ export default function DynamicHeroSection({
               </div>
 
               {/* MAIN CONTENT */}
-              <div className="flex-1 space-y-6">
+              <div className="flex-1 space-y-8">
 
                 {/* BADGE */}
                 <div>
@@ -382,6 +382,47 @@ export default function DynamicHeroSection({
                   >
                     Need Help?
                   </button>
+                </div>
+
+                {/* Additional Page Content to fill space */}
+                <div className="mt-8 p-6 lg:p-8 bg-[#F9F8F6] rounded-2xl border border-[#E5E2DA] relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#C15F3C]/5 rounded-full -mr-16 -mt-16 transition-transform duration-500 group-hover:scale-110" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#C15F3C]/5 rounded-full -ml-12 -mb-12" />
+                  
+                  <h4 className="text-sm font-bold text-[#C15F3C] uppercase mb-4 tracking-widest flex items-center gap-3">
+                    <span className="w-2 h-2 bg-[#C15F3C] rounded-full animate-pulse" />
+                    Complete {headingHighlight || "Registration"} Guide
+                  </h4>
+                  <p className="text-base text-[#6F6B63] leading-relaxed mb-6 font-medium">
+                    {description || "Our comprehensive support ensures your business stays compliant with the latest government regulations. We handle the entire application process, documentation, and follow-ups."}
+                  </p>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-sm transition-all hover:shadow-md">
+                      <div className="w-8 h-8 rounded-lg bg-[#FDF1EC] flex items-center justify-center text-[#C15F3C] flex-shrink-0">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-[#2F2E2B]">Fully Compliant</p>
+                        <p className="text-[10px] text-[#9D9690]">Verified by our CA team</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-sm transition-all hover:shadow-md">
+                      <div className="w-8 h-8 rounded-lg bg-[#FDF1EC] flex items-center justify-center text-[#C15F3C] flex-shrink-0">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-[#2F2E2B]">Swift Turnaround</p>
+                        <p className="text-[10px] text-[#9D9690]">Fastest application filing</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 flex items-center gap-4 text-[11px] text-[#B1ADA1] font-medium border-t border-gray-100 pt-4">
+                    <span className="flex items-center gap-1.5"><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg> No Hidden Costs</span>
+                    <span className="flex items-center gap-1.5"><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg> Real-time Tracking</span>
+                  </div>
                 </div>
 
 
