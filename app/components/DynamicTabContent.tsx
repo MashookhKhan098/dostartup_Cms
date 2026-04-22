@@ -953,7 +953,15 @@ export default function DynamicTabContent({ category }: DynamicTabContentProps) 
                 </div>
                 <h3 className="font-bold text-base mb-1">Need Help?</h3>
                 <p className="text-white/85 text-xs mb-4">Chat with our experts for personalized guidance</p>
-                <button className="w-full bg-white text-[#C15F3C] font-semibold py-2.5 rounded-xl text-sm hover:bg-[#F9F8F6] transition-all">
+                <button 
+                  onClick={() => {
+                    const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+                    if (number) {
+                      window.open(`https://wa.me/${number}`, "_blank");
+                    }
+                  }}
+                  className="w-full bg-white text-[#C15F3C] font-semibold py-2.5 rounded-xl text-sm hover:bg-[#F9F8F6] transition-all"
+                >
                   Start Conversation →
                 </button>
               </div>

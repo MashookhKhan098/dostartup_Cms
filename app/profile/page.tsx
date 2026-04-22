@@ -529,7 +529,7 @@ export default function ProfilePage() {
       // Fetch user's 80G registrations (using email)
       let userA80G: any[] = []
       const { data: a80gData, error: a80gError } = await supabase
-        .from('a80g_registration')
+        .from('registration_80g')
         .select('*')
         .eq('email', user.email)
         .order('created_at', { ascending: false })
@@ -596,6 +596,23 @@ export default function ProfilePage() {
         }))
       }
 
+      // Fetch user's Shop & Establishment Act registrations (using email)
+      let userShopEstablishment: any[] = []
+      const { data: shopEstablishmentData, error: shopEstablishmentError } = await supabase
+        .from('shop_establishment_act_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!shopEstablishmentError && shopEstablishmentData) {
+        userShopEstablishment = shopEstablishmentData.map(p => ({
+          ...p,
+          registration_type: 'Shop & Establishment Act Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
       // Combine all
       const allRegistrations = [
         ...userRegistrations, 
@@ -628,7 +645,8 @@ export default function ProfilePage() {
         ...userA80G,
         ...userA1280G,
         ...userBarcode,
-        ...userDarpan
+        ...userDarpan,
+        ...userShopEstablishment
       ]
       console.log('Final combined registrations:', allRegistrations)
       setPayments(allRegistrations)
