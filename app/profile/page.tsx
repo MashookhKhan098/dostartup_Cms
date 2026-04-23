@@ -17,8 +17,15 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data: { user }, error } = await supabase.auth.getUser();
-      const session = user ? { user } : null;
+      let user: any = null;
+      try {
+        const { data } = await supabase.auth.getUser();
+        user = data.user;
+      } catch {
+        // Lock contention — fall back to cached session
+        const { data: sessionData } = await supabase.auth.getSession();
+        user = sessionData.session?.user ?? null;
+      }
 
       if (!user) {
         router.push('/login')
@@ -613,6 +620,132 @@ export default function ProfilePage() {
         }))
       }
 
+      // Fetch user's FCRA registrations (using email)
+      let userFcra: any[] = []
+      const { data: fcraData, error: fcraError } = await supabase
+        .from('fcra_registration')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!fcraError && fcraData) {
+        userFcra = fcraData.map(p => ({
+          ...p,
+          registration_type: 'FCRA Registration',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's BIS Certification registrations (using email)
+      let userBis: any[] = []
+      const { data: bisData, error: bisError } = await supabase
+        .from('bis_registration')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!bisError && bisData) {
+        userBis = bisData.map(p => ({
+          ...p,
+          registration_type: 'BIS Certification',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Udyam registrations (using email)
+      let userUdyam: any[] = []
+      const { data: udyamData, error: udyamError } = await supabase
+        .from('udyam_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!udyamError && udyamData) {
+        userUdyam = udyamData.map(p => ({
+          ...p,
+          registration_type: 'Udyam Registration',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Drug License registrations (using email)
+      let userDrugLicense: any[] = []
+      const { data: drugData, error: drugError } = await supabase
+        .from('drug_license')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!drugError && drugData) {
+        userDrugLicense = drugData.map(p => ({
+          ...p,
+          registration_type: 'Drug License',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Digital Signature registrations (using email)
+      let userDigitalSignature: any[] = []
+      const { data: dsData, error: dsError } = await supabase
+        .from('digital_signature')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!dsError && dsData) {
+        userDigitalSignature = dsData.map(p => ({
+          ...p,
+          registration_type: 'Digital Signature Certificate',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's APEDA registrations (using email)
+      let userApeda: any[] = []
+      const { data: apedaData, error: apedaError } = await supabase
+        .from('apeda_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!apedaError && apedaData) {
+        userApeda = apedaData.map(p => ({
+          ...p,
+          registration_type: 'APEDA Registration',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Fire License registrations (using email)
+      let userFireLicense: any[] = []
+      const { data: fireLicenseData, error: fireLicenseError } = await supabase
+        .from('fire_license')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!fireLicenseError && fireLicenseData) {
+        userFireLicense = fireLicenseData.map(p => ({
+          ...p,
+          registration_type: 'Fire License',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Incumbency Certificate registrations (using email)
+      let userIncumbency: any[] = []
+      const { data: incumbencyData, error: incumbencyError } = await supabase
+        .from('incumbency_certificate')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!incumbencyError && incumbencyData) {
+        userIncumbency = incumbencyData.map(p => ({
+          ...p,
+          registration_type: 'Certificate of Incumbency',
+          status: p.payment_state || 'paid'
+        }))
+      }
+
       // Combine all
       const allRegistrations = [
         ...userRegistrations, 
@@ -646,7 +779,15 @@ export default function ProfilePage() {
         ...userA1280G,
         ...userBarcode,
         ...userDarpan,
-        ...userShopEstablishment
+        ...userShopEstablishment,
+        ...userApeda,
+        ...userFireLicense,
+        ...userIncumbency,
+        ...userDrugLicense,
+        ...userUdyam,
+        ...userBis,
+        ...userFcra,
+        ...userDigitalSignature
       ]
       console.log('Final combined registrations:', allRegistrations)
       setPayments(allRegistrations)

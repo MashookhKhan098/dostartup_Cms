@@ -39,6 +39,7 @@ declare global { interface Window { Razorpay: any } }
 export default function ServiceModal({ isOpen, onClose, registrationId, packageName, serviceName = 'Service', tableName }: ServiceModalProps) {
   const [step, setStep] = useState<Step>('auth')
   const [authMode, setAuthMode] = useState<AuthMode>('login')
+  const [authChecking, setAuthChecking] = useState(false)
 
   // Auth state
   const [email, setEmail] = useState('')
@@ -71,8 +72,10 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
   // Check if already logged in when modal opens
   useEffect(() => {
     if (!isOpen) return
+    setAuthChecking(true)
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) setStep('documents')
+      setAuthChecking(false)
     })
   }, [isOpen])
 
@@ -442,8 +445,16 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
 
         <div className="p-6">
 
+          {/* ─── Auth checking spinner ───────────────────────────────────── */}
+          {authChecking && (
+            <div className="flex flex-col items-center justify-center py-16 gap-3">
+              <div className="w-8 h-8 border-3 border-[#C15F3C] border-t-transparent rounded-full animate-spin" />
+              <p className="text-sm text-[#6F6B63]">Checking session...</p>
+            </div>
+          )}
+
           {/* ─── Step 1: Auth ────────────────────────────────────────────── */}
-          {step === 'auth' && (
+          {!authChecking && step === 'auth' && (
             <div className="space-y-5">
               <div className="text-center">
                 <h3 className="text-lg font-semibold text-[#2F2E2B]">
@@ -518,7 +529,7 @@ export default function ServiceModal({ isOpen, onClose, registrationId, packageN
           )}
 
           {/* ─── Step 2: Documents ───────────────────────────────────────── */}
-          {step === 'documents' && (
+          {!authChecking && step === 'documents' && (
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg font-semibold text-[#2F2E2B]">Upload Documents</h3>
