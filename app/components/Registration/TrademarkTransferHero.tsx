@@ -7,7 +7,7 @@ import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
 
 export type Feature = { icon: string; text: string };
 
-export type UdyamRegistrationHeroProps = {
+export type TrademarkTransferHeroProps = {
   heading?: string;
   headingHighlight?: string;
   description?: string;
@@ -15,22 +15,69 @@ export type UdyamRegistrationHeroProps = {
   buttonText?: string;
 };
 
+const TRADEMARK_CLASSES = [
+  "Class 1 – Chemicals",
+  "Class 2 – Paints & Varnishes",
+  "Class 3 – Cosmetics & Cleaning",
+  "Class 4 – Lubricants & Fuels",
+  "Class 5 – Pharmaceuticals",
+  "Class 6 – Metal Goods",
+  "Class 7 – Machinery",
+  "Class 8 – Hand Tools",
+  "Class 9 – Electronics & Software",
+  "Class 10 – Medical Devices",
+  "Class 11 – Lighting & Appliances",
+  "Class 12 – Vehicles",
+  "Class 13 – Firearms",
+  "Class 14 – Jewellery & Watches",
+  "Class 15 – Musical Instruments",
+  "Class 16 – Paper & Stationery",
+  "Class 17 – Rubber & Plastics",
+  "Class 18 – Leather Goods & Bags",
+  "Class 19 – Building Materials",
+  "Class 20 – Furniture",
+  "Class 21 – Household Utensils",
+  "Class 22 – Ropes & Fibers",
+  "Class 23 – Yarns & Threads",
+  "Class 24 – Textiles & Fabrics",
+  "Class 25 – Clothing & Footwear",
+  "Class 26 – Lace & Embroidery",
+  "Class 27 – Carpets & Floor Coverings",
+  "Class 28 – Games & Toys",
+  "Class 29 – Meat, Fish & Dairy",
+  "Class 30 – Staple Foods",
+  "Class 31 – Agricultural Products",
+  "Class 32 – Beers & Non-Alcoholic Drinks",
+  "Class 33 – Alcoholic Beverages",
+  "Class 34 – Tobacco",
+  "Class 35 – Advertising & Business",
+  "Class 36 – Insurance & Finance",
+  "Class 37 – Construction & Repair",
+  "Class 38 – Telecommunications",
+  "Class 39 – Transport & Travel",
+  "Class 40 – Treatment of Materials",
+  "Class 41 – Education & Entertainment",
+  "Class 42 – IT & Software Services",
+  "Class 43 – Food & Drink Services",
+  "Class 44 – Medical & Beauty Services",
+  "Class 45 – Legal & Security Services",
+];
+
 const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
 const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 
 const FALLBACK_PACKAGES = [
-  { label: "Basic Registration – ₹1,499", amount: 1499 },
-  { label: "Standard Registration – ₹2,999", amount: 2999 },
-  { label: "Premium Registration – ₹4,999", amount: 4999 },
+  { label: "TM Transfer Drafting – ₹4,999", amount: 4999 },
+  { label: "End-to-End Assignment – ₹9,999", amount: 9999 },
 ];
 
-export default function UdyamRegistrationHero({
+export default function TrademarkTransferHero({
   heading,
   headingHighlight,
   description,
   features,
   buttonText,
-}: UdyamRegistrationHeroProps) {
+}: TrademarkTransferHeroProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -44,6 +91,9 @@ export default function UdyamRegistrationHero({
     name: "",
     phone: "",
     email: "",
+    brand_name: "",
+    application_number: "",
+    trademark_class: TRADEMARK_CLASSES[0],
     package: FALLBACK_PACKAGES[0]?.label || "",
   });
 
@@ -53,9 +103,7 @@ export default function UdyamRegistrationHero({
         const { data: { user }, error } = await supabase.auth.getUser();
         if (error) throw error;
         setIsLoggedIn(!!user);
-        if (user) {
-          setFormData(prev => ({ ...prev, email: user.email || "" }));
-        }
+        if (user) setFormData(prev => ({ ...prev, email: user.email || "" }));
       } catch (err: any) {
         console.warn("Auth check skipped:", err.message);
       }
@@ -64,7 +112,7 @@ export default function UdyamRegistrationHero({
 
     const fetchPricing = async () => {
       try {
-        const filter = JSON.stringify({ category: { "$regex": "^udyam-registration$", "$options": "i" } });
+        const filter = JSON.stringify({ category: { "$regex": "^trademark-transfer$", "$options": "i" } });
         const res = await fetch(
           `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
           { cache: "no-store" }
@@ -110,7 +158,7 @@ export default function UdyamRegistrationHero({
       const res = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, packageName: "Udyam Registration" }),
+        body: JSON.stringify({ amount, packageName: "Trademark Transfer" }),
       });
       const { orderId } = await res.json();
 
@@ -119,7 +167,7 @@ export default function UdyamRegistrationHero({
         amount: amount * 100,
         currency: "INR",
         name: "DoStartup",
-        description: "Udyam Registration",
+        description: "Trademark Transfer Service",
         order_id: orderId,
         handler: async function (response: any) {
           let user = null;
@@ -150,30 +198,37 @@ export default function UdyamRegistrationHero({
           }
 
           const whatsappMsg =
-            `🔔 *New Udyam Registration*\n\n` +
+            `🔔 *New Trademark Transfer Order*\n\n` +
             `👤 *Name:* ${formData.name}\n` +
             `📞 *Phone:* ${formData.phone}\n` +
             `📧 *Email:* ${formData.email || "Not provided"}\n` +
+            `📄 *App Number:* ${formData.application_number}\n` +
+            `™️ *Brand Name:* ${formData.brand_name}\n` +
+            `📋 *Class:* ${formData.trademark_class}\n` +
             `📦 *Package:* ${formData.package}\n` +
             `💰 *Payment ID:* ${response.razorpay_payment_id}\n\n` +
-            `I have successfully completed the payment. Please proceed with my Udyam Registration.`;
+            `I have successfully completed the payment. Please proceed with my Trademark Transfer assignment.`;
 
           const waUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999644807"}?text=${encodeURIComponent(whatsappMsg)}`;
 
           // Save to Supabase
           try {
-            const finalEmail = user?.email || formData.email || "noemail@udyam.com";
-            const { error: dbError } = await supabase.from("udyam_registration").insert({
+            const finalEmail = user?.email || formData.email || "noemail@trademark.com";
+            const { error: dbError } = await supabase.from("trademark_transfer").insert({
               name: formData.name,
               email: finalEmail,
               phone_no: formData.phone,
+              service: "Trademark Transfer",
+              application_number: formData.application_number,
+              brand_name: formData.brand_name,
+              class: formData.trademark_class,
               amount: amount,
               payment_id: response.razorpay_payment_id,
               payment_state: "paid",
             });
             if (dbError) console.error("DB insert error:", dbError);
           } catch (dbErr) {
-            console.error("Failed to insert Udyam record:", dbErr);
+            console.error("Failed to insert Trademark Transfer record:", dbErr);
           }
 
           // Send confirmation email
@@ -184,9 +239,14 @@ export default function UdyamRegistrationHero({
               name: formData.name,
               email: formData.email,
               phone: formData.phone,
-              service: "Udyam Registration",
+              service: "Trademark Transfer",
               paymentId: response.razorpay_payment_id,
-              details: { Package: formData.package },
+              details: {
+                "Application Number": formData.application_number,
+                "Brand Name": formData.brand_name,
+                "Class": formData.trademark_class,
+                "Package": formData.package,
+              },
             }),
           }).catch(err => console.error("Confirmation email failed", err));
 
@@ -197,11 +257,7 @@ export default function UdyamRegistrationHero({
           setLoading(false);
           setStep(0);
         },
-        prefill: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.phone,
-        },
+        prefill: { name: formData.name, email: formData.email, contact: formData.phone },
         theme: { color: "#C15F3C" },
         modal: { ondismiss: () => setLoading(false) },
       };
@@ -218,22 +274,29 @@ export default function UdyamRegistrationHero({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone || (!isLoggedIn && !formData.email)) {
-      alert("Please fill in all required fields");
-      return;
-    }
-    if (formData.phone.length !== 10) {
-      alert("Please enter a valid 10-digit phone number");
-      return;
-    }
-    if (!isLoggedIn && formData.email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        alert("Please enter a valid email address");
+    if (step === 1) {
+      if (!formData.name || !formData.phone || (!isLoggedIn && !formData.email)) {
+        alert("Please fill in all required fields");
         return;
       }
+      if (formData.phone.length !== 10) {
+        alert("Please enter a valid 10-digit phone number");
+        return;
+      }
+      if (!isLoggedIn && formData.email) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          alert("Please enter a valid email address");
+          return;
+        }
+      }
+      setStep(2);
+    } else if (step === 2) {
+      if (!formData.brand_name || !formData.trademark_class || !formData.application_number) {
+        alert("Please fill in all required fields");
+        return;
+      }
+      setStep(3);
     }
-    setStep(2);
   };
 
   return (
@@ -245,27 +308,21 @@ export default function UdyamRegistrationHero({
           <div className="flex-1 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6">
             <div className="flex flex-col md:flex-row gap-8">
               <div className="w-full md:w-64 flex-shrink-0">
-                <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
-                  <span className="text-white font-bold text-xl text-center px-4">Udyam Registration</span>
+                <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center text-center px-4">
+                  <span className="text-white font-bold text-xl">Trademark Transfer</span>
                 </div>
                 <div className="mt-4 space-y-2">
-                  {["MSME Benefits", "Collateral-Free Loans", "Government Subsidies"].map((item) => (
-                    <p key={item} className="text-sm text-[#6F6B63] hover:text-[#C15F3C] cursor-pointer">
-                      {item}
-                    </p>
+                  {["Legal Assignment", "Change of Ownership", "Secure Rights"].map((item) => (
+                    <p key={item} className="text-sm text-[#6F6B63] hover:text-[#C15F3C] cursor-pointer">{item}</p>
                   ))}
-                  <button className="text-sm text-[#C15F3C] font-medium hover:underline">
-                    Learn More →
-                  </button>
+                  <button className="text-sm text-[#C15F3C] font-medium hover:underline">Learn More →</button>
                 </div>
               </div>
 
               <div className="flex-1 space-y-6">
-                <div>
-                  <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1">
-                    <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
-                    <span className="text-xs font-medium text-[#C15F3C]">MSME REGISTRATION EXPERTS</span>
-                  </div>
+                <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1">
+                  <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
+                  <span className="text-xs font-medium text-[#C15F3C]">ASSIGNMENT EXPERTS</span>
                 </div>
 
                 <div>
@@ -277,9 +334,7 @@ export default function UdyamRegistrationHero({
                 </div>
 
                 <div className="bg-[#F9F8F6] border border-[#E5E2DA] rounded-2xl p-6">
-                  <span className="inline-block bg-[#C15F3C] text-white text-[10px] font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">
-                    Key Features
-                  </span>
+                  <span className="inline-block bg-[#C15F3C] text-white text-[10px] font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">Key Features</span>
                   <div className="space-y-3">
                     {features?.map((f, i) => (
                       <div key={i} className="flex items-center gap-3">
@@ -296,12 +351,7 @@ export default function UdyamRegistrationHero({
 
                 <div className="flex justify-between text-sm">
                   <button className="text-[#C15F3C] hover:underline">Terms and conditions</button>
-                  <button
-                    onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Udyam Registration")}
-                    className="text-[#C15F3C] hover:underline"
-                  >
-                    Need Help?
-                  </button>
+                  <button onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Trademark Transfer")} className="text-[#C15F3C] hover:underline">Need Help?</button>
                 </div>
               </div>
             </div>
@@ -310,87 +360,92 @@ export default function UdyamRegistrationHero({
           {/* RIGHT SIDEBAR – FORM */}
           <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden self-start">
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
-              <h2 className="text-lg font-semibold text-white">Apply for Udyam</h2>
-              <p className="text-sm text-[#F4F3EE]">MSME registration services</p>
+              <h2 className="text-lg font-semibold text-white">Transfer Your Trademark</h2>
+              <p className="text-sm text-[#F4F3EE]">Legal assignment of ownership</p>
             </div>
 
+            {/* Step Indicator */}
             <div className="flex items-center gap-0 px-6 pt-4">
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all ${step >= 1 ? "bg-[#C15F3C] border-[#C15F3C] text-white" : "border-[#E5E2DA] text-[#B1ADA1]"}`}>
-                {step > 1 ? "✓" : 1}
-              </div>
+              {[1, 2].map((s) => (
+                <div key={s} className="flex items-center flex-1">
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all ${step >= s ? "bg-[#C15F3C] border-[#C15F3C] text-white" : "border-[#E5E2DA] text-[#B1ADA1]"}`}>
+                    {step > s ? "✓" : s}
+                  </div>
+                  {s < 2 && <div className={`flex-1 h-0.5 mx-1 transition-all ${step > s ? "bg-[#C15F3C]" : "bg-[#E5E2DA]"}`} />}
+                </div>
+              ))}
             </div>
-            <p className="px-6 pt-1 pb-0 text-[11px] text-[#B1ADA1]">Step 1 of 1 – Contact &amp; Package Details</p>
+            <p className="px-6 pt-1 pb-0 text-[11px] text-[#B1ADA1]">
+              {step === 1 ? "Step 1 of 2 – Contact Details" : "Step 2 of 2 – Brand Details"}
+            </p>
 
-            <div className="p-6 space-y-6">
+            <div className="p-6">
               <form onSubmit={handleSubmit} className="space-y-4">
+
+                {/* STEP 1 */}
                 {step === 1 && (
                   <div className="space-y-4">
                     <div>
                       <label className="block text-xs text-[#6F6B63] mb-1">Your Name *</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="Full Name"
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                      />
+                      <input type="text" name="name" value={formData.name} onChange={handleInputChange} required placeholder="Full Name"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
-
                     {!isLoggedIn && (
                       <div>
                         <label className="block text-xs text-[#6F6B63] mb-1">Email *</label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="Email Address"
-                          className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                        />
+                        <input type="email" name="email" value={formData.email} onChange={handleInputChange} required placeholder="Email Address"
+                          className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                       </div>
                     )}
-
                     <div>
                       <label className="block text-xs text-[#6F6B63] mb-1">Phone Number *</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        maxLength={10}
-                        onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                          e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
-                        }}
+                      <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required maxLength={10}
+                        onInput={(e: React.FormEvent<HTMLInputElement>) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, ""); }}
                         placeholder="10-digit mobile number"
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white"
-                      />
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
+                    <button type="submit" className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition shadow-sm hover:shadow-md">
+                      Continue →
+                    </button>
+                  </div>
+                )}
 
+                {/* STEP 2 */}
+                {step === 2 && (
+                  <div className="space-y-4">
                     <div>
-                      <label className="block text-xs text-[#6F6B63] mb-1">Select Package *</label>
-                      <select
-                        name="package"
-                        value={formData.package}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
-                      >
-                        {pricingPackages.map(p => (
-                          <option key={p.label} value={p.label}>{p.label}</option>
-                        ))}
+                      <label className="block text-xs text-[#6F6B63] mb-1">Application Number *</label>
+                      <input type="text" name="application_number" value={formData.application_number} onChange={handleInputChange} required placeholder="Enter TM Application Number"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Brand Name *</label>
+                      <input type="text" name="brand_name" value={formData.brand_name} onChange={handleInputChange} required placeholder="Enter your brand name"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Trademark Class *</label>
+                      <select name="trademark_class" value={formData.trademark_class} onChange={handleInputChange} required
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer">
+                        {TRADEMARK_CLASSES.map(c => <option key={c} value={c}>{c}</option>)}
                       </select>
                     </div>
-
-                    <button
-                      type="submit"
-                      className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition shadow-sm hover:shadow-md mt-2"
-                    >
-                      Review &amp; Pay →
-                    </button>
+                    <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Select Package *</label>
+                      <select name="package" value={formData.package} onChange={handleInputChange} required
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer">
+                        {pricingPackages.map(p => <option key={p.label} value={p.label}>{p.label}</option>)}
+                      </select>
+                    </div>
+                    <div className="flex gap-2 pt-2">
+                      <button type="button" onClick={() => setStep(1)}
+                        className="flex-1 bg-white text-[#6F6B63] border border-[#E5E2DA] font-semibold py-3 rounded-lg text-sm hover:bg-[#F9F8F6] transition">
+                        Back
+                      </button>
+                      <button type="submit" className="flex-[2] bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition">
+                        Review &amp; Pay →
+                      </button>
+                    </div>
                   </div>
                 )}
 
@@ -398,7 +453,7 @@ export default function UdyamRegistrationHero({
                   <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
-                  <span>Secure Gateway · Instant access</span>
+                  <span>Secure Gateway · Professional Legal Support</span>
                 </div>
               </form>
             </div>
@@ -408,22 +463,16 @@ export default function UdyamRegistrationHero({
 
       {/* REVIEW MODAL */}
       <AnimatePresence>
-        {step === 2 && (
+        {step === 3 && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden"
-            >
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden">
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-8 py-6 flex justify-between items-center">
                 <div>
                   <h3 className="text-xl font-bold text-white">Review Your Details</h3>
-                  <p className="text-white/80 text-xs">Final check before Udyam Registration</p>
+                  <p className="text-white/80 text-xs">Final check before Transfer Application</p>
                 </div>
-                <button onClick={() => setStep(1)} className="text-white/60 hover:text-white transition">
-                  <X className="w-6 h-6" />
-                </button>
+                <button onClick={() => setStep(2)} className="text-white/60 hover:text-white transition"><X className="w-6 h-6" /></button>
               </div>
 
               <div className="p-8 space-y-6">
@@ -431,26 +480,27 @@ export default function UdyamRegistrationHero({
                   <div className="space-y-4">
                     <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Contact Information</h4>
                     <div className="space-y-2">
-                      <div className="flex flex-col text-sm">
-                        <span className="text-[#6F6B63]">Name</span>
-                        <span className="font-semibold text-[#2F2E2B]">{formData.name}</span>
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span className="text-[#6F6B63]">Email</span>
-                        <span className="font-semibold text-[#2F2E2B] break-all">{formData.email}</span>
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span className="text-[#6F6B63]">Phone</span>
-                        <span className="font-semibold text-[#2F2E2B]">{formData.phone}</span>
-                      </div>
+                      {[["Name", formData.name], ["Email", formData.email], ["Phone", formData.phone]].map(([label, val]) => (
+                        <div key={label} className="flex flex-col text-sm">
+                          <span className="text-[#6F6B63]">{label}</span>
+                          <span className="font-semibold text-[#2F2E2B] break-all">{val}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-
                   <div className="space-y-4 border-l border-[#E5E2DA] pl-6">
-                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Package Details</h4>
-                    <div className="flex flex-col text-sm">
-                      <span className="text-[#6F6B63]">Package</span>
-                      <span className="font-semibold text-[#2F2E2B]">{formData.package}</span>
+                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Brand Details</h4>
+                    <div className="space-y-2">
+                      {[
+                        ["App Number", formData.application_number],
+                        ["Brand Name", formData.brand_name],
+                        ["Class", formData.trademark_class],
+                      ].map(([label, val]) => (
+                        <div key={label} className="flex flex-col text-sm">
+                          <span className="text-[#6F6B63]">{label}</span>
+                          <span className="font-semibold text-[#2F2E2B]">{val}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -458,12 +508,10 @@ export default function UdyamRegistrationHero({
                 <div className="bg-[#F9F8F6] rounded-2xl p-6 border border-[#E5E2DA] flex justify-between items-center">
                   <div>
                     <span className="text-[#6F6B63] text-sm">Package Amount</span>
-                    <p className="text-2xl font-bold text-[#2F2E2B]">
-                      ₹{selectedPackage.amount.toLocaleString()} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span>
-                    </p>
+                    <p className="text-2xl font-bold text-[#2F2E2B]">₹{selectedPackage.amount.toLocaleString()} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Guaranteed</span>
+                    <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Guaranteed Service</span>
                     <div className="flex gap-1 justify-end text-[#C15F3C]">
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20">
@@ -475,17 +523,9 @@ export default function UdyamRegistrationHero({
                 </div>
 
                 <div className="flex gap-4">
-                  <button
-                    onClick={() => setStep(1)}
-                    className="flex-1 border border-[#E5E2DA] hover:bg-[#F9F8F6] text-[#6F6B63] font-bold py-4 rounded-2xl transition"
-                  >
-                    Edit Details
-                  </button>
-                  <button
-                    onClick={handlePayment}
-                    disabled={loading}
-                    className="flex-[2] bg-[#C15F3C] hover:bg-[#A94E30] text-white font-bold py-4 rounded-2xl transition shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2"
-                  >
+                  <button onClick={() => setStep(2)} className="flex-1 border border-[#E5E2DA] hover:bg-[#F9F8F6] text-[#6F6B63] font-bold py-4 rounded-2xl transition">Edit Details</button>
+                  <button onClick={handlePayment} disabled={loading}
+                    className="flex-[2] bg-[#C15F3C] hover:bg-[#A94E30] text-white font-bold py-4 rounded-2xl transition shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2">
                     {loading ? (
                       <span className="flex items-center gap-2">
                         <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
@@ -509,16 +549,10 @@ export default function UdyamRegistrationHero({
       <AnimatePresence>
         {showSuccessModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
-            >
+            <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] p-8 text-center relative">
-                <button onClick={() => setShowSuccessModal(false)} className="absolute top-4 right-4 text-white/80 hover:text-white transition">
-                  <X className="w-6 h-6" />
-                </button>
+                <button onClick={() => setShowSuccessModal(false)} className="absolute top-4 right-4 text-white/80 hover:text-white transition"><X className="w-6 h-6" /></button>
                 <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <CheckCircle2 className="w-12 h-12 text-[#C15F3C]" />
                 </div>
@@ -534,7 +568,11 @@ export default function UdyamRegistrationHero({
                 <div className="bg-[#F9F8F6] rounded-2xl p-4 border border-[#E5E2DA] space-y-2">
                   <div className="flex justify-between text-xs">
                     <span className="text-[#6F6B63]">Service</span>
-                    <span className="font-semibold text-[#2F2E2B]">Udyam Registration</span>
+                    <span className="font-semibold text-[#2F2E2B]">Trademark Transfer</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-[#6F6B63]">App Number</span>
+                    <span className="font-semibold text-[#2F2E2B]">{formData.application_number}</span>
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-[#6F6B63]">Status</span>
@@ -543,10 +581,8 @@ export default function UdyamRegistrationHero({
                 </div>
                 <div className="pt-2">
                   <div className="text-center text-[10px] text-[#B1ADA1] mb-4 uppercase tracking-widest font-bold">What&apos;s Next?</div>
-                  <button
-                    onClick={() => window.open(whatsappUrl, "_blank")}
-                    className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2"
-                  >
+                  <button onClick={() => window.open(whatsappUrl, "_blank")}
+                    className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2">
                     <MessageCircle className="w-5 h-5" />
                     Complete via WhatsApp
                     <ExternalLink className="w-4 h-4 opacity-70" />

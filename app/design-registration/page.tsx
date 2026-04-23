@@ -3,27 +3,24 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Trademark/Hero3';
+import DesignRegistrationHero from '../components/Registration/DesignRegistrationHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#F4F3EE]">
       <Navbar />
-      <Hero
-        imageUrl="/images/design-registration.png"
-        title="Design Registration"
-        rating={4.9}
+      <DesignRegistrationHero
+        heading="Design"
+        headingHighlight="Registration"
         description="Design registration for one article, wherein the applicant is an Individual or Company having MSME. Inclusive of government fee and service tax."
-        exclusiveOffersCount={2}
-        subHeading="1 Year License"
         features={[
-          "One Article",
-          "Attorney Prepared",
-          "Representation sheets",
-          "Power of Attorney format",
-          "Filings on IPINDIA",
-          "Individuals & MSMEs"
+          { icon: "✓", text: "One Article Protection" },
+          { icon: "✓", text: "Attorney Prepared Representation" },
+          { icon: "✓", text: "Representation Sheets included" },
+          { icon: "✓", text: "Power of Attorney format" },
+          { icon: "✓", text: "Direct Filings on IPINDIA" },
+          { icon: "✓", text: "Ideal for Individuals & MSMEs" }
         ]}
       />
 

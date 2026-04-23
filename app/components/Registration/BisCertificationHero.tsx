@@ -15,7 +15,10 @@ export type BisCertificationHeroProps = {
   buttonText?: string;
 };
 
-const PACKAGES = [
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+
+const FALLBACK_PACKAGES = [
   { label: "Basic Certification – ₹9,999", amount: 9999 },
   { label: "Standard Certification – ₹19,999", amount: 19999 },
   { label: "Premium Certification – ₹29,999", amount: 29999 },
@@ -35,12 +38,13 @@ export default function BisCertificationHero({
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState("");
   const [countdown, setCountdown] = useState(0);
+  const [pricingPackages, setPricingPackages] = useState(FALLBACK_PACKAGES);
 
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
-    package: PACKAGES[0].label,
+    package: FALLBACK_PACKAGES[0]?.label || "",
   });
 
   useEffect(() => {
@@ -57,6 +61,24 @@ export default function BisCertificationHero({
       }
     };
     checkUser();
+
+    const fetchPricing = async () => {
+      try {
+        const filter = JSON.stringify({ category: { "$regex": "^bis-certification$", "$options": "i" } });
+        const res = await fetch(
+          `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
+          { cache: "no-store" }
+        );
+        const data = await res.json();
+        const entries: any[] = Array.isArray(data) ? data : (data?.entries || []);
+        const plans = entries.filter((e: any) => e.price).map((e: any) => ({ label: e.title || "Standard Plan", amount: Number(e.price) }));
+        if (plans.length > 0) {
+          setPricingPackages(plans);
+          setFormData(prev => ({ ...prev, package: plans[0]?.label || "" }));
+        }
+      } catch {}
+    };
+    fetchPricing();
 
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -78,7 +100,7 @@ export default function BisCertificationHero({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const selectedPackage = PACKAGES.find(p => p.label === formData.package) || PACKAGES[0];
+  const selectedPackage = (pricingPackages.find(p => p.label === formData.package) || pricingPackages[0] || FALLBACK_PACKAGES[0])!;
 
   const handlePayment = async () => {
     setLoading(true);
@@ -357,7 +379,7 @@ export default function BisCertificationHero({
                         required
                         className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
                       >
-                        {PACKAGES.map(p => (
+                        {pricingPackages.map(p => (
                           <option key={p.label} value={p.label}>{p.label}</option>
                         ))}
                       </select>

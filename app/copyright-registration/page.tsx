@@ -3,90 +3,34 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Trademark/Hero2';
+import CopyrightRegistrationHero from '../components/Registration/CopyrightRegistrationHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
-export default function Home() {
- 
+export default function CopyrightRegistrationPage() {
+  return (
+    <main className="min-h-screen bg-[#F4F3EE]">
+      <Navbar />
+      <CopyrightRegistrationHero
+        heading="Copyright"
+        headingHighlight="Registration"
+        description="Secure your creative legacy. From software to literature, protect your intellectual property with official copyright filing and expert guidance."
+        features={[
+          { icon: "✓", text: "Attorney Prepared Filing" },
+          { icon: "✓", text: "Copyright in 24 Hours" },
+          { icon: "✓", text: "Full Ownership Rights" },
+          { icon: "✓", text: "Legal Protection" },
+          { icon: "✓", text: "Source Code Security" },
+          { icon: "✓", text: "Work Title Verification" }
+        ]}
+      />
 
-
- const heroProps = {
- // ================= LEFT SIDE =================
- heading: "Simplify",
- headingHighlight: "Copyright Registration",
- description:
- "Secure your creative works with DoStartup. Our expert-guided online Copyright Registration process protects your artistic, literary, and digital creations—ensuring your ownership and peace of mind.",
-
- features: [
- {
- icon: "shield",
- text: "Protect Your Original Creative Works Legally",
- },
- {
- icon: "rocket",
- text: "Quick & Easy Online Copyright Filing",
- },
- {
- icon: "search",
- text: "Get an Official Copyright Registration Certificate",
- },
- {
- icon: "user-check",
- text: "Expert Guidance Through Every Step",
- },
- {
- icon: "shield-check",
- text: "Nationwide Copyright Protection",
- },
- ],
-
- // ================= RIGHT SIDE =================
- tabs: [], // no tabs in this design
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- {
- type: "select",
- name: "copyright_filing_type",
- placeholder: "Select Copyright Filing Type",
- options: [
- "Literary Work",
- "Artistic Work",
- "Software / Digital Work",
- "Musical Work",
- "Other"
- ],
- },
- {
- type: "input",
- inputType: "text",
- name: "work_title",
- placeholder: "Title of the Work",
- },
- {
- type: "input",
- inputType: "text",
- name: "work_description",
- placeholder: "Description of the Work",
- },
- ],
-
- buttonText: "Get Quote",
-};
-
-
-
- return (
- <>
- <Navbar />
- <Hero {...heroProps} />
- <DynamicTabContent category="Trademark" />
- <DynamicPricingSection />
-      <FAQAccordion />
- <Popularsearches />
- <Footer />
- </>
- );
+      <DynamicTabContent category="copyright-registration" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="copyright-registration" />
+      </div>
+      <FAQAccordion category="copyright-registration" />
+      <Popularsearches />
+      <Footer />
+    </main>
+  );
 }

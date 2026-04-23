@@ -7,7 +7,7 @@ import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
 
 export type Feature = { icon: string; text: string };
 
-export type FcraRegistrationHeroProps = {
+export type TrademarkObjectionHeroProps = {
   heading?: string;
   headingHighlight?: string;
   description?: string;
@@ -15,37 +15,69 @@ export type FcraRegistrationHeroProps = {
   buttonText?: string;
 };
 
-const STATES = [
-  "Andaman & Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam",
-  "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu",
-  "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir",
-  "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh",
-  "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha",
-  "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana",
-  "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
-];
-
-const NATURE_OF_TRADE = [
-  "Educational", "Social", "Cultural", "Economic", "Religious",
-  "Health & Medical", "Environmental", "Rural Development", "Others",
+const TRADEMARK_CLASSES = [
+  "Class 1 – Chemicals",
+  "Class 2 – Paints & Varnishes",
+  "Class 3 – Cosmetics & Cleaning",
+  "Class 4 – Lubricants & Fuels",
+  "Class 5 – Pharmaceuticals",
+  "Class 6 – Metal Goods",
+  "Class 7 – Machinery",
+  "Class 8 – Hand Tools",
+  "Class 9 – Electronics & Software",
+  "Class 10 – Medical Devices",
+  "Class 11 – Lighting & Appliances",
+  "Class 12 – Vehicles",
+  "Class 13 – Firearms",
+  "Class 14 – Jewellery & Watches",
+  "Class 15 – Musical Instruments",
+  "Class 16 – Paper & Stationery",
+  "Class 17 – Rubber & Plastics",
+  "Class 18 – Leather Goods & Bags",
+  "Class 19 – Building Materials",
+  "Class 20 – Furniture",
+  "Class 21 – Household Utensils",
+  "Class 22 – Ropes & Fibers",
+  "Class 23 – Yarns & Threads",
+  "Class 24 – Textiles & Fabrics",
+  "Class 25 – Clothing & Footwear",
+  "Class 26 – Lace & Embroidery",
+  "Class 27 – Carpets & Floor Coverings",
+  "Class 28 – Games & Toys",
+  "Class 29 – Meat, Fish & Dairy",
+  "Class 30 – Staple Foods",
+  "Class 31 – Agricultural Products",
+  "Class 32 – Beers & Non-Alcoholic Drinks",
+  "Class 33 – Alcoholic Beverages",
+  "Class 34 – Tobacco",
+  "Class 35 – Advertising & Business",
+  "Class 36 – Insurance & Finance",
+  "Class 37 – Construction & Repair",
+  "Class 38 – Telecommunications",
+  "Class 39 – Transport & Travel",
+  "Class 40 – Treatment of Materials",
+  "Class 41 – Education & Entertainment",
+  "Class 42 – IT & Software Services",
+  "Class 43 – Food & Drink Services",
+  "Class 44 – Medical & Beauty Services",
+  "Class 45 – Legal & Security Services",
 ];
 
 const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
 const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 
 const FALLBACK_PACKAGES = [
-  { label: "Basic Registration – ₹9,999", amount: 9999 },
-  { label: "Standard Registration – ₹14,999", amount: 14999 },
-  { label: "Premium Registration – ₹19,999", amount: 19999 },
+  { label: "Individual / MSME – ₹1,499", amount: 1499 },
+  { label: "Company / LLP – ₹2,999", amount: 2999 },
 ];
 
-export default function FcraRegistrationHero({
-  heading,
-  headingHighlight,
-  description,
+export default function TrademarkObjectionHero({
+  heading = "Trademark Objection",
+  headingHighlight = "Reply & Compliance",
+  description = "Get expert assistance in drafting and filing a professional reply to trademark objections. Protect your brand from abandonment.",
   features,
   buttonText,
-}: FcraRegistrationHeroProps) {
+}: TrademarkObjectionHeroProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -59,9 +91,9 @@ export default function FcraRegistrationHero({
     name: "",
     phone: "",
     email: "",
-    pan_gstin: "",
-    state: "",
-    nature_of_trade: "",
+    brand_name: "",
+    application_number: "",
+    trademark_class: TRADEMARK_CLASSES[0],
     package: FALLBACK_PACKAGES[0]?.label || "",
   });
 
@@ -80,7 +112,7 @@ export default function FcraRegistrationHero({
 
     const fetchPricing = async () => {
       try {
-        const filter = JSON.stringify({ category: { "$regex": "^fcra-registration$", "$options": "i" } });
+        const filter = JSON.stringify({ category: { "$regex": "^trademark-objection$", "$options": "i" } });
         const res = await fetch(
           `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
           { cache: "no-store" }
@@ -99,7 +131,22 @@ export default function FcraRegistrationHero({
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
+    const handleAbortError = (event: PromiseRejectionEvent) => {
+      if (event.reason?.name === "AbortError" && event.reason?.message?.includes("Lock broken")) {
+        event.preventDefault();
+        console.warn("Supabase Auth Lock broken - suppressed");
+      }
+    };
+    window.addEventListener("unhandledrejection", handleAbortError);
+
     document.body.appendChild(script);
+
+    return () => {
+      window.removeEventListener("unhandledrejection", handleAbortError);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -126,7 +173,7 @@ export default function FcraRegistrationHero({
       const res = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, packageName: "FCRA Registration" }),
+        body: JSON.stringify({ amount, packageName: "Trademark Objection Reply" }),
       });
       const { orderId } = await res.json();
 
@@ -135,7 +182,7 @@ export default function FcraRegistrationHero({
         amount: amount * 100,
         currency: "INR",
         name: "DoStartup",
-        description: "FCRA Registration",
+        description: "Trademark Objection Reply",
         order_id: orderId,
         handler: async function (response: any) {
           let user = null;
@@ -166,36 +213,37 @@ export default function FcraRegistrationHero({
           }
 
           const whatsappMsg =
-            `🔔 *New FCRA Registration*\n\n` +
+            `🔔 *New Trademark Objection Reply*\n\n` +
             `👤 *Name:* ${formData.name}\n` +
             `📞 *Phone:* ${formData.phone}\n` +
             `📧 *Email:* ${formData.email || "Not provided"}\n` +
-            `🔢 *PAN / GSTIN:* ${formData.pan_gstin.toUpperCase()}\n` +
-            `📍 *State:* ${formData.state}\n` +
-            `🏢 *Nature of Trade:* ${formData.nature_of_trade || "Not specified"}\n` +
+            `📑 *App Number:* ${formData.application_number}\n` +
+            `™️ *Brand Name:* ${formData.brand_name}\n` +
+            `📋 *Class:* ${formData.trademark_class}\n` +
             `📦 *Package:* ${formData.package}\n` +
             `💰 *Payment ID:* ${response.razorpay_payment_id}\n\n` +
-            `I have successfully completed the payment. Please proceed with my FCRA Registration.`;
+            `I have successfully completed the payment. Please proceed with my Trademark Objection Reply.`;
 
           const waUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999644807"}?text=${encodeURIComponent(whatsappMsg)}`;
 
-          // Save to Supabase
+          // Save to Supabase (Table: trademar_objection)
           try {
-            const finalEmail = user?.email || formData.email || "noemail@fcra.com";
-            const { error: dbError } = await supabase.from("fcra_registration").insert({
+            const finalEmail = user?.email || formData.email || "noemail@trademark.com";
+            const { error: dbError } = await supabase.from("trademar_objection").insert({
               name: formData.name,
               email: finalEmail,
               phone_no: formData.phone,
-              pan_gstin: formData.pan_gstin.toUpperCase(),
-              state: formData.state,
-              nature_of_trade: formData.nature_of_trade || null,
+              brand_name: formData.brand_name,
+              application_number: formData.application_number,
+              class: formData.trademark_class,
+              service: "Trademark Objection Reply",
               amount: amount,
               payment_id: response.razorpay_payment_id,
               payment_state: "paid",
             });
             if (dbError) console.error("DB insert error:", dbError);
           } catch (dbErr) {
-            console.error("Failed to insert FCRA record:", dbErr);
+            console.error("Failed to insert Trademark Objection record:", dbErr);
           }
 
           // Send confirmation email
@@ -206,12 +254,12 @@ export default function FcraRegistrationHero({
               name: formData.name,
               email: formData.email,
               phone: formData.phone,
-              service: "FCRA Registration",
+              service: "Trademark Objection Reply",
               paymentId: response.razorpay_payment_id,
               details: {
-                "PAN / GSTIN": formData.pan_gstin.toUpperCase(),
-                "State": formData.state,
-                "Nature of Trade": formData.nature_of_trade || "Not specified",
+                "Application Number": formData.application_number,
+                "Brand Name": formData.brand_name,
+                "Class": formData.trademark_class,
                 "Package": formData.package,
               },
             }),
@@ -250,23 +298,10 @@ export default function FcraRegistrationHero({
         alert("Please enter a valid 10-digit phone number");
         return;
       }
-      if (!isLoggedIn && formData.email) {
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-          alert("Please enter a valid email address");
-          return;
-        }
-      }
       setStep(2);
     } else if (step === 2) {
-      if (!formData.pan_gstin || !formData.state) {
+      if (!formData.brand_name || !formData.application_number || !formData.trademark_class) {
         alert("Please fill in all required fields");
-        return;
-      }
-      const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/i;
-      const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/i;
-      const val = formData.pan_gstin.toUpperCase();
-      if (!panRegex.test(val) && !gstRegex.test(val)) {
-        alert("Please enter a valid PAN or GSTIN.");
         return;
       }
       setStep(3);
@@ -283,10 +318,10 @@ export default function FcraRegistrationHero({
             <div className="flex flex-col md:flex-row gap-8">
               <div className="w-full md:w-64 flex-shrink-0">
                 <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
-                  <span className="text-white font-bold text-xl text-center px-4">FCRA Registration</span>
+                  <span className="text-white font-bold text-xl text-center px-4">Trademark Objection</span>
                 </div>
                 <div className="mt-4 space-y-2">
-                  {["Foreign Donations", "NGO Compliance", "MHA Approval"].map((item) => (
+                  {["Expert Reply Drafting", "Evidence Analysis", "Professional Consultation"].map((item) => (
                     <p key={item} className="text-sm text-[#6F6B63] hover:text-[#C15F3C] cursor-pointer">{item}</p>
                   ))}
                   <button className="text-sm text-[#C15F3C] font-medium hover:underline">Learn More →</button>
@@ -296,7 +331,7 @@ export default function FcraRegistrationHero({
               <div className="flex-1 space-y-6">
                 <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1">
                   <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
-                  <span className="text-xs font-medium text-[#C15F3C]">NGO COMPLIANCE EXPERTS</span>
+                  <span className="text-xs font-medium text-[#C15F3C]">COMPLIANCE EXPERTS</span>
                 </div>
 
                 <div>
@@ -310,7 +345,12 @@ export default function FcraRegistrationHero({
                 <div className="bg-[#F9F8F6] border border-[#E5E2DA] rounded-2xl p-6">
                   <span className="inline-block bg-[#C15F3C] text-white text-[10px] font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">Key Features</span>
                   <div className="space-y-3">
-                    {features?.map((f, i) => (
+                    {(features || [
+                      { text: "Professional drafting by legal experts" },
+                      { text: "Review of Examination Report" },
+                      { text: "Strong evidence preparation" },
+                      { text: "Timely filing within 30 days" }
+                    ]).map((f, i) => (
                       <div key={i} className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#C15F3C] border border-[#E5E2DA]">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -325,7 +365,7 @@ export default function FcraRegistrationHero({
 
                 <div className="flex justify-between text-sm">
                   <button className="text-[#C15F3C] hover:underline">Terms and conditions</button>
-                  <button onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "FCRA Registration")} className="text-[#C15F3C] hover:underline">Need Help?</button>
+                  <button onClick={() => handleNeedHelpWhatsApp("Trademark Objection Reply")} className="text-[#C15F3C] hover:underline">Need Help?</button>
                 </div>
               </div>
             </div>
@@ -334,8 +374,8 @@ export default function FcraRegistrationHero({
           {/* RIGHT SIDEBAR – FORM */}
           <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden self-start">
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
-              <h2 className="text-lg font-semibold text-white">Apply for FCRA</h2>
-              <p className="text-sm text-[#F4F3EE]">Foreign Contribution Regulation Act</p>
+              <h2 className="text-lg font-semibold text-white">File Your Reply</h2>
+              <p className="text-sm text-[#F4F3EE]">Avoid application abandonment</p>
             </div>
 
             {/* Step Indicator */}
@@ -350,7 +390,7 @@ export default function FcraRegistrationHero({
               ))}
             </div>
             <p className="px-6 pt-1 pb-0 text-[11px] text-[#B1ADA1]">
-              {step === 1 ? "Step 1 of 2 – Contact Details" : "Step 2 of 2 – Registration Details"}
+              {step === 1 ? "Step 1 of 2 – Contact Details" : "Step 2 of 2 – Objection Details"}
             </p>
 
             <div className="p-6">
@@ -388,25 +428,20 @@ export default function FcraRegistrationHero({
                 {step === 2 && (
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-xs text-[#6F6B63] mb-1">PAN / GSTIN *</label>
-                      <input type="text" name="pan_gstin" value={formData.pan_gstin} onChange={handleInputChange} required maxLength={15}
-                        placeholder="Enter PAN or GSTIN"
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white uppercase" />
+                      <label className="block text-xs text-[#6F6B63] mb-1">Application Number *</label>
+                      <input type="text" name="application_number" value={formData.application_number} onChange={handleInputChange} required placeholder="Enter App Number"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
                     <div>
-                      <label className="block text-xs text-[#6F6B63] mb-1">State *</label>
-                      <select name="state" value={formData.state} onChange={handleInputChange} required
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer">
-                        <option value="">Select State</option>
-                        {STATES.map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Brand Name *</label>
+                      <input type="text" name="brand_name" value={formData.brand_name} onChange={handleInputChange} required placeholder="Enter Brand Name"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
                     <div>
-                      <label className="block text-xs text-[#6F6B63] mb-1">Nature of Trade</label>
-                      <select name="nature_of_trade" value={formData.nature_of_trade} onChange={handleInputChange}
+                      <label className="block text-xs text-[#6F6B63] mb-1">Trademark Class *</label>
+                      <select name="trademark_class" value={formData.trademark_class} onChange={handleInputChange} required
                         className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer">
-                        <option value="">Select (Optional)</option>
-                        {NATURE_OF_TRADE.map(n => <option key={n} value={n}>{n}</option>)}
+                        {TRADEMARK_CLASSES.map(c => <option key={c} value={c}>{c}</option>)}
                       </select>
                     </div>
                     <div>
@@ -422,7 +457,7 @@ export default function FcraRegistrationHero({
                         Back
                       </button>
                       <button type="submit" className="flex-[2] bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition">
-                        Review &amp; Pay →
+                        Review & Pay →
                       </button>
                     </div>
                   </div>
@@ -449,7 +484,7 @@ export default function FcraRegistrationHero({
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-8 py-6 flex justify-between items-center">
                 <div>
                   <h3 className="text-xl font-bold text-white">Review Your Details</h3>
-                  <p className="text-white/80 text-xs">Final check before FCRA Registration</p>
+                  <p className="text-white/80 text-xs">Final check before payment</p>
                 </div>
                 <button onClick={() => setStep(2)} className="text-white/60 hover:text-white transition"><X className="w-6 h-6" /></button>
               </div>
@@ -468,12 +503,12 @@ export default function FcraRegistrationHero({
                     </div>
                   </div>
                   <div className="space-y-4 border-l border-[#E5E2DA] pl-6">
-                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Registration Details</h4>
+                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Objection Details</h4>
                     <div className="space-y-2">
                       {[
-                        ["PAN / GSTIN", formData.pan_gstin.toUpperCase()],
-                        ["State", formData.state],
-                        ["Nature of Trade", formData.nature_of_trade || "Not specified"],
+                        ["App No", formData.application_number],
+                        ["Brand Name", formData.brand_name],
+                        ["Class", formData.trademark_class],
                         ["Package", formData.package?.split("–")[0]?.trim() || ""],
                       ].map(([label, val]) => (
                         <div key={label} className="flex flex-col text-sm">
@@ -490,33 +525,13 @@ export default function FcraRegistrationHero({
                     <span className="text-[#6F6B63] text-sm">Package Amount</span>
                     <p className="text-2xl font-bold text-[#2F2E2B]">₹{selectedPackage.amount.toLocaleString()} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
                   </div>
-                  <div className="text-right">
-                    <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Guaranteed</span>
-                    <div className="flex gap-1 justify-end text-[#C15F3C]">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
                 </div>
 
                 <div className="flex gap-4">
                   <button onClick={() => setStep(2)} className="flex-1 border border-[#E5E2DA] hover:bg-[#F9F8F6] text-[#6F6B63] font-bold py-4 rounded-2xl transition">Edit Details</button>
                   <button onClick={handlePayment} disabled={loading}
                     className="flex-[2] bg-[#C15F3C] hover:bg-[#A94E30] text-white font-bold py-4 rounded-2xl transition shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2">
-                    {loading ? (
-                      <span className="flex items-center gap-2">
-                        <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        Processing...
-                      </span>
-                    ) : (
-                      <>{buttonText || `Pay ₹${selectedPackage.amount.toLocaleString()} Online`} →</>
-                    )}
+                    {loading ? "Processing..." : `Pay ₹${selectedPackage.amount.toLocaleString()} Online →`}
                   </button>
                 </div>
               </div>
@@ -529,47 +544,23 @@ export default function FcraRegistrationHero({
       <AnimatePresence>
         {showSuccessModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
               className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] p-8 text-center relative">
                 <button onClick={() => setShowSuccessModal(false)} className="absolute top-4 right-4 text-white/80 hover:text-white transition"><X className="w-6 h-6" /></button>
-                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="w-12 h-12 text-[#C15F3C]" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-1">Payment Successful!</h3>
               </div>
-              <div className="p-8 space-y-6">
-                <div className="space-y-3 text-center">
-                  <p className="text-[#2F2E2B] font-medium text-lg">Thank you, {formData.name}!</p>
-                  <p className="text-[#6F6B63] text-sm leading-relaxed">
-                    Your payment of <span className="font-bold text-[#C15F3C]">₹{selectedPackage.amount.toLocaleString()}</span> has been received successfully.
-                  </p>
-                </div>
-                <div className="bg-[#F9F8F6] rounded-2xl p-4 border border-[#E5E2DA] space-y-2">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-[#6F6B63]">Service</span>
-                    <span className="font-semibold text-[#2F2E2B]">FCRA Registration</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-[#6F6B63]">Status</span>
-                    <span className="text-[#10B981] font-bold">PAID</span>
-                  </div>
-                </div>
-                <div className="pt-2">
-                  <div className="text-center text-[10px] text-[#B1ADA1] mb-4 uppercase tracking-widest font-bold">What&apos;s Next?</div>
-                  <button onClick={() => window.open(whatsappUrl, "_blank")}
-                    className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2">
-                    <MessageCircle className="w-5 h-5" />
-                    Complete via WhatsApp
-                    <ExternalLink className="w-4 h-4 opacity-70" />
-                  </button>
-                  <div className="mt-4 text-center">
-                    <p className="text-xs text-[#6F6B63] flex items-center justify-center gap-2">
-                      <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                      Redirecting to WhatsApp in <span className="font-bold text-[#C15F3C]">{countdown}s</span>...
-                    </p>
-                  </div>
-                </div>
+              <div className="p-8 space-y-6 text-center">
+                <p className="text-[#6F6B63] text-sm">Your reply filing for brand <span className="font-bold text-[#2F2E2B]">{formData.brand_name}</span> is being processed.</p>
+                <button onClick={() => window.open(whatsappUrl, "_blank")}
+                  className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2">
+                  <MessageCircle className="w-5 h-5" />
+                  Continue on WhatsApp
+                </button>
+                <p className="text-xs text-[#B1ADA1]">Redirecting in {countdown}s...</p>
               </div>
             </motion.div>
           </div>

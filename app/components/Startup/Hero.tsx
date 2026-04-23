@@ -6,6 +6,11 @@ import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, MessageCircle, ExternalLink, X, Clock, Calendar } from "lucide-react";
 
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+
+type PricingPlan = { title: string; price: number };
+
 export default function StartBusinessPage({ defaultEntity = "Startup" }: { defaultEntity?: string }) {
   const router = useRouter();
   const [activeEntity, setActiveEntity] = useState(defaultEntity);
@@ -16,6 +21,8 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState("");
   const [countdown, setCountdown] = useState(0);
+  const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([]);
+  const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
   const authChecked = useRef(false);
   const [formData, setFormData] = useState({
     state: "",
@@ -79,6 +86,45 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
     }
   };
 
+  // Fetch pricing from Cockpit for the active entity
+  useEffect(() => {
+    const entitySlugMap: Record<string, string> = {
+      "Startup": "startup-registration",
+      "Company": "company-registration",
+      "LLP": "llp-registration",
+      "OPC": "one-person-company",
+      "Proprietorship": "proprietorship",
+      "Partnership": "partnership",
+      "Section 8": "section-8-company",
+      "Trust": "trust-registration",
+      "Public Limited": "public-limited-company",
+      "Indian Subs.": "indian-subsidiary",
+      "Producer Company": "producer-company",
+    };
+    const slug = entitySlugMap[activeEntity] || activeEntity.toLowerCase().replace(/\s+/g, '-');
+
+    async function fetchPlans() {
+      try {
+        const filter = JSON.stringify({ category: { "$regex": `^${slug}$`, "$options": "i" } });
+        const res = await fetch(
+          `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
+          { cache: "no-store" }
+        );
+        const data = await res.json();
+        const entries: any[] = Array.isArray(data) ? data : (data?.entries || []);
+        const plans: PricingPlan[] = entries
+          .filter(e => e.price)
+          .map(e => ({ title: e.title || "Standard Plan", price: Number(e.price) }));
+        setPricingPlans(plans);
+        setSelectedPlan(plans[0] ?? null);
+      } catch {
+        setPricingPlans([]);
+        setSelectedPlan(null);
+      }
+    }
+    fetchPlans();
+  }, [activeEntity]);
+
   const entities = [
     { name: "Startup", path: "/startup-registration" },
     { name: "Company", path: "/company-registration" },
@@ -109,9 +155,12 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
     });
   };
 
+  const fallbackAmount = (activeEntity === 'Partnership' || activeEntity === 'OPC' || activeEntity === 'LLP' || activeEntity === 'Company' || activeEntity === 'Section 8' || activeEntity === 'Trust' || activeEntity === 'Public Limited' || activeEntity === 'Indian Subs.' || activeEntity === 'Producer Company') ? 1999 : 999;
+  const payableAmount = selectedPlan?.price || fallbackAmount;
+
   const handlePayment = async () => {
     setLoading(true);
-    const amount = (activeEntity === 'Partnership' || activeEntity === 'OPC' || activeEntity === 'LLP' || activeEntity === 'Company' || activeEntity === 'Section 8' || activeEntity === 'Trust' || activeEntity === 'Public Limited' || activeEntity === 'Indian Subs.' || activeEntity === 'Producer Company') ? 1999 : 999;
+    const amount = payableAmount;
 
     try {
       const res = await fetch('/api/create-order', {
@@ -153,7 +202,7 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                   proposed_name1: formData.proposedName1,
                   proposed_name2: formData.proposedName2 || null,
                   payment_id: response.razorpay_payment_id,
-                  amount: 999,
+                  amount: amount,
                   status: 'paid'
                 }]);
               
@@ -665,6 +714,8 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                     onClick={() => {
                       setActiveEntity(name);
                       setStep(1);
+                      setPricingPlans([]);
+                      setSelectedPlan(null);
                     }}
                     className={`px-4 py-2 text-xs font-medium rounded-lg transition-all whitespace-nowrap ${activeEntity === name
                       ? "bg-[#C15F3C] text-white"
@@ -751,6 +802,32 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                             placeholder="10-digit phone number"
                           />
                         </div>
+                        {/* PACKAGE SELECTOR */}
+                        {pricingPlans.length > 1 && (
+                          <div>
+                            <label className="block text-xs text-[#6F6B63] mb-1">Select Package *</label>
+                            <select
+                              value={selectedPlan?.title || ''}
+                              onChange={(e) => {
+                                const plan = pricingPlans.find(p => p.title === e.target.value);
+                                if (plan) setSelectedPlan(plan);
+                              }}
+                              required
+                              className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
+                            >
+                              {pricingPlans.map(p => (
+                                <option key={p.title} value={p.title}>{p.title} – ₹{p.price.toLocaleString('en-IN')}</option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+                        {pricingPlans.length === 1 && selectedPlan && (
+                          <div className="bg-[#F9F8F6] border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] flex justify-between items-center">
+                            <span>{selectedPlan.title}</span>
+                            <span className="font-semibold text-[#C15F3C]">₹{selectedPlan.price.toLocaleString('en-IN')}</span>
+                          </div>
+                        )}
+
                         <button
                           type="submit"
                           className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition"
@@ -1066,8 +1143,8 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                 {/* PRICE CARD */}
                 <div className="bg-[#F9F8F6] rounded-2xl p-6 border border-[#E5E2DA] flex justify-between items-center">
                   <div>
-                    <span className="text-[#6F6B63] text-sm">Package Amount</span>
-                    <p className="text-2xl font-bold text-[#2F2E2B]">₹{(activeEntity === 'Partnership' || activeEntity === 'OPC' || activeEntity === 'LLP' || activeEntity === 'Company' || activeEntity === 'Section 8' || activeEntity === 'Trust' || activeEntity === 'Public Limited' || activeEntity === 'Indian Subs.' || activeEntity === 'Producer Company') ? '1,999' : '999'} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
+                    <span className="text-[#6F6B63] text-sm">{selectedPlan?.title || 'Package'}</span>
+                    <p className="text-2xl font-bold text-[#2F2E2B]">₹{payableAmount.toLocaleString('en-IN')} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Guaranteed</span>
@@ -1157,7 +1234,7 @@ export default function StartBusinessPage({ defaultEntity = "Startup" }: { defau
                     Thank you, {formData.name}!
                   </p>
                   <p className="text-[#6F6B63] text-sm leading-relaxed">
-                    Your payment of <span className="font-bold text-[#C15F3C]">₹{(activeEntity === 'Partnership' || activeEntity === 'OPC' || activeEntity === 'LLP' || activeEntity === 'Company' || activeEntity === 'Section 8' || activeEntity === 'Trust' || activeEntity === 'Public Limited' || activeEntity === 'Indian Subs.' || activeEntity === 'Producer Company') ? '1,999' : '999'}</span> has been received successfully. 
+                    Your payment of <span className="font-bold text-[#C15F3C]">₹{payableAmount.toLocaleString('en-IN')}</span> has been received successfully.
                     We have captured all your registration details.
                   </p>
                 </div>

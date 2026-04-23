@@ -5,6 +5,12 @@ import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
 
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+const FALLBACK_PACKAGES = [
+  { label: "New Registration – ₹4,999", amount: 4999 },
+];
+
 export type Feature = { icon: string; text: string };
 
 export type A80GRegistrationHeroProps = {
@@ -29,6 +35,7 @@ export default function A80GRegistrationHero({
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState("");
   const [countdown, setCountdown] = useState(0);
+  const [pricingPackages, setPricingPackages] = useState(FALLBACK_PACKAGES);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,6 +43,7 @@ export default function A80GRegistrationHero({
     email: "",
     pan_gstin: "",
     state: "",
+    package: FALLBACK_PACKAGES[0]?.label || "",
   });
 
   useEffect(() => {
@@ -52,6 +60,24 @@ export default function A80GRegistrationHero({
       }
     };
     checkUser();
+
+    const fetchPricing = async () => {
+      try {
+        const filter = JSON.stringify({ category: { "$regex": "^80g-registration$", "$options": "i" } });
+        const res = await fetch(
+          `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
+          { cache: "no-store" }
+        );
+        const data = await res.json();
+        const entries: any[] = Array.isArray(data) ? data : (data?.entries || []);
+        const plans = entries.filter((e: any) => e.price).map((e: any) => ({ label: e.title || "Standard Plan", amount: Number(e.price) }));
+        if (plans.length > 0) {
+          setPricingPackages(plans);
+          setFormData(prev => ({ ...prev, package: plans[0]?.label || "" }));
+        }
+      } catch {}
+    };
+    fetchPricing();
 
     // Load Razorpay script
     const script = document.createElement("script");
@@ -74,9 +100,11 @@ export default function A80GRegistrationHero({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const selectedPackage = (pricingPackages.find(p => p.label === formData.package) || pricingPackages[0] || FALLBACK_PACKAGES[0])!;
+
   const handlePayment = async () => {
     setLoading(true);
-    const amount = 4999;
+    const amount = selectedPackage.amount;
 
     try {
       const res = await fetch("/api/create-order", {
@@ -337,6 +365,15 @@ export default function A80GRegistrationHero({
                 {step === 1 && (
                   <div className="space-y-4">
                     <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Select Package *</label>
+                      <select name="package" value={formData.package} onChange={handleInputChange} required
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer">
+                        {pricingPackages.map(p => (
+                          <option key={p.label} value={p.label}>{p.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
                       <label className="block text-xs text-[#6F6B63] mb-1">Your Name *</label>
                       <input
                         type="text"
@@ -510,7 +547,7 @@ export default function A80GRegistrationHero({
                 <div className="bg-[#F9F8F6] rounded-2xl p-6 border border-[#E5E2DA] flex justify-between items-center">
                   <div>
                     <span className="text-[#6F6B63] text-sm">Package Amount</span>
-                    <p className="text-2xl font-bold text-[#2F2E2B]">₹4,999 <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
+                    <p className="text-2xl font-bold text-[#2F2E2B]">₹{selectedPackage.amount.toLocaleString()} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Guaranteed</span>
@@ -545,7 +582,7 @@ export default function A80GRegistrationHero({
                         Processing...
                       </span>
                     ) : (
-                      <>{buttonText || "Pay INR 4,999 Online"} →</>
+                      <>{buttonText || `Pay ₹${selectedPackage.amount.toLocaleString()} Online`} →</>
                     )}
                   </button>
                 </div>
@@ -581,7 +618,7 @@ export default function A80GRegistrationHero({
                 <div className="space-y-3 text-center">
                   <p className="text-[#2F2E2B] font-medium text-lg">Thank you, {formData.name}!</p>
                   <p className="text-[#6F6B63] text-sm leading-relaxed">
-                    Your payment of <span className="font-bold text-[#C15F3C]">₹4,999</span> has been received successfully.
+                    Your payment of <span className="font-bold text-[#C15F3C]">₹{selectedPackage.amount.toLocaleString()}</span> has been received successfully.
                   </p>
                 </div>
                 <div className="bg-[#F9F8F6] rounded-2xl p-4 border border-[#E5E2DA] space-y-2">

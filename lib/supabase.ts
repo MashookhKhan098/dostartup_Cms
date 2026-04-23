@@ -12,8 +12,8 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true,
-    // Increase wait time for the navigator lock to prevent the "Lock not released" error
-    // in development environments with Strict Mode.
-    flowType: 'pkce'
+    flowType: 'pkce',
+    // @ts-ignore - navigatorLockAcquireTimeout is supported in the underlying auth client but might not be in the types for this version
+    navigatorLockAcquireTimeout: 60000,
   }
 })

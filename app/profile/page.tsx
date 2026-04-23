@@ -626,11 +626,14 @@ export default function ProfilePage() {
         .from('fcra_registration')
         .select('*')
         .eq('email', user.email)
+        .order('created_at', { ascending: false })
 
       if (!fcraError && fcraData) {
         userFcra = fcraData.map(p => ({
           ...p,
           registration_type: 'FCRA Registration',
+          id: p.id,
+          created_at: p.created_at,
           status: p.payment_state || 'paid'
         }))
       }
@@ -641,11 +644,14 @@ export default function ProfilePage() {
         .from('bis_registration')
         .select('*')
         .eq('email', user.email)
+        .order('created_at', { ascending: false })
 
       if (!bisError && bisData) {
         userBis = bisData.map(p => ({
           ...p,
           registration_type: 'BIS Certification',
+          id: p.id,
+          created_at: p.created_at,
           status: p.payment_state || 'paid'
         }))
       }
@@ -710,6 +716,42 @@ export default function ProfilePage() {
         userApeda = apedaData.map(p => ({
           ...p,
           registration_type: 'APEDA Registration',
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trademark registrations (using email)
+      let userTrademark: any[] = []
+      const { data: trademarkData, error: trademarkError } = await supabase
+        .from('trademark_registration')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!trademarkError && trademarkData) {
+        userTrademark = trademarkData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Registration',
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trademark Objection registrations (using email)
+      let userTMObjection: any[] = []
+      const { data: tmObjectionData, error: tmObjectionError } = await supabase
+        .from('trademar_objection')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmObjectionError && tmObjectionData) {
+        userTMObjection = tmObjectionData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Objection Reply',
+          id: p.id,
           status: p.payment_state || 'paid'
         }))
       }
@@ -720,12 +762,13 @@ export default function ProfilePage() {
         .from('fire_license')
         .select('*')
         .eq('email', user.email)
-        .order('created_at', { ascending: false })
 
       if (!fireLicenseError && fireLicenseData) {
         userFireLicense = fireLicenseData.map(p => ({
           ...p,
           registration_type: 'Fire License',
+          id: p.id,
+          created_at: p.created_at,
           status: p.payment_state || 'paid'
         }))
       }
@@ -736,60 +779,346 @@ export default function ProfilePage() {
         .from('incumbency_certificate')
         .select('*')
         .eq('email', user.email)
-        .order('created_at', { ascending: false })
 
       if (!incumbencyError && incumbencyData) {
         userIncumbency = incumbencyData.map(p => ({
           ...p,
           registration_type: 'Certificate of Incumbency',
+          id: p.id,
+          created_at: p.created_at,
           status: p.payment_state || 'paid'
         }))
       }
 
-      // Combine all
+      // Fetch user's Trademark Certificate registrations (using email)
+      let userTMCertificate: any[] = []
+      const { data: tmCertData, error: tmCertError } = await supabase
+        .from('trademark_certificate')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmCertError && tmCertData) {
+        userTMCertificate = tmCertData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Registration Certificate',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trademark Opposition registrations (using email)
+      let userTMOpposition: any[] = []
+      const { data: tmOppData, error: tmOppError } = await supabase
+        .from('trademark_opposition')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmOppError && tmOppData) {
+        userTMOpposition = tmOppData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Opposition Filing',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trademark Hearing registrations (using email)
+      let userTMHearing: any[] = []
+      const { data: tmHearingData, error: tmHearingError } = await supabase
+        .from('trademark_hearing')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmHearingError && tmHearingData) {
+        userTMHearing = tmHearingData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Hearing Representation',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trademark Rectification registrations (using email)
+      let userTMRectification: any[] = []
+      const { data: tmRectData, error: tmRectError } = await supabase
+        .from('trademark_rectification')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmRectError && tmRectData) {
+        userTMRectification = tmRectData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Rectification',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's TM Infringement Notice registrations (using email)
+      let userTMInfringement: any[] = []
+      const { data: tmInfData, error: tmInfError } = await supabase
+        .from('trademark_infringement_notice')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmInfError && tmInfData) {
+        userTMInfringement = tmInfData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Infringement Notice',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trademark Renewal registrations (using email)
+      let userTMRenewal: any[] = []
+      const { data: tmRenData, error: tmRenError } = await supabase
+        .from('trademark_renewal')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmRenError && tmRenData) {
+        userTMRenewal = tmRenData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Renewal',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Trademark Transfer registrations (using email)
+      let userTMTransfer: any[] = []
+      const { data: tmTransData, error: tmTransError } = await supabase
+        .from('trademark_transfer')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmTransError && tmTransData) {
+        userTMTransfer = tmTransData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Transfer',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Expedited TM registrations (using email)
+      let userTMExpedited: any[] = []
+      const { data: tmExpData, error: tmExpError } = await supabase
+        .from('expedited_trademark_registration')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!tmExpError && tmExpData) {
+        userTMExpedited = tmExpData.map(p => ({
+          ...p,
+          registration_type: 'Expedited Trademark Registration',
+          id: p.id,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Logo Design orders (using email - requires email column)
+      let userLogoDesign: any[] = []
+      const { data: logoData, error: logoError } = await supabase
+        .from('logo_design')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!logoError && logoData) {
+        userLogoDesign = logoData.map(p => ({
+          ...p,
+          registration_type: 'Logo Design',
+          package: p.package_name || 'Standard Plan',
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Design Registration orders
+      let userDesignRegistration: any[] = []
+      const { data: designData, error: designError } = await supabase
+        .from('design_registration')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!designError && designData) {
+        userDesignRegistration = designData.map(p => ({
+          ...p,
+          registration_type: 'Design Registration',
+          package: p.design_service_type,
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Design Objection orders
+      let userDesignObjection: any[] = []
+      const { data: objectionData, error: objectionError } = await supabase
+        .from('design_objection')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!objectionError && objectionData) {
+        userDesignObjection = objectionData.map(p => ({
+          ...p,
+          registration_type: 'Design Objection Reply',
+          package: 'Objection Reply',
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Copyright Registration orders
+      let userCopyrightRegistration: any[] = []
+      const { data: copyrightData, error: copyrightError } = await supabase
+        .from('copyright_registration')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!copyrightError && copyrightData) {
+        userCopyrightRegistration = copyrightData.map(p => ({
+          ...p,
+          registration_type: 'Copyright Registration',
+          package: p.copyright_filing_type,
+          brand_name: p.title_of_work,
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Copyright Objection orders
+      let userCopyrightObjection: any[] = []
+      const { data: copyObjData, error: copyObjError } = await supabase
+        .from('copyright_objection')
+        .select('*')
+        .eq('email', user.email)
+
+      if (!copyObjError && copyObjData) {
+        userCopyrightObjection = copyObjData.map(p => ({
+          ...p,
+          registration_type: 'Copyright Objection Reply',
+          package: p.copyright_objection_type,
+          brand_name: `CC: ${p.cc_number}`,
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's Patent orders
+      let userPatentRegistration: any[] = []
+      const { data: patentData, error: patentError } = await supabase
+        .from('patent_registration')
+        .select('*')
+        .eq('email', user.email)
+
+      console.log('Patent Query - Data:', patentData, 'Error:', patentError)
+      if (!patentError && patentData) {
+        userPatentRegistration = patentData.map(p => ({
+          ...p,
+          registration_type: 'Patent Registration',
+          package: p.patent_search_type,
+          brand_name: p.invention,
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Fetch user's TM Protection orders
+      let userTMProtection: any[] = []
+      const { data: tmProtData, error: tmProtError } = await supabase
+        .from('trademark_protection')
+        .select('*')
+        .eq('email', user.email)
+
+      console.log('TM Protection Query - Data:', tmProtData, 'Error:', tmProtError)
+      if (!tmProtError && tmProtData) {
+        userTMProtection = tmProtData.map(p => ({
+          ...p,
+          registration_type: 'Trademark Protection',
+          package: p.service_type,
+          brand_name: p.brand_name,
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      }
+
+      // Combine all available registrations
       const allRegistrations = [
-        ...userRegistrations, 
-        ...userReturns, 
-        ...userProprietorship,
-        ...userPartnership,
-        ...userOPC,
-        ...userLLP,
-        ...userPvtLtd,
-        ...userSection8,
-        ...userTrust,
-        ...userPublicLimited,
-        ...userIndianSubs,
-        ...userProducerCompany,
-        ...userStartupIndia,
-        ...userTradeLicense,
-        ...userFssai,
-        ...userFssaiLicense,
-        ...userHalal,
-        ...userIcegate,
-        ...userIEC,
-        ...userLEI,
-        ...userISO,
-        ...userPF,
-        ...userESI,
-        ...userProfTax,
-        ...userRCMC,
-        ...userRERA,
-        ...userA12,
-        ...userA80G,
-        ...userA1280G,
-        ...userBarcode,
-        ...userDarpan,
-        ...userShopEstablishment,
-        ...userApeda,
-        ...userFireLicense,
-        ...userIncumbency,
-        ...userDrugLicense,
-        ...userUdyam,
-        ...userBis,
-        ...userFcra,
-        ...userDigitalSignature
-      ]
-      console.log('Final combined registrations:', allRegistrations)
+        ...(userRegistrations || []), 
+        ...(userReturns || []), 
+        ...(userProprietorship || []),
+        ...(userPartnership || []),
+        ...(userOPC || []),
+        ...(userLLP || []),
+        ...(userPvtLtd || []),
+        ...(userSection8 || []),
+        ...(userTrust || []),
+        ...(userPublicLimited || []),
+        ...(userIndianSubs || []),
+        ...(userProducerCompany || []),
+        ...(userStartupIndia || []),
+        ...(userTradeLicense || []),
+        ...(userFssai || []),
+        ...(userFssaiLicense || []),
+        ...(userHalal || []),
+        ...(userIcegate || []),
+        ...(userIEC || []),
+        ...(userLEI || []),
+        ...(userISO || []),
+        ...(userPF || []),
+        ...(userESI || []),
+        ...(userProfTax || []),
+        ...(userRCMC || []),
+        ...(userRERA || []),
+        ...(userA12 || []),
+        ...(userA80G || []),
+        ...(userA1280G || []),
+        ...(userBarcode || []),
+        ...(userDarpan || []),
+        ...(userShopEstablishment || []),
+        ...(userApeda || []),
+        ...(userTrademark || []),
+        ...(userFireLicense || []),
+        ...(userIncumbency || []),
+        ...(userDrugLicense || []),
+        ...(userUdyam || []),
+        ...(userBis || []),
+        ...(userFcra || []),
+        ...(userDigitalSignature || []),
+        ...(userTMObjection || []),
+        ...(userTMCertificate || []),
+        ...(userTMOpposition || []),
+        ...(userTMHearing || []),
+        ...(userTMRectification || []),
+        ...(userTMInfringement || []),
+        ...(userTMRenewal || []),
+        ...(userTMTransfer || []),
+        ...(userTMExpedited || []),
+        ...(userLogoDesign || []),
+        ...(userDesignRegistration || []),
+        ...(userDesignObjection || []),
+        ...(userCopyrightRegistration || []),
+        ...(userCopyrightObjection || []),
+        ...(userPatentRegistration || []),
+        ...(userTMProtection || [])
+      ].filter(Boolean); // Remove any null/undefined entries
+
+      console.log('Total registrations found:', allRegistrations.length)
       setPayments(allRegistrations)
 
       setLoading(false)
@@ -895,12 +1224,12 @@ export default function ProfilePage() {
                             <span className={`text-xs px-2 py-1 font-medium rounded-full ${reg.status === 'paid' ? 'bg-green-50 text-green-700' : 'bg-orange-50 text-orange-700'}`}>
                               {(reg.status || 'pending').toUpperCase()}
                             </span>
-                            <span className="text-xs text-[#B1ADA1] font-mono">Reg ID: {reg.id?.slice(0, 8) || 'N/A'}</span>
+                            <span className="text-xs text-[#B1ADA1] font-mono">Reg ID: {String(reg.id || '').slice(0, 8) || 'N/A'}</span>
                           </div>
                           {reg.created_at && (
-                             <p className="text-xs text-[#6F6B63] mt-2">
-                               Date: {new Date(reg.created_at).toLocaleDateString()}
-                             </p>
+                            <p className="text-xs text-[#6F6B63] mt-2">
+                              Date: {new Date(reg.created_at).toLocaleDateString()}
+                            </p>
                           )}
                           {reg.gstin && (
                             <p className="text-xs text-[#6F6B63] mt-1">GSTIN: {reg.gstin}</p>
@@ -910,11 +1239,18 @@ export default function ProfilePage() {
                           )}
                         </div>
                         <div className="text-left md:text-right">
-                          {(reg.package || reg.amount) && (
-                            <p className="text-lg font-semibold text-[#C15F3C]">
-                              {reg.package ? reg.package.split('-').pop()?.trim() : `₹${reg.amount}`}
-                            </p>
-                          )}
+                          <div className="flex flex-col items-start md:items-end">
+                            {reg.package && (
+                              <p className="text-sm font-semibold text-[#6F6B63] mb-1">
+                                {reg.package.includes('–') ? reg.package.split('–')[0].trim() : reg.package.split('-')[0].trim()}
+                              </p>
+                            )}
+                            {reg.amount && (
+                              <p className="text-lg font-bold text-[#C15F3C]">
+                                ₹{Number(reg.amount).toLocaleString('en-IN')}
+                              </p>
+                            )}
+                          </div>
                           {reg.state && (
                             <p className="text-xs text-[#B1ADA1] font-mono mt-1 w-full truncate md:w-auto">State: {reg.state}</p>
                           )}
@@ -943,6 +1279,15 @@ export default function ProfilePage() {
                           )}
                           {reg.pan_gstin && (
                              <p className="text-xs text-[#B1ADA1] mt-1 font-mono">PAN/GST: {reg.pan_gstin}</p>
+                          )}
+                          {reg.brand_name && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Brand: {reg.brand_name}</p>
+                          )}
+                          {reg.application_number && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">App No: {reg.application_number}</p>
+                          )}
+                          {reg.class && (
+                             <p className="text-xs text-[#B1ADA1] mt-1 font-mono">Class: {reg.class}</p>
                           )}
                           {reg.cin_gstin && (
                              <p className="text-xs text-[#B1ADA1] mt-1 font-mono">CIN/GSTIN: {reg.cin_gstin}</p>

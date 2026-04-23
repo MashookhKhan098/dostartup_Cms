@@ -5,6 +5,12 @@ import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
 
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+const FALLBACK_PACKAGES = [
+  { label: "New Registration – ₹4,999", amount: 4999 },
+];
+
 export type Feature = { icon: string; text: string };
 
 export type A12RegistrationHeroProps = {
@@ -29,6 +35,7 @@ export default function A12RegistrationHero({
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState("");
   const [countdown, setCountdown] = useState(0);
+  const [pricingPackages, setPricingPackages] = useState(FALLBACK_PACKAGES);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,6 +43,7 @@ export default function A12RegistrationHero({
     email: "",
     pan_gstin: "",
     state: "",
+    package: FALLBACK_PACKAGES[0]?.label || "",
   });
 
   useEffect(() => {
@@ -52,6 +60,24 @@ export default function A12RegistrationHero({
       }
     };
     checkUser();
+
+    const fetchPricing = async () => {
+      try {
+        const filter = JSON.stringify({ category: { "$regex": "^12a-registration$", "$options": "i" } });
+        const res = await fetch(
+          `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
+          { cache: "no-store" }
+        );
+        const data = await res.json();
+        const entries: any[] = Array.isArray(data) ? data : (data?.entries || []);
+        const plans = entries.filter((e: any) => e.price).map((e: any) => ({ label: e.title || "Standard Plan", amount: Number(e.price) }));
+        if (plans.length > 0) {
+          setPricingPackages(plans);
+          setFormData(prev => ({ ...prev, package: plans[0]?.label || "" }));
+        }
+      } catch {}
+    };
+    fetchPricing();
 
     // Load Razorpay script
     const script = document.createElement("script");
@@ -74,9 +100,11 @@ export default function A12RegistrationHero({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const selectedPackage = (pricingPackages.find(p => p.label === formData.package) || pricingPackages[0] || FALLBACK_PACKAGES[0])!;
+
   const handlePayment = async () => {
     setLoading(true);
-    const amount = 4999;
+    const amount = selectedPackage.amount;
 
     try {
       const res = await fetch("/api/create-order", {

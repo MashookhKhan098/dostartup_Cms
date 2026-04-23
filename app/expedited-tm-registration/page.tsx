@@ -3,48 +3,36 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Trademark/Hero';
+import Hero from '../components/Registration/ExpeditedTMHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
- return (
- <main className="min-h-screen bg-[#F4F3EE]">
- <Navbar />
- <Hero
- trademarkService={{
- serviceName: "Expedited",
- serviceDescription:
- "Transfers are allowed only for registered trademarks. Your mark isn't registered yet, so transfer can't be done.",
- formFields: [
- {
- type: "input",
- name: "applicationNumber",
- placeholder: "Application Number",
- },
- {
- type: "input",
- name: "brandName",
- placeholder: "Brand Name",
- },
- {
- type: "select",
- name: "class",
- placeholder: "Select Class",
- options: ["Class 1", "Class 9", "Class 35", "Class 42"],
- },
- ],
- buttonText: "Get Quote"
- }}
- />
- <DynamicTabContent category="Trademark" />
- 
- <div className="bg-[#F4F3EE] py-8">
-   <DynamicPricingSection category="expedited-tm-registration" />
- </div>
- 
- <FAQAccordion category="expedited-trademark-registration" />
- <Popularsearches />
- <Footer />
- </main>
- );
+
+  const heroProps = {
+    heading: "Get your brand registered with ",
+    headingHighlight: "Expedited TM Registration",
+    description: "Don't wait months for your trademark approval! Our Expedited Trademark Registration service fast-tracks your application through the Registry's priority queue. We ensure all legal requirements are met for the fastest possible processing, giving you brand protection in record time.",
+    features: [
+      { icon: "document", text: "Fast-Track Application Filing" },
+      { icon: "chart", text: "Priority Registry Processing" },
+      { icon: "users", text: "Senior Attorney Consultation" },
+      { icon: "plus", text: "Real-time Status Monitoring" },
+      { icon: "document", text: "Minimized Approval Timelines" },
+    ],
+    buttonText: "Apply for Priority TM",
+  };
+
+  return (
+    <>
+      <Navbar />
+      <Hero {...heroProps} />
+      <DynamicTabContent category="expedited-tm-registration" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="expedited-tm-registration" />
+      </div>
+      <FAQAccordion category="expedited-tm-registration" />
+      <Popularsearches />
+      <Footer />
+    </>
+  );
 }

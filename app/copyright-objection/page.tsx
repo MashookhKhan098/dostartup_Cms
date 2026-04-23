@@ -3,86 +3,34 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Trademark/Hero2';
+import CopyrightObjectionHero from '../components/Registration/CopyrightObjectionHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
-export default function Home() {
- 
+export default function CopyrightObjectionPage() {
+  return (
+    <main className="min-h-screen bg-[#F4F3EE]">
+      <Navbar />
+      <CopyrightObjectionHero
+        heading="Copyright"
+        headingHighlight="Objection Reply"
+        description="Filing a professional reply to the copyright objection raised by the examiner. Our experts ensure your work stays protected."
+        features={[
+          { icon: "✓", text: "Attorney Drafted Reply" },
+          { icon: "✓", text: "CC & Receipt Matching" },
+          { icon: "✓", text: "IP India Portal Filing" },
+          { icon: "✓", text: "Status Monitoring" },
+          { icon: "✓", text: "Legal Consultation" },
+          { icon: "✓", text: "Fast Processing" }
+        ]}
+      />
 
-
- const heroProps = {
- // ================= LEFT SIDE =================
- heading: "File an Effective Reply to",
- headingHighlight: "Objections",
- description:
- "Got a copyright objection? Our experts help you draft and file a clear, effective reply to resolve it quickly. Protect your creative work and secure your legal rights under the Copyright Act with a timely response.",
-
- features: [
- {
- icon: "shield",
- text: "Resolve Copyright Objections Quickly and Effectively",
- },
- {
- icon: "document",
- text: "Professional Drafting and Submission of Objection Replies",
- },
- {
- icon: "user-check",
- text: "100% Online Process for Easy and Secure Objection Handling",
- },
- ],
-
- // ================= RIGHT SIDE =================
- tabs: [], // no tabs in this design
- defaultTab: null,
- tabDescriptions: null,
-
- // ================= FORM FIELDS =================
- formFields: [
- {
- type: "select",
- name: "copyright_objection_type",
- placeholder: "Select Copyright Objection Type",
- options: [
- "Type 1",
- "Type 2",
- "Type 3",
- // Add other objection types if needed
- ],
- },
- {
- type: "input",
- inputType: "text",
- name: "cc_number",
- placeholder: "CC Number",
- },
- {
- type: "input",
- inputType: "text",
- name: "receipt_number",
- placeholder: "Receipt Number",
- },
- {
- type: "input",
- inputType: "text",
- name: "dairy_number",
- placeholder: "Dairy Number",
- },
- ],
-
- buttonText: "Get Quote",
-};
-
-
- return (
- <>
- <Navbar />
- <Hero {...heroProps} />
- <DynamicTabContent category="Trademark" />
- <DynamicPricingSection />
-      <FAQAccordion />
- <Popularsearches />
- <Footer />
- </>
- );
+      <DynamicTabContent category="copyright-objection" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="copyright-objection" />
+      </div>
+      <FAQAccordion category="copyright-objection" />
+      <Popularsearches />
+      <Footer />
+    </main>
+  );
 }

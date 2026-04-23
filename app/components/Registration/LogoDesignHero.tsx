@@ -7,7 +7,7 @@ import { CheckCircle2, MessageCircle, ExternalLink, X } from "lucide-react";
 
 export type Feature = { icon: string; text: string };
 
-export type FcraRegistrationHeroProps = {
+export type LogoDesignHeroProps = {
   heading?: string;
   headingHighlight?: string;
   description?: string;
@@ -15,37 +15,22 @@ export type FcraRegistrationHeroProps = {
   buttonText?: string;
 };
 
-const STATES = [
-  "Andaman & Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam",
-  "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu",
-  "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir",
-  "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh",
-  "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha",
-  "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana",
-  "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
-];
-
-const NATURE_OF_TRADE = [
-  "Educational", "Social", "Cultural", "Economic", "Religious",
-  "Health & Medical", "Environmental", "Rural Development", "Others",
-];
-
 const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
 const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
 
 const FALLBACK_PACKAGES = [
-  { label: "Basic Registration – ₹9,999", amount: 9999 },
-  { label: "Standard Registration – ₹14,999", amount: 14999 },
-  { label: "Premium Registration – ₹19,999", amount: 19999 },
+  { label: "Silver Package – ₹4,999", amount: 4999 },
+  { label: "Gold Package – ₹9,999", amount: 9999 },
+  { label: "Platinum Package – ₹14,999", amount: 14999 },
 ];
 
-export default function FcraRegistrationHero({
+export default function LogoDesignHero({
   heading,
   headingHighlight,
   description,
   features,
   buttonText,
-}: FcraRegistrationHeroProps) {
+}: LogoDesignHeroProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -57,11 +42,12 @@ export default function FcraRegistrationHero({
 
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    phone_no: "",
     email: "",
-    pan_gstin: "",
-    state: "",
-    nature_of_trade: "",
+    brand_name: "",
+    tag_line: "",
+    description: "",
+    color: "",
     package: FALLBACK_PACKAGES[0]?.label || "",
   });
 
@@ -80,7 +66,7 @@ export default function FcraRegistrationHero({
 
     const fetchPricing = async () => {
       try {
-        const filter = JSON.stringify({ category: { "$regex": "^fcra-registration$", "$options": "i" } });
+        const filter = JSON.stringify({ category: { "$regex": "^logo-designing$", "$options": "i" } });
         const res = await fetch(
           `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
           { cache: "no-store" }
@@ -106,13 +92,14 @@ export default function FcraRegistrationHero({
     let timer: NodeJS.Timeout;
     if (showSuccessModal && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
-    } else if (showSuccessModal && countdown === 0 && whatsappUrl && paymentSuccess) {
+    } else if (countdown === 0 && showSuccessModal && whatsappUrl) {
       window.open(whatsappUrl, "_blank");
+      setCountdown(-1);
     }
     return () => clearTimeout(timer);
-  }, [showSuccessModal, countdown, whatsappUrl, paymentSuccess]);
+  }, [showSuccessModal, countdown, whatsappUrl]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -126,7 +113,7 @@ export default function FcraRegistrationHero({
       const res = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, packageName: "FCRA Registration" }),
+        body: JSON.stringify({ amount, packageName: "Logo Design" }),
       });
       const { orderId } = await res.json();
 
@@ -135,7 +122,7 @@ export default function FcraRegistrationHero({
         amount: amount * 100,
         currency: "INR",
         name: "DoStartup",
-        description: "FCRA Registration",
+        description: "Professional Logo Design Service",
         order_id: orderId,
         handler: async function (response: any) {
           let user = null;
@@ -154,8 +141,8 @@ export default function FcraRegistrationHero({
               const profileData: any = {
                 name: userName,
                 email: finalEmail,
-                phone: formData.phone,
-                phone_no: formData.phone,
+                phone: formData.phone_no,
+                phone_no: formData.phone_no,
                 updated_at: new Date().toISOString(),
               };
               if (user?.id) profileData.id = user.id;
@@ -166,36 +153,41 @@ export default function FcraRegistrationHero({
           }
 
           const whatsappMsg =
-            `🔔 *New FCRA Registration*\n\n` +
+            `🎨 *New Logo Design Order*\n\n` +
             `👤 *Name:* ${formData.name}\n` +
-            `📞 *Phone:* ${formData.phone}\n` +
+            `📞 *Phone:* ${formData.phone_no}\n` +
             `📧 *Email:* ${formData.email || "Not provided"}\n` +
-            `🔢 *PAN / GSTIN:* ${formData.pan_gstin.toUpperCase()}\n` +
-            `📍 *State:* ${formData.state}\n` +
-            `🏢 *Nature of Trade:* ${formData.nature_of_trade || "Not specified"}\n` +
+            `™️ *Brand Name:* ${formData.brand_name}\n` +
+            `🏷️ *Tagline:* ${formData.tag_line || "None"}\n` +
+            `📝 *Description:* ${formData.description}\n` +
+            `🌈 *Colors:* ${formData.color}\n` +
             `📦 *Package:* ${formData.package}\n` +
             `💰 *Payment ID:* ${response.razorpay_payment_id}\n\n` +
-            `I have successfully completed the payment. Please proceed with my FCRA Registration.`;
+            `I have successfully completed the payment. Please start my logo design process.`;
 
           const waUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999644807"}?text=${encodeURIComponent(whatsappMsg)}`;
 
           // Save to Supabase
           try {
-            const finalEmail = user?.email || formData.email || "noemail@fcra.com";
-            const { error: dbError } = await supabase.from("fcra_registration").insert({
+            const finalEmail = user?.email || formData.email;
+            const { error: dbError } = await supabase.from("logo_design").insert({
               name: formData.name,
               email: finalEmail,
-              phone_no: formData.phone,
-              pan_gstin: formData.pan_gstin.toUpperCase(),
-              state: formData.state,
-              nature_of_trade: formData.nature_of_trade || null,
+              phone_no: formData.phone_no,
+              brand_name: formData.brand_name,
+              tag_line: formData.tag_line,
+              description: formData.description,
+              color: formData.color,
               amount: amount,
               payment_id: response.razorpay_payment_id,
               payment_state: "paid",
             });
-            if (dbError) console.error("DB insert error:", dbError);
-          } catch (dbErr) {
-            console.error("Failed to insert FCRA record:", dbErr);
+            if (dbError) {
+              console.error("Supabase insert error:", dbError);
+              alert("Saved to profile failed: " + dbError.message + ". Please ensure your database table has name, email, and phone_no columns.");
+            }
+          } catch (dbErr: any) {
+            console.error("Failed to insert Logo Design record:", dbErr);
           }
 
           // Send confirmation email
@@ -205,13 +197,12 @@ export default function FcraRegistrationHero({
             body: JSON.stringify({
               name: formData.name,
               email: formData.email,
-              phone: formData.phone,
-              service: "FCRA Registration",
+              phone: formData.phone_no,
+              service: "Logo Design",
               paymentId: response.razorpay_payment_id,
               details: {
-                "PAN / GSTIN": formData.pan_gstin.toUpperCase(),
-                "State": formData.state,
-                "Nature of Trade": formData.nature_of_trade || "Not specified",
+                "Brand Name": formData.brand_name,
+                "Tagline": formData.tag_line,
                 "Package": formData.package,
               },
             }),
@@ -224,7 +215,7 @@ export default function FcraRegistrationHero({
           setLoading(false);
           setStep(0);
         },
-        prefill: { name: formData.name, email: formData.email, contact: formData.phone },
+        prefill: { name: formData.name, email: formData.email, contact: formData.phone_no },
         theme: { color: "#C15F3C" },
         modal: { ondismiss: () => setLoading(false) },
       };
@@ -242,31 +233,18 @@ export default function FcraRegistrationHero({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (step === 1) {
-      if (!formData.name || !formData.phone || (!isLoggedIn && !formData.email)) {
+      if (!formData.name || !formData.phone_no || (!isLoggedIn && !formData.email)) {
         alert("Please fill in all required fields");
         return;
       }
-      if (formData.phone.length !== 10) {
+      if (formData.phone_no.length !== 10) {
         alert("Please enter a valid 10-digit phone number");
         return;
       }
-      if (!isLoggedIn && formData.email) {
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-          alert("Please enter a valid email address");
-          return;
-        }
-      }
       setStep(2);
     } else if (step === 2) {
-      if (!formData.pan_gstin || !formData.state) {
+      if (!formData.brand_name || !formData.description || !formData.color) {
         alert("Please fill in all required fields");
-        return;
-      }
-      const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/i;
-      const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/i;
-      const val = formData.pan_gstin.toUpperCase();
-      if (!panRegex.test(val) && !gstRegex.test(val)) {
-        alert("Please enter a valid PAN or GSTIN.");
         return;
       }
       setStep(3);
@@ -282,21 +260,21 @@ export default function FcraRegistrationHero({
           <div className="flex-1 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] p-6">
             <div className="flex flex-col md:flex-row gap-8">
               <div className="w-full md:w-64 flex-shrink-0">
-                <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center">
-                  <span className="text-white font-bold text-xl text-center px-4">FCRA Registration</span>
+                <div className="w-full h-48 bg-gradient-to-br from-[#C15F3C] to-[#A94E30] rounded-xl border border-[#E5E2DA] flex items-center justify-center text-center px-4">
+                  <span className="text-white font-bold text-xl">Logo &amp; Branding</span>
                 </div>
                 <div className="mt-4 space-y-2">
-                  {["Foreign Donations", "NGO Compliance", "MHA Approval"].map((item) => (
+                  {["Iconic Design", "Brand Guidelines", "Visual Identity"].map((item) => (
                     <p key={item} className="text-sm text-[#6F6B63] hover:text-[#C15F3C] cursor-pointer">{item}</p>
                   ))}
-                  <button className="text-sm text-[#C15F3C] font-medium hover:underline">Learn More →</button>
+                  <button className="text-sm text-[#C15F3C] font-medium hover:underline">View Portfolio →</button>
                 </div>
               </div>
 
               <div className="flex-1 space-y-6">
                 <div className="inline-flex items-center gap-2 bg-white border border-[#E5E2DA] rounded-full px-3 py-1">
                   <div className="w-2 h-2 bg-[#C15F3C] rounded-full" />
-                  <span className="text-xs font-medium text-[#C15F3C]">NGO COMPLIANCE EXPERTS</span>
+                  <span className="text-xs font-medium text-[#C15F3C]">CREATIVE STUDIO</span>
                 </div>
 
                 <div>
@@ -308,7 +286,7 @@ export default function FcraRegistrationHero({
                 </div>
 
                 <div className="bg-[#F9F8F6] border border-[#E5E2DA] rounded-2xl p-6">
-                  <span className="inline-block bg-[#C15F3C] text-white text-[10px] font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">Key Features</span>
+                  <span className="inline-block bg-[#C15F3C] text-white text-[10px] font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">Our Approach</span>
                   <div className="space-y-3">
                     {features?.map((f, i) => (
                       <div key={i} className="flex items-center gap-3">
@@ -324,8 +302,8 @@ export default function FcraRegistrationHero({
                 </div>
 
                 <div className="flex justify-between text-sm">
-                  <button className="text-[#C15F3C] hover:underline">Terms and conditions</button>
-                  <button onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "FCRA Registration")} className="text-[#C15F3C] hover:underline">Need Help?</button>
+                  <button className="text-[#C15F3C] hover:underline">Creative Process</button>
+                  <button onClick={() => handleNeedHelpWhatsApp(headingHighlight || heading || "Logo Design")} className="text-[#C15F3C] hover:underline">Need Help?</button>
                 </div>
               </div>
             </div>
@@ -334,8 +312,8 @@ export default function FcraRegistrationHero({
           {/* RIGHT SIDEBAR – FORM */}
           <div id="registration-form" className="lg:w-96 bg-white rounded-2xl shadow-sm border border-[#E5E2DA] overflow-hidden self-start">
             <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-6 py-4">
-              <h2 className="text-lg font-semibold text-white">Apply for FCRA</h2>
-              <p className="text-sm text-[#F4F3EE]">Foreign Contribution Regulation Act</p>
+              <h2 className="text-lg font-semibold text-white">Start Your Design</h2>
+              <p className="text-sm text-[#F4F3EE]">Unique identity for your business</p>
             </div>
 
             {/* Step Indicator */}
@@ -350,7 +328,7 @@ export default function FcraRegistrationHero({
               ))}
             </div>
             <p className="px-6 pt-1 pb-0 text-[11px] text-[#B1ADA1]">
-              {step === 1 ? "Step 1 of 2 – Contact Details" : "Step 2 of 2 – Registration Details"}
+              {step === 1 ? "Step 1 of 2 – Contact Details" : "Step 2 of 2 – Design Requirements"}
             </p>
 
             <div className="p-6">
@@ -373,13 +351,13 @@ export default function FcraRegistrationHero({
                     )}
                     <div>
                       <label className="block text-xs text-[#6F6B63] mb-1">Phone Number *</label>
-                      <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required maxLength={10}
+                      <input type="tel" name="phone_no" value={formData.phone_no} onChange={handleInputChange} required maxLength={10}
                         onInput={(e: React.FormEvent<HTMLInputElement>) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, ""); }}
                         placeholder="10-digit mobile number"
                         className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
                     <button type="submit" className="w-full bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition shadow-sm hover:shadow-md">
-                      Continue →
+                      Continue &rarr;
                     </button>
                   </div>
                 )}
@@ -388,26 +366,25 @@ export default function FcraRegistrationHero({
                 {step === 2 && (
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-xs text-[#6F6B63] mb-1">PAN / GSTIN *</label>
-                      <input type="text" name="pan_gstin" value={formData.pan_gstin} onChange={handleInputChange} required maxLength={15}
-                        placeholder="Enter PAN or GSTIN"
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white uppercase" />
+                      <label className="block text-xs text-[#6F6B63] mb-1">Brand Name *</label>
+                      <input type="text" name="brand_name" value={formData.brand_name} onChange={handleInputChange} required placeholder="Name to appear on logo"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
                     <div>
-                      <label className="block text-xs text-[#6F6B63] mb-1">State *</label>
-                      <select name="state" value={formData.state} onChange={handleInputChange} required
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer">
-                        <option value="">Select State</option>
-                        {STATES.map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Tagline (Optional)</label>
+                      <input type="text" name="tag_line" value={formData.tag_line} onChange={handleInputChange} placeholder="Slogan or tagline"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
                     <div>
-                      <label className="block text-xs text-[#6F6B63] mb-1">Nature of Trade</label>
-                      <select name="nature_of_trade" value={formData.nature_of_trade} onChange={handleInputChange}
-                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer">
-                        <option value="">Select (Optional)</option>
-                        {NATURE_OF_TRADE.map(n => <option key={n} value={n}>{n}</option>)}
-                      </select>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Logo Description *</label>
+                      <textarea name="description" value={formData.description} onChange={handleInputChange} required rows={2}
+                        placeholder="Explain your business or style preference"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-[#6F6B63] mb-1">Color Preference *</label>
+                      <input type="text" name="color" value={formData.color} onChange={handleInputChange} required placeholder="e.g. Blue and White"
+                        className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] placeholder-[#B1ADA1] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white" />
                     </div>
                     <div>
                       <label className="block text-xs text-[#6F6B63] mb-1">Select Package *</label>
@@ -422,7 +399,7 @@ export default function FcraRegistrationHero({
                         Back
                       </button>
                       <button type="submit" className="flex-[2] bg-[#C15F3C] text-white font-semibold py-3 rounded-lg text-sm hover:bg-[#A94E30] transition">
-                        Review &amp; Pay →
+                        Review &amp; Pay &rarr;
                       </button>
                     </div>
                   </div>
@@ -432,7 +409,7 @@ export default function FcraRegistrationHero({
                   <svg className="w-4 h-4 text-[#C15F3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
-                  <span>Secure Gateway · Instant access</span>
+                  <span>100% Custom Design · Money-Back Guarantee</span>
                 </div>
               </form>
             </div>
@@ -448,8 +425,8 @@ export default function FcraRegistrationHero({
               className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden">
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] px-8 py-6 flex justify-between items-center">
                 <div>
-                  <h3 className="text-xl font-bold text-white">Review Your Details</h3>
-                  <p className="text-white/80 text-xs">Final check before FCRA Registration</p>
+                  <h3 className="text-xl font-bold text-white">Review Your Project</h3>
+                  <p className="text-white/80 text-xs">Final check before starting design</p>
                 </div>
                 <button onClick={() => setStep(2)} className="text-white/60 hover:text-white transition"><X className="w-6 h-6" /></button>
               </div>
@@ -459,26 +436,25 @@ export default function FcraRegistrationHero({
                   <div className="space-y-4">
                     <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Contact Information</h4>
                     <div className="space-y-2">
-                      {[["Name", formData.name], ["Email", formData.email], ["Phone", formData.phone]].map(([label, val]) => (
+                      {[["Name", formData.name], ["Email", formData.email], ["Phone", formData.phone_no]].map(([label, val]) => (
                         <div key={label} className="flex flex-col text-sm">
-                          <span className="text-[#6F6B63]">{label}</span>
-                          <span className="font-semibold text-[#2F2E2B] break-all">{val}</span>
+                          <span className="text-black/60 font-medium">{label}</span>
+                          <span className="font-bold text-black break-all">{val}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                   <div className="space-y-4 border-l border-[#E5E2DA] pl-6">
-                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Registration Details</h4>
+                    <h4 className="text-[10px] font-bold text-[#B1ADA1] uppercase tracking-wider">Design Brief</h4>
                     <div className="space-y-2">
                       {[
-                        ["PAN / GSTIN", formData.pan_gstin.toUpperCase()],
-                        ["State", formData.state],
-                        ["Nature of Trade", formData.nature_of_trade || "Not specified"],
-                        ["Package", formData.package?.split("–")[0]?.trim() || ""],
+                        ["Brand", formData.brand_name],
+                        ["Colors", formData.color],
+                        ["Package", formData.package.split('–')[0]],
                       ].map(([label, val]) => (
                         <div key={label} className="flex flex-col text-sm">
-                          <span className="text-[#6F6B63]">{label}</span>
-                          <span className="font-semibold text-[#2F2E2B]">{val}</span>
+                          <span className="text-black/60 font-medium">{label}</span>
+                          <span className="font-bold text-black">{val}</span>
                         </div>
                       ))}
                     </div>
@@ -487,11 +463,11 @@ export default function FcraRegistrationHero({
 
                 <div className="bg-[#F9F8F6] rounded-2xl p-6 border border-[#E5E2DA] flex justify-between items-center">
                   <div>
-                    <span className="text-[#6F6B63] text-sm">Package Amount</span>
-                    <p className="text-2xl font-bold text-[#2F2E2B]">₹{selectedPackage.amount.toLocaleString()} <span className="text-xs font-normal text-[#B1ADA1]">incl. taxes</span></p>
+                    <span className="text-black/60 text-sm">Project Total</span>
+                    <p className="text-2xl font-bold text-black">₹{selectedPackage.amount.toLocaleString()} <span className="text-xs font-normal text-black/40">incl. taxes</span></p>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Guaranteed</span>
+                    <span className="text-[10px] text-[#A94E30] font-bold uppercase block mb-1">Satisfaction Guarantee</span>
                     <div className="flex gap-1 justify-end text-[#C15F3C]">
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20">
@@ -503,7 +479,7 @@ export default function FcraRegistrationHero({
                 </div>
 
                 <div className="flex gap-4">
-                  <button onClick={() => setStep(2)} className="flex-1 border border-[#E5E2DA] hover:bg-[#F9F8F6] text-[#6F6B63] font-bold py-4 rounded-2xl transition">Edit Details</button>
+                  <button onClick={() => setStep(2)} className="flex-1 border border-[#E5E2DA] hover:bg-[#F9F8F6] text-[#6F6B63] font-bold py-4 rounded-2xl transition">Edit Brief</button>
                   <button onClick={handlePayment} disabled={loading}
                     className="flex-[2] bg-[#C15F3C] hover:bg-[#A94E30] text-white font-bold py-4 rounded-2xl transition shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2">
                     {loading ? (
@@ -512,10 +488,10 @@ export default function FcraRegistrationHero({
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                         </svg>
-                        Processing...
+                        Initializing...
                       </span>
                     ) : (
-                      <>{buttonText || `Pay ₹${selectedPackage.amount.toLocaleString()} Online`} →</>
+                      <>{buttonText || `Pay ₹${selectedPackage.amount.toLocaleString()} &rarr;`}</>
                     )}
                   </button>
                 </div>
@@ -530,43 +506,52 @@ export default function FcraRegistrationHero({
         {showSuccessModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
             <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
+              className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden relative">
+              <button 
+                onClick={() => { setShowSuccessModal(false); setCountdown(-1); }}
+                className="absolute top-6 right-6 text-black/30 hover:text-black z-20 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
               <div className="bg-gradient-to-r from-[#C15F3C] to-[#A94E30] p-8 text-center relative">
-                <button onClick={() => setShowSuccessModal(false)} className="absolute top-4 right-4 text-white/80 hover:text-white transition"><X className="w-6 h-6" /></button>
                 <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <CheckCircle2 className="w-12 h-12 text-[#C15F3C]" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-1">Payment Successful!</h3>
+                <h3 className="text-2xl font-bold text-white mb-1">Project Started!</h3>
               </div>
               <div className="p-8 space-y-6">
                 <div className="space-y-3 text-center">
                   <p className="text-[#2F2E2B] font-medium text-lg">Thank you, {formData.name}!</p>
                   <p className="text-[#6F6B63] text-sm leading-relaxed">
-                    Your payment of <span className="font-bold text-[#C15F3C]">₹{selectedPackage.amount.toLocaleString()}</span> has been received successfully.
+                    Your payment of <span className="font-bold text-[#C15F3C]">₹{selectedPackage.amount.toLocaleString()}</span> has been confirmed. Our creative team will start on your logo immediately.
                   </p>
                 </div>
                 <div className="bg-[#F9F8F6] rounded-2xl p-4 border border-[#E5E2DA] space-y-2">
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#6F6B63]">Service</span>
-                    <span className="font-semibold text-[#2F2E2B]">FCRA Registration</span>
+                    <span className="text-[#6F6B63]">Project</span>
+                    <span className="font-semibold text-[#2F2E2B]">Logo Design</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#6F6B63]">Status</span>
-                    <span className="text-[#10B981] font-bold">PAID</span>
+                    <span className="text-[#6F6B63]">Brand</span>
+                    <span className="font-semibold text-[#2F2E2B]">{formData.brand_name}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-[#6F6B63]">Payment Status</span>
+                    <span className="text-[#10B981] font-bold">CONFIRMED</span>
                   </div>
                 </div>
                 <div className="pt-2">
-                  <div className="text-center text-[10px] text-[#B1ADA1] mb-4 uppercase tracking-widest font-bold">What&apos;s Next?</div>
+                  <div className="text-center text-[10px] text-[#B1ADA1] mb-4 uppercase tracking-widest font-bold">Next Steps</div>
                   <button onClick={() => window.open(whatsappUrl, "_blank")}
                     className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2">
                     <MessageCircle className="w-5 h-5" />
-                    Complete via WhatsApp
+                    Share Ideas on WhatsApp
                     <ExternalLink className="w-4 h-4 opacity-70" />
                   </button>
                   <div className="mt-4 text-center">
                     <p className="text-xs text-[#6F6B63] flex items-center justify-center gap-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                      Redirecting to WhatsApp in <span className="font-bold text-[#C15F3C]">{countdown}s</span>...
+                      Connecting to designer in <span className="font-bold text-[#C15F3C]">{countdown}s</span>...
                     </p>
                   </div>
                 </div>

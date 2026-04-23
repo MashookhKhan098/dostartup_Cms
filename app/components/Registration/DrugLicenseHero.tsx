@@ -25,7 +25,10 @@ const STATES = [
   "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
 ];
 
-const PACKAGES = [
+const COCKPIT_BASE = process.env.NEXT_PUBLIC_COCKPIT_URL;
+const COCKPIT_TOKEN = process.env.NEXT_PUBLIC_COCKPIT_API_KEY;
+
+const FALLBACK_PACKAGES = [
   { label: "Retail Drug License – ₹4,999", amount: 4999 },
   { label: "Wholesale Drug License – ₹7,999", amount: 7999 },
   { label: "Manufacturing License – ₹14,999", amount: 14999 },
@@ -45,6 +48,7 @@ export default function DrugLicenseHero({
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [whatsappUrl, setWhatsappUrl] = useState("");
   const [countdown, setCountdown] = useState(0);
+  const [pricingPackages, setPricingPackages] = useState(FALLBACK_PACKAGES);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -52,7 +56,7 @@ export default function DrugLicenseHero({
     email: "",
     pan_gstin: "",
     state: "",
-    package: PACKAGES[0].label,
+    package: FALLBACK_PACKAGES[0]?.label || "",
   });
 
   useEffect(() => {
@@ -69,6 +73,24 @@ export default function DrugLicenseHero({
       }
     };
     checkUser();
+
+    const fetchPricing = async () => {
+      try {
+        const filter = JSON.stringify({ category: { "$regex": "^drug-license$", "$options": "i" } });
+        const res = await fetch(
+          `${COCKPIT_BASE}/api/content/items/pricingCard?token=${COCKPIT_TOKEN}&filter=${encodeURIComponent(filter)}`,
+          { cache: "no-store" }
+        );
+        const data = await res.json();
+        const entries: any[] = Array.isArray(data) ? data : (data?.entries || []);
+        const plans = entries.filter((e: any) => e.price).map((e: any) => ({ label: e.title || "Standard Plan", amount: Number(e.price) }));
+        if (plans.length > 0) {
+          setPricingPackages(plans);
+          setFormData(prev => ({ ...prev, package: plans[0]?.label || "" }));
+        }
+      } catch {}
+    };
+    fetchPricing();
 
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -90,7 +112,7 @@ export default function DrugLicenseHero({
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const selectedPackage = PACKAGES.find(p => p.label === formData.package) || PACKAGES[0];
+  const selectedPackage = (pricingPackages.find(p => p.label === formData.package) || pricingPackages[0] || FALLBACK_PACKAGES[0])!;
 
   const handlePayment = async () => {
     setLoading(true);
@@ -436,7 +458,7 @@ export default function DrugLicenseHero({
                         required
                         className="w-full border border-[#E5E2DA] rounded-lg px-4 py-3 text-sm text-[#2F2E2B] focus:outline-none focus:ring-1 focus:ring-[#C15F3C] bg-white appearance-none cursor-pointer"
                       >
-                        {PACKAGES.map(p => <option key={p.label} value={p.label}>{p.label}</option>)}
+                        {pricingPackages.map(p => <option key={p.label} value={p.label}>{p.label}</option>)}
                       </select>
                     </div>
                     <div className="flex gap-2 pt-2">
@@ -522,7 +544,7 @@ export default function DrugLicenseHero({
                       </div>
                       <div className="flex flex-col text-sm">
                         <span className="text-[#6F6B63]">License Type</span>
-                        <span className="font-semibold text-[#2F2E2B]">{formData.package.split("–")[0].trim()}</span>
+                        <span className="font-semibold text-[#2F2E2B]">{formData.package?.split("–")[0]?.trim() || ""}</span>
                       </div>
                     </div>
                   </div>

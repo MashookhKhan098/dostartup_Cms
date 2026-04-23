@@ -48,7 +48,7 @@ export default function RootLayout({
  strategy="afterInteractive"
  />
  </head>
- <body
+  <body
  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
  >
  {children}

@@ -3,48 +3,36 @@ import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
 import Popularsearches from '../components/PopularSearches';
-import Hero from '../components/Trademark/Hero';
+import Hero from '../components/Registration/TrademarkHearingHero';
 import DynamicTabContent from '../components/DynamicTabContent';
 
 export default function Home() {
- return (
- <main className="min-h-screen bg-[#F4F3EE]">
- <Navbar />
- <Hero
- trademarkService={{
- serviceName: "Hearing",
- serviceDescription:
- "Hearings are scheduled only when the Registry issues a notice. Your trademark hasn't reached that stage.",
- formFields: [
- {
- type: "input",
- name: "applicationNumber",
- placeholder: "Application Number",
- },
- {
- type: "input",
- name: "brandName",
- placeholder: "Brand Name",
- },
- {
- type: "select",
- name: "class",
- placeholder: "Select Class",
- options: ["Class 1", "Class 9", "Class 35", "Class 42"],
- },
- ],
- buttonText: "Get Quote"
- }}
- />
- <DynamicTabContent category="Trademark" />
- 
- <div className="bg-[#F4F3EE] py-8">
-   <DynamicPricingSection category="trademark-hearing" />
- </div>
- 
- <FAQAccordion category="trademark-hearing" />
- <Popularsearches />
- <Footer />
- </main>
- );
+
+  const heroProps = {
+    heading: "Expert representation for your ",
+    headingHighlight: "Trademark Hearing",
+    description: "Facing a trademark hearing? Our experienced attorneys provide professional representation before the Trademark Registrar. We help you prepare your case, present strong arguments, and protect your brand's legal rights with expert guidance at every step.",
+    features: [
+      { icon: "document", text: "Expert Attorney Representation" },
+      { icon: "chart", text: "Strong Legal Arguments & Prep" },
+      { icon: "users", text: "Dedicated Support Team" },
+      { icon: "plus", text: "High Success Rate" },
+      { icon: "document", text: "End-to-End Hearing Management" },
+    ],
+    buttonText: "Book Your Hearing",
+  };
+
+  return (
+    <>
+      <Navbar />
+      <Hero {...heroProps} />
+      <DynamicTabContent category="trademark-hearing" />
+      <div className="bg-[#F4F3EE] py-8">
+        <DynamicPricingSection category="trademark-hearing" />
+      </div>
+      <FAQAccordion category="trademark-hearing" />
+      <Popularsearches />
+      <Footer />
+    </>
+  );
 }
