@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import PopularSearches from "../components/PopularSearches";
+import ITR3ReturnHero from "../components/Registration/ITR3ReturnHero";
 import {
   CheckCircle,
   XCircle,
@@ -301,6 +302,19 @@ export default function ITR3Page() {
     <>
       <div className="min-h-screen bg-[#F4F3EE] font-sans">
         <Navbar />
+        <ITR3ReturnHero
+          heading="ITR-3"
+          headingHighlight="Return Filing"
+          description="File your ITR-3 return for business owners, freelancers, F&O traders and professionals. Expert CA-assisted filing with full books of accounts support."
+          features={[
+            { icon: "check", text: "Business & Professional Income Support" },
+            { icon: "check", text: "F&O / Intraday Trading Computation" },
+            { icon: "check", text: "Audit Applicability Check & Support" },
+            { icon: "check", text: "Books of Accounts Analysis" },
+            { icon: "check", text: "Old & New Regime Comparison" },
+          ]}
+          buttonText="Pay & File ITR-3"
+        />
         {/* HERO */}
         <section className="bg-[#F4F3EE] relative overflow-hidden pt-8 pb-20 border-b border-[#C15F3C]/10">
           <div className="absolute inset-0 opacity-[0.03]"

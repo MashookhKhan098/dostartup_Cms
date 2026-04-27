@@ -6,6 +6,8 @@ import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
+import ITR2ReturnHero from "../components/Registration/ITR2ReturnHero";
+import PopularSearches from "../components/PopularSearches";
 import {
   CheckCircle,
   XCircle,
@@ -522,6 +524,19 @@ export default function ITR2Page() {
   return (
     <>
       <Navbar />
+      <ITR2ReturnHero
+        heading="ITR-2"
+        headingHighlight="Return Filing"
+        description="File your ITR-2 return for individuals with capital gains, multiple house properties, or foreign income. Expert CA-assisted filing with AI precision."
+        features={[
+          { icon: "check", text: "Capital Gains from Stocks, MFs & Property" },
+          { icon: "check", text: "Multiple House Property Income" },
+          { icon: "check", text: "Foreign Income, RSUs & DTAA Benefits" },
+          { icon: "check", text: "NRI / RNOR with Indian Income" },
+          { icon: "check", text: "Old & New Regime Optimizer" },
+        ]}
+        buttonText="Pay & File ITR-2"
+      />
 
       <main className="min-h-screen bg-[#F4F3EE] font-sans">
         {/* ══════════════════════════════════════
@@ -1600,8 +1615,9 @@ export default function ITR2Page() {
           <DynamicPricingSection category="itr-2-return-filing" />
         </section>
         <FAQAccordion category="itr-2-return-filing" />
-        <Footer />
+        <PopularSearches />
       </main>
+      <Footer />
     </>
   );
 }

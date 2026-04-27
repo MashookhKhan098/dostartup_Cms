@@ -5,8 +5,9 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FAQAccordion from "../components/Faq";
-import Popularsearches from "../components/PopularSearches";
 import DynamicPricingSection from "../components/DynamicPricingSection";
+import ITR6ReturnHero from "../components/Registration/ITR6ReturnHero";
+import PopularSearches from "../components/PopularSearches";
 
 import {
  ChevronRight,
@@ -320,7 +321,7 @@ function Users({ size, className }: { size: number; className?: string }) {
 // ─────────────────────────────────────────────
 // MAIN PAGE
 // ─────────────────────────────────────────────
-export default function TaxCalculatorPage() {
+export default function ITR6Page() {
  const [step, setStep] = useState(1);
 
  const [s1, setS1] = useState<Step1Data>({ fy: "2025-26", age: "below60" });
@@ -355,6 +356,19 @@ export default function TaxCalculatorPage() {
  return (
  <>
  <Navbar />
+ <ITR6ReturnHero
+   heading="ITR-6"
+   headingHighlight="Return Filing"
+   description="File your ITR-6 return for Companies. Expert CA-assisted filing with full balance sheet support, MAT computation, and tax audit assistance."
+   features={[
+     { icon: "check", text: "Corporate Tax Compliance Support" },
+     { icon: "check", text: "MAT (Minimum Alternate Tax) Calculation" },
+     { icon: "check", text: "Balance Sheet & P&L Analysis by AI" },
+     { icon: "check", text: "Tax Audit (Form 3CA/3CD) Support" },
+     { icon: "check", text: "Related Party Transactions Disclosure" },
+   ]}
+   buttonText="Pay & File ITR-6"
+ />
  <main className="min-h-screen bg-[#F4F3EE] font-sans">
 
  {/* ── PAGE HEADER ── */}
@@ -831,7 +845,7 @@ export default function TaxCalculatorPage() {
 
  <FAQAccordion category="itr-6-return-filing" />
  
- <Popularsearches />
+ <PopularSearches />
  </main>
  <Footer />
 </>

@@ -1,495 +1,181 @@
 "use client";
+
+import React from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
-import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
-
-import React, { useCallback, useState } from "react";
-import Image from "next/image";
+import PopularSearches from "../components/PopularSearches";
+import IncomeTaxNoticeHero from "../components/Registration/IncomeTaxNoticeHero";
 import {
- ChevronRight,
- ChevronDown,
- ShoppingBag,
- Star,
- Plus,
- UploadCloud,
- Search,
+  CheckCircle,
+  FileText,
+  Shield,
+  Clock,
+  Briefcase,
+  AlertCircle,
+  MessageCircle,
+  Users,
+  ShieldCheck,
+  ChevronRight,
+  TrendingUp,
+  Scale,
+  SearchCheck,
 } from "lucide-react";
 
-const ASSETS = {
- logo: "/images/india-logo.jpg",
- taxHero: "/images/tax-notice.png",
- ledgers: "/images/ledgers.png",
- whatsapp: "/images/whatsapp.png",
- adRight1: "/images/company-compliance.jpg",
- dinEkyc: "/images/din.jpg",
- cartIcon: "/images/cart-icon.svg",
- indiaFlag: "/images/india-flag.png",
- // sample additional images referenced in longer content — replace or remove if not present
- screenshot497: "/images/docs.png",
- screenshot498: "/images/steps.png",
- screenshot499: "/images/itr-forms.png",
- screenshot500: "/images/due-dates.png",
- screenshot501: "/images/docrequired.png",
- screenshot502: "/images/more.png",
- screenshot503: "/images/more2.png",
- heroRight: "/images/remove.png",
-};
-
-const INCOME_TAX_DROPDOWN_LINKS = [
- { title: "Income Tax E-Filing", href: "/income-tax/e-filing" },
- { title: "Business Tax Filing", href: "/income-tax/business-tax-filing" },
- {
- title: "Partnership Firm / LLP ITR",
- href: "/income-tax/partnership-llp-itr",
- },
- { title: "Company ITR Filing", href: "/income-tax/company-itr-filing" },
- { title: "Trust / NGO Tax Filing", href: "/income-tax/trust-ngo-tax-filing" },
- { title: "15CA - 15CB Filing", href: "/income-tax/15ca-15cb-filing" },
- { title: "TAN Registration", href: "/income-tax/tan-registration" },
- { title: "TDS Return Filing", href: "/income-tax/tds-return-filing" },
- { title: "Income Tax Notice", href: "/income-tax/income-tax-notice" },
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const NOTICE_TYPES = [
+  { icon: <SearchCheck size={20} className="text-[#C15F3C]" />, title: "Section 143(1)", desc: "Intimation notice regarding mismatches in your return processing." },
+  { icon: <AlertCircle size={20} className="text-[#C15F3C]" />, title: "Section 143(2)", desc: "Scrutiny notice requiring detailed explanation of your income & deductions." },
+  { icon: <TrendingUp size={20} className="text-[#C15F3C]" />, title: "Section 148", desc: "Reassessment notice if the department believes income has escaped assessment." },
+  { icon: <Scale size={20} className="text-[#C15F3C]" />, title: "Section 156", desc: "Notice of Demand for outstanding tax, interest, or penalties." },
 ];
 
-const NAV_ITEMS = [
- "DoStartup",
- "Startup",
- "Registrations",
- "Trademark",
- "GST",
- "Income Tax",
- "MCA",
- "Compliance",
- "Personal",
- "Global",
- "Cities",
- "Guides",
- "Login",
+const PROCESS_STEPS = [
+  { step: "01", title: "Upload Notice", desc: "Share your notice securely with our senior tax experts." },
+  { step: "02", title: "Expert Review", desc: "We analyze the grounds of the notice and identify the best response strategy." },
+  { step: "03", title: "Draft Reply", desc: "Our CAs draft a professional legal reply supported by relevant case laws." },
+  { step: "04", title: "Submission", desc: "We file the response on the e-filing portal and follow up until closure." },
 ];
 
-const POPULAR_SEARCHES = [
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Nadakacheri",
- "Flipkart Seller",
- "Caste Certificate",
- "IAY",
- "EPFO Passbook",
- "Domicile Certificate",
- "Udyog Aadhaar",
- "PF Withdrawal",
- "Karnataka One",
- "Encumbrance Certificate",
- "Bonafide Certificate",
- "Instant PAN Card",
- "E PAN Card",
- "Income Certificate",
- "Marriage Certificate",
- "Passport Renewal",
- "Nivesh Mitra",
- "MSME Registration",
- "Experience Certificate",
- "Trademark Status",
- "Trade License",
- "Domicile",
- "eMitra",
- "UAN",
- "PICME",
- "Resignation Letter Format",
- "Ration Card",
- "TNREGINET",
- "RAJSSP",
- "LLP Compliance",
- "Form 16",
- "Police Clearance Certificate",
- "OBC Certificate",
- "Jamabandi",
- "Mee Bhoomi",
- "SC Certificate",
- "UAN Login",
- "eAadhaar Download",
- "Linking Aadhaar To Bank Accounts",
- "mAadhaar",
- "Aadhaar Enrollment Centre",
- "UAN Passbook",
- "Amazon How to Sell",
- "PAN Card Apply",
- "EPFO Unified Portal",
-];
+// ─────────────────────────────────────────────
+// MAIN PAGE
+// ─────────────────────────────────────────────
+export default function IncomeTaxNoticePage() {
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-[#F4F3EE] font-sans">
+        <IncomeTaxNoticeHero
+          heading="Income Tax"
+          headingHighlight="Notice Response"
+          description="Don't panic about tax notices. Get expert legal representation and professional drafting to resolve your income tax issues efficiently."
+          features={[
+            { icon: "check", text: "Expert Notice Authentication" },
+            { icon: "check", text: "Professional Reply Drafting" },
+            { icon: "check", text: "E-filing Portal Submission" },
+            { icon: "check", text: "End-to-End Case Management" },
+          ]}
+          buttonText="Get Expert Help"
+        />
 
-export default function IncomeTaxNoticeResponsePage(): React.ReactElement {
- // hero upload states
- const [tnFileName, setTnFileName] = useState<string | null>(null);
- const [tnDragActive, setTnDragActive] = useState(false);
+        {/* 1. WHY PROFESSIONAL HELP? */}
+        <section className="py-16 px-4 bg-white border-b border-[#E5E2DA]">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-[#C15F3C] text-xs font-bold uppercase tracking-widest bg-[#C15F3C]/5 px-4 py-1 rounded-full mb-4 inline-block">Legal Expertise</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-black">Why you need an expert</h2>
+              <p className="text-gray-500 mt-4 max-w-2xl mx-auto">Responding to a tax notice without legal knowledge can lead to heavy penalties. Our team ensures your rights are protected.</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {NOTICE_TYPES.map((f, i) => (
+                <div key={i} className="p-8 rounded-[2rem] bg-[#F4F3EE]/50 border-2 border-transparent hover:border-[#C15F3C]/20 hover:bg-white hover:shadow-xl transition-all group">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                    {f.icon}
+                  </div>
+                  <h3 className="text-black font-bold text-lg mb-3">{f.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
- // header/search dropdown states
- const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
- const [searchQuery, setSearchQuery] = useState("");
+        {/* 2. COMMON CAUSES */}
+        <section className="py-16 px-4 bg-[#F4F3EE]">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-6 leading-tight">Common causes for <span className="text-[#C15F3C]">Tax Notices</span></h2>
+              <p className="text-gray-600 text-lg mb-8">The Income Tax Department uses advanced data analytics (AIS/TIS) to flag discrepancies in your filings.</p>
+              <div className="space-y-4">
+                {[
+                  { title: "Income Mismatch", desc: "Difference between your ITR and Form 26AS/AIS data." },
+                  { title: "High-Value Transactions", desc: "Large cash deposits or property purchases not explained." },
+                  { title: "Defective Return", desc: "Incorrect forms used or missing schedules in your filing." },
+                  { title: "Tax Evasion Doubts", desc: "Abnormal variations in income compared to previous years." },
+                ].map((e, i) => (
+                  <div key={i} className="flex gap-4 items-start bg-white p-4 rounded-2xl border border-[#E5E2DA] shadow-sm">
+                    <CheckCircle className="text-[#C15F3C] mt-1 shrink-0" size={20} />
+                    <div>
+                      <h4 className="font-bold text-black">{e.title}</h4>
+                      <p className="text-gray-500 text-sm">{e.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white rounded-[2.5rem] p-10 shadow-sm border-2 border-[#E5E2DA] relative overflow-hidden">
+               <h3 className="font-bold text-xl mb-6 flex items-center gap-2"><ShieldCheck className="text-[#C15F3C]" /> Risk Assessment</h3>
+               <p className="text-sm text-gray-500 mb-6">Ignoring a notice is the worst thing you can do. Penalties can range from 50% to 200% of the tax sought to be evaded.</p>
+               <ul className="space-y-4">
+                 <li className="flex gap-4">
+                   <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center font-bold text-red-600">!</div>
+                   <p className="text-gray-600 text-sm italic">"Failure to comply with a notice under Section 142(1) can lead to Best Judgment Assessment."</p>
+                 </li>
+                 <li className="flex gap-4">
+                   <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center font-bold text-blue-600">i</div>
+                   <p className="text-gray-600 text-sm italic">"Always check the DIN (Document Identification Number) to verify the notice's authenticity."</p>
+                 </li>
+               </ul>
+            </div>
+          </div>
+        </section>
 
- const onTaxFileChange = useCallback((file?: File) => {
- if (!file) return;
- setTnFileName(file.name);
- // attach upload logic if needed
- }, []);
+        {/* 3. PROCESS STEPS */}
+        <section className="py-16 px-4 bg-white border-t border-[#E5E2DA]">
+          <div className="max-w-7xl mx-auto text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-black">Our Resolution Framework</h2>
+            <p className="text-gray-500 mt-2">A systematic approach to close your tax litigation</p>
+          </div>
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {PROCESS_STEPS.map((s, i) => (
+              <div key={i} className="text-center p-6">
+                <div className="w-16 h-16 rounded-full bg-[#F4F3EE] flex items-center justify-center mx-auto mb-4 border-2 border-dashed border-[#C15F3C]/20 text-[#C15F3C] font-black text-xl">
+                  {s.step}
+                </div>
+                <h4 className="font-bold text-black mb-2">{s.title}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
- const handleTaxDrop = (e: React.DragEvent) => {
- e.preventDefault();
- setTnDragActive(false);
- const file = e.dataTransfer.files?.[0];
- if (file) onTaxFileChange(file);
- };
+        {/* 4. PRICING */}
+        <section id="pricing" className="bg-[#F4F3EE] py-16 px-4">
+          <div className="max-w-7xl mx-auto">
+             <DynamicPricingSection category="Income Tax Notice" />
+          </div>
+        </section>
 
- const handleTaxFileInput: React.ChangeEventHandler<HTMLInputElement> = (
- e
- ) => {
- const file = e.target.files?.[0];
- if (file) onTaxFileChange(file);
- };
+        {/* 5. FAQ */}
+        <FAQAccordion category="income-tax-notice" />
 
- return (
- <div className="min-h-screen bg-[#F4F3EE] text-gray-800 font-sans">
- <Navbar />
+        {/* 6. FINAL CTA */}
+        <section className="bg-[#F4F3EE] py-16 px-4">
+           <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] p-12 text-center shadow-sm border-2 border-[#E5E2DA] relative overflow-hidden">
+             <div className="relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-6">Resolve your <span className="text-[#C15F3C]">Tax Notices</span> Today</h2>
+                <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+                   <Link href="#registration-form" className="bg-[#C15F3C] text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all">Submit My Notice</Link>
+                   <button onClick={() => window.open(`https://wa.me/919999644807`, "_blank")} className="flex items-center justify-center gap-2 border-2 border-[#C15F3C] text-[#C15F3C] px-10 py-4 rounded-full font-bold text-lg hover:bg-[#C15F3C] hover:text-white transition-all">
+                      <MessageCircle size={20} /> Chat with Specialist
+                   </button>
+                </div>
+                <div className="flex flex-wrap justify-center gap-8 text-gray-400 text-xs font-bold uppercase tracking-widest">
+                   <span className="flex items-center gap-2"><Shield size={16} /> 100% Confidential</span>
+                   <span className="flex items-center gap-2"><Users size={16} /> 5k+ Notices Resolved</span>
+                   <span className="flex items-center gap-2"><Briefcase size={16} /> Expert CA Support</span>
+                </div>
+             </div>
+           </div>
+        </section>
 
- {/* TAX NOTICE HERO */}
- <div className="max-w-[1180px] mx-auto px-6 py-6">
- <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12">
- {/* Left image */}
- <div className="lg:col-span-7 relative bg-white">
- <div className="h-[420px] lg:h-full w-full relative">
- <Image
- src={ASSETS.taxHero}
- alt="tax notice hero"
- fill
- style={{ objectFit: "cover", objectPosition: "left center" }}
- priority
- />
-
- <div className="absolute left-6 top-6 inline-flex items-center gap-3 bg-black/70 text-white text-sm px-3 py-2 rounded-full shadow-lg">
- <span className="h-4 w-4 rounded-full bg-emerald-400 flex items-center justify-center text-xs font-semibold">
- ✓
- </span>
- <span>Consult an Experienced Professional on tax matters.</span>
- </div>
- </div>
- </div>
-
- {/* Right card */}
- <div className="lg:col-span-5 p-6">
- <div className="flex items-start justify-between">
- <div>
- <h2 className="text-2xl font-semibold text-slate-800">
- Income Tax Notice Response
- </h2>
- <div className="text-sm text-slate-500 mt-1">
- TDS Certificate • Salary Slips • Income Tax notice
- </div>
- </div>
-
- <button
- type="button"
- className="ml-4 px-3 py-1 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-gray-50"
- >
- Consult Advisor
- </button>
- </div>
-
- <div className="mt-4 flex items-center gap-2">
- <div className="inline-block bg-[#C15F3C]/10 text-[#C15F3C] px-3 py-1 rounded-full text-xs">
- 30 Minutes - Tax Consultation
- </div>
- <div className="inline-block bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs">
- 2 Exclusive Offers
- </div>
- <div className="ml-auto text-xs text-slate-500">(6)</div>
- </div>
-
- <div className="mt-6">
- <div
- onDragEnter={() => setTnDragActive(true)}
- onDragOver={(e) => {
- e.preventDefault();
- setTnDragActive(true);
- }}
- onDragLeave={() => setTnDragActive(false)}
- onDrop={handleTaxDrop}
- className={`relative rounded-lg ${
- tnDragActive
- ? "border-2 border-[#C15F3C] bg-[#C15F3C]/10"
- : "border-2 border-dashed border-slate-300 bg-gray-50"
- } p-6 flex flex-col items-center justify-center text-center transition`}
- style={{ minHeight: 120 }}
- >
- <div className="text-slate-500">
- <UploadCloud className="mx-auto mb-2" />
- <div className="text-sm">
- <label
- htmlFor="taxFileUpload"
- className="cursor-pointer text-slate-700 font-medium"
- >
- Drop your Income Tax Notice here or{" "}
- <span className="text-[#C15F3C] underline">
- click to upload
- </span>
- </label>
- </div>
- <div className="text-xs mt-2 text-slate-400">
- Supported format: PDF. Max size: 5MB.
- </div>
- <input
- id="taxFileUpload"
- type="file"
- accept="application/pdf"
- className="hidden"
- onChange={handleTaxFileInput}
- />
- </div>
-
- {tnFileName && (
- <div className="absolute bottom-3 left-6 right-6 bg-white border border-gray-200 rounded-md px-3 py-2 text-sm text-slate-700 shadow-sm">
- Uploaded: <span className="font-medium">{tnFileName}</span>
- </div>
- )}
- </div>
- </div>
-
- <div className="mt-6 border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
- <p className="text-sm text-slate-700">
- Upload your income tax notice and our experts will review it.
- You’ll receive clear insights and next steps, along with a
- callback within 12–24 hours. Need immediate help? Connect via
- live chat.
- </p>
- </div>
-
- <div className="mt-6 flex items-center gap-3">
- <button
- type="button"
- className="px-4 py-2 bg-[#C15F3C] text-white rounded-md font-medium shadow-sm hover:bg-[#C15F3C]/90"
- >
- Upload & Request Callback
- </button>
- <button
- type="button"
- className="px-4 py-2 border border-slate-200 rounded-md text-sm text-slate-700 hover:bg-gray-50"
- >
- Live Chat
- </button>
- </div>
-
- <div className="mt-6 text-xs text-slate-400">
- Tip: Keep your PAN & reference number handy for faster assistance.
- </div>
- </div>
- </div>
- </div>
- {/* END HERO */}
-
- {/* Breadcrumb */}
- <div className="bg-[#F4F3EE] py-5">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
- DoStartup / Income Tax /{" "}
- <span className="text-[#C15F3C] font-medium">
- Income Tax Notice Response
- </span>
- </div>
- </div>
-
- {/* Main content */}
- <main className="max-w-[1180px] mx-auto px-6 py-3 grid grid-cols-1 lg:grid-cols-12 gap-8">
- {/* Left column */}
- <section className="lg:col-span-8 space-y-6">
- {/* Top cards */}
- <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-semibold">
- 30 Minutes - Tax Consultation
- </h3>
- <p className="text-sm text-gray-600 mt-2">
- Online Consultation • 30 Minute Session • Preferred language
- Selection
- </p>
- <ul className="mt-4 space-y-2 text-sm text-gray-700">
- <li>Tax consultation</li>
- <li>Corporate Financial Consultation</li>
- <li>Consultation report - Financial</li>
- </ul>
- <div className="mt-4 pt-4 flex gap-3 items-center flex-wrap">
-
- <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded hover:bg-[#C15F3C]/5 transition-colors">
- ADD
- </button>
- </div>
- </div>
-
- <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
- <h3 className="text-lg font-semibold">Professional Services</h3>
- <p className="text-sm text-gray-600 mt-2">
- Section 139 • Professional Consultation • Reply Drafting • Reply
- Submission
- </p>
- <ul className="mt-4 space-y-2 text-sm text-gray-700">
- <li className="flex items-center gap-2">
- <ChevronRight size={14} /> Reply Drafting
- </li>
- <li className="flex items-center gap-2">
- <ChevronRight size={14} /> Reply Submission
- </li>
- </ul>
- <div className="mt-4">
- <button className="bg-white border border-[#C15F3C] text-[#C15F3C] px-3 py-2 rounded hover:bg-[#C15F3C]/5 transition-colors">
- ADD
- </button>
- </div>
- </div>
- </div>
-
- {/* Article */}
- <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
- <h1 className="text-2xl font-semibold text-center">
- Income Tax Notice: Check & Authenticate ITR Notices Online
- </h1>
-
- <div className="mt-4 text-[15px] leading-7 text-gray-700 space-y-4">
- <p>
- Even after filing your Income Tax Return (ITR) on time, you may
- still receive notices from the Income Tax Department (ITD).
- While this can be concerning, it is often a routine part of the
- tax process. Some notices request additional information or
- clarifications that require timely responses, while others are
- simply for your information. It is important to carefully verify
- the authenticity of any notice before taking further action to
- ensure proper compliance and avoid unnecessary penalties.
- </p>
-
- <p>
- DoStartup helps you handle income tax notices quickly and
- easily. We assist in verifying notices and preparing the right
- responses. Get expert support to stay compliant and avoid
- penalties.
- </p>
-
- {/* sections collapsed for brevity — keep the full textual content you want here */}
- <h3 className="text-lg font-semibold">
- What is an Income Tax Notice?
- </h3>
- <p>
- An income tax notice is an official letter sent by the Income
- Tax Department to a taxpayer. It informs the taxpayer about an
- issue or query related to their tax return or tax payments.
- </p>
-
- <h3 className="text-lg font-semibold">
- Types of Income Tax Notices
- </h3>
- <ul className="list-disc list-inside ml-4 space-y-2">
- <li>
- <strong>Notice under Section 142(1):</strong> Requests
- additional information or documents related to your filed
- return, or asks you to file a return if not filed.
- </li>
- <li>
- <strong>Notice under Section 139(9):</strong> Issued when a
- return filed is found to be defective or incomplete.
- </li>
- <li>
- <strong>Notice under Section 143(1):</strong> Computerised
- intimation after processing your return.
- </li>
- <li>
- <strong>Notice under Section 143(2):</strong> Selected for
- detailed scrutiny.
- </li>
- <li>
- <strong>Notice under Section 245:</strong> Adjustment of
- refunds against outstanding demands.
- </li>
- </ul>
-
- {/* you can paste the rest of the long content from your prompt here verbatim */}
- <p>
- ... (full long content omitted in this snippet, paste the
- complete article as needed) ...
- </p>
- </div>
- </article>
-
- {/* Documents required */}
- <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
- <h3 className="text-xl font-semibold mb-4">
- Documents Required For Income Tax Notice Response
- </h3>
- <ul className="list-disc list-inside text-sm text-gray-700 space-y-2">
- <li>TDS Certificate (Form 16 / 16A)</li>
- <li>Salary Slips</li>
- <li>Income Tax notice (copy)</li>
- </ul>
- </article>
- </section>
-
- {/* Sidebar */}
- <aside className="lg:col-span-4 hidden lg:block sticky top-24 self-start">
- <SidebarCart />
-
- <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-4">
- <h4 className="font-semibold mb-3">Offers and discounts</h4>
- <div className="p-3 border rounded-md flex items-center gap-3">
- <img
- src={ASSETS.ledgers}
- alt="ledgers"
- className="h-8 w-8 object-contain"
- />
- <div className="text-sm">
- <div className="text-indigo-600 font-medium">
- LEDGERS - Compliance Platform
- </div>
- <div className="text-gray-500 text-xs">
- Invoicing, GST Filing, Banking and Payroll
- </div>
- </div>
- </div>
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-4 border border-gray-200 shadow-sm">
- <img
- src={ASSETS.adRight1}
- alt="company compliance"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-6 border border-gray-200 shadow-sm">
- <img
- src={ASSETS.dinEkyc}
- alt="din ekyc"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-4">
- <h4 className="font-semibold mb-3">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 14).map((t) => (
- <span
- key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-gray-50 text-gray-700"
- >
- {t}
- </span>
- ))}
- </div>
- </div>
- </aside>
- </main>
-
- <DynamicPricingSection />
- <FAQAccordion category="income-tax-notice" />
-
- <Footer />
- </div>
- );
+        <PopularSearches />
+      </main>
+      <Footer />
+    </>
+  );
 }

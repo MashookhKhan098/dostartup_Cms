@@ -1057,6 +1057,458 @@ export default function ProfilePage() {
         }))
       }
 
+      // Fetch user's Income Tax E-Filing records (using email)
+      let userIncomeTaxFiling: any[] = []
+      const { data: itfData, error: itfError } = await supabase
+        .from('income_tax_filing')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      console.log('Income Tax Filing Query - Data:', itfData, 'Error:', itfError)
+
+      if (!itfError && itfData) {
+        userIncomeTaxFiling = itfData.map(p => ({
+          ...p,
+          registration_type: 'Income Tax E-Filing',
+          brand_name: `PAN: ${p.pan}`,
+          package: p.state_ut,
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (itfError) {
+        console.error('Income Tax Filing fetch error:', itfError.message, itfError.code)
+        // Fallback: try without ordering in case created_at column is missing
+        const { data: itfFallback } = await supabase
+          .from('income_tax_filing')
+          .select('*')
+          .eq('email', user.email)
+        if (itfFallback) {
+          userIncomeTaxFiling = itfFallback.map(p => ({
+            ...p,
+            registration_type: 'Income Tax E-Filing',
+            brand_name: `PAN: ${p.pan}`,
+            package: p.state_ut,
+            amount: p.amount,
+            id: p.id,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's Business Tax Filing records (using email)
+      let userBusinessTaxFiling: any[] = []
+      const { data: btfData, error: btfError } = await supabase
+        .from('bussiness_tax_filing')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      console.log('Business Tax Filing Query - Data:', btfData, 'Error:', btfError)
+
+      if (!btfError && btfData) {
+        userBusinessTaxFiling = btfData.map(p => ({
+          ...p,
+          registration_type: 'Business Tax Filing',
+          brand_name: `GSTIN: ${p.gstin}`,
+          package: p.package || 'Business ITR',
+          amount: p.amount,
+          id: p.id,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (btfError) {
+        console.error('Business Tax Filing fetch error:', btfError.message, btfError.code)
+        // Fallback: try without ordering in case created_at column is missing
+        const { data: btfFallback } = await supabase
+          .from('bussiness_tax_filing')
+          .select('*')
+          .eq('email', user.email)
+        if (btfFallback) {
+          userBusinessTaxFiling = btfFallback.map(p => ({
+            ...p,
+            registration_type: 'Business Tax Filing',
+            brand_name: `GSTIN: ${p.gstin}`,
+            package: p.package || 'Business ITR',
+            amount: p.amount,
+            id: p.id,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's ITR-1 Return Filing records (using email)
+      let userITR1Return: any[] = []
+      const { data: itr1Data, error: itr1Error } = await supabase
+        .from('itr1_return')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      console.log('ITR-1 Return Query - Data:', itr1Data, 'Error:', itr1Error)
+
+      if (!itr1Error && itr1Data) {
+        userITR1Return = itr1Data.map(p => ({
+          ...p,
+          registration_type: 'ITR-1 Return Filing',
+          package: 'Salaried ITR',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (itr1Error) {
+        console.error('ITR-1 Return fetch error:', itr1Error.message, itr1Error.code)
+        const { data: itr1Fallback } = await supabase
+          .from('itr1_return')
+          .select('*')
+          .eq('email', user.email)
+        if (itr1Fallback) {
+          userITR1Return = itr1Fallback.map(p => ({
+            ...p,
+            registration_type: 'ITR-1 Return Filing',
+            package: 'Salaried ITR',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's ITR-2 Return Filing records (using email)
+      let userITR2Return: any[] = []
+      const { data: itr2Data, error: itr2Error } = await supabase
+        .from('itr2_return')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      console.log('ITR-2 Return Query - Data:', itr2Data, 'Error:', itr2Error)
+
+      if (!itr2Error && itr2Data) {
+        userITR2Return = itr2Data.map(p => ({
+          ...p,
+          registration_type: 'ITR-2 Return Filing',
+          package: 'Capital Gains ITR',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (itr2Error) {
+        console.error('ITR-2 Return fetch error:', itr2Error.message, itr2Error.code)
+        const { data: itr2Fallback } = await supabase
+          .from('itr2_return')
+          .select('*')
+          .eq('email', user.email)
+        if (itr2Fallback) {
+          userITR2Return = itr2Fallback.map(p => ({
+            ...p,
+            registration_type: 'ITR-2 Return Filing',
+            package: 'Capital Gains ITR',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's ITR-3 Return Filing records (using email)
+      let userITR3Return: any[] = []
+      const { data: itr3Data, error: itr3Error } = await supabase
+        .from('itr3_return')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      console.log('ITR-3 Return Query - Data:', itr3Data, 'Error:', itr3Error)
+
+      if (!itr3Error && itr3Data) {
+        userITR3Return = itr3Data.map(p => ({
+          ...p,
+          registration_type: 'ITR-3 Return Filing',
+          package: 'Business ITR',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (itr3Error) {
+        console.error('ITR-3 Return fetch error:', itr3Error.message, itr3Error.code)
+        const { data: itr3Fallback } = await supabase
+          .from('itr3_return')
+          .select('*')
+          .eq('email', user.email)
+        if (itr3Fallback) {
+          userITR3Return = itr3Fallback.map(p => ({
+            ...p,
+            registration_type: 'ITR-3 Return Filing',
+            package: 'Business ITR',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's ITR-4 Return Filing records (using email)
+      let userITR4Return: any[] = []
+      const { data: itr4Data, error: itr4Error } = await supabase
+        .from('itr4_return')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      console.log('ITR-4 Return Query - Data:', itr4Data, 'Error:', itr4Error)
+
+      if (!itr4Error && itr4Data) {
+        userITR4Return = itr4Data.map(p => ({
+          ...p,
+          registration_type: 'ITR-4 Return Filing',
+          package: 'Presumptive ITR',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (itr4Error) {
+        console.error('ITR-4 Return fetch error:', itr4Error.message, itr4Error.code)
+        const { data: itr4Fallback } = await supabase
+          .from('itr4_return')
+          .select('*')
+          .eq('email', user.email)
+        if (itr4Fallback) {
+          userITR4Return = itr4Fallback.map(p => ({
+            ...p,
+            registration_type: 'ITR-4 Return Filing',
+            package: 'Presumptive ITR',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's ITR-5 Return Filing records
+      let userITR5Return: any[] = []
+      const { data: itr5Data, error: itr5Error } = await supabase
+        .from('itr5_return')
+        .select('*')
+        .or(`user_id.eq.${user.id},email.eq.${user.email}`)
+        .order('created_at', { ascending: false })
+
+      if (!itr5Error && itr5Data) {
+        userITR5Return = itr5Data.map(p => ({
+          ...p,
+          registration_type: 'ITR-5 Return Filing',
+          package: 'Firm/LLP ITR',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else {
+        // Fallback for missing user_id or created_at
+        const { data: itr5Fallback } = await supabase.from('itr5_return').select('*').eq('email', user.email)
+        if (itr5Fallback) {
+          userITR5Return = itr5Fallback.map(p => ({
+            ...p,
+            registration_type: 'ITR-5 Return Filing',
+            package: 'Firm/LLP ITR',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's ITR-6 Return Filing records (using email)
+      let userITR6Return: any[] = []
+      const { data: itr6Data, error: itr6Error } = await supabase
+        .from('itr6_return')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!itr6Error && itr6Data) {
+        userITR6Return = itr6Data.map(p => ({
+          ...p,
+          registration_type: 'ITR-6 Return Filing',
+          package: 'Corporate ITR',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (itr6Error) {
+        const { data: itr6Fallback } = await supabase.from('itr6_return').select('*').eq('email', user.email)
+        if (itr6Fallback) {
+          userITR6Return = itr6Fallback.map(p => ({
+            ...p,
+            registration_type: 'ITR-6 Return Filing',
+            package: 'Corporate ITR',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's ITR-7 Return Filing records (using email)
+      let userITR7Return: any[] = []
+      const { data: itr7Data, error: itr7Error } = await supabase
+        .from('itr7_return')
+        .select('*')
+        .eq('email', user.email)
+        .order('created_at', { ascending: false })
+
+      if (!itr7Error && itr7Data) {
+        userITR7Return = itr7Data.map(p => ({
+          ...p,
+          registration_type: 'ITR-7 Return Filing',
+          package: 'Trust/NGO ITR',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else if (itr7Error) {
+        const { data: itr7Fallback } = await supabase.from('itr7_return').select('*').eq('email', user.email)
+        if (itr7Fallback) {
+          userITR7Return = itr7Fallback.map(p => ({
+            ...p,
+            registration_type: 'ITR-7 Return Filing',
+            package: 'Trust/NGO ITR',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's 15CA-15CB Filing records
+      let user15CA15CB: any[] = []
+      const { data: ca15Data, error: ca15Error } = await supabase
+        .from('ca15_cb15_filing')
+        .select('*')
+        .or(`user_id.eq.${user.id},email.eq.${user.email}`)
+        .order('created_at', { ascending: false })
+
+      if (!ca15Error && ca15Data) {
+        user15CA15CB = ca15Data.map(p => ({
+          ...p,
+          registration_type: '15CA-15CB Filing',
+          package: 'Foreign Remittance',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else {
+        const { data: ca15Fallback } = await supabase.from('ca15_cb15_filing').select('*').eq('email', user.email)
+        if (ca15Fallback) {
+          user15CA15CB = ca15Fallback.map(p => ({
+            ...p,
+            registration_type: '15CA-15CB Filing',
+            package: 'Foreign Remittance',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's TAN Registration records
+      let userTAN: any[] = []
+      const { data: tanData, error: tanError } = await supabase
+        .from('tan_registration')
+        .select('*')
+        .or(`user_id.eq.${user.id},email.eq.${user.email}`)
+        .order('created_at', { ascending: false })
+
+      if (!tanError && tanData) {
+        userTAN = tanData.map(p => ({
+          ...p,
+          registration_type: 'TAN Registration',
+          package: p.package || 'TAN Allocation',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else {
+        const { data: tanFallback } = await supabase.from('tan_registration').select('*').eq('email', user.email)
+        if (tanFallback) {
+          userTAN = tanFallback.map(p => ({
+            ...p,
+            registration_type: 'TAN Registration',
+            package: p.package || 'TAN Allocation',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's TDS Return Filing records
+      let userTDSReturn: any[] = []
+      const { data: tdsData, error: tdsError } = await supabase
+        .from('tds_return_filing')
+        .select('*')
+        .or(`user_id.eq.${user.id},email.eq.${user.email}`)
+        .order('created_at', { ascending: false })
+
+      if (!tdsError && tdsData) {
+        userTDSReturn = tdsData.map(p => ({
+          ...p,
+          registration_type: 'TDS Return Filing',
+          package: p.package || 'Quarterly TDS Filing',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid'
+        }))
+      } else {
+        const { data: tdsFallback } = await supabase.from('tds_return_filing').select('*').eq('email', user.email)
+        if (tdsFallback) {
+          userTDSReturn = tdsFallback.map(p => ({
+            ...p,
+            registration_type: 'TDS Return Filing',
+            package: p.package || 'Quarterly TDS Filing',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid'
+          }))
+        }
+      }
+
+      // Fetch user's Income Tax Notice Response records
+      let userITNotice: any[] = []
+      const { data: itnData, error: itnError } = await supabase
+        .from('income_tax_notic')
+        .select('*')
+        .or(`user_id.eq.${user.id},email.eq.${user.email}`)
+        .order('created_at', { ascending: false })
+
+      if (!itnError && itnData) {
+        userITNotice = itnData.map(p => ({
+          ...p,
+          registration_type: 'Income Tax Notice Response',
+          package: p.package || 'Notice Review',
+          amount: p.amount,
+          created_at: p.created_at,
+          status: p.payment_state || 'paid',
+          notice_file: p.Notice_file
+        }))
+      } else {
+        const { data: itnFallback } = await supabase.from('income_tax_notic').select('*').eq('email', user.email)
+        if (itnFallback) {
+          userITNotice = itnFallback.map(p => ({
+            ...p,
+            registration_type: 'Income Tax Notice Response',
+            package: p.package || 'Notice Review',
+            amount: p.amount,
+            created_at: p.created_at,
+            status: p.payment_state || 'paid',
+            notice_file: p.Notice_file
+          }))
+        }
+      }
+
       // Combine all available registrations
       const allRegistrations = [
         ...(userRegistrations || []), 
@@ -1115,7 +1567,20 @@ export default function ProfilePage() {
         ...(userCopyrightRegistration || []),
         ...(userCopyrightObjection || []),
         ...(userPatentRegistration || []),
-        ...(userTMProtection || [])
+        ...(userTMProtection || []),
+        ...(userIncomeTaxFiling || []),
+        ...(userBusinessTaxFiling || []),
+        ...(userITR1Return || []),
+        ...(userITR2Return || []),
+        ...(userITR3Return || []),
+        ...(userITR4Return || []),
+        ...(userITR5Return || []),
+        ...(userITR6Return || []),
+        ...(userITR7Return || []),
+        ...(user15CA15CB || []),
+        ...(userTAN || []),
+        ...(userTDSReturn || []),
+        ...(userITNotice || [])
       ].filter(Boolean); // Remove any null/undefined entries
 
       console.log('Total registrations found:', allRegistrations.length)

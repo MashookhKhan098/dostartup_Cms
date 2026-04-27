@@ -6,7 +6,8 @@ import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
-import Popularsearches from "../components/PopularSearches";
+import PopularSearches from "../components/PopularSearches";
+import ITR7ReturnHero from "../components/Registration/ITR7ReturnHero";
 import { Plus, ShoppingBag, CheckCircle, Shield, FileText, Zap, Star, Brain, AlertTriangle, ArrowRight, Target, Building2 } from "lucide-react";
 import Faq from "../components/Faq";
 
@@ -76,6 +77,19 @@ export default function ITR7Page() {
   return (
     <>
       <Navbar />
+      <ITR7ReturnHero
+        heading="ITR-7"
+        headingHighlight="Return Filing"
+        description="File your ITR-7 return for Trusts, NGOs, Political Parties, and Institutions. Specialist CA support for 12A/80G compliance and Form 10B/10BB audit."
+        features={[
+          { icon: "check", text: "Trust & NGO Exemption Compliance" },
+          { icon: "check", text: "12A / 80G Registration Verification" },
+          { icon: "check", text: "Form 10B / 10BB Audit Assistance" },
+          { icon: "check", text: "Political Party & Institute Filing" },
+          { icon: "check", text: "AI-Driven Schedule Automation" },
+        ]}
+        buttonText="Pay & File ITR-7"
+      />
       <main className="min-h-screen bg-[#F4F3EE] font-sans">
 
         {/* ═══════════ HERO ═══════════ */}
@@ -351,7 +365,7 @@ export default function ITR7Page() {
           </div>
         </section>
 
-        <Popularsearches />
+        <PopularSearches />
       </main>
       <Footer />
     </>

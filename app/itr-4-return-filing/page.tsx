@@ -6,6 +6,8 @@ import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
+import PopularSearches from "../components/PopularSearches";
+import ITR4ReturnHero from "../components/Registration/ITR4ReturnHero";
 import {
   CheckCircle,
   XCircle,
@@ -29,7 +31,6 @@ import {
   Star,
   Search as SearchIcon,
 } from "lucide-react";
-import PopularSearches from "../components/PopularSearches";
 import BlogSidebar from "../components/BlogSidebar";
 
 // ─────────────────────────────────────────────
@@ -232,6 +233,19 @@ export default function ITR4Page() {
     <>
       <Navbar />
       <main className="min-h-screen bg-[#F4F3EE] font-sans">
+        <ITR4ReturnHero
+          heading="ITR-4"
+          headingHighlight="Return Filing"
+          description="File your ITR-4 (Sugam) return for presumptive business and professional income. Expert CA-assisted filing for Section 44AD, 44ADA, and 44AE."
+          features={[
+            { icon: "check", text: "Presumptive Income (44AD / 44ADA)" },
+            { icon: "check", text: "No Books of Accounts Required" },
+            { icon: "check", text: "Turnover Auto-Verification from AIS" },
+            { icon: "check", text: "Tax Audit Applicability Check" },
+            { icon: "check", text: "Expert CA Support for Transport (44AE)" },
+          ]}
+          buttonText="Pay & File ITR-4"
+        />
         
         {/* 1. HERO */}
         <section className="bg-[#F4F3EE] relative pt-12 pb-16 border-b border-black/5">

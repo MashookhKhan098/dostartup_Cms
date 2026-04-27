@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
 import Footer from "../components/Footer";
+import ITR1ReturnHero from "../components/Registration/ITR1ReturnHero";
+import PopularSearches from "../components/PopularSearches";
 import {
   CheckCircle,
   XCircle,
@@ -381,6 +383,19 @@ export default function ITR1Page() {
   return (
     <>
       <Navbar />
+      <ITR1ReturnHero
+        heading="ITR-1"
+        headingHighlight="Return Filing"
+        description="File your ITR-1 (Sahaj) return for salaried individuals accurately and on time with expert CA support. Maximize refunds under Old & New regime."
+        features={[
+          { icon: "check", text: "Salaried Individuals & Pensioners" },
+          { icon: "check", text: "Old & New Regime Comparison" },
+          { icon: "check", text: "CA-Assisted Filing with Expert Review" },
+          { icon: "check", text: "Refund Tracking & Notice Handling" },
+          { icon: "check", text: "AIS / 26AS Reconciliation" },
+        ]}
+        buttonText="Pay & File ITR-1"
+      />
 
       <main className="min-h-screen bg-[#F4F3EE] font-sans">
         {/* ══════════════════════════════════════
@@ -975,6 +990,7 @@ export default function ITR1Page() {
             </div>
           </div>
         </section>
+        <PopularSearches />
       </main>
       <Footer />
     </>

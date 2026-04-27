@@ -1,563 +1,188 @@
 "use client";
 
+import React from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import DynamicPricingSection from "../components/DynamicPricingSection";
 import FAQAccordion from "../components/Faq";
-import SidebarCart from "../components/SidebarCart";
 import Footer from "../components/Footer";
-import React, { useState } from "react";
+import PopularSearches from "../components/PopularSearches";
+import Ca15Cb15FilingHero from "../components/Registration/Ca15Cb15FilingHero";
 import {
- ChevronRight,
- ShoppingBag,
- Star,
- Plus,
- ChevronDown,
+  CheckCircle,
+  XCircle,
+  Shield,
+  Clock,
+  Users,
+  ShieldCheck,
+  ArrowRight,
+  Globe,
+  FileText,
+  Lock,
+  MessageCircle,
+  Star,
+  ExternalLink,
 } from "lucide-react";
 
-/* ---------------------------
- Assets & Navigation data
- --------------------------- */
-const ASSETS = {
- logo: "/images/india-logo.jpg",
- hero: "/images/15ca-15cb-hero.jpg", // replace with appropriate square hero image in /public/images/
- ledgers: "/images/ledgers.png",
- whatsapp: "/images/whatsapp.png",
- adRight1: "/images/company-compliance.jpg",
- dinEkyc: "/images/din.jpg",
- cartIcon: "/images/cart-icon.svg",
- indiaFlag: "/images/india-flag.png",
- assuredBadge: "/images/assured-ledgers.png", // optional badge image - replace or remove
-};
-
-const INCOME_TAX_DROPDOWN_LINKS = [
- { title: "Income Tax E-Filing", href: "/income-tax/e-filing" },
- { title: "Business Tax Filing", href: "/income-tax/business-tax-filing" },
- {
- title: "Partnership Firm / LLP ITR",
- href: "/income-tax/partnership-llp-itr",
- },
- { title: "Company ITR Filing", href: "/income-tax/company-itr-filing" },
- { title: "Trust / NGO Tax Filing", href: "/income-tax/trust-ngo-tax-filing" },
- { title: "15CA - 15CB Filing", href: "/income-tax/15ca-15cb-filing" },
- { title: "TAN Registration", href: "/income-tax/tan-registration" },
- { title: "TDS Return Filing", href: "/income-tax/tds-return-filing" },
- { title: "Income Tax Notice", href: "/income-tax/income-tax-notice" },
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const FEATURES = [
+  { icon: <FileText size={20} className="text-[#C15F3C]" />, title: "End-to-End Filing", desc: "We handle the entire process from Form 15CB preparation by a CA to online 15CA declaration on the IT portal." },
+  { icon: <Shield size={20} className="text-[#C15F3C]" />, title: "CA Certification", desc: "Chartered Accountant certified Form 15CB for remittances exceeding ₹5 Lakhs, ensuring 100% compliance." },
+  { icon: <Globe size={20} className="text-[#C15F3C]" />, title: "DTAA Optimization", desc: "Our experts analyze Tax Treaties (DTAA) to help you minimize TDS on foreign remittances legally." },
+  { icon: <Lock size={20} className="text-[#C15F3C]" />, title: "Audit Trail", desc: "Maintain a clear digital record of all foreign remittances and tax declarations for future assessments." },
 ];
 
-const NAV_ITEMS = [
- "DoStartup",
- "Startup",
- "Registrations",
- "Trademark",
- "GST",
- "Income Tax",
- "MCA",
- "Compliance",
- "Personal",
- "Global",
- "Cities",
- "Guides",
- "Login",
+const ELIGIBILITY = [
+  { title: "Residents", desc: "Individuals or companies remitting funds to non-residents." },
+  { title: "Non-Residents", desc: "Foreign entities receiving payments from India." },
+  { title: "Remitters", desc: "Anyone sending money abroad for business, services, or family." },
 ];
 
-const POPULAR_SEARCHES = [
- "Partnership",
- "Limited Liability Partnership",
- "Digital Signature",
- "Copyright Registration",
- "Unified Portal",
- "PAN Card Download",
- "Nadakacheri",
- "Flipkart Seller",
- "Caste Certificate",
- "IAY",
- "EPFO Passbook",
- "Domicile Certificate",
- "Udyog Aadhaar",
- "PF Withdrawal",
- "Karnataka One",
- "Encumbrance Certificate",
- "Bonafide Certificate",
- "Instant PAN Card",
- "E PAN Card",
- "Income Certificate",
- "Marriage Certificate",
- "Passport Renewal",
- "Nivesh Mitra",
- "MSME Registration",
- "Experience Certificate",
- "Trademark Status",
- "Trade License",
- "Domicile",
- "eMitra",
- "UAN",
- "PICME",
- "Resignation Letter Format",
- "Ration Card",
- "TNREGINET",
- "RAJSSP",
- "LLP Compliance",
- "Form 16",
- "Police Clearance Certificate",
- "OBC Certificate",
- "Jamabandi",
- "Mee Bhoomi",
- "SC Certificate",
- "UAN Login",
- "eAadhaar Download",
- "Linking Aadhaar To Bank Accounts",
- "mAadhaar",
- "Aadhaar Enrollment Centre",
- "UAN Passbook",
- "Amazon How to Sell",
- "PAN Card Apply",
- "EPFO Unified Portal",
+const COMPLIANCE_STEPS = [
+  { step: "01", title: "Information Collection", desc: "Provide details of the remitter, beneficiary, and the nature of payment." },
+  { step: "02", title: "CA Review (15CB)", desc: "Our CA reviews the transaction and issues Form 15CB certificate." },
+  { step: "03", title: "Declaration (15CA)", desc: "We file the online 15CA declaration on the Income Tax portal." },
+  { step: "04", title: "Bank Submission", desc: "The filed forms are submitted to the bank to release the remittance." },
 ];
 
-/* ---------------------------
- Component
- --------------------------- */
-export default function FifteenCa15CbPage(): React.ReactElement {
- const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
+// ─────────────────────────────────────────────
+// MAIN PAGE
+// ─────────────────────────────────────────────
+export default function FifteenCa15CbPage() {
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-[#F4F3EE] font-sans">
+        <Ca15Cb15FilingHero
+          heading="15CA & 15CB"
+          headingHighlight="Filing Compliance"
+          description="Mandatory compliance for foreign remittances from India. Our expert CAs handle Form 15CA and 15CB to ensure smooth global payments and tax compliance."
+          features={[
+            { icon: "check", text: "Form 15CA (Declaration) Filing" },
+            { icon: "check", text: "Chartered Accountant Certified 15CB" },
+            { icon: "check", text: "DTAA Tax Benefit Analysis" },
+            { icon: "check", text: "Faster Bank Remittance Approval" },
+          ]}
+          buttonText="File 15CA/15CB Now"
+        />
 
- return (
- <div className="min-h-screen bg-[#F4F3EE] font-sans text-gray-800">
- <Navbar />
+        {/* 1. WHY COMPLIANCE MATTERS */}
+        <section className="py-16 px-4 bg-white border-b border-[#E5E2DA]">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-[#C15F3C] text-xs font-bold uppercase tracking-widest bg-[#C15F3C]/5 px-4 py-1 rounded-full mb-4 inline-block">Compliance Overview</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-black">Hassle-Free Foreign Remittance</h2>
+              <p className="text-gray-500 mt-4 max-w-2xl mx-auto">Every payment made outside India requires a declaration. We make sure yours is accurate, timely, and CA-certified.</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {FEATURES.map((f, i) => (
+                <div key={i} className="p-8 rounded-[2rem] bg-[#F4F3EE]/50 border-2 border-transparent hover:border-[#C15F3C]/20 hover:bg-white hover:shadow-xl transition-all group">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                    {f.icon}
+                  </div>
+                  <h3 className="text-black font-bold text-lg mb-3">{f.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
- {/* Breadcrumb */}
- <div className="bg-[#F4F3EE] py-5">
- <div className="max-w-[1180px] mx-auto px-6 text-sm text-gray-500">
- DoStartup / Income Tax /{" "}
- <span className="text-[#C15F3C] font-medium">
- 15CA - 15CB Filing
- </span>
- </div>
- </div>
+        {/* 2. ELIGIBILITY SECTION */}
+        <section className="py-16 px-4 bg-[#F4F3EE]">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-6 leading-tight">When is 15CA & 15CB <span className="text-[#C15F3C]">Mandatory?</span></h2>
+              <p className="text-gray-600 text-lg mb-8">As per Section 195 of the Income Tax Act, any resident making a payment to a non-resident must deduct TDS and file Form 15CA/15CB.</p>
+              <div className="space-y-4">
+                {ELIGIBILITY.map((e, i) => (
+                  <div key={i} className="flex gap-4 items-start bg-white p-4 rounded-2xl border border-[#E5E2DA] shadow-sm">
+                    <CheckCircle className="text-[#C15F3C] mt-1 shrink-0" size={20} />
+                    <div>
+                      <h4 className="font-bold text-black">{e.title}</h4>
+                      <p className="text-gray-500 text-sm">{e.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white rounded-[2.5rem] p-10 shadow-sm border-2 border-[#E5E2DA] relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-8 opacity-10">
+                  <Globe size={120} className="text-[#C15F3C]" />
+               </div>
+               <h3 className="font-bold text-xl mb-6 flex items-center gap-2"><ShieldCheck className="text-[#C15F3C]" /> Important Limits</h3>
+               <ul className="space-y-6">
+                 <li className="flex gap-4">
+                   <div className="w-8 h-8 rounded-full bg-[#C15F3C]/10 flex items-center justify-center font-bold text-[#C15F3C]">1</div>
+                   <p className="text-gray-600 text-sm">Payments up to <span className="font-bold text-black">₹5 Lakhs</span> in a year only require Form 15CA Part A.</p>
+                 </li>
+                 <li className="flex gap-4">
+                   <div className="w-8 h-8 rounded-full bg-[#C15F3C]/10 flex items-center justify-center font-bold text-[#C15F3C]">2</div>
+                   <p className="text-gray-600 text-sm">Payments exceeding <span className="font-bold text-black">₹5 Lakhs</span> require a CA Certificate in Form 15CB.</p>
+                 </li>
+                 <li className="flex gap-4">
+                   <div className="w-8 h-8 rounded-full bg-[#C15F3C]/10 flex items-center justify-center font-bold text-[#C15F3C]">3</div>
+                   <p className="text-gray-600 text-sm">No 15CA/15CB is required for certain <span className="font-bold text-black">specified payments</span> like import of goods.</p>
+                 </li>
+               </ul>
+            </div>
+          </div>
+        </section>
 
- {/* Main */}
- <main className="max-w-[1180px] mx-auto px-6 py-3 grid grid-cols-1 lg:grid-cols-12 gap-8">
- {/* Left column */}
- <section className="lg:col-span-8 space-y-6">
- {/* Top card */}
- <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 flex flex-col md:flex-row gap-6">
- {/* Left image card (square hero image) */}
- <div className="md:w-1/3 flex-shrink-0">
- <div className="rounded-lg overflow-hidden border border-gray-100">
- <div className="bg-[#C15F3C] rounded-t-lg p-4 text-white text-center">
- <h2 className="text-2xl font-bold ">
- 15CA · 15CB FILING
- </h2>
- <div className="text-xs mt-1 opacity-90">
- Payments to a non-resident by a resident
- </div>
- </div>
+        {/* 3. PROCESS STEPS */}
+        <section className="py-16 px-4 bg-white border-t border-[#E5E2DA]">
+          <div className="max-w-7xl mx-auto text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-black">Filing Process</h2>
+            <p className="text-gray-500 mt-2">Get your compliance done in 4 easy steps</p>
+          </div>
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {COMPLIANCE_STEPS.map((s, i) => (
+              <div key={i} className="text-center p-6">
+                <div className="w-16 h-16 rounded-full bg-[#F4F3EE] flex items-center justify-center mx-auto mb-4 border-2 border-dashed border-[#C15F3C]/20 text-[#C15F3C] font-black text-xl">
+                  {s.step}
+                </div>
+                <h4 className="font-bold text-black mb-2">{s.title}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
- <div className="bg-white px-4 py-6 flex justify-center">
- {/* square image — keep square */}
- <div className="w-44 h-44 rounded-md overflow-hidden bg-white shadow-sm flex items-center justify-center -mt-4 border border-gray-100">
- <img
- src={ASSETS.hero}
- alt="15ca 15cb hero"
- className="w-full h-full object-cover"
- />
- </div>
- </div>
- </div>
+        {/* 4. PRICING */}
+        <section id="pricing" className="bg-[#F4F3EE] py-16 px-4">
+          <div className="max-w-7xl mx-auto">
+             <DynamicPricingSection category="15ca-15cb-filing" />
+          </div>
+        </section>
 
- <ul className="mt-4 text-sm space-y-2 text-gray-600">
- <li>15CA & 15CB filing assistance</li>
- <li>Expert CA-certified reviews</li>
- <li>Hassle-free remittance compliance</li>
- <li className="text-[#C15F3C] underline">Load More</li>
- </ul>
- </div>
+        {/* 5. FAQ */}
+        <FAQAccordion category="15ca-15cb-filing" />
 
- {/* Right content */}
- <div className="md:w-2/3 flex-1">
- <div className="flex flex-col sm:flex-row justify-between gap-4">
- <div>
- <h2 className="text-lg font-semibold text-slate-900">
- 15CA - 15CB Filing
- </h2>
- <div className="flex items-center gap-3 mt-2">
- <div className="flex items-center gap-1">
- {[...Array(5)].map((_, i) => (
- <Star key={i} size={14} className="text-yellow-400" />
- ))}
- </div>
- <span className="text-xs text-slate-500">(16)</span>
- </div>
- </div>
+        {/* 6. FINAL CTA */}
+        <section className="bg-[#F4F3EE] py-16 px-4">
+           <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] p-12 text-center shadow-sm border-2 border-[#E5E2DA] relative overflow-hidden">
+             <div className="relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-black mb-6">Need Expert Help with <span className="text-[#C15F3C]">Foreign Payments?</span></h2>
+                <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+                   <Link href="#registration-form" className="bg-[#C15F3C] text-white px-10 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all">Start 15CA Filing</Link>
+                   <button onClick={() => window.open(`https://wa.me/919999644807`, "_blank")} className="flex items-center justify-center gap-2 border-2 border-[#C15F3C] text-[#C15F3C] px-10 py-4 rounded-full font-bold text-lg hover:bg-[#C15F3C] hover:text-white transition-all">
+                      <MessageCircle size={20} /> Chat with CA
+                   </button>
+                </div>
+                <div className="flex flex-wrap justify-center gap-8 text-gray-400 text-xs font-bold uppercase tracking-widest">
+                   <span className="flex items-center gap-2"><Shield size={16} /> Secure Payment</span>
+                   <span className="flex items-center gap-2"><Users size={16} /> 10K+ Remittances Handled</span>
+                   <span className="flex items-center gap-2"><Clock size={16} /> 24-48h Processing</span>
+                </div>
+             </div>
+           </div>
+        </section>
 
- <p className="text-sm text-gray-600 max-w-md">
- Filing of the income tax form 15 CA & 15 CB by an expert.
- </p>
- </div>
-
- <div className="mt-4 border-t pt-4 text-sm flex justify-between items-center text-slate-600">
- <a className="text-[#C15F3C] underline">
- Terms and conditions
- </a>
- <a className="text-[#C15F3C] underline">Refer a Friend</a>
- </div>
-
- <div className="mt-6">
- <h4 className="font-semibold mb-2">Offers and discounts</h4>
- <div className="p-3 border rounded-md">
- <div className="flex items-center gap-3">
- <img
- src={ASSETS.ledgers}
- alt="ledgers"
- className="h-8 w-8 object-contain"
- />
- <div className="text-sm">
- <div className="text-[#C15F3C] font-medium">
- LEDGERS - Compliance Platform
- </div>
- <div className="text-gray-500 text-xs">
- Invoicing, GST Filing, Banking and Payroll
- </div>
- </div>
- </div>
- </div>
-
- <div className="mt-3 p-3 border rounded-md flex items-center gap-3">
- <img
- src={ASSETS.logo}
- alt="save gst"
- className="h-8 w-8 object-contain"
- />
- <div className="text-sm">
- <div className="font-medium">
- Save 18% with GST Registration
- </div>
- <div className="text-gray-500 text-xs">
- Get GST eInvoice with Input Tax Credit
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
-
- {/* Article */}
- <article className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
- <h1 className="text-2xl font-semibold text-center">
- 15CA-15CB Filing - Compliance for Foreign Remittances
- </h1>
-
- <div className="mt-4 text-[15px] leading-7 text-gray-700 space-y-4">
- <p>
- Suppose you are an Indian resident making payments to a foreign
- entity or receiving payments from a foreign entity. In that
- case, it is mandatory to comply with the legal provisions of the
- Income Tax Act 1961. According to the Act, you must file Form
- 15CA and Form 15CB with the tax authorities before remitting
- funds to a foreign entity. Filing these 15 CA and CB Forms can
- be complex, requiring extensive knowledge of tax laws and
- regulations. DoStartup can assist you in navigating the
- process of filing form 15CA and form 15CB with ease; our team of
- experts ensures that your compliance requirements are met
- without any hassle.
- </p>
-
- <h3 className="mt-4 font-semibold">
- Section 195 of the Income-tax Act, 1961
- </h3>
- <p>
- As per Section 195 of the Income Tax Act 1961, any individual or
- entity responsible for making payment to a non-resident, which
- includes a foreign company, must deduct income tax at the
- applicable rate prior to the payment being made.
- </p>
-
- <p>
- The remitter must also submit an undertaking in Form 15 CA,
- which provides details of the payment being made to the
- non-resident. Furthermore, a certificate in Form 15CB, attested
- by a chartered accountant, is required for payments exceeding
- INR 5 lakh. This certificate provides details of the nature of
- the payment, the tax rate applied, and the amount of tax
- deducted.
- </p>
-
- <h3 className="mt-4 font-semibold">
- Importance of Form 15CA and Form 15CB
- </h3>
- <p>
- Form 15CA and Form 15CB are necessary forms that must be
- submitted under the Income Tax Act, 1961, for any payments made
- by a resident to a non-resident.
- </p>
-
- <p>
- Form 15 CA is a declaration made by the person making the
- payment. In contrast, Form 15CB is a certificate issued by a
- Chartered Accountant (CA), ensuring that the provisions of the
- Income Tax Act and the Double Taxation Avoidance Agreement have
- been complied with.
- </p>
-
- <h3 className="mt-4 font-semibold">Form 15CA</h3>
- <p>
- Form 15 CA is a declaration of remittance made to a non-resident
- by an individual or a company. It is a mandatory form to be
- submitted online on the income tax department's website before
- remitting a non-resident. The purpose of this form is to enable
- the income tax department to track foreign remittances and
- ensure that the remitter is paying taxes according to the
- provisions of the Income Tax Act.
- </p>
-
- <h3 className="mt-4 font-semibold">Form 15CB</h3>
- <p>
- As mentioned above, Form 15CB is a certificate issued by a CA
- under Section 195(6) of the Income Tax Act, 1961, for making
- payments to non-residents or foreign companies. It is used to
- verify that the payment being made complies with the provisions
- of the Income Tax Act and DTAA, if any, between India and the
- foreign country.
- </p>
-
- <h3 className="mt-4 font-semibold">
- Applicability of Form 15CA and Form CB
- </h3>
- <p>
- Form 15 CA and 15CB are applicable for making foreign
- remittances under India's Income Tax Act 1961. The applicability
- of these 15 CA and CB forms depends on the nature and amount of
- the remittance.
- </p>
-
- <h4 className="mt-3 font-semibold">Applicability of Form 15CA</h4>
- <ul className="list-disc list-inside text-sm text-gray-600 mt-2 space-y-2">
- <li>
- Any person intending to make a remittance to a non-resident or
- foreign company, irrespective of whether the remittance is
- subject to tax.
- </li>
- <li>
- The remitter can be a resident, non-resident, domestic
- company, or foreign company.
- </li>
- <li>
- The declaration is required when the income accrues, arises,
- is received, or is deemed to accrue, occur, or received in
- India, as per Section 5 of the Income Tax Act.
- </li>
- </ul>
-
- <h4 className="mt-3 font-semibold">Applicability of Form 15CB</h4>
- <ul className="list-disc list-inside text-sm text-gray-600 mt-2 space-y-2">
- <li>
- Form 15CB is required to be filed by the CA when the
- remittance to a non-resident or foreign company is taxable.
- </li>
- <li>The payment exceeds INR 5,00,000.</li>
- <li>
- When an order/ certificate has not been received from
- Assessing Officer (AO).
- </li>
- </ul>
-
- <h3 className="mt-6 font-semibold">
- When is Form 15CA not required?
- </h3>
- <p>
- Form 15CA is not required when the remittance is made per the
- specified payment list in Rule 37BB of Income Tax Rules, when
- the remittance does not require RBI approval per FEMA, when the
- remittance is exempt under the Income Tax Act or a tax treaty,
- and in some other specified circumstances (see detailed rules).
- </p>
-
- <h3 className="mt-6 font-semibold">
- When is Form 15CB not required?
- </h3>
- <p>
- Form 15CB is not required when the remittance is not taxable in
- India or when the total remittances in the fiscal year do not
- exceed Rs. 5,00,000 and other specified exceptions apply.
- </p>
-
- <h3 className="mt-6 font-semibold">
- Specified payments where Form 15CA/15CB is not required
- </h3>
- <p>
- As per the latest rules and regulations, examples include:
- Indian investment abroad, advance payment against imports,
- intermediary trade, imports by diplomatic missions, loans to
- non-residents, imports below Rs.5,00,000, certain project
- imports, freight, insurance, operating expenses of airlines,
- travel under BTQ, remittances for education within RBI limits,
- donations to charitable institutions abroad, refunds related to
- exports, and others described in the official guidance.
- </p>
-
- <h3 className="mt-6 font-semibold">
- The Contents of Form 15 CA and Form 15CB
- </h3>
- <p>
- Both forms are structured into parts/sections to capture the
- remitter, beneficiary, nature of payment, tax treatment, and CA
- certification where applicable.
- </p>
-
- <h4 className="mt-3 font-semibold">Parts of Form 15CA</h4>
- <ul className="list-disc list-inside text-sm text-gray-600 mt-2 space-y-2">
- <li>
- Part A is for remittances up to Rs 5 Lakhs during the
- financial year that are taxable.
- </li>
- <li>
- Part B is for remittances exceeding Rs 5 Lakhs where an
- order/certificate from AO exists.
- </li>
- <li>
- Part C is for taxable remittances exceeding Rs 5 Lakhs
- requiring Form 15CB.
- </li>
- <li>
- Part D is for remittances not chargeable to tax under the
- Income Tax Act.
- </li>
- </ul>
-
- <h4 className="mt-3 font-semibold">Various parts of Form 15CB</h4>
- <p>
- Part A includes details of the remitter, the beneficiary, and
- the nature of the remittance. Part B verifies compliance with
- the Income Tax Act and DTAA. Part C requires CA certification
- that the information is true and correct. An optional annexure
- can be attached for extra details.
- </p>
-
- <h3 className="mt-6 font-semibold">
- Penalty for not filing Form 15 CA-15CB
- </h3>
- <p>
- The penalty for not filing or late filing of 15 CA and CB form
- may be ₹10,000 per instance (users should check the current law
- for updates).
- </p>
-
- <h3 className="mt-6 font-semibold">
- Details required for filing the forms
- </h3>
- <ul className="list-disc list-inside text-sm text-gray-600 mt-2 space-y-2">
- <li>PAN of the remitter and the beneficiary</li>
- <li>Amount of the remittance (in INR)</li>
- <li>Nature and purpose of the remittance</li>
- <li>Relevant sections and DTAA articles (if applicable)</li>
- <li>Bank details of remitter and beneficiary</li>
- <li>CA certificate details for Form 15CB when required</li>
- </ul>
-
- <h3 className="mt-6 font-semibold">
- Procedure for filing Form 15 CA and 15CB
- </h3>
- <ol className="list-decimal list-inside text-sm text-gray-600 mt-2 space-y-2">
- <li>Obtain a valid PAN for the remitter (if required).</li>
- <li>
- Determine whether Form 15CB is required (commonly for
- remittances {">"} INR 5 lakh).
- </li>
- <li>
- Fill Form 15CA online on the income-tax e-filing portal.
- </li>
- <li>If required, obtain Form 15CB from a CA.</li>
- <li>
- Upload/submit Form 15CA (and 15CB where applicable) on the
- portal and obtain an acknowledgement number.
- </li>
- </ol>
-
- <p className="mt-4">
- DoStartup can help you file Form 15 CA-CB, from preparation
- to submission, and ensure that you comply with all the
- applicable regulations.
- </p>
- </div>
- </article>
-
- {/* Related Guides + long content placeholders */}
- </section>
-
- {/* Right column (sidebar) */}
- <aside className="lg:col-span-4 hidden lg:block sticky top-24 self-start">
- <SidebarCart />
-
- <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mb-4">
- <h4 className="font-semibold mb-3">Offers and discounts</h4>
- <div className="p-3 border rounded-md flex items-center gap-3">
- <img
- src={ASSETS.ledgers}
- alt="ledgers"
- className="h-8 w-8 object-contain"
- />
- <div className="text-sm">
- <div className="text-[#C15F3C] font-medium">
- LEDGERS - Compliance Platform
- </div>
- <div className="text-gray-500 text-xs">
- Invoicing, GST Filing, Banking and Payroll
- </div>
- </div>
- </div>
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-4">
- <img
- src={ASSETS.adRight1}
- alt="company compliance"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="rounded-lg overflow-hidden shadow-sm mb-6">
- <img
- src={ASSETS.dinEkyc}
- alt="din ekyc"
- className="w-full h-56 object-cover"
- />
- </div>
-
- <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-4">
- <h4 className="font-semibold mb-3">Popular Searches</h4>
- <div className="flex flex-wrap gap-2">
- {POPULAR_SEARCHES.slice(0, 20).map((t) => (
- <span
- key={t}
- className="text-xs px-3 py-1 border border-gray-200 rounded bg-gray-50 text-gray-700"
- >
- {t}
- </span>
- ))}
- </div>
- </div>
-
- {/* small content block to make sidebar informative */}
- <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 mt-4">
- <h4 className="font-semibold mb-3">Contact Advisor</h4>
- <p className="text-sm text-gray-600">
- Need help with 15CA / 15CB? Our advisors can assist with
- end-to-end filing and documentation.
- </p>
- <div className="mt-3">
- <button className="w-full bg-[#C15F3C] text-white py-2 rounded-md text-sm">
- Schedule a Call
- </button>
- </div>
- </div>
- </aside>
- </main>
-
-<DynamicPricingSection />
-
-<FAQAccordion category="15ca-15cb-filing" />
-
-
- <Footer />
- </div>
- );
+        <PopularSearches />
+      </main>
+      <Footer />
+    </>
+  );
 }
